@@ -1,3 +1,12 @@
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
+	* configure.in: Invoke AM_LANGINFO_CODESET, not jm_LANGINFO_CODESET.
+	* autoconf/ltmain.sh: Update from GNU gettext.
+	2003-02-18  Bruno Haible  <bruno@clisp.org>
+		Fix the 2002-09-16 fix.
+		* ltmain.sh (install): If "ln -s -f" fails (this is the case
+		with /usr/bin/ln on Solaris 2.7), fall back to "rm && ln -s".
+
 2003-03-17  Bruno Haible  <bruno@clisp.org>
 
 	Improved MSVC support.

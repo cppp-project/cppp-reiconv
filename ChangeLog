@@ -1,5 +1,25 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	* m4/general.m4 (CL_CONFIG_SUBDIRS, CL_CANONICAL_HOST,
+	CL_CANONICAL_HOST_CPU, CL_CANONICAL_HOST_CPU_FOR_FFCALL): Remove
+	macros.
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/iconv.m4: Update from GNU gettext.
+	* m4/lcmessage.m4: Update from GNU gettext.
+	* m4/progtest.m4: Update from GNU gettext.
+	* m4/libtool.m4: Update from GNU gettext.
+	2003-02-16  Bruno Haible  <bruno@clisp.org>
+		Workaround autoconf >= 2.52 breakage.
+		* libtool.m4 (AC_LIBTOOL_ARG_WITH): New macro.
+		(_LT_AC_LTCONFIG_HACK, AC_PROG_LD): Use it.
+	* autoconf/ltmain.sh: Update from GNU gettext.
+	2003-02-18  Bruno Haible  <bruno@clisp.org>
+		Fix the 2002-09-16 fix.
+		* ltmain.sh (install): If "ln -s -f" fails (this is the case
+		with /usr/bin/ln on Solaris 2.7), fall back to "rm && ln -s".
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	Start using automake.
 	* configure.in: Add AM_INIT_AUTOMAKE invocation.
 	(PACKAGE, VERSION): Remove.

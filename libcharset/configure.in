@@ -57,7 +57,7 @@ AC_PROG_LIBTOOL
 
 dnl           checks for header files and functions
 
-jm_LANGINFO_CODESET
+AM_LANGINFO_CODESET
 jm_GLIBC21
 AC_CHECK_HEADERS(stddef.h stdlib.h string.h)
 AC_CHECK_FUNCS(setlocale)
