@@ -319,6 +319,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
         *bp = '\0';
         continue;
       }
+      break;
     }
     if (buf[0] == '\0') {
       fromcode = locale_charset();
