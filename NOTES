@@ -235,9 +235,8 @@ A: libiconv, as an internationalization library, supports those character
        We implement it because it is in the RFCs and because MSIE4 supports
        it, but I have no idea whether it's really used.
      * JOHAB
-       We DON'T implement and document this because the Korean FAQ
-       (http://pantheon.yale.edu/~jshin/faq) says the Johab encoding is not
-       used nowadays. The code is in libiconv only for the sake of reference.
+       We implement this because it is apparently used on Windows as a locale
+       encoding (codepage 1361).
      * ISO-646-KR
        We DON'T implement this because although an old ASCII variant, its
        glyph for 0x7E is not clear: RFC 1345 and unicode.org's JOHAB.TXT

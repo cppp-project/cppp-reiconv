@@ -1,3 +1,6 @@
+New in 1.5:
+* The JOHAB encoding is documented again.
+
 New in 1.4:
 * Added GB18030, BIG5HKSCS converters.
 * Portability to OS/2 with emx+gcc.

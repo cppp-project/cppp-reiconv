@@ -20,7 +20,7 @@ It provides support for the encodings:
         EUC-CN, HZ, GBK, GB18030, EUC-TW, BIG5, CP950, BIG5HKSCS,
         ISO-2022-CN, ISO-2022-CN-EXT
     Korean
-        EUC-KR, CP949, ISO-2022-KR
+        EUC-KR, CP949, ISO-2022-KR, JOHAB
     Armenian
         ARMSCII-8
     Georgian
