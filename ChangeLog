@@ -7,6 +7,12 @@
 
 2000-12-02  Bruno Haible  <haible@clisp.cons.org>
 
+        * src/iconv.c (usage): Take an exitcode argument.
+          (print_version): New function.
+          (main): Recognize --help and --version command line options.
+
+2000-12-02  Bruno Haible  <haible@clisp.cons.org>
+
         * Makefile.msvc: Replace STATIC with its opposite flag, DLL.
         * lib/Makefile.msvc: Likewise.
         * src/Makefile.msvc: Likewise.

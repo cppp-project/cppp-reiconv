@@ -51,10 +51,23 @@
   static int force_binary = 0;
 #endif
 
-static void usage ()
+static void usage (int exitcode)
 {
-  fprintf(stderr,"Usage: iconv -f fromcode -t tocode [file ...]\n");
-  exit(1);
+  fprintf(exitcode ? stderr : stdout,
+          "Usage: iconv -f fromcode -t tocode [file ...]\n");
+  exit(exitcode);
+}
+
+static void print_version (void)
+{
+  printf("iconv (libiconv %d.%d)\n",
+         _libiconv_version >> 8, _libiconv_version & 0xff);
+  printf("\
+Copyright (C) 2000 Free Software Foundation, Inc.\n\
+This is free software; see the source for copying conditions.  There is NO\n\
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\
+Written by Bruno Haible.\n");
+  exit(0);
 }
 
 static int convert (iconv_t cd, FILE* infile, const char* infilename)
@@ -168,18 +181,24 @@ int main (int argc, char* argv[])
 #endif
   for (i = 1; i < argc;) {
     if (!strcmp(argv[i],"-f")) {
-      if (i == argc-1) usage();
-      if (fromcode != NULL) usage();
+      if (i == argc-1) usage(1);
+      if (fromcode != NULL) usage(1);
       fromcode = argv[i+1];
       i += 2;
       continue;
     }
     if (!strcmp(argv[i],"-t")) {
-      if (i == argc-1) usage();
-      if (tocode != NULL) usage();
+      if (i == argc-1) usage(1);
+      if (tocode != NULL) usage(1);
       tocode = argv[i+1];
       i += 2;
       continue;
+    }
+    if (!strcmp(argv[i],"--help")) {
+      usage(0);
+    }
+    if (!strcmp(argv[i],"--version")) {
+      print_version();
     }
 #if O_BINARY
     if (!strcmp(argv[i],"--binary")) {
@@ -189,7 +208,7 @@ int main (int argc, char* argv[])
     }
 #endif
     if (argv[i][0] == '-')
-      usage();
+      usage(1);
     break;
   }
 #if O_BINARY
@@ -197,7 +216,7 @@ int main (int argc, char* argv[])
     setmode(fileno(stdout),O_BINARY);
 #endif
   if (fromcode == NULL || tocode == NULL)
-    usage();
+    usage(1);
   cd = iconv_open(tocode,fromcode);
   if (cd == (iconv_t)(-1)) {
     if (iconv_open("UCS-4",fromcode) == (iconv_t)(-1))
