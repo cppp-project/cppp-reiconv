@@ -16,6 +16,9 @@ dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
 dnl If not, write to the Free Software Foundation, Inc., 59 Temple Place -
 dnl Suite 330, Boston, MA 02111-1307, USA.  */
 
+PACKAGE=libiconv
+VERSION=1.7
+
 AC_PREREQ(2.13)
 
 AC_INIT(lib/iconv.c)
@@ -51,7 +54,6 @@ AC_EXEEXT
 
 dnl           check for build configuration
 
-PACKAGE=libiconv
 AM_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
