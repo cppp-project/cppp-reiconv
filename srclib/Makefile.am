@@ -32,6 +32,7 @@ libicrt_a_SOURCES = \
   exit.h \
   pathmax.h \
   progname.h progname.c progreloc.c \
+  unlocked-io.h \
   xmalloc.h xmalloc.c xstrdup.c \
   xreadlink.h xreadlink.c
 
