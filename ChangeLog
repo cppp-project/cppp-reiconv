@@ -1,5 +1,25 @@
 2002-05-29  Bruno Haible  <bruno@clisp.org>
 
+	Fix installation of iconv program when linked with a libintl that was
+	built against an earlier libiconv.
+	* src/iconv.c: Conditionally disable NLS.
+	* src/iconv_no_i18n.c: New file.
+	* src/Makefile.in (libdir): New variable.
+	(all): Depend on iconv_no_i18n, iconv.@OBJEXT@ but not iconv. Make
+	directory writable, so iconv executable can be created during "make
+	install".
+	(iconv): Remove rule.
+	(iconv_no_i18n, iconv_no_i18n.@OBJEXT@): New rules.
+	(install): Link iconv now, after the new libiconv.so is installed.
+	(clean): Also remove iconv_no_i18n.
+	* tests/Makefile.in: (check, check-extra-yes): Depend on iconv_no_i18n,
+	not iconv.
+	* tests/check-stateful: Use iconv_no_i18n, not iconv.
+	* tests/check-translit: LIkewise.
+	* tests/check-translitfailure: Likewise.
+
+2002-05-29  Bruno Haible  <bruno@clisp.org>
+
 	* configure.in: Call AC_PROG_INSTALL instead of CL_PROG_INSTALL.
 	* m4/install.m4: Remove file.
 

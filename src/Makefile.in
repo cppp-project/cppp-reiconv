@@ -10,6 +10,7 @@ prefix = @prefix@
 local_prefix = /usr/local
 exec_prefix = @exec_prefix@
 bindir = @bindir@
+libdir = @libdir@
 datadir = @datadir@
 localedir = $(datadir)/locale
 
@@ -39,20 +40,25 @@ SHELL = /bin/sh
 # Needed by $(LIBTOOL).
 top_builddir = ..
 
-all : iconv
+# We cannot link with libintl until libiconv is installed. (When we call
+# libtool with arguments "../lib/libiconv.la -lintl", libtool will call ld
+# with "../lib/.libs/libiconv.so $libdir/libintl.so $libdir/libiconv.so",
+# (remember that $libdir/libintl.la lists $libdir/libiconv.so as a dependency),
+# and this gives a fatal linker error on Solaris because the two libiconv.so
+# files are different but have the same soname.
+# So we can link the iconv executable only after we have installed libiconv,
+# i.e. during "make install". The intermediate 'iconv' executable is built
+# without internationalization and not linked with libintl.
 
-# When linking with libintl and producing a shared libiconv, we need to omit
-# the -liconv flag that might be present in @LTLIBINTL@. Otherwise, on FreeBSD,
-# when a libiconv <= 1.7 is already installed and we install a libiconv >= 1.8,
-# we get a link error.
-iconv : iconv.@OBJEXT@ ../lib/libiconv.la
-	build_shared=`$(LIBTOOL) --config | grep '^build_libtool_libs=' | sed -e 's/build_libtool_libs=//'`; \
-	libintl=`if test "$$build_shared" = yes; then \
-		   echo " @LTLIBINTL@ " | sed -e 's, -liconv , ,g' -e 's, [^ ]*/libiconv\.[^ ]* , ,g'; \
-		 else \
-		   echo " @LTLIBINTL@ "; \
-		 fi` ; \
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ ../lib/libiconv.la $$libintl -o $@
+all : iconv_no_i18n iconv.@OBJEXT@
+	chmod 777 .
+
+# This is the temporary iconv executable, without internationalization.
+iconv_no_i18n : iconv_no_i18n.@OBJEXT@ ../lib/libiconv.la
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv_no_i18n.@OBJEXT@ ../lib/libiconv.la -o $@
+
+iconv_no_i18n.@OBJEXT@ : $(srcdir)/iconv_no_i18n.c $(srcdir)/iconv.c
+	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv_no_i18n.c
 
 iconv.@OBJEXT@ : $(srcdir)/iconv.c
 	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv.c
@@ -61,10 +67,19 @@ iconv.@OBJEXT@ : $(srcdir)/iconv.c
 ../lib/libiconv.la :
 	cd ../lib && $(MAKE) libiconv.la
 
+# During "make install", we can build the final iconv executable.
+# On HP-UX, in order to ensure that the new libiconv.sl will override the old
+# one that is hardcoded in libintl.sl, we need to mention libiconv.sl before
+# libintl.sl on the link command line. We have to bypass libtool in order to
+# achieve this.
 install : all force
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then mkdir $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then mkdir $(DESTDIR)$(exec_prefix) ; fi
 	if [ ! -d $(DESTDIR)$(bindir) ] ; then mkdir $(DESTDIR)$(bindir) ; fi
+	case "@host_os@" in \
+	  hpux*) $(CC) $(LDFLAGS) iconv.@OBJEXT@ -L$(libdir) -liconv @LIBINTL@ -o iconv;; \
+	  *) $(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ $(libdir)/libiconv.la @LTLIBINTL@ -o iconv;; \
+	esac
 	$(LIBTOOL_INSTALL) $(INSTALL_PROGRAM) iconv $(DESTDIR)$(bindir)/iconv
 
 installdirs : force
@@ -80,7 +95,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.@OBJEXT@ *.lo iconv core
+	$(RM) *.@OBJEXT@ *.lo iconv_no_i18n iconv core
 	$(RM) -r .libs _libs
 
 distclean : clean

@@ -28,7 +28,7 @@ top_builddir = ..
 
 all :
 
-check : all table-from table-to ../src/iconv
+check : all table-from table-to ../src/iconv_no_i18n
 	$(srcdir)/check-stateless $(srcdir) ASCII
 #	/* General multi-byte encodings */
 	$(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
@@ -142,7 +142,7 @@ check : all table-from table-to ../src/iconv
 
 check-extra: check-extra-@USE_EXTRA_ENCODINGS@
 check-extra-no:
-check-extra-yes: all table-from table-to ../src/iconv
+check-extra-yes: all table-from table-to ../src/iconv_no_i18n
 #	/* AIX specific encodings */
 	$(srcdir)/check-stateless $(srcdir) CP856
 	$(srcdir)/check-stateless $(srcdir) CP922

@@ -27,6 +27,10 @@
 #include <locale.h>
 #endif
 #include <fcntl.h>
+
+#ifdef NO_I18N
+# undef ENABLE_NLS
+#endif
 #include "gettext.h"
 
 #define _(str) gettext(str)
