@@ -18,6 +18,8 @@
 
 /* Create a table from CHARSET to Unicode. */
 
+#include "config.h"
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,7 +45,7 @@ static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned i
   size_t inbytesleft = buflen;
   char* outbuf = (char*) out;
   size_t outbytesleft = sizeof(unsigned int);
-  size_t result = iconv(cd,&inbuf,&inbytesleft,&outbuf,&outbytesleft);
+  size_t result = iconv(cd,(ICONV_CONST char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
   if (result == (size_t)(-1)) {
     if (errno == EILSEQ) {
       return -1;

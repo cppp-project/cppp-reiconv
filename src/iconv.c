@@ -111,7 +111,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
       while (insize > 0) {
         char* outptr = outbuf;
         size_t outsize = sizeof(outbuf);
-        size_t res = iconv(cd,&inptr,&insize,&outptr,&outsize);
+        size_t res = iconv(cd,(ICONV_CONST char**)&inptr,&insize,&outptr,&outsize);
         if (outptr != outbuf) {
           int saved_errno = errno;
           if (fwrite(outbuf,1,outptr-outbuf,stdout) < outptr-outbuf)

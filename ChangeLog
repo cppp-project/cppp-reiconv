@@ -1,5 +1,16 @@
 2001-02-24  Bruno Haible  <haible@clisp.cons.org>
 
+        * src/iconv.c (convert): Use ICONV_CONST.
+        * tests/table-from.c: Include config.h.
+          (try): Use ICONV_CONST.
+        * tests/table-to.c: Include config.h.
+          (main): Use ICONV_CONST.
+        * tests/Makefile.in (INCLUDES): Add -I../lib.
+        * tests/Makefile.os2 (INCLUDES): Likewise.
+        * tests/Makefile.msvc (INCLUDES): Add -I..\lib.
+
+2001-02-24  Bruno Haible  <haible@clisp.cons.org>
+
         Provide all encodings used by DOS locales.
         * tools/Makefile (cp437.h, cp852.h, cp855.h, cp857.h, cp861.h,
            cp864.h, cp865.h, cp869.h): New targets.

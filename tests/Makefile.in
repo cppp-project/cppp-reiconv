@@ -9,7 +9,7 @@ srcdir = @srcdir@
 CC = @CC@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
-INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
+INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include -I../lib
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link

@@ -38,7 +38,7 @@ srcdir = .
 CC = cl
 CFLAGS = $(MFLAGS) -W1 $(OPTIMFLAGS)
 CPP = cl -E
-INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include
+INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include -I..\lib
 RM = del
 
 #### End of system configuration section. ####

@@ -9,7 +9,7 @@
 # Programs used by "make":
 CC = gcc
 CFLAGS = -O2 -Zmtd
-INCLUDES = -I. -I../include
+INCLUDES = -I. -I../include -I../lib
 
 #### End of system configuration section. ####
 
