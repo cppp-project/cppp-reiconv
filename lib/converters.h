@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002, 2004 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -139,6 +139,7 @@ struct conv_struct {
 #include "iso8859_8.h"
 #include "iso8859_9.h"
 #include "iso8859_10.h"
+#include "iso8859_11.h"
 #include "iso8859_13.h"
 #include "iso8859_14.h"
 #include "iso8859_15.h"

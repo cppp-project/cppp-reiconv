@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2003 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2004 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -298,6 +298,13 @@ DEFENCODING(( "ISO-8859-10",            /* IANA */
             ),
             iso8859_10,
             { iso8859_10_mbtowc, NULL },  { iso8859_10_wctomb, NULL })
+
+DEFENCODING(( "ISO-8859-11",            /* glibc */
+              "ISO_8859-11",
+              "ISO8859-11",             /* X11R6.7, glibc */
+            ),
+            iso8859_11,
+            { iso8859_11_mbtowc, NULL },  { iso8859_11_wctomb, NULL })
 
 DEFENCODING(( "ISO-8859-13",            /* IANA, glibc */
               "ISO_8859-13",

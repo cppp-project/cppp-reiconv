@@ -1,3 +1,15 @@
+2004-07-22  Bruno Haible  <bruno@clisp.org>
+
+	* tools/Makefile (ALL): Add iso8859_11.h.
+	(iso8859_11.h): New rule.
+	* lib/encodings.def: Add ISO-8859-11.
+	* lib/iso8859_11.h: New file.
+	* lib/converters.h: Include it.
+	* tests/ISO-8859-11.TXT: New file.
+	* tests/Makefile.in (check): Also test ISO-8859-11.
+	* tests/Makefile.msvc (check): Likewise.
+	* tests/Makefile.os2 (check): Likewise.
+
 2004-07-17  Bruno Haible  <bruno@clisp.org>
 
 	* src/iconv.c (main): Terminate option parsing when option -- is seen.

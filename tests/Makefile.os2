@@ -46,6 +46,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateless $(srcdir) ISO-8859-8
 	$(srcdir)\check-stateless $(srcdir) ISO-8859-9
 	$(srcdir)\check-stateless $(srcdir) ISO-8859-10
+	$(srcdir)\check-stateless $(srcdir) ISO-8859-11
 	$(srcdir)\check-stateless $(srcdir) ISO-8859-13
 	$(srcdir)\check-stateless $(srcdir) ISO-8859-14
 	$(srcdir)\check-stateless $(srcdir) ISO-8859-15

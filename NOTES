@@ -256,8 +256,8 @@ A: libiconv, as an internationalization library, supports those character
        We implement these because they appear to be both used for Georgian;
        Xfree86 supports them.
    Thai
-     * TIS-620
-       We implement this because it seems to be standard for Thai.
+     * ISO-8859-11, TIS-620
+       We implement these because it seems to be standard for Thai.
      * CP874
        We implement this because MSIE4 supports it.
      * MacThai

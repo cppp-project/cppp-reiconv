@@ -85,6 +85,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-8
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-9
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-10
+	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-11
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-13
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-14
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-15

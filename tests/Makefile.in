@@ -57,6 +57,7 @@ check : all table-from table-to ../src/iconv_no_i18n
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-8
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-9
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-10
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-11
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-13
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-14
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-15

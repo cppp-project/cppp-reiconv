@@ -15,6 +15,7 @@ ALL = \
  iso8859_8.h \
  iso8859_9.h \
  iso8859_10.h \
+ iso8859_11.h \
  iso8859_13.h \
  iso8859_14.h \
  iso8859_15.h \
@@ -150,6 +151,9 @@ iso8859_9.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-9.TXT 8bit_tab_to_h
 
 iso8859_10.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-10.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-10 iso8859_10 < $<
+
+iso8859_11.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-11.TXT 8bit_tab_to_h
+	./8bit_tab_to_h ISO-8859-11 iso8859_11 < $<
 
 iso8859_13.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-13.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-13 iso8859_13 < $<

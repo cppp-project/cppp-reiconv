@@ -1,3 +1,6 @@
+New in 1.10:
+* Added ISO-8859-11 converter.
+
 New in 1.9:
 * Many more transliterations.
 * New configuration option --enable-relocatable.  See the INSTALL.generic file
