@@ -329,34 +329,34 @@ gb18030uni.h : GB18030uni.TXT cjk_tab_to_h
 GB18030uni.TXT : $(TABLESDIR)/gb18030/filled-GB18030.TXT
 	grep '^0x........	0x....$$' < $(TABLESDIR)/gb18030/filled-GB18030.TXT > $@
 
-cns11643_1.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_1.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x1\)' < $< | sed -e 's,^0x1,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 1' cns11643_1 > $@
 
-cns11643_2.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_2.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x2\)' < $< | sed -e 's,^0x2,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 2' cns11643_2 > $@
 
-cns11643_3.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_3.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x3\)' < $< | sed -e 's,^0x3,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 3' cns11643_3 > $@
 
-cns11643_4a.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_4a.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x4[0-3]\)' < $< | sed -e 's,^0x4,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 4 part a' cns11643_4a > $@
 
-cns11643_4b.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_4b.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x4[4-7]\)' < $< | sed -e 's,^0x4,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 4 part b' cns11643_4b > $@
 
-cns11643_5.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_5.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x5\)' < $< | sed -e 's,^0x5,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 5' cns11643_5 > $@
 
-cns11643_6.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_6.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x6\)' < $< | sed -e 's,^0x6,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 6' cns11643_6 > $@
 
-cns11643_7.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_7.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0x7\)' < $< | sed -e 's,^0x7,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 7' cns11643_7 > $@
 
-cns11643_15.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_15.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	grep '^\(#\|0xF\)' < $< | sed -e 's,^0xF,0x,' | ./cjk_tab_to_h 'CNS 11643-1992 plane 15' cns11643_15 > $@
 
-cns11643_inv.h : $(TABLESDIR)/csets-new/CNS11643-Unicode31.TXT cjk_tab_to_h
+cns11643_inv.h : $(TABLESDIR)/csets-new/CNS11643-Unicode32.TXT cjk_tab_to_h
 	./cjk_tab_to_h 'CNS 11643-1992 planes 1-7, CNS 11643-1986 plane 15' cns11643_inv < $< > $@
 
 big5.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/OTHER/BIG5.TXT cjk_tab_to_h

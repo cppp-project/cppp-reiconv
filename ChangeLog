@@ -1,3 +1,20 @@
+2002-04-06  Bruno Haible  <bruno@clisp.org>
+
+	Upgrade to Unicode 3.2.
+	* tools/Makefile (cns11643_1.h, cns11643_2.h, cns11643_3.h,
+	cns11643_4a.h, cns11643_4b.h, cns11643_5.h, cns11643_6.h,
+	cns11643_7.h, cns11643_15.h, cns11643_inv.h): Use
+	CNS11643-Unicode32.TXT instead of CNS11643-Unicode31.TXT.
+	* lib/cns11643_3.h: Regenerated.
+	* lib/cns11643_4a.h: Regenerated.
+	* lib/cns11643_4b.h: Regenerated.
+	* lib/cns11643_5.h: Regenerated.
+	* lib/cns11643_6.h: Regenerated.
+	* lib/cns11643_7.h: Regenerated.
+	* lib/cns11643_15.h: Regenerated.
+	* lib/cns11643_inv.h: Regenerated.
+	* tests/EUC-TW.TXT: Update.
+
 2002-01-17  Bruno Haible  <bruno@clisp.org>
 
 	* lib/tcvn.h (tcvn_2uni_1): Make it smaller.
