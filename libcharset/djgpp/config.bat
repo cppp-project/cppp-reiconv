@@ -28,8 +28,8 @@ if not "%CONFIG_SITE%" == "%XSRC%/djgpp/config.site" goto SmallEnv
 Rem Make sure crucial file names are not munged by unpacking
 test -f %XSRC%/config.h.in
 if not errorlevel 1 mv -f %XSRC%/config.h.in %XSRC%/config.h-in
-test -f %XSRC%/include/libcharset.h.in
-if not errorlevel 1 mv -f %XSRC%/include/libcharset.h.in %XSRC%/include/libcharset.h-in
+test -f %XSRC%/include/localcharset.h.in
+if not errorlevel 1 mv -f %XSRC%/include/localcharset.h.in %XSRC%/include/localcharset.h-in
 
 Rem This is required because DOS/Windows are case-insensitive
 Rem to file names, and "make install" will do nothing if Make

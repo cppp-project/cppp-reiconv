@@ -28,10 +28,10 @@ MFLAGS=-MD
 srcdir = .
 
 # Directories used by "make install":
-prefix = /usr/local
-local_prefix = /usr/local
+prefix = c:\usr
 exec_prefix = $(prefix)
-libdir = $(exec_prefix)/lib
+bindir = $(exec_prefix)\bin
+libdir = $(exec_prefix)\lib
 
 # Programs used by "make":
 
@@ -68,9 +68,9 @@ LN = copy
 RM = -del
 
 # Programs used by "make install":
-INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@
-INSTALL_DATA = @INSTALL_DATA@
+INSTALL = copy
+INSTALL_PROGRAM = copy
+INSTALL_DATA = copy
 
 #### End of system configuration section. ####
 
@@ -83,8 +83,8 @@ OBJECTS = iconv.obj
 LIBCHARSET_OBJECTS = ..\libcharset\lib\localcharset.obj
 
 # Set to iconv.res in order to include the resources information.
-RESOURCES =
-# RESOURCES = iconv.res
+# RESOURCES =
+RESOURCES = iconv.res
 
 all : iconv.lib
 
@@ -112,11 +112,36 @@ iconv.res : $(srcdir)/../windows/iconv.rc
 
 !endif
 
+install : all force
+	-mkdir $(prefix)
+	-mkdir $(exec_prefix)
+!if $(DLL)
+	-mkdir $(bindir)
+	$(INSTALL_DATA) iconv.dll $(bindir)\iconv.dll
+!endif
+	-mkdir $(libdir)
+	$(INSTALL_DATA) iconv.lib $(libdir)\iconv.lib
+
+installdirs : force
+	-mkdir $(prefix)
+	-mkdir $(exec_prefix)
+!if $(DLL)
+	-mkdir $(bindir)
+!endif
+	-mkdir $(libdir)
+
+uninstall : force
+!if $(DLL)
+	$(RM) $(bindir)\iconv.dll
+!endif
+	$(RM) $(libdir)\iconv.lib
+
 check : all
 
 mostlyclean : clean
 
 clean : force
+	$(RM) config.h
 	$(RM) *.obj
 	$(RM) *.lib
 	$(RM) *.exp
@@ -125,7 +150,6 @@ clean : force
 	$(RM) core
 
 distclean : clean
-	$(RM) config.h
 
 maintainer-clean : distclean
 

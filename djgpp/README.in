@@ -78,7 +78,7 @@ This is a port of GNU Libiconv @VER@ to MSDOS/DJGPP.
         To install the products run the command:
           make install
 
-        This will install the products (iconv.exe iconv.h libcharset.h libconv.a
+        This will install the products (iconv.exe iconv.h localcharset.h libconv.a
         libcharset.a iconv.1 iconv.3 iconv_open.3 iconv_close.3) into your DJGPP
         installation tree. As usual, prefix is defined as "/dev/env/DJDIR".
         If you prefer to install into same other directory run the command:

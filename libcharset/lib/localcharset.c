@@ -1,6 +1,6 @@
 /* Determine a canonical name for the current locale's character encoding.
 
-   Copyright (C) 2000-2002 Free Software Foundation, Inc.
+   Copyright (C) 2000-2003 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify it
    under the terms of the GNU Library General Public License as published
@@ -22,6 +22,9 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
+
+/* Specification.  */
+#include "localcharset.h"
 
 /* Specification.  */
 #include "localcharset.h"

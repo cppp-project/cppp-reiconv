@@ -28,16 +28,24 @@ MFLAGS=-MD
 !endif
 
 # Directories used by "make install":
-prefix = /usr/local
-local_prefix = /usr/local
+prefix = c:\usr
 exec_prefix = $(prefix)
-libdir = $(exec_prefix)/lib
-includedir = $(prefix)/include
-mandir = $(prefix)/man
+bindir = $(exec_prefix)\bin
+libdir = $(exec_prefix)\lib
+includedir = $(prefix)\include
+datadir = $(prefix)\share
+localedir = $(datadir)\locale
+mandir = $(prefix)\man
+docdir = $(prefix)\doc\libiconv
 
 # Programs used by "make":
 LN = copy
 RM = -del
+
+# Programs used by "make install":
+INSTALL = copy
+INSTALL_PROGRAM = copy
+INSTALL_DATA = copy
 
 #### End of system configuration section. ####
 
@@ -47,7 +55,7 @@ all : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc all
 	cd ..
-	$(LN) libcharset\include\libcharset.h lib\libcharset.h
+	$(LN) libcharset\include\localcharset.h lib\localcharset.h
 !if !$(DLL)
 	$(LN) include\iconv.h.msvc-static include\iconv.h
 !else
@@ -59,38 +67,81 @@ all : force
 	cd src
 	$(MAKE) -f Makefile.msvc all
 	cd ..
-#	cd man
-#	$(MAKE) -f Makefile.msvc all
-#	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc all
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc all
+	cd ..
 	cd tests
 	$(MAKE) -f Makefile.msvc all
 	cd ..
 
 install : force
-	cd libcharset; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	cd lib; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	cd src; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
-	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
-	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
-	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
-	cd man; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+	cd libcharset
+	$(MAKE) -f Makefile.msvc install
+	cd ..
+	cd lib
+	$(MAKE) -f Makefile.msvc install
+	cd ..
+	cd src
+	$(MAKE) -f Makefile.msvc install
+	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc install
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc install
+	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc install
+	cd ..
+	-mkdir $(prefix)
+	-mkdir $(includedir)
+	$(INSTALL_DATA) include\iconv.h $(includedir)\iconv.h
 
 installdirs : force
-	cd libcharset; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	cd lib; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	cd src; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
-	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
-	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
-	cd man; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+	cd libcharset
+	$(MAKE) -f Makefile.msvc installdirs
+	cd ..
+	cd lib
+	$(MAKE) -f Makefile.msvc installdirs
+	cd ..
+	cd src
+	$(MAKE) -f Makefile.msvc installdirs
+	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc installdirs
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc installdirs
+	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc installdirs
+	cd ..
+	-mkdir $(prefix)
+	-mkdir $(includedir)
 
 uninstall : force
-	cd libcharset; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	cd lib; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	cd src; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	$(RM) $(includedir)/iconv.h
-	cd man; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+	cd libcharset
+	$(MAKE) -f Makefile.msvc uninstall
+	cd ..
+	cd lib
+	$(MAKE) -f Makefile.msvc uninstall
+	cd ..
+	cd src
+	$(MAKE) -f Makefile.msvc uninstall
+	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc uninstall
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc uninstall
+	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc uninstall
+	cd ..
+	$(RM) $(includedir)\iconv.h
 
 check : all force
 	cd libcharset
@@ -102,9 +153,12 @@ check : all force
 	cd src
 	$(MAKE) -f Makefile.msvc check
 	cd ..
-#	cd man
-#	$(MAKE) -f Makefile.msvc check
-#	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc check
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc check
+	cd ..
 	cd tests
 	$(MAKE) -f Makefile.msvc check
 	cd ..
@@ -113,16 +167,20 @@ mostlyclean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
-	$(RM) lib\libcharset.h
+	$(RM) lib\localcharset.h
+	$(RM) include\iconv.h
 	cd lib
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
-#	cd man
-#	$(MAKE) -f Makefile.msvc mostlyclean
-#	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc mostlyclean
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc mostlyclean
+	cd ..
 	cd tests
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
@@ -131,16 +189,20 @@ clean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
-	$(RM) lib\libcharset.h
+	$(RM) lib\localcharset.h
+	$(RM) include\iconv.h
 	cd lib
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
-#	cd man
-#	$(MAKE) -f Makefile.msvc clean
-#	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc clean
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc clean
+	cd ..
 	cd tests
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
@@ -149,41 +211,47 @@ distclean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
-	$(RM) lib\libcharset.h
+	$(RM) lib\localcharset.h
+	$(RM) include\iconv.h
 	cd lib
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
-#	cd man
-#	$(MAKE) -f Makefile.msvc distclean
-#	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc distclean
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc distclean
+	cd ..
 	cd tests
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
 	$(RM) config.status config.log config.cache Makefile
-	$(RM) include\iconv.h
 
 maintainer-clean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
-	$(RM) lib\libcharset.h
+	$(RM) lib\localcharset.h
+	$(RM) include\iconv.h
 	cd lib
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
-#	cd man
-#	$(MAKE) -f Makefile.msvc maintainer-clean
-#	cd ..
+	cd po
+	$(MAKE) -f Makefile.msvc maintainer-clean
+	cd ..
+	cd man
+	$(MAKE) -f Makefile.msvc maintainer-clean
+	cd ..
 	cd tests
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
 	$(RM) config.status config.log config.cache Makefile
-	$(RM) include\iconv.h
 
 force :
 

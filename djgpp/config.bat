@@ -47,8 +47,8 @@ test -f %XSRC%/lib/config.h.in
 if not errorlevel 1 mv -f %XSRC%/lib/config.h.in %XSRC%/lib/config.h-in
 test -f %XSRC%/libcharset/config.h.in
 if not errorlevel 1 mv -f %XSRC%/libcharset/config.h.in %XSRC%/libcharset/config.h-in
-test -f %XSRC%/libcharset/include/libcharset.h.in
-if not errorlevel 1 mv -f %XSRC%/libcharset/include/libcharset.h.in %XSRC%/libcharset/include/libcharset.h-in
+test -f %XSRC%/libcharset/include/localcharset.h.in
+if not errorlevel 1 mv -f %XSRC%/libcharset/include/localcharset.h.in %XSRC%/libcharset/include/localcharset.h-in
 test -f %XSRC%/include/iconv.h.in
 if not errorlevel 1 mv -f %XSRC%/include/iconv.h.in %XSRC%/include/iconv.h-in
 

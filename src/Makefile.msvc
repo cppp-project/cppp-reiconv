@@ -38,11 +38,21 @@ WARN_CFLAGS = -W1
 # Directories used by "make":
 srcdir = .
 
+# Directories used by "make install":
+prefix = c:\usr
+exec_prefix = $(prefix)
+bindir = $(exec_prefix)\bin
+
 # Programs used by "make":
 CC = cl
 CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS)
 INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include
 RM = -del
+
+# Programs used by "make install":
+INSTALL = copy
+INSTALL_PROGRAM = copy
+INSTALL_DATA = copy
 
 #### End of system configuration section. ####
 
@@ -56,6 +66,20 @@ iconv.exe : $(srcdir)/iconv.c ../lib/iconv.lib
 !if $(DLL)
 	copy ..\lib\iconv.dll iconv.dll
 !endif
+
+install : all force
+	-mkdir $(prefix)
+	-mkdir $(exec_prefix)
+	-mkdir $(bindir)
+	$(INSTALL_PROGRAM) iconv.exe $(bindir)\iconv.exe
+
+installdirs : force
+	-mkdir $(prefix)
+	-mkdir $(exec_prefix)
+	-mkdir $(bindir)
+
+uninstall : force
+	$(RM) $(bindir)\iconv.exe
 
 check : all
 

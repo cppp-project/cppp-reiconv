@@ -46,6 +46,12 @@ SHELL = /bin/sh
 
 all :
 
+install : all
+
+installdirs :
+
+uninstall :
+
 check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) ASCII
 #	/* General multi-byte encodings */

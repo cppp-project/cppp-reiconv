@@ -27,14 +27,14 @@ mkinstalldirs = $(SHELL) @top_srcdir@/autoconf/mkinstalldirs
 
 SHELL = /bin/sh
 
-all : lib/libcharset.h force
+all : lib/localcharset.h force
 	cd lib && $(MAKE) all
 	cd src && $(MAKE) all
 	cd po && $(MAKE) all
 	cd man && $(MAKE) all
 	if test -d tests; then cd tests && $(MAKE) all; fi
 
-lib/libcharset.h :
+lib/localcharset.h :
 	builddir="`pwd`"; cd libcharset && $(MAKE) all && $(MAKE) install-lib libdir="$$builddir/lib" includedir="$$builddir/lib"
 
 # Installs the library and include files only. Typically called with only
@@ -44,7 +44,7 @@ install-lib : all force
 	if [ ! -d $(includedir) ] ; then $(mkinstalldirs) $(includedir) ; fi
 	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
 
-install : lib/libcharset.h force
+install : lib/localcharset.h force
 	cd libcharset && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd lib && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'

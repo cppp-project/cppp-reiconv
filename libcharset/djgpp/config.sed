@@ -12,7 +12,7 @@ lispdir = \\$(prefix)/gnu/emacs/site-lisp\
   s,\\.tab\\.c,_tab.c,g\
   s,\\.tab\\.h,_tab.h,g\
   s,\\.old\\.,_old.,g\
-  s,libcharset\\.h\\.in,libcharset.h-in,g\
+  s,localcharset\\.h\\.in,localcharset.h-in,g\
   s,Makefile\\.in\\.in,Makefile.in-in,g\
   s,Makefile\\.am\\.in,Makefile.am-in,g\
   /^install-info-am:/,/^$/ s,file-\\[0-9\\]\\[0-9\\],& \\$\\$file[0-9] \\$\\$file[0-9][0-9],\

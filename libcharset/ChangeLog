@@ -1,3 +1,39 @@
+2003-03-17  Bruno Haible  <bruno@clisp.org>
+
+	Improved MSVC support.
+	* windows/charset.rc: New file.
+	* Makefile.msvc (prefix): Use less Unixy value.
+	(local_prefix): Remove variable.
+	(libdir, includedir): Use backslashes.
+	(bindir): New variable.
+	(mandir): Remove variable.
+	(INSTALL, INSTALL_PROGRAM, INSTALL_DATA): New variables.
+	(mostlyclean, clean): Remove config.h and include/localcharset.h.
+	(install, installdirs, uninstall): Rewritten.
+	* README.woe32: Mention automatic installation command.
+
+	Rename libcharset.h to localcharset.h.
+	* include/localcharset.h.in: Renamed from include/libcharset.h.in.
+	* tools/locale_charset.c: Include localcharset.h, not libcharset.h.
+	* Makefile.in (include/localcharset.h): Renamed from
+	include/libcharset.h.
+	(all): Update dependency.
+	(install-lib, install, uninstall, distclean, maintainer-clean): Update.
+	* Makefile.msvc (all): Create include/localcharset.h, not
+	include/libcharset.h.
+	* Makefile.devel (include/localcharset.h.msvc-shared): Renamed from
+	include/libcharset.h.msvc-shared.
+	(all): Update dependency.
+	(config.h.in): Touch the file when done; autoheader doesn't do it.
+	(config.h.msvc): Make rule more robust.
+	* INTEGRATE: Mention localcharset.h only once.
+	* djgpp/README.in, djgpp/README: Update.
+	* djgpp/config.bat: Update.
+	* djgpp/config.sed: Update.
+	* djgpp/fnchange.in, djgpp/fnchange.lst: Update.
+	* configure.in (VERSION): Bump to 1.2.
+	* NEWS: New file.
+
 2003-02-14  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOCONF): Switch to autoconf-2.57.

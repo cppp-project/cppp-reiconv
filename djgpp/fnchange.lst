@@ -122,8 +122,8 @@ libiconv-1.8/libcharset/Makefile.in                       libiconv-1.8/libcharse
 libiconv-1.8/libcharset/configure.in                      libiconv-1.8/libcharset/configure.in
 libiconv-1.8/libcharset/configure                         libiconv-1.8/libcharset/configure
 libiconv-1.8/libcharset/INTEGRATE                         libiconv-1.8/libcharset/INTEGRATE
-libiconv-1.8/libcharset/include/libcharset.h.in           libiconv-1.8/libcharset/include/libcharset.h.in
-libiconv-1.8/libcharset/include/libcharset.h.msvc-shared  libiconv-1.8/libcharset/include/libcharset_h.shared-msvc
+libiconv-1.8/libcharset/include/localcharset.h.in         libiconv-1.8/libcharset/include/localcharset.h.in
+libiconv-1.8/libcharset/include/localcharset.h.msvc-shared libiconv-1.8/libcharset/include/localcharset_h.shared-msvc
 libiconv-1.8/libcharset/autoconf/config.guess             libiconv-1.8/libcharset/autoconf/config.guess
 libiconv-1.8/libcharset/autoconf/config.sub               libiconv-1.8/libcharset/autoconf/config.sub
 libiconv-1.8/libcharset/autoconf/ltmain.sh                libiconv-1.8/libcharset/autoconf/ltmain.sh

@@ -13,7 +13,7 @@ CP = cp
 RM = rm -f
 
 
-all : configures lib/config.h.msvc include/iconv.h.msvc-static include/iconv.h.msvc-shared lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html force
+all : configures lib/config.h.msvc include/iconv.h.msvc-static include/iconv.h.msvc-shared lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html po/Makefile.msvc force
 	cd libcharset && $(MAKE) -f Makefile.devel all
 
 
@@ -116,6 +116,12 @@ lib/translit.h : lib/translit.def lib/gentranslit.c
 
 man/%.html : man/%
 	$(MAN2HTML) $< > $@
+
+
+po/Makefile.msvc : po/LINGUAS
+	ALL_LINGUAS=`sed -e '/^#/d' po/LINGUAS`; \
+	GMOFILES=; for lang in $$ALL_LINGUAS; do GMOFILES="$$GMOFILES $$lang.gmo"; done; \
+	$(SHELL) po/Makefile.msvc.sh libiconv "$$GMOFILES" > po/Makefile.msvc
 
 
 force :

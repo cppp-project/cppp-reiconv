@@ -1,0 +1,78 @@
+# -*- Makefile -*- for libiconv/man
+
+#### Start of system configuration section. ####
+
+# Directories used by "make":
+srcdir = .
+
+# Directories used by "make install":
+prefix = c:\usr
+mandir = $(prefix)\man
+man1dir = $(mandir)\man1
+man3dir = $(mandir)\man3
+docdir = $(prefix)\doc\libiconv
+
+# Programs used by "make":
+RM = -del
+
+# Programs used by "make install":
+INSTALL = copy
+INSTALL_PROGRAM = copy
+INSTALL_DATA = copy
+
+#### End of system configuration section. ####
+
+SHELL = /bin/sh
+
+all :
+
+install : all force
+	-mkdir $(prefix)
+	-mkdir $(mandir)
+	-mkdir $(man1dir)
+	$(INSTALL_DATA) iconv.1 $(man1dir)\iconv.1
+	-mkdir $(man3dir)
+	$(INSTALL_DATA) iconv_open.3 $(man3dir)\iconv_open.3
+	$(INSTALL_DATA) iconv.3 $(man3dir)\iconv.3
+	$(INSTALL_DATA) iconv_close.3 $(man3dir)\iconv_close.3
+	-mkdir $(prefix)\doc
+	-mkdir $(docdir)
+	$(INSTALL_DATA) iconv.1.html $(docdir)\iconv.1.html
+	$(INSTALL_DATA) iconv_open.3.html $(docdir)\iconv_open.3.html
+	$(INSTALL_DATA) iconv.3.html $(docdir)\iconv.3.html
+	$(INSTALL_DATA) iconv_close.3.html $(docdir)\iconv_close.3.html
+
+installdirs : force
+	-mkdir $(prefix)
+	-mkdir $(mandir)
+	-mkdir $(man1dir)
+	-mkdir $(man3dir)
+	-mkdir $(prefix)\doc
+	-mkdir $(docdir)
+
+uninstall : force
+	$(RM) $(man1dir)\iconv.1
+	$(RM) $(man3dir)\iconv_open.3
+	$(RM) $(man3dir)\iconv.3
+	$(RM) $(man3dir)\iconv_close.3
+	$(RM) $(docdir)\iconv.1.html
+	$(RM) $(docdir)\iconv_open.3.html
+	$(RM) $(docdir)\iconv.3.html
+	$(RM) $(docdir)\iconv_close.3.html
+
+check : all
+
+mostlyclean : clean
+
+clean : force
+	$(RM) *.obj
+	$(RM) *.dll
+	$(RM) *.exe
+	$(RM) core
+
+distclean : clean
+	$(RM) Makefile
+
+maintainer-clean : distclean
+
+force :

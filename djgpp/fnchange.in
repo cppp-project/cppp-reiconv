@@ -79,8 +79,8 @@
 @V@/libcharset/tools/glibc-2.2-XF86-3.3.6        @V@/libcharset/tools/glibc22XF86-3.3-6
 @V@/libcharset/tools/glibc-2.2-XF86-4.0.1f       @V@/libcharset/tools/glibc22XF86-4.0-1f
 @V@/libcharset/tools/locale_x11encoding.c        @V@/libcharset/tools/x11encoding_locale.c
-@V@/libcharset/include/libcharset.h.in           @V@/libcharset/include/libcharset.h-in
-@V@/libcharset/include/libcharset.h.msvc-shared  @V@/libcharset/include/libcharset.h-msvc-shared
+@V@/libcharset/include/localcharset.h.in         @V@/libcharset/include/localcharset.h-in
+@V@/libcharset/include/localcharset.h.msvc-shared @V@/libcharset/include/localcharset.h-msvc-shared
 @V@/libcharset/config.h.in                       @V@/libcharset/config.h-in
 @V@/libcharset/config.h.msvc                     @V@/libcharset/config.h-msvc
 @V@/lib/aliases.gperf                            @V@/lib/aliases/aliases.gperf

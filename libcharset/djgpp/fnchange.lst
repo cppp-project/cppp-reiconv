@@ -51,8 +51,8 @@ libcharset-1.1/Makefile.in                       libcharset-1.1/Makefile.in
 libcharset-1.1/configure.in                      libcharset-1.1/configure.in
 libcharset-1.1/configure                         libcharset-1.1/configure
 libcharset-1.1/INTEGRATE                         libcharset-1.1/INTEGRATE
-libcharset-1.1/include/libcharset.h.in           libcharset-1.1/include/libcharset.h.in
-libcharset-1.1/include/libcharset.h.msvc-shared  libcharset-1.1/include/libcharset_h.shared-msvc
+libcharset-1.1/include/localcharset.h.in         libcharset-1.1/include/localcharset.h.in
+libcharset-1.1/include/localcharset.h.msvc-shared libcharset-1.1/include/localcharset_h.shared-msvc
 libcharset-1.1/autoconf/config.guess             libcharset-1.1/autoconf/config.guess
 libcharset-1.1/autoconf/config.sub               libcharset-1.1/autoconf/config.sub
 libcharset-1.1/autoconf/ltmain.sh                libcharset-1.1/autoconf/ltmain.sh

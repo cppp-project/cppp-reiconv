@@ -16,7 +16,7 @@ CC = @CC@
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
-INCLUDES = -I. -I$(srcdir) -I.. -I$(srcdir)/..
+INCLUDES = -I. -I$(srcdir) -I.. -I$(srcdir)/.. -I../include
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link

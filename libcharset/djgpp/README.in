@@ -76,7 +76,7 @@ This is a port of GNU Libcharset @VER@ to MSDOS/DJGPP.
         To install the products run the command:
           make install
 
-        This will install the products (libcharset.h, libcharset.a) into your
+        This will install the products (localcharset.h, libcharset.a) into your
         DJGPP installation tree. As usual, prefix is defined as "/dev/env/DJDIR".
         If you prefer to install into same other directory, run the command:
           make install prefix=z:/some/other/dir

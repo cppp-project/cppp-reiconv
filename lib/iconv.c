@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2003 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "config.h"
-#include "libcharset.h"
+#include "localcharset.h"
 
 #if ENABLE_EXTRA
 /*

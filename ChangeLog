@@ -1,3 +1,46 @@
+2003-03-17  Bruno Haible  <bruno@clisp.org>
+
+	Improved MSVC support.
+	* Makefile.msvc (prefix): Use less Unixy value.
+	(local_prefix): Remove variable.
+	(libdir, includedir, mandir): Use backslashes.
+	(bindir, datadir, localedir, docdir): New variables.
+	(INSTALL, INSTALL_PROGRAM, INSTALL_DATA): New variables.
+	(all): Recurse into po/ and man/.
+	(install, installdirs, uninstall): Rewritten.
+	(check, mostlyclean, clean, distclean, maintainer-clean): Recurse
+	into po/ and man/.
+	* lib/Makefile.msvc (prefix): Use less Unixy value.
+	(local_prefix): Remove variable.
+	(libdir): Use backslashes.
+	(bindir): New variable.
+	(INSTALL, INSTALL_PROGRAM, INSTALL_DATA): Set to real values.
+	(RESOURCES): Enable iconv.res.
+	(install, installdirs, uninstall): New rules.
+	(clean): Remove config.h.
+	(distclean): Don't remove config.h here.
+	* src/Makefile.msvc (prefix, exec_prefix, bindir): New variables.
+	(INSTALL, INSTALL_PROGRAM, INSTALL_DATA): New variables.
+	(install, installdirs, uninstall): New rules.
+	* man/Makefile.msvc: New file.
+	* tests/Makefile.msvc (install, installdirs, uninstall): New rules.
+	* Makefile.devel (all): Depend on po/Makefile.msvc.
+	(po/Makefile.msvc): New rule.
+	* windows/iconv.rc: Update.
+	* README.woe32: Mention automatic installation command.
+
+	Rename libcharset.h to localcharset.h.
+	* lib/iconv.c: Include localcharset.h, not libcharset.h.
+	* Makefile.in (lib/localcharset.h): Renamed from lib/libcharset.h.
+	(all, install): Update dependencies.
+	(all): Create lib/localcharset.h, not lib/libcharset.h.
+	(mostlyclean, clean, distclean, maintainer-clean): Remove
+	lib/localcharset.h, not lib/libcharset.h.
+	* djgpp/README.in, djgpp/README: Update.
+	* djgpp/config.bat: Update.
+	* djgpp/config.sed: Update.
+	* djgpp/fnchange.in, djgpp/fnchange.lst: Update.
+
 2003-01-31  Bruno Haible  <bruno@clisp.org>
 
 	* src/Makefile.in (all): Don't do the chmod if it has already been

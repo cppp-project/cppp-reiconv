@@ -1,3 +1,22 @@
+2003-03-17  Bruno Haible  <bruno@clisp.org>
+
+	Improved MSVC support.
+	* Makefile.msvc (prefix): Use less Unixy value.
+	(local_prefix): Remove variable.
+	(libdir): Use backslashes.
+	(bindir): New variable.
+	(INSTALL, INSTALL_PROGRAM, INSTALL_DATA): Set to real values.
+	(RESOURCES): Enable charset.res.
+	(charset.lib): Set the target library name explicitly.
+	(charset.res): New rule.
+	(install, installdirs, uninstall): New rules.
+
+	Rename libcharset.h to localcharset.h.
+	* localcharset.c: Include localcharset.h.
+	* localcharset.h: Remove file.
+	* Makefile.in (INCLUDES): Add -I../include.
+	* Makefile.msvc (INCLUDES): Add -I../include.
+
 2003-01-29  Bruno Haible  <bruno@clisp.org>
 
 	* config.charset: Add an alias for CP1251 on Solaris.
