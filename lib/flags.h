@@ -83,7 +83,7 @@
 #define ei_tis620_oflags (0)
 #define ei_cp874_oflags (HAVE_QUOTATION_MARKS)
 #define ei_viscii_oflags (0)
-#define ei_tcvn_oflags (0)
+#define ei_tcvn_oflags (HAVE_ACCENTS)
 #define ei_iso646_jp_oflags (0)
 #define ei_jisx0201_oflags (0)
 #define ei_jisx0208_oflags (HAVE_QUOTATION_MARKS)
