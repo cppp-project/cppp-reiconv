@@ -16,9 +16,14 @@ all : configures lib/config.h.msvc include/iconv.h.msvc-static include/iconv.h.m
 
 # Before making a new release:
 # - check that the encoding lists in README and man/iconv_open.3 are up to date,
-# - increment the version number in include/iconv.h.in and README and
-#   windows/iconv.rc
-#   and windows/iconv.rc,
+# - increment the version number in
+#     include/iconv.h.in
+#     README
+#     windows/iconv.rc
+#     djgpp/README
+#     djgpp/fnchange.lst
+#     djgpp/libcharset/README
+#     djgpp/libcharset/fnchange.lst
 # - update the version info in lib/Makefile.in,
 # - do "make -f Makefile.devel".
 
