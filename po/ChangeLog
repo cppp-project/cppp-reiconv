@@ -1,3 +1,8 @@
+2002-12-05  Bruno Haible  <bruno@clisp.org>
+
+	* it.po: New file, from Marco Parrone <marc0@autistici.org>.
+	* LINGUAS: Add it.
+
 2002-11-12  Bruno Haible  <bruno@clisp.org>
 
 	* da.po: New file, from Keld Simonsen <keld@dkuug.dk>.
