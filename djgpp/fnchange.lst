@@ -104,6 +104,8 @@ libiconv-1.6/libcharset/tools/locale_x11encoding.c        libiconv-1.6/libcharse
 libiconv-1.6/lib/aliases.gperf                            libiconv-1.6/lib/aliases/aliases.gperf
 libiconv-1.6/lib/aliases.h                                libiconv-1.6/lib/aliases/aliases.h
 libiconv-1.6/lib/aliases_aix.h                            libiconv-1.6/lib/aliases/aix.h
+libiconv-1.6/lib/aliases_dos.h                            libiconv-1.6/lib/aliases/dos.h
+libiconv-1.6/lib/aliases_osf1.h                           libiconv-1.6/lib/aliases/osf1.h
 libiconv-1.6/lib/cns11643.h                               libiconv-1.6/lib/cns/11643.h
 libiconv-1.6/lib/cns11643_1.h                             libiconv-1.6/lib/cns/11643_1.h
 libiconv-1.6/lib/cns11643_2.h                             libiconv-1.6/lib/cns/11643_2.h
@@ -111,6 +113,8 @@ libiconv-1.6/lib/cns11643_3.h                             libiconv-1.6/lib/cns/1
 libiconv-1.6/lib/cns11643_inv.h                           libiconv-1.6/lib/cns/11643_inv.h
 libiconv-1.6/lib/encodings.def                            libiconv-1.6/lib/encodings/encodings.def
 libiconv-1.6/lib/encodings_aix.def                        libiconv-1.6/lib/encodings/aix.def
+libiconv-1.6/lib/encodings_dos.def                        libiconv-1.6/lib/encodings/dos.def
+libiconv-1.6/lib/encodings_osf1.def                       libiconv-1.6/lib/encodings/osf1.def
 libiconv-1.6/lib/encodings_local.def                      libiconv-1.6/lib/encodings/local.def
 libiconv-1.6/lib/genaliases2.c                            libiconv-1.6/lib/2genaliases.c
 libiconv-1.6/lib/georgian_academy.h                       libiconv-1.6/lib/georgian/academy.h
