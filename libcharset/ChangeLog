@@ -1,3 +1,7 @@
+2001-03-10  Bruno Haible  <haible@clisp.cons.org>
+
+	* INSTALL.generic: New section "Particular Systems".
+
 2001-03-05  Bruno Haible  <haible@clisp.cons.org>
 
 	* tools/all-charsets: Update for change of lib/config.charset.
