@@ -208,9 +208,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
     }
     if (ap->encoding_index == ei_local_char) {
       tocode = locale_charset();
-      if (tocode != NULL)
-        continue;
-      goto invalid;
+      continue;
     }
     if (ap->encoding_index == ei_local_wchar_t) {
 #if __STDC_ISO_10646__
@@ -230,8 +228,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
 #if HAVE_MBRTOWC
       to_wchar = 1;
       tocode = locale_charset();
-      if (tocode != NULL)
-        continue;
+      continue;
 #endif
       goto invalid;
     }
@@ -264,9 +261,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
     }
     if (ap->encoding_index == ei_local_char) {
       fromcode = locale_charset();
-      if (fromcode != NULL)
-        continue;
-      goto invalid;
+      continue;
     }
     if (ap->encoding_index == ei_local_wchar_t) {
 #if __STDC_ISO_10646__
@@ -286,8 +281,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
 #if HAVE_WCRTOMB
       from_wchar = 1;
       fromcode = locale_charset();
-      if (fromcode != NULL)
-        continue;
+      continue;
 #endif
       goto invalid;
     }

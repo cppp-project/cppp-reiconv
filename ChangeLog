@@ -1,3 +1,8 @@
+2001-02-25  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/iconv.c (iconv_open): locale_charset() doesn't return NULL any
+          more.
+
 2001-02-24  Bruno Haible  <haible@clisp.cons.org>
 
         * src/iconv.c (convert): Use ICONV_CONST.
