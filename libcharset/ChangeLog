@@ -1,5 +1,9 @@
 2002-05-12  Bruno Haible  <bruno@clisp.org>
 
+	* tools/all-charsets: Update for change of lib/config.charset.
+
+2002-05-12  Bruno Haible  <bruno@clisp.org>
+
 	* Makefile.devel (AUTOCONF): New variable.
 	(configure): Use the AUTOCONF variable.
 
