@@ -461,7 +461,7 @@ echo > confdefs.h
 
 # A filename unique to this package, relative to the directory that
 # configure is in, which we can look for to find out if srcdir is correct.
-ac_unique_file=src/iconv.c
+ac_unique_file=lib/iconv.c
 
 # Find the source files, if location was not specified.
 if test -z "$srcdir"; then
@@ -1912,7 +1912,7 @@ done
 
 ac_given_srcdir=$srcdir
 
-trap 'rm -fr `echo "Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h src/config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
+trap 'rm -fr `echo "Makefile lib/Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h lib/config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
 EOF
 cat >> $CONFIG_STATUS <<EOF
 
@@ -2007,7 +2007,7 @@ EOF
 
 cat >> $CONFIG_STATUS <<EOF
 
-CONFIG_FILES=\${CONFIG_FILES-"Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h"}
+CONFIG_FILES=\${CONFIG_FILES-"Makefile lib/Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h"}
 EOF
 cat >> $CONFIG_STATUS <<\EOF
 for ac_file in .. $CONFIG_FILES; do if test "x$ac_file" != x..; then
@@ -2088,7 +2088,7 @@ ac_fD='%g'
 if test "${CONFIG_HEADERS+set}" != set; then
 EOF
 cat >> $CONFIG_STATUS <<EOF
-  CONFIG_HEADERS="src/config.h"
+  CONFIG_HEADERS="lib/config.h"
 EOF
 cat >> $CONFIG_STATUS <<\EOF
 fi
