@@ -9,7 +9,7 @@
 .\"   GNU glibc-2 source code and manual
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"
-.TH ICONV_OPEN 3  "January 3, 2000" "GNU" "Linux Programmer's Manual"
+.TH ICONV_OPEN 3  "January 18, 2000" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv_open \- allocate descriptor for character set conversion
 .SH SYNOPSIS
@@ -28,7 +28,8 @@ combinations are system dependent. For the libiconv library, the following
 encodings are supported, in all combinations.
 .TP
 European languages
-ASCII, ISO-8859-{1,2,3,4,5,7,9,10,13,14,15}, KOI8-R, KOI8-U, KOI8-RU,
+ASCII, ISO-8859-{1,2,3,4,5,7,9,10,13,14,15,16},
+KOI8-R, KOI8-U, KOI8-RU,
 CP{1250,1251,1252,1253,1254,1257}, CP{850,866},
 Mac{Roman,CentralEurope,Iceland,Croatian,Romania},
 Mac{Cyrillic,Ukraine,Greek,Turkish},
@@ -38,13 +39,13 @@ Semitic languages
 ISO-8859-{6,8}, CP{1255,1256}, Mac{Hebrew,Arabic}
 .TP
 Japanese
-EUC-JP, SHIFT-JIS, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
+EUC-JP, SHIFT-JIS, CP932, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
 .TP
 Chinese
 EUC-CN, HZ, GBK, EUC-TW, BIG5, CP950, ISO-2022-CN, ISO-2022-CN-EXT
 .TP
 Korean
-EUC-KR, JOHAB, ISO-2022-KR
+EUC-KR, CP949, ISO-2022-KR
 .TP
 Armenian
 ARMSCII-8

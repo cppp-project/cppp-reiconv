@@ -1,3 +1,128 @@
+2000-01-24  Bruno Haible  <haible@clisp.cons.org>
+
+        * Version 1.1 released.
+        * include/iconv.h.in (_LIBICONV_VERSION): Bump version number.
+        * src/Makefile.in (LIBICONV_VERSION_INFO): Define to 1:0:1.
+
+2000-01-23  Bruno Haible  <haible@clisp.cons.org>
+
+        * src/utf7.h (utf7_wctomb): If base64 encoding is not active, encode
+          '+' as "+-".
+
+2000-01-22  Bruno Haible  <haible@clisp.cons.org>
+
+        * include/iconv.h.in (iconvctl): New declaration.
+          (ICONV_TRIVIALP, ICONV_GET_TRANSLITERATE, ICONV_SET_TRANSLITERATE):
+          New macros.
+        * src/iconv.c (iconvctl): New function.
+
+        * tests/Makefile.in: Add a rule for ../src/libiconv.la. Define $(MAKE).
+
+        Solve a build problem.
+        * include/iconv.h.in: Renamed from include/libiconv.h.in.
+        * Makefile.devel: libiconv.h -> iconv.h.
+        * Makefile.in: Likewise.
+        * configure.in: Likewise. Remove check for <iconv.h>.
+        * src/iconv.c: Include iconv.h instead of libiconv.h.
+        * tests/iconv.c, tests/table-from.c, tests/table-to.c: Likewise.
+
+        * README, man/iconv_open.3: Don't document JOHAB any more.
+
+        * man/iconv.3: Clarify return value again.
+
+2000-01-16  Bruno Haible  <haible@clisp.cons.org>
+
+        Add aliases.
+        * src/encodings.def (ISO-8859-14): Add alias ISO-IR-199.
+          (ISO-8859-15): Add alias ISO-IR-203.
+          (EUC-CN): Add alias CN-GB, from RFC 1922.
+          (BIG5): Add alias CN-BIG5, from RFC 1922.
+        * Makefile.devel (src/aliases.h): Add 8th character to key set.
+
+        Drop X11 aliases.
+        * src/encodings.def (JIS_X0201): Drop JISX0201.1976-0 alias.
+          (JIS_X0208): Drop JIS_X0208.1983-0, JIS_X0208.1983-1 aliases.
+          (KSC_5601): Drop KSC5601.1987-0 alias.
+
+        Improve GB/T 12345 (not used yet).
+        * tools/Makefile (gb12345ext.h): Use GB12345-more.TXT.
+        * src/gb12345ext.h: Regenerated.
+
+        Improve and document CP949.
+        * tools/Makefile (all): Add uhc_1.h and uhc_2.h.
+          (uhc_1.h, uhc_2.h): New rules.
+        * tools/cjk_tab_to_h.c (output_charset2uni_noholes_monotonic): New
+          function.
+          (output_uni2charset_sparse): Take an additional boolean argument.
+          All callers changed.
+          (*_uhc_1, *_uhc_2): New functions.
+          (main): Treat uhc_1 and uhc_2.
+        * src/uhc_1.h, src/uhc_2.h: New files.
+        * src/cp949.h: New file, include them.
+        * src/converters.h: Include it.
+        * encodings.def (KSC_5601): Remove alias CP949.
+          (CP949): New encoding.
+        * README, man/iconv_open.3: Add CP949.
+        * tests/Makefile.in (check): Check CP949.
+        * tests/CP949.TXT: New file.
+
+        Document CP932.
+        * README, man/iconv_open.3: Add CP932.
+        * tests/Makefile.in (check): Check CP932.
+        * tests/CP932.TXT, tests/CP932.IRREVERSIBLE.TXT: New files.
+
+        * Makefile.devel (src/flags.h): Depend on src/converters.h.
+
+        * tests/Makefile.in (check): Check JIS_X0201.
+        * tests/JIS_X0201.TXT: New file.
+
+        * src/euc_kr.h (euc_kr_wctomb): Shrink size of buf.
+        * src/iso2022_kr.h (iso2022_kr_wctomb): Likewise.
+
+        * src/iso2022_cnext.h (iso2022_cn_ext_mbtowc): Use isoir165_mbtowc.
+          (iso2022_cn_ext_wctomb): Use isoir165_wctomb.
+
+        Add ISO-IR-165 (undocumented).
+        * tools/Makefile (all): Add isoir165ext.h.
+          (isoir165ext.h): New rule.
+        * tools/cjk_tab_to_h.c (main): Treat isoir165ext like gb2312.
+        * src/isoir165.h, src/isoir165ext.h: New files.
+        * src/converters.h: Include it.
+        * src/encodings.def: Add ISO-IR-165.
+        * tests/Makefile.in (check): Check ISO-IR-165.
+        * tests/ISO-IR-165.TXT, tests/ISO-IR-165.IRREVERSIBLE.TXT: New files.
+
+        Add ISO646-CN (undocumented).
+        * src/iso646_cn.h: New file.
+        * src/converters.h: Include it.
+        * src/encodings.def: Add ISO646-CN.
+        * tests/Makefile.in (check): Check ISO646-CN.
+        * tests/ISO646-CN.TXT: New file.
+
+        Add ISO646-JP (undocumented).
+        * src/iso646_jp.h: New file.
+        * src/converters.h: Include it.
+        * src/encodings.def: Add ISO646-JP.
+        * tests/Makefile.in (check): Check ISO646-JP.
+        * tests/ISO646-JP.TXT: New file.
+
+2000-01-05  Bruno Haible  <haible@clisp.cons.org>
+
+        Add ISO-8859-16.
+        * tools/Makefile (all): Add iso8859_16.h.
+          (iso8859_16.h): New rule.
+        * src/iso8859_16.h: New file.
+        * src/converters.h: Include it.
+        * src/encodings.def: Add ISO-8859-16.
+        * README, man/iconv_open.3: Add ISO-8859-16.
+        * tests/Makefile.in (check): Check ISO-8859-16.
+        * tests/ISO-8859-16.TXT: New file.
+
+        * man/iconv.3: Clarify what happens *inbuf in case 3.
+
+        * src/iso8859_8.h: Update using newest table from ftp.unicode.org.
+        * tests/ISO-8859-8.TXT: Likewise.
+
 2000-01-04  Bruno Haible  <haible@clisp.cons.org>
 
         * Version 1.0 released.

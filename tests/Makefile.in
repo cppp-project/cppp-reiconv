@@ -16,6 +16,7 @@ LIBTOOL_LINK = $(LIBTOOL) --mode=link
 LIBTOOL_INSTALL = $(LIBTOOL) --mode=install
 LIBTOOL_UNINSTALL = $(LIBTOOL) --mode=uninstall
 RM = rm -f
+@SET_MAKE@
 
 #### End of system configuration section. ####
 
@@ -48,6 +49,7 @@ check : all table-from table-to iconv
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-13
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-14
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-15
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-16
 	$(srcdir)/check-stateless $(srcdir) KOI8-R
 	$(srcdir)/check-stateless $(srcdir) KOI8-U
 	$(srcdir)/check-stateless $(srcdir) KOI8-RU
@@ -85,9 +87,19 @@ check : all table-from table-to iconv
 	$(srcdir)/check-stateless $(srcdir) CP874
 	$(srcdir)/check-stateless $(srcdir) VISCII
 	$(srcdir)/check-stateless $(srcdir) TCVN
+#	/* CJK character sets */
+	$(srcdir)/check-stateless $(srcdir) ISO646-JP
+	$(srcdir)/check-stateless $(srcdir) JIS_X0201
+#	$(srcdir)/check-stateless $(srcdir) JIS_X0208 # redundant, see EUC-JP
+#	$(srcdir)/check-stateless $(srcdir) JIS_X0212 # redundant, see EUC-JP
+	$(srcdir)/check-stateless $(srcdir) ISO646-CN
+#	$(srcdir)/check-stateless $(srcdir) GB_2312-80 # redundant, see EUC-CN
+	$(srcdir)/check-stateless $(srcdir) ISO-IR-165
+#	$(srcdir)/check-stateless $(srcdir) KSC_5601 # redundant, see EUC-KR
 #	/* CJK encodings */
 	$(srcdir)/check-stateless $(srcdir) EUC-JP
 	$(srcdir)/check-stateless $(srcdir) SHIFT-JIS
+	$(srcdir)/check-stateless $(srcdir) CP932
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-2
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-1
@@ -100,6 +112,7 @@ check : all table-from table-to iconv
 	$(srcdir)/check-stateless $(srcdir) BIG5
 	$(srcdir)/check-stateless $(srcdir) CP950
 	$(srcdir)/check-stateless $(srcdir) EUC-KR
+	$(srcdir)/check-stateless $(srcdir) CP949
 	$(srcdir)/check-stateless $(srcdir) JOHAB
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-KR
 #	/* transliteration */
@@ -114,6 +127,10 @@ table-to : $(srcdir)/table-to.c ../src/libiconv.la
 
 iconv : $(srcdir)/iconv.c ../src/libiconv.la
 	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/iconv.c ../src/libiconv.la -o $@
+
+# The following rule is necessary to avoid a toplevel "make -n check" failure.
+../src/libiconv.la :
+	cd ../src && $(MAKE) libiconv.la
 
 mostlyclean : clean
 

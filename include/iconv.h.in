@@ -18,28 +18,32 @@
 
 /* When installed, this file is called "iconv.h". */
 
-/* In the build directory, this file is called "libiconv.h", not "iconv.h",
-   because when compiling for LIBICONV_PLUG we need to include the system's
-   <iconv.h> file, and there is no portable way to do this if there is
-   another "iconv.h" file in any of the -I directories. */
-
 #ifndef _LIBICONV_H
 #define _LIBICONV_H
 
-#define _LIBICONV_VERSION 0x0100    /* version number: (major<<8) + minor */
+#define _LIBICONV_VERSION 0x0101    /* version number: (major<<8) + minor */
 
-/* Include all possible include files which could define iconv_t. */
-/* The next line should include the system's <iconv.h> file. But if it
-   happens to include ourselves instead, it does not harm, because
-   _LIBICONV_H is already defined. */
-@INCLUDE_ICONV_H@
+/* We would like to #include any system header file which could define
+   iconv_t, 1. in order to eliminate the risk that the user gets compilation
+   errors because some other system header file includes /usr/include/iconv.h
+   which defines iconv_t or declares iconv after this file, 2. when compiling
+   for LIBICONV_PLUG, we need the proper iconv_t type in order to produce
+   binary compatible code.
+   But gcc's #include_next is not portable. Thus, once libiconv's iconv.h
+   has been installed in /usr/local/include, there is no way any more to
+   include the original /usr/include/iconv.h. We simply have to get away
+   without it.
+   Ad 1. The risk that a system header file does
+   #include "iconv.h"  or  #include_next "iconv.h"
+   is small. They all do #include <iconv.h>.
+   Ad 2. The iconv_t type is a pointer type in all cases I have seen. (It
+   has to be a scalar type because (iconv_t)(-1) is a possible return value
+   from iconv_open().) */
 
-#if !(defined(LIBICONV_PLUG) && @HAVE_ICONV_H@)
 /* Define iconv_t ourselves. */
 #undef iconv_t
 #define iconv_t libiconv_t
 typedef void* iconv_t;
-#endif
 
 /* Get size_t declaration. */
 #include <stddef.h>
@@ -78,6 +82,22 @@ extern size_t iconv (iconv_t cd, @ICONV_CONST@ char* * inbuf, size_t *inbyteslef
 #define iconv_close libiconv_close
 #endif
 extern int iconv_close (iconv_t cd);
+
+
+#ifndef LIBICONV_PLUG
+
+/* Nonstandard extensions. */
+
+/* Control of attributes. */
+#define iconvctl libiconvctl
+extern int iconvctl (iconv_t cd, int request, void* argument);
+
+/* Requests for iconvctl. */
+#define ICONV_TRIVIALP            0  /* int *argument */
+#define ICONV_GET_TRANSLITERATE   1  /* int *argument */
+#define ICONV_SET_TRANSLITERATE   2  /* const int *argument */
+
+#endif
 
 
 #ifdef __cplusplus

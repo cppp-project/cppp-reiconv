@@ -21,7 +21,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <libiconv.h>
+#include <iconv.h>
 #include <errno.h>
 
 int main (int argc, char* argv[])

@@ -1,3 +1,13 @@
+New in 1.1:
+* Added ISO-8859-16 converter.
+* Added CP932 converter, a variant of SHIFT-JIS.
+* Added CP949 converter, a variant of EUC-KR.
+* Improved the ISO-2022-CN-EXT converter: It now covers the ISO-IR-165 range.
+* Updated the ISO-8859-8 conversion table.
+* The JOHAB encoding is deprecated and not documented any more.
+* Fixed two build problems: 1. "make -n check" failed. 2. When libiconv was
+  already installed, "make" failed.
+
 New in 1.0:
 * Added transliteration facilities.
 * Added a test suite.

@@ -40,7 +40,7 @@ int iconv_string (const char* tocode, const char* fromcode,
          If we tried SHIFT_JIS first, then some short EUC-JP inputs would
          come out wrong, and people would condemn EUC-JP and Unix, which
          would not be good. */
-      ret = iconv_string(tocode,"EUC-KR",start,end,resultp,lengthp);
+      ret = iconv_string(tocode,"EUC-JP",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
         return -1;
       /* Finally try SHIFT_JIS. */
@@ -54,13 +54,8 @@ int iconv_string (const char* tocode, const char* fromcode,
       ret = iconv_string(tocode,"ISO-2022-KR",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
         return -1;
-      /* Try EUC-KR next, because it is more frequently used. It may succeed
-         on some short JOHAB inputs. This is unavoidable. */
+      /* Finally try EUC-KR. */
       ret = iconv_string(tocode,"EUC-KR",start,end,resultp,lengthp);
-      if (!(ret < 0 && errno == EILSEQ))
-        return -1;
-      /* Finally try JOHAB. */
-      ret = iconv_string(tocode,"JOHAB",start,end,resultp,lengthp);
       return ret;
     }
     errno = EINVAL;

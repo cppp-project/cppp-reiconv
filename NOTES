@@ -147,6 +147,8 @@ A: libiconv, as an internationalization library, supports those character
      * ISO-8859-15
        We implement this because it's increasingly used in Europe, because
        of the Euro symbol.
+     * ISO-8859-16
+       We implement this because it's an ISO standard.
      * KOI8-R, KOI8-U
        We implement this because it appears to be the predominant encoding
        on Unix in Russia and Ukraine, respectively.
@@ -171,6 +173,9 @@ A: libiconv, as an internationalization library, supports those character
      * EUC-JP, SHIFT-JIS, ISO-2022-JP
        We implement these because they are widely used. EUC-JP and SHIFT-JIS
        are more used for files, whereas ISO-2022-JP is recommended for email.
+     * CP932
+       We implement this because it is the Microsoft variant of SHIFT-JIS,
+       used on Windows.
      * ISO-2022-JP-2
        We implement this because it's the common way to represent mails which
        make use of JIS X 0212 characters.
@@ -210,12 +215,24 @@ A: libiconv, as an internationalization library, supports those character
        tables in the big5p package are not coherent: If you convert directly,
        you get different results than when you convert via GBK.
    Korean
-     * EUC-KR, JOHAB
+     * EUC-KR
        We implement these because they appear to be the widely used
        representations for Korean.
+     * CP949
+       We implement this because it is the Microsoft variant of EUC-KR, used
+       on Windows.
      * ISO-2022-KR
        We implement it because it is in the RFCs and because MSIE4 supports
        it, but I have no idea whether it's really used.
+     * JOHAB
+       We DON'T implement and document this because the Korean FAQ
+       (http://pantheon.yale.edu/~jshin/faq) says the Johab encoding is not
+       used nowadays. The code is in libiconv only for the sake of reference.
+     * ISO-646-KR
+       We DON'T implement this because although an old ASCII variant, its
+       glyph for 0x7E is not clear: RFC 1345 and unicode.org's JOHAB.TXT
+       say it's a tilde, but Ken Lunde's "CJKV information processing" says
+       it's an overline. And it is not ISO-IR registered.
    Armenian
      * ARMSCII-8
        We implement it because XFree86 supports it.
@@ -302,7 +319,7 @@ A: 1. Explain the "why" in this file, above.
    encoding, create the complete table as a TXT file. For a stateful encoding,
    provide a text snippet encoded using your new encoding and its UTF-8
    equivalent.
-   7. Update the README and man3/iconv_open.3, to mention the new encoding.
+   7. Update the README and man/iconv_open.3, to mention the new encoding.
    Add a note in the NEWS file.
 
 Q: What about bidirectional text? Should it be tagged or reversed when

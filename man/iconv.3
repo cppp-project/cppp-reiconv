@@ -9,7 +9,7 @@
 .\"   GNU glibc-2 source code and manual
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"
-.TH ICONV 3  "January 2, 2000" "GNU" "Linux Programmer's Manual"
+.TH ICONV 3  "January 22, 2000" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv \- perform character set conversion
 .SH SYNOPSIS
@@ -39,15 +39,16 @@ The conversion can stop for four reasons:
 .PP
 1. An invalid multibyte sequence is encountered in the input. In this case
 it sets \fBerrno\fP to \fBEILSEQ\fP and returns (size_t)(-1). \fI*inbuf\fP
-is left pointing to the beginning of invalid multibyte sequence.
+is left pointing to the beginning of the invalid multibyte sequence.
 .PP
 2. The input byte sequence has been entirely converted, i.e. \fI*inbytesleft\fP
-has gone down to 0. In this case \fBiconv\fP returns the number of converted
-characters.
+has gone down to 0. In this case \fBiconv\fP returns the number of
+non-reversible conversions performed during this call.
 .PP
 3. An incomplete multibyte sequence is encountered in the input, and the
 input byte sequence terminates after it. In this case it sets \fBerrno\fP to
-\fBEINVAL\fP and returns (size_t)(-1).
+\fBEINVAL\fP and returns (size_t)(-1). \fI*inbuf\fP is left pointing to the
+beginning of the incomplete multibyte sequence.
 .PP
 4. The output buffer has no more room for the next converted character. In
 this case it sets \fBerrno\fP to \fBE2BIG\fP and returns (size_t)(-1).

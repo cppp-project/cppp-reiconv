@@ -36,14 +36,14 @@ all : force
 install-lib : all force
 	cd src; $(MAKE) -r install-lib libdir='$(libdir)' includedir='$(includedir)'
 	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
-	$(INSTALL_DATA) include/libiconv.h $(includedir)/iconv.h
+	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
 
 install : force
 	cd src; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
 	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
 	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
-	$(INSTALL_DATA) include/libiconv.h $(includedir)/iconv.h
+	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
 	cd man; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 installdirs : force
@@ -78,14 +78,14 @@ distclean : force
 	cd man; if test -f Makefile; then $(MAKE) -r distclean; fi
 	if test -d tests; then cd tests; if test -f Makefile; then $(MAKE) -r distclean; fi; fi
 	$(RM) config.status config.log config.cache Makefile libtool
-	$(RM) include/libiconv.h
+	$(RM) include/iconv.h
 
 maintainer-clean : force
 	cd src; if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
 	cd man; if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
 	if test -d tests; then cd tests; if test -f Makefile; then $(MAKE) -r maintainer-clean; fi; fi
 	$(RM) config.status config.log config.cache Makefile libtool
-	$(RM) include/libiconv.h
+	$(RM) include/iconv.h
 
 force :
 

@@ -16,7 +16,7 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
-#include <libiconv.h>
+#include <iconv.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -379,3 +379,26 @@ int iconv_close (iconv_t icd)
   free(cd);
   return 0;
 }
+
+#ifndef LIBICONV_PLUG
+
+int iconvctl (iconv_t icd, int request, void* argument)
+{
+  conv_t cd = (conv_t) icd;
+  switch (request) {
+    case ICONV_TRIVIALP:
+      *(int *)argument = (cd->iindex == cd->oindex ? 1 : 0);
+      return 0;
+    case ICONV_GET_TRANSLITERATE:
+      *(int *)argument = cd->transliterate;
+      return 0;
+    case ICONV_SET_TRANSLITERATE:
+      cd->transliterate = (*(const int *)argument ? 1 : 0);
+      return 0;
+    default:
+      errno = EINVAL;
+      return -1;
+  }
+}
+
+#endif

@@ -120,6 +120,7 @@ struct conv_struct {
 #include "iso8859_13.h"
 #include "iso8859_14.h"
 #include "iso8859_15.h"
+#include "iso8859_16.h"
 #include "koi8_r.h"
 #include "koi8_u.h"
 #include "koi8_ru.h"
@@ -165,11 +166,14 @@ typedef struct {
   unsigned short used; /* bitmask of used entries */
 } Summary16;
 
+#include "iso646_jp.h"
 #include "jisx0201.h"
 #include "jisx0208.h"
 #include "jisx0212.h"
 
+#include "iso646_cn.h"
 #include "gb2312.h"
+#include "isoir165.h"
 /*#include "gb12345.h"*/
 #include "gbk.h"
 #include "cns11643.h"
@@ -197,6 +201,7 @@ typedef struct {
 #include "cp950.h"
 
 #include "euc_kr.h"
+#include "cp949.h"
 #include "johab.h"
 #include "iso2022_kr.h"
 

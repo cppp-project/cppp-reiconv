@@ -199,7 +199,7 @@ utf7_wctomb (conv_t conv, unsigned char *r, wchar_t iwc, int n)
       return 1;
     } else {
       *r++ = '+';
-      if (wc == '-') {
+      if (wc == '+') {
         if (n < 2)
           return RET_TOOSMALL;
         *r = '-';

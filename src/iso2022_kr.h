@@ -117,7 +117,7 @@ iso2022_kr_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
 {
   state_t state = conv->ostate;
   SPLIT_STATE;
-  unsigned char buf[3];
+  unsigned char buf[2];
   int ret;
 
   /* Try ASCII. */

@@ -1429,59 +1429,9 @@ $libtool_flags --no-verify $ac_aux_dir/ltmain.sh $host \
 
 
 
-for ac_hdr in iconv.h
-do
-ac_safe=`echo "$ac_hdr" | sed 'y%./+-%__p_%'`
-echo $ac_n "checking for $ac_hdr""... $ac_c" 1>&6
-echo "configure:1437: checking for $ac_hdr" >&5
-if eval "test \"`echo '$''{'ac_cv_header_$ac_safe'+set}'`\" = set"; then
-  echo $ac_n "(cached) $ac_c" 1>&6
-else
-  cat > conftest.$ac_ext <<EOF
-#line 1442 "configure"
-#include "confdefs.h"
-#include <$ac_hdr>
-EOF
-ac_try="$ac_cpp conftest.$ac_ext >/dev/null 2>conftest.out"
-{ (eval echo configure:1447: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }
-ac_err=`grep -v '^ *+' conftest.out | grep -v "^conftest.${ac_ext}\$"`
-if test -z "$ac_err"; then
-  rm -rf conftest*
-  eval "ac_cv_header_$ac_safe=yes"
-else
-  echo "$ac_err" >&5
-  echo "configure: failed program was:" >&5
-  cat conftest.$ac_ext >&5
-  rm -rf conftest*
-  eval "ac_cv_header_$ac_safe=no"
-fi
-rm -f conftest*
-fi
-if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
-  echo "$ac_t""yes" 1>&6
-    ac_tr_hdr=HAVE_`echo $ac_hdr | sed 'y%abcdefghijklmnopqrstuvwxyz./-%ABCDEFGHIJKLMNOPQRSTUVWXYZ___%'`
-  cat >> confdefs.h <<EOF
-#define $ac_tr_hdr 1
-EOF
- 
-else
-  echo "$ac_t""no" 1>&6
-fi
-done
-
-if test $ac_cv_header_iconv_h = yes; then
-  INCLUDE_ICONV_H="#include <iconv.h>"
-  HAVE_ICONV_H=1
-else
-  INCLUDE_ICONV_H=""
-  HAVE_ICONV_H=0
-fi
-
-
-
 
 echo $ac_n "checking for iconv""... $ac_c" 1>&6
-echo "configure:1485: checking for iconv" >&5
+echo "configure:1435: checking for iconv" >&5
 if eval "test \"`echo '$''{'cl_cv_func_iconv'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1489,7 +1439,7 @@ else
 cl_cv_func_iconv=no
 cl_cv_lib_iconv=no
 cat > conftest.$ac_ext <<EOF
-#line 1493 "configure"
+#line 1443 "configure"
 #include "confdefs.h"
 #include <stdlib.h>
 #include <iconv.h>
@@ -1497,7 +1447,7 @@ int main() {
 iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL); iconv_close(cd);
 ; return 0; }
 EOF
-if { (eval echo configure:1501: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+if { (eval echo configure:1451: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   rm -rf conftest*
   cl_cv_func_iconv=yes
 else
@@ -1509,7 +1459,7 @@ if test "$cl_cv_func_iconv" = no; then
 cl_save_LIBS="$LIBS"
 LIBS="$LIBS -liconv"
 cat > conftest.$ac_ext <<EOF
-#line 1513 "configure"
+#line 1463 "configure"
 #include "confdefs.h"
 #include <stdlib.h>
 #include <iconv.h>
@@ -1517,7 +1467,7 @@ int main() {
 iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL); iconv_close(cd);
 ; return 0; }
 EOF
-if { (eval echo configure:1521: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+if { (eval echo configure:1471: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   rm -rf conftest*
   cl_cv_lib_iconv=yes
 cl_cv_func_iconv=yes
@@ -1537,13 +1487,13 @@ if test "$cl_cv_func_iconv" = yes; then
 EOF
 
 echo $ac_n "checking for iconv declaration""... $ac_c" 1>&6
-echo "configure:1541: checking for iconv declaration" >&5
+echo "configure:1491: checking for iconv declaration" >&5
 if eval "test \"`echo '$''{'cl_cv_proto_iconv'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
   
 cat > conftest.$ac_ext <<EOF
-#line 1547 "configure"
+#line 1497 "configure"
 #include "confdefs.h"
 
 #include <stdlib.h>
@@ -1568,7 +1518,7 @@ int main() {
 
 ; return 0; }
 EOF
-if { (eval echo configure:1572: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
+if { (eval echo configure:1522: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
   rm -rf conftest*
   cl_cv_proto_iconv_arg1=""
 else
@@ -1606,7 +1556,7 @@ fi
 
 
 echo $ac_n "checking byte ordering""... $ac_c" 1>&6
-echo "configure:1610: checking byte ordering" >&5
+echo "configure:1560: checking byte ordering" >&5
 if eval "test \"`echo '$''{'cl_cv_sys_endian'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1616,7 +1566,7 @@ if test "$cross_compiling" = yes; then
 
 else
   cat > conftest.$ac_ext <<EOF
-#line 1620 "configure"
+#line 1570 "configure"
 #include "confdefs.h"
 #ifdef __cplusplus
 extern "C" void exit(int);
@@ -1632,7 +1582,7 @@ int main () {
   exit (u.c[0] == 1);
 }
 EOF
-if { (eval echo configure:1636: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
+if { (eval echo configure:1586: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
   cl_cv_sys_endian="big endian"
 else
@@ -1655,7 +1605,7 @@ fi
 
 if test -z "$cl_cv_sys_endian"; then
 cat > conftest.$ac_ext <<EOF
-#line 1659 "configure"
+#line 1609 "configure"
 #include "confdefs.h"
 #if defined(m68k) || defined(mc68000) || defined(mc68020) || defined(sparc) || defined(__sparc__) || defined(MIPSEB) || defined(hppa) || defined(__hppa) || defined(m88000)
   yes
@@ -1672,7 +1622,7 @@ rm -f conftest*
 fi
 if test -z "$cl_cv_sys_endian"; then
 cat > conftest.$ac_ext <<EOF
-#line 1676 "configure"
+#line 1626 "configure"
 #include "confdefs.h"
 #if defined(i386) || defined(__i386) || defined(_I386) || defined(MIPSEL) || defined(__alpha)
   yes
@@ -1822,7 +1772,7 @@ done
 
 ac_given_srcdir=$srcdir
 
-trap 'rm -fr `echo "Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/libiconv.h src/config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
+trap 'rm -fr `echo "Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h src/config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
 EOF
 cat >> $CONFIG_STATUS <<EOF
 
@@ -1869,8 +1819,6 @@ s%@LD@%$LD%g
 s%@NM@%$NM%g
 s%@LN_S@%$LN_S%g
 s%@LIBTOOL@%$LIBTOOL%g
-s%@INCLUDE_ICONV_H@%$INCLUDE_ICONV_H%g
-s%@HAVE_ICONV_H@%$HAVE_ICONV_H%g
 s%@LIBICONV@%$LIBICONV%g
 s%@ICONV_CONST@%$ICONV_CONST%g
 s%@OS@%$OS%g
@@ -1916,7 +1864,7 @@ EOF
 
 cat >> $CONFIG_STATUS <<EOF
 
-CONFIG_FILES=\${CONFIG_FILES-"Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/libiconv.h"}
+CONFIG_FILES=\${CONFIG_FILES-"Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h"}
 EOF
 cat >> $CONFIG_STATUS <<\EOF
 for ac_file in .. $CONFIG_FILES; do if test "x$ac_file" != x..; then

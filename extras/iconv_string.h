@@ -12,7 +12,7 @@
  * except that FROMCODE may be one of the values
  *    "autodetect_utf8"          supports ISO-8859-1 and UTF-8
  *    "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
- *    "autodetect_kr"            supports EUC-KR, ISO-2022-KR and JOHAB
+ *    "autodetect_kr"            supports EUC-KR and ISO-2022-KR
  * The input is in the memory region between start (inclusive) and end
  * (exclusive). If resultp is not NULL, the output string is stored in
  * *resultp; malloc/realloc is used to allocate the result.

@@ -10,12 +10,12 @@ CP = cp
 RM = rm -f
 
 
-all : configures src/config.h.msvc include/libiconv.h.msvc src/aliases.h src/flags.h src/translit.h
+all : configures src/config.h.msvc include/iconv.h.msvc src/aliases.h src/flags.h src/translit.h
 
 
 # Before making a new release:
 # - check that the encoding lists in README and man/iconv_open.3 are up to date,
-# - increment the version number in include/libiconv.h.in and README,
+# - increment the version number in include/iconv.h.in and README,
 # - update the version info in src/Makefile.in,
 # - do "make -f Makefile.devel".
 
@@ -45,14 +45,14 @@ check-configures : $(CONFIGURES)
 src/config.h.msvc : src/config.h.in
 	sed -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' < $< > $@
 
-include/libiconv.h.msvc : include/libiconv.h.in
-	sed -e 's/@INCLUDE_ICONV_H@//g' -e 's/@HAVE_ICONV_H@/0/' -e 's/@ICONV_CONST@/const/g' < $< > $@
+include/iconv.h.msvc : include/iconv.h.in
+	sed -e 's/@ICONV_CONST@/const/g' < $< > $@
 
 
 # We use "-7" to make a smaller table, but use "unsigned char" array indices
 # to avoid gcc warning.
 src/aliases.h : src/aliases.gperf
-	$(GPERF) -t -L ANSI-C -H aliases_hash -N aliases_lookup -7 -C -k '1,3-7,9-11,$$' src/aliases.gperf | sed -e 's/\[str/\[(unsigned char) str/' > tmp.h
+	$(GPERF) -t -L ANSI-C -H aliases_hash -N aliases_lookup -7 -C -k '1,3-11,$$' src/aliases.gperf | sed -e 's/\[str/\[(unsigned char) str/' > tmp.h
 	$(CP) tmp.h src/aliases.h
 	$(RM) tmp.h
 
@@ -62,7 +62,7 @@ src/aliases.gperf : src/encodings.def src/genaliases.c
 	$(RM) genaliases
 
 
-src/flags.h : src/converters.h src/genflags.c
+src/flags.h : src/encodings.def src/converters.h src/genflags.c
 	$(CC) $(CFLAGS) src/genflags.c -o genflags
 	./genflags > src/flags.h
 	$(RM) genflags

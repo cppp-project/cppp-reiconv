@@ -257,6 +257,125 @@ static void output_charset2uni (const char* name, Encoding* enc)
 }
 
 /*
+ * Outputs the charset to unicode table and function.
+ * (Suitable if the mapping function is well defined, i.e. has no holes, and
+ * is monotonically increasing with small gaps only.)
+ */
+static void output_charset2uni_noholes_monotonic (const char* name, Encoding* enc)
+{
+  int row, col, lastrow, r, col_max, i, i1_min, i1_max;
+
+  /* Choose stepsize so that stepsize*steps_per_row >= enc->cols, and
+     enc->charset2uni[row][col] - enc->charset2uni[row][col/stepsize*stepsize]
+     is always < 0x100. */
+  int steps_per_row = 2;
+  int stepsize = (enc->cols + steps_per_row-1) / steps_per_row;
+
+  find_charset2uni_pages(enc);
+
+  find_charset2uni_blocks(enc);
+
+  for (row = 0; row < enc->rows; row++)
+    if (enc->charsetpage[row] > 0) {
+      if (row == 0 || enc->charsetpage[row-1] == 0) {
+        /* Start a new block. */
+        for (lastrow = row; enc->charsetpage[lastrow+1] > 0; lastrow++);
+        printf("static const unsigned short %s_2uni_main_page%02x[%d] = {\n ",
+               name, enc->row_byte(row),
+               steps_per_row*(lastrow-row+1));
+        for (r = row; r <= lastrow; r++) {
+          for (i = 0; i < steps_per_row; i++)
+            printf(" 0x%04x,", enc->charset2uni[r][i*stepsize]);
+          if (((r-row) % 4) == 3 && (r < lastrow)) printf("\n ");
+        }
+        printf("\n");
+        printf("};\n");
+        printf("static const unsigned char %s_2uni_page%02x[%d] = {\n",
+               name, enc->row_byte(row),
+               (lastrow-row) * enc->cols + enc->charsetpage[lastrow]);
+      }
+      printf("  /""* 0x%02x *""/\n ", enc->row_byte(row));
+      col_max = (enc->charsetpage[row+1] > 0 ? enc->cols : enc->charsetpage[row]);
+      for (col = 0; col < col_max; col++) {
+        printf(" 0x%02x,", enc->charset2uni[row][col] - enc->charset2uni[row][col/stepsize*stepsize]);
+        if ((col % 8) == 7 && (col+1 < col_max)) printf("\n ");
+      }
+      printf("\n");
+      if (enc->charsetpage[row+1] == 0) {
+        /* End a block. */
+        printf("};\n");
+      }
+    }
+  printf("\n");
+
+  printf("static int\n");
+  printf("%s_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)\n", name);
+  printf("{\n");
+  printf("  unsigned char c1 = s[0];\n");
+  printf("  if (");
+  for (i = 0; i < enc->ncharsetblocks; i++) {
+    i1_min = enc->row_byte(enc->charsetblocks[i].start / enc->cols);
+    i1_max = enc->row_byte((enc->charsetblocks[i].end-1) / enc->cols);
+    if (i > 0)
+      printf(" || ");
+    if (i1_min == i1_max)
+      printf("(c1 == 0x%02x)", i1_min);
+    else
+      printf("(c1 >= 0x%02x && c1 <= 0x%02x)", i1_min, i1_max);
+  }
+  printf(") {\n");
+  printf("    if (n >= 2) {\n");
+  printf("      unsigned char c2 = s[1];\n");
+  printf("      if (");
+  printf(enc->check_col_expr, "c2");
+  printf(") {\n");
+  printf("        unsigned int row = ");
+  printf(enc->byte_row_expr, "c1");
+  printf(";\n");
+  printf("        unsigned int col = ");
+  printf(enc->byte_col_expr, "c2");
+  printf(";\n");
+  printf("        unsigned int i = %d * row + col;\n", enc->cols);
+  printf("        unsigned short wc = 0xfffd;\n");
+  for (i = 0; i < enc->ncharsetblocks; i++) {
+    printf("        ");
+    if (i > 0)
+      printf("} else ");
+    if (i < enc->ncharsetblocks-1)
+      printf("if (i < %d) ", enc->charsetblocks[i+1].start);
+    printf("{\n");
+    printf("          if (i < %d)\n", enc->charsetblocks[i].end);
+    printf("            wc = %s_2uni_main_page%02x[%d*", name, enc->row_byte(enc->charsetblocks[i].start / enc->cols), steps_per_row);
+    if (enc->charsetblocks[i].start > 0)
+      printf("(row-%d)", enc->charsetblocks[i].start / enc->cols);
+    else
+      printf("row");
+    printf("+");
+    if (steps_per_row == 2)
+      printf("(col>=%d?1:0)", stepsize);
+    else
+      printf("col/%d", stepsize);
+    printf("] + %s_2uni_page%02x[i", name, enc->row_byte(enc->charsetblocks[i].start / enc->cols));
+    if (enc->charsetblocks[i].start > 0)
+      printf("-%d", enc->charsetblocks[i].start);
+    printf("];\n");
+  }
+  printf("        }\n");
+  printf("        if (wc != 0xfffd) {\n");
+  printf("          *pwc = (wchar_t) wc;\n");
+  printf("          return 2;\n");
+  printf("        }\n");
+  printf("      }\n");
+  printf("      return RET_ILSEQ;\n");
+  printf("    }\n");
+  printf("    return RET_TOOFEW(0);\n");
+  printf("  }\n");
+  printf("  return RET_ILSEQ;\n");
+  printf("}\n");
+  printf("\n");
+}
+
+/*
  * Computes the uni2charset[0x0000..0xffff] array.
  */
 static void invert (Encoding* enc)
@@ -407,8 +526,10 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
 /*
  * Outputs the unicode to charset table and function, using a packed array.
  * (Suitable if the table is sparse.)
+ * The argument 'monotonic' may be set to true if the mapping is monotonically
+ * increasing with small gaps only.
  */
-static void output_uni2charset_sparse (const char* name, Encoding* enc)
+static void output_uni2charset_sparse (const char* name, Encoding* enc, bool monotonic)
 {
   bool pages[0x100];
   Block pageblocks[0x100]; int npageblocks;
@@ -416,6 +537,10 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc)
   int summary_indx[0x1000];
   int summary_used[0x1000];
   int i, row, col, j, p, j1, j2, indx;
+  /* for monotonic: */
+  int log2_stepsize = (!strcmp(name,"uhc_2") ? 6 : 7);
+  int stepsize = 1 << log2_stepsize;
+  int indxsteps;
 
   /* Fill pages[0x100]. */
   for (p = 0; p < 0x100; p++)
@@ -470,14 +595,34 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc)
       p++;
   }
 
-  printf("static const unsigned short %s_2charset[%d] = {\n", name, indx);
-  for (i = 0; i < indx; ) {
-    if ((i % 8) == 0) printf(" ");
-    printf(" 0x%04x,", indx2charset[i]);
-    i++;
-    if ((i % 8) == 0 || i == indx) printf("\n");
+  if (monotonic) {
+    indxsteps = (indx + stepsize-1) / stepsize;
+    printf("static const unsigned short %s_2charset_main[%d] = {\n", name, indxsteps);
+    for (i = 0; i < indxsteps; ) {
+      if ((i % 8) == 0) printf(" ");
+      printf(" 0x%04x,", indx2charset[i*stepsize]);
+      i++;
+      if ((i % 8) == 0 || i == indxsteps) printf("\n");
+    }
+    printf("};\n");
+    printf("static const unsigned char %s_2charset[%d] = {\n", name, indx);
+    for (i = 0; i < indx; ) {
+      if ((i % 8) == 0) printf(" ");
+      printf(" 0x%02x,", indx2charset[i] - indx2charset[i/stepsize*stepsize]);
+      i++;
+      if ((i % 8) == 0 || i == indx) printf("\n");
+    }
+    printf("};\n");
+  } else {
+    printf("static const unsigned short %s_2charset[%d] = {\n", name, indx);
+    for (i = 0; i < indx; ) {
+      if ((i % 8) == 0) printf(" ");
+      printf(" 0x%04x,", indx2charset[i]);
+      i++;
+      if ((i % 8) == 0 || i == indx) printf("\n");
+    }
+    printf("};\n");
   }
-  printf("};\n");
   printf("\n");
   for (i = 0; i < npageblocks; i++) {
     printf("static const Summary16 %s_uni2indx_page%02x[%d] = {\n", name,
@@ -522,7 +667,11 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc)
   printf("        used = (used & 0x3333) + ((used & 0xcccc) >> 2);\n");
   printf("        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);\n");
   printf("        used = (used & 0x00ff) + (used >> 8);\n");
-  printf("        c = %s_2charset[summary->indx + used];\n", name);
+  if (monotonic) {
+    printf("        used += summary->indx;\n");
+    printf("        c = %s_2charset_main[used>>%d] + %s_2charset[used];\n", name, log2_stepsize, name);
+  } else
+    printf("        c = %s_2charset[summary->indx + used];\n", name);
   printf("        r[0] = (c >> 8); r[1] = (c & 0xff);\n");
   printf("        return 2;\n");
   printf("      }\n");
@@ -557,7 +706,7 @@ static void do_normal (const char* name)
 
   read_table(&enc);
   output_charset2uni(name,&enc);
-  invert(&enc); output_uni2charset_sparse(name,&enc);
+  invert(&enc); output_uni2charset_sparse(name,&enc,false);
 }
 
 /* Note: On first sight, the jisx0212_2charset[] table seems to be in order,
@@ -628,7 +777,7 @@ static void do_cns11643_only_uni2charset (const char* name)
       enc.uni2charset[j] = x;
     }
   }
-  output_uni2charset_sparse(name,&enc);
+  output_uni2charset_sparse(name,&enc,false);
 }
 
 /* GBK specifics */
@@ -749,7 +898,7 @@ static void do_gbk1_only_uni2charset (const char* name)
   enc.byte_col_expr = "%1$s - (%1$s >= 0x80 ? 0x41 : 0x40)";
 
   read_table(&enc);
-  invert(&enc); output_uni2charset_sparse(name,&enc);
+  invert(&enc); output_uni2charset_sparse(name,&enc,false);
 }
 
 /* KSC 5601 specifics */
@@ -844,7 +993,99 @@ static void do_ksc5601 (const char* name)
 
   read_table_ksc5601(&enc);
   output_charset2uni(name,&enc);
-  invert(&enc); output_uni2charset_sparse(name,&enc);
+  invert(&enc); output_uni2charset_sparse(name,&enc,false);
+}
+
+/* UHC specifics */
+
+/* UHC part 1: 0x{81..A0}{41..5A,61..7A,81..FE} */
+
+static int row_byte_uhc_1 (int row) {
+  return 0x81 + row;
+}
+static int col_byte_uhc_1 (int col) {
+  return (col >= 0x34 ? 0x4d : col >= 0x1a ? 0x47 : 0x41) + col;
+}
+static int byte_row_uhc_1 (int byte) {
+  if (byte >= 0x81 && byte < 0xa1)
+    return byte-0x81;
+  else
+    return -1;
+}
+static int byte_col_uhc_1 (int byte) {
+  if (byte >= 0x41 && byte < 0x5b)
+    return byte-0x41;
+  else if (byte >= 0x61 && byte < 0x7b)
+    return byte-0x47;
+  else if (byte >= 0x81 && byte < 0xff)
+    return byte-0x4d;
+  else
+    return -1;
+}
+
+static void do_uhc_1 (const char* name)
+{
+  Encoding enc;
+
+  enc.rows = 32;
+  enc.cols = 178;
+  enc.row_byte = row_byte_uhc_1;
+  enc.col_byte = col_byte_uhc_1;
+  enc.byte_row = byte_row_uhc_1;
+  enc.byte_col = byte_col_uhc_1;
+  enc.check_row_expr = "(%1$s >= 0x81 && %1$s < 0xa1)";
+  enc.check_col_expr = "(%1$s >= 0x41 && %1$s < 0x5b) || (%1$s >= 0x61 && %1$s < 0x7b) || (%1$s >= 0x81 && %1$s < 0xff)";
+  enc.byte_row_expr = "%1$s - 0x81";
+  enc.byte_col_expr = "%1$s - (%1$s >= 0x81 ? 0x4d : %1$s >= 0x61 ? 0x47 : 0x41)";
+
+  read_table(&enc);
+  output_charset2uni_noholes_monotonic(name,&enc);
+  invert(&enc); output_uni2charset_sparse(name,&enc,true);
+}
+
+/* UHC part 2: 0x{A1..C6}{41..5A,61..7A,81..A0} */
+
+static int row_byte_uhc_2 (int row) {
+  return 0xa1 + row;
+}
+static int col_byte_uhc_2 (int col) {
+  return (col >= 0x34 ? 0x4d : col >= 0x1a ? 0x47 : 0x41) + col;
+}
+static int byte_row_uhc_2 (int byte) {
+  if (byte >= 0xa1 && byte < 0xff)
+    return byte-0xa1;
+  else
+    return -1;
+}
+static int byte_col_uhc_2 (int byte) {
+  if (byte >= 0x41 && byte < 0x5b)
+    return byte-0x41;
+  else if (byte >= 0x61 && byte < 0x7b)
+    return byte-0x47;
+  else if (byte >= 0x81 && byte < 0xa1)
+    return byte-0x4d;
+  else
+    return -1;
+}
+
+static void do_uhc_2 (const char* name)
+{
+  Encoding enc;
+
+  enc.rows = 94;
+  enc.cols = 84;
+  enc.row_byte = row_byte_uhc_2;
+  enc.col_byte = col_byte_uhc_2;
+  enc.byte_row = byte_row_uhc_2;
+  enc.byte_col = byte_col_uhc_2;
+  enc.check_row_expr = "(%1$s >= 0xa1 && %1$s < 0xff)";
+  enc.check_col_expr = "(%1$s >= 0x41 && %1$s < 0x5b) || (%1$s >= 0x61 && %1$s < 0x7b) || (%1$s >= 0x81 && %1$s < 0xa1)";
+  enc.byte_row_expr = "%1$s - 0xa1";
+  enc.byte_col_expr = "%1$s - (%1$s >= 0x81 ? 0x4d : %1$s >= 0x61 ? 0x47 : 0x41)";
+
+  read_table(&enc);
+  output_charset2uni_noholes_monotonic(name,&enc);
+  invert(&enc); output_uni2charset_sparse(name,&enc,true);
 }
 
 /* Big5 specifics */
@@ -887,7 +1128,7 @@ static void do_big5 (const char* name)
 
   read_table(&enc);
   output_charset2uni(name,&enc);
-  invert(&enc); output_uni2charset_sparse(name,&enc);
+  invert(&enc); output_uni2charset_sparse(name,&enc,false);
 }
 
 /* Johab Hangul specifics */
@@ -975,7 +1216,7 @@ static void do_sjis (const char* name)
 
   read_table(&enc);
   output_charset2uni(name,&enc);
-  invert(&enc); output_uni2charset_sparse(name,&enc);
+  invert(&enc); output_uni2charset_sparse(name,&enc,false);
 }
 
 /* Main program */
@@ -992,7 +1233,8 @@ int main (int argc, char *argv[])
 
   output_title(charsetname);
 
-  if (!strcmp(name,"gb2312") || !strcmp(name,"gb12345ext")
+  if (!strcmp(name,"gb2312")
+      || !strcmp(name,"isoir165ext") || !strcmp(name,"gb12345ext")
       || !strcmp(name,"jisx0208") || !strcmp(name,"jisx0212"))
     do_normal(name);
   else if (!strcmp(name,"cns11643_1") || !strcmp(name,"cns11643_2")
@@ -1010,6 +1252,10 @@ int main (int argc, char *argv[])
     do_gbk1(name);
   else if (!strcmp(name,"ksc5601"))
     do_ksc5601(name);
+  else if (!strcmp(name,"uhc_1"))
+    do_uhc_1(name);
+  else if (!strcmp(name,"uhc_2"))
+    do_uhc_2(name);
   else if (!strcmp(name,"big5") || !strcmp(name,"cp950ext"))
     do_big5(name);
   else if (!strcmp(name,"johab_hangul"))

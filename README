@@ -6,7 +6,8 @@ don't have one, or whose implementation cannot convert from/to Unicode.
 It provides support for the encodings:
 
     European languages
-        ASCII, ISO-8859-{1,2,3,4,5,7,9,10,13,14,15}, KOI8-R, KOI8-U, KOI8-RU,
+        ASCII, ISO-8859-{1,2,3,4,5,7,9,10,13,14,15,16},
+        KOI8-R, KOI8-U, KOI8-RU,
         CP{1250,1251,1252,1253,1254,1257}, CP{850,866},
         Mac{Roman,CentralEurope,Iceland,Croatian,Romania},
         Mac{Cyrillic,Ukraine,Greek,Turkish},
@@ -14,11 +15,11 @@ It provides support for the encodings:
     Semitic languages
         ISO-8859-{6,8}, CP{1255,1256}, Mac{Hebrew,Arabic}
     Japanese
-        EUC-JP, SHIFT-JIS, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
+        EUC-JP, SHIFT-JIS, CP932, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
     Chinese
         EUC-CN, HZ, GBK, EUC-TW, BIG5, CP950, ISO-2022-CN, ISO-2022-CN-EXT
     Korean
-        EUC-KR, JOHAB, ISO-2022-KR
+        EUC-KR, CP949, ISO-2022-KR
     Armenian
         ARMSCII-8
     Georgian
@@ -78,7 +79,7 @@ This library can be built and installed in two variants:
 
 
 Distribution:
-    ftp://ftp.ilog.fr/pub/Users/haible/gnu/libiconv-1.0.tar.gz
+    ftp://ftp.ilog.fr/pub/Users/haible/gnu/libiconv-1.1.tar.gz
 
 Homepage:
     http://clisp.cons.org/~haible/packages-libiconv.html

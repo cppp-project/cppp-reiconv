@@ -18,6 +18,7 @@ ALL = \
  iso8859_13.h \
  iso8859_14.h \
  iso8859_15.h \
+ iso8859_16.h \
  koi8_r.h \
  koi8_u.h \
  koi8_ru.h \
@@ -60,6 +61,7 @@ ALL = \
  jisx0212.h \
  cp932ext.h \
  gb2312.h \
+ isoir165ext.h \
  gb12345ext.h \
  gbkext1.h \
  gbkext2.h \
@@ -72,6 +74,8 @@ ALL = \
  big5.h \
  cp950ext.h \
  ksc5601.h \
+ uhc_1.h \
+ uhc_2.h \
  johab_hangul.h \
  cjk_variants.h
 
@@ -118,6 +122,9 @@ iso8859_14.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-14.TXT 8bit_tab_to
 
 iso8859_15.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-15.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-15 iso8859_15 < $<
+
+iso8859_16.h : $(TABLESDIR)/csets-new/ISO-8859-16.TXT 8bit_tab_to_h
+	./8bit_tab_to_h ISO-8859-16 iso8859_16 < $<
 
 koi8_r.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MISC/KOI8-R.TXT 8bit_tab_to_h
 	./8bit_tab_to_h KOI8-R koi8_r < $<
@@ -245,8 +252,11 @@ cp932ext.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP932.TXT 
 gb2312.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT cjk_tab_to_h
 	./cjk_tab_to_h GB2312.1980-0 gb2312 < $< > $@
 
-gb12345ext.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB12345.TXT cjk_tab_to_h
-	(echo '#' ; sed -e '/^0x..[ 	]*#UNDEFINED/d' -e 's/#.*$$//' -e '/^[ 	]*$$/d' $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT > tmp1.TXT ; sed -e '/^0x..[ 	]*#UNDEFINED/d' -e 's/#.*$$//' -e '/^[ 	]*$$/d' $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB12345.TXT > tmp2.TXT ; diff tmp1.TXT tmp2.TXT | grep '^> ' | sed -e 's,^> ,,' ) | ./cjk_tab_to_h 'GB/T 12345.1990-0 extensions' gb12345ext > $@ && rm -f tmp1.TXT tmp2.TXT
+isoir165ext.h : $(TABLESDIR)/csets-new/ISO-IR-165-additions.TXT cjk_tab_to_h
+	(echo '#' ; grep -v '^0x2[8A]' < $<) | ./cjk_tab_to_h 'ISO-IR-165 extensions' isoir165ext > $@
+
+gb12345ext.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB12345-FIXED.TXT $(TABLESDIR)/csets-new/GB12345-more.TXT cjk_tab_to_h
+	(echo '#' ; sed -e '/^0x..[ 	]*#UNDEFINED/d' -e 's/#.*$$//' -e '/^[ 	]*$$/d' $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT > tmp1.TXT ; sed -e '/^0x..[ 	]*#UNDEFINED/d' -e 's/#.*$$//' -e '/^[ 	]*$$/d' $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB12345-FIXED.TXT > tmp2.TXT ; diff tmp1.TXT tmp2.TXT | grep '^> ' | sed -e 's,^> ,,' ; cat $(TABLESDIR)/csets-new/GB12345-more.TXT ) | ./cjk_tab_to_h 'GB/T 12345.1990-0 extensions' gb12345ext > $@ && rm -f tmp1.TXT tmp2.TXT
 
 gbkext1.h : GBKext.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0x\([89].\|A0\)' < GBKext.TXT) | ./cjk_tab_to_h 'GBK/3 extensions' gbkext1 > $@
@@ -283,6 +293,12 @@ cp950ext.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP950.TXT 
 
 ksc5601.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_to_h
 	./cjk_tab_to_h KSC5601.1987-0 ksc5601 < $< > $@
+
+uhc_1.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_to_h
+	(echo '#' ; grep '^0x\([8-9]\|A0\)' < $< ) | ./cjk_tab_to_h 'Unified Hangul Code part 1' uhc_1 > $@
+
+uhc_2.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_to_h
+	(echo '#' ; grep '^0x\(A[1-9A-F]\|[B-F][0-9A-F]\)\([0-9]\|A0\)' < $< ) | ./cjk_tab_to_h 'Unified Hangul Code part 2' uhc_2 > $@
 
 johab_hangul.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/JOHAB.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0x\([8-C]...\|D[0-7]..\)' < $< ) | ./cjk_tab_to_h 'JOHAB Hangul' johab_hangul > $@
