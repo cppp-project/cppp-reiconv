@@ -2,6 +2,19 @@
 
 #### Start of system configuration section. ####
 
+# Flags that can be set on the nmake command line:
+#   STATIC=1  for compiling a static .lib (default is a .dll with a stub .lib)
+#   DEBUG=1   for compiling with debugging information
+# Note that nmake command line flags are automatically passed to subdirectory
+# Makefiles. Therefore we don't need to pass them explicitly to subdirectory
+# Makefiles, but the subdirectory Makefiles need to have the same defaults.
+!if !defined(STATIC)
+STATIC=0
+!endif
+!if !defined(DEBUG)
+DEBUG=0
+!endif
+
 # Directories used by "make install":
 prefix = /usr/local
 local_prefix = /usr/local
@@ -19,13 +32,20 @@ RM = del
 SHELL = /bin/sh
 
 all : force
-	$(LN) include\iconv.h.msvc include\iconv.h
+!if $(STATIC)
+	$(LN) include\iconv.h.msvc-static include\iconv.h
+!else
+	$(LN) include\iconv.h.msvc-shared include\iconv.h
+!endif
 	cd src
 	$(MAKE) -f Makefile.msvc all
 	cd ..
 #	cd man
 #	$(MAKE) -f Makefile.msvc all
 #	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc all
+	cd ..
 
 install : force
 	cd src; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
@@ -47,13 +67,16 @@ uninstall : force
 	$(RM) $(includedir)/iconv.h
 	cd man; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
-check : force
+check : all
 	cd src
 	$(MAKE) -f Makefile.msvc check
 	cd ..
 #	cd man
 #	$(MAKE) -f Makefile.msvc check
 #	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc check
+	cd ..
 
 mostlyclean : force
 	cd src
@@ -62,6 +85,9 @@ mostlyclean : force
 #	cd man
 #	$(MAKE) -f Makefile.msvc mostlyclean
 #	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc mostlyclean
+	cd ..
 
 clean : force
 	cd src
@@ -70,6 +96,9 @@ clean : force
 #	cd man
 #	$(MAKE) -f Makefile.msvc clean
 #	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc clean
+	cd ..
 
 distclean : force
 	cd src
@@ -78,6 +107,9 @@ distclean : force
 #	cd man
 #	$(MAKE) -f Makefile.msvc distclean
 #	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc distclean
+	cd ..
 	$(RM) config.status config.log config.cache Makefile
 	$(RM) include\iconv.h
 
@@ -88,6 +120,9 @@ maintainer-clean : force
 #	cd man
 #	$(MAKE) -f Makefile.msvc maintainer-clean
 #	cd ..
+	cd tests
+	$(MAKE) -f Makefile.msvc maintainer-clean
+	cd ..
 	$(RM) config.status config.log config.cache Makefile
 	$(RM) include\iconv.h
 

@@ -66,12 +66,36 @@ DEFENCODING(( "UCS-2",                  /* glibc */
             ucs2,
             { ucs2_mbtowc },              { ucs2_wctomb, NULL })
 
+DEFENCODING(( "UCS-2BE",                /* glibc */
+              "UNICODEBIG",             /* glibc */
+              "UNICODE-1-1",            /* IANA */
+              "csUnicode11",            /* IANA */
+            ),
+            ucs2be,
+            { ucs2be_mbtowc },            { ucs2be_wctomb, NULL })
+
+DEFENCODING(( "UCS-2LE",                /* glibc */
+              "UNICODELITTLE",          /* glibc */
+            ),
+            ucs2le,
+            { ucs2le_mbtowc },            { ucs2le_wctomb, NULL })
+
 DEFENCODING(( "UCS-4",                  /* glibc */
               "ISO-10646-UCS-4",        /* IANA */
               "csUCS4",                 /* IANA */
             ),
             ucs4,
             { ucs4_mbtowc },              { ucs4_wctomb, NULL })
+
+DEFENCODING(( "UCS-4BE",                /* glibc */
+            ),
+            ucs4be,
+            { ucs4be_mbtowc },            { ucs4be_wctomb, NULL })
+
+DEFENCODING(( "UCS-4LE",                /* glibc */
+            ),
+            ucs4le,
+            { ucs4le_mbtowc },            { ucs4le_wctomb, NULL })
 
 DEFENCODING(( "UTF-16",                 /* RFC 2781 */
             ),
@@ -105,20 +129,6 @@ DEFENCODING(( "UCS-2-SWAPPED",          /* libiconv */
             ucs2swapped,
             { ucs2swapped_mbtowc },       { ucs2swapped_wctomb, NULL })
 
-DEFENCODING(( "UCS-2-BE",
-              "UNICODEBIG",             /* glibc */
-              "UNICODE-1-1",            /* IANA */
-              "csUnicode11",            /* IANA */
-            ),
-            ucs2be,
-            { ucs2be_mbtowc },            { ucs2be_wctomb, NULL })
-
-DEFENCODING(( "UCS-2-LE",
-              "UNICODELITTLE",          /* glibc */
-            ),
-            ucs2le,
-            { ucs2le_mbtowc },            { ucs2le_wctomb, NULL })
-
 DEFENCODING(( "UCS-4-INTERNAL",         /* libiconv */
             ),
             ucs4internal,
@@ -128,16 +138,6 @@ DEFENCODING(( "UCS-4-SWAPPED",          /* libiconv */
             ),
             ucs4swapped,
             { ucs4swapped_mbtowc },       { ucs4swapped_wctomb, NULL })
-
-DEFENCODING(( "UCS-4-BE",
-            ),
-            ucs4be,
-            { ucs4be_mbtowc },            { ucs4be_wctomb, NULL })
-
-DEFENCODING(( "UCS-4-LE",
-            ),
-            ucs4le,
-            { ucs4le_mbtowc },            { ucs4le_wctomb, NULL })
 
 DEFENCODING(( "JAVA",
             ),

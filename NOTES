@@ -269,6 +269,11 @@ A: libiconv, as an internationalization library, supports those character
    Full Unicode
      * UTF-8, UCS-2, UCS-4
        We implement these. Obviously.
+     * UCS-2BE, UCS-2LE, UCS-4BE, UCS-4LE
+       We implement these because they are the preferred internal
+       representation of strings in Unicode aware applications. These are
+       non-ambiguous names, known to glibc. (glibc doesn't have
+       UCS-2-INTERNAL and UCS-4-INTERNAL.)
      * UTF-16, UTF-16BE, UTF-16LE
        We implement these, because UTF-16 is still the favourite encoding of
        the president of the Unicode Consortium (for political reasons), and

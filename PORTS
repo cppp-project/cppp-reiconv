@@ -25,7 +25,14 @@
 * AIX 4.2:
   OK
 
+* SunOS 4:
+  OK when configured --enable-static --disable-shared
+  (gcc cannot create shared libraries without relocations)
+
 * FreeBSD 3.3:
+  OK
+
+* BeOS 5:
   OK
 
 * Win32 with MSVC 4.0:

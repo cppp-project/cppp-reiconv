@@ -1700,6 +1700,7 @@ case "$host_os" in
 esac
 if test -n "$OS"; then
   
+  
   PLUGLIB="libiconv_plug.so"
 else
   PLUGLIB=""
@@ -1863,6 +1864,7 @@ s%@LIBTOOL@%$LIBTOOL%g
 s%@LIBICONV@%$LIBICONV%g
 s%@ICONV_CONST@%$ICONV_CONST%g
 s%@OS@%$OS%g
+s%@GCC@%$GCC%g
 s%@PLUGLIB@%$PLUGLIB%g
 
 CEOF

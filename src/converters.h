@@ -97,7 +97,11 @@ struct conv_struct {
 /* General multi-byte encodings */
 #include "utf8.h"
 #include "ucs2.h"
+#include "ucs2be.h"
+#include "ucs2le.h"
 #include "ucs4.h"
+#include "ucs4be.h"
+#include "ucs4le.h"
 #include "utf16.h"
 #include "utf16be.h"
 #include "utf16le.h"

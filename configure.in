@@ -73,6 +73,7 @@ case "$host_os" in
 esac
 if test -n "$OS"; then
   AC_SUBST(OS)
+  AC_SUBST(GCC)
   PLUGLIB="libiconv_plug.so"
 else
   PLUGLIB=""
