@@ -336,13 +336,13 @@ cl_cv_sys_endian="little endian",
 : # must guess the endianness
 )
 if test -z "$cl_cv_sys_endian"; then
-AC_EGREP_CPP(yes,[#if defined(m68k) || defined(mc68000) || defined(mc68020) || defined(sparc) || defined(__sparc__) || defined(MIPSEB) || defined(hppa) || defined(__hppa) || defined(m88000)
+AC_EGREP_CPP(yes,[#if defined(m68k) || defined(__m68k__) || defined(mc68000) || defined(mc68020) || defined(__mc68020__) || defined(sparc) || defined(__sparc__) || defined(MIPSEB) || defined(__MIPSEB__) || defined(hppa) || defined(__hppa) || defined(m88000) || defined(__m88k__)
   yes
 #endif
 ], cl_cv_sys_endian="big endian")
 fi
 if test -z "$cl_cv_sys_endian"; then
-AC_EGREP_CPP(yes,[#if defined(i386) || defined(__i386) || defined(__i386__) || defined(_I386) || defined(MIPSEL) || defined(__alpha)
+AC_EGREP_CPP(yes,[#if defined(i386) || defined(__i386) || defined(__i386__) || defined(_I386) || defined(MIPSEL) || defined(__MIPSEL__) || defined(__alpha)
   yes
 #endif
 ], cl_cv_sys_endian="little endian")

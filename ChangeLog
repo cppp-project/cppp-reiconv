@@ -1,3 +1,9 @@
+2000-10-09  Bruno Haible  <haible@clisp.cons.org>
+
+        CPU recognition on OpenBSD.
+        * autoconf/aclocal.m4 (CL_WORDS_LITTLEENDIAN): Recognize __m68k__,
+          __mc68020__, __MIPSEB__, __MIPSEL__, __m88k__ as CPU indicators.
+
 2000-10-03  Bruno Haible  <haible@clisp.cons.org>
 
         * src/gentranslit.c (main): Don't output non-ASCII ISO-8859-1
