@@ -1,3 +1,9 @@
+2004-11-11  Bruno Haible  <bruno@clisp.org>
+
+	* lib/iconv.c (iconv_open): Accept the suffixes //TRANSLIT and //IGNORE
+	in arbitrary order.
+	Reported by Lukas Gebauer <gebauerl@mlp.cz>.
+
 2004-09-21  Juan Manuel Guerrero  <st001906@hrz1.hrz.tu-darmstadt.de>
 
 	* djgpp/config.bat: Update.

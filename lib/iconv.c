@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2003 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2004 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -232,15 +232,20 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       if (--count == 0)
         goto invalid;
     }
-    if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
-      bp -= 10;
-      *bp = '\0';
-      transliterate = 1;
-    }
-    if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
-      bp -= 8;
-      *bp = '\0';
-      discard_ilseq = 1;
+    for (;;) {
+      if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+        bp -= 10;
+        *bp = '\0';
+        transliterate = 1;
+        continue;
+      }
+      if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
+        bp -= 8;
+        *bp = '\0';
+        discard_ilseq = 1;
+        continue;
+      }
+      break;
     }
     if (buf[0] == '\0') {
       tocode = locale_charset();
@@ -303,13 +308,17 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       if (--count == 0)
         goto invalid;
     }
-    if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
-      bp -= 10;
-      *bp = '\0';
-    }
-    if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
-      bp -= 8;
-      *bp = '\0';
+    for (;;) {
+      if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+        bp -= 10;
+        *bp = '\0';
+        continue;
+      }
+      if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
+        bp -= 8;
+        *bp = '\0';
+        continue;
+      }
     }
     if (buf[0] == '\0') {
       fromcode = locale_charset();
