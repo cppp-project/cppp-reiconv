@@ -32,6 +32,7 @@ ALL = \
  cp1257.h \
  cp1258.h \
  cp850.h \
+ cp862.h \
  cp866.h \
  mac_roman.h \
  mac_centraleurope.h \
@@ -172,6 +173,9 @@ cp1258.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP1258.TXT 8
 
 cp850.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP850.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP850 cp850 < $<
+
+cp862.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP862.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP862 cp862 < $<
 
 cp866.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP866.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP866 cp866 < $<

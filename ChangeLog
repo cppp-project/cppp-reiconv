@@ -42,6 +42,20 @@
         * lib/loop_unicode.h (unicode_loop_convert): Change type of pointer
           into translit_data.
 
+2001-01-05  Bruno Haible  <haible@clisp.cons.org>
+
+        Implement and document CP862.
+        * tools/Makefile (ALL): Add cp862.h.
+          (cp862.h): New target.
+        * lib/cp862.h: New file.
+        * lib/converters.h: Include it.
+        * lib/encodings.def (CP862): New encoding.
+        * README, man/iconv_open.3: Add CP862.
+        * tests/Makefile.in (check): Check CP862.
+        * tests/Makefile.msvc (check): Likewise.
+        * tests/Makefile.os2 (check): Likewise.
+        * tests/CP862.TXT: New file.
+
 2000-12-18  Bruno Haible  <haible@clisp.cons.org>
 
         * autoconf/mbstate_t.m4: New file, from textutils-2.0.10.
