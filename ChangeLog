@@ -1,5 +1,9 @@
 2005-01-05  Bruno Haible  <bruno@clisp.org>
 
+	* autoconf/config.rpath: Update from GNU gettext.
+
+2005-01-05  Bruno Haible  <bruno@clisp.org>
+
 	Assume automake-1.9.
 	* Makefile.devel (AUTOMAKE): Assume automake-1.9.
 
