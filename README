@@ -106,7 +106,7 @@ Distribution:
     ftp://ftp.ilog.fr/pub/Users/haible/gnu/libiconv-1.7.tar.gz
 
 Homepage:
-    http://clisp.cons.org/~haible/packages-libiconv.html
+    http://www.gnu.org/software/libiconv/
 
 Bug reports to:
     <bug-gnu-libiconv@gnu.org>
