@@ -629,13 +629,18 @@ const char * iconv_canonicalize (const char * name)
       if (--count == 0)
         goto invalid;
     }
-    if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
-      bp -= 10;
-      *bp = '\0';
-    }
-    if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
-      bp -= 8;
-      *bp = '\0';
+    for (;;) {
+      if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+        bp -= 10;
+        *bp = '\0';
+        continue;
+      }
+      if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
+        bp -= 8;
+        *bp = '\0';
+        continue;
+      }
+      break;
     }
     if (buf[0] == '\0') {
       code = locale_charset();
