@@ -60,6 +60,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateless $(srcdir) CP1257
 	$(srcdir)\check-stateless $(srcdir) CP1258
 	$(srcdir)\check-stateless $(srcdir) CP850
+	$(srcdir)\check-stateless $(srcdir) CP862
 	$(srcdir)\check-stateless $(srcdir) CP866
 	$(srcdir)\check-stateless $(srcdir) MacRoman
 	$(srcdir)\check-stateless $(srcdir) MacCentralEurope

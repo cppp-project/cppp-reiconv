@@ -13,7 +13,7 @@ It provides support for the encodings:
         Mac{Cyrillic,Ukraine,Greek,Turkish},
         Macintosh
     Semitic languages
-        ISO-8859-{6,8}, CP{1255,1256}, Mac{Hebrew,Arabic}
+        ISO-8859-{6,8}, CP{1255,1256}, CP862, Mac{Hebrew,Arabic}
     Japanese
         EUC-JP, SHIFT-JIS, CP932, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
     Chinese

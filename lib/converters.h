@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -140,6 +140,7 @@ struct conv_struct {
 #include "cp1257.h"
 #include "cp1258.h"
 #include "cp850.h"
+#include "cp862.h"
 #include "cp866.h"
 #include "mac_roman.h"
 #include "mac_centraleurope.h"

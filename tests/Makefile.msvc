@@ -92,6 +92,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) CP1257
 	$(srcdir)\check-stateless.bat $(srcdir) CP1258
 	$(srcdir)\check-stateless.bat $(srcdir) CP850
+	$(srcdir)\check-stateless.bat $(srcdir) CP862
 	$(srcdir)\check-stateless.bat $(srcdir) CP866
 	$(srcdir)\check-stateless.bat $(srcdir) MacRoman
 	$(srcdir)\check-stateless.bat $(srcdir) MacCentralEurope

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -402,6 +402,14 @@ DEFENCODING(( "CP850",                  /* IANA, JDK 1.1 */
             ),
             cp850,
             { cp850_mbtowc },             { cp850_wctomb, NULL })
+
+DEFENCODING(( "CP862",                  /* IANA, JDK 1.1 */
+              "IBM862",                 /* IANA */
+              "862",                    /* IANA */
+              "csPC862LatinHebrew",     /* IANA */
+            ),
+            cp862,
+            { cp862_mbtowc },             { cp862_wctomb, NULL })
 
 DEFENCODING(( "CP866",                  /* IANA, JDK 1.1 */
               "IBM866",                 /* IANA */

@@ -1,3 +1,6 @@
+New in 1.6:
+* Added CP862 converter.
+
 New in 1.5:
 * New locale dependent encodings "char", "wchar_t".
 * Transliteration is now off by default. Use a //TRANSLIT suffix to enable it.

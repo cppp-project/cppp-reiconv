@@ -164,6 +164,9 @@ A: libiconv, as an internationalization library, supports those character
      * CP850
        We implement this because it is mentioned as occurring in the web
        in the aforementioned statistics.
+     * CP862
+       We implement this because Ron Aaron says it is sometimes used in web
+       pages and emails.
      * CP866
        We implement this because Netscape Communicator does.
      * Mac{Roman,CentralEurope,Croatian,Romania,Cyrillic,Greek,Turkish} and
@@ -319,14 +322,14 @@ A: 1. Explain the "why" in this file, above.
    can include it in his collection.
    3. If it's an 8-bit character set, use the '8bit_tab_to_h' program in the
    tools directory to generate the C code for the conversion. You may tweak
-   the resulting C code if you are satisfied with its quality, but this is
-   rarely needed.
+   the resulting C code if you are not satisfied with its quality, but this
+   is rarely needed.
    If it's a two-dimensional character set (with rows and columns), use the
    'cjk_tab_to_h' program in the tools directory to generate the C code for
    the conversion. You will need to modify the main() function to recognize
    the new character set name, with the proper dimensions, but that shouldn't
    be too hard. This yields the CCS. The CES you have to write by hand.
-   4. Store the resulting C code file in the src directory. Add a #include
+   4. Store the resulting C code file in the lib directory. Add a #include
    directive to converters.h, and add an entry to the encodings.def file.
    5. Compile the package, and test your new encoding using a program like
    iconv(1) or clisp(1).

@@ -70,6 +70,7 @@ check : all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) CP1257
 	$(srcdir)/check-stateless $(srcdir) CP1258
 	$(srcdir)/check-stateless $(srcdir) CP850
+	$(srcdir)/check-stateless $(srcdir) CP862
 	$(srcdir)/check-stateless $(srcdir) CP866
 	$(srcdir)/check-stateless $(srcdir) MacRoman
 	$(srcdir)/check-stateless $(srcdir) MacCentralEurope
