@@ -1,3 +1,9 @@
+2002-05-26  Bruno Haible  <bruno@clisp.org>
+
+	* lib/java.h (java_mbtowc): Accept 12-byte sequences for non-BMP
+	characters.
+	(java_wctomb): Produce 12-byte sequences for non-BMP characters.
+
 2002-05-29  Bruno Haible  <bruno@clisp.org>
 
 	Fix installation of iconv program when linked with a libintl that was
