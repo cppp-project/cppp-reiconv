@@ -1,5 +1,20 @@
 2002-01-13  Bruno Haible  <bruno@clisp.org>
 
+	Support for "iconv -c".
+	* include/iconv.h.in (ICONV_GET_DISCARD_ILSEQ): New macro.
+	(ICONV_SET_DISCARD_ILSEQ): Likewise.
+	* lib/converters.h (struct conv_struct): New field discard_ilseq.
+	* lib/iconv.c (iconv_open): Set discard_ilseq to true if tocode
+	has an "//IGNORE" suffix, and to false otherwise.
+	(iconvctl): Implement ICONV_GET_DISCARD_ILSEQ, ICONV_SET_DISCARD_ILSEQ.
+	* lib/loop_unicode.h (unicode_loop_convert): If discard_ilseq is
+	true, skip one input character instead of returning EILSEQ.
+	(unicode_loop_reset): Likewise.
+	* lib/loop_wchar.h (wchar_from_loop_convert): Likewise.
+	(wchar_to_loop_convert): Likewise.
+
+2002-01-13  Bruno Haible  <bruno@clisp.org>
+
 	Support for "iconv -l".
 	* include/iconv.h.in (iconvlist): New declaration.
 	* Makefile.devel (lib/aliases.h): Change gperf options.

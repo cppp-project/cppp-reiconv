@@ -169,6 +169,21 @@ static size_t unicode_loop_convert (iconv_t icd,
     if (incount < 0) {
       if (incount == RET_ILSEQ) {
         /* Case 1: invalid input */
+        if (cd->discard_ilseq) {
+          switch (cd->iindex) {
+            case ei_ucs4: case ei_ucs4be: case ei_ucs4le:
+            case ei_utf32: case ei_utf32be: case ei_utf32le:
+            case ei_ucs4internal: case ei_ucs4swapped:
+              incount = 4; break;
+            case ei_ucs2: case ei_ucs2be: case ei_ucs2le:
+            case ei_utf16: case ei_utf16be: case ei_utf16le:
+            case ei_ucs2internal: case ei_ucs2swapped:
+              incount = 2; break;
+            default:
+              incount = 1; break;
+          }
+          goto outcount_zero;
+        }
         errno = EILSEQ;
         result = -1;
         break;
@@ -201,6 +216,8 @@ static size_t unicode_loop_convert (iconv_t icd,
         if (outcount != RET_ILUNI)
           goto outcount_ok;
       }
+      if (cd->discard_ilseq)
+        goto outcount_zero;
       outcount = cd->ofuncs.xxx_wctomb(cd,outptr,0xFFFD,outleft);
       if (outcount != RET_ILUNI)
         goto outcount_ok;
@@ -215,8 +232,8 @@ static size_t unicode_loop_convert (iconv_t icd,
       }
       if (!(outcount <= outleft)) abort();
       outptr += outcount; outleft -= outcount;
-    outcount_zero: ;
     }
+  outcount_zero:
     if (!(incount <= inleft)) abort();
     inptr += incount; inleft -= incount;
   }
@@ -256,6 +273,8 @@ static size_t unicode_loop_reset (iconv_t icd,
           if (outcount != RET_ILUNI)
             goto outcount_ok;
         }
+        if (cd->discard_ilseq)
+          goto outcount_zero;
         outcount = cd->ofuncs.xxx_wctomb(cd,outptr,0xFFFD,outleft);
         if (outcount != RET_ILUNI)
           goto outcount_ok;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -189,6 +189,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
   unsigned int to_index;
   int to_wchar;
   int transliterate = 0;
+  int discard_ilseq = 0;
 
   /* Before calling aliases_lookup, convert the input string to upper case,
    * and check whether it's entirely ASCII (we call gperf with option "-7"
@@ -213,6 +214,11 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       bp -= 10;
       *bp = '\0';
       transliterate = 1;
+    }
+    if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
+      bp -= 8;
+      *bp = '\0';
+      discard_ilseq = 1;
     }
     if (buf[0] == '\0') {
       tocode = locale_charset();
@@ -277,6 +283,10 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
     }
     if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
       bp -= 10;
+      *bp = '\0';
+    }
+    if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
+      bp -= 8;
       *bp = '\0';
     }
     if (buf[0] == '\0') {
@@ -370,6 +380,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
   memset(&cd->ostate,'\0',sizeof(state_t));
   /* Initialize the operation flags. */
   cd->transliterate = transliterate;
+  cd->discard_ilseq = discard_ilseq;
   /* Initialize additional fields. */
   if (from_wchar != to_wchar) {
     struct wchar_conv_struct * wcd = (struct wchar_conv_struct *) cd;
@@ -420,6 +431,12 @@ int iconvctl (iconv_t icd, int request, void* argument)
       return 0;
     case ICONV_SET_TRANSLITERATE:
       cd->transliterate = (*(const int *)argument ? 1 : 0);
+      return 0;
+    case ICONV_GET_DISCARD_ILSEQ:
+      *(int *)argument = cd->discard_ilseq;
+      return 0;
+    case ICONV_SET_DISCARD_ILSEQ:
+      cd->discard_ilseq = (*(const int *)argument ? 1 : 0);
       return 0;
     default:
       errno = EINVAL;

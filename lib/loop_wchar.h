@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2001 Free Software Foundation, Inc.
+ * Copyright (C) 2000-2002 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -74,8 +74,11 @@ static size_t wchar_from_loop_convert (iconv_t icd,
       size_t count = wcrtomb(buf+bufcount,*inptr,&state);
       if (count == (size_t)(-1)) {
         /* Invalid input. */
-        errno = EILSEQ;
-        return -1;
+        if (!wcd->parent.discard_ilseq) {
+          errno = EILSEQ;
+          return -1;
+        }
+        count = 0;
       }
       inptr++;
       inleft -= sizeof(wchar_t);
@@ -208,17 +211,20 @@ static size_t wchar_to_loop_convert (iconv_t icd,
         res = mbrtowc(&wc,buf,bufcount,&state);
         if (res == (size_t)(-2)) {
           /* Next try with one more input byte. */
-        } else if (res == (size_t)(-1)) {
-          /* Invalid input. */
-          return -1;
         } else {
-          if (*outbytesleft < sizeof(wchar_t)) {
-            errno = E2BIG;
-            return -1;
+          if (res == (size_t)(-1)) {
+            /* Invalid input. */
+            if (!wcd->parent.discard_ilseq)
+              return -1;
+          } else {
+            if (*outbytesleft < sizeof(wchar_t)) {
+              errno = E2BIG;
+              return -1;
+            }
+            *(wchar_t*) *outbuf = wc;
+            *outbuf += sizeof(wchar_t);
+            *outbytesleft -= sizeof(wchar_t);
           }
-          *(wchar_t*) *outbuf = wc;
-          *outbuf += sizeof(wchar_t);
-          *outbytesleft -= sizeof(wchar_t);
           *inbuf += incount;
           *inbytesleft -= incount;
           result += res;
