@@ -1,3 +1,8 @@
+New in 1.7:
+
+* Added UTF-32, UTF-32BE, UTF-32LE converters.
+* Fixed a bug in the byte order mark treatment of the UCS-4 decoder.
+
 New in 1.6:
 * The iconv program's -f and -t options are now optional.
 * Many more transliterations.

@@ -290,6 +290,8 @@ A: libiconv, as an internationalization library, supports those character
        We implement these, because UTF-16 is still the favourite encoding of
        the president of the Unicode Consortium (for political reasons), and
        because they appear in RFC 2781.
+     * UTF-32, UTF-32BE, UTF-32LE
+       We implement these because they are part of Unicode 3.1.
      * UTF-7
        We implement this because it is essential functionality for mail
        applications.

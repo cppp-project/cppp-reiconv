@@ -31,6 +31,9 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateful $(srcdir) UTF-16
 	$(srcdir)\check-stateful $(srcdir) UTF-16BE
 	$(srcdir)\check-stateful $(srcdir) UTF-16LE
+	$(srcdir)\check-stateful $(srcdir) UTF-32
+	$(srcdir)\check-stateful $(srcdir) UTF-32BE
+	$(srcdir)\check-stateful $(srcdir) UTF-32LE
 	$(srcdir)\check-stateful $(srcdir) UTF-7
 #	/* 8-bit encodings */
 	$(srcdir)\check-stateless $(srcdir) ISO-8859-1

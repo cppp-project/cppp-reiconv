@@ -1,5 +1,20 @@
 2001-04-11  Bruno Haible  <haible@clisp.cons.org>
 
+        Implement and document UTF-32, UTF-32BE, UTF-32LE.
+        * src/utf32.h, src/utf32be.h, src/utf32le.h: New files.
+        * src/converters.h: Include them.
+        * src/encodings.def (UTF-32, UTF-32BE, UTF32LE): New encodings.
+        * README, man/iconv_open.3: Add UTF-32, UTF-32BE, UTF32LE.
+        * tests/Makefile.in (check): Check UTF-32, UTF-32BE, UTF32LE.
+        * tests/Makefile.os2 (check): Likewise.
+        * tests/Makefile.msvc (check): Likewise.
+        * tests/UTF-32*snippet*: New files.
+
+        * lib/ucs4.h (ucs4_mbtowc): Fix value of other-endian byte order.
+          (ucs4_wctomb): Allow any 31-bit codepoint.
+
+2001-04-11  Bruno Haible  <haible@clisp.cons.org>
+
         * tests/GB18030.TXT: Add mappings for all of U+0000..U+FFFF, including
           unassigned code points.
         * tests/table-from.c (main); When dumping GB18030, don't print code

@@ -112,6 +112,21 @@ DEFENCODING(( "UTF-16LE",               /* RFC 2781 */
             utf16le,
             { utf16le_mbtowc },           { utf16le_wctomb, NULL })
 
+DEFENCODING(( "UTF-32",                 /* Unicode 3.1 */
+            ),
+            utf32,
+            { utf32_mbtowc },             { utf32_wctomb, NULL })
+
+DEFENCODING(( "UTF-32BE",               /* Unicode 3.1 */
+            ),
+            utf32be,
+            { utf32be_mbtowc },           { utf32be_wctomb, NULL })
+
+DEFENCODING(( "UTF-32LE",               /* Unicode 3.1 */
+            ),
+            utf32le,
+            { utf32le_mbtowc },           { utf32le_wctomb, NULL })
+
 DEFENCODING(( "UTF-7",                  /* IANA, RFC 2152 */
               "UNICODE-1-1-UTF-7",      /* IANA, RFC 1642 */
               "csUnicode11UTF7",        /* IANA */
