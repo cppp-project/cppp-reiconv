@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2004 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -300,6 +300,7 @@ int main (int argc, char* argv[])
         fprintf(stderr,_("iconv: conversion to %s unsupported\n"),tocode);
       else
         fprintf(stderr,_("iconv: conversion from %s to %s unsupported\n"),fromcode,tocode);
+      fprintf(stderr,_("iconv: try '%s -l' to get the list of supported encodings\n"),program_name);
       exit(1);
     }
     if (i == argc)
