@@ -1,4 +1,13 @@
 struct alias { const char* name; unsigned int encoding_index; };
+%struct-type
+%language=ANSI-C
+%define hash-function-name aliases_hash
+%define lookup-function-name aliases_lookup
+%7bit
+%readonly-tables
+%global-table
+%define word-array-name aliases
+%null-strings
 %%
 US-ASCII, ei_ascii
 ASCII, ei_ascii
