@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU CHARSET Library.
 
    The GNU CHARSET Library is free software; you can redistribute it and/or
@@ -35,7 +35,7 @@ extern "C" {
    into one of the canonical names listed in config.charset.
    The result must not be freed; it is statically allocated.
    If the canonical name cannot be determined, the result is a non-canonical
-   name or NULL.  */
+   name.  */
 extern LIBCHARSET_DLL_EXPORTED const char * locale_charset (void);
 
 

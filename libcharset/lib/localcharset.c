@@ -191,7 +191,7 @@ get_charset_aliases ()
    into one of the canonical names listed in config.charset.
    The result must not be freed; it is statically allocated.
    If the canonical name cannot be determined, the result is a non-canonical
-   name or NULL.  */
+   name.  */
 
 #ifdef STATIC
 STATIC
@@ -249,7 +249,10 @@ locale_charset ()
 
 #endif
 
-  if (codeset != NULL && codeset[0] != '\0')
+  if (codeset == NULL)
+    /* The canonical name cannot be determined.  */
+    codeset = "";
+  else if (codeset[0] != '\0')
     {
       /* Resolve alias. */
       for (aliases = get_charset_aliases ();

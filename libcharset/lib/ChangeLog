@@ -1,3 +1,7 @@
+2001-02-25  Bruno Haible  <haible@clisp.cons.org>
+
+	* localcharset.c (locale_charset): Don't return NULL.
+
 2001-02-24  Bruno Haible  <haible@clisp.cons.org>
 
 	* localcharset.c (locale_charset): Don't use setlocale(LC_CTYPE,NULL).

@@ -1,3 +1,8 @@
+2001-02-25  Bruno Haible  <haible@clisp.cons.org>
+
+	* include/libcharset.h.in (locale_charset): Return value is never
+	NULL any more.
+
 2001-02-22  Bruno Haible  <haible@clisp.cons.org>
 
 	* INTEGRATE (Makefile.am): Change $@-t to t-$@. For DJGPP.
