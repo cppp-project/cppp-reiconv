@@ -17,7 +17,7 @@
 
 <hr>
 <!-- Creator     : groff version 1.17 -->
-<!-- CreationDate: Fri May 24 14:48:04 2002 -->
+<!-- CreationDate: Fri Feb 14 19:23:41 2003 -->
 <a name="NAME"></a>
 <h2>NAME</h2>
 <table width="100%" border=0 rules="none" frame="void"
@@ -69,7 +69,7 @@ The <b>iconv</b> function converts one multibyte character
 at a time, and for each character conversion it increments
 <i>*inbuf</i> and decrements <i>*inbytesleft</i> by the
 number of converted input bytes, it increments
-<i>*outbuf</i> and decrements <i>*outbytesptr</i> by the
+<i>*outbuf</i> and decrements <i>*outbytesleft</i> by the
 number of converted output bytes, and it updates the
 conversion state contained in <i>cd</i>. The conversion can
 stop for four reasons:</td></table>
@@ -124,8 +124,9 @@ initial state and store a corresponding shift sequence at
 at <i>*outbuf</i>, will be written. If the output buffer has
 no more room for this reset sequence, it sets <b>errno</b>
 to <b>E2BIG</b> and returns (size_t)(-1). Otherwise it
-increments <i>*outbuf</i> and decrements <i>*outbytesptr</i>
-by the number of bytes written.</td></table>
+increments <i>*outbuf</i> and decrements
+<i>*outbytesleft</i> by the number of bytes
+written.</td></table>
 
 <table width="100%" border=0 rules="none" frame="void"
        cols="2" cellspacing="0" cellpadding="0">
