@@ -1,3 +1,8 @@
+2004-01-20  Bruno Haible  <bruno@clisp.org>
+
+	Assume automake-1.8.
+	* Makefile.devel (AUTOCONF): Assume autoconf-2.59.
+
 2003-06-18  Bruno Haible  <bruno@clisp.org>
 
 	* config/install-sh: Update from automake-1.7.5.

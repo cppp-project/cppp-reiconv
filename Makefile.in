@@ -135,3 +135,5 @@ maintainer-clean : force
 
 force :
 
+# Work around an automake-1.8 bug.
+am--refresh:

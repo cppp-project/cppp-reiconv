@@ -4,9 +4,9 @@
 
 SHELL = /bin/sh
 MAKE = make
-AUTOCONF = autoconf-2.57
-AUTOHEADER = autoheader-2.57
-AUTOMAKE = automake-1.7
+AUTOCONF = autoconf-2.59
+AUTOHEADER = autoheader-2.59
+AUTOMAKE = automake-1.8
 GPERF = gperf
 CC = gcc
 CFLAGS = -O
