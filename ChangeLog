@@ -1,3 +1,29 @@
+2001-02-24  Bruno Haible  <haible@clisp.cons.org>
+
+        Provide all encodings used by DOS locales.
+        * tools/Makefile (cp437.h, cp852.h, cp855.h, cp857.h, cp861.h,
+           cp864.h, cp865.h, cp869.h): New targets.
+          (ALL): Add them.
+        * lib/cp437.h: New file.
+        * lib/cp852.h: New file.
+        * lib/cp855.h: New file.
+        * lib/cp857.h: New file.
+        * lib/cp861.h: New file.
+        * lib/cp864.h: New file.
+        * lib/cp865.h: New file.
+        * lib/cp869.h: New file.
+        * lib/converters.h: Include them if USE_DOS is defined.
+        * lib/encodings_dos.def: New file.
+        * lib/genflags.c (main): Include it. Define USE_DOS.
+        * lib/genaliases2.c (main): Include it conditionally.
+        * lib/iconv.c: Define USE_DOS on DJGPP.
+          Include encodings_dos.def and aliases_dos.h.
+        * lib/Makefile.in (iconv.lo): Depend on encodings_dos.def and
+          aliases_dos.h.
+        * Makefile.devel (lib/aliases_dos.h): New target.
+          (all): Depend on lib/aliases_dos.h.
+          (lib/flags.h): Depend on lib/encodings_dos.def.
+
 2001-02-23  Bruno Haible  <haible@clisp.cons.org>
 
         * src/iconv.c [DJGPP]: Include <io.h>.
