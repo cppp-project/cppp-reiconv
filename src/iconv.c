@@ -206,6 +206,11 @@ size_t iconv (iconv_t icd,
         incount = -1-incount;
       } else {
         /* Case 4: k bytes read, making up a wide character */
+        if (outleft == 0) {
+          errno = E2BIG;
+          result = -1;
+          break;
+        }
         outcount = cd->ofuncs.xxx_wctomb(cd,outptr,wc,outleft);
         if (outcount != 0)
           goto outcount_ok;
