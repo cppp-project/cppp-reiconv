@@ -1,3 +1,54 @@
+2001-06-02  Bruno Haible  <haible@clisp.cons.org>
+
+        * tools/cjk_tab_to_h.c (Encoding): Add fffd field.
+          (is_charset2uni_large, compact_large_charset2uni): New functions.
+          (find_charset2uni_pages): Use enc->fffd instead of 0xfffd.
+          (output_charset2uni): If mapping to more than the Unicode BMP,
+          use an extra indirection to keep each value in 16 bits.
+          (invert): Bump limit from U+10000 to U+30000.
+          (output_uni2charset_dense): Likewise.
+          (output_uni2charset_sparse): Likewise. If mapping to more than one
+          CJK plane, use three bytes per value instead of two bytes.
+          (byte_row_cns11643): Allow more than 3 CJK planes.
+          (do_cns11643_only_uni2charset): Increase number of rows, to include
+          plane 15. Remove plane bits hack.
+          (main): Accept names cns11643_4a,4b,5,6,7,15 as well.
+        * tools/Makefile (ALL): Add cns11643_4a.h, cns11643_4b.h, cns11643_5.h,
+          cns11643_6.h, cns11643_7.h, cns11643_15.h.
+          (cns11643_1.h, cns11643_2.h, cns11643_3.h): Use new Unicode 3.1
+          derived table.
+          (cns11643_4a.h, cns11643_4b.h, cns11643_5.h, cns11643_6.h,
+           cns11643_7.h, cns11643_15.h): New rules.
+          (cns11643_inv.h): Change title.
+        * lib/cns11643_1.h: Regenerated from Unicode 3.1 derived table.
+        * lib/cns11643_3.h: Likewise.
+        * lib/cns11643_4a.h: New file.
+        * lib/cns11643_4b.h: New file.
+        * lib/cns11643_4.h: New file.
+        * lib/cns11643_5.h: New file.
+        * lib/cns11643_6.h: New file.
+        * lib/cns11643_7.h: New file.
+        * lib/cns11643_15.h: New file.
+        * lib/cns11643_inv.h: Regenerated from Unicode 3.1 derived table.
+          (cns11643_inv_wctomb): Return 3 bytes now.
+        * lib/cns11643.h: Include cns11643_4.h, cns11643_5.h, cns11643_6.h,
+          cns11643_7.h, cns11643_15.h.
+          (cns11643_wctomb): Now a simple alias to cns11643_inv_wctomb. Return
+          plane number starting at 1, not 0.
+        * lib/dec_hanyu.h (dec_hanyu_wctomb): Update for cns11643_wctomb
+          change.
+        * lib/euc_tw.h (euc_tw_mbtowc): Accept CNS11643 planes 4,5,6,7,15 as
+          well.
+          (euc_tw_wctomb): Update for cns11643_wctomb change.
+        * lib/iso2022_cn.h (iso2022_cn_wctomb): Likewise.
+        * lib/iso2022_cnext.h (iso2022_cn_ext_mbtowc): Accept CNS11643 planes
+          4,5,6,7 as well.
+          (iso2022_cn_ext_wctomb): Update for cns11643_wctomb change.
+          Try CNS11643 planes 4,5,6,7 as well.
+        * tests/EUC-TW.TXT: Many additions, mostly in planes 3,4,5,6,7,15.
+        * tests/EUC-TW.IRREVERSIBLE.TXT: Reflect additions to CNS11643 plane 1.
+          Add U+5344.
+
 2001-06-01  Bruno Haible  <haible@clisp.cons.org>
 
         * tests/table-from.c (bmp_only): New variable.

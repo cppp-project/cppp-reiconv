@@ -238,7 +238,7 @@ iso2022_cn_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     if (ret != 3) abort();
 
     /* Try CNS 11643-1992 Plane 1. */
-    if (buf[0] == 0 && buf[1] < 0x80 && buf[2] < 0x80) {
+    if (buf[0] == 1 && buf[1] < 0x80 && buf[2] < 0x80) {
       int count = (state2 == STATE2_DESIGNATED_CNS11643_1 ? 0 : 4) + (state1 == STATE_TWOBYTE ? 0 : 1) + 2;
       if (n < count)
         return RET_TOOSMALL;
@@ -263,7 +263,7 @@ iso2022_cn_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
 
     /* Try CNS 11643-1992 Plane 2. */
-    if (buf[0] == 1 && buf[1] < 0x80 && buf[2] < 0x80) {
+    if (buf[0] == 2 && buf[1] < 0x80 && buf[2] < 0x80) {
       int count = (state3 == STATE3_DESIGNATED_CNS11643_2 ? 0 : 4) + 4;
       if (n < count)
         return RET_TOOSMALL;

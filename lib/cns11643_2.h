@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -19,7 +19,7 @@
  */
 
 /*
- * CNS 11643-1986 plane 2
+ * CNS 11643-1992 plane 2
  */
 
 static const unsigned short cns11643_2_2uni_page21[7650] = {

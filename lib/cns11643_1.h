@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -19,7 +19,7 @@
  */
 
 /*
- * CNS 11643-1986 plane 1
+ * CNS 11643-1992 plane 1
  */
 
 static const unsigned short cns11643_1_2uni_page21[500] = {
@@ -857,7 +857,7 @@ static int
 cns11643_1_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c1 = s[0];
-  if ((c1 >= 0x21 && c1 <= 0x26) || (c1 == 0x42) || (c1 >= 0x44 && c1 <= 0x7d)) {
+  if ((c1 >= 0x21 && c1 <= 0x27) || (c1 == 0x42) || (c1 >= 0x44 && c1 <= 0x7d)) {
     if (n >= 2) {
       unsigned char c2 = s[1];
       if (c2 >= 0x21 && c2 < 0x7f) {
@@ -866,6 +866,12 @@ cns11643_1_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
         if (i < 3102) {
           if (i < 500)
             wc = cns11643_1_2uni_page21[i];
+          else if (i == 571)
+            wc = 0x4ea0;
+          else if (i == 578)
+            wc = 0x51ab;
+          else if (i == 583)
+            wc = 0x52f9;
         } else if (i < 3290) {
           if (i < 3135)
             wc = cns11643_1_2uni_page42[i-3102];

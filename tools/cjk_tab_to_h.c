@@ -63,6 +63,7 @@ typedef struct {
   int ncharsetblocks;
   Block* charsetblocks; /* blocks[0..nblocks-1] */
   int* uni2charset; /* uni2charset[0x0000..0xffff] */
+  int fffd;    /* uni representation of the invalid character */
 } Encoding;
 
 /*
@@ -163,6 +164,61 @@ static void read_table (Encoding* enc)
 }
 
 /*
+ * Determine whether the Unicode range goes outside the BMP.
+ */
+static bool is_charset2uni_large (Encoding* enc)
+{
+  int row, col;
+
+  for (row = 0; row < enc->rows; row++)
+    for (col = 0; col < enc->cols; col++)
+      if (enc->charset2uni[row][col] >= 0x10000)
+        return true;
+  return false;
+}
+
+/*
+ * Compactify the Unicode range by use of an auxiliary table,
+ * so 16 bits suffice to store each value.
+ */
+static int compact_large_charset2uni (Encoding* enc, unsigned int **urows)
+{
+  int upages[0x1100];
+  int i, row, col, nurows;
+
+  for (i = 0; i < 0x1100; i++)
+    upages[i] = -1;
+
+  for (row = 0; row < enc->rows; row++)
+    for (col = 0; col < enc->cols; col++)
+      upages[enc->charset2uni[row][col] >> 8] = 0;
+
+  nurows = 0;
+  for (i = 0; i < 0x1100; i++)
+    if (upages[i] == 0)
+      nurows++;
+
+  *urows = (unsigned int *) malloc(nurows * sizeof(unsigned int));
+
+  nurows = 0;
+  for (i = 0; i < 0x1100; i++)
+    if (upages[i] == 0) {
+      upages[i] = nurows;
+      (*urows)[nurows] = i;
+      nurows++;
+    }
+
+  for (row = 0; row < enc->rows; row++)
+    for (col = 0; col < enc->cols; col++) {
+      int u = enc->charset2uni[row][col];
+      enc->charset2uni[row][col] = (upages[u >> 8] << 8) | (u & 0xFF);
+    }
+  enc->fffd = (upages[0xfffd >> 8] << 8) | (0xfffd & 0xFF);
+
+  return nurows;
+}
+
+/*
  * Computes the charsetpage[0..rows] array.
  */
 static void find_charset2uni_pages (Encoding* enc)
@@ -177,7 +233,7 @@ static void find_charset2uni_pages (Encoding* enc)
   for (row = 0; row < enc->rows; row++) {
     int used = 0;
     for (col = 0; col < enc->cols; col++)
-      if (enc->charset2uni[row][col] != 0xfffd)
+      if (enc->charset2uni[row][col] != enc->fffd)
         used = col+1;
     enc->charsetpage[row] = used;
   }
@@ -208,7 +264,16 @@ static void find_charset2uni_blocks (Encoding* enc)
  */
 static void output_charset2uni (const char* name, Encoding* enc)
 {
-  int row, col, lastrow, col_max, i, i1_min, i1_max;
+  int nurows, row, col, lastrow, col_max, i, i1_min, i1_max;
+  bool is_large;
+  unsigned int* urows;
+
+  is_large = is_charset2uni_large(enc);
+  if (is_large) {
+    nurows = compact_large_charset2uni(enc,&urows);
+  } else {
+    nurows = 0; urows = NULL; enc->fffd = 0xfffd;
+  }
 
   find_charset2uni_pages(enc);
 
@@ -237,6 +302,17 @@ static void output_charset2uni (const char* name, Encoding* enc)
     }
   printf("\n");
 
+  if (is_large) {
+    printf("static const ucs4_t %s_2uni_upages[%d] = {\n ", name, nurows);
+    for (i = 0; i < nurows; i++) {
+      printf(" 0x%05x,", urows[i] << 8);
+      if ((i % 8) == 7 && (i+1 < nurows)) printf("\n ");
+    }
+    printf("\n");
+    printf("};\n");
+    printf("\n");
+  }
+
   printf("static int\n");
   printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", name);
   printf("{\n");
@@ -263,7 +339,8 @@ static void output_charset2uni (const char* name, Encoding* enc)
   printf(") + (");
   printf(enc->byte_col_expr, "c2");
   printf(");\n");
-  printf("        unsigned short wc = 0xfffd;\n");
+  printf("        %s wc = 0xfffd;\n", is_large ? "ucs4_t" : "unsigned short");
+  if (is_large) printf("        unsigned short swc;\n");
   for (i = 0; i < enc->ncharsetblocks; i++) {
     printf("        ");
     if (i > 0)
@@ -272,14 +349,17 @@ static void output_charset2uni (const char* name, Encoding* enc)
       printf("if (i < %d) ", enc->charsetblocks[i+1].start);
     printf("{\n");
     printf("          if (i < %d)\n", enc->charsetblocks[i].end);
-    printf("            wc = %s_2uni_page%02x[i", name, enc->row_byte(enc->charsetblocks[i].start / enc->cols));
+    printf("            %s = ", is_large ? "swc" : "wc");
+    printf("%s_2uni_page%02x[i", name, enc->row_byte(enc->charsetblocks[i].start / enc->cols));
     if (enc->charsetblocks[i].start > 0)
       printf("-%d", enc->charsetblocks[i].start);
-    printf("];\n");
+    printf("]");
+    if (is_large) printf(",\n            wc = %s_2uni_upages[swc>>8] | (swc & 0xff)", name);
+    printf(";\n");
   }
   printf("        }\n");
   printf("        if (wc != 0xfffd) {\n");
-  printf("          *pwc = (ucs4_t) wc;\n");
+  printf("          *pwc = %swc;\n", is_large ? "" : "(ucs4_t) ");
   printf("          return 2;\n");
   printf("        }\n");
   printf("      }\n");
@@ -412,15 +492,15 @@ static void output_charset2uni_noholes_monotonic (const char* name, Encoding* en
 }
 
 /*
- * Computes the uni2charset[0x0000..0xffff] array.
+ * Computes the uni2charset[0x0000..0x2ffff] array.
  */
 static void invert (Encoding* enc)
 {
   int row, col, j;
 
-  enc->uni2charset = (int*) malloc(0x10000*sizeof(int));
+  enc->uni2charset = (int*) malloc(0x30000*sizeof(int));
 
-  for (j = 0; j < 0x10000; j++)
+  for (j = 0; j < 0x30000; j++)
     enc->uni2charset[j] = 0;
 
   for (row = 0; row < enc->rows; row++)
@@ -438,14 +518,14 @@ static void invert (Encoding* enc)
 static void output_uni2charset_dense (const char* name, Encoding* enc)
 {
   /* Like in 8bit_tab_to_h.c */
-  bool pages[0x100];
-  int line[0x2000];
+  bool pages[0x300];
+  int line[0x6000];
   int tableno;
-  struct { int minline; int maxline; int usecount; } tables[0x2000];
+  struct { int minline; int maxline; int usecount; } tables[0x6000];
   bool first;
   int row, col, j, p, j1, j2, t;
 
-  for (p = 0; p < 0x100; p++)
+  for (p = 0; p < 0x300; p++)
     pages[p] = false;
   for (row = 0; row < enc->rows; row++)
     for (col = 0; col < enc->cols; col++) {
@@ -453,7 +533,7 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
       if (j != 0xfffd)
         pages[j>>8] = true;
     }
-  for (j1 = 0; j1 < 0x2000; j1++) {
+  for (j1 = 0; j1 < 0x6000; j1++) {
     bool all_invalid = true;
     for (j2 = 0; j2 < 8; j2++) {
       j = 8*j1+j2;
@@ -466,7 +546,7 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
       line[j1] = 0;
   }
   tableno = 0;
-  for (j1 = 0; j1 < 0x2000; j1++) {
+  for (j1 = 0; j1 < 0x6000; j1++) {
     if (line[j1] >= 0) {
       if (tableno > 0
           && ((j1 > 0 && line[j1-1] == tableno-1)
@@ -515,9 +595,9 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
   printf("  if (n >= 2) {\n");
   printf("    unsigned short c = 0;\n");
   first = true;
-  for (j1 = 0; j1 < 0x2000;) {
+  for (j1 = 0; j1 < 0x6000;) {
     t = line[j1];
-    for (j2 = j1; j2 < 0x2000 && line[j2] == t; j2++);
+    for (j2 = j1; j2 < 0x6000 && line[j2] == t; j2++);
     if (t >= 0) {
       if (j1 != tables[t].minline) abort();
       if (j2 > tables[t].maxline+1) abort();
@@ -567,19 +647,20 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
  */
 static void output_uni2charset_sparse (const char* name, Encoding* enc, bool monotonic)
 {
-  bool pages[0x100];
-  Block pageblocks[0x100]; int npageblocks;
-  int indx2charset[0x10000];
-  int summary_indx[0x1000];
-  int summary_used[0x1000];
+  bool pages[0x300];
+  Block pageblocks[0x300]; int npageblocks;
+  int indx2charset[0x30000];
+  int summary_indx[0x3000];
+  int summary_used[0x3000];
   int i, row, col, j, p, j1, j2, indx;
+  bool is_large;
   /* for monotonic: */
   int log2_stepsize = (!strcmp(name,"uhc_2") ? 6 : 7);
   int stepsize = 1 << log2_stepsize;
   int indxsteps;
 
-  /* Fill pages[0x100]. */
-  for (p = 0; p < 0x100; p++)
+  /* Fill pages[0x300]. */
+  for (p = 0; p < 0x300; p++)
     pages[p] = false;
   for (row = 0; row < enc->rows; row++)
     for (col = 0; col < enc->cols; col++) {
@@ -588,8 +669,14 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
         pages[j>>8] = true;
     }
 
+  /* Determine whether two or three bytes are needed for each character. */
+  is_large = false;
+  for (j = 0; j < 0x30000; j++)
+    if (enc->uni2charset[j] >= 0x10000)
+      is_large = true;
+
 #if 0
-  for (p = 0; p < 0x100; p++)
+  for (p = 0; p < 0x300; p++)
     if (pages[p]) {
       printf("static const unsigned short %s_page%02x[256] = {\n", name, p);
       for (j1 = 0; j1 < 32; j1++) {
@@ -605,7 +692,7 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
 
   /* Fill summary_indx[] and summary_used[]. */
   indx = 0;
-  for (j1 = 0; j1 < 0x1000; j1++) {
+  for (j1 = 0; j1 < 0x3000; j1++) {
     summary_indx[j1] = indx;
     summary_used[j1] = 0;
     for (j2 = 0; j2 < 16; j2++) {
@@ -619,10 +706,10 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
 
   /* Fill npageblocks and pageblocks[]. */
   npageblocks = 0;
-  for (p = 0; p < 0x100; ) {
+  for (p = 0; p < 0x300; ) {
     if (pages[p] && (p == 0 || !pages[p-1])) {
       pageblocks[npageblocks].start = 16*p;
-      do p++; while (p < 0x100 && pages[p]);
+      do p++; while (p < 0x300 && pages[p]);
       j1 = 16*p;
       while (summary_used[j1-1] == 0) j1--;
       pageblocks[npageblocks].end = j1;
@@ -650,14 +737,26 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
     }
     printf("};\n");
   } else {
-    printf("static const unsigned short %s_2charset[%d] = {\n", name, indx);
-    for (i = 0; i < indx; ) {
-      if ((i % 8) == 0) printf(" ");
-      printf(" 0x%04x,", indx2charset[i]);
-      i++;
-      if ((i % 8) == 0 || i == indx) printf("\n");
+    if (is_large) {
+      printf("static const unsigned char %s_2charset[3*%d] = {\n", name, indx);
+      for (i = 0; i < indx; ) {
+        if ((i % 4) == 0) printf(" ");
+        printf(" 0x%1x,0x%02x,0x%02x,", indx2charset[i] >> 16,
+               (indx2charset[i] >> 8) & 0xff, indx2charset[i] & 0xff);
+        i++;
+        if ((i % 4) == 0 || i == indx) printf("\n");
+      }
+      printf("};\n");
+    } else {
+      printf("static const unsigned short %s_2charset[%d] = {\n", name, indx);
+      for (i = 0; i < indx; ) {
+        if ((i % 8) == 0) printf(" ");
+        printf(" 0x%04x,", indx2charset[i]);
+        i++;
+        if ((i % 8) == 0 || i == indx) printf("\n");
+      }
+      printf("};\n");
     }
-    printf("};\n");
   }
   printf("\n");
   for (i = 0; i < npageblocks; i++) {
@@ -695,7 +794,8 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
   printf("      unsigned short used = summary->used;\n");
   printf("      unsigned int i = wc & 0x0f;\n");
   printf("      if (used & ((unsigned short) 1 << i)) {\n");
-  printf("        unsigned short c;\n");
+  if (monotonic || !is_large)
+    printf("        unsigned short c;\n");
   printf("        /* Keep in `used' only the bits 0..i-1. */\n");
   printf("        used &= ((unsigned short) 1 << i) - 1;\n");
   printf("        /* Add `summary->indx' and the number of bits set in `used'. */\n");
@@ -706,10 +806,21 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
   if (monotonic) {
     printf("        used += summary->indx;\n");
     printf("        c = %s_2charset_main[used>>%d] + %s_2charset[used];\n", name, log2_stepsize, name);
-  } else
-    printf("        c = %s_2charset[summary->indx + used];\n", name);
-  printf("        r[0] = (c >> 8); r[1] = (c & 0xff);\n");
-  printf("        return 2;\n");
+    printf("        r[0] = (c >> 8); r[1] = (c & 0xff);\n");
+    printf("        return 2;\n");
+  } else {
+    if (is_large) {
+      printf("        used += summary->indx;\n");
+      printf("        r[0] = %s_2charset[3*used];\n", name);
+      printf("        r[1] = %s_2charset[3*used+1];\n", name);
+      printf("        r[2] = %s_2charset[3*used+2];\n", name);
+      printf("        return 3;\n");
+    } else {
+      printf("        c = %s_2charset[summary->indx + used];\n", name);
+      printf("        r[0] = (c >> 8); r[1] = (c & 0xff);\n");
+      printf("        return 2;\n");
+    }
+  }
   printf("      }\n");
   printf("    }\n");
   printf("    return RET_ILUNI;\n");
@@ -775,18 +886,14 @@ static int row_byte_cns11643 (int row) {
   return 0x100 * (row / 94) + (row % 94) + 0x21;
 }
 static int byte_row_cns11643 (int byte) {
-  return (byte >= 0x100 && byte < 0x200 ? byte-0x121 :
-          byte >= 0x200 && byte < 0x300 ? byte-0x221+94 :
-          byte >= 0x300 && byte < 0x400 ? byte-0x321+2*94 :
-          -1);
+  return (byte >> 8) * 94 + (byte & 0xff) - 0x21;
 }
 
 static void do_cns11643_only_uni2charset (const char* name)
 {
   Encoding enc;
-  int j, x;
 
-  enc.rows = 3*94;
+  enc.rows = 16*94;
   enc.cols = 94;
   enc.row_byte = row_byte_cns11643;
   enc.col_byte = col_byte_normal;
@@ -799,20 +906,6 @@ static void do_cns11643_only_uni2charset (const char* name)
 
   read_table(&enc);
   invert(&enc);
-  /* Move the 2 plane bits into the unused bits 15 and 7. */
-  for (j = 0; j < 0x10000; j++) {
-    x = enc.uni2charset[j];
-    if (x != 0) {
-      if (x & 0x8080) abort();
-      switch (x >> 16) {
-        case 0: /* plane 1 */ x = (x & 0xffff) | 0x0000; break;
-        case 1: /* plane 2 */ x = (x & 0xffff) | 0x0080; break;
-        case 2: /* plane 3 */ x = (x & 0xffff) | 0x8000; break;
-        default: abort();
-      }
-      enc.uni2charset[j] = x;
-    }
-  }
   output_uni2charset_sparse(name,&enc,false);
 }
 
@@ -1544,7 +1637,10 @@ int main (int argc, char *argv[])
       || !strcmp(name,"jisx0208") || !strcmp(name,"jisx0212"))
     do_normal(name);
   else if (!strcmp(name,"cns11643_1") || !strcmp(name,"cns11643_2")
-           || !strcmp(name,"cns11643_3"))
+           || !strcmp(name,"cns11643_3") || !strcmp(name,"cns11643_4a")
+           || !strcmp(name,"cns11643_4b") || !strcmp(name,"cns11643_5")
+           || !strcmp(name,"cns11643_6") || !strcmp(name,"cns11643_7")
+           || !strcmp(name,"cns11643_15"))
     do_normal_only_charset2uni(name);
   else if (!strcmp(name,"cns11643_inv"))
     do_cns11643_only_uni2charset(name);
