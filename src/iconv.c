@@ -75,7 +75,7 @@ static void usage (int exitcode)
 
 static void print_version (void)
 {
-  printf("iconv (libiconv %d.%d)\n",
+  printf("iconv (GNU libiconv %d.%d)\n",
          _libiconv_version >> 8, _libiconv_version & 0xff);
   printf("\
 Copyright (C) 2000-2001 Free Software Foundation, Inc.\n\
