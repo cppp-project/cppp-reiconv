@@ -1,4 +1,4 @@
-dnl autoconf/aclocal.m4 generated automatically by aclocal 1.4
+dnl autoconf/aclocal.m4 generated automatically by aclocal 1.4-p2
 
 dnl Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
@@ -11,6 +11,9 @@ dnl even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 dnl PARTICULAR PURPOSE.
 
 # libtool.m4 - Configure libtool for the host system. -*-Shell-script-*-
+
+# The next line was added by Bruno Haible 2001-06-08.
+builtin([undefine],[symbols])
 
 # serial 46 AC_PROG_LIBTOOL
 AC_DEFUN([AC_PROG_LIBTOOL],
