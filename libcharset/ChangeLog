@@ -1,3 +1,7 @@
+2001-07-17  Bruno Haible  <haible@clisp.cons.org>
+
+	* configure.in (VERSION): Bump to 1.1.
+
 2001-06-08  Bruno Haible  <haible@clisp.cons.org>
 
 	* m4/libtool.m4: Upgrade to libtool-1.4.
