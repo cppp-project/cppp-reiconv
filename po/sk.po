@@ -1,27 +1,27 @@
 # Slovak translation of the libiconv.
-# Copyright (C) 2002 Free Software Foundation, Inc.
-# Marcel Telka <marcel@telka.sk>, 2002.
+# Copyright (C) 2002, 2003 Free Software Foundation, Inc.
+# Marcel Telka <marcel@telka.sk>, 2002, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.8\n"
+"Project-Id-Version: libiconv 1.9.1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2003-05-06 13:32+0200\n"
-"PO-Revision-Date: 2002-05-30 15:39+0200\n"
+"PO-Revision-Date: 2003-09-05 07:05+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/iconv.c:59
 msgid "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr ""
-"Pouæitie: iconv [--binary] [-c] [-s] [-f z_kÛdu] [-t do_kÛdu] [s˙bor ...]"
+"Pou≈æitie: iconv [--binary] [-c] [-s] [-f z_k√≥du] [-t do_k√≥du] [s√∫bor ...]"
 
 #: src/iconv.c:61
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr "Pouæitie: iconv [-c] [-s] [-f z_kÛdu] [-t do kÛdu] [s˙bor ...]"
+msgstr "Pou≈æitie: iconv [-c] [-s] [-f z_k√≥du] [-t do k√≥du] [s√∫bor ...]"
 
 #: src/iconv.c:64
 msgid "or:    iconv -l"
@@ -32,26 +32,26 @@ msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 msgstr ""
-"Toto je voµne πÌriteµn˝ softvÈr; pre podmienky kopÌrovania pozri zdrojov˝ "
-"kÛd.\n"
-"Neposkytuje sa ÆIADNA z·ruka; ani Ëo sa t˝ka OBCHODOVATE•NOSTI alebo "
+"Toto je voƒæne ≈°√≠riteƒæn√Ω softv√©r; pre podmienky kop√≠rovania pozri zdrojov√Ω "
+"k√≥d.\n"
+"Neposkytuje sa ≈ΩIADNA z√°ruka; ani ƒço sa t√Ωka OBCHODOVATEƒΩNOSTI alebo "
 "VHODNOSTI\n"
-"NA KONKR…TNY ⁄»EL.\n"
+"NA KONKR√âTNY √öƒåEL.\n"
 
 #: src/iconv.c:77
 #, c-format
 msgid "Written by %s.\n"
-msgstr "NapÌsal %s.\n"
+msgstr "Nap√≠sal %s.\n"
 
 #: src/iconv.c:114 src/iconv.c:146 src/iconv.c:196
 #, c-format
 msgid "iconv: %s: incomplete character or shift sequence\n"
-msgstr "iconv: %s: nekompletn˝ znak alebo preraÔovacia sekvencia\n"
+msgstr "iconv: %s: nekompletn√Ω znak alebo preraƒèovacia sekvencia\n"
 
 #: src/iconv.c:140 src/iconv.c:191
 #, c-format
 msgid "iconv: %s: cannot convert\n"
-msgstr "iconv: %s: nemÙæem konvertovaª\n"
+msgstr "iconv: %s: nem√¥≈æem konvertova≈•\n"
 
 #: src/iconv.c:162 src/iconv.c:201 src/iconv.c:320
 #, c-format
@@ -66,21 +66,21 @@ msgstr "iconv: %s: V/V chyba\n"
 #: src/iconv.c:304
 #, c-format
 msgid "iconv: conversion from %s unsupported\n"
-msgstr "iconv: konverzia z %s nie je podporovan·\n"
+msgstr "iconv: konverzia z %s nie je podporovan√°\n"
 
 #: src/iconv.c:306
 #, c-format
 msgid "iconv: conversion to %s unsupported\n"
-msgstr "iconv: konverzia do %s nie je podporovan·\n"
+msgstr "iconv: konverzia do %s nie je podporovan√°\n"
 
 #: src/iconv.c:308
 #, c-format
 msgid "iconv: conversion from %s to %s unsupported\n"
-msgstr "iconv: konverzia z %s do %s nie je podporovan·\n"
+msgstr "iconv: konverzia z %s do %s nie je podporovan√°\n"
 
 #: src/iconv.c:312
 msgid "(stdin)"
-msgstr "(πtandardn˝ vstup)"
+msgstr "(≈°tandardn√Ω vstup)"
 
 #: src/iconv.c:333
 msgid "iconv: I/O error\n"
