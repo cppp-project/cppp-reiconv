@@ -11,8 +11,12 @@ ucs2swapped_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
   if (n >= 2) {
     unsigned short x = *(const unsigned short *)s;
     x = (x >> 8) | (x << 8);
-    *pwc = x;
-    return 2;
+    if (x >= 0xd800 && x < 0xe000) {
+      return RET_EILSEQ;
+    } else {
+      *pwc = x;
+      return 2;
+    }
   }
   return RET_TOOFEW(0);
 }
@@ -23,7 +27,7 @@ ucs2swapped_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
   /* This function assumes that 'unsigned short' has exactly 16 bits. */
   if (sizeof(unsigned short) != 2) abort();
 
-  if (wc < 0x10000) {
+  if (wc < 0x10000 && !(wc >= 0xd800 && wc < 0xe000)) {
     if (n >= 2) {
       unsigned short x = wc;
       x = (x >> 8) | (x << 8);

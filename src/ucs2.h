@@ -16,6 +16,8 @@ ucs2_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
     if (wc == 0xfeff) {
     } else if (wc == 0xfffe) {
       state ^= 1;
+    } else if (wc >= 0xd800 && wc < 0xe000) {
+      return RET_EILSEQ;
     } else {
       *pwc = wc;
       conv->istate = state;
@@ -33,7 +35,7 @@ ucs2_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 static int
 ucs2_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
 {
-  if (wc < 0x10000 && wc != 0xfffe) {
+  if (wc < 0x10000 && wc != 0xfffe && !(wc >= 0xd800 && wc < 0xe000)) {
     if (n >= 2) {
       r[0] = (unsigned char) (wc >> 8);
       r[1] = (unsigned char) wc;

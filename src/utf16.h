@@ -52,7 +52,7 @@ utf16_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 static int
 utf16_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
 {
-  if (wc != 0xfffe) {
+  if (wc != 0xfffe && !(wc >= 0xd800 && wc < 0xe000)) {
     int count = 0;
     if (!conv->ostate) {
       if (n >= 2) {

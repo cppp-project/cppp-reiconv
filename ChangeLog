@@ -1,3 +1,16 @@
+2000-09-21  Bruno Haible  <haible@clisp.cons.org>
+
+        * src/utf16.h (utf16_wctomb): Reject single surrogates.
+        * src/utf16be.h (utf16be_wctomb): Likewise.
+        * src/utf16le.h (utf16le_wctomb): Likewise.
+        * src/ucs2.h (ucs2_mbtowc, ucs2_wctomb): Likewise.
+        * src/ucs2be.h (ucs2be_mbtowc, ucs2be_wctomb): Likewise.
+        * src/ucs2le.h (ucs2le_mbtowc, ucs2le_wctomb): Likewise.
+        * src/ucs2internal.h (ucs2internal_mbtowc, ucs2internal_wctomb):
+          Likewise.
+        * src/ucs2swapped.h (ucs2swapped_mbtowc, ucs2swapped_wctomb):
+          Likewise.
+
 2000-09-15  Bruno Haible  <haible@clisp.cons.org>
 
         * Makefile.in (install, installdirs, uninstall): Support DESTDIR.

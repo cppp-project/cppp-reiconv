@@ -31,25 +31,27 @@ utf16be_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 static int
 utf16be_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
 {
-  if (wc < 0x10000) {
-    if (n >= 2) {
-      r[0] = (unsigned char) (wc >> 8);
-      r[1] = (unsigned char) wc;
-      return 2;
-    } else
-      return RET_TOOSMALL;
-  }
-  else if (wc < 0x110000) {
-    if (n >= 4) {
-      wchar_t wc1 = 0xd800 + ((wc - 0x10000) >> 10);
-      wchar_t wc2 = 0xdc00 + ((wc - 0x10000) & 0x3ff);
-      r[0] = (unsigned char) (wc1 >> 8);
-      r[1] = (unsigned char) wc1;
-      r[2] = (unsigned char) (wc2 >> 8);
-      r[3] = (unsigned char) wc2;
-      return 4;
-    } else
-      return RET_TOOSMALL;
+  if (!(wc >= 0xd800 && wc < 0xe000)) {
+    if (wc < 0x10000) {
+      if (n >= 2) {
+        r[0] = (unsigned char) (wc >> 8);
+        r[1] = (unsigned char) wc;
+        return 2;
+      } else
+        return RET_TOOSMALL;
+    }
+    else if (wc < 0x110000) {
+      if (n >= 4) {
+        wchar_t wc1 = 0xd800 + ((wc - 0x10000) >> 10);
+        wchar_t wc2 = 0xdc00 + ((wc - 0x10000) & 0x3ff);
+        r[0] = (unsigned char) (wc1 >> 8);
+        r[1] = (unsigned char) wc1;
+        r[2] = (unsigned char) (wc2 >> 8);
+        r[3] = (unsigned char) wc2;
+        return 4;
+      } else
+        return RET_TOOSMALL;
+    }
   }
   return RET_ILSEQ;
 }
