@@ -1,3 +1,8 @@
+2004-08-25  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4: Update from GNU gettext, based on libtool-1.5.6.
+	* autoconf/ltmain.sh: Update from GNU gettext, based on libtool-1.5.6.
+
 2004-07-31  Bruno Haible  <bruno@clisp.org>
 
 	Update to JISX 0213 plane 1 to 2004 version (ISO-IR-233).
