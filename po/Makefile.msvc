@@ -28,127 +28,127 @@ install : all force
 	-mkdir $(prefix)
 	-mkdir $(datadir)
 	-mkdir $(localedir)
-	-mkdir $(localedir)\ca.gmo
-	-mkdir $(localedir)\ca.gmo\LC_MESSAGES
-	$(INSTALL_DATA) ca.gmo.gmo $(localedir)\ca.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\da.gmo
-	-mkdir $(localedir)\da.gmo\LC_MESSAGES
-	$(INSTALL_DATA) da.gmo.gmo $(localedir)\da.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\de.gmo
-	-mkdir $(localedir)\de.gmo\LC_MESSAGES
-	$(INSTALL_DATA) de.gmo.gmo $(localedir)\de.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\eo.gmo
-	-mkdir $(localedir)\eo.gmo\LC_MESSAGES
-	$(INSTALL_DATA) eo.gmo.gmo $(localedir)\eo.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\es.gmo
-	-mkdir $(localedir)\es.gmo\LC_MESSAGES
-	$(INSTALL_DATA) es.gmo.gmo $(localedir)\es.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\fi.gmo
-	-mkdir $(localedir)\fi.gmo\LC_MESSAGES
-	$(INSTALL_DATA) fi.gmo.gmo $(localedir)\fi.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\fr.gmo
-	-mkdir $(localedir)\fr.gmo\LC_MESSAGES
-	$(INSTALL_DATA) fr.gmo.gmo $(localedir)\fr.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\gl.gmo
-	-mkdir $(localedir)\gl.gmo\LC_MESSAGES
-	$(INSTALL_DATA) gl.gmo.gmo $(localedir)\gl.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\hr.gmo
-	-mkdir $(localedir)\hr.gmo\LC_MESSAGES
-	$(INSTALL_DATA) hr.gmo.gmo $(localedir)\hr.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\hu.gmo
-	-mkdir $(localedir)\hu.gmo\LC_MESSAGES
-	$(INSTALL_DATA) hu.gmo.gmo $(localedir)\hu.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\id.gmo
-	-mkdir $(localedir)\id.gmo\LC_MESSAGES
-	$(INSTALL_DATA) id.gmo.gmo $(localedir)\id.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\it.gmo
-	-mkdir $(localedir)\it.gmo\LC_MESSAGES
-	$(INSTALL_DATA) it.gmo.gmo $(localedir)\it.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\pt_BR.gmo
-	-mkdir $(localedir)\pt_BR.gmo\LC_MESSAGES
-	$(INSTALL_DATA) pt_BR.gmo.gmo $(localedir)\pt_BR.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\ru.gmo
-	-mkdir $(localedir)\ru.gmo\LC_MESSAGES
-	$(INSTALL_DATA) ru.gmo.gmo $(localedir)\ru.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\sk.gmo
-	-mkdir $(localedir)\sk.gmo\LC_MESSAGES
-	$(INSTALL_DATA) sk.gmo.gmo $(localedir)\sk.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\sl.gmo
-	-mkdir $(localedir)\sl.gmo\LC_MESSAGES
-	$(INSTALL_DATA) sl.gmo.gmo $(localedir)\sl.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\sv.gmo
-	-mkdir $(localedir)\sv.gmo\LC_MESSAGES
-	$(INSTALL_DATA) sv.gmo.gmo $(localedir)\sv.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\tr.gmo
-	-mkdir $(localedir)\tr.gmo\LC_MESSAGES
-	$(INSTALL_DATA) tr.gmo.gmo $(localedir)\tr.gmo\LC_MESSAGES\libiconv.mo
-	-mkdir $(localedir)\uk.gmo
-	-mkdir $(localedir)\uk.gmo\LC_MESSAGES
-	$(INSTALL_DATA) uk.gmo.gmo $(localedir)\uk.gmo\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\ca
+	-mkdir $(localedir)\ca\LC_MESSAGES
+	$(INSTALL_DATA) ca.gmo $(localedir)\ca\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\da
+	-mkdir $(localedir)\da\LC_MESSAGES
+	$(INSTALL_DATA) da.gmo $(localedir)\da\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\de
+	-mkdir $(localedir)\de\LC_MESSAGES
+	$(INSTALL_DATA) de.gmo $(localedir)\de\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\eo
+	-mkdir $(localedir)\eo\LC_MESSAGES
+	$(INSTALL_DATA) eo.gmo $(localedir)\eo\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\es
+	-mkdir $(localedir)\es\LC_MESSAGES
+	$(INSTALL_DATA) es.gmo $(localedir)\es\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\fi
+	-mkdir $(localedir)\fi\LC_MESSAGES
+	$(INSTALL_DATA) fi.gmo $(localedir)\fi\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\fr
+	-mkdir $(localedir)\fr\LC_MESSAGES
+	$(INSTALL_DATA) fr.gmo $(localedir)\fr\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\gl
+	-mkdir $(localedir)\gl\LC_MESSAGES
+	$(INSTALL_DATA) gl.gmo $(localedir)\gl\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\hr
+	-mkdir $(localedir)\hr\LC_MESSAGES
+	$(INSTALL_DATA) hr.gmo $(localedir)\hr\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\hu
+	-mkdir $(localedir)\hu\LC_MESSAGES
+	$(INSTALL_DATA) hu.gmo $(localedir)\hu\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\id
+	-mkdir $(localedir)\id\LC_MESSAGES
+	$(INSTALL_DATA) id.gmo $(localedir)\id\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\it
+	-mkdir $(localedir)\it\LC_MESSAGES
+	$(INSTALL_DATA) it.gmo $(localedir)\it\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\pt_BR
+	-mkdir $(localedir)\pt_BR\LC_MESSAGES
+	$(INSTALL_DATA) pt_BR.gmo $(localedir)\pt_BR\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\ru
+	-mkdir $(localedir)\ru\LC_MESSAGES
+	$(INSTALL_DATA) ru.gmo $(localedir)\ru\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\sk
+	-mkdir $(localedir)\sk\LC_MESSAGES
+	$(INSTALL_DATA) sk.gmo $(localedir)\sk\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\sl
+	-mkdir $(localedir)\sl\LC_MESSAGES
+	$(INSTALL_DATA) sl.gmo $(localedir)\sl\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\sv
+	-mkdir $(localedir)\sv\LC_MESSAGES
+	$(INSTALL_DATA) sv.gmo $(localedir)\sv\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\tr
+	-mkdir $(localedir)\tr\LC_MESSAGES
+	$(INSTALL_DATA) tr.gmo $(localedir)\tr\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\uk
+	-mkdir $(localedir)\uk\LC_MESSAGES
+	$(INSTALL_DATA) uk.gmo $(localedir)\uk\LC_MESSAGES\libiconv.mo
 
 installdirs : force
 	-mkdir $(prefix)
 	-mkdir $(datadir)
 	-mkdir $(localedir)
-	-mkdir $(localedir)\ca.gmo
-	-mkdir $(localedir)\ca.gmo\LC_MESSAGES
-	-mkdir $(localedir)\da.gmo
-	-mkdir $(localedir)\da.gmo\LC_MESSAGES
-	-mkdir $(localedir)\de.gmo
-	-mkdir $(localedir)\de.gmo\LC_MESSAGES
-	-mkdir $(localedir)\eo.gmo
-	-mkdir $(localedir)\eo.gmo\LC_MESSAGES
-	-mkdir $(localedir)\es.gmo
-	-mkdir $(localedir)\es.gmo\LC_MESSAGES
-	-mkdir $(localedir)\fi.gmo
-	-mkdir $(localedir)\fi.gmo\LC_MESSAGES
-	-mkdir $(localedir)\fr.gmo
-	-mkdir $(localedir)\fr.gmo\LC_MESSAGES
-	-mkdir $(localedir)\gl.gmo
-	-mkdir $(localedir)\gl.gmo\LC_MESSAGES
-	-mkdir $(localedir)\hr.gmo
-	-mkdir $(localedir)\hr.gmo\LC_MESSAGES
-	-mkdir $(localedir)\hu.gmo
-	-mkdir $(localedir)\hu.gmo\LC_MESSAGES
-	-mkdir $(localedir)\id.gmo
-	-mkdir $(localedir)\id.gmo\LC_MESSAGES
-	-mkdir $(localedir)\it.gmo
-	-mkdir $(localedir)\it.gmo\LC_MESSAGES
-	-mkdir $(localedir)\pt_BR.gmo
-	-mkdir $(localedir)\pt_BR.gmo\LC_MESSAGES
-	-mkdir $(localedir)\ru.gmo
-	-mkdir $(localedir)\ru.gmo\LC_MESSAGES
-	-mkdir $(localedir)\sk.gmo
-	-mkdir $(localedir)\sk.gmo\LC_MESSAGES
-	-mkdir $(localedir)\sl.gmo
-	-mkdir $(localedir)\sl.gmo\LC_MESSAGES
-	-mkdir $(localedir)\sv.gmo
-	-mkdir $(localedir)\sv.gmo\LC_MESSAGES
-	-mkdir $(localedir)\tr.gmo
-	-mkdir $(localedir)\tr.gmo\LC_MESSAGES
-	-mkdir $(localedir)\uk.gmo
-	-mkdir $(localedir)\uk.gmo\LC_MESSAGES
+	-mkdir $(localedir)\ca
+	-mkdir $(localedir)\ca\LC_MESSAGES
+	-mkdir $(localedir)\da
+	-mkdir $(localedir)\da\LC_MESSAGES
+	-mkdir $(localedir)\de
+	-mkdir $(localedir)\de\LC_MESSAGES
+	-mkdir $(localedir)\eo
+	-mkdir $(localedir)\eo\LC_MESSAGES
+	-mkdir $(localedir)\es
+	-mkdir $(localedir)\es\LC_MESSAGES
+	-mkdir $(localedir)\fi
+	-mkdir $(localedir)\fi\LC_MESSAGES
+	-mkdir $(localedir)\fr
+	-mkdir $(localedir)\fr\LC_MESSAGES
+	-mkdir $(localedir)\gl
+	-mkdir $(localedir)\gl\LC_MESSAGES
+	-mkdir $(localedir)\hr
+	-mkdir $(localedir)\hr\LC_MESSAGES
+	-mkdir $(localedir)\hu
+	-mkdir $(localedir)\hu\LC_MESSAGES
+	-mkdir $(localedir)\id
+	-mkdir $(localedir)\id\LC_MESSAGES
+	-mkdir $(localedir)\it
+	-mkdir $(localedir)\it\LC_MESSAGES
+	-mkdir $(localedir)\pt_BR
+	-mkdir $(localedir)\pt_BR\LC_MESSAGES
+	-mkdir $(localedir)\ru
+	-mkdir $(localedir)\ru\LC_MESSAGES
+	-mkdir $(localedir)\sk
+	-mkdir $(localedir)\sk\LC_MESSAGES
+	-mkdir $(localedir)\sl
+	-mkdir $(localedir)\sl\LC_MESSAGES
+	-mkdir $(localedir)\sv
+	-mkdir $(localedir)\sv\LC_MESSAGES
+	-mkdir $(localedir)\tr
+	-mkdir $(localedir)\tr\LC_MESSAGES
+	-mkdir $(localedir)\uk
+	-mkdir $(localedir)\uk\LC_MESSAGES
 
 uninstall : force
-	$(RM) $(localedir)\ca.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\da.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\de.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\eo.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\es.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\fi.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\fr.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\gl.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\hr.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\hu.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\id.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\it.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\pt_BR.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\ru.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\sk.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\sl.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\sv.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\tr.gmo\LC_MESSAGES\libiconv.mo
-	$(RM) $(localedir)\uk.gmo\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\ca\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\da\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\de\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\eo\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\es\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\fi\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\fr\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\gl\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\hr\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\hu\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\id\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\it\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\pt_BR\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\ru\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\sk\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\sl\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\sv\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\tr\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\uk\LC_MESSAGES\libiconv.mo
 
 check : all
 
