@@ -12,6 +12,7 @@
 	* srclib/readlink.c: New file, from GNU gettext and gnulib.
 	* srclib/Makefile.am (LIBADD_SOURCE): Add readlink.c.
 	(EXTRA_DIST, stdbool.h): Use stdbool_.h instead of stdbool.h.in.
+	* configure.in: Invoke gl_FUNC_READLINK.
 
 2003-06-22  Bruno Haible  <bruno@clisp.org>
 

@@ -115,6 +115,7 @@ gl_PATHMAX
 gt_FUNC_SETENV
 gt_STDBOOL_H
 gl_FUNC_STRERROR
+gl_FUNC_READLINK
 gl_XREADLINK
 
 dnl           check whether OS supports plug libraries
