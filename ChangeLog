@@ -1,3 +1,10 @@
+2000-12-02  Bruno Haible  <haible@clisp.cons.org>
+
+        * Makefile.msvc: Replace STATIC with its opposite flag, DLL.
+        * lib/Makefile.msvc: Likewise.
+        * src/Makefile.msvc: Likewise.
+        * tests/Makefile.msvc: Likewise.
+
 2000-12-01  Bruno Haible  <haible@clisp.cons.org>
 
         * src/iconv.c: Include <fcntl.h>. Define fallbacks for setmode, fileno.

@@ -3,7 +3,7 @@
 #### Start of system configuration section. ####
 
 # Flags that can be set on the nmake command line:
-#   STATIC=0  for compiling a .dll with a stub .lib (default is a static .lib)
+#   DLL=1     for compiling a .dll with a stub .lib (default is a static .lib)
 #             Note that this works only with MFLAGS=-MD.
 #   MFLAGS={-ML|-MT|-MD} for defining the compilation model
 #     MFLAGS=-ML (the default)  Single-threaded, statically linked - libc.lib
@@ -13,14 +13,14 @@
 # Note that nmake command line flags are automatically passed to subdirectory
 # Makefiles. Therefore we don't need to pass them explicitly to subdirectory
 # Makefiles, but the subdirectory Makefiles need to have the same defaults.
-!if !defined(STATIC)
-STATIC=1
+!if !defined(DLL)
+DLL=0
 !endif
 !if !defined(DEBUG)
 DEBUG=0
 !endif
 !if !defined(MFLAGS)
-!if $(STATIC)
+!if !$(DLL)
 MFLAGS=
 !else
 MFLAGS=-MD
@@ -48,7 +48,7 @@ all : force
 	$(MAKE) -f Makefile.msvc all
 	cd ..
 	$(LN) libcharset\include\libcharset.h lib\libcharset.h
-!if $(STATIC)
+!if !$(DLL)
 	$(LN) include\iconv.h.msvc-static include\iconv.h
 !else
 	$(LN) include\iconv.h.msvc-shared include\iconv.h

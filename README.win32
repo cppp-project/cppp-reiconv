@@ -11,9 +11,9 @@ Installation on Win32 (WinNT, Win95/98):
 
    For shared library (DLL):
 
-        nmake -f Makefile.msvc STATIC=0 MFLAGS=-MD
+        nmake -f Makefile.msvc DLL=1 MFLAGS=-MD
    or
-        nmake -f Makefile.msvc STATIC=0 MFLAGS=-MD check
+        nmake -f Makefile.msvc DLL=1 MFLAGS=-MD check
                                                    [This runs the testsuite.]
 
    For static library:
@@ -30,7 +30,7 @@ Installation on Win32 (WinNT, Win95/98):
 - Installation:
 
    Copy include/iconv.h to your header file repository.
-   Copy src/iconv.lib to your library repository.
-   If you built for shared library, also copy src/iconv.dll into one of the
+   Copy lib/iconv.lib to your library repository.
+   If you built for shared library, also copy lib/iconv.dll into one of the
    directories listed in your PATH, or into the directory containing the
    executable which shall make use of libiconv.
