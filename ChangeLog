@@ -1,3 +1,19 @@
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
+	Start using automake.
+	* configure.in: Add AM_INIT_AUTOMAKE invocation.
+	(PACKAGE, VERSION): Remove.
+	Use AC_CANONICAL_HOST instead of CL_CANONICAL_HOST.
+	Use AC_PROG_LN_S instead of CL_PROG_LN_S.
+	Use AC_PROG_RANLIB instead of CL_PROG_RANLIB.
+	Reorder so that AC_CANONICAL_HOST comes early but still after
+	AC_PROG_CC.
+	* m4/ranlib.m4: Remove file.
+	* m4/libtool.m4: Undo AC_ -> CL_ substitutions.
+	* Makefile.devel (CLISP_DIR): Comment out.
+	(AUTOCONF_FILES): Change to aclocal.m4.
+	(aclocal.m4): Renamed from autoconf/aclocal.m4. Update dependencies.
+
 2003-03-17  Bruno Haible  <bruno@clisp.org>
 
 	Improved MSVC support.
