@@ -1,3 +1,11 @@
+2002-09-02  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (main): Don't call bindtextdomain if !ENABLE_NLS.
+
+2002-08-16  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (main): Perform fflush before testing ferror(stdout).
+
 2002-05-29  Bruno Haible  <bruno@clisp.org>
 
 	* Version 1.8 released.

@@ -250,7 +250,9 @@ int main (int argc, char* argv[])
   setlocale(LC_MESSAGES,"");
 #endif
 #endif
+#if ENABLE_NLS
   bindtextdomain("libiconv",LOCALEDIR);
+#endif
   textdomain("libiconv");
   for (i = 1; i < argc;) {
     if (!strcmp(argv[i],"-f")) {
@@ -345,7 +347,7 @@ int main (int argc, char* argv[])
     }
     iconv_close(cd);
   }
-  if (ferror(stdout)) {
+  if (fflush(stdout) || ferror(stdout)) {
     fprintf(stderr,_("iconv: I/O error\n"));
     status = 1;
   }
