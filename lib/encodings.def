@@ -677,9 +677,9 @@ DEFENCODING(( "EUC-JP",                 /* IANA */
             euc_jp,
             { euc_jp_mbtowc, NULL },      { euc_jp_wctomb, NULL })
 
-DEFENCODING(( "SJIS",                   /* JDK 1.1 */
-              "SHIFT_JIS",              /* IANA */
+DEFENCODING(( "SHIFT_JIS",              /* IANA */
               "SHIFT-JIS",              /* glibc */
+              "SJIS",                   /* JDK 1.1 */
               "MS_KANJI",               /* IANA */
               "csShiftJIS",             /* IANA */
             ),

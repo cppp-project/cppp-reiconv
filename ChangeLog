@@ -1,3 +1,7 @@
+2001-06-25  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/encodings.def: Make SHIFT_JIS the primary name of SJIS.
+
 2001-06-08  Bruno Haible  <haible@clisp.cons.org>
 
         * autoconf/ltmain.sh: Upgrade to libtool-1.4.
