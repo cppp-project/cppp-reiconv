@@ -1208,13 +1208,6 @@ dnl AC_MSG_RESULT(RESULT-DESCRIPTION)
 define(AC_MSG_RESULT,
 [echo "$ac_t""$1" 1>&AC_FD_MSG])
 
-dnl AC_MSG_RESULTPROTO(RESULT-PROTOTYPE-DESCRIPTION)
-define(AC_MSG_RESULTPROTO,
-[AC_MSG_RESULT(${ac_tt}[$1])
-dnl ac_proto=`echo "$1" | tr -s ' '`
-dnl AC_MSG_RESULT(${ac_tt}${ac_proto})
-])
-
 dnl AC_VERBOSE(RESULT-DESCRIPTION)
 define(AC_VERBOSE,
 [AC_OBSOLETE([$0], [; instead use AC_MSG_RESULT])dnl
@@ -1274,15 +1267,6 @@ pushdef([AC_LANG_RESTORE],
 [ifelse(AC_LANG_STACK, [C], [AC_LANG_C],dnl
 AC_LANG_STACK, [CPLUSPLUS], [AC_LANG_CPLUSPLUS],dnl
 AC_LANG_STACK, [FORTRAN77], [AC_LANG_FORTRAN77])[]popdef([AC_LANG_STACK])])
-
-dnl Expands to the "extern ..." prefix used for system declarations.
-dnl AC_LANG_EXTERN()
-define(AC_LANG_EXTERN,
-[extern
-#ifdef __cplusplus
-"C"
-#endif
-])
 
 
 dnl ### Compiler-running mechanics

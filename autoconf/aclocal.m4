@@ -69,7 +69,8 @@ define(CL_PROTO,
 AC_CACHE_VAL(cl_cv_proto_[$1], [$2
 cl_cv_proto_$1="$3"])
 cl_cv_proto_$1=`echo "[$]cl_cv_proto_$1" | tr -s ' ' | sed -e 's/( /(/'`
-AC_MSG_RESULTPROTO([$]cl_cv_proto_$1)
+AC_MSG_RESULT([$]{ac_t:-
+         }[$]cl_cv_proto_$1)
 ])dnl
 dnl
 dnl CL_PROTO_RET(INCLUDES, DECL, CACHE-ID, TYPE-IF-OK, TYPE-IF-FAILS)
@@ -102,12 +103,19 @@ define(CL_SILENT,
 [pushdef([AC_MSG_CHECKING],[:])dnl
 pushdef([AC_CHECKING],[:])dnl
 pushdef([AC_MSG_RESULT],[:])dnl
-pushdef([AC_MSG_RESULTPROTO],[:])dnl
 $1[]dnl
-popdef([AC_MSG_RESULTPROTO])dnl
 popdef([AC_MSG_RESULT])dnl
 popdef([AC_CHECKING])dnl
 popdef([AC_MSG_CHECKING])dnl
+])dnl
+dnl
+dnl Expands to the "extern ..." prefix used for system declarations.
+dnl AC_LANG_EXTERN()
+define(AC_LANG_EXTERN,
+[extern
+#ifdef __cplusplus
+"C"
+#endif
 ])dnl
 dnl
 AC_DEFUN(CL_PROG_RANLIB, [AC_CHECK_PROG(RANLIB, ranlib, ranlib, true)])dnl
