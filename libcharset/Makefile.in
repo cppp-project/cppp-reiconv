@@ -31,44 +31,44 @@ SHELL = /bin/sh
 all : force
 	if [ ! -d include ] ; then mkdir include ; fi
 	$(CP) $(srcdir)/include/libcharset.h.in include/libcharset.h
-	cd lib && $(MAKE) -r all
+	cd lib && $(MAKE) all
 
 # Installs the library and include files only. Typically called with only
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
 install-lib : all force
-	cd lib && $(MAKE) -r install-lib libdir='$(libdir)' includedir='$(includedir)'
+	cd lib && $(MAKE) install-lib libdir='$(libdir)' includedir='$(includedir)'
 	$(MKINSTALLDIRS) $(includedir)
 	$(INSTALL_DATA) include/libcharset.h $(includedir)/libcharset.h
 
 install : force
-	cd lib && $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd lib && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(MKINSTALLDIRS) $(DESTDIR)$(includedir)
 	$(INSTALL_DATA) include/libcharset.h $(DESTDIR)$(includedir)/libcharset.h
 
 installdirs : force
-	cd lib && $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd lib && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(MKINSTALLDIRS) $(DESTDIR)$(includedir)
 
 uninstall : force
-	cd lib && $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd lib && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(RM) $(DESTDIR)$(includedir)/libcharset.h
 
 check : force
-	cd lib && $(MAKE) -r check
+	cd lib && $(MAKE) check
 
 mostlyclean : force
-	cd lib && $(MAKE) -r mostlyclean
+	cd lib && $(MAKE) mostlyclean
 
 clean : force
-	cd lib && $(MAKE) -r clean
+	cd lib && $(MAKE) clean
 
 distclean : force
-	cd lib && if test -f Makefile; then $(MAKE) -r distclean; fi
+	cd lib && if test -f Makefile; then $(MAKE) distclean; fi
 	$(RM) include/libcharset.h
 	$(RM) config.status config.log config.cache Makefile config.h libtool
 
 maintainer-clean : force
-	cd lib && if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
+	cd lib && if test -f Makefile; then $(MAKE) maintainer-clean; fi
 	$(RM) include/libcharset.h
 	$(RM) config.status config.log config.cache Makefile config.h libtool
 

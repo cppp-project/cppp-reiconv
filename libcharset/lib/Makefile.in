@@ -57,11 +57,11 @@ charset.alias: $(srcdir)/config.charset
 	mv t-$@ $@
 
 ref-add.sed : $(srcdir)/ref-add.sin
-	sed -e '/^#/d' -e 's/@''PACKAGE''@/@PACKAGE@/g' $< > t-$@
+	sed -e '/^#/d' -e 's/@''PACKAGE''@/@PACKAGE@/g' $(srcdir)/ref-add.sin > t-$@
 	mv t-$@ $@
 
 ref-del.sed : $(srcdir)/ref-del.sin
-	sed -e '/^#/d' -e 's/@''PACKAGE''@/@PACKAGE@/g' $< > t-$@
+	sed -e '/^#/d' -e 's/@''PACKAGE''@/@PACKAGE@/g' $(srcdir)/ref-del.sin > t-$@
 	mv t-$@ $@
 
 # Installs the library and include files only. Typically called with only

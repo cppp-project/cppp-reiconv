@@ -1,3 +1,9 @@
+2000-12-12  Bruno Haible  <haible@clisp.cons.org>
+
+        * Makefile.in: Use $(MAKE) instead of $(MAKE) -r. Needed with Solaris
+          "make", which doesn't set MAKE as expected by @SET_MAKE@ if -r is
+          given. Reported by Toshimitsu Fujiwara.
+
 2000-12-08  Bruno Haible  <haible@clisp.cons.org>
 
         * Makefile.in (exec_prefix): Use configure's --exec-prefix argument.

@@ -1,3 +1,8 @@
+2000-12-12  Bruno Haible  <haible@clisp.cons.org>
+
+	* Makefile.in (ref-add.sed, ref-del.sed): Don't use $<, not understood
+	by Solaris "make". Reported by Toshimitsu Fujiwara.
+
 2000-12-08  Bruno Haible  <haible@clisp.cons.org>
 
 	* Makefile.in (exec_prefix): Use configure's --exec-prefix argument.
