@@ -147,7 +147,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-TW
 	$(srcdir)\check-stateless.bat $(srcdir) BIG5
 	$(srcdir)\check-stateless.bat $(srcdir) CP950
-	$(srcdir)\check-stateless.bat $(srcdir) BIG5HKSCS
+	$(srcdir)\check-stateless.bat $(srcdir) BIG5-HKSCS
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-KR
 	$(srcdir)\check-stateless.bat $(srcdir) CP949
 	$(srcdir)\check-stateless.bat $(srcdir) JOHAB

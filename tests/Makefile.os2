@@ -116,7 +116,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateless $(srcdir) EUC-TW
 	$(srcdir)\check-stateless $(srcdir) BIG5
 	$(srcdir)\check-stateless $(srcdir) CP950
-	$(srcdir)\check-stateless $(srcdir) BIG5HKSCS
+	$(srcdir)\check-stateless $(srcdir) BIG5-HKSCS
 	$(srcdir)\check-stateless $(srcdir) EUC-KR
 	$(srcdir)\check-stateless $(srcdir) CP949
 	$(srcdir)\check-stateless $(srcdir) JOHAB

@@ -127,7 +127,7 @@ check : all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) EUC-TW
 	$(srcdir)/check-stateless $(srcdir) BIG5
 	$(srcdir)/check-stateless $(srcdir) CP950
-	$(srcdir)/check-stateless $(srcdir) BIG5HKSCS
+	$(srcdir)/check-stateless $(srcdir) BIG5-HKSCS
 	$(srcdir)/check-stateless $(srcdir) EUC-KR
 	$(srcdir)/check-stateless $(srcdir) CP949
 	$(srcdir)/check-stateless $(srcdir) JOHAB

@@ -224,7 +224,7 @@ A: libiconv, as an internationalization library, supports those character
        Only the CWEX fonts use this encoding. Furthermore, the conversion
        tables in the big5p package are not coherent: If you convert directly,
        you get different results than when you convert via GBK.
-     * BIG5HKSCS
+     * BIG5-HKSCS
        We implement it because it is the de-facto standard for traditional
        Chinese in Hongkong.
    Korean

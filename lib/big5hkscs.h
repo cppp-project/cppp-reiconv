@@ -19,11 +19,11 @@
  */
 
 /*
- * BIG5HKSCS
+ * BIG5-HKSCS
  */
 
 /*
- * BIG5HKSCS can be downloaded from
+ * BIG5-HKSCS can be downloaded from
  *   http://www.info.gov.hk/digital21/eng/hkscs/download.html
  *   http://www.info.gov.hk/digital21/eng/hkscs/index.html
  *

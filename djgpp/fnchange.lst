@@ -70,7 +70,7 @@ libiconv-1.6.1/tests/check-stateful.bat                     libiconv-1.6.1/tests
 libiconv-1.6.1/tests/check-stateful.cmd                     libiconv-1.6.1/tests/stateful-check.cmd
 libiconv-1.6.1/tests/check-stateless.cmd                    libiconv-1.6.1/tests/stateless-check.cmd
 libiconv-1.6.1/tests/check-translit.cmd                     libiconv-1.6.1/tests/translit-check.cmd
-libiconv-1.6.1/tests/BIG5HKSCS.IRREVERSIBLE.TXT             libiconv-1.6.1/tests/BIG5HKSCS.IRREVERSIBLE-TXT
+libiconv-1.6.1/tests/BIG5-HKSCS.IRREVERSIBLE.TXT            libiconv-1.6.1/tests/BIG5-HKSCS.IRREVERSIBLE-TXT
 libiconv-1.6.1/libcharset/tools/README                      libiconv-1.6.1/libcharset/tools/README
 libiconv-1.6.1/libcharset/tools/aix-3.2.5                   libiconv-1.6.1/libcharset/tools/aix-3.2.5
 libiconv-1.6.1/libcharset/tools/aix-4.1.5                   libiconv-1.6.1/libcharset/tools/aix-4.1.5
