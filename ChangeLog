@@ -1,5 +1,9 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	* m4/endian.m4 (CL_WORDS_LITTLEENDIAN): Use 3-argument AC_DEFINE.
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	* m4/general.m4 (CL_CONFIG_SUBDIRS, CL_CANONICAL_HOST,
 	CL_CANONICAL_HOST_CPU, CL_CANONICAL_HOST_CPU_FOR_FFCALL): Remove
 	macros.

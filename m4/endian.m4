@@ -1,4 +1,4 @@
-dnl Copyright (C) 1993-2002 Free Software Foundation, Inc.
+dnl Copyright (C) 1993-2003 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
 dnl General Public License.  As a special exception to the GNU General
 dnl Public License, this file may be distributed as part of a program
@@ -42,7 +42,9 @@ cl_cv_sys_endian="guessing little endian"
 fi
 ])
 case "$cl_cv_sys_endian" in
-  *little*) AC_DEFINE(WORDS_LITTLEENDIAN) ;;
-  *big*)    ;;
+  *little*)
+    AC_DEFINE(WORDS_LITTLEENDIAN, 1,
+      [Define if the machine's byte ordering is little endian.]) ;;
+  *big*) ;;
 esac
 ])
