@@ -1,7 +1,7 @@
 /*
  * Generates a table of small strings, used for transliteration, from a table
  * containing lines of the form
- *   Unicode <tab> iso-8859-1 replacement <tab> # comment
+ *   Unicode <tab> utf-8 replacement <tab> # comment
  */
 
 #include <stdio.h>
@@ -10,7 +10,7 @@
 
 int main (int argc, char *argv[])
 {
-  unsigned char data[0x100000];
+  unsigned short data[0x100000];
   int uni2index[0x10000];
   int index;
 
@@ -67,13 +67,14 @@ int main (int argc, char *argv[])
             }
           }
         }
-        data[index++] = (unsigned char) c;
+        data[index++] = (unsigned short) c;
       }
-      data[uni2index[j]] = index - uni2index[j] - 1;
+      if (uni2index[j] >= 0)
+        data[uni2index[j]] = index - uni2index[j] - 1;
       do { c = getc(stdin); } while (!(c == EOF || c == '\n'));
     }
   }
-  printf("static const unsigned char translit_data[%d] = {",index);
+  printf("static const unsigned short translit_data[%d] = {",index);
   {
     int i;
     for (i = 0; i < index; i++) {
@@ -81,10 +82,14 @@ int main (int argc, char *argv[])
         printf("\n %3d,",data[i]);
       else if (data[i] == '\'')
         printf("'\\'',");
+      else if (data[i] == '\\')
+        printf("'\\\\',");
       else if (data[i] < 127)
         printf(" '%c',",data[i]);
-      else
+      else if (data[i] < 256)
         printf("0x%02X,",data[i]);
+      else
+        printf("0x%04X,",data[i]);
     }
     printf("\n};\n");
   }
@@ -164,7 +169,7 @@ int main (int argc, char *argv[])
             printf(" ");
             for (j2 = 0; j2 < 8; j2++) {
               j = 8*j1+j2;
-              printf(" %3d,", uni2index[j]);
+              printf(" %4d,", uni2index[j]);
             }
             printf(" /* 0x%02x-0x%02x */\n", 8*(j1 % 0x20), 8*(j1 % 0x20)+7);
           }

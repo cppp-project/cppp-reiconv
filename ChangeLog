@@ -1,3 +1,12 @@
+2001-02-04  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/translit.def: Add all the neutral transliterations from glibc.
+        * lib/gentranslit.c (main): Allow UTF-8 replacements which are in
+          UCS-2 but not in ISO-8859-1. Generate a table of 'unsigned short'.
+          Avoid accessing data[-1].
+        * lib/loop_unicode.h (unicode_loop_convert): Change type of pointer
+          into translit_data.
+
 2000-12-18  Bruno Haible  <haible@clisp.cons.org>
 
         * autoconf/mbstate_t.m4: New file, from textutils-2.0.10.

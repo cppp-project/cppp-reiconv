@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -164,7 +164,7 @@ static size_t unicode_loop_convert (iconv_t icd,
           /* Use the transliteration table. */
           int indx = translit_index(wc);
           if (indx >= 0) {
-            const unsigned char * cp = &translit_data[indx];
+            const unsigned short * cp = &translit_data[indx];
             unsigned int num = *cp++;
             state_t backup_state = cd->ostate;
             unsigned char* backup_outptr = outptr;
