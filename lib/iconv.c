@@ -383,4 +383,6 @@ int iconvctl (iconv_t icd, int request, void* argument)
   }
 }
 
+int _libiconv_version = _LIBICONV_VERSION;
+
 #endif
