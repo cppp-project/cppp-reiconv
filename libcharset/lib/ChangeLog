@@ -1,3 +1,22 @@
+2004-01-21  Bruno Haible  <bruno@clisp.org>
+
+	Upgrade from gettext-0.14.
+
+	2004-01-21  Bruno Haible  <bruno@clisp.org>
+	* config.charset: Add support for MacOS X (Darwin).
+
+	2003-12-02  Bruno Haible  <bruno@clisp.org>
+	* config.charset: Treat the new country name CS like the old country
+	name YU.
+
+	2003-08-20  Bruno Haible  <bruno@clisp.org>
+	* config.charset (linux-gnulibc1*): Change hr_HR, ro_RO to ISO-8859-2.
+	Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+	2003-08-14  Bruno Haible  <bruno@clisp.org>
+	* config.charset: Add support for Linux libc5. Based on data from
+	Alain Guibert <derogaton+bgli@oreka.com>.
+
 2003-06-27  Bruno Haible  <bruno@clisp.org>
 
 	Avoid use of *_unlocked functions on Solaris 2.5.1.
