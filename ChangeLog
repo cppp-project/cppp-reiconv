@@ -1,5 +1,10 @@
 2005-01-05  Bruno Haible  <bruno@clisp.org>
 
+	Assume automake-1.9.
+	* Makefile.devel (AUTOMAKE): Assume automake-1.9.
+
+2005-01-05  Bruno Haible  <bruno@clisp.org>
+
 	* m4/libtool.m4: Update from GNU gettext, based on libtool-1.5.10.
 	* autoconf/ltmain.sh: Update from GNU gettext, based on libtool-1.5.10.
 
