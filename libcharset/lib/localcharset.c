@@ -69,6 +69,9 @@
    'charset_aliases' simultaneously, both will produce the same value,
    and everything will be ok if the two assignments to 'charset_aliases'
    are atomic. But I don't know what will happen if the two assignments mix.  */
+#if __STDC__ != 1
+# define volatile /* empty */
+#endif
 /* Pointer to the contents of the charset.alias file, if it has already been
    read, else NULL.  Its format is:
    ALIAS_1 '\0' CANONICAL_1 '\0' ... ALIAS_n '\0' CANONICAL_n '\0' '\0'  */

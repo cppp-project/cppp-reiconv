@@ -1,3 +1,7 @@
+2001-01-05  Bruno Haible  <haible@clisp.cons.org>
+
+	* localcharset.c (volatile): Define to empty if not using ANSI C.
+
 2001-03-05  Bruno Haible  <haible@clisp.cons.org>
 
 	* config.charset: Update for OSF/1 5.1.
