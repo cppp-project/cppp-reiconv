@@ -37,12 +37,12 @@ static const char* hexbuf (unsigned char buf[], unsigned int buflen)
   return msg;
 }
 
-static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned short *out)
+static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned int *out)
 {
   const char* inbuf = (const char*) buf;
   size_t inbytesleft = buflen;
   char* outbuf = (char*) out;
-  size_t outbytesleft = sizeof(unsigned short);
+  size_t outbytesleft = sizeof(unsigned int);
   size_t result = iconv(cd,&inbuf,&inbytesleft,&outbuf,&outbytesleft);
   if (result == (size_t)(-1)) {
     if (errno == EILSEQ) {
@@ -60,7 +60,7 @@ static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned s
     return -1;
   } else {
     if (inbytesleft != 0 || outbytesleft != 0) {
-      fprintf(stderr,"%s: inbytes = %ld, outbytes = %ld\n",hexbuf(buf,buflen),(long)(buflen-inbytesleft),(long)(sizeof(unsigned short)-outbytesleft));
+      fprintf(stderr,"%s: inbytes = %ld, outbytes = %ld\n",hexbuf(buf,buflen),(long)(buflen-inbytesleft),(long)(sizeof(unsigned int)-outbytesleft));
       exit(1);
     }
     return 1;
@@ -78,14 +78,14 @@ int main (int argc, char* argv[])
   }
   charset = argv[1];
 
-  cd = iconv_open("UCS-2-INTERNAL",charset);
+  cd = iconv_open("UCS-4-INTERNAL",charset);
   if (cd == (iconv_t)(-1)) {
     perror("iconv_open");
     exit(1);
   }
 
   {
-    unsigned short out;
+    unsigned int out;
     unsigned char buf[4];
     unsigned int i0, i1, i2, i3;
     int result;

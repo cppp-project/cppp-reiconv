@@ -35,7 +35,7 @@ int main (int argc, char* argv[])
   }
   charset = argv[1];
 
-  cd = iconv_open(charset,"UCS-2-INTERNAL");
+  cd = iconv_open(charset,"UCS-4-INTERNAL");
   if (cd == (iconv_t)(-1)) {
     perror("iconv_open");
     exit(1);
@@ -45,9 +45,9 @@ int main (int argc, char* argv[])
     unsigned int i;
     unsigned char buf[10];
     for (i = 0; i < 0x10000; i++) {
-      unsigned short in = i;
+      unsigned int in = i;
       const char* inbuf = (const char*) &in;
-      size_t inbytesleft = sizeof(unsigned short);
+      size_t inbytesleft = sizeof(unsigned int);
       char* outbuf = (char*)buf;
       size_t outbytesleft = sizeof(buf);
       size_t result = iconv(cd,&inbuf,&inbytesleft,&outbuf,&outbytesleft);
@@ -62,7 +62,7 @@ int main (int argc, char* argv[])
       } else if (result == 0) /* ignore conversions with transliteration */ {
         unsigned int j, jmax;
         if (inbytesleft != 0 || outbytesleft == sizeof(buf)) {
-          fprintf(stderr,"0x%02X: inbytes = %ld, outbytes = %ld\n",i,(long)(sizeof(unsigned short)-inbytesleft),(long)(sizeof(buf)-outbytesleft));
+          fprintf(stderr,"0x%02X: inbytes = %ld, outbytes = %ld\n",i,(long)(sizeof(unsigned int)-inbytesleft),(long)(sizeof(buf)-outbytesleft));
           exit(1);
         }
         jmax = sizeof(buf) - outbytesleft;

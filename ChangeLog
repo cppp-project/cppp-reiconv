@@ -1,3 +1,9 @@
+2000-10-23  Bruno Haible  <haible@clisp.cons.org>
+
+        * tests/table-from.c (try, main): Use UCS-4-INTERNAL instead of
+          UCS-2-INTERNAL, to avoid problems with UCS-2 surrogate handling.
+        * tests/table-to.c (main): Likewise.
+
 2000-10-22  Bruno Haible  <haible@clisp.cons.org>
 
         * src/gentranslit.c (main): Read the input in UTF-8 encoding.
