@@ -28,6 +28,9 @@ UCS-4LE, ei_ucs4le
 UTF-16, ei_utf16
 UTF-16BE, ei_utf16be
 UTF-16LE, ei_utf16le
+UTF-32, ei_utf32
+UTF-32BE, ei_utf32be
+UTF-32LE, ei_utf32le
 UTF-7, ei_utf7
 UNICODE-1-1-UTF-7, ei_utf7
 CSUNICODE11UTF7, ei_utf7
