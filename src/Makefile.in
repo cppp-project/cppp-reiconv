@@ -52,7 +52,7 @@ top_builddir = ..
 # without internationalization and not linked with libintl.
 
 all : iconv_no_i18n iconv.@OBJEXT@
-	chmod 777 .
+	test `ls -ld . | sed -e 's/^d\(.........\).*/\1/'` = rwxrwxrwx || chmod 777 .
 
 # This is the temporary iconv executable, without internationalization.
 iconv_no_i18n : iconv_no_i18n.@OBJEXT@ ../lib/libiconv.la

@@ -1,5 +1,10 @@
 2003-01-31  Bruno Haible  <bruno@clisp.org>
 
+	* src/Makefile.in (all): Don't do the chmod if it has already been
+	done.
+
+2003-01-31  Bruno Haible  <bruno@clisp.org>
+
 	* lib/loop_unicode.h (unicode_transliterate): Enable recursive
 	transliteration. Idea from Perry Rapp.
 	* lib/gentranslit.c (main): Change bound from 0x10000 to 0x110000.
