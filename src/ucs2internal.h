@@ -8,7 +8,7 @@ ucs2internal_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
   if (n >= 2) {
     unsigned short x = *(const unsigned short *)s;
     if (x >= 0xd800 && x < 0xe000) {
-      return RET_EILSEQ;
+      return RET_ILSEQ;
     } else {
       *pwc = x;
       return 2;

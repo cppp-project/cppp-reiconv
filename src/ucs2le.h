@@ -7,7 +7,7 @@ ucs2le_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 {
   if (n >= 2) {
     if (s[1] >= 0xd8 && s[1] < 0xe0) {
-      return RET_EILSEQ;
+      return RET_ILSEQ;
     } else {
       *pwc = s[0] + (s[1] << 8);
       return 2;

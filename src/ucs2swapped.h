@@ -12,7 +12,7 @@ ucs2swapped_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
     unsigned short x = *(const unsigned short *)s;
     x = (x >> 8) | (x << 8);
     if (x >= 0xd800 && x < 0xe000) {
-      return RET_EILSEQ;
+      return RET_ILSEQ;
     } else {
       *pwc = x;
       return 2;
