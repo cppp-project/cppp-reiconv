@@ -1,3 +1,7 @@
+2000-08-24  Jim Blackson  <blackson@ontrack-japan.com>
+
+        * iconv_string.c (iconv_string): Fix return value for autodetect.
+
 2000-01-24  Bruno Haible  <haible@clisp.cons.org>
 
         * iconv_string.c (iconv_string): Stop recognizing JOHAB.

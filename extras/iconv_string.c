@@ -24,7 +24,7 @@ int iconv_string (const char* tocode, const char* fromcode,
          be valid UTF-8, but many UTF-8 inputs are valid ISO-8859-1. */
       ret = iconv_string(tocode,"UTF-8",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
-        return -1;
+        return ret;
       ret = iconv_string(tocode,"ISO-8859-1",start,end,resultp,lengthp);
       return ret;
     }
@@ -34,7 +34,7 @@ int iconv_string (const char* tocode, const char* fromcode,
          it will fail. */
       ret = iconv_string(tocode,"ISO-2022-JP-2",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
-        return -1;
+        return ret;
       /* Try EUC-JP next. Short SHIFT_JIS inputs may come out wrong. This
          is unavoidable. People will condemn SHIFT_JIS.
          If we tried SHIFT_JIS first, then some short EUC-JP inputs would
@@ -42,7 +42,7 @@ int iconv_string (const char* tocode, const char* fromcode,
          would not be good. */
       ret = iconv_string(tocode,"EUC-JP",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
-        return -1;
+        return ret;
       /* Finally try SHIFT_JIS. */
       ret = iconv_string(tocode,"SHIFT_JIS",start,end,resultp,lengthp);
       return ret;
@@ -53,7 +53,7 @@ int iconv_string (const char* tocode, const char* fromcode,
          it will fail. */
       ret = iconv_string(tocode,"ISO-2022-KR",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
-        return -1;
+        return ret;
       /* Finally try EUC-KR. */
       ret = iconv_string(tocode,"EUC-KR",start,end,resultp,lengthp);
       return ret;
