@@ -1,3 +1,16 @@
+2002-02-06  Bruno Haible  <bruno@clisp.org>
+
+	* autoconf/ltmain.sh: Upgrade from libtool-1.4 to libtool-1.4.2.
+
+2002-02-02  Bruno Haible  <bruno@clisp.org>
+
+	* autoconf/ltmain.sh: Add DESTDIR support on ELF systems.
+
+2001-11-03  Bruno Haible  <haible@clisp.cons.org>
+
+	* autoconf/ltmain.sh: chmod 777 the .libs directory, so that
+	"make install" succeeds.
+
 2002-05-18  Bruno Haible  <bruno@clisp.org>
 
 	* src/Makefile.in (iconv): Remove the -liconv dependency of -lintl
