@@ -34,12 +34,19 @@ CONFIGURES = configure
 CONFIGURES_IN = configure.in
 
 CLISP_DIR = ..
-ACLOCAL = $(CLISP_DIR)/src/autoconf/aclocal.m4
-ACSELECT = $(CLISP_DIR)/src/autoconf/acselect
-OTHERMACROS = libcharset/m4/libtool.m4 autoconf/eilseq.m4 autoconf/mbstate_t.m4
 
-autoconf/aclocal.m4 : $(ACLOCAL)
-	($(ACSELECT) `cat $(CONFIGURES_IN) | grep '^[A-Z][A-Z]_' | sed 's,[^A-Z_].*$$,,g' | sort | uniq` < $(ACLOCAL) ; cat $(OTHERMACROS) | sed -e 's,AC_CANONICAL_HOST,CL_CANONICAL_HOST,g' -e 's,AC_PROG_RANLIB,CL_PROG_RANLIB,g' -e 's,AC_PROG_LN_S,CL_PROG_LN_S,g') > autoconf/aclocal.m4
+m4/general.m4 : $(CLISP_DIR)/src/m4/general.m4 ; cp -p $< $@-t && mv $@-t $@
+m4/proto.m4 : $(CLISP_DIR)/src/m4/proto.m4 ; cp -p $< $@-t && mv $@-t $@
+m4/ranlib.m4 : $(CLISP_DIR)/src/m4/ranlib.m4 ; cp -p $< $@-t && mv $@-t $@
+m4/install.m4 : $(CLISP_DIR)/src/m4/install.m4 ; cp -p $< $@-t && mv $@-t $@
+m4/cp.m4 : $(CLISP_DIR)/src/m4/cp.m4 ; cp -p $< $@-t && mv $@-t $@
+m4/ln.m4 : $(CLISP_DIR)/src/m4/ln.m4 ; cp -p $< $@-t && mv $@-t $@
+m4/endian.m4 : $(CLISP_DIR)/src/m4/endian.m4 ; cp -p $< $@-t && mv $@-t $@
+m4/libtool.m4 : $(CLISP_DIR)/src/m4/libtool.m4
+	sed -e 's,AC_CANONICAL_HOST,CL_CANONICAL_HOST,g' -e 's,AC_PROG_RANLIB,CL_PROG_RANLIB,g' -e 's,AC_PROG_LN_S,CL_PROG_LN_S,g' < $< > $@-t && mv $@-t $@
+
+autoconf/aclocal.m4 : m4/general.m4 m4/proto.m4 m4/ranlib.m4 m4/install.m4 m4/cp.m4 m4/ln.m4 m4/endian.m4 m4/libtool.m4
+	aclocal --acdir=m4 --output=$@
 
 configures : $(CONFIGURES)
 

@@ -1,3 +1,27 @@
+2002-04-28  Bruno Haible  <bruno@clisp.org>
+
+	* m4/eilseq.m4: Renamed from autoconf/eilseq.m4.
+	* m4/mbstate_t.m4: Renamed from autoconf/mbstate_t.m4.
+	* m4/general.m4: New file, from GNU clisp.
+	* m4/proto.m4: New file, from GNU clisp.
+	* m4/ranlib.m4: New file, from GNU clisp.
+	* m4/install.m4: New file, from GNU clisp.
+	* m4/cp.m4: New file, from GNU clisp.
+	* m4/ln.m4: New file, from GNU clisp.
+	* m4/endian.m4: New file, from GNU clisp.
+	* m4/iconv.m4: New file, from GNU gettext 0.11.2.
+	* m4/lib-ld.m4: New file, from GNU gettext 0.11.2.
+	* m4/lib-link.m4: New file, from GNU gettext 0.11.2.
+	* m4/lib-prefix.m4: New file, from GNU gettext 0.11.2.
+	* autoconf/config.rpath: New file, from GNU gettext 0.11.2.
+	* m4/libtool.m4: New file, based on libtool-1.4.2.
+	* Makefile.devel (ACLOCAL): Remove variable.
+	(ACSELECT): Remove variable.
+	(OTHERMACROS): Remove variable.
+	(m4/*.m4): New rules.
+	(autoconf/aclocal.m4): Construct using aclocal instead of acselect.
+	* configure.in: Invoke AM_ICONV instead of CL_ICONV.
+
 2002-04-06  Bruno Haible  <bruno@clisp.org>
 
 	Upgrade to Unicode 3.2.

@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2001 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2002 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -56,6 +56,7 @@ dnl           check for build configuration
 
 AM_DISABLE_STATIC
 AM_PROG_LIBTOOL
+AM_ICONV
 
 dnl           checks for header files
 
@@ -67,8 +68,7 @@ AC_MBSTATE_T
 
 dnl           checks for functions and declarations
 
-CL_ICONV
-if test $cl_cv_func_iconv = yes -a -z "$cl_cv_proto_iconv_arg1"; then
+if test "$am_cv_func_iconv" = yes -a -z "$am_cv_proto_iconv_arg1"; then
   ICONV_CONST=""
 else
   ICONV_CONST="const"
