@@ -1204,7 +1204,7 @@
 
         Fix a SunOS 4 problem.
         * include/iconv.h.in: If EILSEQ is not defined by the system, define
-          it to ENOENT, not EILSEQ.
+          it to ENOENT, not EINVAL.
 
 2000-04-02  Bruno Haible  <haible@clisp.cons.org>
 
