@@ -1,3 +1,29 @@
+2005-03-29  Bruno Haible  <bruno@clisp.org>
+
+	Rename libiconv_plug.so to preloadable_libiconv.so.
+	* configure.in (PLUGLIB): Set to preloadable_libiconv.so instead of
+	libiconv_plug.so.
+	* lib/Makefile.in (preloadable_libiconv.so): Renamed from
+	libiconv_plug.so.
+	(preloadable_libiconv_linux.so): Renamed from libiconv_plug_linux.so.
+	(preloadable_libiconv_solaris.so): Renamed from
+	libiconv_plug_solaris.so.
+	(preloadable_libiconv_osf.so): Renamed from libiconv_plug_osf.so.
+	(clean): Update.
+	* README: Update.
+
+2005-03-29  Bruno Haible  <bruno@clisp.org>
+
+	Implement and document ATARIST.
+	* tools/Makefile (ALL): Add atarist.h.
+	(atarist.h): New rule.
+	* lib/atarist.h: New file.
+	* lib/converters.h: Include it.
+	* lib/encodings_extra.def (ATARIST): New encoding.
+	* README, man/iconv_open.3: Add ATARIST.
+	* tests/Makefile.in (check-extra-yes): Check ATARIST.
+	* tests/ATARIST.TXT: New file.
+
 2005-03-22  Bruno Haible  <bruno@clisp.org>
 
 	* build-aux: New directory, renamed from autoconf.

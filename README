@@ -123,14 +123,14 @@ This library can be built and installed in two variants:
   - The libc plug/override mode. This works on GNU/Linux, Solaris and OSF/1
     systems only. It is a way to get good iconv support without having
     glibc-2.1.
-    It installs a library `libiconv_plug.so'. This library can be used with
-    LD_PRELOAD, to override the iconv* functions present in the C library.
+    It installs a library `preloadable_libiconv.so'. This library can be used
+    with LD_PRELOAD, to override the iconv* functions present in the C library.
 
     On GNU/Linux and Solaris:
-        $ export LD_PRELOAD=/usr/local/lib/libiconv_plug.so
+        $ export LD_PRELOAD=/usr/local/lib/preloadable_libiconv.so
 
     On OSF/1:
-        $ export _RLD_LIST=/usr/local/lib/libiconv_plug.so:DEFAULT
+        $ export _RLD_LIST=/usr/local/lib/preloadable_libiconv.so:DEFAULT
 
     A program's source need not be modified, the program need not even be
     recompiled. Just set the LD_PRELOAD environment variable, that's it!

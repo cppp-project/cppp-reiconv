@@ -131,7 +131,7 @@ esac
 if test -n "$OS"; then
   AC_SUBST(OS)
   AC_SUBST(GCC)
-  PLUGLIB="libiconv_plug.so"
+  PLUGLIB="preloadable_libiconv.so"
 else
   PLUGLIB=""
 fi
