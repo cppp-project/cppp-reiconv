@@ -22,7 +22,7 @@ RM = rm -f
 # Programs used by "make install":
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
-MKINSTALLDIRS = $(SHELL) $(srcdir)/autoconf/mkinstalldirs
+mkinstalldirs = $(SHELL) @top_srcdir@/autoconf/mkinstalldirs
 
 #### End of system configuration section. ####
 
@@ -39,17 +39,17 @@ include/libcharset.h :
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
 install-lib : all force
 	cd lib && $(MAKE) install-lib libdir='$(libdir)' includedir='$(includedir)'
-	$(MKINSTALLDIRS) $(includedir)
+	$(mkinstalldirs) $(includedir)
 	$(INSTALL_DATA) include/libcharset.h $(includedir)/libcharset.h
 
 install : include/libcharset.h force
 	cd lib && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	$(MKINSTALLDIRS) $(DESTDIR)$(includedir)
+	$(mkinstalldirs) $(DESTDIR)$(includedir)
 	$(INSTALL_DATA) include/libcharset.h $(DESTDIR)$(includedir)/libcharset.h
 
 installdirs : force
 	cd lib && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	$(MKINSTALLDIRS) $(DESTDIR)$(includedir)
+	$(mkinstalldirs) $(DESTDIR)$(includedir)
 
 uninstall : force
 	cd lib && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'

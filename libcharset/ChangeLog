@@ -1,3 +1,8 @@
+2003-01-01  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (mkinstalldirs): Renamed from MKINSTALLDIRS.
+	(install-lib, install, installdirs): Use it.
+
 2002-09-27  Bruno Haible  <bruno@clisp.org>
 
 	* autoconf/mkinstalldirs: Upgrade to automake-1.7.2 version.

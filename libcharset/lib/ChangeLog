@@ -1,3 +1,8 @@
+2003-01-01  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (mkinstalldirs): Renamed from MKINSTALLDIRS.
+	(install-lib, install, installdirs): Use it.
+
 2002-05-09  Bruno Haible  <bruno@clisp.org>
 
 	* config.charset: Update for newest glibc. Add canonical names
