@@ -1,20 +1,20 @@
 dnl Copyright (C) 1999-2001 Free Software Foundation, Inc.
-dnl This file is part of the GNU ICONV Library.
+dnl This file is part of the GNU LIBICONV Library.
 dnl
-dnl The GNU ICONV Library is free software; you can redistribute it and/or
-dnl modify it under the terms of the GNU Library General Public License as
-dnl published by the Free Software Foundation; either version 2 of the
-dnl License, or (at your option) any later version.
+dnl The GNU LIBICONV Library is free software; you can redistribute it
+dnl and/or modify it under the terms of the GNU Library General Public
+dnl License as published by the Free Software Foundation; either version 2
+dnl of the License, or (at your option) any later version.
 dnl
-dnl The GNU ICONV Library is distributed in the hope that it will be useful,
-dnl but WITHOUT ANY WARRANTY; without even the implied warranty of
+dnl The GNU LIBICONV Library is distributed in the hope that it will be
+dnl useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 dnl Library General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU Library General Public
-dnl License along with the GNU ICONV Library; see the file COPYING.LIB.  If not,
-dnl write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-dnl Boston, MA 02111-1307, USA.
+dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
+dnl If not, write to the Free Software Foundation, Inc., 59 Temple Place -
+dnl Suite 330, Boston, MA 02111-1307, USA.  */
 
 AC_PREREQ(2.13)
 
