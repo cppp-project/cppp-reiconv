@@ -1,3 +1,15 @@
+2002-08-23  Bruno Haible  <bruno@clisp.org>
+
+	* fi.po: New file, from Matti Koskimies <matti@apulanta.fi>.
+	* fr.po: New file, from Michel Robitaille <robitail@iro.umontreal.ca>.
+	* pt_BR.po: Update from
+	Alexandre Folle de Menezes <afmenez@terra.com.br>.
+	* ru.po: New file, from Dmitry S. Sivachenko <mitya@cavia.pp.ru>.
+	* sl.po: New file, from
+	Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>.
+	* tr.po: New file, from Deniz Akkus Kanca <deniz@arayan.com>.
+	* LINGUAS: Add fi, fr, ru, sl, tr.
+
 2002-06-20  Bruno Haible  <bruno@clisp.org>
 
 	* es.po: New file, from Santiago Vila Doncel <sanvila@unex.es>.
