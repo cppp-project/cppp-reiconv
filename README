@@ -85,7 +85,7 @@ This library can be built and installed in two variants:
 
 
 Distribution:
-    ftp://ftp.ilog.fr/pub/Users/haible/gnu/libiconv-1.3.tar.gz
+    ftp://ftp.ilog.fr/pub/Users/haible/gnu/libiconv-1.4.tar.gz
 
 Homepage:
     http://clisp.cons.org/~haible/packages-libiconv.html

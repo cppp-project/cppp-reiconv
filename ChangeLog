@@ -1,3 +1,10 @@
+2000-10-24  Bruno Haible  <haible@clisp.cons.org>
+
+        * Version 1.4 released.
+        * include/iconv.h.in (_LIBICONV_VERSION), README, windows/iconv.rc:
+          Bump version number.
+        * src/Makefile.in (LIBICONV_VERSION_INFO): Define to 2:1:0.
+
 2000-10-23  Bruno Haible  <haible@clisp.cons.org>
 
         Implement and document GB18030 and BIG5HKSCS.
@@ -73,6 +80,11 @@
 2000-09-11  Bruno Haible  <haible@clisp.cons.org>
 
         * src/utf7.h (utf7_mbtowc): Fix combining of UTF-16 surrogates.
+
+2000-08-26  Bruno Haible  <haible@clisp.cons.org>
+
+        * autoconf/acgeneral.m4 (AC_OUTPUT): Use braces in exec_prefix default
+          value, not parens.
 
 2000-07-04  Akira Hatakeyama  <akira@sra.co.jp>
             Bruno Haible  <haible@clisp.cons.org>
