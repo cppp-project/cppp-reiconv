@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,6 +21,12 @@
 /*
  * TCVN-5712
  */
+
+#include "vietcomb.h"
+
+static const unsigned char tcvn_comb_table[] = {
+  0xb0, 0xb3, 0xb2, 0xb1, 0xb4,
+};
 
 static const unsigned short tcvn_2uni_1[32] = {
   /* 0x00 */
@@ -56,6 +62,11 @@ static const unsigned short tcvn_2uni_2[128] = {
   0x1ed6, 0x1ee7, 0x0169, 0x00fa, 0x1ee5, 0x1eeb, 0x1eed, 0x1eef,
   0x1ee9, 0x1ef1, 0x1ef3, 0x1ef7, 0x1ef9, 0x00fd, 0x1ef5, 0x1ed0,
 };
+
+/* TCVN as a stateless encoding. Suitable for locales, but it has
+   the drawback that it can produce Unicode strings which are not
+   in Normalization Form C and therefore not suitable for interchange.
+   FIXME: It should produce Normalization Form C instead. */
 
 static int
 tcvn_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
@@ -142,11 +153,66 @@ tcvn_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     c = tcvn_page00[wc-0x00a0];
   else if (wc >= 0x0300 && wc < 0x0328)
     c = tcvn_page03[wc-0x0300];
+  else if (wc >= 0x0340 && wc < 0x0342) /* deprecated Vietnamese tone marks */
+    c = tcvn_page03[wc-0x0340];
   else if (wc >= 0x1ea0 && wc < 0x1f00)
     c = tcvn_page1e[wc-0x1ea0];
   if (c != 0) {
     *r = c;
     return 1;
+  }
+  /* Try compatibility or canonical decomposition. */
+  {
+    /* Binary search through viet_decomp_table. */
+    unsigned int i1 = 0;
+    unsigned int i2 = sizeof(viet_decomp_table)/sizeof(viet_decomp_table[0])-1;
+    if (wc >= viet_decomp_table[i1].composed
+        && wc <= viet_decomp_table[i2].composed) {
+      unsigned int i;
+      for (;;) {
+        /* Here i2 - i1 > 0. */
+        i = (i1+i2)>>1;
+        if (wc == viet_decomp_table[i].composed)
+          break;
+        if (wc < viet_decomp_table[i].composed) {
+          if (i1 == i)
+            return RET_ILSEQ;
+          /* Here i1 < i < i2. */
+          i2 = i;
+        } else {
+          /* Here i1 <= i < i2. */
+          if (i1 != i)
+            i1 = i;
+          else {
+            /* Here i2 - i1 = 1. */
+            i = i2;
+            if (wc == viet_decomp_table[i].composed)
+              break;
+            else
+              return RET_ILSEQ;
+          }
+        }
+      }
+      /* Found a compatibility or canonical decomposition. */
+      wc = viet_decomp_table[i].base;
+      /* wc is one of 0x0020, 0x0041..0x005a, 0x0061..0x007a, 0x00a5, 0x00a8,
+         0x00c2, 0x00c5..0x00c7, 0x00ca, 0x00cf, 0x00d3, 0x00d4, 0x00d6,
+         0x00d8, 0x00da, 0x00dc, 0x00e2, 0x00e5..0x00e7, 0x00ea, 0x00ef,
+         0x00f3, 0x00f4, 0x00f6, 0x00f8, 0x00fc, 0x0102, 0x0103, 0x01a0,
+         0x01a1, 0x01af, 0x01b0. */
+      if (wc < 0x0080)
+        c = wc;
+      else {
+        c = tcvn_page00[wc-0x00a0];
+        if (c == 0)
+          return RET_ILSEQ;
+      }
+      if (n < 2)
+        return RET_TOOSMALL;
+      r[0] = c;
+      r[1] = tcvn_comb_table[viet_decomp_table[i].comb1];
+      return 2;
+    }
   }
   return RET_ILSEQ;
 }

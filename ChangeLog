@@ -1,3 +1,15 @@
+2001-05-13  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/vietcomb.h: New file.
+        * lib/cp1258.h: Include it.
+          (cp1258_comb_table): New array.
+          (cp1258_wctomb): Decompose Unicode characters.
+        * lib/tcvn.h: Include it.
+          (tcvn_comb_table): New array.
+          (tcvn_wctomb): Decompose Unicode characters.
+        * tests/CP1258.IRREVERSIBLE.TXT: New file.
+        * tests/TCVN.IRREVERSIBLE.TXT: New file.
+
 2001-05-06  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/Makefile.msvc (config.h): Allow the 'del' command to fail.
