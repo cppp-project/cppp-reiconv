@@ -1,3 +1,10 @@
+2005-03-14  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (aclocal.m4): Depend also on allocsa.m4, eealloc.m4,
+	extensions.m4, intmax.m4, inttypes.m4, longdouble.m4, longlong.m4,
+	printf-posix.m4, readlink.m4, signed.m4, ssize_t.m4, stdint.m4,
+	wchar_t.m4, wint_t.m4.
+
 2005-03-13  Bruno Haible  <bruno@clisp.org>
 
 	Make stdout error checking reliable, also when writing to a NFS file.
