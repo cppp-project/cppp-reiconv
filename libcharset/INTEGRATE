@@ -1,7 +1,8 @@
 Integration of this library into your package:
 
-* Copy the lib/ sourcefiles (localcharset.c, config.charset, ref-add.sin,
-  ref-del.sin) and the include file (include/libcharset.h) into your package.
+* Copy the lib/ sourcefiles (localcharset.h, localcharset.c, config.charset,
+  ref-add.sin, ref-del.sin) and the include file (include/libcharset.h) into
+  your package.
 
 * Add the m4/ files (codeset.m4, glibc21.m4) to your aclocal.m4 file or, if
   you are using automake, to your m4/ directory.
@@ -73,7 +74,7 @@ Integration of this library into your package:
 
   - Augment the main *_SOURCES variable by
 
-        localcharset.c
+        localcharset.h localcharset.c
 
   - Augment EXTRA_DIST by
 

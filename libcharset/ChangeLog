@@ -1,3 +1,7 @@
+2003-01-12  Bruno Haible  <bruno@clisp.org>
+
+	* INTEGRATE: Mention localcharset.h.
+
 2003-01-01  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.in (mkinstalldirs): Renamed from MKINSTALLDIRS.
