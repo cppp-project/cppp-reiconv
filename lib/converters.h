@@ -227,6 +227,7 @@ typedef struct {
 
 #ifdef USE_DOS
 #include "cp437.h"
+#include "cp775.h"
 #include "cp852.h"
 #include "cp855.h"
 #include "cp857.h"

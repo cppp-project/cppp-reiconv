@@ -87,6 +87,7 @@ ALL = \
  cp1124.h \
  cp1129.h \
  cp437.h \
+ cp775.h \
  cp852.h \
  cp855.h \
  cp857.h \
@@ -357,6 +358,9 @@ cp1129.h : $(TABLESDIR)/aix-4.3.2/IBM-1129.TXT 8bit_tab_to_h
 
 cp437.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP437.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP437 cp437 < $<
+
+cp775.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP775.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP775 cp775 < $<
 
 cp852.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP852.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP852 cp852 < $<

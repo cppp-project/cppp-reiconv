@@ -1,3 +1,11 @@
+2001-03-01  Bruno Haible  <haible@clisp.cons.org>
+
+        * tools/Makefile (cp775.h): New target.
+          (ALL): Add it.
+        * lib/cp775.h: New file.
+        * lib/converters.h: Include it.
+        * lib/encodings_dos.def (CP775): New encoding.
+
 2001-02-25  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/iconv.c (iconv_open): locale_charset() doesn't return NULL any
@@ -51,8 +59,8 @@
 
 2001-02-25  Bruno Haible  <haible@clisp.cons.org>
 
-	* autoconf/ltconfig:
-	sed -e 's/reload object files/produce relocatable object files/'.
+        * autoconf/ltconfig:
+          sed -e 's/reload object files/produce relocatable object files/'.
 
 2001-02-20  Bruno Haible  <haible@clisp.cons.org>
 

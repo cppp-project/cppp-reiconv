@@ -46,6 +46,7 @@
 #   KOI8-R                    glibc solaris freebsd                     yes
 #   KOI8-U                    glibc freebsd                             yes
 #   CP437                     dos
+#   CP775                     dos
 #   CP850                     aix osf dos
 #   CP852                     dos
 #   CP855                     dos
@@ -325,6 +326,10 @@ case "$os" in
 	echo "it CP850"
 	echo "it_CH CP850"
 	echo "it_IT CP850"
+	echo "lt CP775"
+	echo "lt_LT CP775"
+	echo "lv CP775"
+	echo "lv_LV CP775"
 	echo "nb CP865"    # not CP850 ??
 	echo "nb_NO CP865" # not CP850 ??
 	echo "nl CP850"

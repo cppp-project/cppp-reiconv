@@ -1,3 +1,7 @@
+2001-03-01  Bruno Haible  <haible@clisp.cons.org>
+
+	* config.charset: For DOS/DJGPP, add CP775.
+
 2001-02-24  Bruno Haible  <haible@clisp.cons.org>
 
 	* config.charset: Add support for DOS/DJGPP.

@@ -1,3 +1,7 @@
+2001-03-01  Bruno Haible  <haible@clisp.cons.org>
+
+	* tools/all-charsets: Update for change of lib/config.charset.
+
 2001-02-25  Bruno Haible  <haible@clisp.cons.org>
 
 	* autoconf/ltconfig:
