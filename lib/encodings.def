@@ -155,6 +155,11 @@ DEFENCODING(( "UCS-4-SWAPPED",          /* libiconv */
             ucs4swapped,
             { ucs4swapped_mbtowc, NULL }, { ucs4swapped_wctomb, NULL })
 
+DEFENCODING(( "C99",
+            ),
+            c99,
+            { c99_mbtowc, NULL },         { c99_wctomb, NULL })
+
 DEFENCODING(( "JAVA",
             ),
             java,

@@ -125,6 +125,7 @@ struct conv_struct {
 #include "ucs2swapped.h"
 #include "ucs4internal.h"
 #include "ucs4swapped.h"
+#include "c99.h"
 #include "java.h"
 
 /* 8-bit encodings */

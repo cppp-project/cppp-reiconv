@@ -298,6 +298,9 @@ A: libiconv, as an internationalization library, supports those character
      * UTF-7
        We implement this because it is essential functionality for mail
        applications.
+     * C99
+       We implement it because it's used for C and C++ programs and because
+       it's a nice encoding for debugging.
      * JAVA
        We implement it because it's used for Java programs and because it's
        a nice encoding for debugging.

@@ -1,5 +1,12 @@
 2002-05-26  Bruno Haible  <bruno@clisp.org>
 
+	* lib/c99.h: New file.
+	* lib/converters.h: Include it.
+	* lib/encodings.def (C99): New encoding.
+	* README, man/iconv_open.3: Document C99 encoding.
+
+2002-05-26  Bruno Haible  <bruno@clisp.org>
+
 	* lib/java.h (java_mbtowc): Accept 12-byte sequences for non-BMP
 	characters.
 	(java_wctomb): Produce 12-byte sequences for non-BMP characters.
