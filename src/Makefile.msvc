@@ -11,7 +11,8 @@
 #     MFLAGS=-MD                Multi-threaded, dynamically linked - msvcrt.lib
 #   DEBUG=1   for compiling with debugging information
 #   NO_NLS=1  do not use Native Language Support
-#   PREFIX=Some\Directory   Base directory for installation
+#   PREFIX=Some\Directory       Base directory for installation
+#   IIPREFIX=Some\\Directory    Same thing with doubled backslashes
 !if !defined(DLL)
 DLL=0
 !endif
@@ -30,6 +31,9 @@ NO_NLS=0
 !endif
 !if !defined(PREFIX)
 PREFIX = c:\usr
+!endif
+!if !defined(IIPREFIX)
+IIPREFIX = c:\\usr
 !endif
 
 !if $(DEBUG)
@@ -61,11 +65,15 @@ prefix = $(PREFIX)
 exec_prefix = $(prefix)
 bindir = $(exec_prefix)\bin
 includedir = $(prefix)\include
+IIprefix = $(IIPREFIX)
+IIexec_prefix = $(IIprefix)
+IIbindir = $(IIexec_prefix)\\bin
+IIincludedir = $(IIprefix)\\include
 
 # Programs used by "make":
 CC = cl
 CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) $(NLSFLAGS)
-INCLUDES = -I. -I.. -I..\include -I..\srclib $(INCINTL)
+INCLUDES = -I. -I.. -I..\include -I..\srclib -I..\windows $(INCINTL)
 RM = -del
 
 # Programs used by "make install":
@@ -80,7 +88,7 @@ SHELL = /bin/sh
 all : iconv.exe
 
 iconv.exe : $(srcdir)/iconv.c ../lib/iconv.lib
-	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) $(srcdir)/iconv.c $(LIBINTL) ../lib/iconv.lib -Feiconv.exe
+	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) -DINSTALLPREFIX=\"$(IIprefix)\" -DINSTALLDIR=\"$(IIbindir)\" $(srcdir)/iconv.c $(LIBINTL) ../lib/iconv.lib -Feiconv.exe
 	$(RM) iconv.obj
 !if $(DLL)
 	copy ..\lib\iconv.dll iconv.dll

@@ -1,3 +1,20 @@
+2003-05-08  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.msvc (IIPREFIX): New variable.
+	* srclib/Makefile.msvc (INCLUDES): Add -I..\windows.
+	* src/Makefile.msvc (IIPREFIX, IIprefix, IIexec_prefix, IIbindir,
+	IIincludedir): New variables.
+	(INCLUDES): Add -I..\windows.
+	(iconv.exe): Define INSTALLPREFIX and INSTALLDIR.
+	Patches by Perry Rapp.
+
+2003-05-07  Bruno Haible  <bruno@clisp.org>
+
+	* README.woe32: Fix instructions for step 1.
+	* srclib/Makefile.msvc (OBJECTS): Remove strtoul.obj.
+	(strtoul.obj): Remove rule.
+	Reported by Perry Rapp.
+
 2003-05-07  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.vms: New file.

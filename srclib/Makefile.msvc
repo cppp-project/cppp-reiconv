@@ -66,7 +66,7 @@ LIBINTL = $(libdir)\intl.lib
 
 CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H $(NLSFLAGS) -DDEPENDS_ON_LIBICONV=1 -DDEPENDS_ON_LIBINTL=1
 
-INCLUDES = -I. -I.. $(INCINTL)
+INCLUDES = -I. -I.. -I..\windows $(INCINTL)
 
 AR = lib
 AR_FLAGS = /out:
@@ -86,7 +86,6 @@ SHELL = /bin/sh
 OBJECTS = \
   error.obj \
   progname.obj progreloc.obj \
-  strtoul.obj \
   xmalloc.obj xstrdup.obj \
   \
   relocatable.obj \
@@ -102,9 +101,6 @@ progname.obj : progname.c
 
 progreloc.obj : progreloc.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c progreloc.c
-
-strtoul.obj : strtoul.c
-	$(CC) $(INCLUDES) $(CFLAGS) -c strtoul.c
 
 xmalloc.obj : xmalloc.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c xmalloc.c
