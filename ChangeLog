@@ -1,5 +1,9 @@
 2004-01-23  Bruno Haible  <bruno@clisp.org>
 
+	* Version 1.9.2 released.
+
+2004-01-23  Bruno Haible  <bruno@clisp.org>
+
 	* tests/table-from.c: Include binary-io.h.
 	(main): Switch stdout to binary mode.
 	* tests/table-to.c: Include binary-io.h.
