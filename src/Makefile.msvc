@@ -10,6 +10,7 @@
 #     MFLAGS=-MT                Multi-threaded, statically linked  - libcmt.lib
 #     MFLAGS=-MD                Multi-threaded, dynamically linked - msvcrt.lib
 #   DEBUG=1   for compiling with debugging information
+#   NO_NLS=1  do not use Native Language Support
 #   PREFIX=Some\Directory   Base directory for installation
 !if !defined(DLL)
 DLL=0
@@ -23,6 +24,9 @@ MFLAGS=
 !else
 MFLAGS=-MD
 !endif
+!endif
+!if !defined(NO_NLS)
+NO_NLS=0
 !endif
 !if !defined(PREFIX)
 PREFIX = c:\usr
@@ -39,6 +43,16 @@ OPTIMFLAGS = -D_NDEBUG -O1
 # ones. Set to -W1 to avoid warnings about signed/unsigned combinations.
 WARN_CFLAGS = -W1
 
+!if $(NO_NLS)
+NLSFLAGS =
+INCINTL =
+LIBINTL =
+!else
+NLSFLAGS = -DENABLE_NLS=1
+INCINTL = -I$(includedir)
+LIBINTL = $(libdir)\intl.lib
+!endif
+
 # Directories used by "make":
 srcdir = .
 
@@ -49,8 +63,8 @@ bindir = $(exec_prefix)\bin
 
 # Programs used by "make":
 CC = cl
-CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS)
-INCLUDES = -I. -I.. -I..\include -I..\srclib
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) $(NLSFLAGS)
+INCLUDES = -I. -I.. -I..\include -I..\srclib $(INCINTL)
 RM = -del
 
 # Programs used by "make install":
@@ -65,7 +79,7 @@ SHELL = /bin/sh
 all : iconv.exe
 
 iconv.exe : $(srcdir)/iconv.c ../lib/iconv.lib
-	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) $(srcdir)/iconv.c ../lib/iconv.lib -Feiconv.exe
+	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) $(srcdir)/iconv.c $(LIBINTL) ../lib/iconv.lib -Feiconv.exe
 	$(RM) iconv.obj
 !if $(DLL)
 	copy ..\lib\iconv.dll iconv.dll

@@ -1,3 +1,14 @@
+2003-04-06  Bruno Haible  <bruno@clisp.org>
+
+	Make it possible to build with or without libintl support on Woe32.
+	* Makefile.devel (config.h.msvc): Remove ENABLE_NLS.
+	* Makefile.msvc (NO_NLS): New variable.
+	* srclib/Makefile.msvc (NO_NLS): New variable.
+	(CFLAGS, INCLUDES): Use them.
+	* src/Makefile.msvc (NO_NLS): New variable.
+	(NLSFLAGS, INCINTL, LIBINTL): New variables.
+	(CFLAGS, INCLUDES, iconv.exe): Use them.
+
 2003-04-12  Bruno Haible  <bruno@clisp.org>
 
 	* lib/loop_unicode.h (unicode_transliterate): When the Hangul or

@@ -67,8 +67,7 @@ srclib/Makefile.in : srclib/Makefile.am
 
 
 config.h.msvc: config.h.in
-	sed -e 's/#undef ENABLE_NLS$$/#define ENABLE_NLS 1/' \
-	    -e 's/#undef ENABLE_RELOCATABLE$$/#define ENABLE_RELOCATABLE 1/' \
+	sed -e 's/#undef ENABLE_RELOCATABLE$$/#define ENABLE_RELOCATABLE 1/' \
 	    -e 's/#undef HAVE_ALLOCA$$/#define HAVE_ALLOCA 1/' \
 	    -e 's/#undef HAVE_DECL_STRERROR$$/#define HAVE_DECL_STRERROR 1/' \
 	    -e 's/#undef HAVE_ENVIRON_DECL$$/#define HAVE_ENVIRON_DECL 1/' \
@@ -90,6 +89,7 @@ config.h.msvc: config.h.in
 	    -e 's/#undef STACK_DIRECTION$$/#define STACK_DIRECTION -1/' \
 	    -e 's/#undef STDC_HEADERS$$/#define STDC_HEADERS 1/' \
 	    -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' \
+	    -e '/#undef ENABLE_NLS$$/d' \
 	    -e '/#undef INSTALLPREFIX$$/d' \
 	  < $< > $@
 

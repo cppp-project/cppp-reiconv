@@ -10,6 +10,7 @@
 #     MFLAGS=-MT                Multi-threaded, statically linked  - libcmt.lib
 #     MFLAGS=-MD                Multi-threaded, dynamically linked - msvcrt.lib
 #   DEBUG=1   for compiling with debugging information
+#   NO_NLS=1  do not use Native Language Support
 #   PREFIX=Some\Directory   Base directory for installation
 !if !defined(DLL)
 DLL=0
@@ -23,6 +24,9 @@ MFLAGS=
 !else
 MFLAGS=-MD
 !endif
+!endif
+!if !defined(NO_NLS)
+NO_NLS=0
 !endif
 !if !defined(PREFIX)
 PREFIX = c:\usr
@@ -50,9 +54,19 @@ OPTIMFLAGS = -Od -Z7
 OPTIMFLAGS = -D_NDEBUG -O1
 !endif
 
-CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H -DDEPENDS_ON_LIBCONV=1 -DDEPENDS_ON_LIBINTL=1
+!if $(NO_NLS)
+NLSFLAGS =
+INCINTL =
+LIBINTL =
+!else
+NLSFLAGS = -DENABLE_NLS=1
+INCINTL = -I$(includedir)
+LIBINTL = $(libdir)\intl.lib
+!endif
 
-INCLUDES = -I.
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H $(NLSFLAGS) -DDEPENDS_ON_LIBCONV=1 -DDEPENDS_ON_LIBINTL=1
+
+INCLUDES = -I. $(INCINTL)
 
 AR = lib
 AR_FLAGS = /out:
