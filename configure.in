@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2000 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2001 Free Software Foundation, Inc.
 dnl This file is part of the GNU ICONV Library.
 dnl
 dnl The GNU ICONV Library is free software; you can redistribute it and/or
@@ -16,9 +16,10 @@ dnl License along with the GNU ICONV Library; see the file COPYING.LIB.  If not,
 dnl write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 dnl Boston, MA 02111-1307, USA.
 
-AC_PREREQ(2.12)
+AC_PREREQ(2.13)
 
 AC_INIT(lib/iconv.c)
+AC_CONFIG_AUX_DIR(autoconf)
 AC_CONFIG_HEADER(lib/config.h)
 AC_PROG_MAKE_SET
 
@@ -42,6 +43,11 @@ dnl           checks for UNIX variants that set DEFS
 AC_AIX
 AC_MINIX
 AC_ISC_POSIX
+
+dnl           checks for compiler output filename suffixes
+
+AC_OBJEXT
+AC_EXEEXT
 
 dnl           check for build configuration
 
