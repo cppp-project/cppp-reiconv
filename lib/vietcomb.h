@@ -259,7 +259,7 @@ static const struct { unsigned int len; unsigned int idx; } viet_comp_table[] = 
 };
 
 /* Decomposition table for the relevant Unicode characters. */
-struct viet_decomp { unsigned short composed; unsigned short base : 12; int comb1 : 4; };
+struct viet_decomp { unsigned short composed; unsigned int base : 12; int comb1 : 4; };
 static const struct viet_decomp viet_decomp_table[] = {
   { 0x00B4, 0x0020, 1 }, /* compatility decomposition - for TCVN only */
   { 0x00C0, 0x0041, 0 },

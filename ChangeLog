@@ -1,6 +1,24 @@
-2001-06-26  Bruno Haible  <haible@clisp.cons.org>
+2001-06-27  Bruno Haible  <haible@clisp.cons.org>
 
 	* Version 1.7 released.
+
+2001-06-27  Bruno Haible  <haible@clisp.cons.org>
+
+	* INSTALL.generic (Particular Systems): Generalize section about
+	/usr/local to "most systems".
+
+	* lib/Makefile.in (all): Build @PLUGLIB@ before libiconv.la, because
+	Solaris cc destroys iconv.o and iconv.lo while building
+	libiconv_plug_solaris.so.
+	(clean): Remove so_locations, left there by the OSF/1 linker.
+
+	* lib/cp1255.h (cp1255_decomp): Use 'signed int' instead of 'int'.
+
+	* lib/vietcomb.h (viet_decomp): Use 'unsigned int' instead of
+	'unsigned short'.
+
+	* tests/table-from.c: Include string.h.
+	* tests/table-to.c: Likewise.
 
 2001-06-26  Bruno Haible  <haible@clisp.cons.org>
 

@@ -50,7 +50,7 @@ OBJECTS = iconv.lo
 
 LIBCHARSET_OBJECTS = ../libcharset/lib/localcharset.lo
 
-all : libiconv.la @PLUGLIB@
+all : @PLUGLIB@ libiconv.la
 
 libiconv.la : $(OBJECTS)
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS) $(LIBCHARSET_OBJECTS)
@@ -107,7 +107,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo *.a *.la libiconv_plug* core
+	$(RM) *.o *.lo *.a *.la libiconv_plug* core so_locations
 	$(RM) -r .libs _libs
 
 distclean : clean

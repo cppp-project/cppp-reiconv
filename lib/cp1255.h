@@ -96,7 +96,7 @@ static const struct { unsigned int len; unsigned int idx; } cp1255_comp_table[] 
 };
 
 /* Decomposition table for the relevant Unicode characters. */
-struct cp1255_decomp { unsigned short composed; unsigned short base; int comb1 : 8; int comb2 : 8; };
+struct cp1255_decomp { unsigned short composed; unsigned short base; int comb1 : 8; signed int comb2 : 8; };
 static const struct cp1255_decomp cp1255_decomp_table[] = {
   { 0xFB1D, 0x05D9, 0, -1 },
   { 0xFB1F, 0x05F2, 1, -1 },
