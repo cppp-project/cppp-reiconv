@@ -151,11 +151,14 @@ ISO-8859-15, ei_iso8859_15
 ISO_8859-15, ei_iso8859_15
 ISO_8859-15:1998, ei_iso8859_15
 ISO-IR-203, ei_iso8859_15
+LATIN-9, ei_iso8859_15
 ISO8859-15, ei_iso8859_15
 ISO-8859-16, ei_iso8859_16
 ISO_8859-16, ei_iso8859_16
-ISO_8859-16:2000, ei_iso8859_16
+ISO_8859-16:2001, ei_iso8859_16
 ISO-IR-226, ei_iso8859_16
+LATIN10, ei_iso8859_16
+L10, ei_iso8859_16
 ISO8859-16, ei_iso8859_16
 KOI8-R, ei_koi8_r
 CSKOI8R, ei_koi8_r
@@ -304,6 +307,8 @@ CN-GB, ei_euc_cn
 CSGB2312, ei_euc_cn
 GBK, ei_ces_gbk
 CP936, ei_ces_gbk
+MS936, ei_ces_gbk
+WINDOWS-936, ei_ces_gbk
 GB18030, ei_gb18030
 ISO-2022-CN, ei_iso2022_cn
 CSISO2022CN, ei_iso2022_cn

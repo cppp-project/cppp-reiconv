@@ -180,7 +180,7 @@ AUTOMAKE_OPTIONS = 1.5 gnits no-dependencies
 # Woe32 support.
 EXTRA_DIST = \
   $(LIBADD_SOURCE) relocwrapper.c\
-stdbool.h.in alloca_.h Makefile.msvc
+stdbool_.h alloca_.h Makefile.msvc
 MOSTLYCLEANFILES = stdbool.h alloca.h
 
 RM = rm -f
@@ -205,6 +205,7 @@ LIBADD_SOURCE = \
   alloca.c \
   canonicalize.h canonicalize.c \
   memmove.c \
+  readlink.c \
   relocatable.h relocatable.c \
   setenv.h setenv.c unsetenv.c \
   strerror.c
@@ -241,7 +242,7 @@ LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(libicrt_a_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in alloca.c canonicalize.c memmove.c \
-	relocatable.c setenv.c strerror.c unsetenv.c
+	readlink.c relocatable.c setenv.c strerror.c unsetenv.c
 SOURCES = $(libicrt_a_SOURCES)
 
 all: all-am
@@ -463,8 +464,8 @@ uninstall-am: uninstall-info-am
 # The following is needed in order to create an <stdbool.h> when the system
 # doesn't have one that works.
 all-local $(libicrt_a_OBJECTS): @STDBOOL_H@
-stdbool.h: stdbool.h.in
-	sed -e 's/@''HAVE__BOOL''@/@HAVE__BOOL@/g' < $(srcdir)/stdbool.h.in > stdbool.h
+stdbool.h: stdbool_.h
+	sed -e 's/@''HAVE__BOOL''@/@HAVE__BOOL@/g' < $(srcdir)/stdbool_.h > stdbool.h
 
 # The following is needed in order to create an <alloca.h> when the system
 # doesn't have one that works with the given compiler.

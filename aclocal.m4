@@ -918,7 +918,7 @@ AC_DEFUN([AC_LIB_LIBPATH],
   shlibpath_var="$acl_cv_shlibpath_var"
 ])
 
-# lib-ld.m4 serial 2 (gettext-0.12)
+# lib-ld.m4 serial 3 (gettext-0.12.2)
 dnl Copyright (C) 1996-2003 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
 dnl General Public License.  As a special exception to the GNU General
@@ -934,11 +934,12 @@ dnl From libtool-1.4. Sets the variable with_gnu_ld to yes or no.
 AC_DEFUN([AC_LIB_PROG_LD_GNU],
 [AC_CACHE_CHECK([if the linker ($LD) is GNU ld], acl_cv_prog_gnu_ld,
 [# I'd rather use --version here, but apparently some GNU ld's only accept -v.
-if $LD -v 2>&1 </dev/null | egrep '(GNU|with BFD)' 1>&5; then
-  acl_cv_prog_gnu_ld=yes
-else
-  acl_cv_prog_gnu_ld=no
-fi])
+case `$LD -v 2>&1 </dev/null` in
+*GNU* | *'with BFD'*)
+  acl_cv_prog_gnu_ld=yes ;;
+*)
+  acl_cv_prog_gnu_ld=no ;;
+esac])
 with_gnu_ld=$acl_cv_prog_gnu_ld
 ])
 
@@ -1008,11 +1009,12 @@ AC_CACHE_VAL(acl_cv_path_LD,
       # Check to see if the program is GNU ld.  I'd rather use --version,
       # but apparently some GNU ld's only accept -v.
       # Break only if it was the GNU/non-GNU ld that we prefer.
-      if "$acl_cv_path_LD" -v 2>&1 < /dev/null | egrep '(GNU|with BFD)' > /dev/null; then
-	test "$with_gnu_ld" != no && break
-      else
-	test "$with_gnu_ld" != yes && break
-      fi
+      case `"$acl_cv_path_LD" -v 2>&1 < /dev/null` in
+      *GNU* | *'with BFD'*)
+	test "$with_gnu_ld" != no && break ;;
+      *)
+	test "$with_gnu_ld" != yes && break ;;
+      esac
     fi
   done
   IFS="$ac_save_ifs"
@@ -7108,7 +7110,7 @@ size_t iconv();
   fi
 ])
 
-# lib-prefix.m4 serial 2 (gettext-0.12)
+# lib-prefix.m4 serial 3 (gettext-0.12.2)
 dnl Copyright (C) 2001-2003 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
 dnl General Public License.  As a special exception to the GNU General
@@ -7123,7 +7125,7 @@ dnl similar to AC_ARG_WITH in autoconf 2.52...2.57 except that is doesn't
 dnl require excessive bracketing.
 ifdef([AC_HELP_STRING],
 [AC_DEFUN([AC_LIB_ARG_WITH], [AC_ARG_WITH([$1],[[$2]],[$3],[$4])])],
-[AC_DEFUN([AC_LIB_ARG_WITH], [AC_ARG_WITH([$1],[$2],[$3],[$4])])])
+[AC_DEFUN([AC_][LIB_ARG_WITH], [AC_ARG_WITH([$1],[$2],[$3],[$4])])])
 
 dnl AC_LIB_PREFIX adds to the CPPFLAGS and LDFLAGS the flags that are needed
 dnl to access previously installed libraries. The basic assumption is that
@@ -7816,7 +7818,7 @@ AC_DEFUN([AC_LIB_APPENDTOVAR],
   done
 ])
 
-# gettext.m4 serial 20 (gettext-0.12)
+# gettext.m4 serial 22 (gettext-0.12.2)
 dnl Copyright (C) 1995-2003 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
 dnl General Public License.  As a special exception to the GNU General
@@ -8172,9 +8174,18 @@ AC_DEFUN([AM_INTL_SUBDIR],
   AC_REQUIRE([AC_ISC_POSIX])dnl
   AC_REQUIRE([AC_HEADER_STDC])dnl
   AC_REQUIRE([AC_C_CONST])dnl
+  AC_REQUIRE([bh_C_SIGNED])dnl
   AC_REQUIRE([AC_C_INLINE])dnl
   AC_REQUIRE([AC_TYPE_OFF_T])dnl
   AC_REQUIRE([AC_TYPE_SIZE_T])dnl
+  AC_REQUIRE([jm_AC_TYPE_LONG_LONG])dnl
+  AC_REQUIRE([gt_TYPE_LONGDOUBLE])dnl
+  AC_REQUIRE([gt_TYPE_WCHAR_T])dnl
+  AC_REQUIRE([gt_TYPE_WINT_T])dnl
+  AC_REQUIRE([jm_AC_HEADER_INTTYPES_H])
+  AC_REQUIRE([jm_AC_HEADER_STDINT_H])
+  AC_REQUIRE([gt_TYPE_INTMAX_T])
+  AC_REQUIRE([gt_PRINTF_POSIX])
   AC_REQUIRE([AC_FUNC_ALLOCA])dnl
   AC_REQUIRE([AC_FUNC_MMAP])dnl
   AC_REQUIRE([jm_GLIBC21])dnl
@@ -8183,12 +8194,45 @@ AC_DEFUN([AM_INTL_SUBDIR],
   AC_REQUIRE([gt_HEADER_INTTYPES_H])dnl
   AC_REQUIRE([gt_INTTYPES_PRI])dnl
 
+  AC_CHECK_TYPES([ptrdiff_t])
   AC_CHECK_HEADERS([argz.h limits.h locale.h nl_types.h malloc.h stddef.h \
 stdlib.h string.h unistd.h sys/param.h])
-  AC_CHECK_FUNCS([feof_unlocked fgets_unlocked getc_unlocked getcwd getegid \
-geteuid getgid getuid mempcpy munmap putenv setenv setlocale stpcpy \
-strcasecmp strdup strtoul tsearch __argz_count __argz_stringify __argz_next \
-__fsetlocking])
+  AC_CHECK_FUNCS([asprintf getcwd getegid geteuid getgid getuid mempcpy \
+munmap putenv setenv setlocale snprintf stpcpy strcasecmp strdup strtoul \
+tsearch wprintf __argz_count __argz_stringify __argz_next __fsetlocking])
+
+  dnl Use the *_unlocked functions only if they are declared.
+  dnl (because some of them were defined without being declared in Solaris
+  dnl 2.5.1 but were removed in Solaris 2.6, whereas we want binaries built
+  dnl on Solaris 2.5.1 to run on Solaris 2.6).
+  dnl Don't use AC_CHECK_DECLS because it isn't supported in autoconf-2.13.
+  gt_CHECK_DECL(feof_unlocked, [#include <stdio.h>])
+  gt_CHECK_DECL(fgets_unlocked, [#include <stdio.h>])
+  gt_CHECK_DECL(getc_unlocked, [#include <stdio.h>])
+
+  case $gt_cv_func_printf_posix in
+    *yes) HAVE_POSIX_PRINTF=1 ;;
+    *) HAVE_POSIX_PRINTF=0 ;;
+  esac
+  AC_SUBST([HAVE_POSIX_PRINTF])
+  if test "$ac_cv_func_asprintf" = yes; then
+    HAVE_ASPRINTF=1
+  else
+    HAVE_ASPRINTF=0
+  fi
+  AC_SUBST([HAVE_ASPRINTF])
+  if test "$ac_cv_func_snprintf" = yes; then
+    HAVE_SNPRINTF=1
+  else
+    HAVE_SNPRINTF=0
+  fi
+  AC_SUBST([HAVE_SNPRINTF])
+  if test "$ac_cv_func_wprintf" = yes; then
+    HAVE_WPRINTF=1
+  else
+    HAVE_WPRINTF=0
+  fi
+  AC_SUBST([HAVE_WPRINTF])
 
   AM_ICONV
   AM_LANGINFO_CODESET
@@ -8226,6 +8270,26 @@ changequote([,])dnl
   if test $ac_verc_fail = yes; then
     INTLBISON=:
   fi
+])
+
+
+dnl gt_CHECK_DECL(FUNC, INCLUDES)
+dnl Check whether a function is declared.
+AC_DEFUN([gt_CHECK_DECL],
+[
+  AC_CACHE_CHECK([whether $1 is declared], ac_cv_have_decl_$1,
+    [AC_TRY_COMPILE([$2], [
+#ifndef $1
+  char *p = (char *) $1;
+#endif
+], ac_cv_have_decl_$1=yes, ac_cv_have_decl_$1=no)])
+  if test $ac_cv_have_decl_$1 = yes; then
+    gt_value=1
+  else
+    gt_value=0
+  fi
+  AC_DEFINE_UNQUOTED([HAVE_DECL_]translit($1, [a-z], [A-Z]), [$gt_value],
+    [Define to 1 if you have the declaration of `$1', and to 0 if you don't.])
 ])
 
 
@@ -8572,6 +8636,267 @@ fi
 AC_SUBST($1)dnl
 ])
 
+# signed.m4 serial 1 (gettext-0.10.40)
+dnl Copyright (C) 2001-2002 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Bruno Haible.
+
+AC_DEFUN([bh_C_SIGNED],
+[
+  AC_CACHE_CHECK([for signed], bh_cv_c_signed,
+   [AC_TRY_COMPILE(, [signed char x;], bh_cv_c_signed=yes, bh_cv_c_signed=no)])
+  if test $bh_cv_c_signed = no; then
+    AC_DEFINE(signed, ,
+              [Define to empty if the C compiler doesn't support this keyword.])
+  fi
+])
+
+# longlong.m4 serial 4
+dnl Copyright (C) 1999-2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Paul Eggert.
+
+# Define HAVE_LONG_LONG if 'long long' works.
+
+AC_DEFUN([jm_AC_TYPE_LONG_LONG],
+[
+  AC_CACHE_CHECK([for long long], ac_cv_type_long_long,
+  [AC_TRY_LINK([long long ll = 1LL; int i = 63;],
+    [long long llmax = (long long) -1;
+     return ll << i | ll >> i | llmax / ll | llmax % ll;],
+    ac_cv_type_long_long=yes,
+    ac_cv_type_long_long=no)])
+  if test $ac_cv_type_long_long = yes; then
+    AC_DEFINE(HAVE_LONG_LONG, 1,
+      [Define if you have the 'long long' type.])
+  fi
+])
+
+# longdouble.m4 serial 1 (gettext-0.12)
+dnl Copyright (C) 2002-2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Bruno Haible.
+dnl Test whether the compiler supports the 'long double' type.
+dnl Prerequisite: AC_PROG_CC
+
+AC_DEFUN([gt_TYPE_LONGDOUBLE],
+[
+  AC_CACHE_CHECK([for long double], gt_cv_c_long_double,
+    [if test "$GCC" = yes; then
+       gt_cv_c_long_double=yes
+     else
+       AC_TRY_COMPILE([
+         /* The Stardent Vistra knows sizeof(long double), but does not support it.  */
+         long double foo = 0.0;
+         /* On Ultrix 4.3 cc, long double is 4 and double is 8.  */
+         int array [2*(sizeof(long double) >= sizeof(double)) - 1];
+         ], ,
+         gt_cv_c_long_double=yes, gt_cv_c_long_double=no)
+     fi])
+  if test $gt_cv_c_long_double = yes; then
+    AC_DEFINE(HAVE_LONG_DOUBLE, 1, [Define if you have the 'long double' type.])
+  fi
+])
+
+# wchar_t.m4 serial 1 (gettext-0.12)
+dnl Copyright (C) 2002-2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Bruno Haible.
+dnl Test whether <stddef.h> has the 'wchar_t' type.
+dnl Prerequisite: AC_PROG_CC
+
+AC_DEFUN([gt_TYPE_WCHAR_T],
+[
+  AC_CACHE_CHECK([for wchar_t], gt_cv_c_wchar_t,
+    [AC_TRY_COMPILE([#include <stddef.h>
+       wchar_t foo = (wchar_t)'\0';], ,
+       gt_cv_c_wchar_t=yes, gt_cv_c_wchar_t=no)])
+  if test $gt_cv_c_wchar_t = yes; then
+    AC_DEFINE(HAVE_WCHAR_T, 1, [Define if you have the 'wchar_t' type.])
+  fi
+])
+
+# wint_t.m4 serial 1 (gettext-0.12)
+dnl Copyright (C) 2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Bruno Haible.
+dnl Test whether <wchar.h> has the 'wint_t' type.
+dnl Prerequisite: AC_PROG_CC
+
+AC_DEFUN([gt_TYPE_WINT_T],
+[
+  AC_CACHE_CHECK([for wint_t], gt_cv_c_wint_t,
+    [AC_TRY_COMPILE([#include <wchar.h>
+       wint_t foo = (wchar_t)'\0';], ,
+       gt_cv_c_wint_t=yes, gt_cv_c_wint_t=no)])
+  if test $gt_cv_c_wint_t = yes; then
+    AC_DEFINE(HAVE_WINT_T, 1, [Define if you have the 'wint_t' type.])
+  fi
+])
+
+# inttypes_h.m4 serial 5 (gettext-0.12)
+dnl Copyright (C) 1997-2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Paul Eggert.
+
+# Define HAVE_INTTYPES_H_WITH_UINTMAX if <inttypes.h> exists,
+# doesn't clash with <sys/types.h>, and declares uintmax_t.
+
+AC_DEFUN([jm_AC_HEADER_INTTYPES_H],
+[
+  AC_CACHE_CHECK([for inttypes.h], jm_ac_cv_header_inttypes_h,
+  [AC_TRY_COMPILE(
+    [#include <sys/types.h>
+#include <inttypes.h>],
+    [uintmax_t i = (uintmax_t) -1;],
+    jm_ac_cv_header_inttypes_h=yes,
+    jm_ac_cv_header_inttypes_h=no)])
+  if test $jm_ac_cv_header_inttypes_h = yes; then
+    AC_DEFINE_UNQUOTED(HAVE_INTTYPES_H_WITH_UINTMAX, 1,
+      [Define if <inttypes.h> exists, doesn't clash with <sys/types.h>,
+       and declares uintmax_t. ])
+  fi
+])
+
+# stdint_h.m4 serial 3 (gettext-0.12)
+dnl Copyright (C) 1997-2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Paul Eggert.
+
+# Define HAVE_STDINT_H_WITH_UINTMAX if <stdint.h> exists,
+# doesn't clash with <sys/types.h>, and declares uintmax_t.
+
+AC_DEFUN([jm_AC_HEADER_STDINT_H],
+[
+  AC_CACHE_CHECK([for stdint.h], jm_ac_cv_header_stdint_h,
+  [AC_TRY_COMPILE(
+    [#include <sys/types.h>
+#include <stdint.h>],
+    [uintmax_t i = (uintmax_t) -1;],
+    jm_ac_cv_header_stdint_h=yes,
+    jm_ac_cv_header_stdint_h=no)])
+  if test $jm_ac_cv_header_stdint_h = yes; then
+    AC_DEFINE_UNQUOTED(HAVE_STDINT_H_WITH_UINTMAX, 1,
+      [Define if <stdint.h> exists, doesn't clash with <sys/types.h>,
+       and declares uintmax_t. ])
+  fi
+])
+
+# intmax.m4 serial 1 (gettext-0.12)
+dnl Copyright (C) 2002-2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Bruno Haible.
+dnl Test whether the system has the 'intmax_t' type, but don't attempt to
+dnl find a replacement if it is lacking.
+
+AC_DEFUN([gt_TYPE_INTMAX_T],
+[
+  AC_REQUIRE([jm_AC_HEADER_INTTYPES_H])
+  AC_REQUIRE([jm_AC_HEADER_STDINT_H])
+  AC_CACHE_CHECK(for intmax_t, gt_cv_c_intmax_t,
+    [AC_TRY_COMPILE([
+#include <stddef.h> 
+#include <stdlib.h>
+#if HAVE_STDINT_H_WITH_UINTMAX
+#include <stdint.h>
+#endif
+#if HAVE_INTTYPES_H_WITH_UINTMAX
+#include <inttypes.h>
+#endif
+], [intmax_t x = -1;], gt_cv_c_intmax_t=yes, gt_cv_c_intmax_t=no)])
+  if test $gt_cv_c_intmax_t = yes; then
+    AC_DEFINE(HAVE_INTMAX_T, 1,
+      [Define if you have the 'intmax_t' type in <stdint.h> or <inttypes.h>.])
+  fi
+])
+
+# printf-posix.m4 serial 1 (gettext-0.12.2)
+dnl Copyright (C) 2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Bruno Haible.
+dnl Test whether the printf() function supports POSIX/XSI format strings with
+dnl positions.
+
+AC_DEFUN([gt_PRINTF_POSIX],
+[
+  AC_REQUIRE([AC_PROG_CC])
+  AC_CACHE_CHECK([whether printf() supports POSIX/XSI format strings],
+    gt_cv_func_printf_posix,
+    [
+      AC_TRY_RUN([
+#include <stdio.h>
+#include <string.h>
+/* The string "%2$d %1$d", with dollar characters protected from the shell's
+   dollar expansion (possibly an autoconf bug).  */
+static char format[] = { '%', '2', '$', 'd', ' ', '%', '1', '$', 'd', '\0' };
+static char buf[100];
+int main ()
+{
+  sprintf (buf, format, 33, 55);
+  return (strcmp (buf, "55 33") != 0);
+}], gt_cv_func_printf_posix=yes, gt_cv_func_printf_posix=no,
+      [
+        AC_EGREP_CPP(notposix, [
+#if defined __NetBSD__ || defined _MSC_VER || defined __MINGW32__
+  notposix
+#endif
+        ], gt_cv_func_printf_posix="guessing no",
+           gt_cv_func_printf_posix="guessing yes")
+      ])
+    ])
+  case $gt_cv_func_printf_posix in
+    *yes)
+      AC_DEFINE(HAVE_POSIX_PRINTF, 1,
+        [Define if your printf() function supports format strings with positions.])
+      ;;
+  esac
+])
+
 # glibc21.m4 serial 2 (fileutils-4.1.3, gettext-0.10.40)
 dnl Copyright (C) 2000-2002 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
@@ -8708,64 +9033,6 @@ AC_DEFUN([jm_AC_TYPE_UINTMAX_T],
   else
     AC_DEFINE(HAVE_UINTMAX_T, 1,
       [Define if you have the 'uintmax_t' type in <stdint.h> or <inttypes.h>.])
-  fi
-])
-
-# inttypes_h.m4 serial 5 (gettext-0.12)
-dnl Copyright (C) 1997-2003 Free Software Foundation, Inc.
-dnl This file is free software, distributed under the terms of the GNU
-dnl General Public License.  As a special exception to the GNU General
-dnl Public License, this file may be distributed as part of a program
-dnl that contains a configuration script generated by Autoconf, under
-dnl the same distribution terms as the rest of that program.
-
-dnl From Paul Eggert.
-
-# Define HAVE_INTTYPES_H_WITH_UINTMAX if <inttypes.h> exists,
-# doesn't clash with <sys/types.h>, and declares uintmax_t.
-
-AC_DEFUN([jm_AC_HEADER_INTTYPES_H],
-[
-  AC_CACHE_CHECK([for inttypes.h], jm_ac_cv_header_inttypes_h,
-  [AC_TRY_COMPILE(
-    [#include <sys/types.h>
-#include <inttypes.h>],
-    [uintmax_t i = (uintmax_t) -1;],
-    jm_ac_cv_header_inttypes_h=yes,
-    jm_ac_cv_header_inttypes_h=no)])
-  if test $jm_ac_cv_header_inttypes_h = yes; then
-    AC_DEFINE_UNQUOTED(HAVE_INTTYPES_H_WITH_UINTMAX, 1,
-      [Define if <inttypes.h> exists, doesn't clash with <sys/types.h>,
-       and declares uintmax_t. ])
-  fi
-])
-
-# stdint_h.m4 serial 3 (gettext-0.12)
-dnl Copyright (C) 1997-2003 Free Software Foundation, Inc.
-dnl This file is free software, distributed under the terms of the GNU
-dnl General Public License.  As a special exception to the GNU General
-dnl Public License, this file may be distributed as part of a program
-dnl that contains a configuration script generated by Autoconf, under
-dnl the same distribution terms as the rest of that program.
-
-dnl From Paul Eggert.
-
-# Define HAVE_STDINT_H_WITH_UINTMAX if <stdint.h> exists,
-# doesn't clash with <sys/types.h>, and declares uintmax_t.
-
-AC_DEFUN([jm_AC_HEADER_STDINT_H],
-[
-  AC_CACHE_CHECK([for stdint.h], jm_ac_cv_header_stdint_h,
-  [AC_TRY_COMPILE(
-    [#include <sys/types.h>
-#include <stdint.h>],
-    [uintmax_t i = (uintmax_t) -1;],
-    jm_ac_cv_header_stdint_h=yes,
-    jm_ac_cv_header_stdint_h=no)])
-  if test $jm_ac_cv_header_stdint_h = yes; then
-    AC_DEFINE_UNQUOTED(HAVE_STDINT_H_WITH_UINTMAX, 1,
-      [Define if <stdint.h> exists, doesn't clash with <sys/types.h>,
-       and declares uintmax_t. ])
   fi
 ])
 
@@ -9312,8 +9579,8 @@ if test $ac_cv_func_strerror_r_char_p = yes; then
 fi
 ])# AC_FUNC_STRERROR_R
 
-# pathmax.m4 serial 1 (gettext-0.12)
-dnl Copyright (C) 2002 Free Software Foundation, Inc.
+# pathmax.m4 serial 2
+dnl Copyright (C) 2002, 2003 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
 dnl General Public License.  As a special exception to the GNU General
 dnl Public License, this file may be distributed as part of a program
@@ -9323,7 +9590,7 @@ dnl the same distribution terms as the rest of that program.
 AC_DEFUN([gl_PATHMAX],
 [
   dnl Prerequisites of lib/pathmax.h.
-  AC_CHECK_HEADERS_ONCE(limits.h sys/param.h unistd.h)
+  AC_CHECK_HEADERS_ONCE(sys/param.h unistd.h)
 ])
 
 # setenv.m4 serial 2 (gettext-0.11.1)
@@ -9437,8 +9704,31 @@ AC_DEFUN([gl_PREREQ_STRERROR], [
   :
 ])
 
-# xreadlink.m4 serial 1 (gettext-0.12)
-dnl Copyright (C) 2002 Free Software Foundation, Inc.
+# readlink.m4 serial 1
+dnl Copyright (C) 2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+AC_DEFUN([gl_FUNC_READLINK],
+[
+  AC_CHECK_FUNCS(readlink)
+  if test $ac_cv_func_readlink = no; then
+    AC_LIBOBJ(readlink)
+    gl_PREREQ_READLINK
+  fi
+])
+
+# Prerequisites of lib/readlink.c.
+AC_DEFUN([gl_PREREQ_READLINE],
+[
+  :
+])
+
+# xreadlink.m4 serial 3
+dnl Copyright (C) 2002, 2003 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
 dnl General Public License.  As a special exception to the GNU General
 dnl Public License, this file may be distributed as part of a program
@@ -9448,6 +9738,30 @@ dnl the same distribution terms as the rest of that program.
 AC_DEFUN([gl_XREADLINK],
 [
   dnl Prerequisites of lib/xreadlink.c.
-  AC_CHECK_HEADERS_ONCE(limits.h stdlib.h sys/types.h unistd.h)
+  AC_REQUIRE([gt_TYPE_SSIZE_T])
+  AC_CHECK_HEADERS_ONCE(stdlib.h sys/types.h unistd.h)
+])
+
+# ssize_t.m4 serial 3 (gettext-0.12.2)
+dnl Copyright (C) 2001-2003 Free Software Foundation, Inc.
+dnl This file is free software, distributed under the terms of the GNU
+dnl General Public License.  As a special exception to the GNU General
+dnl Public License, this file may be distributed as part of a program
+dnl that contains a configuration script generated by Autoconf, under
+dnl the same distribution terms as the rest of that program.
+
+dnl From Bruno Haible.
+dnl Test whether ssize_t is defined.
+
+AC_DEFUN([gt_TYPE_SSIZE_T],
+[
+  AC_CACHE_CHECK([for ssize_t], gt_cv_ssize_t,
+    [AC_TRY_COMPILE([#include <sys/types.h>],
+       [int x = sizeof (ssize_t *) + sizeof (ssize_t);],
+       gt_cv_ssize_t=yes, gt_cv_ssize_t=no)])
+  if test $gt_cv_ssize_t = no; then
+    AC_DEFINE(ssize_t, int,
+              [Define as a signed type of the same size as size_t.])
+  fi
 ])
 

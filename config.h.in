@@ -128,9 +128,6 @@
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
 #undef HAVE_LANGINFO_CODESET
 
-/* Define to 1 if you have the <limits.h> header file. */
-#undef HAVE_LIMITS_H
-
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
 
@@ -145,6 +142,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `readlink' function. */
+#undef HAVE_READLINK
 
 /* Define to 1 if you have the <search.h> header file. */
 #undef HAVE_SEARCH_H
@@ -277,3 +277,6 @@
 
 /* Define to a replacement function name for realpath(). */
 #undef realpath
+
+/* Define as a signed type of the same size as size_t. */
+#undef ssize_t
