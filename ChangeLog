@@ -1,3 +1,9 @@
+2003-05-16  Bruno Haible  <bruno@clisp.org>
+
+	* lib/genaliases.c (main): Emit declarations for gperf-3.0.
+	* Makefile.devel (lib/aliases.h): Remove gperf command line options;
+	add new option "-m 10" for gperf-3.0.
+
 2003-05-12  Bruno Haible  <bruno@clisp.org>
 
 	* m4/error.m4: Update from gettext.

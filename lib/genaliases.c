@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2001, 2003 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -41,6 +41,15 @@ static void emit_encoding (const char* const* names, size_t n, const char* c_nam
 int main ()
 {
   printf("struct alias { const char* name; unsigned int encoding_index; };\n");
+  printf("%%struct-type\n");
+  printf("%%language=ANSI-C\n");
+  printf("%%define hash-function-name aliases_hash\n");
+  printf("%%define lookup-function-name aliases_lookup\n");
+  printf("%%7bit\n");
+  printf("%%readonly-tables\n");
+  printf("%%global-table\n");
+  printf("%%define word-array-name aliases\n");
+  printf("%%null-strings\n");
   printf("%%%%\n");
 
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
