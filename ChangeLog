@@ -47,6 +47,18 @@
         * tests/table-from.c (main); When dumping GB18030, don't print code
           points larger than U+FFFF.
 
+2001-03-30  Bruno Haible  <haible@clisp.cons.org>
+
+        * tools/Makefile (GB18030uni.TXT): Use a table source which includes
+          the unassigned Unicode code points.
+        * lib/gb18030uni.h: Update.
+          (gb18030uni_ranges): Remove bitmap_offset field.
+          (gb18030uni_bitmap): Remove array.
+          (gb18030uni_mbtowc): Omit gb18030uni_bitmap access.
+          (gb18030uni_wctomb): Likewise.
+        * lib/gb18030.h (gb18030_mbtowc): Handle Unicode characters >= 0x10000.
+          (gb18030_wctomb): Likewise.
+
 2001-03-21  Bruno Haible  <haible@clisp.cons.org>
 
         * INSTALL.generic (Particular Systems): Add recommendations for AIX 3.
