@@ -1,3 +1,10 @@
+2003-06-22  Bruno Haible  <bruno@clisp.org>
+
+	* lib/relocatable.c (compute_curr_prefix): Comment out this function in
+	the case when it is not used.
+	* srclib/relocatable.c (compute_curr_prefix): Likewise.
+	Reported by Pavel Roskin <proski@gnu.org>.
+
 2003-06-18  Bruno Haible  <bruno@clisp.org>
 
 	* config/install-sh: Update from automake-1.7.5.
