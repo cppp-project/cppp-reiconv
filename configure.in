@@ -16,14 +16,20 @@ dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
 dnl If not, write to the Free Software Foundation, Inc., 59 Temple Place -
 dnl Suite 330, Boston, MA 02111-1307, USA.  */
 
-PACKAGE=libiconv
-VERSION=1.7
+AC_PREREQ(2.52)
 
-AC_PREREQ(2.13)
+AC_INIT(libiconv,1.7)
 
-AC_INIT(lib/iconv.c)
+PACKAGE=$PACKAGE_NAME
+VERSION=$PACKAGE_VERSION
+AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
+AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
+AC_SUBST(PACKAGE)
+AC_SUBST(VERSION)
+
+AC_CONFIG_SRCDIR(lib/iconv.c)
 AC_CONFIG_AUX_DIR(autoconf)
-AC_CONFIG_HEADER(lib/config.h)
+AC_CONFIG_HEADERS(lib/config.h src/config.h)
 AC_PROG_MAKE_SET
 
 dnl           checks for programs
@@ -57,6 +63,7 @@ dnl           check for build configuration
 AM_DISABLE_STATIC
 AM_PROG_LIBTOOL
 AM_ICONV
+AM_GNU_GETTEXT([external])
 
 dnl           checks for header files
 
@@ -104,4 +111,4 @@ else
   TESTS_MAKEFILE=""
 fi
 AC_CONFIG_SUBDIRS(libcharset)
-AC_OUTPUT(Makefile lib/Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h)
+AC_OUTPUT(Makefile lib/Makefile src/Makefile po/Makefile.in man/Makefile ${TESTS_MAKEFILE} include/iconv.h)

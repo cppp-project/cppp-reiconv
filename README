@@ -70,6 +70,21 @@ As usual for GNU packages:
     $ make
     $ make install
 
+After installing GNU libiconv for the first time, it is recommended to
+recompile and reinstall GNU gettext, so that it can take advantage of
+libiconv.
+
+On systems other than GNU/Linux, the iconv program will be internationalized
+only if GNU gettext has been built and installed before GNU libiconv. This
+means that the first time GNU libiconv is installed, we have a circular
+dependency between the GNU libiconv and GNU gettext packages, which can be
+resolved by building and installing either
+  - first libiconv, then gettext, then libiconv again,
+or (on systems supporting shared libraries, excluding AIX)
+  - first gettext, then libiconv, then gettext again.
+Recall that before building a package for the second time, you need to erase
+the traces of the first build by running "make distclean".
+
 This library can be built and installed in two variants:
 
   - The library mode. This works on all systems, and uses a library

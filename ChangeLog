@@ -1,5 +1,38 @@
 2002-04-28  Bruno Haible  <bruno@clisp.org>
 
+	* src/iconv.c: Include gettext.h.
+	(_): New macro.
+	(usage, print_version, convert, main): Internationalize.
+	(main): Call setlocale, bindtextdomain, textdomain.
+	* src/gettext.h: New file, from GNU gettext 0.11.2.
+	* src/config.h.in: New file, needed for ENABLE_NLS.
+	* src/Makefile.in (datadir, localedir): New variables.
+	(iconv): Link with @LTLIBINTL@.
+	(iconv.@OBJEXT@): Define LOCALEDIR.
+	(distclean): Remove config.h.
+	* po: New directory.
+	* Makefile.in (all, install, installdirs, uninstall, check,
+	mostlyclean, clean, distclean, maintainer-clean): Recurse into the po
+	directory.
+	* autoconf/mkinstalldirs: New file, from automake-1.5.
+	* ABOUT-NLS: New file, from GNU gettext 0.11.2.
+	* m4/codeset.m4: New file, from GNU gettext 0.11.2.
+	* m4/gettext.m4: New file, from GNU gettext 0.11.2.
+	* m4/glibc21.m4: New file, from GNU gettext 0.11.2.
+	* m4/isc-posix.m4: New file, from GNU gettext 0.11.2.
+	* m4/lcmessage.m4: New file, from GNU gettext 0.11.2.
+	* m4/progtest.m4: New file, from GNU gettext 0.11.2.
+	* configure.in: Require autoconf-2.52, needed for multiple config.h.in
+	files. Use new form of AC_INIT. Invoke AM_GNU_GETTEXT.
+	(PACKAGE, VERSION): Define, needed for po/Makefile.in.in.
+	* lib/config.h.in (HAVE_LOCALE_H, HAVE_SETLOCALE): Remove.
+
+2002-04-28  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* configure.in (AC_OUTPUT): Add po/Makefile.in.
+
+2002-04-28  Bruno Haible  <bruno@clisp.org>
+
 	* m4/eilseq.m4: Renamed from autoconf/eilseq.m4.
 	* m4/mbstate_t.m4: Renamed from autoconf/mbstate_t.m4.
 	* m4/general.m4: New file, from GNU clisp.

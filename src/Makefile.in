@@ -10,6 +10,8 @@ prefix = @prefix@
 local_prefix = /usr/local
 exec_prefix = @exec_prefix@
 bindir = @bindir@
+datadir = @datadir@
+localedir = $(datadir)/locale
 
 # Programs used by "make":
 CC = @CC@
@@ -40,10 +42,10 @@ top_builddir = ..
 all : iconv
 
 iconv : iconv.@OBJEXT@ ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ ../lib/libiconv.la @LTLIBINTL@ -o $@
 
 iconv.@OBJEXT@ : $(srcdir)/iconv.c
-	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) $(srcdir)/iconv.c
+	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv.c
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
 ../lib/libiconv.la :
@@ -72,7 +74,7 @@ clean : force
 	$(RM) -r .libs _libs
 
 distclean : clean
-	$(RM) Makefile
+	$(RM) Makefile config.h
 
 maintainer-clean : distclean
 

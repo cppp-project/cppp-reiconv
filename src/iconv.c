@@ -27,6 +27,9 @@
 #include <locale.h>
 #endif
 #include <fcntl.h>
+#include "gettext.h"
+
+#define _(str) gettext(str)
 
 /* For systems that distinguish between text and binary I/O.
    O_BINARY is usually declared in <fcntl.h>. */
@@ -66,14 +69,15 @@ static int silent = 0;
 
 static void usage (int exitcode)
 {
-  const char* helpstring =
+  const char* helpstring1 =
 #if O_BINARY
-    "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]\n"
+    _("Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]");
 #else
-    "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]\n"
+    _("Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]");
 #endif
-    "or:    iconv -l\n";
-  fprintf(exitcode ? stderr : stdout, helpstring);
+  const char* helpstring2 =
+    _("or:    iconv -l");
+  fprintf(exitcode ? stderr : stdout, "%s\n%s\n", helpstring1, helpstring2);
   exit(exitcode);
 }
 
@@ -81,11 +85,11 @@ static void print_version (void)
 {
   printf("iconv (GNU libiconv %d.%d)\n",
          _libiconv_version >> 8, _libiconv_version & 0xff);
-  printf("\
-Copyright (C) 2000-2002 Free Software Foundation, Inc.\n\
+  printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2002");
+  printf(_("\
 This is free software; see the source for copying conditions.  There is NO\n\
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\
-Written by Bruno Haible.\n");
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"));
+  printf(_("Written by %s.\n"),"Bruno Haible");
   exit(0);
 }
 
@@ -122,7 +126,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
         break;
       else {
         if (!silent)
-          fprintf(stderr,"iconv: %s: incomplete character or shift sequence\n",infilename);
+          fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
         return 1;
       }
     } else {
@@ -148,13 +152,13 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               status = 1;
             } else {
               if (!silent)
-                fprintf(stderr,"iconv: %s: cannot convert\n",infilename);
+                fprintf(stderr,_("iconv: %s: cannot convert\n"),infilename);
               return 1;
             }
           } else if (errno == EINVAL) {
             if (inbufsize == 0 || insize > 4096) {
               if (!silent)
-                fprintf(stderr,"iconv: %s: incomplete character or shift sequence\n",infilename);
+                fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
               return 1;
             } else {
               inbufrest = insize;
@@ -170,7 +174,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           } else if (errno != E2BIG) {
             if (!silent) {
               int saved_errno = errno;
-              fprintf(stderr,"iconv: %s: ",infilename);
+              fprintf(stderr,_("iconv: %s: "),infilename);
               errno = saved_errno;
               perror("");
             }
@@ -199,17 +203,17 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           status = 1;
         } else {
           if (!silent)
-            fprintf(stderr,"iconv: %s: cannot convert\n",infilename);
+            fprintf(stderr,_("iconv: %s: cannot convert\n"),infilename);
           return 1;
         }
       } else if (errno == EINVAL) {
         if (!silent)
-          fprintf(stderr,"iconv: %s: incomplete character or shift sequence\n",infilename);
+          fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
         return 1;
       } else {
         if (!silent) {
           int saved_errno = errno;
-          fprintf(stderr,"iconv: %s: ",infilename);
+          fprintf(stderr,_("iconv: %s: "),infilename);
           errno = saved_errno;
           perror("");
         }
@@ -218,7 +222,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
     }
   }
   if (ferror(infile)) {
-    fprintf(stderr,"iconv: %s: I/O error\n",infilename);
+    fprintf(stderr,_("iconv: %s: I/O error\n"),infilename);
     return 1;
   }
   return status;
@@ -234,9 +238,16 @@ int main (int argc, char* argv[])
   int status;
 
 #if HAVE_SETLOCALE
-  /* Needed for the locale dependent encodings, "char" and "wchar_t". */
+  /* Needed for the locale dependent encodings, "char" and "wchar_t",
+     and for gettext. */
   setlocale(LC_CTYPE,"");
+#if ENABLE_NLS
+  /* Needed for gettext. */
+  setlocale(LC_MESSAGES,"");
 #endif
+#endif
+  bindtextdomain("libiconv",LOCALEDIR);
+  textdomain("libiconv");
   for (i = 1; i < argc;) {
     if (!strcmp(argv[i],"-f")) {
       if (i == argc-1) usage(1);
@@ -302,15 +313,15 @@ int main (int argc, char* argv[])
     cd = iconv_open(tocode,fromcode);
     if (cd == (iconv_t)(-1)) {
       if (iconv_open("UCS-4",fromcode) == (iconv_t)(-1))
-        fprintf(stderr,"iconv: conversion from %s unsupported\n",fromcode);
+        fprintf(stderr,_("iconv: conversion from %s unsupported\n"),fromcode);
       else if (iconv_open(tocode,"UCS-4") == (iconv_t)(-1))
-        fprintf(stderr,"iconv: conversion to %s unsupported\n",tocode);
+        fprintf(stderr,_("iconv: conversion to %s unsupported\n"),tocode);
       else
-        fprintf(stderr,"iconv: conversion from %s to %s unsupported\n",fromcode,tocode);
+        fprintf(stderr,_("iconv: conversion from %s to %s unsupported\n"),fromcode,tocode);
       exit(1);
     }
     if (i == argc)
-      status = convert(cd,stdin,"(stdin)");
+      status = convert(cd,stdin,_("(stdin)"));
     else {
       status = 0;
       for (; i < argc; i++) {
@@ -318,7 +329,7 @@ int main (int argc, char* argv[])
         FILE* infile = fopen(infilename,"r");
         if (infile == NULL) {
           int saved_errno = errno;
-          fprintf(stderr,"iconv: %s: ",infilename);
+          fprintf(stderr,_("iconv: %s: "),infilename);
           errno = saved_errno;
           perror("");
           status = 1;
@@ -331,7 +342,7 @@ int main (int argc, char* argv[])
     iconv_close(cd);
   }
   if (ferror(stdout)) {
-    fprintf(stderr,"iconv: I/O error\n");
+    fprintf(stderr,_("iconv: I/O error\n"));
     status = 1;
   }
   exit(status);
