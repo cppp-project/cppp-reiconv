@@ -37,7 +37,6 @@ srcdir = .
 # Programs used by "make":
 CC = cl
 CFLAGS = $(MFLAGS) -W1 $(OPTIMFLAGS)
-CPP = cl -E
 INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include -I..\lib
 RM = del
 

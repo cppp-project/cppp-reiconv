@@ -59,8 +59,6 @@ OPTIMFLAGS = -D_NDEBUG -O1
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
 CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(PICFLAGS) $(OPTIMFLAGS) -DBUILDING_LIBICONV
 
-CPP = cl -E
-
 INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
 
 AR = lib

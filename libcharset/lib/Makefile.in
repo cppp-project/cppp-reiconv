@@ -14,6 +14,8 @@ libdir = @libdir@
 # Programs used by "make":
 CC = @CC@
 CFLAGS = @CFLAGS@
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
 INCLUDES = -I. -I$(srcdir) -I.. -I$(srcdir)/..
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
@@ -48,10 +50,10 @@ OBJECTS = localcharset.lo
 all : libcharset.la charset.alias ref-add.sed ref-del.sed
 
 libcharset.la : $(OBJECTS)
-	$(LIBTOOL_LINK) $(CC) -o libcharset.la -rpath $(libdir) -version-info $(LIBCHARSET_VERSION_INFO) -no-undefined $(OBJECTS)
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) -o libcharset.la -rpath $(libdir) -version-info $(LIBCHARSET_VERSION_INFO) -no-undefined $(OBJECTS)
 
 localcharset.lo : $(srcdir)/localcharset.c
-	$(LIBTOOL_COMPILE) $(CC) $(CFLAGS) $(INCLUDES) -DHAVE_CONFIG_H -DLIBDIR=\"$(libdir)\" -c $(srcdir)/localcharset.c
+	$(LIBTOOL_COMPILE) $(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -DHAVE_CONFIG_H -DLIBDIR=\"$(libdir)\" -c $(srcdir)/localcharset.c
 
 charset.alias: $(srcdir)/config.charset
 	$(SHELL) $(srcdir)/config.charset '@host@' > t-$@

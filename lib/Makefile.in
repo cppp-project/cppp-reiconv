@@ -14,7 +14,8 @@ libdir = @libdir@
 # Programs used by "make":
 CC = @CC@
 CFLAGS = @CFLAGS@
-CPP = @CPP@
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
 INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
@@ -52,32 +53,32 @@ LIBCHARSET_OBJECTS = ../libcharset/lib/localcharset.lo
 all : libiconv.la @PLUGLIB@
 
 libiconv.la : $(OBJECTS)
-	$(LIBTOOL_LINK) $(CC) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS) $(LIBCHARSET_OBJECTS)
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS) $(LIBCHARSET_OBJECTS)
 
 libiconv_plug.so : libiconv_plug_@OS@.so
 	$(RM) libiconv_plug.so
 	$(LN_S) libiconv_plug_@OS@.so libiconv_plug.so
 
 libiconv_plug_linux.so : $(SOURCES)
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_linux.so
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_linux.so
 
 libiconv_plug_solaris.so : $(SOURCES)
 	if test -n "@GCC@"; then \
-	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
+	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
 	else \
-	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -KPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
+	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -KPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
 	fi
 
 libiconv_plug_osf.so : $(SOURCES)
 	if test -n "@GCC@"; then \
-	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_osf.so; \
+	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_osf.so; \
 	else \
-	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -c -o iconv_plug.o; \
+	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -c -o iconv_plug.o; \
 	  /bin/ld -shared -expect_unresolved \* -o libiconv_plug_osf.so iconv_plug.o; \
 	fi
 
 iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/encodings_osf1.def $(srcdir)/encodings_dos.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h $(srcdir)/aliases_aix.h $(srcdir)/aliases_osf1.h $(srcdir)/aliases_dos.h $(srcdir)/flags.h
-	$(LIBTOOL_COMPILE) $(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
+	$(LIBTOOL_COMPILE) $(CC) $(CPPFLAGS) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
 
 # Installs the library and include files only. Typically called with only
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.

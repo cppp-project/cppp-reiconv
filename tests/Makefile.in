@@ -8,7 +8,8 @@ srcdir = @srcdir@
 # Programs used by "make":
 CC = @CC@
 CFLAGS = @CFLAGS@
-CPP = @CPP@
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
 INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include -I../lib
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
@@ -30,7 +31,7 @@ all :
 check : all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) ASCII
 #	/* General multi-byte encodings */
-	$(CC) $(CFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
+	$(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
 	./genutf8 > UTF-8.TXT && \
 	$(srcdir)/check-stateless . UTF-8 && \
 	$(RM) genutf8 UTF-8.TXT
@@ -133,10 +134,10 @@ check : all table-from table-to ../src/iconv
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
 
 table-from : $(srcdir)/table-from.c ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../lib/libiconv.la -o $@
 
 table-to : $(srcdir)/table-to.c ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../lib/libiconv.la -o $@
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
 ../lib/libiconv.la :

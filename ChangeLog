@@ -1,5 +1,22 @@
 2001-05-06  Bruno Haible  <haible@clisp.cons.org>
 
+        * lib/Makefile.in (CPPFLAGS, LDFLAGS): New variables.
+        (CPP): Remove variable.
+        (libiconv.la, libiconv_plug_linux.so, libiconv_plug_solaris.so,
+         libiconv_plug_osf.so): Use LDFLAGS.
+        (libiconv_plug_linux.so, libiconv_plug_solaris.so,
+         libiconv_plug_osf.so, iconv.lo): Use CPPFLAGS.
+        * lib/Makefile.msvc (CPP): Remove variable.
+        * src/Makefile.in (CPPFLAGS, LDFLAGS): New variables.
+        (CPP): Remove variable.
+        (iconv): Use CPPFLAGS and LDFLAGS.
+        * src/Makefile.msvc (CPP): Remove variable.
+        * tests/Makefile.in (CPPFLAGS, LDFLAGS): New variables.
+        (check, table-from, table-to): Use CPPFLAGS and LDFLAGS.
+        * tests/Makefile.msvc (CPP): Remove variable.
+
+2001-05-06  Bruno Haible  <haible@clisp.cons.org>
+
         * lib/Makefile.in (libiconv_plug_solaris.so): Change rule if not using
           gcc. Reported by Paananen Mikko <mikkopa@cs.tut.fi>.
 
