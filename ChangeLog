@@ -1,3 +1,8 @@
+2002-05-08  Bruno Haible  <bruno@clisp.org>
+
+	* lib/iconv.c: Enable DOS encodings also when compiling for Woe32,
+	because the Woe32 consoles use them.
+
 2002-05-04  Bruno Haible  <bruno@clisp.org>
 
 	* lib/loop_unicode.h (unicode_loop_convert): When quitting the loop

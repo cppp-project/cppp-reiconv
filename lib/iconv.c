@@ -35,7 +35,7 @@
 #ifdef __osf__
 #define USE_OSF1
 #endif
-#ifdef __DJGPP__
+#if defined(__DJGPP__) || (defined(_WIN32) && (defined(_MSC_VER) || defined(__MINGW32__)))
 #define USE_DOS
 #endif
 
