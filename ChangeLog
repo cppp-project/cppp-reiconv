@@ -1,5 +1,11 @@
 2002-05-12  Bruno Haible  <bruno@clisp.org>
 
+	* README: Mention extra encodings.
+	* man/iconv_open.3: Likewise. Improve formatting in text and html
+	output formats.
+
+2002-05-12  Bruno Haible  <bruno@clisp.org>
+
 	* tests/SHIFT_JIS.TXT: Renamed from tests/SHIFT-JIS.TXT.
 
 2002-05-12  Bruno Haible  <bruno@clisp.org>
