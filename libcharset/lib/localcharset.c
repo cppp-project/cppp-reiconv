@@ -26,9 +26,6 @@
 /* Specification.  */
 #include "localcharset.h"
 
-/* Specification.  */
-#include "localcharset.h"
-
 #if HAVE_STDDEF_H
 # include <stddef.h>
 #endif
