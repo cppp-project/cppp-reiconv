@@ -43,7 +43,7 @@ iconv.obj : iconv.c
 	$(CC) $(INCLUDES) $(CFLAGS) /define=($(DEFS),"INSTALLPREFIX=""$(prefix)]""","INSTALLDIR=""$(bindir)]""") iconv.c
 
 iconv.exe : iconv.obj [-.srclib]icrt.olb [-.lib]iconv.olb
-	link /executable=iconv.exe iconv.obj,$(libdir)]intl.olb/lib,[-.srclib]icrt.olb/lib,[-.lib]iconv.olb/lib,[-.vms]link_options.opt
+	link /executable=iconv.exe iconv.obj,$(libdir)]intl.olb/lib,[-.srclib]icrt.olb/lib,[-.lib]iconv.olb/lib,[-]link_options.vms
 
 install : all
 	create /directory $(prefix)]
