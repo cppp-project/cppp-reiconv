@@ -1,3 +1,8 @@
+2003-06-07  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (config.h_vms): Remove INSTALLPREFIX.
+	Reported by Jouk Jansen <joukj@hrem.stm.tudelft.nl>.
+
 2003-05-19  Bruno Haible  <bruno@clisp.org>
 
 	* windows/charset.rc: Include <winver.h>.

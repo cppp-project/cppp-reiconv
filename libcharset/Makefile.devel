@@ -35,6 +35,7 @@ config.h_vms : config.h.in
 	    -e 's/#undef HAVE_SYS_TYPES_H$$/#define HAVE_SYS_TYPES_H 1/' \
 	    -e 's/#undef HAVE_UNISTD_H$$/#define HAVE_UNISTD_H 1/' \
 	    -e 's/#undef STDC_HEADERS$$/#define STDC_HEADERS 1/' \
+	    -e '/#undef INSTALLPREFIX$$/d' \
 	  < $< > $@
 
 config.h.msvc : config.h.in

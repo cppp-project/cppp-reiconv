@@ -1,5 +1,29 @@
 2003-06-07  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.devel (config.h_vms): Don't define HAVE_ENVIRON_DECL.
+	* Makefile.vms (config.h): New rule.
+	(all, install): Depend on it.
+	(all, install, installdirs, uninstall, check): Fix typo.
+	(mostlyclean, clean, distclean, maintainer-clean): Likewise. Remove
+	config.h.
+	* lib/Makefile.vms (DEFS): Fix value of INSTALLDIR.
+	(OBJECTS): Use libiconv.obj instead of iconv.obj.
+	(libiconv.obj): Renamed from iconv.obj.
+	* srclib/Makefile.vms (INCLUDES): Add parent directory.
+	(OBJECTS): Remove strtoul.obj, setenv.obj, unsetenv.obj.
+	(strtoul.obj, setenv.obj, unsetenv.obj): Remove rules.
+	(alloca.h): New rule.
+	(canonicalize.obj): Depend on it.
+	(clean): Remove alloca.h.
+	* src/Makefile.vms (datadir, localedir): New variables.
+	(DEFS): Also define LOCALEDIR.
+	(iconv.obj): Add flags for relocatability,
+	(iconv.exe): Link with libicrt. Use link_options.
+	* vms/link_options.opt: New file.
+	Reported by Jouk Jansen <joukj@hrem.stm.tudelft.nl>.
+
+2003-06-07  Bruno Haible  <bruno@clisp.org>
+
 	Support for relocatable data files even on Woe32.
 	* lib/Makefile.msvc (PICFLAGS): Also define PIC.
 
