@@ -75,6 +75,11 @@ This library can be built and installed in two variants:
 
     To use it, simply #include <iconv.h> and use the functions.
 
+    To use it in an autoconfiguring package:
+    - If you don't use automake, append extras/iconv.m4 to your aclocal.m4
+      file.
+    - If you do use automake, add extras/iconv.m4 to your m4 macro repository.
+
   - The libc plug/override mode. This works on GNU/Linux, Solaris and OSF/1
     systems only. It is a way to get good iconv support without having
     glibc-2.1.
