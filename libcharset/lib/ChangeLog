@@ -8,6 +8,11 @@
 
 	* config.charset: Add support for Darwin 7.
 
+2004-04-28  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c (ISSLASH): Treat Cygwin like Windows, since it now
+	accepts Windows pathnames.
+
 2004-04-23  Bruno Haible  <bruno@clisp.org>
 
 	* localcharset.c (get_charset_aliases): Allow the CHARSETALIASDIR
