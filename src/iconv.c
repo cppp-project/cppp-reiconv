@@ -228,6 +228,10 @@ int main (int argc, char* argv[])
 #endif
   textdomain("libiconv");
   for (i = 1; i < argc;) {
+    if (!strcmp(argv[i],"--")) {
+      i++;
+      break;
+    }
     if (!strcmp(argv[i],"-f")) {
       if (i == argc-1) usage(1);
       if (fromcode != NULL) usage(1);
