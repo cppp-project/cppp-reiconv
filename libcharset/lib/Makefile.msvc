@@ -95,7 +95,7 @@ localcharset.obj : $(srcdir)/localcharset.c
 !if !$(DLL)
 
 charset.lib : $(OBJECTS)
-	$(RM) charset.lib
+	-$(RM) charset.lib
 	$(AR) $(AR_FLAGS)charset.lib $(OBJECTS)
 
 !else

@@ -54,7 +54,7 @@ all : config.h force
 	cd ..
 
 config.h : config.h.msvc
-	$(RM) config.h
+	-$(RM) config.h
 	$(LN) config.h.msvc config.h
 
 install : force

@@ -1,5 +1,9 @@
 2001-05-06  Bruno Haible  <haible@clisp.cons.org>
 
+	* Makefile.msvc (charset.lib): Allow the 'del' command to fail.
+
+2001-05-06  Bruno Haible  <haible@clisp.cons.org>
+
 	* Makefile.in (CPPFLAGS, LDFLAGS): New variables.
 	(libcharset.la): Use LDFLAGS.
 	(localcharset.lo): Use CPPFLAGS.

@@ -89,7 +89,7 @@ RESOURCES =
 all : iconv.lib
 
 config.h : config.h.msvc
-	$(RM) config.h
+	-$(RM) config.h
 	$(LN) config.h.msvc config.h
 
 iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h config.h
@@ -98,7 +98,7 @@ iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/encodings_local.
 !if !$(DLL)
 
 iconv.lib : $(OBJECTS)
-	$(RM) iconv.lib
+	-$(RM) iconv.lib
 	$(AR) $(AR_FLAGS)iconv.lib $(OBJECTS) $(LIBCHARSET_OBJECTS)
 
 !else

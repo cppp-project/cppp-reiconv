@@ -1,5 +1,10 @@
 2001-05-06  Bruno Haible  <haible@clisp.cons.org>
 
+        * lib/Makefile.msvc (config.h): Allow the 'del' command to fail.
+        (iconv.lib): Likewise.
+
+2001-05-06  Bruno Haible  <haible@clisp.cons.org>
+
         * lib/Makefile.in (CPPFLAGS, LDFLAGS): New variables.
         (CPP): Remove variable.
         (libiconv.la, libiconv_plug_linux.so, libiconv_plug_solaris.so,
