@@ -1,3 +1,8 @@
+2002-12-19  Bruno Haible  <bruno@clisp.org>
+
+	* lib/Makefile.in (libiconv_plug_solaris.so): Change rule if using gcc.
+	Reported by Henry Nelson <henry@irm.nara.kindai.ac.jp>.
+
 2002-11-07  Bruno Haible  <bruno@clisp.org>
 
 	Make "make install" without prior "make" work.

@@ -68,7 +68,7 @@ libiconv_plug_linux.so : $(SOURCES)
 
 libiconv_plug_solaris.so : $(SOURCES)
 	if test -n "@GCC@"; then \
-	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) -x none $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
+	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) -x none $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_solaris.so; \
 	else \
 	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) -KPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
 	fi
