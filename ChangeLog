@@ -1,3 +1,10 @@
+2004-02-02  Perry Rapp  <lifelines_3_0_18@hotmail.com>
+            Bruno Haible  <bruno@clisp.org>
+
+	* man/iconvctl.3: New file.
+	* man/iconv.3: Refer to it in "See also".
+	* man/iconv_open.3: Likewise.
+
 2004-01-24  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/progreloc.c (xstrdup): Define as strdup if no xmalloc should
