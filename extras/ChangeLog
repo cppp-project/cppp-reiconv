@@ -1,3 +1,7 @@
+2001-01-29  Bruno Haible  <haible@clisp.cons.org>
+
+        * locale_charset.c: Remove file. Obsoleted by libcharset.
+
 2000-10-22  Bruno Haible  <haible@clisp.cons.org>
 
         * locale_charset.c (get_locale_charset): Accept french and spanish
