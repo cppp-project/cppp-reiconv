@@ -5844,7 +5844,14 @@ static const Summary16 jisx0213_from_ucs_level2_2indx[] = {
   { 11197, 0x0000 }, { 11197, 0x0000 }, { 11197, 0x0000 }, { 11197, 0x0004 },
 };
 
-static inline ucs4_t jisx0213_to_ucs4 (unsigned int row, unsigned int col)
+#ifdef __GNUC__
+__inline
+#else
+#ifdef __cplusplus
+inline
+#endif
+#endif
+static ucs4_t jisx0213_to_ucs4 (unsigned int row, unsigned int col)
 {
   ucs4_t val;
 
@@ -5875,7 +5882,14 @@ static inline ucs4_t jisx0213_to_ucs4 (unsigned int row, unsigned int col)
   return val;
 }
 
-static inline unsigned short ucs4_to_jisx0213 (ucs4_t ucs)
+#ifdef __GNUC__
+__inline
+#else
+#ifdef __cplusplus
+inline
+#endif
+#endif
+static unsigned short ucs4_to_jisx0213 (ucs4_t ucs)
 {
   if (ucs < (sizeof(jisx0213_from_ucs_level1)/sizeof(jisx0213_from_ucs_level1[0])) << 6) {
     int index1 = jisx0213_from_ucs_level1[ucs >> 6];
