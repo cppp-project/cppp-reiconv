@@ -63,5 +63,5 @@ ucs4_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     } else
       return RET_TOOSMALL;
   } else
-    return RET_ILSEQ;
+    return RET_ILUNI;
 }

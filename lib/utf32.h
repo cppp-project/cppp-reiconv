@@ -87,5 +87,5 @@ utf32_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
         return RET_TOOSMALL;
     }
   }
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

@@ -218,7 +218,7 @@ gb18030uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
         else if (i >= gb18030uni_uni2charset_ranges[2*k+2])
           k1 = k + 1;
         else
-          return RET_ILSEQ;
+          return RET_ILUNI;
       }
       {
         unsigned int diff = gb18030uni_ranges[k1];
@@ -230,7 +230,7 @@ gb18030uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
         return 4;
       }
     }
-    return RET_ILSEQ;
+    return RET_ILUNI;
   }
   return RET_TOOSMALL;
 }

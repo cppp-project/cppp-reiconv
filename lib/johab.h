@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -106,7 +106,7 @@ johab_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JOHAB Hangul. */
   ret = johab_hangul_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (n < 2)
       return RET_TOOSMALL;
@@ -117,7 +117,7 @@ johab_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try KSC5601. */
   ret = ksc5601_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     unsigned char c1, c2;
     if (ret != 2) abort();
     if (n < 2)
@@ -134,5 +134,5 @@ johab_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

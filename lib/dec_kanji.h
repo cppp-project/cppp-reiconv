@@ -53,12 +53,12 @@ dec_kanji_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Code set 0 (ASCII or JIS X 0201-1976 Roman) */
   ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   /* Code set 1 (JIS X 0208) */
   ret = jisx0208_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (n < 2)
       return RET_TOOSMALL;
@@ -67,5 +67,5 @@ dec_kanji_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     return 2;
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

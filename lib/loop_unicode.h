@@ -35,21 +35,21 @@ static size_t unicode_loop_convert (iconv_t icd,
     int incount;
     int outcount;
     incount = cd->ifuncs.xxx_mbtowc(cd,&wc,inptr,inleft);
-    if (incount <= 0) {
-      if (incount == 0) {
+    if (incount < 0) {
+      if (incount == RET_ILSEQ) {
         /* Case 1: invalid input */
         errno = EILSEQ;
         result = -1;
         break;
       }
-      if (incount == -1) {
+      if (incount == RET_TOOFEW(0)) {
         /* Case 2: not enough bytes available to detect anything */
         errno = EINVAL;
         result = -1;
         break;
       }
       /* Case 3: k bytes read, but only a shift sequence */
-      incount = -1-incount;
+      incount = -2-incount;
     } else {
       /* Case 4: k bytes read, making up a wide character */
       if (outleft == 0) {
@@ -58,7 +58,7 @@ static size_t unicode_loop_convert (iconv_t icd,
         break;
       }
       outcount = cd->ofuncs.xxx_wctomb(cd,outptr,wc,outleft);
-      if (outcount != 0)
+      if (outcount != RET_ILUNI)
         goto outcount_ok;
       /* Try transliteration. */
       result++;
@@ -69,7 +69,7 @@ static size_t unicode_loop_convert (iconv_t icd,
              (contained in Unicode only). */
           ucs4_t buf[3];
           int ret = johab_hangul_decompose(cd,buf,wc);
-          if (ret != RET_ILSEQ) {
+          if (ret != RET_ILUNI) {
             /* we know 1 <= ret <= 3 */
             state_t backup_state = cd->ostate;
             unsigned char* backup_outptr = outptr;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -129,14 +129,14 @@ isoir165_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try the Unicode -> GB2312 table table. */
   ret = gb2312_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (!(r[0] == 0x28 && r[1] >= 0x21 && r[1] <= 0x40))
       return ret;
   }
   /* Row 0x2A is GB_1988-80. */
   ret = iso646_cn_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 1) abort();
     if (buf[0] >= 0x21 && buf[0] < 0x7f) {
       if (n >= 2) {

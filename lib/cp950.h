@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -154,7 +154,7 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Code set 0 (ASCII) */
   ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   /* Code set 1 (BIG5 extended) */
@@ -162,7 +162,7 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     case 0x00:
       if (wc == 0x00af) { buf[0] = 0xa1; buf[1] = 0xc2; ret = 2; break; }
       if (wc == 0x00a2 || wc == 0x00a3 || wc == 0x00a4)
-        return RET_ILSEQ;
+        return RET_ILUNI;
       break;
     case 0x02:
       if (wc == 0x02cd) { buf[0] = 0xa1; buf[1] = 0xc5; ret = 2; break; }
@@ -170,21 +170,21 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     case 0x20:
       if (wc == 0x2027) { buf[0] = 0xa1; buf[1] = 0x45; ret = 2; break; }
       if (wc == 0x2022 || wc == 0x203e)
-        return RET_ILSEQ;
+        return RET_ILUNI;
       break;
     case 0x22:
       if (wc == 0x2215) { buf[0] = 0xa2; buf[1] = 0x41; ret = 2; break; }
       if (wc == 0x2295) { buf[0] = 0xa1; buf[1] = 0xf2; ret = 2; break; }
       if (wc == 0x2299) { buf[0] = 0xa1; buf[1] = 0xf3; ret = 2; break; }
       if (wc == 0x223c)
-        return RET_ILSEQ;
+        return RET_ILUNI;
       break;
     case 0x25:
       if (wc == 0x2574) { buf[0] = 0xa1; buf[1] = 0x5a; ret = 2; break; }
       break;
     case 0x26:
       if (wc == 0x2609 || wc == 0x2641)
-        return RET_ILSEQ;
+        return RET_ILUNI;
       break;
     case 0xfe:
       if (wc == 0xfe51) { buf[0] = 0xa1; buf[1] = 0x4e; ret = 2; break; }
@@ -199,12 +199,12 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
       if (wc == 0xffe3) { buf[0] = 0xa1; buf[1] = 0xc3; ret = 2; break; }
       if (wc == 0xffe5) { buf[0] = 0xa2; buf[1] = 0x44; ret = 2; break; }
       if (wc == 0xff64)
-        return RET_ILSEQ;
+        return RET_ILUNI;
       break;
   }
-  if (ret == RET_ILSEQ)
+  if (ret == RET_ILUNI)
     ret = big5_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (!((buf[0] == 0xc6 && buf[1] >= 0xa1) || buf[0] == 0xc7)) {
       if (n < 2)
@@ -215,7 +215,7 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
   }
   ret = cp950ext_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (n < 2)
       return RET_TOOSMALL;
@@ -224,5 +224,5 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     return 2;
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

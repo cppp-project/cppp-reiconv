@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -87,7 +87,7 @@ sjis_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JIS X 0201-1976. */
   ret = jisx0201_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     unsigned char c;
     if (ret != 1) abort();
     c = buf[0];
@@ -99,7 +99,7 @@ sjis_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JIS X 0208-1990. */
   ret = jisx0208_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     unsigned char c1, c2;
     if (ret != 2) abort();
     if (n < 2)
@@ -128,5 +128,5 @@ sjis_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     return 2;
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

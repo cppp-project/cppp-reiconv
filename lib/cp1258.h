@@ -176,7 +176,7 @@ cp1258_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
           break;
         if (wc < viet_decomp_table[i].composed) {
           if (i1 == i)
-            return RET_ILSEQ;
+            return RET_ILUNI;
           /* Here i1 < i < i2. */
           i2 = i;
         } else {
@@ -189,7 +189,7 @@ cp1258_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
             if (wc == viet_decomp_table[i].composed)
               break;
             else
-              return RET_ILSEQ;
+              return RET_ILUNI;
           }
         }
       }
@@ -213,5 +213,5 @@ cp1258_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
       return 2;
     }
   }
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

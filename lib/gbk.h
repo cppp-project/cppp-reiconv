@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -122,7 +122,7 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   if (wc != 0x30fb && wc != 0x2015) {
     ret = gb2312_wctomb(conv,buf,wc,2);
-    if (ret != RET_ILSEQ) {
+    if (ret != RET_ILUNI) {
       if (ret != 2) abort();
       if (n < 2)
         return RET_TOOSMALL;
@@ -132,7 +132,7 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
   }
   ret = gbkext_inv_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (n < 2)
       return RET_TOOSMALL;
@@ -146,7 +146,7 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     return 2;
   }
   ret = cp936ext_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (n < 2)
       return RET_TOOSMALL;
@@ -169,5 +169,5 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     return 2;
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

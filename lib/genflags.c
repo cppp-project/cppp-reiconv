@@ -44,7 +44,7 @@ static void emit_encoding (struct wctomb_funcs * ofuncs, const char* c_name)
     for (i = 0; i < 6; i++) {
       unsigned char buf[10];
       memset(&conv.ostate,'\0',sizeof(state_t));
-      res[i] = (conv.ofuncs.xxx_wctomb(&conv,buf,probe[i],sizeof(buf)) != 0);
+      res[i] = (conv.ofuncs.xxx_wctomb(&conv,buf,probe[i],sizeof(buf)) != RET_ILUNI);
     }
     printf("#define ei_%s_oflags (",c_name);
     {

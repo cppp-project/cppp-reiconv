@@ -40,10 +40,15 @@ struct mbtowc_funcs {
    * converts the byte sequence starting at s to a wide character. Up to n bytes
    * are available at s. n is >= 1.
    * Result is number of bytes consumed (if a wide character was read),
-   * or 0 if invalid, or -1 if n too small, or -1-(number of bytes consumed)
+   * or -1 if invalid, or -2 if n too small, or -2-(number of bytes consumed)
    * if only a shift sequence was read.
    */
 };
+
+/* Return code if invalid. (xxx_mbtowc) */
+#define RET_ILSEQ      -1
+/* Return code if only a shift sequence of n bytes was read. (xxx_mbtowc) */
+#define RET_TOOFEW(n)  (-2-(n))
 
 /*
  * Data type for conversion unicode -> multibyte
@@ -65,10 +70,8 @@ struct wctomb_funcs {
    */
 };
 
-/* Return code if invalid. (xxx_mbtowc, xxx_wctomb) */
-#define RET_ILSEQ      0
-/* Return code if only a shift sequence of n bytes was read. (xxx_mbtowc) */
-#define RET_TOOFEW(n)  (-1-(n))
+/* Return code if invalid. (xxx_wctomb) */
+#define RET_ILUNI      0
 /* Return code if output buffer is too small. (xxx_wctomb, xxx_reset) */
 #define RET_TOOSMALL   -1
 

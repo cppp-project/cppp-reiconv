@@ -107,21 +107,21 @@ gb18030_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Code set 0 (ASCII) */
   ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   /* Code set 1 (GBK extended) */
   ret = gbk_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   ret = gb18030ext_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   /* Code set 2 (remainder of Unicode U+0000..U+FFFF) */
   ret = gb18030uni_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   /* Code set 3 (Unicode U+10000..U+10FFFF) */
@@ -134,7 +134,7 @@ gb18030_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
       r[0] = i + 0x90;
       return 4;
     }
-    return RET_ILSEQ;
+    return RET_ILUNI;
   }
   return RET_TOOSMALL;
 }

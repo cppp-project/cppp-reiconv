@@ -499,7 +499,7 @@ int main (int argc, char *argv[])
         fprintf(f, "    return 1;\n");
         fprintf(f, "  }\n");
       }
-      fprintf(f, "  return RET_ILSEQ;\n");
+      fprintf(f, "  return RET_ILUNI;\n");
       fprintf(f, "}\n");
 
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -55,13 +55,13 @@ gb12345_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
   /* The gb12345ext table overrides some entries in the gb2312 table. */
   /* Try the Unicode -> GB12345 extensions table. */
   ret = gb12345ext_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
   /* Try the Unicode -> GB2312 table, and check that the resulting GB2312
      byte sequence is not overridden by the GB12345 extensions table. */
   ret = gb2312_wctomb(conv,r,wc,n);
   if (ret == 2 && gb12345ext_mbtowc(conv,&wc,r,2) == 2)
-    return RET_ILSEQ;
+    return RET_ILUNI;
   else
     return ret;
 }

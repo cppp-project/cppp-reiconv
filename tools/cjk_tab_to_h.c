@@ -553,7 +553,7 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
   printf("      r[0] = (c >> 8); r[1] = (c & 0xff);\n");
   printf("      return 2;\n");
   printf("    }\n");
-  printf("    return RET_ILSEQ;\n");
+  printf("    return RET_ILUNI;\n");
   printf("  }\n");
   printf("  return RET_TOOSMALL;\n");
   printf("}\n");
@@ -712,7 +712,7 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
   printf("        return 2;\n");
   printf("      }\n");
   printf("    }\n");
-  printf("    return RET_ILSEQ;\n");
+  printf("    return RET_ILUNI;\n");
   printf("  }\n");
   printf("  return RET_TOOSMALL;\n");
   printf("}\n");
@@ -1504,7 +1504,7 @@ static void do_gb18030uni (const char* name)
   printf("        else if (i >= %s_uni2charset_ranges[2*k+2])\n", name);
   printf("          k1 = k + 1;\n");
   printf("        else\n");
-  printf("          return RET_ILSEQ;\n");
+  printf("          return RET_ILUNI;\n");
   printf("      }\n");
   printf("      {\n");
   printf("        unsigned int bitmap_index = i - %s_uni2charset_ranges[2*k1] + %s_ranges[k1].bitmap_offset;\n", name, name);
@@ -1519,7 +1519,7 @@ static void do_gb18030uni (const char* name)
   printf("        }\n");
   printf("      }\n");
   printf("    }\n");
-  printf("    return RET_ILSEQ;\n");
+  printf("    return RET_ILUNI;\n");
   printf("  }\n");
   printf("  return RET_TOOSMALL;\n");
   printf("}\n");

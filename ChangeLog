@@ -1,3 +1,144 @@
+2001-05-22  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/converters.h (RET_ILUNI): New macro.
+          (RET_ILSEQ): Change value to -1.
+          (RET_TOOFEW): Change value.
+        * lib/loop_unicode.h (unicode_loop_convert): Write RET_ILUNI instead
+          of 0. Update handling of xxx_mbtowc return value.
+        * lib/genflags.c (emit_encoding): Likewise.
+        * lib/ascii.h (ascii_wctomb): Use RET_ILUNI instead of RET_ILSEQ.
+        * lib/armscii_8.h (armscii_8_wctomb): Likewise.
+        * lib/big5.h (big5_wctomb): Likewise.
+        * lib/big5hkscs.h (big5hkscs_wctomb): Likewise.
+        * lib/ces_big5.h (ces_big5_wctomb): Likewise.
+        * lib/ces_gbk.h (ces_gbk_wctomb): Likewise.
+        * lib/cns11643.h (cns11643_wctomb): Likewise.
+        * lib/cns11643_inv.h (cns11643_inv_wctomb): Likewise.
+        * lib/cp437.h (cp437_wctomb): Likewise.
+        * lib/cp775.h (cp775_wctomb): Likewise.
+        * lib/cp850.h (cp850_wctomb): Likewise.
+        * lib/cp852.h (cp852_wctomb): Likewise.
+        * lib/cp855.h (cp855_wctomb): Likewise.
+        * lib/cp856.h (cp856_wctomb): Likewise.
+        * lib/cp857.h (cp857_wctomb): Likewise.
+        * lib/cp861.h (cp861_wctomb): Likewise.
+        * lib/cp862.h (cp862_wctomb): Likewise.
+        * lib/cp864.h (cp864_wctomb): Likewise.
+        * lib/cp865.h (cp865_wctomb): Likewise.
+        * lib/cp866.h (cp866_wctomb): Likewise.
+        * lib/cp869.h (cp869_wctomb): Likewise.
+        * lib/cp874.h (cp874_wctomb): Likewise.
+        * lib/cp922.h (cp922_wctomb): Likewise.
+        * lib/cp932ext.h (cp932ext_wctomb): Likewise.
+        * lib/cp932.h (cp932_wctomb): Likewise.
+        * lib/cp936ext.h (cp936ext_wctomb): Likewise.
+        * lib/cp949.h (cp949_wctomb): Likewise.
+        * lib/cp950ext.h (cp950ext_wctomb): Likewise.
+        * lib/cp950.h (cp950_wctomb): Likewise.
+        * lib/cp1046.h (cp1046_wctomb): Likewise.
+        * lib/cp1124.h (cp1124_wctomb): Likewise.
+        * lib/cp1129.h (cp1129_wctomb): Likewise.
+        * lib/cp1133.h (cp1133_wctomb): Likewise.
+        * lib/cp1250.h (cp1250_wctomb): Likewise.
+        * lib/cp1251.h (cp1251_wctomb): Likewise.
+        * lib/cp1252.h (cp1252_wctomb): Likewise.
+        * lib/cp1253.h (cp1253_wctomb): Likewise.
+        * lib/cp1254.h (cp1254_wctomb): Likewise.
+        * lib/cp1255.h (cp1255_wctomb): Likewise.
+        * lib/cp1256.h (cp1256_wctomb): Likewise.
+        * lib/cp1257.h (cp1257_wctomb): Likewise.
+        * lib/cp1258.h (cp1258_wctomb): Likewise.
+        * lib/dec_hanyu.h (dec_hanyu_wctomb): Likewise.
+        * lib/dec_kanji.h (dec_kanji_wctomb): Likewise.
+        * lib/euc_cn.h (euc_cn_wctomb): Likewise.
+        * lib/euc_jp.h (euc_jp_wctomb): Likewise.
+        * lib/euc_kr.h (euc_kr_wctomb): Likewise.
+        * lib/euc_tw.h (euc_tw_wctomb): Likewise.
+        * lib/gb12345ext.h (gb12345ext_wctomb): Likewise.
+        * lib/gb12345.h (gb12345_wctomb): Likewise.
+        * lib/gb18030ext.h (gb18030ext_wctomb): Likewise.
+        * lib/gb18030.h (gb18030_wctomb): Likewise.
+        * lib/gb18030uni.h (gb18030uni_wctomb): Likewise.
+        * lib/gb2312.h (gb2312_wctomb): Likewise.
+        * lib/gbkext_inv.h (gbkext_inv_wctomb): Likewise.
+        * lib/gbk.h (gbk_wctomb): Likewise.
+        * lib/georgian_academy.h (georgian_academy_wctomb): Likewise.
+        * lib/georgian_ps.h (georgian_ps_wctomb): Likewise.
+        * lib/hkscs.h (hkscs_wctomb): Likewise.
+        * lib/hp_roman8.h (hp_roman8_wctomb): Likewise.
+        * lib/hz.h (hz_wctomb): Likewise.
+        * lib/iso2022_cnext.h (iso2022_cn_ext_wctomb): Likewise.
+        * lib/iso2022_cn.h (iso2022_cn_wctomb): Likewise.
+        * lib/iso2022_jp1.h (iso2022_jp1_wctomb): Likewise.
+        * lib/iso2022_jp2.h (iso2022_jp2_wctomb): Likewise.
+        * lib/iso2022_jp.h (iso2022_jp_wctomb): Likewise.
+        * lib/iso2022_kr.h (iso2022_kr_wctomb): Likewise.
+        * lib/iso646_cn.h (iso646_cn_wctomb): Likewise.
+        * lib/iso646_jp.h (iso646_jp_wctomb): Likewise.
+        * lib/iso8859_1.h (iso8859_1_wctomb): Likewise.
+        * lib/iso8859_2.h (iso8859_2_wctomb): Likewise.
+        * lib/iso8859_3.h (iso8859_3_wctomb): Likewise.
+        * lib/iso8859_4.h (iso8859_4_wctomb): Likewise.
+        * lib/iso8859_5.h (iso8859_5_wctomb): Likewise.
+        * lib/iso8859_6.h (iso8859_6_wctomb): Likewise.
+        * lib/iso8859_7.h (iso8859_7_wctomb): Likewise.
+        * lib/iso8859_8.h (iso8859_8_wctomb): Likewise.
+        * lib/iso8859_9.h (iso8859_9_wctomb): Likewise.
+        * lib/iso8859_10.h (iso8859_10_wctomb): Likewise.
+        * lib/iso8859_13.h (iso8859_13_wctomb): Likewise.
+        * lib/iso8859_14.h (iso8859_14_wctomb): Likewise.
+        * lib/iso8859_15.h (iso8859_15_wctomb): Likewise.
+        * lib/iso8859_16.h (iso8859_16_wctomb): Likewise.
+        * lib/isoir165ext.h (isoir165ext_wctomb): Likewise.
+        * lib/isoir165.h (isoir165_wctomb): Likewise.
+        * lib/jisx0201.h (jisx0201_wctomb): Likewise.
+        * lib/jisx0208.h (jisx0208_wctomb): Likewise.
+        * lib/jisx0212.h (jisx0212_wctomb): Likewise.
+        * lib/johab.h (johab_wctomb): Likewise.
+        * lib/johab_hangul.h (johab_hangul_wctomb, johab_hangul_decompose):
+          Likewise.
+        * lib/koi8_r.h (koi8_r_wctomb): Likewise.
+        * lib/koi8_ru.h (koi8_ru_wctomb): Likewise.
+        * lib/koi8_u.h (koi8_u_wctomb): Likewise.
+        * lib/ksc5601.h (ksc5601_wctomb): Likewise.
+        * lib/mac_arabic.h (mac_arabic_wctomb): Likewise.
+        * lib/mac_centraleurope.h (mac_centraleurope_wctomb): Likewise.
+        * lib/mac_croatian.h (mac_croatian_wctomb): Likewise.
+        * lib/mac_cyrillic.h (mac_cyrillic_wctomb): Likewise.
+        * lib/mac_greek.h (mac_greek_wctomb): Likewise.
+        * lib/mac_hebrew.h (mac_hebrew_wctomb): Likewise.
+        * lib/mac_iceland.h (mac_iceland_wctomb): Likewise.
+        * lib/mac_roman.h (mac_roman_wctomb): Likewise.
+        * lib/mac_romania.h (mac_romania_wctomb): Likewise.
+        * lib/mac_thai.h (mac_thai_wctomb): Likewise.
+        * lib/mac_turkish.h (mac_turkish_wctomb): Likewise.
+        * lib/mac_ukraine.h (mac_ukraine_wctomb): Likewise.
+        * lib/mulelao.h (mulelao_wctomb): Likewise.
+        * lib/nextstep.h (nextstep_wctomb): Likewise.
+        * lib/sjis.h (sjis_wctomb): Likewise.
+        * lib/tcvn.h (tcvn_wctomb): Likewise.
+        * lib/tis620.h (tis620_wctomb): Likewise.
+        * lib/ucs2be.h (ucs2be_wctomb): Likewise.
+        * lib/ucs2.h (ucs2_wctomb): Likewise.
+        * lib/ucs2internal.h (ucs2internal_wctomb): Likewise.
+        * lib/ucs2le.h (ucs2le_wctomb): Likewise.
+        * lib/ucs2swapped.h (ucs2swapped_wctomb): Likewise.
+        * lib/ucs4.h (ucs4_wctomb): Likewise.
+        * lib/uhc_1.h (uhc_1_wctomb): Likewise.
+        * lib/uhc_2.h (uhc_2_wctomb): Likewise.
+        * lib/utf16be.h (utf16be_wctomb): Likewise.
+        * lib/utf16.h (utf16_wctomb): Likewise.
+        * lib/utf16le.h (utf16le_wctomb): Likewise.
+        * lib/utf32be.h (utf32be_wctomb): Likewise.
+        * lib/utf32.h (utf32_wctomb): Likewise.
+        * lib/utf32le.h (utf32le_wctomb): Likewise.
+        * lib/utf7.h (utf7_wctomb): Likewise.
+        * lib/utf8.h (utf8_wctomb): Likewise.
+        * lib/viscii.h (viscii_wctomb): Likewise.
+        * tools/8bit_tab_to_h.c (main): Likewise.
+        * tools/cjk_tab_to_h.c (output_uni2charset_dense,
+           output_uni2charset_sparse, do_gb18030uni): Likewise.
+
 2001-05-19  Bruno Haible  <haible@clisp.cons.org>
 
         * Makefile.devel (all): Add man/{iconv.1,iconv*.3}.html.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -218,7 +218,7 @@ johab_hangul_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
       r[0] = (c >> 8); r[1] = (c & 0xff);
       return 2;
     }
-    return RET_ILSEQ;
+    return RET_ILUNI;
   }
   return RET_TOOSMALL;
 }
@@ -228,13 +228,13 @@ johab_hangul_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
  */
 
 /* Decompose wc into r[0..2], and return the number of resulting Jamo elements.
-   Return RET_ILSEQ if decomposition is not possible. */
+   Return RET_ILUNI if decomposition is not possible. */
 
 static int johab_hangul_decompose (conv_t conv, ucs4_t* r, ucs4_t wc)
 {
   unsigned char buf[2];
   int ret = johab_hangul_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     unsigned int hangul = (buf[0] << 8) | buf[1];
     unsigned char jamo1 = jamo_initial[(hangul >> 10) & 31];
     unsigned char jamo2 = jamo_medial[(hangul >> 5) & 31];
@@ -253,7 +253,7 @@ static int johab_hangul_decompose (conv_t conv, ucs4_t* r, ucs4_t wc)
       return p-r;
     }
   }
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }
 
 #undef fill

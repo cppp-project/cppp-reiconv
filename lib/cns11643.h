@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -38,8 +38,8 @@ cns11643_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   if (n >= 3) {
     int ret = cns11643_inv_wctomb(conv,r+1,wc,2);
-    if (ret == RET_ILSEQ)
-      return RET_ILSEQ;
+    if (ret == RET_ILUNI)
+      return RET_ILUNI;
     if (ret != 2) abort();
     r[0] = ((r[1] & 0x80) >> 6) | ((r[2] & 0x80) >> 7);
     r[1] &= 0x7f;

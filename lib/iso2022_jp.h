@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -126,7 +126,7 @@ iso2022_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try ASCII. */
   ret = ascii_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 1) abort();
     if (buf[0] < 0x80) {
       int count = (state == STATE_ASCII ? 1 : 4);
@@ -147,7 +147,7 @@ iso2022_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JIS X 0201-1976 Roman. */
   ret = jisx0201_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 1) abort();
     if (buf[0] < 0x80) {
       int count = (state == STATE_JISX0201ROMAN ? 1 : 4);
@@ -168,7 +168,7 @@ iso2022_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JIS X 0208-1990 in place of JIS X 0208-1978 and JIS X 0208-1983. */
   ret = jisx0208_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (buf[0] < 0x80 && buf[1] < 0x80) {
       int count = (state == STATE_JISX0208 ? 2 : 5);
@@ -188,7 +188,7 @@ iso2022_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }
 
 static int

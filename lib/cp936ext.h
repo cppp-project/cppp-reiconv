@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -93,7 +93,7 @@ cp936ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
       r[0] = (c >> 8); r[1] = (c & 0xff);
       return 2;
     }
-    return RET_ILSEQ;
+    return RET_ILUNI;
   }
   return RET_TOOSMALL;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -115,12 +115,12 @@ euc_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Code set 0 (ASCII or JIS X 0201-1976 Roman) */
   ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   /* Code set 1 (JIS X 0208) */
   ret = jisx0208_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (n < 2)
       return RET_TOOSMALL;
@@ -131,7 +131,7 @@ euc_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Code set 2 (half-width katakana) */
   ret = jisx0201_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ && buf[0] >= 0x80) {
+  if (ret != RET_ILUNI && buf[0] >= 0x80) {
     if (ret != 1) abort();
     if (n < 2)
       return RET_TOOSMALL;
@@ -142,7 +142,7 @@ euc_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Code set 3 (JIS X 0212-1990) */
   ret = jisx0212_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (n < 3)
       return RET_TOOSMALL;
@@ -177,5 +177,5 @@ euc_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

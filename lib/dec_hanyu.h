@@ -72,11 +72,11 @@ dec_hanyu_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Code set 0 (ASCII) */
   ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILSEQ)
+  if (ret != RET_ILUNI)
     return ret;
 
   ret = cns11643_wctomb(conv,buf,wc,3);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 3) abort();
 
     /* Code set 1 (CNS 11643-1992 Plane 1) */
@@ -109,5 +109,5 @@ dec_hanyu_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

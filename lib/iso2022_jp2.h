@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -287,7 +287,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try ASCII. */
   ret = ascii_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 1) abort();
     if (buf[0] < 0x80) {
       int count = (state1 == STATE_ASCII ? 1 : 4);
@@ -311,7 +311,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try ISO-8859-1. */
   ret = iso8859_1_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 1) abort();
     if (buf[0] >= 0x80) {
       int count = (state2 == STATE_G2_ISO8859_1 ? 3 : 6);
@@ -335,7 +335,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try ISO-8859-7. */
   ret = iso8859_7_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 1) abort();
     if (buf[0] >= 0x80) {
       int count = (state2 == STATE_G2_ISO8859_7 ? 3 : 6);
@@ -359,7 +359,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JIS X 0201-1976 Roman and Kana. */
   ret = jisx0201_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 1) abort();
     if (buf[0] < 0x80) {
       int count = (state1 == STATE_JISX0201ROMAN ? 1 : 4);
@@ -398,7 +398,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JIS X 0208-1990 in place of JIS X 0208-1978 and JIS X 0208-1983. */
   ret = jisx0208_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (buf[0] < 0x80 && buf[1] < 0x80) {
       int count = (state1 == STATE_JISX0208 ? 2 : 5);
@@ -421,7 +421,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try JIS X 0212-1990. */
   ret = jisx0212_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (buf[0] < 0x80 && buf[1] < 0x80) {
       int count = (state1 == STATE_JISX0212 ? 2 : 6);
@@ -445,7 +445,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try GB 2312-1980. */
   ret = gb2312_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (buf[0] < 0x80 && buf[1] < 0x80) {
       int count = (state1 == STATE_GB2312 ? 2 : 5);
@@ -468,7 +468,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
   /* Try KS C 5601-1992. */
   ret = ksc5601_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILSEQ) {
+  if (ret != RET_ILUNI) {
     if (ret != 2) abort();
     if (buf[0] < 0x80 && buf[1] < 0x80) {
       int count = (state1 == STATE_KSC5601 ? 2 : 6);
@@ -490,7 +490,7 @@ iso2022_jp2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     }
   }
 
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }
 
 static int

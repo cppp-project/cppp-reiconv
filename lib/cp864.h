@@ -184,5 +184,5 @@ cp864_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     *r = c;
     return 1;
   }
-  return RET_ILSEQ;
+  return RET_ILUNI;
 }

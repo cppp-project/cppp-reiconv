@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -113,7 +113,7 @@ utf8_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n) /* n == 0 is accep
   else if (wc <= 0x7fffffff)
     count = 6;
   else
-    return RET_ILSEQ;
+    return RET_ILUNI;
   if (n < count)
     return RET_TOOSMALL;
   switch (count) { /* note: code falls through cases! */
