@@ -225,3 +225,14 @@ typedef struct {
 #include "cp1129.h"
 #endif
 
+#ifdef USE_DOS
+#include "cp437.h"
+#include "cp852.h"
+#include "cp855.h"
+#include "cp857.h"
+#include "cp861.h"
+#include "cp864.h"
+#include "cp865.h"
+#include "cp869.h"
+#endif
+

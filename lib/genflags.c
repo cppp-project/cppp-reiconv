@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -23,6 +23,7 @@
 
 /* Consider all encodings, including the system dependent ones. */
 #define USE_AIX
+#define USE_DOS
 
 struct loop_funcs {};
 #include "converters.h"
@@ -95,6 +96,7 @@ int main ()
 /* Consider all encodings, including the system dependent ones. */
 #include "encodings.def"
 #include "encodings_aix.def"
+#include "encodings_dos.def"
 #undef DEFENCODING
 
   fflush(stdout);

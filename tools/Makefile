@@ -86,6 +86,14 @@ ALL = \
  cp1046.h \
  cp1124.h \
  cp1129.h \
+ cp437.h \
+ cp852.h \
+ cp855.h \
+ cp857.h \
+ cp861.h \
+ cp864.h \
+ cp865.h \
+ cp869.h \
  cjk_variants.h
 
 all : $(ALL)
@@ -345,6 +353,31 @@ cp1124.h : $(TABLESDIR)/aix-4.3.2/IBM-1124.TXT 8bit_tab_to_h
 
 cp1129.h : $(TABLESDIR)/aix-4.3.2/IBM-1129.TXT 8bit_tab_to_h
 	(echo '#' ; cat $<) | ./8bit_tab_to_h CP1129 cp1129
+
+
+cp437.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP437.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP437 cp437 < $<
+
+cp852.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP852.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP852 cp852 < $<
+
+cp855.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP855.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP855 cp855 < $<
+
+cp857.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP857.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP857 cp857 < $<
+
+cp861.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP861.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP861 cp861 < $<
+
+cp864.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP864.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP864 cp864 < $<
+
+cp865.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP865.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP865 cp865 < $<
+
+cp869.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP869.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP869 cp869 < $<
 
 
 cjk_variants.h : $(TABLESDIR)/yasuoka/UniVariants cjk_variants

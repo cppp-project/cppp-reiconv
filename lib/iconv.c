@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -29,6 +29,9 @@
  */
 #ifdef _AIX
 #define USE_AIX
+#endif
+#ifdef __DJGPP__
+#define USE_DOS
 #endif
 
 /*
@@ -68,6 +71,9 @@ enum {
 #ifdef USE_AIX
 #include "encodings_aix.def"
 #endif
+#ifdef USE_DOS
+#include "encodings_dos.def"
+#endif
 #include "encodings_local.def"
 #undef DEFENCODING
 ei_for_broken_compilers_that_dont_like_trailing_commas
@@ -79,6 +85,9 @@ static struct encoding const all_encodings[] = {
 #include "encodings.def"
 #ifdef USE_AIX
 #include "encodings_aix.def"
+#endif
+#ifdef USE_DOS
+#include "encodings_dos.def"
 #endif
 #undef DEFENCODING
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
@@ -110,6 +119,9 @@ static struct encoding const all_encodings[] = {
 static struct alias sysdep_aliases[] = {
 #ifdef USE_AIX
 #include "aliases_aix.h"
+#endif
+#ifdef USE_DOS
+#include "aliases_dos.h"
 #endif
 };
 #ifdef __GNUC__
