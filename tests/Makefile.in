@@ -172,6 +172,9 @@ check-extra-yes: all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) CP869
 	$(srcdir)/check-stateless $(srcdir) CP1125
 #	/* Extra encodings */
+	$(srcdir)/check-stateless $(srcdir) EUC-JISX0213
+	$(srcdir)/check-stateless $(srcdir) SHIFT_JISX0213
+	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-3
 
 table-from : table-from.@OBJEXT@ ../lib/libiconv.la
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) table-from.@OBJEXT@ ../lib/libiconv.la -o $@

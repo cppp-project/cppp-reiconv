@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2002 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -58,8 +58,13 @@ int main (int argc, char* argv[])
       size_t inbytesleft = sizeof(unsigned int);
       char* outbuf = (char*)buf;
       size_t outbytesleft = sizeof(buf);
-      size_t result = iconv(cd,(ICONV_CONST char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
-      if (result == (size_t)(-1)) {
+      size_t result;
+      size_t result2 = 0;
+      iconv(cd,NULL,NULL,NULL,NULL);
+      result = iconv(cd,(ICONV_CONST char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
+      if (result != (size_t)(-1))
+        result2 = iconv(cd,NULL,NULL,&outbuf,&outbytesleft);
+      if (result == (size_t)(-1) || result2 == (size_t)(-1)) {
         if (errno != EILSEQ) {
           int saved_errno = errno;
           fprintf(stderr,"0x%02X: iconv error: ",i);

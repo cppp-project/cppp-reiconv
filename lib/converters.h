@@ -267,5 +267,8 @@ typedef struct {
 #endif
 
 #ifdef USE_EXTRA
+#include "euc_jisx0213.h"
+#include "shift_jisx0213.h"
+#include "iso2022_jp3.h"
 #endif
 

@@ -33,12 +33,16 @@
  *   ./cjk_tab_to_h BIG5 big5 > big5.h < BIG5.TXT
  *
  *   ./cjk_tab_to_h JOHAB johab > johab.h < JOHAB.TXT
+ *
+ *   ./cjk_tab_to_h JISX0213:2000 jisx0213 > jisx0213.h < JISX0213.TXT
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
+#include <assert.h>
 
 typedef struct {
   int start;
@@ -1640,6 +1644,436 @@ static void do_gb18030uni (const char* name)
   printf("}\n");
 }
 
+/* JISX0213 specifics */
+
+static void do_jisx0213 (const char* name)
+{
+  printf("#ifndef _JISX0213_H\n");
+  printf("#define _JISX0213_H\n");
+  printf("\n");
+  printf("/* JISX0213 plane 1 (= ISO-IR-228) characters are in the range\n");
+  printf("   0x{21..7E}{21..7E}.\n");
+  printf("   JISX0213 plane 2 (= ISO-IR-229) characters are in the range\n");
+  printf("   0x{21,23..25,28,2C..2F,6E..7E}{21..7E}.\n");
+  printf("   Together this makes 120 rows of 94 characters.\n");
+  printf("*/\n");
+  printf("\n");
+  {
+#define row_convert(row) \
+      ((row) >= 0x121 && (row) <= 0x17E ? row-289 : /* 0..93 */    \
+       (row) == 0x221                   ? row-451 : /* 94 */       \
+       (row) >= 0x223 && (row) <= 0x225 ? row-452 : /* 95..97 */   \
+       (row) == 0x228                   ? row-454 : /* 98 */       \
+       (row) >= 0x22C && (row) <= 0x22F ? row-457 : /* 99..102 */  \
+       (row) >= 0x26E && (row) <= 0x27E ? row-519 : /* 103..119 */ \
+       -1)
+    unsigned int table[120][94];
+    int pagemin[0x1100];
+    int pagemax[0x1100];
+    int pageidx[0x1100];
+    unsigned int pagestart[0x1100];
+    unsigned int pagestart_len = 0;
+    {
+      unsigned int rowc, colc;
+      for (rowc = 0; rowc < 120; rowc++)
+        for (colc = 0; colc < 94; colc++)
+          table[rowc][colc] = 0;
+    }
+    {
+      unsigned int page;
+      for (page = 0; page < 0x1100; page++)
+        pagemin[page] = -1;
+      for (page = 0; page < 0x1100; page++)
+        pagemax[page] = -1;
+      for (page = 0; page < 0x1100; page++)
+        pageidx[page] = -1;
+    }
+    printf("static const unsigned short jisx0213_to_ucs_combining[][2] = {\n");
+    {
+      int private_use = 0x0001;
+      for (;;) {
+        char line[30];
+        unsigned int row, col;
+        unsigned int ucs;
+        memset(line,0,sizeof(line));
+        if (scanf("%[^\n]\n",line) < 1)
+          break;
+        assert(line[0]=='0');
+        assert(line[1]=='x');
+        assert(isxdigit(line[2]));
+        assert(isxdigit(line[3]));
+        assert(isxdigit(line[4]));
+        assert(isxdigit(line[5]));
+        assert(isxdigit(line[6]));
+        assert(line[7]=='\t');
+        line[7] = '\0';
+        col = strtoul(&line[5],NULL,16);
+        line[5] = '\0';
+        row = strtoul(&line[2],NULL,16);
+        if (line[20] != '\0' && line[21] == '\0') {
+          unsigned int u1, u2;
+          assert(line[8]=='0');
+          assert(line[9]=='x');
+          assert(isxdigit(line[10]));
+          assert(isxdigit(line[11]));
+          assert(isxdigit(line[12]));
+          assert(isxdigit(line[13]));
+          assert(line[14]==' ');
+          assert(line[15]=='0');
+          assert(line[16]=='x');
+          assert(isxdigit(line[17]));
+          assert(isxdigit(line[18]));
+          assert(isxdigit(line[19]));
+          assert(isxdigit(line[20]));
+          u2 = strtoul(&line[17],NULL,16);
+          line[14] = '\0';
+          u1 = strtoul(&line[10],NULL,16);
+          printf("  { 0x%04x, 0x%04x },\n", u1, u2);
+          ucs = private_use++;
+        } else {
+          assert(line[8]=='0');
+          assert(line[9]=='x');
+          assert(isxdigit(line[10]));
+          assert(isxdigit(line[11]));
+          assert(isxdigit(line[12]));
+          assert(isxdigit(line[13]));
+          ucs = strtoul(&line[10],NULL,16);
+        }
+        assert((unsigned int) row_convert(row) < 120);
+        assert((unsigned int) (col-0x21) < 94);
+        table[row_convert(row)][col-0x21] = ucs;
+      }
+    }
+    printf("};\n");
+    printf("\n");
+    {
+      unsigned int rowc, colc;
+      for (rowc = 0; rowc < 120; rowc++) {
+        for (colc = 0; colc < 94; colc++) {
+          unsigned int value = table[rowc][colc];
+          unsigned int page = value >> 8;
+          unsigned int rest = value & 0xff;
+          if (pagemin[page] < 0 || pagemin[page] > rest) pagemin[page] = rest;
+          if (pagemax[page] < 0 || pagemax[page] < rest) pagemax[page] = rest;
+        }
+      }
+    }
+    {
+      unsigned int index = 0;
+      unsigned int i;
+      for (i = 0; i < 0x1100; ) {
+        if (pagemin[i] >= 0) {
+          if (pagemin[i+1] >= 0 && pagemin[i] >= 0x80 && pagemax[i+1] < 0x80) {
+            /* Combine two pages into a single one. */
+            assert(pagestart_len < sizeof(pagestart)/sizeof(pagestart[0]));
+            pagestart[pagestart_len++] = (i<<8)+0x80;
+            pageidx[i] = index;
+            pageidx[i+1] = index;
+            index++;
+            i += 2;
+          } else {
+            /* A single page. */
+            assert(pagestart_len < sizeof(pagestart)/sizeof(pagestart[0]));
+            pagestart[pagestart_len++] = i<<8;
+            pageidx[i] = index;
+            index++;
+            i += 1;
+          }
+        } else
+          i++;
+      }
+    }
+    printf("static const unsigned short jisx0213_to_ucs_main[120 * 94] = {\n");
+    {
+      unsigned int row;
+      for (row = 0; row < 0x300; row++) {
+        unsigned int rowc = row_convert(row);
+        if (rowc != (unsigned int) (-1)) {
+          printf("  /* 0x%X21..0x%X7E */\n",row,row);
+          {
+            unsigned int count = 0;
+            unsigned int colc;
+            for (colc = 0; colc < 94; colc++) {
+              if ((count % 8) == 0) printf(" ");
+              {
+                unsigned int value = table[rowc][colc];
+                unsigned int page = value >> 8;
+                unsigned int index = pageidx[page];
+                assert(value-pagestart[index] < 0x100);
+                printf(" 0x%04x,",(index<<8)|(value-pagestart[index]));
+              }
+              count++;
+              if ((count % 8) == 0) printf("\n");
+            }
+          }
+          printf("\n");
+        }
+      }
+    }
+    printf("};\n");
+    printf("\n");
+    printf("static const ucs4_t jisx0213_to_ucs_pagestart[] = {\n");
+    {
+      unsigned int count = 0;
+      unsigned int i;
+      for (i = 0; i < pagestart_len; i++) {
+        char buf[10];
+        if ((count % 8) == 0) printf(" ");
+        printf(" ");
+        sprintf(buf,"0x%04x",pagestart[i]);
+        if (strlen(buf) < 7) printf("%*s",7-strlen(buf),"");
+        printf("%s,",buf);
+        count++;
+        if ((count % 8) == 0) printf("\n");
+      }
+    }
+    printf("\n");
+    printf("};\n");
+#undef row_convert
+  }
+  rewind(stdin);
+  printf("\n");
+  {
+    int table[0x110000];
+    bool pages[0x4400];
+    int maxpage = -1;
+    unsigned int combining_prefixes[100];
+    unsigned int combining_prefixes_len = 0;
+    {
+      unsigned int i;
+      for (i = 0; i < 0x110000; i++)
+        table[i] = -1;
+      for (i = 0; i < 0x4400; i++)
+        pages[i] = false;
+    }
+    for (;;) {
+      char line[30];
+      unsigned int plane, row, col;
+      memset(line,0,sizeof(line));
+      if (scanf("%[^\n]\n",line) < 1)
+        break;
+      assert(line[0]=='0');
+      assert(line[1]=='x');
+      assert(isxdigit(line[2]));
+      assert(isxdigit(line[3]));
+      assert(isxdigit(line[4]));
+      assert(isxdigit(line[5]));
+      assert(isxdigit(line[6]));
+      assert(line[7]=='\t');
+      line[7] = '\0';
+      col = strtoul(&line[5],NULL,16);
+      line[5] = '\0';
+      row = strtoul(&line[3],NULL,16);
+      line[3] = '\0';
+      plane = strtoul(&line[2],NULL,16) - 1;
+      if (line[20] != '\0' && line[21] == '\0') {
+        unsigned int u1, u2;
+        assert(line[8]=='0');
+        assert(line[9]=='x');
+        assert(isxdigit(line[10]));
+        assert(isxdigit(line[11]));
+        assert(isxdigit(line[12]));
+        assert(isxdigit(line[13]));
+        assert(line[14]==' ');
+        assert(line[15]=='0');
+        assert(line[16]=='x');
+        assert(isxdigit(line[17]));
+        assert(isxdigit(line[18]));
+        assert(isxdigit(line[19]));
+        assert(isxdigit(line[20]));
+        u2 = strtoul(&line[17],NULL,16);
+        line[14] = '\0';
+        u1 = strtoul(&line[10],NULL,16);
+        assert(u2 == 0x02E5 || u2 == 0x02E9 || u2 == 0x0300 || u2 == 0x0301
+               || u2 == 0x309A);
+        assert(combining_prefixes_len < sizeof(combining_prefixes)/sizeof(combining_prefixes[0]));
+        combining_prefixes[combining_prefixes_len++] = u1;
+      } else {
+        unsigned int ucs;
+        assert(line[8]=='0');
+        assert(line[9]=='x');
+        assert(isxdigit(line[10]));
+        assert(isxdigit(line[11]));
+        assert(isxdigit(line[12]));
+        assert(isxdigit(line[13]));
+        ucs = strtoul(&line[10],NULL,16);
+        /* Add an entry. */
+        assert(plane <= 1);
+        assert(row <= 0x7f);
+        assert(col <= 0x7f);
+        table[ucs] = (plane << 15) | (row << 8) | col;
+        pages[ucs>>6] = true;
+        if (maxpage < 0 || (ucs>>6) > maxpage) maxpage = ucs>>6;
+      }
+    }
+    {
+      unsigned int i;
+      for (i = 0; i < combining_prefixes_len; i++) {
+        unsigned int u1 = combining_prefixes[i];
+        assert(table[u1] >= 0);
+        table[u1] |= 0x0080;
+      }
+    }
+    printf("static const short jisx0213_from_ucs_level1[%d] = {\n",maxpage+1);
+    {
+      unsigned int index = 0;
+      unsigned int i;
+      for (i = 0; i <= maxpage; i++) {
+        if ((i % 8) == 0) printf(" ");
+        if (pages[i]) {
+          printf(" %3u,",index);
+          index++;
+        } else {
+          printf(" %3d,",-1);
+        }
+        if (((i+1) % 8) == 0) printf("\n");
+      }
+    }
+    printf("\n");
+    printf("};\n");
+    printf("\n");
+    #if 0 /* Dense array */
+    printf("static const unsigned short jisx0213_from_ucs_level2[] = {\n");
+    {
+      unsigned int i;
+      for (i = 0; i <= maxpage; i++) {
+        if (pages[i]) {
+          printf("  /* 0x%04X */\n",i<<6);
+          {
+            unsigned int j;
+            for (j = 0; j < 0x40; ) {
+              unsigned int ucs = (i<<6)+j;
+              int value = table[ucs];
+              if (value < 0) value = 0;
+              if ((j % 8) == 0) printf(" ");
+              printf(" 0x%04x,",value);
+              j++;
+              if ((j % 8) == 0) printf("\n");
+            }
+          }
+        }
+      }
+    }
+    printf("};\n");
+    #else /* Sparse array */
+    {
+      int summary_indx[0x11000];
+      int summary_used[0x11000];
+      unsigned int i, k, indx;
+      printf("static const unsigned short jisx0213_from_ucs_level2_data[] = {\n");
+      /* Fill summary_indx[] and summary_used[]. */
+      indx = 0;
+      for (i = 0, k = 0; i <= maxpage; i++) {
+        if (pages[i]) {
+          unsigned int j1, j2;
+          unsigned int count = 0;
+          printf("  /* 0x%04X */\n",i<<6);
+          for (j1 = 0; j1 < 4; j1++) {
+            summary_indx[4*k+j1] = indx;
+            summary_used[4*k+j1] = 0;
+            for (j2 = 0; j2 < 16; j2++) {
+              unsigned int j = 16*j1+j2;
+              unsigned int ucs = (i<<6)+j;
+              int value = table[ucs];
+              if (value < 0) value = 0;
+              if (value > 0) {
+                summary_used[4*k+j1] |= (1 << j2);
+                if ((count % 8) == 0) printf(" ");
+                printf(" 0x%04x,",value);
+                count++;
+                if ((count % 8) == 0) printf("\n");
+                indx++;
+              }
+            }
+          }
+          if ((count % 8) > 0)
+            printf("\n");
+          k++;
+        }
+      }
+      printf("};\n");
+      printf("\n");
+      printf("static const Summary16 jisx0213_from_ucs_level2_2indx[] = {\n");
+      for (i = 0, k = 0; i <= maxpage; i++) {
+        if (pages[i]) {
+          unsigned int j1;
+          printf("  /* 0x%04X */\n",i<<6);
+          printf(" ");
+          for (j1 = 0; j1 < 4; j1++) {
+            printf(" { %4d, 0x%04x },", summary_indx[4*k+j1], summary_used[4*k+j1]);
+          }
+          printf("\n");
+          k++;
+        }
+      }
+      printf("};\n");
+    }
+    #endif
+    printf("\n");
+  }
+  printf("static inline ucs4_t jisx0213_to_ucs4 (unsigned int row, unsigned int col)\n");
+  printf("{\n");
+  printf("  ucs4_t val;\n");
+  printf("\n");
+  printf("  if (row >= 0x121 && row <= 0x17e)\n");
+  printf("    row -= 289;\n");
+  printf("  else if (row == 0x221)\n");
+  printf("    row -= 451;\n");
+  printf("  else if (row >= 0x223 && row <= 0x225)\n");
+  printf("    row -= 452;\n");
+  printf("  else if (row == 0x228)\n");
+  printf("    row -= 454;\n");
+  printf("  else if (row >= 0x22c && row <= 0x22f)\n");
+  printf("    row -= 457;\n");
+  printf("  else if (row >= 0x26e && row <= 0x27e)\n");
+  printf("    row -= 519;\n");
+  printf("  else\n");
+  printf("    return 0x0000;\n");
+  printf("\n");
+  printf("  if (col >= 0x21 && col <= 0x7e)\n");
+  printf("    col -= 0x21;\n");
+  printf("  else\n");
+  printf("    return 0x0000;\n");
+  printf("\n");
+  printf("  val = jisx0213_to_ucs_main[row * 94 + col];\n");
+  printf("  val = jisx0213_to_ucs_pagestart[val >> 8] + (val & 0xff);\n");
+  printf("  if (val == 0xfffd)\n");
+  printf("    val = 0x0000;\n");
+  printf("  return val;\n");
+  printf("}\n");
+  printf("\n");
+  printf("static inline unsigned short ucs4_to_jisx0213 (ucs4_t ucs)\n");
+  printf("{\n");
+  printf("  if (ucs < (sizeof(jisx0213_from_ucs_level1)/sizeof(jisx0213_from_ucs_level1[0])) << 6) {\n");
+  printf("    int index1 = jisx0213_from_ucs_level1[ucs >> 6];\n");
+  printf("    if (index1 >= 0)");
+  #if 0 /* Dense array */
+  printf("\n");
+  printf("      return jisx0213_from_ucs_level2[(index1 << 6) + (ucs & 0x3f)];\n");
+  #else /* Sparse array */
+  printf(" {\n");
+  printf("      const Summary16 *summary = &jisx0213_from_ucs_level2_2indx[((index1 << 6) + (ucs & 0x3f)) >> 4];\n");
+  printf("      unsigned short used = summary->used;\n");
+  printf("      unsigned int i = ucs & 0x0f;\n");
+  printf("      if (used & ((unsigned short) 1 << i)) {\n");
+  printf("        /* Keep in `used' only the bits 0..i-1. */\n");
+  printf("        used &= ((unsigned short) 1 << i) - 1;\n");
+  printf("        /* Add `summary->indx' and the number of bits set in `used'. */\n");
+  printf("        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);\n");
+  printf("        used = (used & 0x3333) + ((used & 0xcccc) >> 2);\n");
+  printf("        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);\n");
+  printf("        used = (used & 0x00ff) + (used >> 8);\n");
+  printf("        return jisx0213_from_ucs_level2_data[summary->indx + used];\n");
+  printf("      };\n");
+  printf("    };\n");
+  #endif
+  printf("  }\n");
+  printf("  return 0x0000;\n");
+  printf("}\n");
+  printf("\n");
+  printf("#endif /* _JISX0213_H */\n");
+}
+
 /* Main program */
 
 int main (int argc, char *argv[])
@@ -1690,6 +2124,8 @@ int main (int argc, char *argv[])
     do_sjis(name);
   else if (!strcmp(name,"gb18030uni"))
     do_gb18030uni(name);
+  else if (!strcmp(name,"jisx0213"))
+    do_jisx0213(name);
   else
     exit(1);
 
