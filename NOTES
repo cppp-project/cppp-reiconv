@@ -140,9 +140,11 @@ A: libiconv, as an internationalization library, supports those character
        ISO-8859-x -> UTF-8 is trivial).
      * ISO-8859-{1,2,3,4,5,6,7,8,9,10}
        We implement this because they are widely used. Except ISO-8859-4
-       which appears to have been superseded by ISO-8859-10 in the baltic
+       which appears to have been superseded by ISO-8859-13 in the baltic
        countries. But it's an ISO standard anyway.
-     * ISO-8859-{13,14}
+     * ISO-8859-13
+       We implement this because it's a standard in Lithuania and Latvia.
+     * ISO-8859-14
        We implement this because it's an ISO standard.
      * ISO-8859-15
        We implement this because it's increasingly used in Europe, because
