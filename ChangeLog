@@ -1,5 +1,18 @@
 2002-01-13  Bruno Haible  <bruno@clisp.org>
 
+	New options -l, -c, -s.
+	* src/iconv.c (discard_unconvertible, silent): New variables.
+	(usage): Document options -l, -c, -s.
+	(print_one): New function.
+	(convert): If silent is true, don't print error messages about the
+	conversion to stderr. If discard_unconvertible is true, set the
+	iconv descriptor to DISCARD_ILSEQ the first time, but make sure to
+	return the same return code as when discard_unconvertible is false.
+	(main): Accept options -l, -c, -s. Implement option -l.
+	* man/iconv.1: Document options -l, -c, -s.
+
+2002-01-13  Bruno Haible  <bruno@clisp.org>
+
 	Support for "iconv -c".
 	* include/iconv.h.in (ICONV_GET_DISCARD_ILSEQ): New macro.
 	(ICONV_SET_DISCARD_ILSEQ): Likewise.

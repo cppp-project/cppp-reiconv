@@ -1,5 +1,7 @@
-New in 1.7:
+New in 1.8:
+* The iconv program has new options -l, -c, -s.
 
+New in 1.7:
 * Added UTF-32, UTF-32BE, UTF-32LE converters.
 * Changed CP1255, CP1258 and TCVN converters to handle combining characters.
 * Changed EUC-JP, SHIFT-JIS, CP932, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
