@@ -5,6 +5,9 @@
           functions.
           (do_gb18030uni): New function.
           (main): Accept gb18030ext, gb18030uni, hkscs.
+        * tools/Makefile (ALL): Add gb18030ext.h, gb18030uni.h, hkscs.h.
+          (gb18030ext.h, GB18030ext.TXT, gb18030uni.h, GB18030uni.TXT,
+           hkscs.h): New targets.
         * src/gb18030ext.h, src/gb18030uni.h, src/gb18030.h: New files.
         * src/hkscs.h, src/big5hkscs.h: New files.
         * src/converters.h: Include gb18030.h and big5hkscs.h.

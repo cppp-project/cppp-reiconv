@@ -67,12 +67,15 @@ ALL = \
  gbkext2.h \
  gbkext_inv.h \
  cp936ext.h \
+ gb18030ext.h \
+ gb18030uni.h \
  cns11643_1.h \
  cns11643_2.h \
  cns11643_3.h \
  cns11643_inv.h \
  big5.h \
  cp950ext.h \
+ hkscs.h \
  ksc5601.h \
  uhc_1.h \
  uhc_2.h \
@@ -278,6 +281,18 @@ cp936ext.h : GBKext.TXT cjk_tab_to_h
 GBKext.TXT : $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT
 	sed -e 's,^0x2,0xA,' -e 's,^0x3,0xB,' -e 's,^0x4,0xC,' -e 's,^0x5,0xD,' -e 's,^0x6,0xE,' -e 's,^0x7,0xF,' -e 's,^0x\(..\)2,0x\1A,' -e 's,^0x\(..\)3,0x\1B,' -e 's,^0x\(..\)4,0x\1C,' -e 's,^0x\(..\)5,0x\1D,' -e 's,^0x\(..\)6,0x\1E,' -e 's,^0x\(..\)7,0x\1F,' $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT > tmpEUCCN.TXT ; sed -e '/^0x..[ 	]*#UNDEFINED/d' -e 's/#.*$$//' -e '/^[ 	]*$$/d' tmpEUCCN.TXT > tmp1.TXT ; sed -e '/^0x..[ 	]/d' -e 's/#.*$$//' -e '/^[ 	]*$$/d' $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT > tmp2.TXT ; diff -c1 tmp1.TXT tmp2.TXT | grep '^+ ' | sed -e 's,^+ ,,' > $@ && rm -f tmpEUCCN.TXT tmp1.TXT tmp2.TXT
 
+gb18030ext.h : GB18030ext.TXT cjk_tab_to_h
+	(echo '#' ; cat GB18030ext.TXT) | ./cjk_tab_to_h 'GB18030 two-byte extension' gb18030ext > $@
+
+GB18030ext.TXT : $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT
+	cat $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT | sed -e 's/[ 	]*#.*$$//' | grep '^0x[0-9A-F]*	0x....$$' > tmpGBK.TXT ; diff tmpGBK.TXT $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT | grep '^> 0x....	0x....$$' | sed -e 's/^> //' > $@ && rm -f tmpGBK.TXT
+
+gb18030uni.h : GB18030uni.TXT cjk_tab_to_h
+	./cjk_tab_to_h 'GB18030 four-byte extension' gb18030uni < GB18030uni.TXT > $@
+
+GB18030uni.TXT : $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT
+	grep '^0x........	0x....$$' < $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT > $@
+
 cns11643_1.h : $(TABLESDIR)/csets-new/CNS11643.TXT cjk_tab_to_h
 	grep '^\(#\|0x1\)' < $< | sed -e 's,^0x1,0x,' | ./cjk_tab_to_h 'CNS 11643-1986 plane 1' cns11643_1 > $@
 
@@ -295,6 +310,9 @@ big5.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/OTHER/BIG5.TXT cjk_tab_to_h
 
 cp950ext.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP950.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0xF9\(D[6-9A-F]\|[EF][0-9A-F]\)' < $< ) | ./cjk_tab_to_h 'CP950 extensions' cp950ext > $@
+
+hkscs.h : $(TABLESDIR)/big5hkscs/HKSCS.TXT cjk_tab_to_h
+	(echo '#' ; cat $<) | ./cjk_tab_to_h HKSCS hkscs > $@
 
 ksc5601.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_to_h
 	./cjk_tab_to_h KSC5601.1987-0 ksc5601 < $< > $@
