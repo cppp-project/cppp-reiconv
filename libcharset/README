@@ -27,7 +27,7 @@ This library fixes these flaws and provides a function
 It determines the current locale's character encoding, and canonicalizes it
 into one of the canonical names listed in config.charset. The result must
 not be freed; it is statically allocated. If the canonical name cannot be
-determined, the result is a non-canonical name or NULL.
+determined, the result is a non-canonical name.
 
 
 Installation:
@@ -40,7 +40,7 @@ As usual for GNU packages:
 
 
 This library is used in
-  GNU sh-utils
+  GNU sh-utils, fileutils, textutils
   GNU gettext
   GNU clisp
 
