@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-04-28 04:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/iconv.c:74
+msgid "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+msgstr ""
+
+#: src/iconv.c:76
+msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+msgstr ""
+
+#: src/iconv.c:79
+msgid "or:    iconv -l"
+msgstr ""
+
+#: src/iconv.c:89
+msgid ""
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+
+#: src/iconv.c:92
+#, c-format
+msgid "Written by %s.\n"
+msgstr ""
+
+#: src/iconv.c:129 src/iconv.c:161 src/iconv.c:211
+#, c-format
+msgid "iconv: %s: incomplete character or shift sequence\n"
+msgstr ""
+
+#: src/iconv.c:155 src/iconv.c:206
+#, c-format
+msgid "iconv: %s: cannot convert\n"
+msgstr ""
+
+#: src/iconv.c:177 src/iconv.c:216 src/iconv.c:331
+#, c-format
+msgid "iconv: %s: "
+msgstr ""
+
+#: src/iconv.c:225
+#, c-format
+msgid "iconv: %s: I/O error\n"
+msgstr ""
+
+#: src/iconv.c:315
+#, c-format
+msgid "iconv: conversion from %s unsupported\n"
+msgstr ""
+
+#: src/iconv.c:317
+#, c-format
+msgid "iconv: conversion to %s unsupported\n"
+msgstr ""
+
+#: src/iconv.c:319
+#, c-format
+msgid "iconv: conversion from %s to %s unsupported\n"
+msgstr ""
+
+#: src/iconv.c:323
+msgid "(stdin)"
+msgstr ""
+
+#: src/iconv.c:344
+msgid "iconv: I/O error\n"
+msgstr ""
