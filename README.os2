@@ -6,10 +6,7 @@ Installation on OS/2:
 - Requires emx+gcc, recommend emx-0.9d with fix03 or newer.
 
   Also requires a few GNU utilities to be installed: GNU fileutils (cp, mv,
-  rm, ...), GNU textutils (cat, cmp, uniq, ...), GNU sed.
-
-  Also requires x11make.exe, make.cmd, indir.cmd, found in XFree86/2
-  distribution.
+  rm, ...), GNU textutils (cat, cmp, uniq, ...), GNU sed, GNU make.
 
 - Cannot build in a separate directory.
 
