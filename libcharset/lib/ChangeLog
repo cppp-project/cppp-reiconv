@@ -1,3 +1,9 @@
+2001-08-05  Bruno Haible  <haible@clisp.cons.org>
+
+	Make it possible to build libcharset with CC=gcc CFLAGS="-x c++".
+	* localcharset.c (locale_charset): Declare as extern "C".
+	(get_charset_aliases): Cast malloc and realloc results to 'char *'.
+
 2001-06-27  Bruno Haible  <haible@clisp.cons.org>
 
 	* Makefile.in (clean): Remove also *.o.lock, left there by libtool

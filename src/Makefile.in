@@ -39,8 +39,11 @@ top_builddir = ..
 
 all : iconv
 
-iconv : $(srcdir)/iconv.c ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) $(srcdir)/iconv.c ../lib/libiconv.la -o $@
+iconv : iconv.@OBJEXT@ ../lib/libiconv.la
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ ../lib/libiconv.la -o $@
+
+iconv.@OBJEXT@ : $(srcdir)/iconv.c
+	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) $(srcdir)/iconv.c
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
 ../lib/libiconv.la :
@@ -65,7 +68,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo iconv core
+	$(RM) *.@OBJEXT@ *.lo iconv core
 	$(RM) -r .libs _libs
 
 distclean : clean

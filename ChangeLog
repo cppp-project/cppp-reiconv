@@ -1,3 +1,21 @@
+2001-08-05  Bruno Haible  <haible@clisp.cons.org>
+
+	Make it possible to build libiconv with CC=gcc CFLAGS="-x c++".
+	* lib/loop_wchar.h (wchar_to_loop_convert): Rename local variable
+	'try' to 'incount'.
+	* lib/Makefile.in (libiconv_plug_linux.so): Add "-x none" option
+	between sources and libs.
+	(libiconv_plug_solaris.so) [GCC]: Likewise.
+	(libiconv_plug_osf.so) [GCC]: Likewise.
+	* src/Makefile.in (iconv.@OBJEXT@): New rule.
+	(iconv): Depend on it.
+	(clean): Erase *.@OBJEXT@, not *.o.
+	* tests/Makefile.in (table-from.@OBJEXT@): New rule.
+	(table-from): Depend on it.
+	(table-to.@OBJEXT@): New rule.
+	(table-to): Depend on it.
+	(clean): Erase *.@OBJEXT@, not *.o.
+
 2001-07-28  Bruno Haible  <haible@clisp.cons.org>
 
 	* tools/Makefile (iso8859_16.h): Generate from the unicode.org table.

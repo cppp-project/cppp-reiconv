@@ -63,6 +63,11 @@
 # define ISSLASH(C) ((C) == DIRECTORY_SEPARATOR)
 #endif
 
+#ifdef __cplusplus
+/* When compiling with "gcc -x c++", produce a function with C linkage.  */
+extern "C" const char * locale_charset (void);
+#endif
+
 /* The following static variable is declared 'volatile' to avoid a
    possible multithread problem in the function get_charset_aliases. If we
    are running in a threaded environment, and if two threads initialize
@@ -145,12 +150,12 @@ get_charset_aliases ()
 	      if (res_size == 0)
 		{
 		  res_size = l1 + 1 + l2 + 1;
-		  res_ptr = malloc (res_size + 1);
+		  res_ptr = (char *) malloc (res_size + 1);
 		}
 	      else
 		{
 		  res_size += l1 + 1 + l2 + 1;
-		  res_ptr = realloc (res_ptr, res_size + 1);
+		  res_ptr = (char *) realloc (res_ptr, res_size + 1);
 		}
 	      if (res_ptr == NULL)
 		{

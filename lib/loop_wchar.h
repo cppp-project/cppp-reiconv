@@ -181,11 +181,11 @@ static size_t wchar_to_loop_convert (iconv_t icd,
   struct wchar_conv_struct * wcd = (struct wchar_conv_struct *) icd;
   size_t result = 0;
   while (*inbytesleft > 0) {
-    size_t try;
-    for (try = 1; try <= *inbytesleft; try++) {
+    size_t incount;
+    for (incount = 1; incount <= *inbytesleft; incount++) {
       char buf[BUF_SIZE];
       const char* inptr = *inbuf;
-      size_t inleft = try;
+      size_t inleft = incount;
       char* bufptr = buf;
       size_t bufleft = BUF_SIZE;
       size_t res = unicode_loop_convert(&wcd->parent,
@@ -219,8 +219,8 @@ static size_t wchar_to_loop_convert (iconv_t icd,
           *(wchar_t*) *outbuf = wc;
           *outbuf += sizeof(wchar_t);
           *outbytesleft -= sizeof(wchar_t);
-          *inbuf += try;
-          *inbytesleft -= try;
+          *inbuf += incount;
+          *inbytesleft -= incount;
           result += res;
           break;
         }
