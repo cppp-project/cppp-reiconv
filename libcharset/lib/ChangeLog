@@ -1,3 +1,8 @@
+2003-01-12  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.h: New file.
+	* localcharset.c: Include it.
+
 2003-01-01  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.in (mkinstalldirs): Renamed from MKINSTALLDIRS.
