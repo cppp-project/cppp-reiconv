@@ -1,13 +1,17 @@
 2003-05-18  Bruno Haible  <bruno@clisp.org>
 
+	* Version 1.9 released.
+
+2003-05-18  Bruno Haible  <bruno@clisp.org>
+
+	* lib/Makefile.in (libiconv_plug_osf.so): Avoid using LIBTOOL_LINK.
+
+2003-05-18  Bruno Haible  <bruno@clisp.org>
+
 	* lib/Makefile.msvc (DEBUGFLAGS): New variable.
 	(iconv.lib): Use it.
 	* src/Makefile.msvc (DEBUGFLAGS): New variable.
 	* tests/Makefile.msvc (DEBUGFLAGS): New variable.
-
-2003-05-17  Bruno Haible  <bruno@clisp.org>
-
-	* Version 1.9 released.
 
 2003-05-17  Bruno Haible  <bruno@clisp.org>
 
