@@ -115,6 +115,8 @@
 #define ei_cp1046_oflags (0)
 #define ei_cp1124_oflags (0)
 #define ei_cp1129_oflags (0)
+#define ei_dec_kanji_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
+#define ei_dec_hanyu_oflags (HAVE_QUOTATION_MARKS)
 #define ei_cp437_oflags (0)
 #define ei_cp775_oflags (0)
 #define ei_cp852_oflags (HAVE_ACCENTS)
