@@ -1,3 +1,11 @@
+2000-12-18  Bruno Haible  <haible@clisp.cons.org>
+
+        * autoconf/mbstate_t.m4: New file, from textutils-2.0.10.
+        * Makefile.devel (OTHERMACROS): Add it.
+        * configure.in: Call AC_MBSTATE_T.
+        * lib/config.h.in (mbstate_t): New definition.
+        * lib/loop_wchar.h (mbrtowc): For BeOS, declare and define fallback.
+
 2000-12-12  Bruno Haible  <haible@clisp.cons.org>
 
         * Makefile.in: Use $(MAKE) instead of $(MAKE) -r. Needed with Solaris

@@ -20,6 +20,9 @@
 /* Define if you have <locale.h>. */
 #undef HAVE_LOCALE_H
 
+/* Define to a type if <wchar.h> does not define. */
+#undef mbstate_t
+
 /* Define if you have <iconv.h>, the iconv_t type, and the
    iconv_open, iconv, iconv_close functions. */
 #undef HAVE_ICONV

@@ -1,3 +1,7 @@
+2000-12-18  Bruno Haible  <haible@clisp.cons.org>
+
+	* config.charset: Add support for BeOS.
+
 2000-12-12  Bruno Haible  <haible@clisp.cons.org>
 
 	* Makefile.in (ref-add.sed, ref-del.sed): Don't use $<, not understood

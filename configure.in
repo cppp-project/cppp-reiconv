@@ -53,6 +53,10 @@ dnl           checks for header files
 
 AC_CHECK_HEADERS(locale.h)
 
+dnl           checks for typedefs
+
+AC_MBSTATE_T
+
 dnl           checks for functions and declarations
 
 CL_ICONV
