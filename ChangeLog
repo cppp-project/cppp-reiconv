@@ -1,3 +1,10 @@
+2003-04-12  Bruno Haible  <bruno@clisp.org>
+
+	* lib/loop_unicode.h (unicode_transliterate): When the Hangul or
+	variants transliteration failed with RET_ILUNI, don't return
+	RET_TOOSMALL.
+	Reported by the FreeBSD porters.
+
 2003-04-06  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/binary-io.h: New file, from GNU gettext.

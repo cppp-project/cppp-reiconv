@@ -52,7 +52,7 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
       cd->ostate = backup_state;
       outptr = backup_outptr;
       outleft = backup_outleft;
-      if (sub_outcount < 0)
+      if (sub_outcount != RET_ILUNI)
         return RET_TOOSMALL;
     }
   }
@@ -96,7 +96,7 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
           cd->ostate = backup_state;
           outptr = backup_outptr;
           outleft = backup_outleft;
-          if (sub_outcount < 0)
+          if (sub_outcount != RET_ILUNI)
             return RET_TOOSMALL;
         }
         if (last)
