@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,6 +21,126 @@
 /*
  * CP1255
  */
+
+/* Combining characters used in Hebrew encoding CP1255. */
+
+#ifdef notusedyet
+
+/* Relevant combining characters. */
+static const unsigned short cp1255_comb_table_uni[] = {
+  0x05b4, 0x05b7, 0x05b8, 0x05b9, 0x05bc, 0x05bf, 0x05c1, 0x05c2,
+};
+
+/* Composition tables for each of the relevant combining characters. */
+static const unsigned short cp1255_comp_table_data[][2] = {
+#define cp1255_comp_table05b4_idx 0
+#define cp1255_comp_table05b4_len 1
+  { 0x05D9, 0xFB1D },
+#define cp1255_comp_table05b7_idx (cp1255_comp_table05b4_idx+cp1255_comp_table05b4_len)
+#define cp1255_comp_table05b7_len 2
+  { 0x05D0, 0xFB2E },
+  { 0x05F2, 0xFB1F },
+#define cp1255_comp_table05b8_idx (cp1255_comp_table05b7_idx+cp1255_comp_table05b7_len)
+#define cp1255_comp_table05b8_len 1
+  { 0x05D0, 0xFB2F },
+#define cp1255_comp_table05b9_idx (cp1255_comp_table05b8_idx+cp1255_comp_table05b8_len)
+#define cp1255_comp_table05b9_len 1
+  { 0x05D5, 0xFB4B },
+#define cp1255_comp_table05bc_idx (cp1255_comp_table05b9_idx+cp1255_comp_table05b9_len)
+#define cp1255_comp_table05bc_len 24
+  { 0x05D0, 0xFB30 },
+  { 0x05D1, 0xFB31 },
+  { 0x05D2, 0xFB32 },
+  { 0x05D3, 0xFB33 },
+  { 0x05D4, 0xFB34 },
+  { 0x05D5, 0xFB35 },
+  { 0x05D6, 0xFB36 },
+  { 0x05D8, 0xFB38 },
+  { 0x05D9, 0xFB39 },
+  { 0x05DA, 0xFB3A },
+  { 0x05DB, 0xFB3B },
+  { 0x05DC, 0xFB3C },
+  { 0x05DE, 0xFB3E },
+  { 0x05E0, 0xFB40 },
+  { 0x05E1, 0xFB41 },
+  { 0x05E3, 0xFB43 },
+  { 0x05E4, 0xFB44 },
+  { 0x05E6, 0xFB46 },
+  { 0x05E7, 0xFB47 },
+  { 0x05E8, 0xFB48 },
+  { 0x05E9, 0xFB49 },
+  { 0x05EA, 0xFB4A },
+  { 0xFB2A, 0xFB2C },
+  { 0xFB2B, 0xFB2D },
+#define cp1255_comp_table05bf_idx (cp1255_comp_table05bc_idx+cp1255_comp_table05bc_len)
+#define cp1255_comp_table05bf_len 3
+  { 0x05D1, 0xFB4C },
+  { 0x05DB, 0xFB4D },
+  { 0x05E4, 0xFB4E },
+#define cp1255_comp_table05c1_idx (cp1255_comp_table05bf_idx+cp1255_comp_table05bf_len)
+#define cp1255_comp_table05c1_len 2
+  { 0x05E9, 0xFB2A },
+  { 0xFB49, 0xFB2C },
+#define cp1255_comp_table05c2_idx (cp1255_comp_table05c1_idx+cp1255_comp_table05c1_len)
+#define cp1255_comp_table05c2_len 2
+  { 0x05E9, 0xFB2B },
+  { 0xFB49, 0xFB2D },
+};
+static const struct { unsigned int len; unsigned int offset; } cp1255_comp_table[] = {
+  { cp1255_comp_table05b4_len, cp1255_comp_table05b4_idx },
+  { cp1255_comp_table05b7_len, cp1255_comp_table05b7_idx },
+  { cp1255_comp_table05b8_len, cp1255_comp_table05b8_idx },
+  { cp1255_comp_table05b9_len, cp1255_comp_table05b9_idx },
+  { cp1255_comp_table05bc_len, cp1255_comp_table05bc_idx },
+  { cp1255_comp_table05bf_len, cp1255_comp_table05bf_idx },
+  { cp1255_comp_table05c1_len, cp1255_comp_table05c1_idx },
+  { cp1255_comp_table05c2_len, cp1255_comp_table05c2_idx },
+};
+
+#endif
+
+/* Decomposition table for the relevant Unicode characters. */
+struct cp1255_decomp { unsigned short composed; unsigned short base; int comb1 : 8; int comb2 : 8; };
+static const struct cp1255_decomp cp1255_decomp_table[] = {
+  { 0xFB1D, 0x05D9, 0, -1 },
+  { 0xFB1F, 0x05F2, 1, -1 },
+  { 0xFB2A, 0x05E9, 6, -1 },
+  { 0xFB2B, 0x05E9, 7, -1 },
+  { 0xFB2C, 0x05E9, 4, 6 },
+  { 0xFB2D, 0x05E9, 4, 7 },
+  { 0xFB2E, 0x05D0, 1, -1 },
+  { 0xFB2F, 0x05D0, 2, -1 },
+  { 0xFB30, 0x05D0, 4, -1 },
+  { 0xFB31, 0x05D1, 4, -1 },
+  { 0xFB32, 0x05D2, 4, -1 },
+  { 0xFB33, 0x05D3, 4, -1 },
+  { 0xFB34, 0x05D4, 4, -1 },
+  { 0xFB35, 0x05D5, 4, -1 },
+  { 0xFB36, 0x05D6, 4, -1 },
+  { 0xFB38, 0x05D8, 4, -1 },
+  { 0xFB39, 0x05D9, 4, -1 },
+  { 0xFB3A, 0x05DA, 4, -1 },
+  { 0xFB3B, 0x05DB, 4, -1 },
+  { 0xFB3C, 0x05DC, 4, -1 },
+  { 0xFB3E, 0x05DE, 4, -1 },
+  { 0xFB40, 0x05E0, 4, -1 },
+  { 0xFB41, 0x05E1, 4, -1 },
+  { 0xFB43, 0x05E3, 4, -1 },
+  { 0xFB44, 0x05E4, 4, -1 },
+  { 0xFB46, 0x05E6, 4, -1 },
+  { 0xFB47, 0x05E7, 4, -1 },
+  { 0xFB48, 0x05E8, 4, -1 },
+  { 0xFB49, 0x05E9, 4, -1 },
+  { 0xFB4A, 0x05EA, 4, -1 },
+  { 0xFB4B, 0x05D5, 3, -1 },
+  { 0xFB4C, 0x05D1, 5, -1 },
+  { 0xFB4D, 0x05DB, 5, -1 },
+  { 0xFB4E, 0x05E4, 5, -1 },
+};
+
+static const unsigned char cp1255_comb_table[] = {
+  0xc4, 0xc7, 0xc8, 0xc9, 0xcc, 0xcf, 0xd1, 0xd2,
+};
 
 static const unsigned short cp1255_2uni[128] = {
   /* 0x80 */
@@ -48,6 +168,11 @@ static const unsigned short cp1255_2uni[128] = {
   0x05e0, 0x05e1, 0x05e2, 0x05e3, 0x05e4, 0x05e5, 0x05e6, 0x05e7,
   0x05e8, 0x05e9, 0x05ea, 0xfffd, 0xfffd, 0x200e, 0x200f, 0xfffd,
 };
+
+/* CP1255 as a stateless encoding. Suitable for locales, but it has
+   the drawback that it can produce Unicode strings which are not
+   in Normalization Form C and therefore not suitable for interchange.
+   FIXME: It should produce Normalization Form C instead. */
 
 static int
 cp1255_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
@@ -134,6 +259,59 @@ cp1255_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
   if (c != 0) {
     *r = c;
     return 1;
+  }
+  /* Try canonical decomposition. */
+  {
+    /* Binary search through cp1255_decomp_table. */
+    unsigned int i1 = 0;
+    unsigned int i2 = sizeof(cp1255_decomp_table)/sizeof(cp1255_decomp_table[0])-1;
+    if (wc >= cp1255_decomp_table[i1].composed
+        && wc <= cp1255_decomp_table[i2].composed) {
+      unsigned int i;
+      for (;;) {
+        /* Here i2 - i1 > 0. */
+        i = (i1+i2)>>1;
+        if (wc == cp1255_decomp_table[i].composed)
+          break;
+        if (wc < cp1255_decomp_table[i].composed) {
+          if (i1 == i)
+            return RET_ILSEQ;
+          /* Here i1 < i < i2. */
+          i2 = i;
+        } else {
+          /* Here i1 <= i < i2. */
+          if (i1 != i)
+            i1 = i;
+          else {
+            /* Here i2 - i1 = 1. */
+            i = i2;
+            if (wc == cp1255_decomp_table[i].composed)
+              break;
+            else
+              return RET_ILSEQ;
+          }
+        }
+      }
+      /* Found a canonical decomposition. */
+      wc = cp1255_decomp_table[i].base;
+      /* wc is one of 0x05d0..0x05d6, 0x05d8..0x05dc, 0x05de, 0x05e0..0x05e1,
+         0x05e3..0x05e4, 0x05e6..0x05ea, 0x05f2. */
+      c = cp1255_page05[wc-0x05b0];
+      if (cp1255_decomp_table[i].comb2 < 0) {
+        if (n < 2)
+          return RET_TOOSMALL;
+        r[0] = c;
+        r[1] = cp1255_comb_table[cp1255_decomp_table[i].comb1];
+        return 2;
+      } else {
+        if (n < 3)
+          return RET_TOOSMALL;
+        r[0] = c;
+        r[1] = cp1255_comb_table[cp1255_decomp_table[i].comb1];
+        r[2] = cp1255_comb_table[cp1255_decomp_table[i].comb2];
+        return 3;
+      }
+    }
   }
   return RET_ILSEQ;
 }
