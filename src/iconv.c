@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -54,7 +54,7 @@
 static void usage (int exitcode)
 {
   fprintf(exitcode ? stderr : stdout,
-          "Usage: iconv -f fromcode -t tocode [file ...]\n");
+          "Usage: iconv [-f fromcode] [-t tocode] [file ...]\n");
   exit(exitcode);
 }
 
@@ -63,7 +63,7 @@ static void print_version (void)
   printf("iconv (libiconv %d.%d)\n",
          _libiconv_version >> 8, _libiconv_version & 0xff);
   printf("\
-Copyright (C) 2000 Free Software Foundation, Inc.\n\
+Copyright (C) 2000-2001 Free Software Foundation, Inc.\n\
 This is free software; see the source for copying conditions.  There is NO\n\
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\
 Written by Bruno Haible.\n");
@@ -215,8 +215,10 @@ int main (int argc, char* argv[])
   if (force_binary)
     setmode(fileno(stdout),O_BINARY);
 #endif
-  if (fromcode == NULL || tocode == NULL)
-    usage(1);
+  if (fromcode == NULL)
+    fromcode = "char";
+  if (tocode == NULL)
+    tocode = "char";
   cd = iconv_open(tocode,fromcode);
   if (cd == (iconv_t)(-1)) {
     if (iconv_open("UCS-4",fromcode) == (iconv_t)(-1))
