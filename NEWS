@@ -1,8 +1,8 @@
 New in 1.7:
 
 * Added UTF-32, UTF-32BE, UTF-32LE converters.
-* Changed the CP1255 encoder to decompose precomposed characters.
-* Changed the CP1258 encoder to partially decompose precomposed characters.
+* Changed CP1255 and CP1258 converters to handle combining characters.
+* Upgraded EUC-TW, ISO-2022-CN, ISO-2022-CN-EXT converters to Unicode 3.1.
 * Changed the GB18030 converter to not reject unassigned and private-use
   Unicode characters.
 * Fixed a bug in the byte order mark treatment of the UCS-4 decoder.
