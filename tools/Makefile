@@ -267,11 +267,27 @@ tcvn.h : $(TABLESDIR)/csets-1.6/VN5712-1.TXT 8bit_tab_to_h
 jisx0201.h : $(TABLESDIR)/clisp/JIS_X0201.TXT 8bit_tab_to_h
 	./8bit_tab_to_h JISX0201.1976-0 jisx0201 < $<
 
-jisx0208.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/JIS/JIS0208.TXT cjk_tab_to_h
-	sed -e 's,^0x....[ 	]*\(0x....[ 	]*0x.....*\)$$,\1,' < $< | ./cjk_tab_to_h JISX0208.1990-0 jisx0208 > $@
+# We use modified JISX0208 and JISX0212 tables. Why?
+# Hironori Sakamoto and Tomohiro Kubota explain that
+# - EUC-JP and SHIFT_JIS contain JISX0208 exactly,
+# - Their round-trip conversion to Unicode and back must be the identity,
+# - Conversions between EUC-JP, SHIFT_JIS, CP932, ISO-2022-JP must behave
+#   as if no Unicode conversion was involved,
+# - When JISX0208 is used as a CES (i.e. combined with ASCII) its mapping of
+#   REVERSE SOLIDUS becomes a FULLWIDTH REVERSE SOLIDUS, apparently because
+#   round-trip conversion stability is more important than a particular glyph.
+#   Only with CCS the character is a REVERSE SOLIDUS.
+# As a consequence, we use FULLWIDTH REVERSE SOLIDUS in EUC-JP's JISX0208 part,
+# and for consistency also in SHIFT_JIS and ISO-2022-JP, i.e. everywhere.
+# JISX0208 never occurs as a CCS in practice. Similarly with JISX0212.
 
+# Unicode.org maps 0x2140 to U+005C. We map it to U+FF3C.
+jisx0208.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/JIS/JIS0208.TXT cjk_tab_to_h
+	sed -e 's,^0x....[ 	]*\(0x....[ 	]*0x.....*\)$$,\1,' < $< | sed -e 's,\([ 	]\)0x005C,\10xFF3C,' | ./cjk_tab_to_h JISX0208.1990-0 jisx0208 > $@
+
+# Unicode.org maps 0x2237 to U+007E. We map it to U+FF5E.
 jisx0212.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/JIS/JIS0212.TXT cjk_tab_to_h
-	./cjk_tab_to_h JISX0212.1990-0 jisx0212 < $< > $@
+	sed -e 's,\([ 	]\)0x007E,\10xFF5E,' < $< | ./cjk_tab_to_h JISX0212.1990-0 jisx0212 > $@
 
 cp932ext.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP932.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0x\(87\|E[D-F]\|F[0-9A-F]\)[0-9A-F][0-9A-F]' < $< ) | ./cjk_tab_to_h 'CP932 extensions' cp932ext > $@
