@@ -80,7 +80,7 @@
 #   EUC-KR                    glibc aix hpux irix osf solaris freebsd   yes
 #   EUC-TW                    glibc aix hpux irix osf solaris
 #   BIG5                      glibc aix hpux osf solaris freebsd        yes
-#   BIG5-HKSCS                glibc                                     yes
+#   BIG5-HKSCS                glibc
 #   GBK                       aix osf win32 dos
 #   GB18030                   glibc
 #   SHIFT_JIS                 hpux osf solaris freebsd                  yes
