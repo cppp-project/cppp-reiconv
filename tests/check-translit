@@ -1,6 +1,6 @@
 #!/bin/sh
 # Simple check of transliteration facilities.
-# Usage: check-translit SRCDIR FILE fromcode tocode
+# Usage: check-translit SRCDIR FILE FROMCODE TOCODE
 srcdir="$1"
 file="$2"
 fromcode="$3"
