@@ -161,6 +161,7 @@ check-extra-yes: all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) CP737
 	$(srcdir)/check-stateless $(srcdir) CP775
 	$(srcdir)/check-stateless $(srcdir) CP852
+	$(srcdir)/check-stateless $(srcdir) CP853
 	$(srcdir)/check-stateless $(srcdir) CP855
 	$(srcdir)/check-stateless $(srcdir) CP857
 	$(srcdir)/check-stateless $(srcdir) CP858
@@ -175,6 +176,8 @@ check-extra-yes: all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) EUC-JISX0213
 	$(srcdir)/check-stateless $(srcdir) SHIFT_JISX0213
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-3
+	$(srcdir)/check-stateless $(srcdir) TDS565
+	$(srcdir)/check-stateless $(srcdir) RISCOS-LATIN1
 
 table-from : table-from.@OBJEXT@ ../lib/libiconv.la
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) table-from.@OBJEXT@ ../lib/libiconv.la -o $@

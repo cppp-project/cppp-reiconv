@@ -1,3 +1,24 @@
+2002-05-14  Bruno Haible  <bruno@clisp.org>
+
+	Implement and document CP853, TDS565, RISCOS-LATIN1.
+	* tools/Makefile (ALL): Add cp853.h, tds565.h, riscos1.h.
+	(cp853.h, tds565.h, riscos1.h): New rules.
+	* lib/cp853.h: New file.
+	* lib/tds565.h: New file.
+	* lib/riscos1.h: New file.
+	* lib/converters.h: Include them.
+	* lib/encodings_dos.def (CP853): New encoding.
+	* lib/encodings_extra.def (TDS565, RISCOS-LATIN1): New encodings.
+	* README, man/iconv_open.3: Add CP853, TDS565, RISCOS-LATIN1.
+	* tests/Makefile.in (check-extra-yes): Check CP853, TDS565,
+	RISCOS-LATIN1.
+	* tests/Makefile.msvc (check): Check CP853.
+	* tests/CP853.TXT: New file.
+	* tests/TDS565.TXT: New file.
+	* tests/RISCOS-LATIN1.TXT: New file.
+
+	* lib/cp860.h (cp860_wctomb): Optimize.
+
 2002-05-12  Bruno Haible  <bruno@clisp.org>
 
 	* tools/Makefile (ksc5601.h): Add two extra characters.

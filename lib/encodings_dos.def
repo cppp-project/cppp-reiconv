@@ -46,6 +46,11 @@ DEFENCODING(( "CP852",                  /* IANA, JDK 1.1 */
             cp852,
             { cp852_mbtowc, NULL },       { cp852_wctomb, NULL })
 
+DEFENCODING(( "CP853",
+            ),
+            cp853,
+            { cp853_mbtowc, NULL },       { cp853_wctomb, NULL })
+
 DEFENCODING(( "CP855",                  /* IANA, JDK 1.1 */
               "IBM855",                 /* IANA */
               "855",                    /* IANA */

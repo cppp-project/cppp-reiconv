@@ -100,6 +100,7 @@ ALL = \
  cp737.h \
  cp775.h \
  cp852.h \
+ cp853.h \
  cp855.h \
  cp857.h \
  cp858.h \
@@ -111,6 +112,8 @@ ALL = \
  cp869.h \
  cp1125.h \
  jisx0213.h \
+ tds565.h \
+ riscos1.h \
  cjk_variants.h
 
 all : $(ALL)
@@ -435,6 +438,9 @@ cp775.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP775.TXT 8bit_tab
 cp852.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP852.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP852 cp852 < $<
 
+cp853.h : $(TABLESDIR)/other/CP853.TXT 8bit_tab_to_h
+	(echo '#'; cat $<) | ./8bit_tab_to_h CP853 cp853
+
 cp855.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP855.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP855 cp855 < $<
 
@@ -468,6 +474,12 @@ cp1125.h : $(TABLESDIR)/csets-new/CP1125.TXT 8bit_tab_to_h
 
 jisx0213.h : JISX0213.TXT cjk_tab_to_h
 	./cjk_tab_to_h JISX0213:2000 jisx0213 < $< > $@
+
+tds565.h : $(TABLESDIR)/recode-cvs/TDS565.TXT 8bit_tab_to_h
+	(echo '#'; cat $<) | ./8bit_tab_to_h TDS565 tds565 > $@
+
+riscos1.h : $(TABLESDIR)/recode-cvs/RISCOS-LATIN1.TXT 8bit_tab_to_h
+	(echo '#'; cat $<) | ./8bit_tab_to_h RISCOS-LATIN1 riscos1 > $@
 
 
 cjk_variants.h : $(TABLESDIR)/yasuoka/UniVariants cjk_variants

@@ -30,3 +30,14 @@ DEFENCODING(( "ISO-2022-JP-3",
             ),
             iso2022_jp3,
             { iso2022_jp3_mbtowc, iso2022_jp3_flushwc }, { iso2022_jp3_wctomb, iso2022_jp3_reset })
+
+DEFENCODING(( "TDS565",
+              "ISO-IR-230",
+            ),
+            tds565,
+            { tds565_mbtowc, NULL },      { tds565_wctomb, NULL })
+
+DEFENCODING(( "RISCOS-LATIN1",
+            ),
+            riscos1,
+            { riscos1_mbtowc, NULL },     { riscos1_wctomb, NULL })

@@ -254,6 +254,7 @@ typedef struct {
 #include "cp737.h"
 #include "cp775.h"
 #include "cp852.h"
+#include "cp853.h"
 #include "cp855.h"
 #include "cp857.h"
 #include "cp858.h"
@@ -270,5 +271,7 @@ typedef struct {
 #include "euc_jisx0213.h"
 #include "shift_jisx0213.h"
 #include "iso2022_jp3.h"
+#include "tds565.h"
+#include "riscos1.h"
 #endif
 
