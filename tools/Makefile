@@ -147,7 +147,7 @@ iso8859_14.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-14.TXT 8bit_tab_to
 iso8859_15.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-15.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-15 iso8859_15 < $<
 
-iso8859_16.h : $(TABLESDIR)/csets-new/ISO-8859-16.TXT 8bit_tab_to_h
+iso8859_16.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-16.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-16 iso8859_16 < $<
 
 koi8_r.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MISC/KOI8-R.TXT 8bit_tab_to_h
