@@ -89,6 +89,7 @@ libiconv-1.6/libcharset/tools/locale_charset.c            libiconv-1.6/libcharse
 libiconv-1.6/libcharset/tools/locale_codeset.c            libiconv-1.6/libcharset/tools/localecodeset.c
 libiconv-1.6/libcharset/tools/osf1-4.0a                   libiconv-1.6/libcharset/tools/osf1-4.0a
 libiconv-1.6/libcharset/tools/osf1-4.0d                   libiconv-1.6/libcharset/tools/osf1-4.0d
+libiconv-1.6/libcharset/tools/osf1-5.1                    libiconv-1.6/libcharset/tools/osf1-5.1
 libiconv-1.6/libcharset/tools/solaris-2.4                 libiconv-1.6/libcharset/tools/solaris-2.4
 libiconv-1.6/libcharset/tools/solaris-2.5.1               libiconv-1.6/libcharset/tools/solaris-2.5.1
 libiconv-1.6/libcharset/tools/solaris-2.6                 libiconv-1.6/libcharset/tools/solaris-2.6
