@@ -1,3 +1,15 @@
+2001-06-26  Bruno Haible  <haible@clisp.cons.org>
+
+	* tools/Makefile (jisx0208.h): Replace U+005C with U+FF3C.
+	(jisx0212.h): Replace U+007E with U+FF5E.
+	* lib/jisx0208.h: Regenerated.
+	* lib/jisx0212.h: Regenerated.
+	* tests/EUC-JP.TXT: Map 0xA1C0 to U+FF3C. Map 0x8FA2B7 to U+FF5E.
+	* tests/EUC-JP.IRREVERSIBLE.TXT: Remove file.
+	* tests/SHIFT-JIS.TXT: Map 0x815F to U+FF3C.
+	* tests/CP932.TXT: Likewise.
+	* tests/CP932.IRREVERSIBLE.TXT: 0x815F mapping is now reversible.
+
 2001-06-25  Bruno Haible  <haible@clisp.cons.org>
 
 	* src/Makefile.in (iconv): Mention $(INCLUDES) before $(CFLAGS) and
