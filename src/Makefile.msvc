@@ -64,15 +64,21 @@ srcdir = .
 prefix = $(PREFIX)
 exec_prefix = $(prefix)
 bindir = $(exec_prefix)\bin
+libdir = $(exec_prefix)\lib
 includedir = $(prefix)\include
+datadir = $(prefix)\share
+localedir = $(datadir)\locale
 IIprefix = $(IIPREFIX)
 IIexec_prefix = $(IIprefix)
 IIbindir = $(IIexec_prefix)\\bin
+IIlibdir = $(IIexec_prefix)\\lib
 IIincludedir = $(IIprefix)\\include
+IIdatadir = $(IIprefix)\\share
+IIlocaledir = $(IIdatadir)\\locale
 
 # Programs used by "make":
 CC = cl
-CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) $(NLSFLAGS)
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) $(NLSFLAGS) -DLOCALEDIR=\"$(IIlocaledir)\"
 INCLUDES = -I. -I.. -I..\include -I..\srclib -I..\windows $(INCINTL)
 RM = -del
 
@@ -85,7 +91,15 @@ INSTALL_DATA = copy
 
 SHELL = /bin/sh
 
-all : iconv.exe
+all : iconv_no_i18n.exe iconv.exe
+
+# This is the temporary iconv executable, without internationalization.
+iconv_no_i18n.exe : $(srcdir)/iconv_no_i18n.c $(srcdir)/iconv.c ../srclib/icrt.lib ../lib/iconv.lib
+	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) -DINSTALLPREFIX=\"$(IIprefix)\" -DINSTALLDIR=\"$(IIbindir)\" $(srcdir)/iconv_no_i18n.c ../srclib/icrt.lib ../lib/iconv.lib -Feiconv_no_i18n.exe
+	$(RM) iconv_no_i18n.obj
+!if $(DLL)
+	copy ..\lib\iconv.dll iconv.dll
+!endif
 
 iconv.exe : $(srcdir)/iconv.c ../srclib/icrt.lib ../lib/iconv.lib
 	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) -DINSTALLPREFIX=\"$(IIprefix)\" -DINSTALLDIR=\"$(IIbindir)\" $(srcdir)/iconv.c ../srclib/icrt.lib $(LIBINTL) ../lib/iconv.lib -Feiconv.exe

@@ -1,3 +1,13 @@
+2003-05-17  Bruno Haible  <bruno@clisp.org>
+
+	* src/Makefile.msvc (libdir, datadir, localedir): New variables.
+	(IIlibdir, IIdatadir, IIlocaledir): New variables.
+	(CFLAGS): Define LOCALEDIR.
+	(iconv_no_i18n.exe): New rule.
+	(all): Depend on it.
+	* tests/check-stateful.bat: Invoke iconv_no_i18n instead of iconv.
+	* tests/check-translit.bat: Likewise.
+
 2003-05-16  Bruno Haible  <bruno@clisp.org>
 
 	* lib/genaliases.c (main): Emit declarations for gperf-3.0.
