@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000, 2004 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,9 +21,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "binary-io.h"
+
 int main ()
 {
   int i1, i2, i3;
+
+#if O_BINARY
+  SET_BINARY(fileno(stdout));
+#endif
 
   /* Range 0x0000..0x007f */
   for (i1 = 0; i1 < 0x80; i1++)

@@ -1,3 +1,18 @@
+2004-01-23  Bruno Haible  <bruno@clisp.org>
+
+	* tests/table-from.c: Include binary-io.h.
+	(main): Switch stdout to binary mode.
+	* tests/table-to.c: Include binary-io.h.
+	(main): Switch stdout to binary mode.
+	* tests/genutf8.c: Include binary-io.h.
+	(main): Switch stdout to binary mode.
+	* tests/Makefile.in (INCLUDES): Also look in srclib.
+	(check): Pass INCLUDES when compiling genutf8.c.
+	* tests/Makefile.os2 (INCLUDES): Also look in srclib.
+	(genutf8.exe): Pass INCLUDES when compiling genutf8.c.
+	* tests/Makefile.msvc (INCLUDES): Also look in srclib.
+	(check): Pass INCLUDES when compiling genutf8.c.
+
 2004-01-21  Bruno Haible  <bruno@clisp.org>
 
 	* src/iconv.c (force_binary): Remove variable.

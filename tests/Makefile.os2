@@ -9,7 +9,7 @@
 # Programs used by "make":
 CC = gcc
 CFLAGS = -O2 -Zmtd
-INCLUDES = -I. -I../include -I../lib
+INCLUDES = -I. -I../include -I../srclib -I../lib
 
 #### End of system configuration section. ####
 
@@ -136,7 +136,7 @@ table-to.exe : table-to.c
 	copy ..\lib\iconv.dll iconv.dll
 
 genutf8.exe : genutf8.c
-	$(CC) $(CFLAGS) genutf8.c
+	$(CC) $(INCLUDES) $(CFLAGS) genutf8.c
 
 mostlyclean : clean
 

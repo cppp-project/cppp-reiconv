@@ -39,7 +39,7 @@ srcdir = .
 # Programs used by "make":
 CC = cl
 CFLAGS = $(MFLAGS) -W1 $(OPTIMFLAGS)
-INCLUDES = -I. -I..\include -I..\lib
+INCLUDES = -I. -I..\include -I..\srclib -I..\lib
 RM = -del
 
 #### End of system configuration section. ####
@@ -57,7 +57,7 @@ uninstall :
 check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) ASCII
 #	/* General multi-byte encodings */
-	$(CC) $(CFLAGS) $(srcdir)\genutf8.c -Fegenutf8.exe
+	$(CC) $(INCLUDES) $(CFLAGS) $(srcdir)\genutf8.c -Fegenutf8.exe
 	$(RM) genutf8.obj
 	.\genutf8 > UTF-8.TXT
 	$(srcdir)\check-stateless.bat . UTF-8

@@ -10,7 +10,7 @@ CC = @CC@
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
-INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include -I../lib
+INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include -I../srclib -I$(srcdir)/../srclib -I../lib
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link
@@ -31,7 +31,7 @@ all :
 check : all table-from table-to ../src/iconv_no_i18n
 	$(srcdir)/check-stateless $(srcdir) ASCII
 #	/* General multi-byte encodings */
-	$(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
+	$(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
 	./genutf8 > UTF-8.TXT && \
 	$(srcdir)/check-stateless . UTF-8 && \
 	$(RM) genutf8 UTF-8.TXT

@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2002, 2004 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -26,6 +26,8 @@
 #include <string.h>
 #include <iconv.h>
 #include <errno.h>
+
+#include "binary-io.h"
 
 /* If nonzero, ignore conversions outside Unicode plane 0. */
 static int bmp_only;
@@ -105,6 +107,10 @@ int main (int argc, char* argv[])
     exit(1);
   }
   charset = argv[1];
+
+#if O_BINARY
+  SET_BINARY(fileno(stdout));
+#endif
 
   cd = iconv_open("UCS-4-INTERNAL",charset);
   if (cd == (iconv_t)(-1)) {
