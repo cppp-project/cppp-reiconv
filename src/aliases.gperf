@@ -295,3 +295,5 @@ JOHAB, ei_johab
 CP1361, ei_johab
 ISO-2022-KR, ei_iso2022_kr
 CSISO2022KR, ei_iso2022_kr
+CHAR, ei_local_char
+WCHAR_T, ei_local_wchar_t
