@@ -6,7 +6,7 @@ static int
 ucs4internal_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 {
   if (n >= 4) {
-    *pwc = *(unsigned int *)s;
+    *pwc = *(const unsigned int *)s;
     return 4;
   }
   return RET_TOOFEW(0);

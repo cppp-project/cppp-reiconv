@@ -6,7 +6,7 @@ static int
 ucs2internal_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 {
   if (n >= 2) {
-    *pwc = *(unsigned short *)s;
+    *pwc = *(const unsigned short *)s;
     return 2;
   }
   return RET_TOOFEW(0);
