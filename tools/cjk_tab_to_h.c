@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software; you can redistribute it and/or modify
@@ -72,7 +72,7 @@ typedef struct {
 static void output_title (const char *charsetname)
 {
   printf("/*\n");
-  printf(" * Copyright (C) 1999-2001 Free Software Foundation, Inc.\n");
+  printf(" * Copyright (C) 1999-2002 Free Software Foundation, Inc.\n");
   printf(" * This file is part of the GNU LIBICONV Library.\n");
   printf(" *\n");
   printf(" * The GNU LIBICONV Library is free software; you can redistribute it\n");
@@ -181,41 +181,58 @@ static bool is_charset2uni_large (Encoding* enc)
  * Compactify the Unicode range by use of an auxiliary table,
  * so 16 bits suffice to store each value.
  */
-static int compact_large_charset2uni (Encoding* enc, unsigned int **urows)
+static int compact_large_charset2uni (Encoding* enc, unsigned int **urows, unsigned int *urowshift)
 {
-  int upages[0x1100];
-  int i, row, col, nurows;
+  unsigned int shift;
 
-  for (i = 0; i < 0x1100; i++)
-    upages[i] = -1;
+  for (shift = 8; ; shift--) {
+    int *upages = (int *) malloc((0x110000>>shift) * sizeof(int));
+    int i, row, col, nurows;
 
-  for (row = 0; row < enc->rows; row++)
-    for (col = 0; col < enc->cols; col++)
-      upages[enc->charset2uni[row][col] >> 8] = 0;
+    for (i = 0; i < 0x110000>>shift; i++)
+      upages[i] = -1;
 
-  nurows = 0;
-  for (i = 0; i < 0x1100; i++)
-    if (upages[i] == 0)
-      nurows++;
+    for (row = 0; row < enc->rows; row++)
+      for (col = 0; col < enc->cols; col++)
+        upages[enc->charset2uni[row][col] >> shift] = 0;
 
-  *urows = (unsigned int *) malloc(nurows * sizeof(unsigned int));
+    nurows = 0;
+    for (i = 0; i < 0x110000>>shift; i++)
+      if (upages[i] == 0)
+        nurows++;
 
-  nurows = 0;
-  for (i = 0; i < 0x1100; i++)
-    if (upages[i] == 0) {
-      upages[i] = nurows;
-      (*urows)[nurows] = i;
-      nurows++;
+    /* We want all table entries to fit in an 'unsigned short'. */
+    if (nurows <= 1<<(16-shift)) {
+      int** old_charset2uni;
+
+      *urows = (unsigned int *) malloc(nurows * sizeof(unsigned int));
+      *urowshift = shift;
+
+      nurows = 0;
+      for (i = 0; i < 0x110000>>shift; i++)
+        if (upages[i] == 0) {
+          upages[i] = nurows;
+          (*urows)[nurows] = i;
+          nurows++;
+        }
+
+      old_charset2uni = enc->charset2uni;
+      enc->charset2uni = (int**) malloc(enc->rows*sizeof(int*));
+      for (row = 0; row < enc->rows; row++)
+        enc->charset2uni[row] = (int*) malloc(enc->cols*sizeof(int));
+      for (row = 0; row < enc->rows; row++)
+        for (col = 0; col < enc->cols; col++) {
+          int u = old_charset2uni[row][col];
+          enc->charset2uni[row][col] =
+            (upages[u >> shift] << shift) | (u & ((1 << shift) - 1));
+        }
+      enc->fffd =
+        (upages[0xfffd >> shift] << shift) | (0xfffd & ((1 << shift) - 1));
+
+      return nurows;
     }
-
-  for (row = 0; row < enc->rows; row++)
-    for (col = 0; col < enc->cols; col++) {
-      int u = enc->charset2uni[row][col];
-      enc->charset2uni[row][col] = (upages[u >> 8] << 8) | (u & 0xFF);
-    }
-  enc->fffd = (upages[0xfffd >> 8] << 8) | (0xfffd & 0xFF);
-
-  return nurows;
+  }
+  abort();
 }
 
 /*
@@ -267,12 +284,17 @@ static void output_charset2uni (const char* name, Encoding* enc)
   int nurows, row, col, lastrow, col_max, i, i1_min, i1_max;
   bool is_large;
   unsigned int* urows;
+  unsigned int urowshift;
+  Encoding tmpenc;
 
   is_large = is_charset2uni_large(enc);
   if (is_large) {
-    nurows = compact_large_charset2uni(enc,&urows);
+    /* Use a temporary copy of enc. */
+    tmpenc = *enc;
+    enc = &tmpenc;
+    nurows = compact_large_charset2uni(enc,&urows,&urowshift);
   } else {
-    nurows = 0; urows = NULL; enc->fffd = 0xfffd;
+    nurows = 0; urows = NULL; urowshift = 0; enc->fffd = 0xfffd;
   }
 
   find_charset2uni_pages(enc);
@@ -305,7 +327,7 @@ static void output_charset2uni (const char* name, Encoding* enc)
   if (is_large) {
     printf("static const ucs4_t %s_2uni_upages[%d] = {\n ", name, nurows);
     for (i = 0; i < nurows; i++) {
-      printf(" 0x%05x,", urows[i] << 8);
+      printf(" 0x%05x,", urows[i] << urowshift);
       if ((i % 8) == 7 && (i+1 < nurows)) printf("\n ");
     }
     printf("\n");
@@ -354,7 +376,7 @@ static void output_charset2uni (const char* name, Encoding* enc)
     if (enc->charsetblocks[i].start > 0)
       printf("-%d", enc->charsetblocks[i].start);
     printf("]");
-    if (is_large) printf(",\n            wc = %s_2uni_upages[swc>>8] | (swc & 0xff)", name);
+    if (is_large) printf(",\n            wc = %s_2uni_upages[swc>>%d] | (swc & 0x%x)", name, urowshift, (1 << urowshift) - 1);
     printf(";\n");
   }
   printf("        }\n");

@@ -1,6 +1,18 @@
 2002-04-06  Bruno Haible  <bruno@clisp.org>
 
 	Upgrade to Unicode 3.2.
+	* tools/cjk_tab_to_h.c (output_title): Bump copyright year.
+	(compact_large_charset2uni): Add an argument. Determine optimal shift.
+	Copy modified enc->charset2uni table.
+	(output_charset2uni): Deal with shift other than 8. Copy encoding, so
+	as to not disturb subsequent output_uni2charset[_sparse] call.
+	* lib/hkscs.h: Regenerated.
+	* tests/BIG5-HKSCS.TXT: Update.
+	* tests/BIG5-HKSCS.IRREVERSIBLE.TXT: Update.
+
+2002-04-06  Bruno Haible  <bruno@clisp.org>
+
+	Upgrade to Unicode 3.2.
 	* tools/Makefile (cns11643_1.h, cns11643_2.h, cns11643_3.h,
 	cns11643_4a.h, cns11643_4b.h, cns11643_5.h, cns11643_6.h,
 	cns11643_7.h, cns11643_15.h, cns11643_inv.h): Use
