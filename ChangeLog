@@ -1,5 +1,13 @@
 2002-05-12  Bruno Haible  <bruno@clisp.org>
 
+	* tools/Makefile (ksc5601.h): Add two extra characters.
+	* lib/ksc5601.h: Regenerated.
+	* tests/EUC-KR.TXT: Add EURO SIGN and REGISTERED SIGN.
+	* tests/CP949.TXT: Likewise.
+	* tests/JOHAB.TXT: Likewise.
+
+2002-05-12  Bruno Haible  <bruno@clisp.org>
+
 	* README: Mention extra encodings.
 	* man/iconv_open.3: Likewise. Improve formatting in text and html
 	output formats.
