@@ -1,5 +1,12 @@
 2000-12-02  Bruno Haible  <haible@clisp.cons.org>
 
+        * Version 1.5 released.
+        * include/iconv.h.in (_LIBICONV_VERSION), README, windows/iconv.rc:
+          Bump version number.
+        * src/Makefile.in (LIBICONV_VERSION_INFO): Define to 2:2:0.
+
+2000-12-02  Bruno Haible  <haible@clisp.cons.org>
+
         * Makefile.msvc: Replace STATIC with its opposite flag, DLL.
         * lib/Makefile.msvc: Likewise.
         * src/Makefile.msvc: Likewise.
