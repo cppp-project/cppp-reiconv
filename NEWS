@@ -3,6 +3,7 @@ New in 1.6:
 * Many more transliterations.
 * Added CP862 converter.
 * Changed the GB18030 converter.
+* Portability to DOS with DJGPP.
 
 New in 1.5:
 * Added an iconv(1) program.
