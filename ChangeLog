@@ -1,5 +1,18 @@
 2003-05-06  Bruno Haible  <bruno@clisp.org>
 
+	* srclib/Makefile.am (DEFS): Fix spelling of DEPENDS_ON_LIBICONV.
+	* srclib/Makefile.msvc (CFLAGS): Likewise.
+
+	* srclib/Makefile.msvc (INCLUDES): Add -I.. .
+	Reported by Perry Rapp.
+
+	* Makefile.msvc (config.h): New rule.
+	(all): Depend on it.
+	(mostlyclean, clean, distclean, maintainer-clean): Erase config.h.
+	Reported by Perry Rapp.
+
+2003-05-06  Bruno Haible  <bruno@clisp.org>
+
 	* autoconf/config.guess: Update to GNU version 2003-02-22.
 	* autoconf/config.sub: Likewise.
 
@@ -248,6 +261,7 @@
 	* Makefile.devel (CLISP_DIR): Comment out.
 	(AUTOCONF_FILES): Change to aclocal.m4.
 	(aclocal.m4): Renamed from autoconf/aclocal.m4. Update dependencies.
+	(configure.in): Drop --include option.
 
 2003-03-17  Bruno Haible  <bruno@clisp.org>
 

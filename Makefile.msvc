@@ -59,7 +59,7 @@ INSTALL_DATA = copy
 
 SHELL = /bin/sh
 
-all : force
+all : config.h force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc all
 	cd ..
@@ -87,6 +87,10 @@ all : force
 	cd tests
 	$(MAKE) -f Makefile.msvc all
 	cd ..
+
+config.h : config.h.msvc
+	-$(RM) config.h
+	$(LN) config.h.msvc config.h
 
 install : force
 	cd libcharset
@@ -187,6 +191,7 @@ check : all force
 	cd ..
 
 mostlyclean : force
+	$(RM) config.h
 	cd libcharset
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
@@ -212,6 +217,7 @@ mostlyclean : force
 	cd ..
 
 clean : force
+	$(RM) config.h
 	cd libcharset
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
@@ -237,6 +243,7 @@ clean : force
 	cd ..
 
 distclean : force
+	$(RM) config.h
 	cd libcharset
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
@@ -262,6 +269,7 @@ distclean : force
 	cd ..
 
 maintainer-clean : force
+	$(RM) config.h
 	cd libcharset
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
