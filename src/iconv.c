@@ -26,6 +26,30 @@
 #if HAVE_LOCALE_H
 #include <locale.h>
 #endif
+#include <fcntl.h>
+
+/* For systems that distinguish between text and binary I/O.
+   O_BINARY is usually declared in <fcntl.h>. */
+#if !defined O_BINARY && defined _O_BINARY
+  /* For MSC-compatible compilers.  */
+# define O_BINARY _O_BINARY
+# define O_TEXT _O_TEXT
+#endif
+#ifdef __BEOS__
+  /* BeOS 5 has O_BINARY and O_TEXT, but they have no effect.  */
+# undef O_BINARY
+# undef O_TEXT
+#endif
+#if O_BINARY
+# if !(defined(__EMX__) || defined(__DJGPP__))
+#  define setmode _setmode
+#  define fileno _fileno
+# endif
+#endif
+
+#if O_BINARY
+  static int force_binary = 0;
+#endif
 
 static void usage ()
 {
@@ -38,6 +62,11 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
   char inbuf[4096+4096];
   size_t inbufrest = 0;
   char outbuf[4096];
+
+#if O_BINARY
+  if (force_binary)
+    setmode(fileno(infile),O_BINARY);
+#endif
   iconv(cd,NULL,NULL,NULL,NULL);
   for (;;) {
     size_t inbufsize = fread(inbuf+4096,1,4096,infile);
@@ -152,10 +181,21 @@ int main (int argc, char* argv[])
       i += 2;
       continue;
     }
+#if O_BINARY
+    if (!strcmp(argv[i],"--binary")) {
+      force_binary = 1;
+      i++;
+      continue;
+    }
+#endif
     if (argv[i][0] == '-')
       usage();
     break;
   }
+#if O_BINARY
+  if (force_binary)
+    setmode(fileno(stdout),O_BINARY);
+#endif
   if (fromcode == NULL || tocode == NULL)
     usage();
   cd = iconv_open(tocode,fromcode);
