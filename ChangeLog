@@ -1,3 +1,12 @@
+2000-04-02  Bruno Haible  <haible@clisp.cons.org>
+
+        Allow building on filesystems lacking symlinks and hard links.
+        * Makefile.devel (autoconf/aclocal.m4): Replace AC_PROG_LN_S with
+          CL_PROG_LN_S.
+        * configure.in: Add CL_PROG_LN, CL_PROG_LN_S.
+        * src/Makefile.in (LN): Use autoconfigured value @LN@.
+          (LN_S): Use autoconfigured value @LN_S@.
+
 2000-03-15  Bruno Haible  <haible@clisp.cons.org>
 
         * Version 1.2 released.

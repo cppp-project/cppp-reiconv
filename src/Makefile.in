@@ -23,8 +23,8 @@ LIBTOOL_INSTALL = $(LIBTOOL) --mode=install
 LIBTOOL_UNINSTALL = $(LIBTOOL) --mode=uninstall
 CP = cp
 MV = mv
-LN = ln
-LN_S = ln -s
+LN = @LN@
+LN_S = @LN_S@
 RM = rm -f
 
 # Programs used by "make install":
