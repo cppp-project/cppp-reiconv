@@ -1,3 +1,8 @@
+2000-11-12  Bruno Haible  <haible@clisp.cons.org>
+
+        * autoconf/config.guess, autoconf/config.sub: Upgrade to newest
+          version from GNU CVS.
+
 2000-10-24  Bruno Haible  <haible@clisp.cons.org>
 
         * Version 1.4 released.
