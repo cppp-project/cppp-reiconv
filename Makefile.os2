@@ -15,9 +15,9 @@ mandir = $(prefix)/man
 
 all : force
 	sed -e 's/@ICONV_CONST@/const/g' < include/iconv.h.in > include/iconv.h
-	os2/indir src   $(MAKE) -f Makefile.os2 all
-	os2/indir man   $(MAKE) -f Makefile.os2 all
-	os2/indir tests $(MAKE) -f Makefile.os2 all
+	(cd src   && $(MAKE) -f Makefile.os2 all && cd ..)
+	(cd man   && $(MAKE) -f Makefile.os2 all && cd ..)
+	(cd tests && $(MAKE) -f Makefile.os2 all && cd ..)
 
 # Installs the library and include files only. Typically called with only
 # $(libdir), $(shlibdir) and $(includedir) - don't use $(prefix) and
@@ -25,44 +25,44 @@ all : force
 install-lib : all force
 	@echo install to $(libdir), $(shlibdir) and $(includedir)
 	cp include/iconv.h $(includedir)/iconv.h
-	os2/indir src $(MAKE) -f Makefile.os2 install-lib libdir='$(libdir)' shlibdir='$(shlibdir)' includedir='$(includedir)'
+	(cd src && $(MAKE) -f Makefile.os2 install-lib libdir='$(libdir)' shlibdir='$(shlibdir)' includedir='$(includedir)' && cd ..)
 	
 install : force
 	@echo install to $(prefix)
 	cp include/iconv.h $(includedir)/iconv.h
-	os2/indir src $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)'
-	os2/indir man $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+	(cd src && $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)' && cd ..)
+	(cd man && $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)' && cd ..)
 
 uninstall : force
 	rm -i $(includedir)/iconv.h
-	os2/indir src $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)'
-	os2/indir man $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+	(cd src && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)' && cd ..)
+	(cd man && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)' && cd ..)
 
 check : force
-	os2/indir src   $(MAKE) -f Makefile.os2 check
-	os2/indir man   $(MAKE) -f Makefile.os2 check
-	os2/indir tests $(MAKE) -f Makefile.os2 check
+	(cd src   && $(MAKE) -f Makefile.os2 check && cd ..)
+	(cd man   && $(MAKE) -f Makefile.os2 check && cd ..)
+	(cd tests && $(MAKE) -f Makefile.os2 check && cd ..)
 
 mostlyclean : force
-	os2/indir src   $(MAKE) -f Makefile.os2 mostlyclean
-	os2/indir man   $(MAKE) -f Makefile.os2 mostlyclean
-	os2/indir tests $(MAKE) -f Makefile.os2 mostlyclean
+	(cd src   && $(MAKE) -f Makefile.os2 mostlyclean && cd ..)
+	(cd man   && $(MAKE) -f Makefile.os2 mostlyclean && cd ..)
+	(cd tests && $(MAKE) -f Makefile.os2 mostlyclean && cd ..)
 
 clean : force
-	os2/indir src   $(MAKE) -f Makefile.os2 clean
-	os2/indir man   $(MAKE) -r Makefile.os2 clean
-	os2/indir tests $(MAKE) -r Makefile.os2 clean
+	(cd src   && $(MAKE) -f Makefile.os2 clean && cd ..)
+	(cd man   && $(MAKE) -r Makefile.os2 clean && cd ..)
+	(cd tests && $(MAKE) -r Makefile.os2 clean && cd ..)
 
 distclean : force
-	os2/indir src   $(MAKE) -f Makefile.os2 distclean
-	os2/indir man   $(MAKE) -f Makefile.os2 distclean
-	os2/indir tests $(MAKE) -f Makefile.os2 distclean
+	(cd src   && $(MAKE) -f Makefile.os2 distclean && cd ..)
+	(cd man   && $(MAKE) -f Makefile.os2 distclean && cd ..)
+	(cd tests && $(MAKE) -f Makefile.os2 distclean && cd ..)
 	rm -f include/iconv.h
 
 maintainer-clean : force
-	os2/indir src   $(MAKE) -f Makefile.os2 maintainer-clean
-	os2/indir man   $(MAKE) -f Makefile.os2 maintainer-clean
-	os2/indir tests $(MAKE) -f Makefile.os2 maintainer-clean
+	(cd src   && $(MAKE) -f Makefile.os2 maintainer-clean && cd ..)
+	(cd man   && $(MAKE) -f Makefile.os2 maintainer-clean && cd ..)
+	(cd tests && $(MAKE) -f Makefile.os2 maintainer-clean && cd ..)
 	rm -f include/iconv.h
 
 force :
