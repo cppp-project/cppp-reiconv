@@ -269,6 +269,7 @@ CN-GB, ei_euc_cn
 CSGB2312, ei_euc_cn
 GBK, ei_ces_gbk
 CP936, ei_ces_gbk
+GB18030, ei_gb18030
 ISO-2022-CN, ei_iso2022_cn
 CSISO2022CN, ei_iso2022_cn
 ISO-2022-CN-EXT, ei_iso2022_cn_ext
@@ -284,6 +285,7 @@ BIGFIVE, ei_ces_big5
 CN-BIG5, ei_ces_big5
 CSBIG5, ei_ces_big5
 CP950, ei_cp950
+BIG5HKSCS, ei_big5hkscs
 EUC-KR, ei_euc_kr
 EUCKR, ei_euc_kr
 CSEUCKR, ei_euc_kr
