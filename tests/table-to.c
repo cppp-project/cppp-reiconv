@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -30,6 +30,7 @@ int main (int argc, char* argv[])
 {
   const char* charset;
   iconv_t cd;
+  int bmp_only;
 
   if (argc != 2) {
     fprintf(stderr,"Usage: table-to charset\n");
@@ -43,10 +44,14 @@ int main (int argc, char* argv[])
     exit(1);
   }
 
+  /* When testing UTF-8 or GB18030, stop at 0x10000, otherwise the output
+     file gets too big. */
+  bmp_only = (strcmp(charset,"UTF-8") == 0 || strcmp(charset,"GB18030") == 0);
+
   {
     unsigned int i;
     unsigned char buf[10];
-    for (i = 0; i < 0x10000; i++) {
+    for (i = 0; i < (bmp_only ? 0x10000 : 0x30000); i++) {
       unsigned int in = i;
       const char* inbuf = (const char*) &in;
       size_t inbytesleft = sizeof(unsigned int);

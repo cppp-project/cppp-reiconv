@@ -26,6 +26,9 @@
 #include <iconv.h>
 #include <errno.h>
 
+/* If nonzero, ignore conversions outside Unicode plane 0. */
+static int bmp_only;
+
 static const char* hexbuf (unsigned char buf[], unsigned int buflen)
 {
   static char msg[50];
@@ -83,7 +86,9 @@ static const char* ucs4_decode (const unsigned int* out, unsigned int outlen)
       *p++ = ' ';
     sprintf (p, "0x%04X", out[0]);
     out += 1; outlen -= 1;
-    p += strlen (p);
+    if (bmp_only && strlen(p) > 6)
+      return NULL;
+    p += strlen(p);
   }
   return hexbuf;
 }
@@ -92,6 +97,7 @@ int main (int argc, char* argv[])
 {
   const char* charset;
   iconv_t cd;
+  int search_depth;
 
   if (argc != 2) {
     fprintf(stderr,"Usage: table-to charset\n");
@@ -105,6 +111,11 @@ int main (int argc, char* argv[])
     exit(1);
   }
 
+  /* When testing UTF-8 or GB18030, stop at 0x10000, otherwise the output
+     file gets too big. */
+  bmp_only = (strcmp(charset,"UTF-8") == 0 || strcmp(charset,"GB18030") == 0);
+  search_depth = (strcmp(charset,"UTF-8") == 0 ? 3 : 4);
+
   {
     unsigned int out[3];
     unsigned char buf[4];
@@ -115,29 +126,36 @@ int main (int argc, char* argv[])
       result = try(cd,buf,1,out);
       if (result < 0) {
       } else if (result > 0) {
-        printf("0x%02X\t%s\n",i0,ucs4_decode(out,result));
+        const char* unicode = ucs4_decode(out,result);
+        if (unicode != NULL)
+          printf("0x%02X\t%s\n",i0,unicode);
       } else {
         for (i1 = 0; i1 < 0x100; i1++) {
           buf[1] = i1;
           result = try(cd,buf,2,out);
           if (result < 0) {
           } else if (result > 0) {
-            printf("0x%02X%02X\t%s\n",i0,i1,ucs4_decode(out,result));
+            const char* unicode = ucs4_decode(out,result);
+            if (unicode != NULL)
+              printf("0x%02X%02X\t%s\n",i0,i1,unicode);
           } else {
             for (i2 = 0; i2 < 0x100; i2++) {
               buf[2] = i2;
               result = try(cd,buf,3,out);
               if (result < 0) {
               } else if (result > 0) {
-                printf("0x%02X%02X%02X\t%s\n",i0,i1,i2,ucs4_decode(out,result));
-              } else if (strcmp(charset,"UTF-8")) {
+                const char* unicode = ucs4_decode(out,result);
+                if (unicode != NULL)
+                  printf("0x%02X%02X%02X\t%s\n",i0,i1,i2,unicode);
+              } else if (search_depth > 3) {
                 for (i3 = 0; i3 < 0x100; i3++) {
                   buf[3] = i3;
                   result = try(cd,buf,4,out);
                   if (result < 0) {
                   } else if (result > 0) {
-                    if (out[0] < 0x10000 || strcmp(charset,"GB18030"))
-                      printf("0x%02X%02X%02X%02X\t%s\n",i0,i1,i2,i3,ucs4_decode(out,result));
+                    const char* unicode = ucs4_decode(out,result);
+                    if (unicode != NULL)
+                      printf("0x%02X%02X%02X%02X\t%s\n",i0,i1,i2,i3,unicode);
                   } else {
                     fprintf(stderr,"%s: incomplete byte sequence\n",hexbuf(buf,4));
                     exit(1);

@@ -1,3 +1,13 @@
+2001-06-01  Bruno Haible  <haible@clisp.cons.org>
+
+        * tests/table-from.c (bmp_only): New variable.
+          (ucs4_decode): If bmp_only, don't return characters outside Unicode
+          plane 0.
+          (main): When testing UTF-8 or GB18030, set bmp_only to 1. Don't print
+          a conversion line if ucs4_decode returns NULL.
+        * tests/table-to.c (main): When testing encodings other than UTF-8 and
+          GB18030, loop upto U+30000 instead of U+10000.
+
 2001-05-24  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/converters.h (mbtowc_funcs): Add flushwc member function.
