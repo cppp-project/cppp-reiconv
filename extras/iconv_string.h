@@ -1,3 +1,7 @@
+/* Copyright (C) 1999-2001 Bruno Haible.
+   This file is not part of the GNU LIBICONV Library.
+   This file is put into the public domain.  */
+
 /*
  * This C function converts an entire string from one encoding to another,
  * using iconv. Easier to use than iconv() itself, and supports autodetect

@@ -1,3 +1,7 @@
+/* Copyright (C) 1999-2001 Bruno Haible.
+   This file is not part of the GNU LIBICONV Library.
+   This file is put into the public domain.  */
+
 #include "iconv_string.h"
 #include <iconv.h>
 #include <errno.h>
