@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2004 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -241,7 +241,8 @@ cp1255_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
     *pwc = (ucs4_t) last_wc;
     return 0; /* Don't advance the input pointer. */
   }
-  if (wc >= 0x05d0 && wc <= 0x05f2) {
+  if ((wc >= 0x05d0 && wc <= 0x05ea && ((0x07db5f7f >> (wc - 0x05d0)) & 1))
+      || wc == 0x05f2) {
     /* wc is a possible match in cp1255_comp_table_data. Buffer it. */
     conv->istate = wc;
     return RET_TOOFEW(1);

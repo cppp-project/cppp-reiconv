@@ -1,3 +1,19 @@
+2004-02-19  Bruno Haible  <bruno@clisp.org>
+
+	* lib/vietcomb.h (viet_comp_table_data): Un-uncomment 0x00D5, 0x00F5,
+	0x0168, 0x0169. Needed for TCVN-5712 but not for CP1258.
+	(viet_comp_table0301_len): Increment by 4.
+
+	* lib/cp1255.h (cp1255_mbtowc): Don't delay the handling of characters
+	which are not entries in cp1255_comp_table_data.
+	* lib/cp1258.h (cp1258_comp_bases): New array.
+	(cp1258_mbtowc): Don't delay the handling of characters which are not
+	relevant entries in viet_comp_table_data.
+	* lib/tcvn.h (tcvn_comp_bases): New array.
+	(tcvn_mbtowc): Don't delay the handling of characters which are not
+	relevant entries in viet_comp_table_data.
+	Reported by Alain Bench <veronatif@free.fr>.
+
 2004-02-02  Perry Rapp  <lifelines_3_0_18@hotmail.com>
             Bruno Haible  <bruno@clisp.org>
 
