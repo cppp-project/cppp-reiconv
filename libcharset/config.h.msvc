@@ -23,6 +23,9 @@
 /* Define if you have the setlocale function.  */
 #define HAVE_SETLOCALE 1
 
+/* Define if you have the <dlfcn.h> header file.  */
+#undef HAVE_DLFCN_H
+
 /* Define if you have the <langinfo.h> header file.  */
 #undef HAVE_LANGINFO_H
 
