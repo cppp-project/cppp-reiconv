@@ -9,7 +9,7 @@
 .\"   GNU glibc-2 source code and manual
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"
-.TH ICONV 3  "November 18, 2000" "GNU" "Linux Programmer's Manual"
+.TH ICONV 3  "June 13, 2002" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv \- perform character set conversion
 .SH SYNOPSIS
@@ -33,7 +33,7 @@ At most \fI*outbytesleft\fP bytes, starting at \fI*outbuf\fP, will be written.
 The \fBiconv\fP function converts one multibyte character at a time, and for
 each character conversion it increments \fI*inbuf\fP and decrements
 \fI*inbytesleft\fP by the number of converted input bytes, it increments
-\fI*outbuf\fP and decrements \fI*outbytesptr\fP by the number of converted
+\fI*outbuf\fP and decrements \fI*outbytesleft\fP by the number of converted
 output bytes, and it updates the conversion state contained in \fIcd\fP.
 The conversion can stop for four reasons:
 .PP
@@ -60,7 +60,7 @@ initial state and store a corresponding shift sequence at \fI*outbuf\fP.
 At most \fI*outbytesleft\fP bytes, starting at \fI*outbuf\fP, will be written.
 If the output buffer has no more room for this reset sequence, it sets
 \fBerrno\fP to \fBE2BIG\fP and returns (size_t)(-1). Otherwise it increments
-\fI*outbuf\fP and decrements \fI*outbytesptr\fP by the number of bytes
+\fI*outbuf\fP and decrements \fI*outbytesleft\fP by the number of bytes
 written.
 .PP
 A third case is when \fIinbuf\fP is NULL or \fI*inbuf\fP is NULL, and
