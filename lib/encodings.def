@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -538,6 +538,11 @@ DEFENCODING(( "GEORGIAN-PS",
             ),
             georgian_ps,
             { georgian_ps_mbtowc, NULL }, { georgian_ps_wctomb, NULL })
+
+DEFENCODING(( "KOI8-T",
+            ),
+            koi8_t,
+            { koi8_t_mbtowc, NULL },      { koi8_t_wctomb, NULL })
 
 DEFENCODING(( "MULELAO-1",
             ),

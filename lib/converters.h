@@ -174,6 +174,7 @@ struct conv_struct {
 #include "armscii_8.h"
 #include "georgian_academy.h"
 #include "georgian_ps.h"
+#include "koi8_t.h"
 #include "mulelao.h"
 #include "cp1133.h"
 #include "tis620.h"

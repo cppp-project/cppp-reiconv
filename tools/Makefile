@@ -51,6 +51,7 @@ ALL = \
  armscii_8.h \
  georgian_academy.h \
  georgian_ps.h \
+ koi8_t.h \
  mulelao.h \
  cp1133.h \
  tis620.h \
@@ -246,6 +247,9 @@ georgian_academy.h : $(TABLESDIR)/csets-1.6/GEO-ITA.TXT 8bit_tab_to_h
 
 georgian_ps.h : $(TABLESDIR)/csets-1.6/GEO-PS.TXT 8bit_tab_to_h
 	./8bit_tab_to_h GEORGIAN-PS georgian_ps < $<
+
+koi8_t.h : $(TABLESDIR)/glibc-2.2.90-iconv/KOI8-T.TXT
+	(echo '#' ; cat $<) | ./8bit_tab_to_h KOI8-T koi8_t
 
 mulelao.h : $(TABLESDIR)/csets-new/MULELAO1.TXT 8bit_tab_to_h
 	./8bit_tab_to_h MULELAO-1 mulelao < $<

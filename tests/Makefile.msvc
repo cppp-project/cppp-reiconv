@@ -115,6 +115,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) ARMSCII-8
 	$(srcdir)\check-stateless.bat $(srcdir) Georgian-Academy
 	$(srcdir)\check-stateless.bat $(srcdir) Georgian-PS
+	$(srcdir)\check-stateless.bat $(srcdir) KOI8-T
 	$(srcdir)\check-stateless.bat $(srcdir) MuleLao-1
 	$(srcdir)\check-stateless.bat $(srcdir) CP1133
 	$(srcdir)\check-stateless.bat $(srcdir) TIS-620

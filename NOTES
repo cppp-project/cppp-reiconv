@@ -158,6 +158,9 @@ A: libiconv, as an internationalization library, supports those character
        on Unix in Russia and Ukraine, respectively.
      * KOI8-RU
        We implement this because MSIE4 supports it.
+     * KOI8-T
+       We implement this because it is the locale encoding in glibc's Tajik
+       locale.
      * CP{1250,1251,1252,1253,1254,1255,1256,1257}
        We implement these because they are the predominant Windows encodings
        in Europe.

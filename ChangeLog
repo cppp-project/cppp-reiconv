@@ -1,5 +1,19 @@
 2002-05-09  Bruno Haible  <bruno@clisp.org>
 
+	Implement and document KOI8-T.
+	* tools/Makefile (ALL): Add koi8_t.h.
+	(koi8_t.h): New rule.
+	* lib/koi8_t.h: New file.
+	* lib/converters.h: Include it.
+	* lib/encodings.def (KOI8-T): New encoding.
+	* README, man/iconv_open.3: Add KOI8-T.
+	* tests/Makefile.in (tests): Check KOI8-T.
+	* tests/Makefile.os2 (tests): Likewise.
+	* tests/Makefile.msvc (tests): Likewise.
+	* tests/KOI8-T.TXT: New file.
+
+2002-05-09  Bruno Haible  <bruno@clisp.org>
+
 	* tools/8bit_tab_to_h.c (main): Update copyright year.
 	* tools/cjk_variants.c (main): Likewise.
 
