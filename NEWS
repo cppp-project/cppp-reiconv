@@ -2,6 +2,7 @@ New in 1.5:
 * New locale dependent encodings "char", "wchar_t".
 * Transliteration is now off by default. Use a //TRANSLIT suffix to enable it.
 * The JOHAB encoding is documented again.
+* Changed a few mappings in the CP950 converter.
 
 New in 1.4:
 * Added GB18030, BIG5HKSCS converters.

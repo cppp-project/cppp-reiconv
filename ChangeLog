@@ -1,5 +1,12 @@
 2000-11-18  Bruno Haible  <haible@clisp.cons.org>
 
+        * src/cp950.h (cp950_mbtowc, cp950_wctomb): Change implementation
+          so that it agrees with Microsoft's definition of CP950.
+        * tests/CP950.TXT: Likewise.
+        * tests/CP950.IRREVERSIBLE.TXT: Add 0xA244, 0xA2CC, 0xA2CE.
+
+2000-11-18  Bruno Haible  <haible@clisp.cons.org>
+
         Add support for locale dependent "char" and "wchar_t" encodings.
         * libcharset: New subdirectory.
         * src/loop_unicode.h: New file, extracted from src/iconv.c.
