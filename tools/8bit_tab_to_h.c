@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software; you can redistribute it and/or modify
@@ -144,7 +144,7 @@ int main (int argc, char *argv[])
     }
 
     fprintf(f, "/*\n");
-    fprintf(f, " * Copyright (C) 1999-2001 Free Software Foundation, Inc.\n");
+    fprintf(f, " * Copyright (C) 1999-2002 Free Software Foundation, Inc.\n");
     fprintf(f, " * This file is part of the GNU LIBICONV Library.\n");
     fprintf(f, " *\n");
     fprintf(f, " * The GNU LIBICONV Library is free software; you can redistribute it\n");

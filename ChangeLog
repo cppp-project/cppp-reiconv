@@ -1,3 +1,8 @@
+2002-05-09  Bruno Haible  <bruno@clisp.org>
+
+	* tools/8bit_tab_to_h.c (main): Update copyright year.
+	* tools/cjk_variants.c (main): Likewise.
+
 2002-05-08  Bruno Haible  <bruno@clisp.org>
 
 	* README.woe32: Renamed from README.win32.
