@@ -1,3 +1,8 @@
+2003-05-12  Bruno Haible  <bruno@clisp.org>
+
+	* lib/Makefile.msvc (PICFLAGS, CFLAGS): Move BUILDING_* macros from
+	CFLAGS to PICFLAGS.
+
 2003-05-09  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/error.c: Update from gnulib with modifications.
