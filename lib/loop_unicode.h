@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2003 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -121,7 +121,7 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
     /* Use the transliteration table. */
     int indx = translit_index(wc);
     if (indx >= 0) {
-      const unsigned short * cp = &translit_data[indx];
+      const unsigned int * cp = &translit_data[indx];
       unsigned int num = *cp++;
       state_t backup_state = cd->ostate;
       unsigned char* backup_outptr = outptr;
@@ -134,6 +134,9 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
           goto translit_failed;
         }
         sub_outcount = cd->ofuncs.xxx_wctomb(cd,outptr,cp[i],outleft);
+        if (sub_outcount == RET_ILUNI)
+          /* Recursive transliteration. */
+          sub_outcount = unicode_transliterate(cd,cp[i],outptr,outleft);
         if (sub_outcount <= RET_ILUNI)
           goto translit_failed;
         if (!(sub_outcount <= outleft)) abort();

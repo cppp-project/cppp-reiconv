@@ -1,3 +1,18 @@
+2003-01-31  Bruno Haible  <bruno@clisp.org>
+
+	* lib/loop_unicode.h (unicode_transliterate): Enable recursive
+	transliteration. Idea from Perry Rapp.
+	* lib/gentranslit.c (main): Change bound from 0x10000 to 0x110000.
+	Change element type of translit_data to 'unsigned int'.
+	* lib/translit.def: Many new transliterations, mostly taken from glibc.
+	* lib/translit.h: Regenerated.
+	* tests/Translit1.ISO-8859-1, tests/Translit1.ASCII: New files.
+	* tests/Makefile.in (check): Add Translit1 check.
+	* tests/Makefile.msvc (check): Likewise.
+	* tests/Makefile.os2 (check): Likewise.
+	* tests/TranslitFail1.ISO-8859-1: Choose a sentence which the new
+	improved transliteration cannot do.
+
 2003-02-14  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOCONF): Switch to autoconf-2.57.

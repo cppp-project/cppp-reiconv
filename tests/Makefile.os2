@@ -125,6 +125,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 #	/* transliteration */
 	$(srcdir)\check-translit $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)\check-translit $(srcdir) Quotes UTF-8 ASCII
+	$(srcdir)\check-translit $(srcdir) Translit1 ISO-8859-1 ASCII
 
 table-from.exe : table-from.c 
 	$(CC) $(INCLUDES) $(CFLAGS) table-from.c ../lib/iconv.a

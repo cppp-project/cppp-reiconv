@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2003 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -28,15 +28,15 @@
 
 int main (int argc, char *argv[])
 {
-  unsigned short data[0x100000];
-  int uni2index[0x10000];
+  unsigned int data[0x100000];
+  int uni2index[0x110000];
   int index;
 
   if (argc != 1)
     exit(1);
 
   printf("/*\n");
-  printf(" * Copyright (C) 1999-2001 Free Software Foundation, Inc.\n");
+  printf(" * Copyright (C) 1999-2003 Free Software Foundation, Inc.\n");
   printf(" * This file is part of the GNU LIBICONV Library.\n");
   printf(" *\n");
   printf(" * The GNU LIBICONV Library is free software; you can redistribute it\n");
@@ -62,7 +62,7 @@ int main (int argc, char *argv[])
   {
     int c;
     int j;
-    for (j = 0; j < 0x10000; j++)
+    for (j = 0; j < 0x110000; j++)
       uni2index[j] = -1;
     index = 0;
     for (;;) {
@@ -104,14 +104,14 @@ int main (int argc, char *argv[])
             }
           }
         }
-        data[index++] = (unsigned short) c;
+        data[index++] = (unsigned int) c;
       }
       if (uni2index[j] >= 0)
         data[uni2index[j]] = index - uni2index[j] - 1;
       do { c = getc(stdin); } while (!(c == EOF || c == '\n'));
     }
   }
-  printf("static const unsigned short translit_data[%d] = {",index);
+  printf("static const unsigned int translit_data[%d] = {",index);
   {
     int i;
     for (i = 0; i < index; i++) {
@@ -132,18 +132,18 @@ int main (int argc, char *argv[])
   }
   printf("\n");
   {
-    bool pages[0x100];
-    int line[0x2000];
+    bool pages[0x1100];
+    int line[0x22000];
     int tableno;
     struct { int minline; int maxline; int usecount; const char* suffix; } tables[0x2000];
     int i, j, p, j1, j2, t;
 
-    for (p = 0; p < 0x100; p++)
+    for (p = 0; p < 0x1100; p++)
       pages[p] = false;
-    for (j = 0; j < 0x10000; j++)
+    for (j = 0; j < 0x110000; j++)
       if (uni2index[j] >= 0)
         pages[j>>8] = true;
-    for (j1 = 0; j1 < 0x2000; j1++) {
+    for (j1 = 0; j1 < 0x22000; j1++) {
       bool all_invalid = true;
       for (j2 = 0; j2 < 8; j2++) {
         j = 8*j1+j2;
@@ -156,7 +156,7 @@ int main (int argc, char *argv[])
         line[j1] = 0;
     }
     tableno = 0;
-    for (j1 = 0; j1 < 0x2000; j1++) {
+    for (j1 = 0; j1 < 0x22000; j1++) {
       if (line[j1] >= 0) {
         if (tableno > 0
             && ((j1 > 0 && line[j1-1] == tableno-1)
@@ -216,9 +216,9 @@ int main (int argc, char *argv[])
         printf("\n");
     }
     printf("#define translit_index(wc) \\\n  (");
-    for (j1 = 0; j1 < 0x2000;) {
+    for (j1 = 0; j1 < 0x22000;) {
       t = line[j1];
-      for (j2 = j1; j2 < 0x2000 && line[j2] == t; j2++);
+      for (j2 = j1; j2 < 0x22000 && line[j2] == t; j2++);
       if (t >= 0) {
         if (j1 != tables[t].minline) abort();
         if (j2 > tables[t].maxline+1) abort();

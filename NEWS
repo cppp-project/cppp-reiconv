@@ -1,3 +1,6 @@
+New in 1.9:
+* Many more transliterations.
+
 New in 1.8:
 * The iconv program has new options -l, -c, -s.
 * The iconv program is internationalized.

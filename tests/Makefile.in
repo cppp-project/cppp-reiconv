@@ -138,6 +138,7 @@ check : all table-from table-to ../src/iconv_no_i18n
 #	/* transliteration */
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
+	$(srcdir)/check-translit $(srcdir) Translit1 ISO-8859-1 ASCII
 	$(srcdir)/check-translitfailure $(srcdir) TranslitFail1 ISO-8859-1 ASCII
 
 check-extra: check-extra-@USE_EXTRA_ENCODINGS@

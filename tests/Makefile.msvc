@@ -172,6 +172,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 #	/* transliteration */
 	$(srcdir)\check-translit.bat $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)\check-translit.bat $(srcdir) Quotes UTF-8 ASCII
+	$(srcdir)\check-translit.bat $(srcdir) Translit1 ISO-8859-1 ASCII
 
 table-from.exe : $(srcdir)/table-from.c ../lib/iconv.lib
 	$(CC) $(INCLUDES) $(CFLAGS) $(srcdir)/table-from.c ../lib/iconv.lib -Fetable-from.exe
