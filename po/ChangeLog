@@ -1,3 +1,8 @@
+2003-10-14 Bruno Haible  <bruno@clisp.org>
+
+	* pl.po: New file, from Arkadiusz Lipiec <A.Lipiec@elka.pw.edu.pl>.
+	* LINGUAS: Add pl.
+
 2003-08-22  Bruno Haible  <bruno@clisp.org>
 
 	* wa.po: New file, from Pablo Saratxaga <pablo@walon.org>.
