@@ -1,5 +1,15 @@
 2003-04-12  Bruno Haible  <bruno@clisp.org>
 
+	Better support for FreeBSD.
+	* lib/encodings.def (ISO8859-{1,2,3,4,5,6,7,8,9,10,13,14,15,16): New
+	aliases, for compatibility with earlier FreeBSD iconv implementation
+	by Konstantin Chuguev.
+	* lib/iconv.c (iconv_open, iconv, iconv_close) [FreeBSD]: Define as
+	aliases.
+	* src/Makefile.in (install) [FreeBSD]: Avoid installation problem.
+
+2003-04-12  Bruno Haible  <bruno@clisp.org>
+
 	* configure.in (mandir): Change default value.
 	* Makefile.in (datadir): New variable.
 	(install, installdirs, uninstall): Pass datadir to po and man
