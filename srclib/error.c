@@ -36,7 +36,7 @@
 #endif
 
 #if HAVE_VPRINTF || HAVE_DOPRNT || _LIBC
-# if __STDC__
+# if __STDC__ || defined _MSC_VER
 #  include <stdarg.h>
 #  define VA_START(args, lastarg) va_start(args, lastarg)
 # else
@@ -251,7 +251,7 @@ error_tail (int status, int errnum, const char *message, va_list args)
    Exit with status STATUS if it is nonzero.  */
 /* VARARGS */
 void
-#if defined VA_START && __STDC__
+#if defined VA_START && (__STDC__ || defined _MSC_VER)
 error (int status, int errnum, const char *message, ...)
 #else
 error (status, errnum, message, va_alist)
@@ -314,7 +314,7 @@ error (status, errnum, message, va_alist)
 int error_one_per_line;
 
 void
-#if defined VA_START && __STDC__
+#if defined VA_START && (__STDC__ || defined _MSC_VER)
 error_at_line (int status, int errnum, const char *file_name,
 	       unsigned int line_number, const char *message, ...)
 #else

@@ -1,6 +1,6 @@
 /* xreadlink.c -- readlink wrapper to return the link name in malloc'd storage
 
-   Copyright 2001, 2003 Free Software Foundation, Inc.
+   Copyright (C) 2001, 2003 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -34,12 +34,8 @@
 extern int errno;
 #endif
 
-#if HAVE_LIMITS_H
-# include <limits.h>
-#endif
-#if HAVE_SYS_TYPES_H
-# include <sys/types.h>
-#endif
+#include <limits.h>
+#include <sys/types.h>
 #if HAVE_STDLIB_H
 # include <stdlib.h>
 #endif
@@ -57,7 +53,7 @@ extern int errno;
 #ifdef NO_XMALLOC
 # define xmalloc malloc
 #else
-# include "xmalloc.h"
+# include "xalloc.h"
 #endif
 
 /* Call readlink to get the symbolic link value of FILENAME.

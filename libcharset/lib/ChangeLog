@@ -1,3 +1,27 @@
+2004-01-20  Bruno Haible  <bruno@clisp.org>
+
+	Upgrade from gettext-0.14.
+
+	2003-10-09  Bruno Haible  <bruno@clisp.org>
+	* relocatable.c: Include xalloc.h instead of xmalloc.h.
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* relocatable.h: Make this file includable in C++ mode: add extern "C".
+
+	2003-08-01  Bruno Haible  <bruno@clisp.org>
+	* relocatable.c (find_shared_library_fullname): Disable the code on
+	Linux/libc5. Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+	2003-06-27  Bruno Haible  <bruno@clisp.org>
+	Avoid use of *_unlocked functions on Solaris 2.5.1.
+	* localcharset.c: Test HAVE_DECL_GETC_UNLOCKED, not HAVE_GETC_UNLOCKED.
+	Reported by Eric Botcazou <ebotcazou@libertysurf.fr>.
+
+	2003-06-22  Bruno Haible  <bruno@clisp.org>
+	* relocatable.c (compute_curr_prefix): Comment out this function in
+	the case when it is not used.
+	Reported by Pavel Roskin <proski@gnu.org>.
+
 2004-01-21  Bruno Haible  <bruno@clisp.org>
 
 	Upgrade from gettext-0.14.

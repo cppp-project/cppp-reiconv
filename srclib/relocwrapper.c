@@ -21,9 +21,12 @@
     -> progname
     -> progreloc
         -> xreadlink
+           -> readlink
         -> canonicalize
+           -> allocsa
     -> relocatable
     -> setenv
+       -> allocsa
     -> strerror
 
    Macros that need to be set while compiling this file:

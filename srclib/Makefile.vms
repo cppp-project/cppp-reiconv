@@ -39,6 +39,7 @@ INSTALL_DATA = copy
 #### End of system configuration section. ####
 
 OBJECTS = \
+  allocsa.obj, \
   error.obj, \
   progname.obj, progreloc.obj, \
   xmalloc.obj, xstrdup.obj, \
@@ -52,6 +53,9 @@ all : icrt.olb
 
 alloca.h : alloca_.h
 	$(LN) alloca_.h alloca.h
+
+allocsa.obj : allocsa.c,alloca.h
+	$(CC) $(INCLUDES) $(CFLAGS) /define=($(DEFS)) allocsa.c
 
 error.obj : error.c
 	$(CC) $(INCLUDES) $(CFLAGS) /define=($(DEFS)) error.c

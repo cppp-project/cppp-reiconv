@@ -18,9 +18,14 @@
 #ifndef _BINARY_H
 #define _BINARY_H
 
-#include <fcntl.h>
 /* For systems that distinguish between text and binary I/O.
    O_BINARY is usually declared in <fcntl.h>. */
+#include <fcntl.h>
+
+/* The MSVC7 <stdio.h> doesn't like to be included after '#define fileno ...',
+   so we include it here first.  */
+#include <stdio.h>
+
 #if !defined O_BINARY && defined _O_BINARY
   /* For MSC-compatible compilers.  */
 # define O_BINARY _O_BINARY
@@ -32,12 +37,14 @@
 # undef O_TEXT
 #endif
 #if O_BINARY
-# if !(defined __EMX__ || defined __DJGPP__)
+# if !(defined __EMX__ || defined __DJGPP__ || defined __CYGWIN__)
 #  define setmode _setmode
 #  define fileno _fileno
 # endif
-# ifdef __DJGPP__
+# if defined __DJGPP__ || defined __CYGWIN__
 #  include <io.h> /* declares setmode() */
+# endif
+# ifdef __DJGPP__
 #  include <unistd.h> /* declares isatty() */
 #  /* Avoid putting stdin/stdout in binary mode if it is connected to the
 #     console, because that would make it impossible for the user to
@@ -48,6 +55,7 @@
 # endif
 #else
   /* On reasonable systems, binary I/O is the default.  */
+# undef O_BINARY
 # define O_BINARY 0
 # define SET_BINARY(fd) /* nothing */
 #endif

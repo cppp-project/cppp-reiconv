@@ -1,5 +1,5 @@
 ## Makefile for the srclib subdirectory of GNU libiconv
-## Copyright (C) 2003 Free Software Foundation, Inc.
+## Copyright (C) 2003-2004 Free Software Foundation, Inc.
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -28,18 +28,18 @@ noinst_LIBRARIES = libicrt.a
 # Sources that are compiled on all platforms.
 
 libicrt_a_SOURCES = \
+  allocsa.h allocsa.c \
   error.h error.c \
   exit.h \
   pathmax.h \
   progname.h progname.c progreloc.c \
   unlocked-io.h \
-  xmalloc.h xmalloc.c xstrdup.c \
+  xalloc.h xmalloc.c xstrdup.c \
   xreadlink.h xreadlink.c
 
 # Sources that are compiled only on platforms that lack the functions.
 
 LIBADD_SOURCE = \
-  alloca.c \
   canonicalize.h canonicalize.c \
   memmove.c \
   readlink.c \
@@ -49,7 +49,7 @@ LIBADD_SOURCE = \
 
 # How to build libicrt.a.
 
-libicrt_a_LIBADD = @ALLOCA@ @LIBOBJS@
+libicrt_a_LIBADD = @LIBOBJS@
 
 # List of files to be distributed.
 
