@@ -73,10 +73,20 @@ DEFENCODING(( "UCS-4",                  /* glibc */
             ucs4,
             { ucs4_mbtowc },              { ucs4_wctomb, NULL })
 
-DEFENCODING(( "UTF-16",
+DEFENCODING(( "UTF-16",                 /* RFC 2781 */
             ),
             utf16,
             { utf16_mbtowc },             { utf16_wctomb, NULL })
+
+DEFENCODING(( "UTF-16BE",               /* RFC 2781 */
+            ),
+            utf16be,
+            { utf16be_mbtowc },           { utf16be_wctomb, NULL })
+
+DEFENCODING(( "UTF-16LE",               /* RFC 2781 */
+            ),
+            utf16le,
+            { utf16le_mbtowc },           { utf16le_wctomb, NULL })
 
 DEFENCODING(( "UTF-7",                  /* IANA, RFC 2152 */
               "UNICODE-1-1-UTF-7",      /* IANA, RFC 1642 */

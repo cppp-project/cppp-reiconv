@@ -99,6 +99,8 @@ struct conv_struct {
 #include "ucs2.h"
 #include "ucs4.h"
 #include "utf16.h"
+#include "utf16be.h"
+#include "utf16le.h"
 #include "utf7.h"
 #include "ucs2internal.h"
 #include "ucs2swapped.h"

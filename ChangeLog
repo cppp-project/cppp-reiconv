@@ -1,3 +1,21 @@
+2000-03-15  Bruno Haible  <haible@clisp.cons.org>
+
+        * Version 1.2 released.
+        * include/iconv.h.in (_LIBICONV_VERSION): Bump version number.
+        * src/Makefile.in (LIBICONV_VERSION_INFO): Define to 1:1:1.
+
+2000-03-14  Bruno Haible  <haible@clisp.cons.org>
+
+        Implement and document UTF-16BE and UTF16-LE.
+        * src/utf16be.h, src/utf16le.h: New files.
+        * src/converters.h: Include them.
+        * src/encodings.def (UTF-16BE, UTF16-LE): New encodings.
+        * README, man/iconv_open.3: Add UTF-16BE, UTF16-LE.
+        * tests/Makefile.in (check): Check UTF-16, UTF-16BE, UTF16-LE.
+        * tests/UTF-16*snippet*: New files.
+
+        * src/utf16.h (utf16_wctomb): Output a byte order mark.
+
 2000-03-13  Bruno Haible  <haible@clisp.cons.org>
 
         Provide all encodings used by AIX locales.
@@ -104,7 +122,7 @@
         * src/uhc_1.h, src/uhc_2.h: New files.
         * src/cp949.h: New file, include them.
         * src/converters.h: Include it.
-        * encodings.def (KSC_5601): Remove alias CP949.
+        * src/encodings.def (KSC_5601): Remove alias CP949.
           (CP949): New encoding.
         * README, man/iconv_open.3: Add CP949.
         * tests/Makefile.in (check): Check CP949.

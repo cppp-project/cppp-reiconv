@@ -18,6 +18,8 @@ UCS-4, ei_ucs4
 ISO-10646-UCS-4, ei_ucs4
 CSUCS4, ei_ucs4
 UTF-16, ei_utf16
+UTF-16BE, ei_utf16be
+UTF-16LE, ei_utf16le
 UTF-7, ei_utf7
 UNICODE-1-1-UTF-7, ei_utf7
 CSUNICODE11UTF7, ei_utf7

@@ -35,6 +35,9 @@ check : all table-from table-to iconv
 	$(srcdir)/check-stateless . UTF-8 && \
 	$(RM) genutf8 UTF-8.TXT
 	$(srcdir)/check-stateful $(srcdir) UTF-7
+	$(srcdir)/check-stateful $(srcdir) UTF-16
+	$(srcdir)/check-stateful $(srcdir) UTF-16BE
+	$(srcdir)/check-stateful $(srcdir) UTF-16LE
 #	/* 8-bit encodings */
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-1
 	$(srcdir)/check-stateless $(srcdir) ISO-8859-2

@@ -1,3 +1,9 @@
+New in 1.2:
+* Added UTF-16BE and UTF16-LE converters.
+* Changed the UTF-16 encoder.
+* Fixed the treatment of tab characters in the UTF-7 converter.
+* Fixed an internal error when output buffer was not large enough.
+
 New in 1.1:
 * Added ISO-8859-16 converter.
 * Added CP932 converter, a variant of SHIFT-JIS.
