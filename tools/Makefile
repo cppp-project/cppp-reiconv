@@ -93,6 +93,9 @@ ALL = \
  cp1046.h \
  cp1124.h \
  cp1129.h \
+ cp1161.h \
+ cp1162.h \
+ cp1163.h \
  cp437.h \
  cp775.h \
  cp852.h \
@@ -399,6 +402,15 @@ cp1124.h : $(TABLESDIR)/aix-4.3.2/IBM-1124.TXT 8bit_tab_to_h
 
 cp1129.h : $(TABLESDIR)/aix-4.3.2/IBM-1129.TXT 8bit_tab_to_h
 	(echo '#' ; cat $<) | ./8bit_tab_to_h CP1129 cp1129
+
+cp1161.h : $(TABLESDIR)/glibc-2.2.90-iconv/IBM1161.TXT
+	(echo '#' ; cat $(TABLESDIR)/glibc-2.2-iconv/ASCII.TXT ; grep -v '^0x[0-7]' $<) | ./8bit_tab_to_h CP1161 cp1161
+
+cp1162.h : $(TABLESDIR)/glibc-2.2.90-iconv/IBM1162.TXT
+	(echo '#' ; cat $<) | ./8bit_tab_to_h CP1162 cp1162
+
+cp1163.h : $(TABLESDIR)/glibc-2.2.90-iconv/IBM1163.TXT
+	(echo '#' ; cat $<) | ./8bit_tab_to_h CP1163 cp1163
 
 
 cp437.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP437.TXT 8bit_tab_to_h

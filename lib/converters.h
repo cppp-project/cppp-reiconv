@@ -239,6 +239,9 @@ typedef struct {
 #include "cp1046.h"
 #include "cp1124.h"
 #include "cp1129.h"
+#include "cp1161.h"
+#include "cp1162.h"
+#include "cp1163.h"
 #endif
 
 #ifdef USE_OSF1

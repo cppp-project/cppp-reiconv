@@ -1,5 +1,16 @@
 2002-05-09  Bruno Haible  <bruno@clisp.org>
 
+	Implement new ASCII compatible encodings from IBM.
+	* tools/Makefile (ALL): Add cp1161.h, cp1162.h, cp1163.h.
+	(cp1161.h, cp1162.h, cp1163.h): New rules.
+	* lib/cp1161.h: New file.
+	* lib/cp1162.h: New file.
+	* lib/cp1163.h: New file.
+	* lib/converters.h: Include them.
+	* lib/encodings_aix.def (CP1161, CP1162, CP1163): New encodings.
+
+2002-05-09  Bruno Haible  <bruno@clisp.org>
+
 	Implement and document KOI8-T.
 	* tools/Makefile (ALL): Add koi8_t.h.
 	(koi8_t.h): New rule.
