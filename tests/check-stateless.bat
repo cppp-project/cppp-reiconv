@@ -8,7 +8,7 @@ fc %1\%2.TXT tmp-%2.TXT
 
 if not exist %1\%2.IRREVERSIBLE.TXT goto ELSE_1
   copy /a %1\%2.TXT /a + %1\%2.IRREVERSIBLE.TXT /a tmp
-  sort tmp | uniq-u > tmp-orig-%2.INVERSE.TXT
+  sort < tmp | uniq-u > tmp-orig-%2.INVERSE.TXT
   fc tmp-orig-%2.INVERSE.TXT tmp-%2.INVERSE.TXT
   del tmp
   del tmp-orig-%2.INVERSE.TXT

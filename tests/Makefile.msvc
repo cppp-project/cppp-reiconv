@@ -3,9 +3,32 @@
 #### Start of system configuration section. ####
 
 # Flags that can be set on the nmake command line:
-#   STATIC=1  for compiling a static .lib (default is a .dll with a stub .lib)
+#   STATIC=0  for compiling a .dll with a stub .lib (default is a static .lib)
+#             Note that this works only with MFLAGS=-MD.
+#   MFLAGS={-ML|-MT|-MD} for defining the compilation model
+#     MFLAGS=-ML (the default)  Single-threaded, statically linked - libc.lib
+#     MFLAGS=-MT                Multi-threaded, statically linked  - libcmt.lib
+#     MFLAGS=-MD                Multi-threaded, dynamically linked - msvcrt.lib
+#   DEBUG=1   for compiling with debugging information
 !if !defined(STATIC)
-STATIC=0
+STATIC=1
+!endif
+!if !defined(DEBUG)
+DEBUG=0
+!endif
+!if !defined(MFLAGS)
+!if $(STATIC)
+MFLAGS=
+!else
+MFLAGS=-MD
+!endif
+!endif
+
+!if $(DEBUG)
+OPTIMFLAGS = -Od -Z7
+!else
+# Some people prefer -O2 -G6 instead of -O1, but -O2 is not reliable in MSVC5.
+OPTIMFLAGS = -D_NDEBUG -O1
 !endif
 
 # Directories used by "make":
@@ -13,7 +36,7 @@ srcdir = .
 
 # Programs used by "make":
 CC = cl
-CFLAGS = -MD -W1 -O1
+CFLAGS = $(MFLAGS) -W1 $(OPTIMFLAGS)
 CPP = cl -E
 INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include
 RM = del

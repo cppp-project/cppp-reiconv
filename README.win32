@@ -11,15 +11,15 @@ Installation on Win32 (WinNT, Win95/98):
 
    For shared library (DLL):
 
-        nmake -f Makefile.msvc
+        nmake -f Makefile.msvc STATIC=0
    or
-        nmake -f Makefile.msvc check               [This runs the testsuite.]
+        nmake -f Makefile.msvc STATIC=0 check      [This runs the testsuite.]
 
    For static library:
 
-        nmake -f Makefile.msvc STATIC=1
+        nmake -f Makefile.msvc
    or
-        nmake -f Makefile.msvc STATIC=1 check      [This runs the testsuite.]
+        nmake -f Makefile.msvc check               [This runs the testsuite.]
 
    If you want to build both the shared and static library, you have to
    unpack the libiconv sources twice in different directories. Don't mix

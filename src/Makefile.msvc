@@ -3,13 +3,25 @@
 #### Start of system configuration section. ####
 
 # Flags that can be set on the nmake command line:
-#   STATIC=1  for compiling a static .lib (default is a .dll with a stub .lib)
+#   STATIC=0  for compiling a .dll with a stub .lib (default is a static .lib)
+#             Note that this works only with MFLAGS=-MD.
+#   MFLAGS={-ML|-MT|-MD} for defining the compilation model
+#     MFLAGS=-ML (the default)  Single-threaded, statically linked - libc.lib
+#     MFLAGS=-MT                Multi-threaded, statically linked  - libcmt.lib
+#     MFLAGS=-MD                Multi-threaded, dynamically linked - msvcrt.lib
 #   DEBUG=1   for compiling with debugging information
 !if !defined(STATIC)
-STATIC=0
+STATIC=1
 !endif
 !if !defined(DEBUG)
 DEBUG=0
+!endif
+!if !defined(MFLAGS)
+!if $(STATIC)
+MFLAGS=
+!else
+MFLAGS=-MD
+!endif
 !endif
 
 # Directories used by "make":
@@ -44,9 +56,8 @@ OPTIMFLAGS = -Od -Z7
 OPTIMFLAGS = -D_NDEBUG -O1
 !endif
 
-# -MD: use MSVCRT.DLL for C runtime library.
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
-CFLAGS = -MD $(WARN_CFLAGS) $(PICFLAGS) $(OPTIMFLAGS) -DBUILDING_LIBICONV
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(PICFLAGS) $(OPTIMFLAGS) -DBUILDING_LIBICONV
 
 CPP = cl -E
 
@@ -94,7 +105,7 @@ iconv.lib : $(OBJECTS)
 
 # iconv.dll and iconv.lib are created together.
 iconv.lib : $(OBJECTS) $(RESOURCES)
-	$(CC) -MD -LD $(OBJECTS) $(RESOURCES)
+	$(CC) $(MFLAGS) -LD $(OBJECTS) $(RESOURCES)
 
 iconv.res : $(srcdir)/../windows/iconv.rc
 	rc -Fo iconv.res $(srcdir)/../windows/iconv.rc
