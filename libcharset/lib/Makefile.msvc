@@ -58,9 +58,11 @@ PICFLAGS = -GD
 
 !if $(DEBUG)
 OPTIMFLAGS = -Od -Z7
+DEBUGFLAGS = -Z7
 !else
 # Some people prefer -O2 -G6 instead of -O1, but -O2 is not reliable in MSVC5.
 OPTIMFLAGS = -D_NDEBUG -O1
+DEBUGFLAGS =
 !endif
 
 # -DBUILDING_LIBCHARSET: Change expansion of LIBCHARSET_DLL_EXPORTED macro.
@@ -105,7 +107,7 @@ charset.lib : $(OBJECTS)
 
 # charset.dll and charset.lib are created together.
 charset.lib : $(OBJECTS) $(RESOURCES)
-	$(CC) $(MFLAGS) -LD $(OBJECTS) $(RESOURCES) -Fecharset.dll
+	$(CC) $(MFLAGS) $(DEBUGFLAGS) -LD $(OBJECTS) $(RESOURCES) -Fecharset.dll
 
 charset.res : $(srcdir)/../windows/charset.rc
 	rc -Fo charset.res $(srcdir)/../windows/charset.rc

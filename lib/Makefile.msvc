@@ -65,9 +65,11 @@ PICFLAGS = -GD -DBUILDING_LIBICONV -DBUILDING_DLL
 
 !if $(DEBUG)
 OPTIMFLAGS = -Od -Z7
+DEBUGFLAGS = -Z7
 !else
 # Some people prefer -O2 -G6 instead of -O1, but -O2 is not reliable in MSVC5.
 OPTIMFLAGS = -D_NDEBUG -O1
+DEBUGFLAGS =
 !endif
 
 CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H -DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(IIbindir)\" -DNO_XMALLOC -Dset_relocation_prefix=libiconv_set_relocation_prefix -Drelocate=libiconv_relocate
@@ -118,7 +120,7 @@ iconv.lib : $(OBJECTS)
 
 # iconv.dll and iconv.lib are created together.
 iconv.lib : $(OBJECTS) $(RESOURCES)
-	$(CC) $(MFLAGS) -LD $(OBJECTS) $(RESOURCES) -Feiconv.dll
+	$(CC) $(MFLAGS) $(DEBUGFLAGS) -LD $(OBJECTS) $(RESOURCES) -Feiconv.dll
 
 iconv.res : $(srcdir)/../windows/iconv.rc
 	rc -Fo iconv.res $(srcdir)/../windows/iconv.rc

@@ -1,3 +1,8 @@
+2003-05-18  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.msvc (DEBUGFLAGS): New variable.
+	(charset.lib): Use it.
+
 2003-05-07  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.vms: New file.

@@ -26,9 +26,11 @@ MFLAGS=-MD
 
 !if $(DEBUG)
 OPTIMFLAGS = -Od -Z7
+DEBUGFLAGS = -Z7
 !else
 # Some people prefer -O2 -G6 instead of -O1, but -O2 is not reliable in MSVC5.
 OPTIMFLAGS = -D_NDEBUG -O1
+DEBUGFLAGS =
 !endif
 
 # Directories used by "make":
