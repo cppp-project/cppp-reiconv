@@ -1,5 +1,28 @@
 2005-03-13  Bruno Haible  <bruno@clisp.org>
 
+	* include/iconv.h.in (iconv_canonicalize): New declaration.
+	* lib/genaliases.c (emit_encoding): Take two output streams as
+	arguments. To the second stream, emit a shell command for extracting
+	offsets into the gperf generated string pool.
+	(main): Write the shell commands into file descriptors 3 and 4.
+	* lib/genaliases2.c (emit_encoding): Take two output streams as
+	arguments. To the second stream, emit an expression for the offset
+	into the string pool.
+	(main): Write the offsets into file descriptor 3.
+	* Makefile.devel (lib/aliases.gperf): Remove target.
+	(lib/aliases.h): Generate lib/aliases.gperf temporarily. Generate also
+	lib/canonical.h and lib/canonical_local.h.
+	(lib/aliases_aix.h): Generate also lib/canonical_aix.h.
+	(lib/aliases_osf1.h): Generate also lib/canonical_osf1.h.
+	(lib/aliases_dos.h): Generate also lib/canonical_dos.h.
+	(lib/aliases_extra.h): Generate also lib/canonical_extra.h.
+	* lib/iconv.c (stringpool2): Provide default definition when it doesn't
+	exist.
+	(all_canonical): New array.
+	(iconv_canonicalize): New function.
+
+2005-03-13  Bruno Haible  <bruno@clisp.org>
+
 	* include/iconv.h.in (iconv_unicode_char_hook, iconv_wide_char_hook,
 	iconv_hooks): New types.
 	(ICONV_SET_HOOKS): New macro.

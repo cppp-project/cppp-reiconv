@@ -175,6 +175,7 @@ aliases2_lookup (register const char *str)
 }
 #else
 #define aliases2_lookup(str)  NULL
+#define stringpool2  NULL
 #endif
 
 #if 0
@@ -575,6 +576,113 @@ void iconvlist (int (*do_one) (unsigned int namescount,
 #undef aliascount
 #undef aliascount2
 #undef aliascount1
+}
+
+/*
+ * Table of canonical names of encodings.
+ * Instead of strings, it contains offsets into stringpool and stringpool2.
+ */
+static const unsigned short all_canonical[] = {
+#include "canonical.h"
+#ifdef USE_AIX
+#include "canonical_aix.h"
+#endif
+#ifdef USE_OSF1
+#include "canonical_osf1.h"
+#endif
+#ifdef USE_DOS
+#include "canonical_dos.h"
+#endif
+#ifdef USE_EXTRA
+#include "canonical_extra.h"
+#endif
+#include "canonical_local.h"
+};
+
+const char * iconv_canonicalize (const char * name)
+{
+  const char* code;
+  char buf[MAX_WORD_LENGTH+10+1];
+  const char* cp;
+  char* bp;
+  const struct alias * ap;
+  unsigned int count;
+  unsigned int index;
+  const char* pool;
+
+  /* Before calling aliases_lookup, convert the input string to upper case,
+   * and check whether it's entirely ASCII (we call gperf with option "-7"
+   * to achieve a smaller table) and non-empty. If it's not entirely ASCII,
+   * or if it's too long, it is not a valid encoding name.
+   */
+  for (code = name;;) {
+    /* Search code in the table. */
+    for (cp = code, bp = buf, count = MAX_WORD_LENGTH+10+1; ; cp++, bp++) {
+      unsigned char c = * (unsigned char *) cp;
+      if (c >= 0x80)
+        goto invalid;
+      if (c >= 'a' && c <= 'z')
+        c -= 'a'-'A';
+      *bp = c;
+      if (c == '\0')
+        break;
+      if (--count == 0)
+        goto invalid;
+    }
+    if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+      bp -= 10;
+      *bp = '\0';
+    }
+    if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
+      bp -= 8;
+      *bp = '\0';
+    }
+    if (buf[0] == '\0') {
+      code = locale_charset();
+      /* Avoid an endless loop that could occur when using an older version
+         of localcharset.c. */
+      if (code[0] == '\0')
+        goto invalid;
+      continue;
+    }
+    pool = stringpool;
+    ap = aliases_lookup(buf,bp-buf);
+    if (ap == NULL) {
+      pool = stringpool2;
+      ap = aliases2_lookup(buf);
+      if (ap == NULL)
+        goto invalid;
+    }
+    if (ap->encoding_index == ei_local_char) {
+      code = locale_charset();
+      /* Avoid an endless loop that could occur when using an older version
+         of localcharset.c. */
+      if (code[0] == '\0')
+        goto invalid;
+      continue;
+    }
+    if (ap->encoding_index == ei_local_wchar_t) {
+#if __STDC_ISO_10646__
+      if (sizeof(wchar_t) == 4) {
+        index = ei_ucs4internal;
+        break;
+      }
+      if (sizeof(wchar_t) == 2) {
+        index = ei_ucs2internal;
+        break;
+      }
+      if (sizeof(wchar_t) == 1) {
+        index = ei_iso8859_1;
+        break;
+      }
+#endif
+    }
+    index = ap->encoding_index;
+    break;
+  }
+  return all_canonical[index] + pool;
+ invalid:
+  return name;
 }
 
 int _libiconv_version = _LIBICONV_VERSION;

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2003 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2003, 2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,11 +21,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void emit_encoding (const char* tag, const char* const* names, size_t n, const char* c_name)
+static void emit_encoding (FILE* out1, FILE* out2, const char* tag, const char* const* names, size_t n, const char* c_name)
 {
   static unsigned int counter = 0;
+  fprintf(out2,"  (int)(long)&((struct stringpool2_t *)0)->stringpool_%s_%u,\n",tag,counter);
   for (; n > 0; names++, n--, counter++) {
-    printf("  S(%s_%u, \"",tag,counter);
+    fprintf(out1,"  S(%s_%u, \"",tag,counter);
     /* Output *names in upper case. */
     {
       const char* s = *names;
@@ -35,20 +36,23 @@ static void emit_encoding (const char* tag, const char* const* names, size_t n, 
           exit(1);
         if (c >= 'a' && c <= 'z')
           c -= 'a'-'A';
-        putc(c, stdout);
+        putc(c, out1);
       }
     }
-    printf("\", ei_%s )\n", c_name);
+    fprintf(out1,"\", ei_%s )\n", c_name);
   }
 }
 
 int main (int argc, char* argv[])
 {
   const char * tag = (argc > 1 ? argv[1] : "xxx");
+  FILE * stdout2 = fdopen(3, "w");
+  if (stdout2 == NULL)
+    exit(1);
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                           \
     static const char* const names[] = BRACIFY xxx_names;     \
-    emit_encoding(tag,names,sizeof(names)/sizeof(names[0]),#xxx); \
+    emit_encoding(stdout,stdout2,tag,names,sizeof(names)/sizeof(names[0]),#xxx); \
   }
 #define BRACIFY(...) { __VA_ARGS__ }
 #ifdef USE_AIX
@@ -66,7 +70,8 @@ int main (int argc, char* argv[])
 #undef BRACIFY
 #undef DEFENCODING
   fflush(stdout);
-  if (ferror(stdout))
+  fflush(stdout2);
+  if (ferror(stdout) || ferror(stdout2))
     exit(1);
   exit(0);
 }

@@ -170,34 +170,34 @@ include/iconv.h.msvc-shared : include/iconv.h.in windows/dllexport.h
 	sed -e 's/@ICONV_CONST@/const/g' -e 's/extern \([^"]\)/extern LIBICONV_DLL_EXPORTED \1/' -e '/_LIBICONV_VERSION/r windows/dllexport.h' < $< > $@
 
 
-lib/aliases.h : lib/aliases.gperf
+lib/aliases.h lib/canonical.h lib/canonical_local.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
+	$(CC) $(CFLAGS) lib/genaliases.c -o genaliases
+	./genaliases > lib/aliases.gperf 3> canonical.sh 4> canonical_local.sh
+	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases.gperf > tmp.h
 	$(CP) tmp.h lib/aliases.h
-	$(RM) tmp.h
+	sh canonical.sh > lib/canonical.h
+	sh canonical_local.sh > lib/canonical_local.h
+	$(RM) tmp.h canonical.sh canonical_local.sh
 
-lib/aliases.gperf : lib/encodings.def lib/encodings_local.def lib/genaliases.c
-	$(CC) $(CFLAGS) lib/genaliases.c -o genaliases
-	./genaliases > lib/aliases.gperf
-	$(RM) genaliases
-
-lib/aliases_aix.h : lib/encodings_aix.def lib/genaliases2.c
+lib/aliases_aix.h lib/canonical_aix.h : lib/encodings_aix.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_AIX lib/genaliases2.c -o genaliases
-	./genaliases aix > lib/aliases_aix.h
+	./genaliases aix > lib/aliases_aix.h 3> lib/canonical_aix.h
 	$(RM) genaliases
 
-lib/aliases_osf1.h : lib/encodings_osf1.def lib/genaliases2.c
+lib/aliases_osf1.h lib/canonical_osf1.h : lib/encodings_osf1.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_OSF1 lib/genaliases2.c -o genaliases
-	./genaliases osf1 > lib/aliases_osf1.h
+	./genaliases osf1 > lib/aliases_osf1.h 3> lib/canonical_osf1.h
 	$(RM) genaliases
 
-lib/aliases_dos.h : lib/encodings_dos.def lib/genaliases2.c
+lib/aliases_dos.h lib/canonical_dos.h : lib/encodings_dos.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_DOS lib/genaliases2.c -o genaliases
-	./genaliases dos > lib/aliases_dos.h
+	./genaliases dos > lib/aliases_dos.h 3> lib/canonical_dos.h
 	$(RM) genaliases
 
-lib/aliases_extra.h : lib/encodings_extra.def lib/genaliases2.c
+lib/aliases_extra.h lib/canonical_extra.h : lib/encodings_extra.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_EXTRA lib/genaliases2.c -o genaliases
-	./genaliases extra > lib/aliases_extra.h
+	./genaliases extra > lib/aliases_extra.h 3> lib/canonical_extra.h
 	$(RM) genaliases
 
 

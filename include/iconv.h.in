@@ -122,6 +122,10 @@ extern void iconvlist (int (*do_one) (unsigned int namescount,
                                       void* data),
                        void* data);
 
+/* Canonicalize an encoding name.
+   The result is either a canonical encoding name, or name itself. */
+extern const char * iconv_canonicalize (const char * name);
+
 /* Support for relocatable packages.  */
 
 /* Sets the original and the current installation prefix of the package.
