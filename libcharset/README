@@ -50,10 +50,11 @@ See file INTEGRATE.
 
 
 Distribution:
-    ftp://ftp.ilog.fr/pub/Users/haible/gnu/libcharset-1.0.tar.gz
+    The libcharset directory of
+    ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.8.tar.gz
 
 Homepage:
-    http://clisp.cons.org/~haible/packages-libcharset.html
+    http://www.haible.de/bruno/packages-libcharset.html
 
 
 Bruno Haible <bruno@clisp.org>
