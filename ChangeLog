@@ -1,5 +1,9 @@
 2001-06-25  Bruno Haible  <haible@clisp.cons.org>
 
+	* Makefile.devel (OTHERMACROS): Use libtool.m4 in libcharset subdir.
+
+2001-06-25  Bruno Haible  <haible@clisp.cons.org>
+
         * lib/encodings.def: Make SHIFT_JIS the primary name of SJIS.
 
 2001-06-08  Bruno Haible  <haible@clisp.cons.org>

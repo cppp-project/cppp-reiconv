@@ -35,7 +35,7 @@ CONFIGURES_IN = configure.in
 CLISP_DIR = ..
 ACLOCAL = $(CLISP_DIR)/src/autoconf/aclocal.m4
 ACSELECT = $(CLISP_DIR)/src/autoconf/acselect
-OTHERMACROS = $(CLISP_DIR)/src/autoconf/libtool.m4 autoconf/mbstate_t.m4
+OTHERMACROS = libcharset/m4/libtool.m4 autoconf/mbstate_t.m4
 
 autoconf/aclocal.m4 : $(ACLOCAL)
 	($(ACSELECT) `cat $(CONFIGURES_IN) | grep '^[A-Z][A-Z]_' | sed 's,[^A-Z_].*$$,,g' | sort | uniq` < $(ACLOCAL) ; cat $(OTHERMACROS) | sed -e 's,AC_CANONICAL_HOST,CL_CANONICAL_HOST,g' -e 's,AC_PROG_RANLIB,CL_PROG_RANLIB,g' -e 's,AC_PROG_LN_S,CL_PROG_LN_S,g') > autoconf/aclocal.m4
