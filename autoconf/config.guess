@@ -909,8 +909,8 @@ EOF
 	  # GCC wants to distinguish between linuxoldld and linuxaout.
 	  # If ld does not provide *any* "supported emulations:"
 	  # that means it is gnuoldld.
-	  echo "$ld_help_string" | grep >/dev/null 2>&1 "supported emulations:"
-	  test $? != 0 && echo "${UNAME_MACHINE}-pc-linuxoldld" && exit 0
+	  test -z "$ld_supported_emulations" \
+	    && echo "${UNAME_MACHINE}-pc-linux-gnuoldld" && exit 0
 
 	  case "${UNAME_MACHINE}" in
 	  i?86)
