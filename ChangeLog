@@ -1,3 +1,9 @@
+2003-05-06  Bruno Haible  <bruno@clisp.org>
+
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/nls.m4: Update from GNU gettext.
+	* m4/po.m4: Update from GNU gettext.
+
 2003-04-12  Bruno Haible  <bruno@clisp.org>
 
 	Support for OpenVMS 7.3.
