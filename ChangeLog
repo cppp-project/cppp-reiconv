@@ -1,3 +1,7 @@
+2000-10-22  Bruno Haible  <haible@clisp.cons.org>
+
+        * src/gentranslit.c (main): Read the input in UTF-8 encoding.
+
 2000-10-09  Bruno Haible  <haible@clisp.cons.org>
 
         CPU recognition on OpenBSD.

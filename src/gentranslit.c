@@ -52,6 +52,21 @@ int main (int argc, char *argv[])
           uni2index[j] = index;
           data[index++] = 0;
         }
+        if (c >= 0x80) {
+          /* Finish reading an UTF-8 character. */
+          if (c < 0xc0)
+            exit(1);
+          else {
+            unsigned int i = (c < 0xe0 ? 2 : c < 0xf0 ? 3 : c < 0xf8 ? 4 : c < 0xfc ? 5 : 6);
+            c &= (1 << (8-i)) - 1;
+            while (--i > 0) {
+              int cc = getc(stdin);
+              if (!(cc >= 0x80 && cc < 0xc0))
+                exit(1);
+              c <<= 6; c |= (cc & 0x3f);
+            }
+          }
+        }
         data[index++] = (unsigned char) c;
       }
       data[uni2index[j]] = index - uni2index[j] - 1;
