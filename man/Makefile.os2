@@ -15,17 +15,20 @@ mandir = $(prefix)/man
 
 #### End of system configuration section. ####
 
-MAN = iconv.3 iconv_close.3 iconv_open.3
+MAN1 = iconv.1
+MAN3 = iconv.3 iconv_close.3 iconv_open.3
 
 all :
 
 install : force
-	@for %i in ($(MAN)) do cp -i %i $(mandir)/man3/%i
+	@for %i in ($(MAN1)) do cp -i %i $(mandir)/man1/%i
+	@for %i in ($(MAN3)) do cp -i %i $(mandir)/man3/%i
 
 installdirs :
 
 uninstall : force
-	@for %i in ($(MAN)) do rm -i $(mandir)/man3/%i
+	@for %i in ($(MAN1)) do rm -i $(mandir)/man1/%i
+	@for %i in ($(MAN3)) do rm -i $(mandir)/man3/%i
 
 check :
 

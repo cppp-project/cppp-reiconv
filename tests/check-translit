@@ -6,7 +6,7 @@ file="$2"
 fromcode="$3"
 tocode="$4"
 set -e
-./iconv -f "$fromcode" -t "$tocode"//TRANSLIT < "${srcdir}"/"$file"."$fromcode" > tmp
+../src/iconv -f "$fromcode" -t "$tocode"//TRANSLIT < "${srcdir}"/"$file"."$fromcode" > tmp
 cmp "${srcdir}"/"$file"."$tocode" tmp
 rm -f tmp
 exit 0

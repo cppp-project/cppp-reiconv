@@ -18,8 +18,8 @@ dnl Boston, MA 02111-1307, USA.
 
 AC_PREREQ(2.12)
 
-AC_INIT(src/iconv.c)
-AC_CONFIG_HEADER(src/config.h)
+AC_INIT(lib/iconv.c)
+AC_CONFIG_HEADER(lib/config.h)
 AC_PROG_MAKE_SET
 
 dnl           checks for programs
@@ -89,5 +89,5 @@ if test -d "${srcdir}/tests"; then
 else
   TESTS_MAKEFILE=""
 fi
-AC_OUTPUT(Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h)
+AC_OUTPUT(Makefile lib/Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/iconv.h)
 AC_OUTPUT_SUBDIRS(libcharset)

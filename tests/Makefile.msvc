@@ -47,7 +47,7 @@ SHELL = /bin/sh
 
 all :
 
-check : all table-from.exe table-to.exe iconv.exe uniq-u.exe
+check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) ASCII
 #	/* General multi-byte encodings */
 	$(CC) $(CFLAGS) $(srcdir)\genutf8.c -Fegenutf8.exe
@@ -150,25 +150,18 @@ check : all table-from.exe table-to.exe iconv.exe uniq-u.exe
 	$(srcdir)\check-translit.bat $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)\check-translit.bat $(srcdir) Quotes UTF-8 ASCII
 
-table-from.exe : $(srcdir)/table-from.c ../src/iconv.lib
-	$(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../src/iconv.lib -Fetable-from.exe
+table-from.exe : $(srcdir)/table-from.c ../lib/iconv.lib
+	$(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../lib/iconv.lib -Fetable-from.exe
 	$(RM) table-from.obj
 !if !$(STATIC)
-	copy ..\src\iconv.dll iconv.dll
+	copy ..\lib\iconv.dll iconv.dll
 !endif
 
-table-to.exe : $(srcdir)/table-to.c ../src/iconv.lib
-	$(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../src/iconv.lib -Fetable-to.exe
+table-to.exe : $(srcdir)/table-to.c ../lib/iconv.lib
+	$(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../lib/iconv.lib -Fetable-to.exe
 	$(RM) table-to.obj
 !if !$(STATIC)
-	copy ..\src\iconv.dll iconv.dll
-!endif
-
-iconv.exe : $(srcdir)/iconv.c ../src/iconv.lib
-	$(CC) $(CFLAGS) $(INCLUDES) -I..\src $(srcdir)/iconv.c ../src/iconv.lib -Feiconv.exe
-	$(RM) iconv.obj
-!if !$(STATIC)
-	copy ..\src\iconv.dll iconv.dll
+	copy ..\lib\iconv.dll iconv.dll
 !endif
 
 uniq-u.exe : $(srcdir)/uniq-u.c

@@ -27,7 +27,7 @@ top_builddir = ..
 
 all :
 
-check : all table-from table-to iconv
+check : all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) ASCII
 #	/* General multi-byte encodings */
 	$(CC) $(CFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
@@ -128,23 +128,20 @@ check : all table-from table-to iconv
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
 
-table-from : $(srcdir)/table-from.c ../src/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../src/libiconv.la -o $@
+table-from : $(srcdir)/table-from.c ../lib/libiconv.la
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../lib/libiconv.la -o $@
 
-table-to : $(srcdir)/table-to.c ../src/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../src/libiconv.la -o $@
-
-iconv : $(srcdir)/iconv.c ../src/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -I../src $(srcdir)/iconv.c ../src/libiconv.la -o $@
+table-to : $(srcdir)/table-to.c ../lib/libiconv.la
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../lib/libiconv.la -o $@
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
-../src/libiconv.la :
-	cd ../src && $(MAKE) libiconv.la
+../lib/libiconv.la :
+	cd ../lib && $(MAKE) libiconv.la
 
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo table-from table-to iconv tmp-* genutf8 UTF-8.TXT core
+	$(RM) *.o *.lo table-from table-to tmp-* genutf8 UTF-8.TXT core
 	$(RM) -r .libs _libs
 
 distclean : clean

@@ -19,7 +19,7 @@ srcdir = .
 
 all :
 
-check : all table-from.exe table-to.exe iconv.exe genutf8.exe
+check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateless $(srcdir) ASCII
 #	/* General multi-byte encodings */
 	.\genutf8 > UTF-8.TXT
@@ -119,16 +119,12 @@ check : all table-from.exe table-to.exe iconv.exe genutf8.exe
 	$(srcdir)\check-translit $(srcdir) Quotes UTF-8 ASCII
 
 table-from.exe : table-from.c 
-	$(CC) $(CFLAGS) $(INCLUDES) table-from.c ../src/iconv.a
-	copy ..\src\iconv.dll iconv.dll
+	$(CC) $(CFLAGS) $(INCLUDES) table-from.c ../lib/iconv.a
+	copy ..\lib\iconv.dll iconv.dll
 
 table-to.exe : table-to.c
-	$(CC) $(CFLAGS) $(INCLUDES) table-to.c ../src/iconv.a
-	copy ..\src\iconv.dll iconv.dll
-
-iconv.exe : iconv.c
-	$(CC) $(CFLAGS) $(INCLUDES) -I../src iconv.c ../src/iconv.a
-	copy ..\src\iconv.dll iconv.dll
+	$(CC) $(CFLAGS) $(INCLUDES) table-to.c ../lib/iconv.a
+	copy ..\lib\iconv.dll iconv.dll
 
 genutf8.exe : genutf8.c
 	$(CC) $(CFLAGS) $(INCLUDES) genutf8.c

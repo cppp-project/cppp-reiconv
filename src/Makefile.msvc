@@ -24,31 +24,6 @@ MFLAGS=-MD
 !endif
 !endif
 
-# Directories used by "make":
-srcdir = .
-
-# Directories used by "make install":
-prefix = /usr/local
-local_prefix = /usr/local
-exec_prefix = $(prefix)
-libdir = $(exec_prefix)/lib
-
-# Programs used by "make":
-
-CC = cl
-
-# Set to -W3 if you want to see maximum amount of warnings, including stupid
-# ones. Set to -W1 to avoid warnings about signed/unsigned combinations.
-WARN_CFLAGS = -W1
-
-!if $(STATIC)
-PICFLAGS =
-!else
-# "-GD" (msvc5) optimizes for DLL.
-# mscv4 doesn't know about this flag and ignores it.
-PICFLAGS = -GD
-!endif
-
 !if $(DEBUG)
 OPTIMFLAGS = -Od -Z7
 !else
@@ -56,62 +31,31 @@ OPTIMFLAGS = -Od -Z7
 OPTIMFLAGS = -D_NDEBUG -O1
 !endif
 
-# -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
-CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(PICFLAGS) $(OPTIMFLAGS) -DBUILDING_LIBICONV
+# Set to -W3 if you want to see maximum amount of warnings, including stupid
+# ones. Set to -W1 to avoid warnings about signed/unsigned combinations.
+WARN_CFLAGS = -W1
 
+# Directories used by "make":
+srcdir = .
+
+# Programs used by "make":
+CC = cl
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS)
 CPP = cl -E
-
-INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
-
-AR = lib
-AR_FLAGS = /out:
-
-LN = copy
+INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include
 RM = del
-
-# Programs used by "make install":
-INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@
-INSTALL_DATA = @INSTALL_DATA@
 
 #### End of system configuration section. ####
 
 SHELL = /bin/sh
 
-SOURCES = $(srcdir)/iconv.c
+all : iconv.exe
 
-OBJECTS = iconv.obj
-
-LIBCHARSET_OBJECTS = ..\libcharset\lib\localcharset.obj
-
-# Set to iconv.res in order to include the resources information.
-RESOURCES =
-# RESOURCES = iconv.res
-
-all : iconv.lib
-
-config.h : config.h.msvc
-	$(RM) config.h
-	$(LN) config.h.msvc config.h
-
-iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h config.h
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
-
-!if $(STATIC)
-
-iconv.lib : $(OBJECTS)
-	$(RM) iconv.lib
-	$(AR) $(AR_FLAGS)iconv.lib $(OBJECTS) $(LIBCHARSET_OBJECTS)
-
-!else
-
-# iconv.dll and iconv.lib are created together.
-iconv.lib : $(OBJECTS) $(RESOURCES)
-	$(CC) $(MFLAGS) -LD $(OBJECTS) $(LIBCHARSET_OBJECTS) $(RESOURCES)
-
-iconv.res : $(srcdir)/../windows/iconv.rc
-	rc -Fo iconv.res $(srcdir)/../windows/iconv.rc
-
+iconv.exe : $(srcdir)/iconv.c ../lib/iconv.lib
+	$(CC) $(CFLAGS) $(INCLUDES) -I..\lib $(srcdir)/iconv.c ../lib/iconv.lib -Feiconv.exe
+	$(RM) iconv.obj
+!if !$(STATIC)
+	copy ..\lib\iconv.dll iconv.dll
 !endif
 
 check : all
@@ -120,16 +64,13 @@ mostlyclean : clean
 
 clean : force
 	$(RM) *.obj
-	$(RM) *.lib
-	$(RM) *.exp
 	$(RM) *.dll
-	$(RM) iconv.res
+	$(RM) *.exe
 	$(RM) core
 
 distclean : clean
-	$(RM) config.h
+	$(RM) Makefile
 
 maintainer-clean : distclean
 
 force :
-

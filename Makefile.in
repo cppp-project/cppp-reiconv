@@ -27,7 +27,8 @@ INSTALL_DATA = @INSTALL_DATA@
 SHELL = /bin/sh
 
 all : force
-	builddir="`pwd`"; cd libcharset && $(MAKE) -r all && $(MAKE) -r install-lib libdir="$$builddir/src" includedir="$$builddir/src"
+	builddir="`pwd`"; cd libcharset && $(MAKE) -r all && $(MAKE) -r install-lib libdir="$$builddir/lib" includedir="$$builddir/lib"
+	cd lib && $(MAKE) -r all
 	cd src && $(MAKE) -r all
 	cd man && $(MAKE) -r all
 	if test -d tests; then cd tests && $(MAKE) -r all; fi
@@ -35,11 +36,13 @@ all : force
 # Installs the library and include files only. Typically called with only
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
 install-lib : all force
-	cd src && $(MAKE) -r install-lib libdir='$(libdir)' includedir='$(includedir)'
+	cd lib && $(MAKE) -r install-lib libdir='$(libdir)' includedir='$(includedir)'
 	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
 	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
 
 install : force
+	cd libcharset && $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd lib && $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then mkdir $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then mkdir $(DESTDIR)$(exec_prefix) ; fi
@@ -48,6 +51,8 @@ install : force
 	cd man && $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 installdirs : force
+	cd libcharset && $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd lib && $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then mkdir $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then mkdir $(DESTDIR)$(exec_prefix) ; fi
@@ -55,30 +60,36 @@ installdirs : force
 	cd man && $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 uninstall : force
+	cd libcharset && $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd lib && $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(RM) $(DESTDIR)$(includedir)/iconv.h
 	cd man && $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 check : force
 	cd libcharset && $(MAKE) -r check
+	cd lib && $(MAKE) -r check
 	cd src && $(MAKE) -r check
 	cd man && $(MAKE) -r check
 	if test -d tests; then cd tests && $(MAKE) -r check; fi
 
 mostlyclean : force
 	cd libcharset && $(MAKE) -r mostlyclean
+	cd lib && $(MAKE) -r mostlyclean
 	cd src && $(MAKE) -r mostlyclean
 	cd man && $(MAKE) -r mostlyclean
 	if test -d tests; then cd tests && $(MAKE) -r mostlyclean; fi
 
 clean : force
 	cd libcharset && $(MAKE) -r clean
+	cd lib && $(MAKE) -r clean
 	cd src && $(MAKE) -r clean
 	cd man && $(MAKE) -r clean
 	if test -d tests; then cd tests && $(MAKE) -r clean; fi
 
 distclean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) -r distclean; fi
+	cd lib && if test -f Makefile; then $(MAKE) -r distclean; fi
 	cd src && if test -f Makefile; then $(MAKE) -r distclean; fi
 	cd man && if test -f Makefile; then $(MAKE) -r distclean; fi
 	if test -d tests; then cd tests && if test -f Makefile; then $(MAKE) -r distclean; fi; fi
@@ -87,6 +98,7 @@ distclean : force
 
 maintainer-clean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
+	cd lib && if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
 	cd src && if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
 	cd man && if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
 	if test -d tests; then cd tests && if test -f Makefile; then $(MAKE) -r maintainer-clean; fi; fi

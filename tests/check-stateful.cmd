@@ -14,9 +14,9 @@ END
 
 PARSE ARG srcdir charset
 
-'.\iconv -f 'charset' -t UTF-8 < 'srcdir'\'charset'-snippet > tmp-snippet'
+'..\src\iconv -f 'charset' -t UTF-8 < 'srcdir'\'charset'-snippet > tmp-snippet'
 'cmp 'srcdir'\'charset'-snippet.UTF-8 tmp-snippet'
-'.\iconv -f UTF-8 -t 'charset' < 'srcdir'\'charset'-snippet.UTF-8 > tmp-snippet'
+'..\src\iconv -f UTF-8 -t 'charset' < 'srcdir'\'charset'-snippet.UTF-8 > tmp-snippet'
 'cmp 'srcdir'\'charset'-snippet tmp-snippet'
 'rm -f tmp-snippet'
 

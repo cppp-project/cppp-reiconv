@@ -1,3 +1,53 @@
+2000-11-23  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/*: Move here all files from src/*.
+        * src/*: Move all files to lib.
+        * lib/Makefile.in (distclean): No need to remove config.status,
+          config.log, config.cache.
+        * configure.in: Require lib/iconv.c, not src/iconv.c. Create
+          lib/config.h, not src/config.h. Also create lib/Makefile.
+        * Makefile.in (all): Install libcharset into lib, not src. Recurse
+          into lib and src.
+          (install-lib): Recurse into lib, not src.
+          (install): Recurse into libcharset, lib and src.
+          (installdirs, uninstall): Likewise.
+          (check, mostlyclean, clean, distclean, maintainer-clean): Likewise.
+        * Makefile.msvc (all): Recurse into lib and src.
+          (install): Recurse into libcharset, lib and src.
+          (installdirs, uninstall): Likewise.
+          (check, mostlyclean, clean, distclean, maintainer-clean): Likewise.
+        * Makefile.os2 (all): Recurse into lib and src.
+          (install-lib): Recurse into lib, not src.
+          (install, uninstall): Recurse into lib and src.
+          (check, mostlyclean, clean, distclean, maintainer-clean): Likewise.
+        * Makefile.devel (lib/config.h.msvc): Renamed from src/config.h.msvc.
+          (lib/aliases.h): Renamed from src/aliases.h.
+          (lib/aliases.gperf): Renamed from src/aliases.gperf.
+          (lib/aliases_aix.h): Renamed from src/aliases_aix.h.
+          (lib/flags.h): Renamed from src/flags.h.
+          (lib/translit.h): Renamed from src/translit.h.
+        * src/iconv.c: Moved here from tests/iconv.c.
+        * src/Makefile.in: New file.
+        * src/Makefile.msvc: New file.
+        * src/Makefile.os2: New file.
+        * tests/Makefile.in (iconv): Remove target.
+          (../lib/libiconv.la): Renamed from ../src/libiconv.la.
+          (clean): No need to remove iconv.
+        * tests/Makefile.msvc (iconv.exe): Remove target.
+        * tests/Makefile.os2 (iconv.exe): Likewise.
+        * tests/check-stateful: iconv is in ../src.
+        * tests/check-stateful.bat: Likewise.
+        * tests/check-stateful.cmd: Likewise.
+        * tests/check-translit: iconv is in ../src.
+        * tests/check-translit.bat: Likewise.
+        * tests/check-translit.cmd: Likewise.
+        * man/iconv.1: New file.
+        * man/Makefile.in (install, installdirs, uninstall): Also install *.1
+          man pages.
+        * man/Makefile.os2 (MAN3): Renamed from MAN.
+          (MAN1): New variable.
+          (install, uninstall): Also install *.1 man pages.
+
 2000-11-21  Bruno Haible  <haible@clisp.cons.org>
 
         * Makefile.msvc (all, check, mostlyclean, clean, distclean,
