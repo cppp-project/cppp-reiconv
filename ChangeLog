@@ -1,3 +1,8 @@
+2001-05-06  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/Makefile.in (libiconv_plug_solaris.so): Change rule if not using
+          gcc. Reported by Paananen Mikko <mikkopa@cs.tut.fi>.
+
 2001-04-11  Bruno Haible  <haible@clisp.cons.org>
 
         Implement and document UTF-32, UTF-32BE, UTF-32LE.

@@ -62,7 +62,11 @@ libiconv_plug_linux.so : $(SOURCES)
 	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_linux.so
 
 libiconv_plug_solaris.so : $(SOURCES)
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so
+	if test -n "@GCC@"; then \
+	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
+	else \
+	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -KPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so; \
+	fi
 
 libiconv_plug_osf.so : $(SOURCES)
 	if test -n "@GCC@"; then \
