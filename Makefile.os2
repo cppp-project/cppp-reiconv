@@ -1,4 +1,4 @@
-# Makefile for libiconv, for OS2/EMX
+# -*- Makefile -*- for libiconv, for OS2/EMX
 #
 
 #### Start of system configuration section. ####
@@ -27,7 +27,7 @@ install-lib : all force
 	@echo install to $(libdir), $(shlibdir) and $(includedir)
 	cp include/iconv.h $(includedir)/iconv.h
 	(cd lib && $(MAKE) -f Makefile.os2 install-lib libdir='$(libdir)' shlibdir='$(shlibdir)' includedir='$(includedir)' && cd ..)
-	
+
 install : force
 	@echo install to $(prefix)
 	cp include/iconv.h $(includedir)/iconv.h

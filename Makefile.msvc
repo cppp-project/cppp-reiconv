@@ -1,4 +1,4 @@
-# Makefile for libiconv
+# -*- Makefile -*- for libiconv
 
 #### Start of system configuration section. ####
 
