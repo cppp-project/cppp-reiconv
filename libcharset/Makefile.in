@@ -29,7 +29,8 @@ MKINSTALLDIRS = $(SHELL) $(srcdir)/autoconf/mkinstalldirs
 SHELL = /bin/sh
 
 all : force
-	$(CP) include/libcharset.h.in include/libcharset.h
+	if [ ! -d include ] ; then mkdir include ; fi
+	$(CP) $(srcdir)/include/libcharset.h.in include/libcharset.h
 	cd lib && $(MAKE) -r all
 
 # Installs the library and include files only. Typically called with only
