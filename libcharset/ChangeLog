@@ -1,5 +1,10 @@
 2001-02-25  Bruno Haible  <haible@clisp.cons.org>
 
+	* autoconf/ltconfig:
+	sed -e 's/reload object files/produce relocatable object files/'.
+
+2001-02-25  Bruno Haible  <haible@clisp.cons.org>
+
 	* include/libcharset.h.in (locale_charset): Return value is never
 	NULL any more.
 
