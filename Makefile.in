@@ -29,6 +29,7 @@ SHELL = /bin/sh
 
 all : lib/localcharset.h force
 	cd lib && $(MAKE) all
+	cd srclib && $(MAKE) all
 	cd src && $(MAKE) all
 	cd po && $(MAKE) all
 	cd man && $(MAKE) all
@@ -47,6 +48,7 @@ install-lib : all force
 install : lib/localcharset.h force
 	cd libcharset && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd lib && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd srclib && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(exec_prefix) ; fi
@@ -58,6 +60,7 @@ install : lib/localcharset.h force
 installdirs : force
 	cd libcharset && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd lib && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd srclib && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(exec_prefix) ; fi
@@ -68,6 +71,7 @@ installdirs : force
 uninstall : force
 	cd libcharset && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd lib && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd srclib && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(RM) $(DESTDIR)$(includedir)/iconv.h
 	cd po && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
@@ -76,6 +80,7 @@ uninstall : force
 check : all force
 	cd libcharset && $(MAKE) check
 	cd lib && $(MAKE) check
+	cd srclib && $(MAKE) check
 	cd src && $(MAKE) check
 	cd po && $(MAKE) check
 	cd man && $(MAKE) check
@@ -83,8 +88,9 @@ check : all force
 
 mostlyclean : force
 	cd libcharset && $(MAKE) mostlyclean
-	$(RM) lib/charset.alias lib/libcharset.*
+	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
 	cd lib && $(MAKE) mostlyclean
+	cd srclib && $(MAKE) mostlyclean
 	cd src && $(MAKE) mostlyclean
 	cd po && $(MAKE) mostlyclean
 	cd man && $(MAKE) mostlyclean
@@ -92,8 +98,9 @@ mostlyclean : force
 
 clean : force
 	cd libcharset && $(MAKE) clean
-	$(RM) lib/charset.alias lib/libcharset.*
+	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
 	cd lib && $(MAKE) clean
+	cd srclib && $(MAKE) clean
 	cd src && $(MAKE) clean
 	cd po && $(MAKE) clean
 	cd man && $(MAKE) clean
@@ -101,24 +108,28 @@ clean : force
 
 distclean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) distclean; fi
-	$(RM) lib/charset.alias lib/libcharset.*
+	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
 	cd lib && if test -f Makefile; then $(MAKE) distclean; fi
+	cd srclib && if test -f Makefile; then $(MAKE) distclean; fi
 	cd src && if test -f Makefile; then $(MAKE) distclean; fi
 	cd po && if test -f Makefile; then $(MAKE) distclean; fi
 	cd man && if test -f Makefile; then $(MAKE) distclean; fi
 	if test -d tests; then cd tests && if test -f Makefile; then $(MAKE) distclean; fi; fi
 	$(RM) config.status config.log config.cache Makefile libtool
+	$(RM) config.h stamp-h1 lib/stamp-h2
 	$(RM) include/iconv.h
 
 maintainer-clean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) maintainer-clean; fi
-	$(RM) lib/charset.alias lib/libcharset.*
+	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
 	cd lib && if test -f Makefile; then $(MAKE) maintainer-clean; fi
+	cd srclib && if test -f Makefile; then $(MAKE) maintainer-clean; fi
 	cd src && if test -f Makefile; then $(MAKE) maintainer-clean; fi
 	cd po && if test -f Makefile; then $(MAKE) maintainer-clean; fi
 	cd man && if test -f Makefile; then $(MAKE) maintainer-clean; fi
 	if test -d tests; then cd tests && if test -f Makefile; then $(MAKE) maintainer-clean; fi; fi
 	$(RM) config.status config.log config.cache Makefile libtool
+	$(RM) config.h stamp-h1 lib/stamp-h2
 	$(RM) include/iconv.h
 
 force :

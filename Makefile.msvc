@@ -68,6 +68,9 @@ all : force
 	cd lib
 	$(MAKE) -f Makefile.msvc all
 	cd ..
+	cd srclib
+	$(MAKE) -f Makefile.msvc all
+	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc all
 	cd ..
@@ -86,6 +89,9 @@ install : force
 	$(MAKE) -f Makefile.msvc install
 	cd ..
 	cd lib
+	$(MAKE) -f Makefile.msvc install
+	cd ..
+	cd srclib
 	$(MAKE) -f Makefile.msvc install
 	cd ..
 	cd src
@@ -111,6 +117,9 @@ installdirs : force
 	cd lib
 	$(MAKE) -f Makefile.msvc installdirs
 	cd ..
+	cd srclib
+	$(MAKE) -f Makefile.msvc installdirs
+	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc installdirs
 	cd ..
@@ -133,6 +142,9 @@ uninstall : force
 	cd lib
 	$(MAKE) -f Makefile.msvc uninstall
 	cd ..
+	cd srclib
+	$(MAKE) -f Makefile.msvc uninstall
+	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc uninstall
 	cd ..
@@ -152,6 +164,9 @@ check : all force
 	$(MAKE) -f Makefile.msvc check
 	cd ..
 	cd lib
+	$(MAKE) -f Makefile.msvc check
+	cd ..
+	cd srclib
 	$(MAKE) -f Makefile.msvc check
 	cd ..
 	cd src
@@ -176,6 +191,9 @@ mostlyclean : force
 	cd lib
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
+	cd srclib
+	$(MAKE) -f Makefile.msvc mostlyclean
+	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
@@ -196,6 +214,9 @@ clean : force
 	$(RM) lib\localcharset.h
 	$(RM) include\iconv.h
 	cd lib
+	$(MAKE) -f Makefile.msvc clean
+	cd ..
+	cd srclib
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
 	cd src
@@ -220,6 +241,9 @@ distclean : force
 	cd lib
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
+	cd srclib
+	$(MAKE) -f Makefile.msvc distclean
+	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
@@ -240,6 +264,9 @@ maintainer-clean : force
 	$(RM) lib\localcharset.h
 	$(RM) include\iconv.h
 	cd lib
+	$(MAKE) -f Makefile.msvc maintainer-clean
+	cd ..
+	cd srclib
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
 	cd src

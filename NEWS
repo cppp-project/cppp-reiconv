@@ -1,5 +1,7 @@
 New in 1.9:
 * Many more transliterations.
+* New configuration option --enable-relocatable.  See the INSTALL.generic file
+  for details.
 
 New in 1.8:
 * The iconv program has new options -l, -c, -s.

@@ -64,9 +64,9 @@ OPTIMFLAGS = -D_NDEBUG -O1
 !endif
 
 # -DBUILDING_LIBCHARSET: Change expansion of LIBCHARSET_DLL_EXPORTED macro.
-CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(PICFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H -DBUILDING_LIBCHARSET
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H -DBUILDING_LIBCHARSET
 
-INCLUDES = -I. -I$(srcdir) -I.. -I$(srcdir)/.. -I../include
+INCLUDES = -I. -I.. -I..\include
 
 AR = lib
 AR_FLAGS = /out:
@@ -83,18 +83,17 @@ INSTALL_DATA = copy
 
 SHELL = /bin/sh
 
-SOURCES = $(srcdir)/localcharset.c
+OBJECTS = localcharset.obj relocatable.obj
 
-OBJECTS = localcharset.obj
-
-# Set to charset.res in order to include the resources information.
-# RESOURCES =
 RESOURCES = charset.res
 
 all : charset.lib
 
 localcharset.obj : $(srcdir)/localcharset.c
-	$(CC) $(INCLUDES) $(CFLAGS) -c $(srcdir)/localcharset.c
+	$(CC) $(INCLUDES) $(CFLAGS) $(PICFLAGS) -c $(srcdir)/localcharset.c
+
+relocatable.obj : $(srcdir)/relocatable.c
+	$(CC) $(INCLUDES) $(CFLAGS) $(PICFLAGS) -c $(srcdir)/relocatable.c
 
 !if !$(DLL)
 

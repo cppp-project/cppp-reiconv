@@ -69,9 +69,10 @@ OPTIMFLAGS = -D_NDEBUG -O1
 !endif
 
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
-CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(PICFLAGS) $(OPTIMFLAGS) -DBUILDING_LIBICONV
+# -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H -DBUILDING_LIBICONV -DBUILDING_DLL -DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(IIbindir)\" -DNO_XMALLOC -Dset_relocation_prefix=libiconv_set_relocation_prefix -Drelocate=libiconv_relocate
 
-INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
+INCLUDES = -I. -I..\include
 
 AR = lib
 AR_FLAGS = /out:
@@ -88,14 +89,8 @@ INSTALL_DATA = copy
 
 SHELL = /bin/sh
 
-SOURCES = $(srcdir)/iconv.c
+OBJECTS = iconv.obj localcharset.obj relocatable.obj
 
-OBJECTS = iconv.obj
-
-LIBCHARSET_OBJECTS = ..\libcharset\lib\localcharset.obj
-
-# Set to iconv.res in order to include the resources information.
-# RESOURCES =
 RESOURCES = iconv.res
 
 all : iconv.lib
@@ -105,19 +100,25 @@ config.h : config.h.msvc
 	$(LN) config.h.msvc config.h
 
 iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h config.h
-	$(CC) $(INCLUDES) $(CFLAGS) -c $(srcdir)/iconv.c
+	$(CC) $(INCLUDES) $(CFLAGS) $(PICFLAGS) -c $(srcdir)/iconv.c
+
+localcharset.obj : $(srcdir)/../libcharset/lib/localcharset.c $(srcdir)/relocatable.h config.h
+	$(CC) $(INCLUDES) $(CFLAGS) $(PICFLAGS) -c $(srcdir)/../libcharset/lib/localcharset.c
+
+relocatable.obj : $(srcdir)/relocatable.c $(srcdir)/relocatable.h config.h
+	$(CC) $(INCLUDES) $(CFLAGS) $(PICFLAGS) -c $(srcdir)/relocatable.c
 
 !if !$(DLL)
 
 iconv.lib : $(OBJECTS)
 	-$(RM) iconv.lib
-	$(AR) $(AR_FLAGS)iconv.lib $(OBJECTS) $(LIBCHARSET_OBJECTS)
+	$(AR) $(AR_FLAGS)iconv.lib $(OBJECTS)
 
 !else
 
 # iconv.dll and iconv.lib are created together.
 iconv.lib : $(OBJECTS) $(RESOURCES)
-	$(CC) $(MFLAGS) -LD $(OBJECTS) $(LIBCHARSET_OBJECTS) $(RESOURCES) -Feiconv.dll
+	$(CC) $(MFLAGS) -LD $(OBJECTS) $(RESOURCES) -Feiconv.dll
 
 iconv.res : $(srcdir)/../windows/iconv.rc
 	rc -Fo iconv.res $(srcdir)/../windows/iconv.rc

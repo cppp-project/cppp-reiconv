@@ -67,6 +67,12 @@
 # include <os2.h>
 #endif
 
+#if ENABLE_RELOCATABLE
+# include "relocatable.h"
+#else
+# define relocate(pathname) (pathname)
+#endif
+
 #if defined _WIN32 || defined __WIN32__ || defined __EMX__ || defined __DJGPP__
   /* Win32, OS/2, DOS */
 # define ISSLASH(C) ((C) == '/' || (C) == '\\')
@@ -83,11 +89,6 @@
 #ifdef HAVE_GETC_UNLOCKED
 # undef getc
 # define getc getc_unlocked
-#endif
-
-#ifdef __cplusplus
-/* When compiling with "gcc -x c++", produce a function with C linkage.  */
-extern "C" const char * locale_charset (void);
 #endif
 
 /* The following static variable is declared 'volatile' to avoid a
@@ -115,7 +116,7 @@ get_charset_aliases ()
     {
 #if !defined WIN32
       FILE *fp;
-      const char *dir = LIBDIR;
+      const char *dir = relocate (LIBDIR);
       const char *base = "charset.alias";
       char *file_name;
 

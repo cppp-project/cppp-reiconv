@@ -17,6 +17,10 @@ CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 INCLUDES = -I. -I$(srcdir) -I.. -I$(srcdir)/.. -I../include
+DEFS = -DLIBDIR=\"$(libdir)\" \
+-DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(libdir)\" -DNO_XMALLOC \
+-Dset_relocation_prefix=libcharset_set_relocation_prefix \
+-Drelocate=libcharset_relocate @DEFS@
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link
@@ -43,9 +47,9 @@ LIBCHARSET_VERSION_INFO = 1:0:0
 # Needed by $(LIBTOOL).
 top_builddir = ..
 
-SOURCES = $(srcdir)/localcharset.c
+SOURCES = $(srcdir)/localcharset.c $(srcdir)/relocatable.c
 
-OBJECTS = localcharset.lo
+OBJECTS = localcharset.lo relocatable.lo
 
 all : libcharset.la charset.alias ref-add.sed ref-del.sed
 
@@ -53,7 +57,10 @@ libcharset.la : $(OBJECTS)
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) -o libcharset.la -rpath $(libdir) -version-info $(LIBCHARSET_VERSION_INFO) -no-undefined $(OBJECTS)
 
 localcharset.lo : $(srcdir)/localcharset.c
-	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) -DHAVE_CONFIG_H -DLIBDIR=\"$(libdir)\" -c $(srcdir)/localcharset.c
+	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -c $(srcdir)/localcharset.c
+
+relocatable.lo : $(srcdir)/relocatable.c $(srcdir)/relocatable.h
+	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -c $(srcdir)/relocatable.c
 
 charset.alias: $(srcdir)/config.charset
 	$(SHELL) $(srcdir)/config.charset '@host@' > t-$@

@@ -1,5 +1,117 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	Support for relocatable installation.
+	* m4/alloca.m4: New file, from GNU gettext.
+	* m4/canonicalize.m4: New file, from GNU gettext.
+	* m4/error.m4: New file, from GNU gettext.
+	* m4/onceonly.m4: New file, from GNU gettext.
+	* m4/pathmax.m4: New file, from GNU gettext.
+	* m4/relocatable.m4: New file, from GNU gettext.
+	* m4/setenv.m4: New file, from GNU gettext.
+	* m4/stdbool.m4: New file, from GNU gettext.
+	* m4/strerror.m4: New file, from GNU gettext.
+	* m4/xreadlink.m4: New file, from GNU gettext.
+	* autoconf/config.libpath: New file, from GNU gettext.
+	* autoconf/install-reloc: New file, from GNU gettext.
+	* autoconf/reloc-ldflags: New file, from GNU gettext.
+	* autoconf/missing: New file, from GNU automake 1.7.3.
+	* lib/relocatable.h: New file, from GNU gettext.
+	* lib/relocatable.c: New file, from GNU gettext.
+	* srclib/alloca.c: New file, from GNU gettext.
+	* srclib/alloca_.h: New file, from GNU gettext.
+	* srclib/canonicalize.c: New file, from GNU gettext.
+	* srclib/canonicalize.h: New file, from GNU gettext.
+	* srclib/error.c: New file, from GNU gettext.
+	* srclib/error.h: New file, from GNU gettext.
+	* srclib/exit.h: New file, from GNU gettext.
+	* srclib/gettext.h: New file, from GNU gettext.
+	* srclib/memmove.c: New file, from GNU gettext.
+	* srclib/pathmax.h: New file, from GNU gettext.
+	* srclib/progname.c: New file, from GNU gettext.
+	* srclib/progname.h: New file, from GNU gettext.
+	* srclib/progreloc.c: New file, from GNU gettext.
+	* srclib/relocatable.c: New file, from GNU gettext.
+	* srclib/relocatable.h: New file, from GNU gettext.
+	* srclib/relocwrapper.c: New file, from GNU gettext.
+	* srclib/setenv.c: New file, from GNU gettext.
+	* srclib/setenv.h: New file, from GNU gettext.
+	* srclib/stdbool.h.in: New file, from GNU gettext.
+	* srclib/strerror.c: New file, from GNU gettext.
+	* srclib/unsetenv.c: New file, from GNU gettext.
+	* srclib/xmalloc.c: New file, from GNU gettext.
+	* srclib/xmalloc.h: New file, from GNU gettext.
+	* srclib/xreadlink.c: New file, from GNU gettext.
+	* srclib/xreadlink.h: New file, from GNU gettext.
+	* srclib/xstrdup.c: New file, from GNU gettext.
+	* srclib/Makefile.am: New file.
+	* srclib/Makefile.msvc: New file.
+	* windows/alloca.h: New file, from GNU gettext.
+	* windows/stdbool.h: New file, from GNU gettext.
+	* configure.in (AC_CONFIG_HEADERS): Replace src/config.h with config.h.
+	Add AC_RELOCATABLE, AC_HEADER_STDC, AC_CHECK_HEADERS(stddef.h stdlib.h
+	string.h), AC_CHECK_FUNCS(getc_unlocked), AC_REPLACE_FUNCS(memmove),
+	AM_LANGINFO_CODESET, gl_FUNC_ALLOCA, gl_CANONICALIZE,
+	gt_FUNC_ERROR_AT_LINE, gl_PATHMAX, gt_FUNC_SETENV, gt_STDBOOL_H,
+	gl_FUNC_STRERROR, gl_XREADLINK, AC_OUTPUT(srclib/Makefile).
+	* lib/config.h.in: Add HAVE_GETC_UNLOCKED, HAVE_LANGINFO_CODESET,
+	HAVE_SETLOCALE, HAVE_STDDEF_H, HAVE_STDLIB_H, HAVE_STRING_H, for
+	localcharset.c. Add ENABLE_RELOCATABLE, INSTALLPREFIX, for
+	relocatable.c.
+	* lib/Makefile.in (DEFS): New variable.
+	(SOURCES): Add localcharset.c and relocatable.c.
+	(OBJECTS): Add localcharset.lo and relocatable.lo.
+	(LIBCHARSET_OBJECTS): Remove variable.
+	(libiconv_plug_linux.so, libiconv_plug_solaris.so,
+	libiconv_plug_osf.so): Use $(DEFS). Don't use $(LIBCHARSET_OBJECTS).
+	(iconv.lo): Use $(DEFS).
+	(localcharset.lo, relocatable.lo): New rules.
+	* lib/Makefile.msvc (CFLAGS): Define HAVE_CONFIG_H, BUILDING_DLL,
+	ENABLE_RELOCATABLE, IN_LIBRARY, INSTALLDIR, NO_XMALLOC,
+	set_relocation_prefix, relocate. Remove $(PICFLAGS).
+	(INCLUDES): Simplify.
+	(SOURCES): Remove variable.
+	(OBJECTS): Add localcharset.obj and relocatable.obj.
+	(LIBCHARSET_OBJECTS): Remove variable.
+	(iconv.obj): Add $(PICFLAGS).
+	(localcharset.obj, relocatable.obj): New rules.
+	(iconv.lib): Drop $(LIBCHARSET_OBJECTS).
+	* include/iconv.h.in (libiconv_set_relocation_prefix): New declaration.
+	* src/gettext.h: Remove file.
+	* src/iconv.c: Include progname.h and relocatable.h.
+	(ICONV_CONST): Define to const if the system has no iconv.
+	(main): Invoke set_program_name. Relocate LOCALEDIR.
+	* src/Makefile.in (top_srcdir): New variable.
+	(INCLUDES): Add .. and ../srclib.
+	(iconv_no_i18n, iconv): Link with ../srclib/libicrt.a.
+	(iconv_no_i18n.@OBJEXT@, iconv.@OBJEXT@): Define INSTALLDIR.
+	(RELOCATABLE_LIBRARY_PATH, RELOCATABLE_SRC_DIR, RELOCATABLE_BUILD_DIR,
+	RELOCATABLE_CONFIG_H_DIR, @SET_RELOCATABLE@, iconv_LDFLAGS): New
+	variables.
+	(iconv): Use $(iconv_LDFLAGS).
+	(install): Use $(INSTALL_PROGRAM_ENV).
+	(distclean): Drop removing config.h.
+	* src/Makefile.msvc (INCLUDES): Add .., simplify.
+	* tests/Makefile.msvc (INCLUDES): Simplify.
+	* Makefile.devel (AUTOHEADER, AUTOMAKE): New variables.
+	(config.h.in, srclib/Makefile.in, config.h.msvc): New rules.
+	(all): Depend on them.
+	(aclocal.m4) Depend also on m4/alloca.m4, m4/canonicalize.m4,
+	m4/error.m4, m4/onceonly.m4, m4/pathmax.m4, m4/relocatable.m4,
+	m4/setenv.m4, m4/stdbool.m4, m4/strerror.m4, m4/xreadlink.m4.
+	(lib/config.h.msvc): Additional processing.
+	* Makefile.in (all, install, installdirs, uninstall, check): Recurse
+	into srclib.
+	(mostlyclean, clean, distclean, maintainerclean): Likewise. Remove
+	lib/localcharset.h.
+	(distclean, maintainerclean): Remove also config.h and some stamps.
+	* Makefile.msvc (all, install, installdirs, uninstall, check,
+	mostlyclean, clean, distclean, maintainerclean): Recurse into srclib.
+	* INSTALL.generic: Document --enable-relocatable and
+	--with-libintl-prefix. Remove the recommendation to set CPPFLAGS and
+	LDFLAGS. The lib-link.m4 macros make this unnecessary.
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	* configure.in: Bump version number to 1.9.
 	* include/iconv.h.in (_LIBICONV_VERSION): Bump.
 	* windows/iconv.rc: Bump version number.

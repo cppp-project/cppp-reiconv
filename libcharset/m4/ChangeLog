@@ -1,5 +1,10 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	Support for relocatable installation.
+	* relocatable.m4: New file, from GNU gettext.
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	* codeset.m4: Update from GNU gettext-0.10.40.
 	* glibc21.m4: Update from GNU gettext-0.10.40.
 
