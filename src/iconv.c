@@ -38,40 +38,12 @@
 # undef ENABLE_RELOCATABLE
 #endif
 
+#include "binary-io.h"
 #include "progname.h"
 #include "relocatable.h"
 #include "gettext.h"
 
 #define _(str) gettext(str)
-
-/* For systems that distinguish between text and binary I/O.
-   O_BINARY is usually declared in <fcntl.h>. */
-#if !defined O_BINARY && defined _O_BINARY
-  /* For MSC-compatible compilers.  */
-# define O_BINARY _O_BINARY
-# define O_TEXT _O_TEXT
-#endif
-#ifdef __BEOS__
-  /* BeOS 5 has O_BINARY and O_TEXT, but they have no effect.  */
-# undef O_BINARY
-# undef O_TEXT
-#endif
-#if O_BINARY
-# if !(defined(__EMX__) || defined(__DJGPP__))
-#  define setmode _setmode
-#  define fileno _fileno
-# endif
-# ifdef __DJGPP__
-#  include <io.h> /* declares setmode() */
-#  include <unistd.h> /* declares isatty() */
-#  /* Avoid putting stdin/stdout in binary mode if it is connected to the
-#     console, because that would make it impossible for the user to
-#     interrupt the program through Ctrl-C or Ctrl-Break.  */
-#  define SET_BINARY(fd) (!isatty(fd) ? (setmode(fd,O_BINARY), 0) : 0)
-# else
-#  define SET_BINARY(fd) setmode(fd,O_BINARY)
-# endif
-#endif
 
 #if O_BINARY
   static int force_binary = 0;

@@ -1,3 +1,9 @@
+2003-04-06  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/binary-io.h: New file, from GNU gettext.
+	* src/iconv.c: Include it.
+	(O_BINARY, O_TEXT, SET_BINARY): Remove definitions.
+
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
 	Support for relocatable installation.
