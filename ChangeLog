@@ -1,13 +1,19 @@
 2003-05-12  Bruno Haible  <bruno@clisp.org>
 
+	* configure.in: Invoke AC_GNU_SOURCE and jm_FUNC_GLIBC_UNLOCKED_IO.
+
+2003-05-12  Bruno Haible  <bruno@clisp.org>
+
 	* lib/Makefile.msvc (PICFLAGS, CFLAGS): Move BUILDING_* macros from
 	CFLAGS to PICFLAGS.
 
 2003-05-09  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/error.c: Update from gnulib with modifications.
+	* srclib/unlocked-io.h: New file, from gnulib.
 	* m4/strerror_r.m4: New file, from gnulib.
-	* Makefile.devel (aclocal.m4): Depend on it.
+	* m4/unlocked-io.m4: New file, from gnulib.
+	* Makefile.devel (aclocal.m4): Depend on them.
 
 2003-05-08  Bruno Haible  <bruno@clisp.org>
 
