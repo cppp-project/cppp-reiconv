@@ -1,5 +1,10 @@
 2003-05-06  Bruno Haible  <bruno@clisp.org>
 
+	* autoconf/config.guess: Update to GNU version 2003-02-22.
+	* autoconf/config.sub: Likewise.
+
+2003-05-06  Bruno Haible  <bruno@clisp.org>
+
 	* m4/lib-link.m4: Update from GNU gettext.
 	* autoconf/config.rpath: Update from GNU gettext.
 
