@@ -1,4 +1,5 @@
 New in 1.5:
+* Transliteration is now off by default. Use a //TRANSLIT suffix to enable it.
 * The JOHAB encoding is documented again.
 
 New in 1.4:

@@ -1,5 +1,15 @@
 2000-11-18  Bruno Haible  <haible@clisp.cons.org>
 
+        Make transliteration optional.
+        * src/iconv.c (iconv_open): Strip off //TRANSLIT suffix from names.
+          Set transliteration on if and only if tocode ends in //TRANSLIT.
+        * README, man/iconv_open.3: Document how to enable transliteration.
+        * tests/check-translit: Add //TRANSLIT to iconv's 't' argument.
+        * tests/check-translit.bat: Likewise.
+        * tests/check-translit.cmd: Likewise.
+
+2000-11-18  Bruno Haible  <haible@clisp.cons.org>
+
         * man/iconv.3: Fix typo.
 
 2000-10-31  Bruno Haible  <haible@clisp.cons.org>

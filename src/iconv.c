@@ -131,11 +131,12 @@ static int strequal (const char* str1, const char* str2)
 iconv_t iconv_open (const char* tocode, const char* fromcode)
 {
   struct conv_struct * cd = (struct conv_struct *) malloc(sizeof(struct conv_struct));
-  char buf[MAX_WORD_LENGTH+1];
+  char buf[MAX_WORD_LENGTH+10+1];
   const char* cp;
   char* bp;
   const struct alias * ap;
   unsigned int count;
+  int transliterate = 0;
 
   if (cd == NULL) {
     errno = ENOMEM;
@@ -147,7 +148,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
    * or if it's too long, it is not a valid encoding name.
    */
   /* Search tocode in the table. */
-  for (cp = tocode, bp = buf, count = MAX_WORD_LENGTH+1; ; cp++, bp++) {
+  for (cp = tocode, bp = buf, count = MAX_WORD_LENGTH+10+1; ; cp++, bp++) {
     unsigned char c = * (unsigned char *) cp;
     if (c >= 0x80)
       goto invalid;
@@ -158,6 +159,11 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       break;
     if (--count == 0)
       goto invalid;
+  }
+  if (bp-buf > 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+    bp -= 10;
+    *bp = '\0';
+    transliterate = 1;
   }
   ap = aliases_lookup(buf,bp-buf);
   if (ap == NULL) {
@@ -169,7 +175,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
   cd->ofuncs = all_encodings[ap->encoding_index].ofuncs;
   cd->oflags = all_encodings[ap->encoding_index].oflags;
   /* Search fromcode in the table. */
-  for (cp = fromcode, bp = buf, count = MAX_WORD_LENGTH+1; ; cp++, bp++) {
+  for (cp = fromcode, bp = buf, count = MAX_WORD_LENGTH+10+1; ; cp++, bp++) {
     unsigned char c = * (unsigned char *) cp;
     if (c >= 0x80)
       goto invalid;
@@ -180,6 +186,10 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       break;
     if (--count == 0)
       goto invalid;
+  }
+  if (bp-buf > 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+    bp -= 10;
+    *bp = '\0';
   }
   ap = aliases_lookup(buf,bp-buf);
   if (ap == NULL) {
@@ -193,7 +203,7 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
   memset(&cd->istate,'\0',sizeof(state_t));
   memset(&cd->ostate,'\0',sizeof(state_t));
   /* Initialize the operation flags. */
-  cd->transliterate = 1;
+  cd->transliterate = transliterate;
   /* Done. */
   return (iconv_t)cd;
 invalid:
