@@ -1,5 +1,17 @@
 2005-03-13  Bruno Haible  <bruno@clisp.org>
 
+	Make stdout error checking reliable, also when writing to a NFS file.
+	* src/iconv.c (main): Check the return value of fclose(stdout).
+	* lib/genaliases.c (main): Likewise.
+	* lib/genaliases2.c (main): Likewise.
+	* lib/genflags.c (main): Likewise.
+	* lib/gentranslit.c (main): Likewise.
+	* tests/genutf8.c (main): Likewise.
+	* tests/table-from.c (main): Likewise.
+	* tests/table-to.c (main): Likewise.
+
+2005-03-13  Bruno Haible  <bruno@clisp.org>
+
 	* src/iconv.c (convert): Before outputting an error message, flush
 	stdout and output a newline if suitable.
 

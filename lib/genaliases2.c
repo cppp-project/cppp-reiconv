@@ -69,9 +69,7 @@ int main (int argc, char* argv[])
 #endif
 #undef BRACIFY
 #undef DEFENCODING
-  fflush(stdout);
-  fflush(stdout2);
-  if (ferror(stdout) || ferror(stdout2))
+  if (ferror(stdout) || fclose(stdout) || ferror(stdout2) || fclose(stdout2))
     exit(1);
   exit(0);
 }

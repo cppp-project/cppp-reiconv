@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002, 2004 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2002, 2004-2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -181,7 +181,7 @@ int main (int argc, char* argv[])
     exit(1);
   }
 
-  if (ferror(stdin) || ferror(stdout)) {
+  if (ferror(stdin) || ferror(stdout) || fclose(stdout)) {
     fprintf(stderr,"I/O error\n");
     exit(1);
   }

@@ -104,8 +104,7 @@ int main ()
 #include "encodings_extra.def"
 #undef DEFENCODING
 
-  fflush(stdout);
-  if (ferror(stdout))
+  if (ferror(stdout) || fclose(stdout))
     exit(1);
   exit(0);
 }

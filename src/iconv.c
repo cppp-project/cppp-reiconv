@@ -387,7 +387,7 @@ int main (int argc, char* argv[])
     }
     iconv_close(cd);
   }
-  if (fflush(stdout) || ferror(stdout)) {
+  if (ferror(stdout) || fclose(stdout)) {
     fprintf(stderr,_("iconv: I/O error\n"));
     status = 1;
   }
