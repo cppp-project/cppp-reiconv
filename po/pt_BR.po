@@ -1,12 +1,14 @@
 # libiconv: translation to Brazilian Portuguese (pt_BR)
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Alexandre Folle de Menezes <afmenez@terra.com.br>, 2002.
+# based on the translation to Galician (gl) by
+# Jacobo Tarrío Barreiro <jtarrio@trasno.net>, 2002.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.8\n"
 "POT-Creation-Date: 2002-04-28 04:19+0200\n"
-"PO-Revision-Date: 2002-06-04 00:45-0300\n"
+"PO-Revision-Date: 2002-06-13 15:00-0300\n"
 "Last-Translator: Alexandre Folle de Menezes <afmenez@terra.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +25,7 @@ msgstr "Uso: iconv [-c] [-s] [-f fromcode] [-t tocode] [arquivo ...]"
 
 #: src/iconv.c:79
 msgid "or:    iconv -l"
-msgstr "ou:    iconv -l"
+msgstr "ou:  iconv -l"
 
 #: src/iconv.c:89
 msgid ""
@@ -37,7 +39,7 @@ msgstr ""
 #: src/iconv.c:92
 #, c-format
 msgid "Written by %s.\n"
-msgstr "Escrito por  %s.\n"
+msgstr "Escrito por %s.\n"
 
 #: src/iconv.c:129 src/iconv.c:161 src/iconv.c:211
 #, c-format

@@ -1,3 +1,8 @@
+2002-06-14  Bruno Haible  <bruno@clisp.org>
+
+	* pt_BR.po: Update from
+	Alexandre Folle de Menezes <afmenez@terra.com.br>.
+
 2002-06-11  Bruno Haible  <bruno@clisp.org>
 
 	* sv.po: New file, from Christian Rose <menthos@menthos.com>.
