@@ -10,7 +10,7 @@ CP = cp
 RM = rm -f
 
 
-all : configures src/config.h.msvc include/iconv.h.msvc src/aliases.h src/flags.h src/translit.h
+all : configures src/config.h.msvc include/iconv.h.msvc src/aliases.h src/aliases_aix.h src/flags.h src/translit.h
 
 
 # Before making a new release:
@@ -61,8 +61,13 @@ src/aliases.gperf : src/encodings.def src/genaliases.c
 	./genaliases > src/aliases.gperf
 	$(RM) genaliases
 
+src/aliases_aix.h : src/encodings_aix.def src/genaliases2.c
+	$(CC) $(CFLAGS) -DUSE_AIX src/genaliases2.c -o genaliases
+	./genaliases > src/aliases_aix.h
+	$(RM) genaliases
 
-src/flags.h : src/encodings.def src/converters.h src/genflags.c
+
+src/flags.h : src/encodings.def src/encodings_aix.def src/converters.h src/genflags.c
 	$(CC) $(CFLAGS) src/genflags.c -o genflags
 	./genflags > src/flags.h
 	$(RM) genflags

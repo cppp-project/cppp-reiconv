@@ -67,14 +67,8 @@ libiconv_plug_solaris.so : $(SOURCES)
 libiconv_plug_osf.so : $(SOURCES)
 	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -shared -o libiconv_plug_osf.so
 
-iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h $(srcdir)/encodings.def $(srcdir)/aliases.h $(srcdir)/flags.h aliases2.h
+iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/aliases.h $(srcdir)/aliases_aix.h $(srcdir)/flags.h
 	$(LIBTOOL_COMPILE) $(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
-
-aliases2.h : $(srcdir)/genaliases2.c $(srcdir)/encodings.def
-	$(CC) $(CFLAGS) $(srcdir)/genaliases2.c -o genaliases2
-	./genaliases2 > aliases2.tmp
-	$(MV) aliases2.tmp aliases2.h
-	$(RM) genaliases2
 
 
 # Installs the library and include files only. Typically called with only
@@ -104,7 +98,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo *.a *.la libiconv_plug* aliases2.h core
+	$(RM) *.o *.lo *.a *.la libiconv_plug* core
 	$(RM) -r .libs _libs
 
 distclean : clean

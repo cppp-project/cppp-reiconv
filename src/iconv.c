@@ -23,6 +23,14 @@
 #include "config.h"
 
 /*
+ * Consider those system dependent encodings that are needed for the
+ * current system.
+ */
+#ifdef _AIX
+#define USE_AIX
+#endif
+
+/*
  * Converters.
  */
 #include "converters.h"
@@ -36,7 +44,6 @@
 /*
  * Table of all supported encodings.
  */
-#include "use_aliases2.h"
 struct encoding {
   struct mbtowc_funcs ifuncs; /* conversion multibyte -> unicode */
   struct wctomb_funcs ofuncs; /* conversion unicode -> multibyte */
@@ -46,6 +53,9 @@ enum {
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
   ei_##xxx ,
 #include "encodings.def"
+#ifdef USE_AIX
+#include "encodings_aix.def"
+#endif
 #undef DEFENCODING
 ei_for_broken_compilers_that_dont_like_trailing_commas
 };
@@ -54,6 +64,9 @@ static struct encoding const all_encodings[] = {
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
   { xxx_ifuncs, xxx_ofuncs1,xxx_ofuncs2, ei_##xxx##_oflags },
 #include "encodings.def"
+#ifdef USE_AIX
+#include "encodings_aix.def"
+#endif
 #undef DEFENCODING
 };
 
@@ -71,7 +84,28 @@ static struct encoding const all_encodings[] = {
  * Defines
  *   const struct alias * aliases2_lookup (const char *str);
  */
-#include "aliases2.h"
+#if defined(USE_AIX) /* || ... */
+static struct alias sysdep_aliases[] = {
+#ifdef USE_AIX
+#include "aliases_aix.h"
+#endif
+};
+#ifdef __GNUC__
+__inline
+#endif
+const struct alias *
+aliases2_lookup (register const char *str)
+{
+  struct alias * ptr;
+  unsigned int count;
+  for (ptr = sysdep_aliases, count = sizeof(sysdep_aliases)/sizeof(sysdep_aliases[0]); count > 0; ptr++, count--)
+    if (!strcmp(str,ptr->name))
+      return ptr;
+  return NULL;
+}
+#else
+#define aliases2_lookup(str)  NULL
+#endif
 
 #if 0
 /* Like !strcasecmp, except that the both strings can be assumed to be ASCII

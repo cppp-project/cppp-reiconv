@@ -207,7 +207,7 @@ typedef struct {
 
 /* Encodings used by system dependent locales. */
 
-#if defined(USE_AIX) || defined(USE_ALL)
+#ifdef USE_AIX
 #include "cp856.h"
 #include "cp922.h"
 #include "cp943.h"

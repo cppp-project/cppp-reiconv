@@ -22,7 +22,7 @@
 #include <stdlib.h>
 
 /* Consider all encodings, including the system dependent ones. */
-#define USE_ALL
+#define USE_AIX
 
 #include "converters.h"
 
@@ -91,7 +91,9 @@ int main ()
     struct wctomb_funcs ofuncs = xxx_ofuncs1,xxx_ofuncs2; \
     emit_encoding(&ofuncs,#xxx);                          \
   }
+/* Consider all encodings, including the system dependent ones. */
 #include "encodings.def"
+#include "encodings_aix.def"
 #undef DEFENCODING
 
   fflush(stdout);

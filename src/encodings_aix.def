@@ -1,0 +1,49 @@
+/* Copyright (C) 2000 Free Software Foundation, Inc.
+   This file is part of the GNU ICONV Library.
+
+   The GNU ICONV Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The GNU ICONV Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the GNU ICONV Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+
+/* Encodings used by system dependent locales on AIX. */
+
+DEFENCODING(( "CP856",
+            ),
+            cp856,
+            { cp856_mbtowc },             { cp856_wctomb, NULL })
+
+DEFENCODING(( "CP922",
+            ),
+            cp922,
+            { cp922_mbtowc },             { cp922_wctomb, NULL })
+
+DEFENCODING(( "CP943",
+            ),
+            cp943,
+            { cp943_mbtowc },             { cp943_wctomb, NULL })
+
+DEFENCODING(( "CP1046",
+            ),
+            cp1046,
+            { cp1046_mbtowc },            { cp1046_wctomb, NULL })
+
+DEFENCODING(( "CP1124",
+            ),
+            cp1124,
+            { cp1124_mbtowc },            { cp1124_wctomb, NULL })
+
+DEFENCODING(( "CP1129",
+            ),
+            cp1129,
+            { cp1129_mbtowc },            { cp1129_wctomb, NULL })

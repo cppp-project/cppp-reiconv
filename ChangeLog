@@ -1,3 +1,26 @@
+2000-03-13  Bruno Haible  <haible@clisp.cons.org>
+
+        Provide all encodings used by AIX locales.
+        * tools/Makefile (all): Add cp856.h, cp922.h, cp1046.h, cp1124.h,
+          cp1129.h.
+          (cp856.h, cp922.h, cp1046.h, cp1124.h, cp1129.h): New targets.
+        * src/cp856.h, src/cp922.h, src/cp943.h, src/cp1046.h, src/cp1124.h,
+          src/cp1129.h: New files.
+        * src/converters.h: Include them if USE_AIX is defined.
+        * src/encodings_aix.def: New file, with CP856, CP922, CP943, CP1046,
+          CP1124, CP1129.
+        * src/genflags.c: Define USE_AIX. Include encodings_aix.def.
+        * src/genaliases2.c: New file.
+        * src/iconv.c: Define USE_AIX on AIX.
+          Include encodings_aix.def and aliases_aix.h.
+          (aliases2_lookup): New function.
+          (iconv_open): Call aliases2_lookup.
+        * src/Makefile.in (iconv.lo): Depend on encodings_aix.def and
+          aliases_aix.h.
+        * Makefile.devel (all): Add src/aliases_aix.h.
+          (src/aliases_aix.h): New rule.
+          (src/flags.h): Depend on src/encodings_aix.def.
+
 2000-02-24  Bruno Haible  <haible@clisp.cons.org>
 
         * src/iconv.c (iconv): Don't write beyond the end of the output buffer.
@@ -12,24 +35,6 @@
         * src/iconv.c (iconv): Add cast in xxx_reset call.
 
 2000-02-05  Bruno Haible  <haible@clisp.cons.org>
-
-        Provide all encodings used by AIX locales.
-        * tools/Makefile (all): Add cp856.h, cp922.h, cp1046.h, cp1124.h,
-          cp1129.h.
-          (cp856.h, cp922.h, cp1046.h, cp1124.h, cp1129.h): New targets.
-        * src/cp856.h, src/cp922.h, src/cp943.h, src/cp1046.h, src/cp1124.h,
-          src/cp1129.h: New files.
-        * src/converters.h: Include them if either USE_AIX or USE_ALL is
-          defined.
-        * src/encodings.def: Add CP856, CP922, CP943, CP1046, CP1124, CP1129.
-        * src/genflags.c: Define USE_ALL.
-        * src/use_aliases2.h: New file.
-        * src/genaliases2.c: New file.
-        * src/iconv.c: Include use_aliases2.h and aliases2.h.
-          (iconv_open): Call aliases2_lookup.
-        * src/Makefile.in (iconv.lo): Depend on aliases2.h.
-          (aliases2.h): New rule.
-          (clean): Remove aliases2.h.
 
         * src/tis620.h: Simplify.
 

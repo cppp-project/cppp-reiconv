@@ -21,17 +21,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "use_aliases2.h"
-
-static int empty = 1;
-
 static void emit_encoding (const char* const* names, size_t n, const char* c_name)
 {
   for (; n > 0; names++, n--) {
-    if (empty) {
-      printf("static struct alias sysdep_aliases[] = {\n");
-      empty = 0;
-    }
     printf("  { \"");
     /* Output *names in upper case. */
     {
@@ -51,35 +43,17 @@ static void emit_encoding (const char* const* names, size_t n, const char* c_nam
 
 int main ()
 {
-#define USE_SYSDEPENDENT_ONLY
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                           \
     static const char* const names[] = BRACIFY xxx_names;     \
     emit_encoding(names,sizeof(names)/sizeof(names[0]),#xxx); \
   }
 #define BRACIFY(...) { __VA_ARGS__ }
-#include "encodings.def"
+#ifdef USE_AIX
+#include "encodings_aix.def"
+#endif
 #undef BRACIFY
 #undef DEFENCODING
-#undef USE_SYSDEPENDENT_ONLY
-  if (!empty) {
-    printf("};\n\n");
-    printf("#ifdef __GNUC__\n");
-    printf("__inline\n");
-    printf("#endif\n");
-    printf("const struct alias *\n");
-    printf("aliases2_lookup (register const char *str)\n");
-    printf("{\n");
-    printf("  struct alias * ptr;\n");
-    printf("  unsigned int count;\n");
-    printf("  for (ptr = sysdep_aliases, count = sizeof(sysdep_aliases)/sizeof(sysdep_aliases[0]); count > 0; ptr++, count--)\n");
-    printf("    if (!strcmp(str,ptr->name))\n");
-    printf("      return ptr;\n");
-    printf("  return NULL;\n");
-    printf("}\n");
-  } else {
-    printf("#define aliases2_lookup(str)  NULL\n");
-  }
   fflush(stdout);
   if (ferror(stdout))
     exit(1);

@@ -16,7 +16,7 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
-/* The list of all user-visible encodings. */
+/* The list of all system independent user-visible encodings. */
 
 /* By convention, an encoding named FOOBAR or FOO_BAR or FOO-BAR is defined
    in a file named "foobar.h" through the functions foobar_mbtowc and
@@ -35,8 +35,6 @@
    xxx is the name as used in the C code (lowercase).
  */
 
-
-#ifndef USE_SYSDEPENDENT_ONLY
 
 DEFENCODING(( "US-ASCII",               /* IANA */
               "ASCII",                  /* IANA, JDK 1.1 */
@@ -754,42 +752,4 @@ DEFENCODING(( "ISO-2022-KR",            /* IANA, RFC 1557 */
             ),
             iso2022_kr,
             { iso2022_kr_mbtowc },        { iso2022_kr_wctomb, iso2022_kr_reset })
-
-#endif /* USE_SYSDEPENDENT_ONLY */
-
-/* Encodings used by system dependent locales. */
-
-#if defined(USE_AIX) || defined(USE_ALL)
-
-DEFENCODING(( "CP856",
-            ),
-            cp856,
-            { cp856_mbtowc },             { cp856_wctomb, NULL })
-
-DEFENCODING(( "CP922",
-            ),
-            cp922,
-            { cp922_mbtowc },             { cp922_wctomb, NULL })
-
-DEFENCODING(( "CP943",
-            ),
-            cp943,
-            { cp943_mbtowc },             { cp943_wctomb, NULL })
-
-DEFENCODING(( "CP1046",
-            ),
-            cp1046,
-            { cp1046_mbtowc },            { cp1046_wctomb, NULL })
-
-DEFENCODING(( "CP1124",
-            ),
-            cp1124,
-            { cp1124_mbtowc },            { cp1124_wctomb, NULL })
-
-DEFENCODING(( "CP1129",
-            ),
-            cp1129,
-            { cp1129_mbtowc },            { cp1129_wctomb, NULL })
-
-#endif
 
