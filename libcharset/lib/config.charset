@@ -256,6 +256,14 @@ case "$os" in
 	# DJGPP 2.03 doesn't have nl_langinfo(CODESET); therefore
 	# localcharset.c falls back to using the full locale name
 	# from the environment variables.
+	echo "#"
+	echo "# The encodings given here may not all be correct."
+	echo "# If you find that the encoding given for your language and"
+	echo "# country is not the one your DOS machine actually uses, just"
+	echo "# correct it in this file, and send a mail to"
+	echo "# Juan Manuel Guerrero <st001906@hrz1.hrz.tu-darmstadt.de>"
+	echo "# and Bruno Haible <haible@clisp.cons.org>."
+	echo "#"
 	echo "C ASCII"
 	# ISO-8859-1 languages
 	echo "ca CP850"
