@@ -1,3 +1,9 @@
+2003-06-22  Bruno Haible  <bruno@clisp.org>
+
+	* src/Makefile.in (install): Link with the already installed library.
+	This fixes a link error on Solaris.
+	Reported by Paul Eggert.
+
 2003-06-08  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/canonicalize.c (__getcwd) [VMS]: Pass 3 arguments to getcwd.
