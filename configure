@@ -5511,7 +5511,7 @@ else
 fi
 
 
-for ac_func in mbrtowc wcrtomb setlocale
+for ac_func in mbrtowc wcrtomb mbsinit setlocale
 do
 echo $ac_n "checking for $ac_func""... $ac_c" 1>&6
 echo "configure:5518: checking for $ac_func" >&5
