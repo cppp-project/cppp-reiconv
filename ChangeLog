@@ -1,3 +1,7 @@
+2000-11-18  Bruno Haible  <haible@clisp.cons.org>
+
+        * man/iconv.3: Fix typo.
+
 2000-10-31  Bruno Haible  <haible@clisp.cons.org>
 
         * README, man/iconv_open.3: Document JOHAB again.

@@ -9,7 +9,7 @@
 .\"   GNU glibc-2 source code and manual
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"
-.TH ICONV 3  "January 22, 2000" "GNU" "Linux Programmer's Manual"
+.TH ICONV 3  "November 18, 2000" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv \- perform character set conversion
 .SH SYNOPSIS
@@ -63,7 +63,7 @@ If the output buffer has no more room for this reset sequence, it sets
 \fI*outbuf\fP and decrements \fI*outbytesptr\fP by the number of bytes
 written.
 .PP
-A third state is when \fIinbuf\fP is NULL or \fI*inbuf\fP is NULL, and
+A third case is when \fIinbuf\fP is NULL or \fI*inbuf\fP is NULL, and
 \fIoutbuf\fP is NULL or \fI*outbuf\fP is NULL. In this case, the \fBiconv\fP
 function sets \fIcd\fP's conversion state to the initial state.
 .SH "RETURN VALUE"
