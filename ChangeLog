@@ -1,5 +1,12 @@
 2004-07-22  Bruno Haible  <bruno@clisp.org>
 
+	* lib/encodings.def (ISO-8859-7): Add alias ISO_8859-7:2003.
+	* tools/Makefile (iso8859_7.h): Use conversion table from 2003.
+	* lib/iso8859_7.h: Add mappings for 0xa4, 0xa5, 0xaa.
+	* tests/ISO-8859-7.TXT: Update to ISO_8859-7:2003.
+
+2004-07-22  Bruno Haible  <bruno@clisp.org>
+
 	* tools/Makefile (ALL): Add iso8859_11.h.
 	(iso8859_11.h): New rule.
 	* lib/encodings.def: Add ISO-8859-11.

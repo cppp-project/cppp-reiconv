@@ -140,7 +140,7 @@ iso8859_5.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-5.TXT 8bit_tab_to_h
 iso8859_6.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-6.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-6 iso8859_6 < $<
 
-iso8859_7.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-7.TXT 8bit_tab_to_h
+iso8859_7.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-7-2003.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-7 iso8859_7 < $<
 
 iso8859_8.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-8.TXT 8bit_tab_to_h

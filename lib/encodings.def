@@ -250,6 +250,7 @@ DEFENCODING(( "ISO-8859-6",             /* IANA */
 DEFENCODING(( "ISO-8859-7",             /* IANA, RFC 1947 */
               "ISO_8859-7",             /* IANA */
               "ISO_8859-7:1987",        /* IANA */
+              "ISO_8859-7:2003",
               "ISO-IR-126",             /* IANA */
               "ECMA-118",               /* IANA */
               "ELOT_928",               /* IANA */
