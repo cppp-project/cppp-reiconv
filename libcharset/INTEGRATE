@@ -119,7 +119,7 @@ charset.alias: config.charset
 
 SUFFIXES = .sed .sin
 .sin.sed:
-	sed -e '/^#/d' -e 's/@''PACKAGE''@/@PACKAGE@/g' $< > $@-t
-	mv $@-t $@
+	sed -e '/^#/d' -e 's/@''PACKAGE''@/@PACKAGE@/g' $< > t-$@
+	mv t-$@ $@
 
 CLEANFILES = charset.alias ref-add.sed ref-del.sed
