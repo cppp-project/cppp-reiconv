@@ -1,3 +1,25 @@
+2002-02-15  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset [msdosdjgpp]: For Russian, use CP866.
+
+2002-02-11  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset: Add support for NetBSD.
+
+2002-01-10  Andrew Zabolotny  <zap@cobra.ru>
+	    Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Rework OS/2 support.
+	* config.charset: Add OS/2 support.
+
+2001-12-21  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c (ISSLASH): Provide definition for DOS-like systems.
+
+2001-12-15  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Add OS/2 support.
+
 2001-12-05  Bruno Haible  <bruno@clisp.org>
 
 	* localcharset.c (locale_charset): Don't return an empty string.
