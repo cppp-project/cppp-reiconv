@@ -40,13 +40,13 @@ Integration of this library into your package:
 	if test -f $(DESTDIR)$(libdir)/charset.alias; then \
 	  sed -f ref-add.sed $(DESTDIR)$(libdir)/charset.alias > $(DESTDIR)$(libdir)/t-charset.alias; \
 	  $(INSTALL_DATA) $(DESTDIR)$(libdir)/t-charset.alias $(DESTDIR)$(libdir)/charset.alias; \
-	  rm -f $(DESTDIR)$(libdir)/t-charset.alias
+	  rm -f $(DESTDIR)$(libdir)/t-charset.alias; \
 	else \
 	  if test @GLIBC21@ = no; then \
 	    sed -f ref-add.sed charset.alias > $(DESTDIR)$(libdir)/t-charset.alias; \
 	    $(INSTALL_DATA) $(DESTDIR)$(libdir)/t-charset.alias $(DESTDIR)$(libdir)/charset.alias; \
-	    rm -f $(DESTDIR)$(libdir)/t-charset.alias
-	  fi ; \
+	    rm -f $(DESTDIR)$(libdir)/t-charset.alias; \
+	  fi; \
 	fi
 
   - Augment target "installdirs" by
