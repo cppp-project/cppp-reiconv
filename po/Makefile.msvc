@@ -2,11 +2,17 @@
 
 #### Start of system configuration section. ####
 
+# Flags that can be set on the nmake command line:
+#   PREFIX=Some\Directory   Base directory for installation
+!if !defined(PREFIX)
+PREFIX = c:\usr
+!endif
+
 # Directories used by "make":
 srcdir = .
 
 # Directories used by "make install":
-prefix = c:\usr
+prefix = $(PREFIX)
 datadir = $(prefix)\share
 localedir = $(datadir)\locale
 
@@ -49,6 +55,9 @@ install : all force
 	-mkdir $(localedir)\fr
 	-mkdir $(localedir)\fr\LC_MESSAGES
 	$(INSTALL_DATA) fr.gmo $(localedir)\fr\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\ga
+	-mkdir $(localedir)\ga\LC_MESSAGES
+	$(INSTALL_DATA) ga.gmo $(localedir)\ga\LC_MESSAGES\libiconv.mo
 	-mkdir $(localedir)\gl
 	-mkdir $(localedir)\gl\LC_MESSAGES
 	$(INSTALL_DATA) gl.gmo $(localedir)\gl\LC_MESSAGES\libiconv.mo
@@ -67,6 +76,9 @@ install : all force
 	-mkdir $(localedir)\pt_BR
 	-mkdir $(localedir)\pt_BR\LC_MESSAGES
 	$(INSTALL_DATA) pt_BR.gmo $(localedir)\pt_BR\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\ro
+	-mkdir $(localedir)\ro\LC_MESSAGES
+	$(INSTALL_DATA) ro.gmo $(localedir)\ro\LC_MESSAGES\libiconv.mo
 	-mkdir $(localedir)\ru
 	-mkdir $(localedir)\ru\LC_MESSAGES
 	$(INSTALL_DATA) ru.gmo $(localedir)\ru\LC_MESSAGES\libiconv.mo
@@ -104,6 +116,8 @@ installdirs : force
 	-mkdir $(localedir)\fi\LC_MESSAGES
 	-mkdir $(localedir)\fr
 	-mkdir $(localedir)\fr\LC_MESSAGES
+	-mkdir $(localedir)\ga
+	-mkdir $(localedir)\ga\LC_MESSAGES
 	-mkdir $(localedir)\gl
 	-mkdir $(localedir)\gl\LC_MESSAGES
 	-mkdir $(localedir)\hr
@@ -116,6 +130,8 @@ installdirs : force
 	-mkdir $(localedir)\it\LC_MESSAGES
 	-mkdir $(localedir)\pt_BR
 	-mkdir $(localedir)\pt_BR\LC_MESSAGES
+	-mkdir $(localedir)\ro
+	-mkdir $(localedir)\ro\LC_MESSAGES
 	-mkdir $(localedir)\ru
 	-mkdir $(localedir)\ru\LC_MESSAGES
 	-mkdir $(localedir)\sk
@@ -137,12 +153,14 @@ uninstall : force
 	$(RM) $(localedir)\es\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\fi\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\fr\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\ga\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\gl\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\hr\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\hu\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\id\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\it\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\pt_BR\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\ro\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\ru\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\sk\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\sl\LC_MESSAGES\libiconv.mo
@@ -155,7 +173,6 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) core
 
 distclean : clean
 
