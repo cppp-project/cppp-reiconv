@@ -70,29 +70,29 @@ uninstall : force
 	cd lib; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(RM) $(includedir)/libcharset.h
 
-check : all
+check : all force
 	cd lib
 	$(MAKE) -f Makefile.msvc check
 	cd ..
 
-mostlyclean : all
+mostlyclean : force
 	cd lib
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
 
-clean : all
+clean : force
 	cd lib
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
 
-distclean : all
+distclean : force
 	cd lib
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
 	$(RM) include\libcharset.h
 	$(RM) config.status config.log config.cache Makefile config.h
 
-maintainer-clean : all
+maintainer-clean : force
 	cd lib
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
