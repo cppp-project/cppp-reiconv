@@ -23,15 +23,12 @@
 #ifndef _VIETCOMB_H
 #define _VIETCOMB_H
 
-#ifdef notusedyet
-
-/* Relevant combining characters. */
-static const unsigned short viet_comb_table[] = {
-  0x0300, 0x0301, 0x0303, 0x0309, 0x0323,
-};
+/* Relevant combining characters:
+   0x0300, 0x0301, 0x0303, 0x0309, 0x0323. */
 
 /* Composition tables for each of the relevant combining characters. */
-static const unsigned short viet_comp_table_data[][2] = {
+static const struct { unsigned short base; unsigned short composed; } viet_comp_table_data[] = {
+#define viet_comp_table0300_idx 0
 #define viet_comp_table0300_len 31
   { 0x0041, 0x00C0 },
   { 0x0045, 0x00C8 },
@@ -68,6 +65,7 @@ static const unsigned short viet_comp_table_data[][2] = {
   { 0x01A1, 0x1EDD },
   { 0x01AF, 0x1EEA },
   { 0x01B0, 0x1EEB },
+#define viet_comp_table0301_idx (viet_comp_table0300_idx+viet_comp_table0300_len)
 #define viet_comp_table0301_len 60
   { 0x0041, 0x00C1 },
   { 0x0043, 0x0106 },
@@ -137,6 +135,7 @@ static const unsigned short viet_comp_table_data[][2] = {
   { 0x01A1, 0x1EDB },
   { 0x01AF, 0x1EE8 },
   { 0x01B0, 0x1EE9 },
+#define viet_comp_table0303_idx (viet_comp_table0301_idx+viet_comp_table0301_len)
 #define viet_comp_table0303_len 34
   { 0x0041, 0x00C3 },
   { 0x0045, 0x1EBC },
@@ -172,6 +171,7 @@ static const unsigned short viet_comp_table_data[][2] = {
   { 0x01A1, 0x1EE1 },
   { 0x01AF, 0x1EEE },
   { 0x01B0, 0x1EEF },
+#define viet_comp_table0309_idx (viet_comp_table0303_idx+viet_comp_table0303_len)
 #define viet_comp_table0309_len 24
   { 0x0041, 0x1EA2 },
   { 0x0045, 0x1EBA },
@@ -197,6 +197,7 @@ static const unsigned short viet_comp_table_data[][2] = {
   { 0x01A1, 0x1EDF },
   { 0x01AF, 0x1EEC },
   { 0x01B0, 0x1EED },
+#define viet_comp_table0323_idx (viet_comp_table0309_idx+viet_comp_table0309_len)
 #define viet_comp_table0323_len 50
   { 0x0041, 0x1EA0 },
   { 0x0042, 0x1E04 },
@@ -249,15 +250,13 @@ static const unsigned short viet_comp_table_data[][2] = {
   { 0x01AF, 0x1EF0 },
   { 0x01B0, 0x1EF1 },
 };
-static const struct { unsigned int len; unsigned int offset; } viet_comp_table[] = {
-  { viet_comp_table0300_len, 0 },
-  { viet_comp_table0301_len, viet_comp_table0300_len },
-  { viet_comp_table0303_len, viet_comp_table0300_len + viet_comp_table0301_len },
-  { viet_comp_table0309_len, viet_comp_table0300_len + viet_comp_table0301_len + viet_comp_table0303_len },
-  { viet_comp_table0323_len, viet_comp_table0300_len + viet_comp_table0301_len + viet_comp_table0303_len + viet_comp_table0309_len },
+static const struct { unsigned int len; unsigned int idx; } viet_comp_table[] = {
+  { viet_comp_table0300_len, viet_comp_table0300_idx },
+  { viet_comp_table0301_len, viet_comp_table0301_idx },
+  { viet_comp_table0303_len, viet_comp_table0303_idx },
+  { viet_comp_table0309_len, viet_comp_table0309_idx },
+  { viet_comp_table0323_len, viet_comp_table0323_idx },
 };
-
-#endif
 
 /* Decomposition table for the relevant Unicode characters. */
 struct viet_decomp { unsigned short composed; unsigned short base : 12; int comb1 : 4; };

@@ -89,7 +89,7 @@ int main ()
   printf("#define HAVE_HANGUL_JAMO %d\n",bitmask);
   printf("\n");
 
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
+#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                       \
     struct wctomb_funcs ofuncs = xxx_ofuncs1,xxx_ofuncs2; \
     emit_encoding(&ofuncs,#xxx);                          \

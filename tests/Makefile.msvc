@@ -90,9 +90,11 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) CP1253
 	$(srcdir)\check-stateless.bat $(srcdir) CP1254
 	$(srcdir)\check-stateless.bat $(srcdir) CP1255
+	$(srcdir)\check-stateful.bat $(srcdir) CP1255
 	$(srcdir)\check-stateless.bat $(srcdir) CP1256
 	$(srcdir)\check-stateless.bat $(srcdir) CP1257
 	$(srcdir)\check-stateless.bat $(srcdir) CP1258
+	$(srcdir)\check-stateful.bat $(srcdir) CP1258
 	$(srcdir)\check-stateless.bat $(srcdir) CP850
 	$(srcdir)\check-stateless.bat $(srcdir) CP862
 	$(srcdir)\check-stateless.bat $(srcdir) CP866
@@ -119,6 +121,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) CP874
 	$(srcdir)\check-stateless.bat $(srcdir) VISCII
 	$(srcdir)\check-stateless.bat $(srcdir) TCVN
+	$(srcdir)\check-stateful.bat $(srcdir) TCVN
 #	/* CJK character sets */
 	$(srcdir)\check-stateless.bat $(srcdir) ISO646-JP
 	$(srcdir)\check-stateless.bat $(srcdir) JIS_X0201

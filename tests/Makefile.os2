@@ -59,9 +59,11 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateless $(srcdir) CP1253
 	$(srcdir)\check-stateless $(srcdir) CP1254
 	$(srcdir)\check-stateless $(srcdir) CP1255
+	$(srcdir)\check-stateful $(srcdir) CP1255
 	$(srcdir)\check-stateless $(srcdir) CP1256
 	$(srcdir)\check-stateless $(srcdir) CP1257
 	$(srcdir)\check-stateless $(srcdir) CP1258
+	$(srcdir)\check-stateful $(srcdir) CP1258
 	$(srcdir)\check-stateless $(srcdir) CP850
 	$(srcdir)\check-stateless $(srcdir) CP862
 	$(srcdir)\check-stateless $(srcdir) CP866
@@ -88,6 +90,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateless $(srcdir) CP874
 	$(srcdir)\check-stateless $(srcdir) VISCII
 	$(srcdir)\check-stateless $(srcdir) TCVN
+	$(srcdir)\check-stateful $(srcdir) TCVN
 #	/* CJK character sets */
 	$(srcdir)\check-stateless $(srcdir) ISO646-JP
 	$(srcdir)\check-stateless $(srcdir) JIS_X0201

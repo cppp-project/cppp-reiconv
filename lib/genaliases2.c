@@ -43,7 +43,7 @@ static void emit_encoding (const char* const* names, size_t n, const char* c_nam
 
 int main ()
 {
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
+#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                           \
     static const char* const names[] = BRACIFY xxx_names;     \
     emit_encoding(names,sizeof(names)/sizeof(names[0]),#xxx); \

@@ -43,6 +43,12 @@ struct mbtowc_funcs {
    * or -1 if invalid, or -2 if n too small, or -2-(number of bytes consumed)
    * if only a shift sequence was read.
    */
+  int (*xxx_flushwc) (conv_t conv, ucs4_t *pwc);
+  /*
+   * int xxx_flushwc (conv_t conv, ucs4_t *pwc)
+   * returns to the initial state and stores the pending wide character, if any.
+   * Result is 1 (if a wide character was read) or 0 if none was pending.
+   */
 };
 
 /* Return code if invalid. (xxx_mbtowc) */

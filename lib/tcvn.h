@@ -22,6 +22,7 @@
  * TCVN-5712
  */
 
+#include "flushwc.h"
 #include "vietcomb.h"
 
 static const unsigned char tcvn_comb_table[] = {
@@ -63,23 +64,84 @@ static const unsigned short tcvn_2uni_2[128] = {
   0x1ee9, 0x1ef1, 0x1ef3, 0x1ef7, 0x1ef9, 0x00fd, 0x1ef5, 0x1ed0,
 };
 
-/* TCVN as a stateless encoding. Suitable for locales, but it has
-   the drawback that it can produce Unicode strings which are not
-   in Normalization Form C and therefore not suitable for interchange.
-   FIXME: It should produce Normalization Form C instead. */
+/* In the TCVN to Unicode direction, the state contains a buffered
+   character, or 0 if none. */
 
 static int
 tcvn_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c = *s;
+  unsigned short wc;
+  unsigned short last_wc;
   if (c < 0x20)
-    *pwc = (ucs4_t) tcvn_2uni_1[c];
+    wc = tcvn_2uni_1[c];
   else if (c < 0x80)
-    *pwc = (ucs4_t) c;
+    wc = c;
   else
-    *pwc = (ucs4_t) tcvn_2uni_2[c-0x80];
-  return 1;
+    wc = tcvn_2uni_2[c-0x80];
+  last_wc = conv->istate;
+  if (last_wc) {
+    if (wc >= 0x0300 && wc < 0x0340) {
+      /* See whether last_wc and wc can be combined. */
+      unsigned int k;
+      unsigned int i1, i2;
+      switch (wc) {
+        case 0x0300: k = 0; break;
+        case 0x0301: k = 1; break;
+        case 0x0303: k = 2; break;
+        case 0x0309: k = 3; break;
+        case 0x0323: k = 4; break;
+        default: abort();
+      }
+      i1 = viet_comp_table[k].idx;
+      i2 = i1 + viet_comp_table[k].len-1;
+      if (last_wc >= viet_comp_table_data[i1].base
+          && last_wc <= viet_comp_table_data[i2].base) {
+        unsigned int i;
+        for (;;) {
+          i = (i1+i2)>>1;
+          if (last_wc == viet_comp_table_data[i].base)
+            break;
+          if (last_wc < viet_comp_table_data[i].base) {
+            if (i1 == i)
+              goto not_combining;
+            i2 = i;
+          } else {
+            if (i1 != i)
+              i1 = i;
+            else {
+              i = i2;
+              if (last_wc == viet_comp_table_data[i].base)
+                break;
+              goto not_combining;
+            }
+          }
+        }
+        last_wc = viet_comp_table_data[i].composed;
+        /* Output the combined character. */
+        conv->istate = 0;
+        *pwc = (ucs4_t) last_wc;
+        return 1;
+      }
+    }
+  not_combining:
+    /* Output the buffered character. */
+    conv->istate = 0;
+    *pwc = (ucs4_t) last_wc;
+    return 0; /* Don't advance the input pointer. */
+  }
+  if (wc >= 0x0041 && wc <= 0x01b0) {
+    /* wc is a possible match in viet_comp_table_data. Buffer it. */
+    conv->istate = wc;
+    return RET_TOOFEW(1);
+  } else {
+    /* Output wc immediately. */
+    *pwc = (ucs4_t) wc;
+    return 1;
+  }
 }
+
+#define tcvn_flushwc normal_flushwc
 
 static const unsigned char tcvn_page00[96+184] = {
   0xa0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xa0-0xa7 */

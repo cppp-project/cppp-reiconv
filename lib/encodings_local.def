@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,9 +21,9 @@
 DEFENCODING(( "CHAR",
             ),
             local_char,
-            { NULL },                     { NULL, NULL })
+            { NULL, NULL },               { NULL, NULL })
 
 DEFENCODING(( "WCHAR_T",                /* glibc */
             ),
             local_wchar_t,
-            { NULL },                     { NULL, NULL })
+            { NULL, NULL },               { NULL, NULL })

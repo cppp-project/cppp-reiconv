@@ -39,13 +39,17 @@ static const char* hexbuf (unsigned char buf[], unsigned int buflen)
   return msg;
 }
 
-static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned int *out)
+static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned int* out)
 {
   const char* inbuf = (const char*) buf;
   size_t inbytesleft = buflen;
   char* outbuf = (char*) out;
-  size_t outbytesleft = sizeof(unsigned int);
-  size_t result = iconv(cd,(ICONV_CONST char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
+  size_t outbytesleft = 3*sizeof(unsigned int);
+  size_t result;
+  iconv(cd,NULL,NULL,NULL,NULL);
+  result = iconv(cd,(ICONV_CONST char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
+  if (result != (size_t)(-1))
+    result = iconv(cd,NULL,NULL,&outbuf,&outbytesleft);
   if (result == (size_t)(-1)) {
     if (errno == EILSEQ) {
       return -1;
@@ -61,12 +65,27 @@ static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned i
   } else if (result > 0) /* ignore conversions with transliteration */ {
     return -1;
   } else {
-    if (inbytesleft != 0 || outbytesleft != 0) {
-      fprintf(stderr,"%s: inbytes = %ld, outbytes = %ld\n",hexbuf(buf,buflen),(long)(buflen-inbytesleft),(long)(sizeof(unsigned int)-outbytesleft));
+    if (inbytesleft != 0) {
+      fprintf(stderr,"%s: inbytes = %ld, outbytes = %ld\n",hexbuf(buf,buflen),(long)(buflen-inbytesleft),(long)(3*sizeof(unsigned int)-outbytesleft));
       exit(1);
     }
-    return 1;
+    return (3*sizeof(unsigned int)-outbytesleft)/sizeof(unsigned int);
   }
+}
+
+/* Returns the out[] buffer as a Unicode value, formatted as 0x%04X. */
+static const char* ucs4_decode (const unsigned int* out, unsigned int outlen)
+{
+  static char hexbuf[21];
+  char* p = hexbuf;
+  while (outlen > 0) {
+    if (p > hexbuf)
+      *p++ = ' ';
+    sprintf (p, "0x%04X", out[0]);
+    out += 1; outlen -= 1;
+    p += strlen (p);
+  }
+  return hexbuf;
 }
 
 int main (int argc, char* argv[])
@@ -87,38 +106,38 @@ int main (int argc, char* argv[])
   }
 
   {
-    unsigned int out;
+    unsigned int out[3];
     unsigned char buf[4];
     unsigned int i0, i1, i2, i3;
     int result;
     for (i0 = 0; i0 < 0x100; i0++) {
       buf[0] = i0;
-      result = try(cd,buf,1,&out);
+      result = try(cd,buf,1,out);
       if (result < 0) {
       } else if (result > 0) {
-        printf("0x%02X\t0x%04X\n",i0,out);
+        printf("0x%02X\t%s\n",i0,ucs4_decode(out,result));
       } else {
         for (i1 = 0; i1 < 0x100; i1++) {
           buf[1] = i1;
-          result = try(cd,buf,2,&out);
+          result = try(cd,buf,2,out);
           if (result < 0) {
           } else if (result > 0) {
-            printf("0x%02X%02X\t0x%04X\n",i0,i1,out);
+            printf("0x%02X%02X\t%s\n",i0,i1,ucs4_decode(out,result));
           } else {
             for (i2 = 0; i2 < 0x100; i2++) {
               buf[2] = i2;
-              result = try(cd,buf,3,&out);
+              result = try(cd,buf,3,out);
               if (result < 0) {
               } else if (result > 0) {
-                printf("0x%02X%02X%02X\t0x%04X\n",i0,i1,i2,out);
+                printf("0x%02X%02X%02X\t%s\n",i0,i1,i2,ucs4_decode(out,result));
               } else if (strcmp(charset,"UTF-8")) {
                 for (i3 = 0; i3 < 0x100; i3++) {
                   buf[3] = i3;
-                  result = try(cd,buf,4,&out);
+                  result = try(cd,buf,4,out);
                   if (result < 0) {
                   } else if (result > 0) {
-                    if (out < 0x10000 || strcmp(charset,"GB18030"))
-                      printf("0x%02X%02X%02X%02X\t0x%04X\n",i0,i1,i2,i3,out);
+                    if (out[0] < 0x10000 || strcmp(charset,"GB18030"))
+                      printf("0x%02X%02X%02X%02X\t%s\n",i0,i1,i2,i3,ucs4_decode(out,result));
                   } else {
                     fprintf(stderr,"%s: incomplete byte sequence\n",hexbuf(buf,4));
                     exit(1);

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -43,7 +43,7 @@ int main ()
   printf("struct alias { const char* name; unsigned int encoding_index; };\n");
   printf("%%%%\n");
 
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
+#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                           \
     static const char* const names[] = BRACIFY xxx_names;     \
     emit_encoding(names,sizeof(names)/sizeof(names[0]),#xxx); \

@@ -22,6 +22,7 @@
  * CP1258
  */
 
+#include "flushwc.h"
 #include "vietcomb.h"
 
 static const unsigned char cp1258_comb_table[] = {
@@ -55,28 +56,85 @@ static const unsigned short cp1258_2uni[128] = {
   0x00f8, 0x00f9, 0x00fa, 0x00fb, 0x00fc, 0x01b0, 0x20ab, 0x00ff,
 };
 
-/* CP1258 as a stateless encoding. Suitable for locales, but it has
-   the drawback that it can produce Unicode strings which are not
-   in Normalization Form C and therefore not suitable for interchange.
-   FIXME: It should produce Normalization Form C instead. */
+/* In the CP1258 to Unicode direction, the state contains a buffered
+   character, or 0 if none. */
 
 static int
 cp1258_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c = *s;
+  unsigned short wc;
+  unsigned short last_wc;
   if (c < 0x80) {
-    *pwc = (ucs4_t) c;
+    wc = c;
+  } else {
+    wc = cp1258_2uni[c-0x80];
+    if (wc == 0xfffd)
+      return RET_ILSEQ;
+  }
+  last_wc = conv->istate;
+  if (last_wc) {
+    if (wc >= 0x0300 && wc < 0x0340) {
+      /* See whether last_wc and wc can be combined. */
+      unsigned int k;
+      unsigned int i1, i2;
+      switch (wc) {
+        case 0x0300: k = 0; break;
+        case 0x0301: k = 1; break;
+        case 0x0303: k = 2; break;
+        case 0x0309: k = 3; break;
+        case 0x0323: k = 4; break;
+        default: abort();
+      }
+      i1 = viet_comp_table[k].idx;
+      i2 = i1 + viet_comp_table[k].len-1;
+      if (last_wc >= viet_comp_table_data[i1].base
+          && last_wc <= viet_comp_table_data[i2].base) {
+        unsigned int i;
+        for (;;) {
+          i = (i1+i2)>>1;
+          if (last_wc == viet_comp_table_data[i].base)
+            break;
+          if (last_wc < viet_comp_table_data[i].base) {
+            if (i1 == i)
+              goto not_combining;
+            i2 = i;
+          } else {
+            if (i1 != i)
+              i1 = i;
+            else {
+              i = i2;
+              if (last_wc == viet_comp_table_data[i].base)
+                break;
+              goto not_combining;
+            }
+          }
+        }
+        last_wc = viet_comp_table_data[i].composed;
+        /* Output the combined character. */
+        conv->istate = 0;
+        *pwc = (ucs4_t) last_wc;
+        return 1;
+      }
+    }
+  not_combining:
+    /* Output the buffered character. */
+    conv->istate = 0;
+    *pwc = (ucs4_t) last_wc;
+    return 0; /* Don't advance the input pointer. */
+  }
+  if (wc >= 0x0041 && wc <= 0x01b0) {
+    /* wc is a possible match in viet_comp_table_data. Buffer it. */
+    conv->istate = wc;
+    return RET_TOOFEW(1);
+  } else {
+    /* Output wc immediately. */
+    *pwc = (ucs4_t) wc;
     return 1;
   }
-  else {
-    unsigned short wc = cp1258_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
-    }
-  }
-  return RET_ILSEQ;
 }
+
+#define cp1258_flushwc normal_flushwc
 
 static const unsigned char cp1258_page00[88] = {
   0xc0, 0xc1, 0xc2, 0x00, 0xc4, 0xc5, 0xc6, 0xc7, /* 0xc0-0xc7 */

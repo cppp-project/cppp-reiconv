@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,29 +21,29 @@
 DEFENCODING(( "CP856",
             ),
             cp856,
-            { cp856_mbtowc },             { cp856_wctomb, NULL })
+            { cp856_mbtowc, NULL },       { cp856_wctomb, NULL })
 
 DEFENCODING(( "CP922",
             ),
             cp922,
-            { cp922_mbtowc },             { cp922_wctomb, NULL })
+            { cp922_mbtowc, NULL },       { cp922_wctomb, NULL })
 
 DEFENCODING(( "CP943",
             ),
             cp943,
-            { cp943_mbtowc },             { cp943_wctomb, NULL })
+            { cp943_mbtowc, NULL },       { cp943_wctomb, NULL })
 
 DEFENCODING(( "CP1046",
             ),
             cp1046,
-            { cp1046_mbtowc },            { cp1046_wctomb, NULL })
+            { cp1046_mbtowc, NULL },      { cp1046_wctomb, NULL })
 
 DEFENCODING(( "CP1124",
             ),
             cp1124,
-            { cp1124_mbtowc },            { cp1124_wctomb, NULL })
+            { cp1124_mbtowc, NULL },      { cp1124_wctomb, NULL })
 
 DEFENCODING(( "CP1129",
             ),
             cp1129,
-            { cp1129_mbtowc },            { cp1129_wctomb, NULL })
+            { cp1129_mbtowc, NULL },      { cp1129_wctomb, NULL })

@@ -1,3 +1,47 @@
+2001-05-24  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/converters.h (mbtowc_funcs): Add flushwc member function.
+        * lib/flushwc.h: New file.
+        * lib/cp1255.h: Include flushwc.h.
+          (cp1255_comp_table_data, cp1255_comp_table): New arrays.
+          (cp1255_mbtowc): Compose base and combining characters.
+          (cp1255_flushwc): New macro.
+        * lib/vietcomb.h (viet_comp_table_data, viet_comp_table): New arrays.
+        * lib/cp1258.h: Include flushwc.h.
+          (cp1258_mbtowc): Compose base and combining characters.
+          (cp1258_flushwc): New macro.
+        * lib/tcvn.h: Include flushwc.h.
+          (tcvn_mbtowc): Compose base and combining characters.
+          (tcvn_flushwc): New macro.
+        * lib/loop_unicode.h: (unicode_transliterate): New function, extracted
+          from unicode_loop_convert.
+          (unicode_loop_convert): Use unicode_transliterate.
+          (unicode_loop_reset): Call xxx_flushwc and output the resulting
+          character.
+        * lib/encodings.def: Add xxx_flushwc member.
+        * lib/encodings_aix.def: Likewise.
+        * lib/encodings_dos.def: Likewise.
+        * lib/encodings_local.def: Likewise.
+        * lib/encodings_osf1.def: Likewise.
+        * lib/genaliases.c: Add an argument to the DEFENCODING macro.
+        * lib/genaliases2.c: Likewise.
+        * lib/genflags.c: Likewise.
+        * lib/iconv.c: Likewise.
+        * tests/table-from.c (try): Reset the iconv descriptor before the main
+          call, and flush it afterwards.
+          (ucs4_decode): New function.
+          (main): Allow up to 3 Unicode characters output. Call ucs4_decode.
+        * tests/CP1255-snippet: New file.
+        * tests/CP1255-snippet.UTF-8: New file.
+        * tests/CP1258-snippet: New file.
+        * tests/CP1258-snippet.UTF-8: New file.
+        * tests/TCVN-snippet: New file.
+        * tests/TCVN-snippet.UTF-8: New file.
+        * tests/Makefile.in (check): Check combining behaviour of CP1255,
+          CP1258, TCVN.
+        * tests/Makefile.msvc (check): Likewise.
+        * tests/Makefile.os2 (check): Likewise.
+
 2001-05-22  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/converters.h (RET_ILUNI): New macro.

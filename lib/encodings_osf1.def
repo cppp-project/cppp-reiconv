@@ -21,9 +21,9 @@
 DEFENCODING(( "DEC-KANJI",
             ),
             dec_kanji,
-            { dec_kanji_mbtowc },         { dec_kanji_wctomb, NULL })
+            { dec_kanji_mbtowc, NULL },   { dec_kanji_wctomb, NULL })
 
 DEFENCODING(( "DEC-HANYU",
             ),
             dec_hanyu,
-            { dec_hanyu_mbtowc },         { dec_hanyu_wctomb, NULL })
+            { dec_hanyu_mbtowc, NULL },   { dec_hanyu_wctomb, NULL })

@@ -70,7 +70,7 @@ struct encoding {
   int oflags;                 /* flags for unicode -> multibyte conversion */
 };
 enum {
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
+#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   ei_##xxx ,
 #include "encodings.def"
 #ifdef USE_AIX
@@ -88,8 +88,8 @@ ei_for_broken_compilers_that_dont_like_trailing_commas
 };
 #include "flags.h"
 static struct encoding const all_encodings[] = {
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
-  { xxx_ifuncs, xxx_ofuncs1,xxx_ofuncs2, ei_##xxx##_oflags },
+#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
+  { xxx_ifuncs1,xxx_ifuncs2, xxx_ofuncs1,xxx_ofuncs2, ei_##xxx##_oflags },
 #include "encodings.def"
 #ifdef USE_AIX
 #include "encodings_aix.def"
@@ -101,8 +101,8 @@ static struct encoding const all_encodings[] = {
 #include "encodings_dos.def"
 #endif
 #undef DEFENCODING
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs,xxx_ofuncs1,xxx_ofuncs2) \
-  { xxx_ifuncs, xxx_ofuncs1,xxx_ofuncs2, 0 },
+#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
+  { xxx_ifuncs1,xxx_ifuncs2, xxx_ofuncs1,xxx_ofuncs2, 0 },
 #include "encodings_local.def"
 #undef DEFENCODING
 };
