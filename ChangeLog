@@ -1,5 +1,22 @@
 2001-06-25  Bruno Haible  <haible@clisp.cons.org>
 
+	* src/Makefile.in (iconv): Mention $(INCLUDES) before $(CFLAGS) and
+	$(CPPFLAGS).
+	* src/Makefile.msvc (iconv.exe): Likewise.
+	* src/Makefile.os2 (iconv.exe): Likewise.
+	* lib/Makefile.in (libiconv_plug_linux.so): Likewise.
+	(libiconv_plug_solaris.so): Likewise.
+	(libiconv_plug_osf.so): Likewise.
+	(iconv.lo): Likewise.
+	* lib/Makefile.msvc (iconv.obj): Likewise.
+	* lib/Makefile.os2 (iconv.obj): Likewise.
+	* tests/Makefile.in (table-from, table-to): Likewise.
+	* tests/Makefile.msvc (table-from.exe, table-to.exe): Likewise.
+	* tests/Makefile.os2 (table-from.exe, table-to.exe): Likewise.
+	(genutf8.exe): Don't use $(INCLUDES).
+
+2001-06-25  Bruno Haible  <haible@clisp.cons.org>
+
         * include/iconv.h.in (_LIBICONV_VERSION), README, windows/iconv.rc:
           Bump version number.
         * lib/Makefile.in (LIBICONV_VERSION_INFO): Define to 2:4:0.

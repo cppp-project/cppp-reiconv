@@ -90,7 +90,7 @@ RESOURCES =
 all : charset.lib
 
 localcharset.obj : $(srcdir)/localcharset.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/localcharset.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c $(srcdir)/localcharset.c
 
 !if !$(DLL)
 

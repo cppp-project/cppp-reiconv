@@ -137,10 +137,10 @@ check : all table-from table-to ../src/iconv
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
 
 table-from : $(srcdir)/table-from.c ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(srcdir)/table-from.c ../lib/libiconv.la -o $@
 
 table-to : $(srcdir)/table-to.c ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(srcdir)/table-to.c ../lib/libiconv.la -o $@
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
 ../lib/libiconv.la :

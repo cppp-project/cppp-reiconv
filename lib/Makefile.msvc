@@ -93,7 +93,7 @@ config.h : config.h.msvc
 	$(LN) config.h.msvc config.h
 
 iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h config.h
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c $(srcdir)/iconv.c
 
 !if !$(DLL)
 

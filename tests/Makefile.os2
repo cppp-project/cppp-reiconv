@@ -126,15 +126,15 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-translit $(srcdir) Quotes UTF-8 ASCII
 
 table-from.exe : table-from.c 
-	$(CC) $(CFLAGS) $(INCLUDES) table-from.c ../lib/iconv.a
+	$(CC) $(INCLUDES) $(CFLAGS) table-from.c ../lib/iconv.a
 	copy ..\lib\iconv.dll iconv.dll
 
 table-to.exe : table-to.c
-	$(CC) $(CFLAGS) $(INCLUDES) table-to.c ../lib/iconv.a
+	$(CC) $(INCLUDES) $(CFLAGS) table-to.c ../lib/iconv.a
 	copy ..\lib\iconv.dll iconv.dll
 
 genutf8.exe : genutf8.c
-	$(CC) $(CFLAGS) $(INCLUDES) genutf8.c
+	$(CC) $(CFLAGS) genutf8.c
 
 mostlyclean : clean
 

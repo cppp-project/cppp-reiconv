@@ -40,7 +40,7 @@ top_builddir = ..
 all : iconv
 
 iconv : $(srcdir)/iconv.c ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -I../lib $(srcdir)/iconv.c ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) $(srcdir)/iconv.c ../lib/libiconv.la -o $@
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
 ../lib/libiconv.la :

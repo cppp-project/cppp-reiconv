@@ -51,7 +51,7 @@ SHELL = /bin/sh
 all : iconv.exe
 
 iconv.exe : $(srcdir)/iconv.c ../lib/iconv.lib
-	$(CC) $(CFLAGS) $(INCLUDES) -I..\lib $(srcdir)/iconv.c ../lib/iconv.lib -Feiconv.exe
+	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) $(srcdir)/iconv.c ../lib/iconv.lib -Feiconv.exe
 	$(RM) iconv.obj
 !if $(DLL)
 	copy ..\lib\iconv.dll iconv.dll

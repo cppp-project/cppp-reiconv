@@ -33,7 +33,7 @@ config.h : force
 	sed -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' < config.h.in > config.h
 
 iconv.obj : iconv.c encodings.def encodings_local.def aliases.h config.h
-	$(CC) $(CFLAGS) $(INCLUDES) -c iconv.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c iconv.c
 
 iconv.dll : $(OBJECTS) ../os2/iconv.def # DLL itself
 	$(CC) -Zdll $(CFLAGS) -o $@ $(OBJECTS) ../os2/iconv.def

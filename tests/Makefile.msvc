@@ -157,14 +157,14 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-translit.bat $(srcdir) Quotes UTF-8 ASCII
 
 table-from.exe : $(srcdir)/table-from.c ../lib/iconv.lib
-	$(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../lib/iconv.lib -Fetable-from.exe
+	$(CC) $(INCLUDES) $(CFLAGS) $(srcdir)/table-from.c ../lib/iconv.lib -Fetable-from.exe
 	$(RM) table-from.obj
 !if $(DLL)
 	copy ..\lib\iconv.dll iconv.dll
 !endif
 
 table-to.exe : $(srcdir)/table-to.c ../lib/iconv.lib
-	$(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../lib/iconv.lib -Fetable-to.exe
+	$(CC) $(INCLUDES) $(CFLAGS) $(srcdir)/table-to.c ../lib/iconv.lib -Fetable-to.exe
 	$(RM) table-to.obj
 !if $(DLL)
 	copy ..\lib\iconv.dll iconv.dll

@@ -25,7 +25,7 @@ srcdir = .
 all : iconv.exe
 
 iconv.exe : iconv.c
-	$(CC) $(CFLAGS) $(INCLUDES) -I../lib iconv.c ../lib/iconv.a
+	$(CC) $(INCLUDES) -I../lib $(CFLAGS) iconv.c ../lib/iconv.a
 	copy ..\lib\iconv.dll iconv.dll
 
 install : all force
