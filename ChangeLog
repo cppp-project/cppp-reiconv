@@ -1,3 +1,9 @@
+2003-08-15  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (lib/translit.h): Add ulimit command so that the
+	gentranslit program gets the stack it needs. Many Linux distributions
+	allow only 8 MB of stack by default.
+
 2003-08-01  Bruno Haible  <bruno@clisp.org>
 
 	* lib/relocatable.c (find_shared_library_fullname): Disable the code on
