@@ -104,5 +104,8 @@ Distribution:
 Homepage:
     http://clisp.cons.org/~haible/packages-libiconv.html
 
+Bug reports to:
+    <bug-gnu-libiconv@gnu.org>
+
 
 Bruno Haible <haible@clisp.cons.org>
