@@ -1,3 +1,8 @@
+2000-09-29  Bruno Haible  <haible@clisp.cons.org>
+
+        * autoconf/aclocal.m4 (CL_CANONICAL_HOST): Fix bug in 2000-05-23
+          change.
+
 2000-09-25  Bruno Haible  <haible@clisp.cons.org>
 
         * autoconf/aclocal.m4 (CL_WORDS_LITTLEENDIAN): Recognize __i386__
