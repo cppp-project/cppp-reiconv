@@ -100,6 +100,7 @@ config.h_vms : config.h.in
 	    -e 's/#undef HAVE_WCHAR_H$$/#define HAVE_WCHAR_H 1/' \
 	    -e 's/#undef HAVE_WCRTOMB$$/#define HAVE_WCRTOMB 1/' \
 	    -e 's/#undef ICONV_CONST$$/#define ICONV_CONST/' \
+	    -e 's/#undef MALLOC_0_IS_NONNULL$$/#define MALLOC_0_IS_NONNULL 0/' \
 	    -e 's/#undef STDC_HEADERS$$/#define STDC_HEADERS 1/' \
 	    -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' \
 	    -e 's/#undef realpath$$/#define realpath rpl_realpath/' \
@@ -126,6 +127,7 @@ config.h.msvc : config.h.in
 	    -e 's/#undef HAVE_SYS_STAT_H$$/#define HAVE_SYS_STAT_H 1/' \
 	    -e 's/#undef HAVE_SYS_TYPES_H$$/#define HAVE_SYS_TYPES_H 1/' \
 	    -e 's/#undef HAVE_VPRINTF$$/#define HAVE_VPRINTF 1/' \
+	    -e 's/#undef MALLOC_0_IS_NONNULL$$/#define MALLOC_0_IS_NONNULL 1/' \
 	    -e 's/#undef STACK_DIRECTION$$/#define STACK_DIRECTION -1/' \
 	    -e 's/#undef STDC_HEADERS$$/#define STDC_HEADERS 1/' \
 	    -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' \

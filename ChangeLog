@@ -1,3 +1,205 @@
+2004-01-24  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/progreloc.c (xstrdup): Define as strdup if no xmalloc should
+	be used.
+
+2004-01-20  Bruno Haible  <bruno@clisp.org>
+
+	Upgrade from gettext-0.14.
+
+	* configure.in: Call gl_USE_SYSTEM_EXTENSIONS. Call AM_STDBOOL_H
+	instead of gt_STDBOOL_H. Provide a definition for DLL_VARIABLE.
+	* srclib/Makefile.am (libicrt_a_SOURCES): Add allocsa.h, allocsa.c,
+	xalloc.h. Remove xmalloc.h.
+	(libicrt_a_LIBADD): Remove @ALLOCA@.
+	* srclib/Makefile.msvc (OBJECTS): Add allocsa.obj.
+	(allocsa.obj): New rule.
+	* srclib/Makefile.vms (OBJECTS): Add allocsa.obj.
+	(allocsa.obj): New rule.
+	* Makefile.devel (config.h_vms): Set MALLOC_0_IS_NONNULL to 0.
+	(config.h.msvc): Set MALLOC_0_IS_NONNULL to 1.
+
+    lib/:
+
+	2003-10-09  Bruno Haible  <bruno@clisp.org>
+	* lib/relocatable.c: Include xalloc.h instead of xmalloc.h.
+
+	2003-08-01  Bruno Haible  <bruno@clisp.org>
+	* lib/relocatable.c (find_shared_library_fullname): Disable the code on
+	Linux/libc5. Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+	2003-06-22  Bruno Haible  <bruno@clisp.org>
+	* lib/relocatable.c (compute_curr_prefix): Comment out this function in
+	the case when it is not used.
+	Reported by Pavel Roskin <proski@gnu.org>.
+
+    m4/:
+
+	* m4/gettext.m4: Upgrade from GNU gettext. Many changes.
+	* m4/po.m4: Likewise.
+
+	* m4/readlink.m4: New file, from GNU gettext.
+
+	2003-11-30  Bruno Haible  <bruno@clisp.org>
+	* m4/allocsa.m4: New file.
+	* m4/eealloc.m4: New file.
+	* m4/setenv.m4 (gl_PREREQ_SETENV): Require gl_ALLOCSA instead of
+	AC_FUNC_ALLOCA.
+
+	2003-10-21  Bruno Haible  <bruno@clisp.org>
+	* m4/canonicalize.m4 (gl_PREREQ_CANONICALIZE): Also test for
+	readlink().
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* m4/relocatable.m4 (AC_RELOCATABLE): Use $(host) instead of @host@,
+	since the substitution of @host@ may occur before the substitution of
+	@SET_RELOCATABLE@.
+
+	2003-08-23  Bruno Haible  <bruno@clisp.org>
+	* stdbool.m4: Replace with the version from gnulib, without
+	AC_HEADER_STDBOOL.
+
+	2003-08-08  Paul Eggert  <eggert@twinsun.com>
+	* m4/extensions.m4: New file.
+	* m4/unlocked-io.m4 (jm_FUNC_GLIBC_UNLOCKED_IO):
+	Require gl_USE_SYSTEM_EXTENSIONS rather than AC_GNU_SOURCE.
+
+	2003-07-01  Bruno Haible  <bruno@clisp.org>
+	* m4/ssize_t.m4 (gt_TYPE_SSIZE_T): Don't include <unistd.h>.
+	<sys/types.h> should be sufficient.
+	Reported by Paul Eggert.
+
+	2003-07-01  Bruno Haible  <bruno@clisp.org>
+	* m4/lib-prefix.m4 (AC_LIB_ARG_WITH): Avoid "duplicated macro" error
+	from aclocal-1.4-p4.
+	Reported by Luke Schierer <lschiere@rackspace.com> and
+	Michael C. Toren <mct@toren.net>.
+
+	2003-07-01  Paul Eggert  <eggert@twinsun.com>
+	* m4/xreadlink.m4 (gl_XREADLINK): Don't check for sys/types.h, since
+	xreadlink.c now includes it unconditionally.
+
+	2003-06-17  Paul Eggert  <eggert@twinsun.com>
+	* m4/lib-ld.m4 (AC_LIB_PROG_LD_GNU, AC_LIB_PROG_LD): Don't use egrep,
+	for portability to POSIX 1003.1-2001.  Backported from libtool-1.5.
+
+	2003-05-28  Paul Eggert  <eggert@twinsun.com>
+	* m4/pathmax.m4 (gl_PATHMAX): Don't check for limits.h.
+	* m4/xreadlink.m4 (gl_XREADLINK): Likewise.
+
+	2002-12-24  Bruno Haible  <bruno@clisp.org>
+	* m4/setenv.m4 (gt_FUNC_SETENV): New macro.
+	(gt_CHECK_VAR_DECL): Fix quoting error that led to infinite loop in m4
+	when invoked twice.
+	(gt_PREREQ_SETENV, gt_PREREQ_UNSETENV): New macros, replacing old
+	gt_FUNC_SETENV.
+
+    srclib/:
+
+	2003-11-30  Bruno Haible  <bruno@clisp.org>
+	* srclib/alloca.c: Remove file.
+
+	2003-11-30  Bruno Haible  <bruno@clisp.org>
+	Safer stack allocation.
+	* srclib/allocsa.h: New file.
+	* srclib/allocsa.c: New file.
+	* canonicalize.c: Include allocsa.h.
+	(__realpath): Use allocsa instead of alloca. Don't clobber errno right
+	before returning NULL.
+	* srclib/relocwrapper.c: Indirectly depends on allocsa.
+	* srclib/setenv.c: Include allocsa.h.
+	(alloca): Remove fallback definition.
+	(freea): Remove macro.
+	(__add_to_environ) [!_LIBC]: Use allocsa instead of alloca. Use freesa
+	instead of freea.
+
+	2003-11-17  Bruno Haible  <bruno@clisp.org>
+	* srclib/canonicalize.c: #undef realpath after <config.h> but before
+	the system includes, so as to avoid a prototype clash on Solaris 2.5.1.
+	Reported by Warren L. Dodge <warrend@mdhost.cse.tek.com>.
+
+	2003-10-21  Bruno Haible  <bruno@clisp.org>
+	* srclib/canonicalize.c (lstat): Define as an alias to 'stat' on
+	systems without symbolic links.
+
+	2003-10-17  Bruno Haible  <bruno@clisp.org>
+	* srclib/binary-io.h: Avoid warnings on Cygwin.
+
+	2003-10-09  Bruno Haible  <bruno@clisp.org>
+	* srclib/xalloc.h: Renamed from xmalloc.h.
+	* srclib/progreloc.c: Include xalloc.h instead of xmalloc.h.
+	* srclib/relocatable.c: Likewise.
+	* srclib/xmalloc.c: Likewise.
+	* srclib/xreadlink.c: Likewise.
+	* srclib/xstrdup.c: Likewise.
+
+	2003-09-12  Paul Eggert  <eggert@twinsun.com>
+	* srclib/progreloc.c (get_full_program_name): Define via prototype.
+
+	2003-09-12  Paul Eggert  <eggert@twinsun.com>
+	* srclib/setenv.c (clearenv): Define via prototype.
+
+	2003-09-10  Bruno Haible  <bruno@clisp.org>
+	* srclib/setenv.c: Include <stdlib.h> and <string.h> unconditionally.
+	* srclib/unsetenv.c: Likewise.
+
+	2003-08-28  Bruno Haible  <bruno@clisp.org>
+	* srclib/binary-io.h: Undefine O_BINARY before defining it. This avoids
+	a warning on QNX, which defines O_BINARY to 000000.
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* srclib/binary-io.h: Include <stdio.h>, to avoid a compilation error
+	when MSVC7 <stdio.h> is included later.
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* srclib/error.h: Use ANSI C "..." declarations when compiling with
+	MSVC, even though it doesn't define __STDC__ by default.
+	* srclib/error.c: Use <stdarg.h> when compiling with MSVC, even though
+	it doesn't define __STDC__ by default.
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	Support for building DLLs on Windows.
+	* srclib/error.h (error_print_progname, error_message_count,
+	error_one_per_line): Add DLL_VARIABLE attribute.
+	* srclib/progname.h (program_name): Likewise.
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* srclib/progname.h: Make this file includable in C++ mode: add extern
+	"C".
+	* srclib/relocatable.h: Likewise.
+	* srclib/xmalloc.h: Likewise.
+
+	2003-08-22  Bruno Haible  <bruno@clisp.org>
+	* srclib/progname.h (error_with_progname, maybe_print_progname): Remove
+	declarations.
+	* srclib/progname.c (error_with_progname): Remove variable.
+	(maybe_print_progname): Remove function.
+
+	2003-08-01  Bruno Haible  <bruno@clisp.org>
+	* srclib/relocatable.c (find_shared_library_fullname): Disable the code
+	on Linux/libc5. Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+	2003-07-01  Paul Eggert  <eggert@twinsun.com>
+	* srclib/xreadlink.c: Include <sys/types.h> unconditionally, instead of
+	having it depend on HAVE_SYS_TYPES_H.
+
+	2003-06-23  Bruno Haible  <bruno@clisp.org>
+	Avoid compilation units that are empty after preprocessing.
+	* srclib/canonicalize.c: Add dummy declaration.
+	* srclib/strerror.c: Likewise.
+	* srclib/error.c: Include <stdio.h> even if there's nothing to be
+	compiled.
+
+	2003-06-22  Bruno Haible  <bruno@clisp.org>
+	* srclib/relocatable.c (compute_curr_prefix): Comment out this function
+	in the case when it is not used.
+	Reported by Pavel Roskin <proski@gnu.org>.
+
+	2003-05-28  Paul Eggert  <eggert@twinsun.com>
+	* srclib/pathmax.h: Include <limits.h> without checking for
+	HAVE_LIMITS_H.
+	* srclib/xreadlink.c: Likewise.
+
 2004-01-20  Bruno Haible  <bruno@clisp.org>
 
 	Assume automake-1.8.

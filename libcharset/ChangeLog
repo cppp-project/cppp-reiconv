@@ -1,5 +1,14 @@
 2004-01-20  Bruno Haible  <bruno@clisp.org>
 
+	Upgrade from gettext-0.14.
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* m4/relocatable.m4 (AC_RELOCATABLE): Use $(host) instead of @host@,
+	since the substitution of @host@ may occur before the substitution of
+	@SET_RELOCATABLE@.
+
+2004-01-20  Bruno Haible  <bruno@clisp.org>
+
 	Assume automake-1.8.
 	* Makefile.devel (AUTOCONF): Assume autoconf-2.59.
 
