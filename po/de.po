@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU libiconv 1.7\n"
+"Project-Id-Version: GNU libiconv 1.8\n"
 "POT-Creation-Date: 2002-04-28 04:19+0200\n"
-"PO-Revision-Date: 2002-04-28 04:06+0200\n"
+"PO-Revision-Date: 2002-04-28 04:26+0200\n"
 "Last-Translator: Bruno Haible <bruno@clisp.org>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,8 +23,7 @@ msgstr ""
 
 #: src/iconv.c:76
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr ""
-"Aufruf: iconv [-c] [-s] [-f AUSGANGS-KODIERUNG] [-t ZIEL-KODIERUNG] [DATEI ...]"
+msgstr "Aufruf: iconv [-c] [-s] [-f AUSGANGS-KODIERUNG] [-t ZIEL-KODIERUNG] [DATEI ...]"
 
 #: src/iconv.c:79
 msgid "or:    iconv -l"
@@ -36,8 +35,7 @@ msgid ""
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 msgstr ""
 "Dies ist freie Software; die Kopierbedingungen stehen in den Quellen. Es\n"
-"gibt keine Garantie; auch nicht für VERKAUFBARKEIT oder FÜR SPEZIELLE "
-"ZWECKE.\n"
+"gibt keine Garantie; auch nicht für VERKAUFBARKEIT oder FÜR SPEZIELLE ZWECKE.\n"
 
 #: src/iconv.c:92
 #, c-format
