@@ -34,6 +34,9 @@ install : all force
 	-mkdir $(prefix)
 	-mkdir $(datadir)
 	-mkdir $(localedir)
+	-mkdir $(localedir)\af
+	-mkdir $(localedir)\af\LC_MESSAGES
+	$(INSTALL_DATA) af.gmo $(localedir)\af\LC_MESSAGES\libiconv.mo
 	-mkdir $(localedir)\ca
 	-mkdir $(localedir)\ca\LC_MESSAGES
 	$(INSTALL_DATA) ca.gmo $(localedir)\ca\LC_MESSAGES\libiconv.mo
@@ -120,6 +123,8 @@ installdirs : force
 	-mkdir $(prefix)
 	-mkdir $(datadir)
 	-mkdir $(localedir)
+	-mkdir $(localedir)\af
+	-mkdir $(localedir)\af\LC_MESSAGES
 	-mkdir $(localedir)\ca
 	-mkdir $(localedir)\ca\LC_MESSAGES
 	-mkdir $(localedir)\da
@@ -176,6 +181,7 @@ installdirs : force
 	-mkdir $(localedir)\zh_CN\LC_MESSAGES
 
 uninstall : force
+	$(RM) $(localedir)\af\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\ca\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\da\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\de\LC_MESSAGES\libiconv.mo

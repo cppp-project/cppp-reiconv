@@ -43,6 +43,7 @@
 #define ei_iso8859_8_oflags (HAVE_ACCENTS)
 #define ei_iso8859_9_oflags (HAVE_ACCENTS)
 #define ei_iso8859_10_oflags (0)
+#define ei_iso8859_11_oflags (0)
 #define ei_iso8859_13_oflags (0)
 #define ei_iso8859_14_oflags (0)
 #define ei_iso8859_15_oflags (0)
