@@ -1,9 +1,5 @@
 Installation on Win32 (WinNT, Win95/98):
 
-Here are instructions for compiling libiconv as a static library. If you
-want to create it as a shared library (DLL), you are on your own; patches
-are welcome.
-
 - Requires MS Visual C/C++ 4.0 or 5.0 or 6.0.
 
 - Cannot build in a separate directory.
