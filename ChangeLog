@@ -1,3 +1,18 @@
+2003-07-02  Bruno Haible  <bruno@clisp.org>
+
+	* m4/lib-ld.m4: Update from GNU gettext.
+	* m4/lib-prefix.m4: Update from GNU gettext.
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/pathmax.m4: Update from GNU gettext and gnulib.
+	* m4/ssize_t.m4: Update from GNU gettext and gnulib.
+	* m4/xreadlink.m4: Update from GNU gettext and gnulib.
+	* m4/readlink.m4: New file, from gnulib.
+	* autoconf/install-reloc: Update from GNU gettext.
+	* srclib/stdbool_.h: Renamed from srclib/stdbool.h.in.
+	* srclib/readlink.c: New file, from GNU gettext and gnulib.
+	* srclib/Makefile.am (LIBADD_SOURCE): Add readlink.c.
+	(EXTRA_DIST, stdbool.h): Use stdbool_.h instead of stdbool.h.in.
+
 2003-06-22  Bruno Haible  <bruno@clisp.org>
 
 	* src/Makefile.in (install): Link with the already installed library.

@@ -42,6 +42,7 @@ LIBADD_SOURCE = \
   alloca.c \
   canonicalize.h canonicalize.c \
   memmove.c \
+  readlink.c \
   relocatable.h relocatable.c \
   setenv.h setenv.c unsetenv.c \
   strerror.c
@@ -61,13 +62,13 @@ DEFS = -DDEPENDS_ON_LIBICONV=1 -DDEPENDS_ON_LIBINTL=1 @DEFS@
 
 
 # >>> gnulib module stdbool.
-EXTRA_DIST += stdbool.h.in
+EXTRA_DIST += stdbool_.h
 
 # The following is needed in order to create an <stdbool.h> when the system
 # doesn't have one that works.
 all-local $(libicrt_a_OBJECTS): @STDBOOL_H@
-stdbool.h: stdbool.h.in
-	sed -e 's/@''HAVE__BOOL''@/@HAVE__BOOL@/g' < $(srcdir)/stdbool.h.in > stdbool.h
+stdbool.h: stdbool_.h
+	sed -e 's/@''HAVE__BOOL''@/@HAVE__BOOL@/g' < $(srcdir)/stdbool_.h > stdbool.h
 MOSTLYCLEANFILES += stdbool.h
 # <<< gnulib module stdbool.
 
