@@ -1,3 +1,11 @@
+2001-03-10  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/Makefile.in (libiconv.la): Pass flag -no-undefined. Needed on
+          platforms like BeOS.
+
+        * lib/loop_wchar.h (mbstate_t): Don't typedef if already #defined in
+          config.h.
+
 2001-03-06  Bruno Haible  <haible@clisp.cons.org>
 
         * Version 1.6 released.
