@@ -1,5 +1,12 @@
 2002-04-28  Bruno Haible  <bruno@clisp.org>
 
+	* tools/Makefile (armscii_8.h): Use table from glibc-2.2.90.
+	* tests/ARMSCII-8.TXT: Update to glibc-2.2.90 version.
+	* tests/ARMSCII-8.IRREVERSIBLE.TXT: Remove 0x0027.
+	* lib/armscii_8.h: Regenerated.
+
+2002-04-28  Bruno Haible  <bruno@clisp.org>
+
 	* src/iconv.c: Include gettext.h.
 	(_): New macro.
 	(usage, print_version, convert, main): Internationalize.

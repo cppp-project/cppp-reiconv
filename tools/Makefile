@@ -238,8 +238,8 @@ hp_roman8.h : $(TABLESDIR)/glibc-2.1-iconv/HP-ROMAN8.TXT 8bit_tab_to_h
 nextstep.h : $(TABLESDIR)/clisp/NEXTSTEP.TXT 8bit_tab_to_h
 	./8bit_tab_to_h NEXTSTEP nextstep < $<
 
-armscii_8.h : $(TABLESDIR)/csets-1.6/AST166-8.TXT 8bit_tab_to_h
-	./8bit_tab_to_h ARMSCII-8 armscii_8 < $<
+armscii_8.h : $(TABLESDIR)/glibc-2.2.90-iconv/ARMSCII-8.TXT 8bit_tab_to_h
+	(echo '#' ; cat $<) | ./8bit_tab_to_h ARMSCII-8 armscii_8
 
 georgian_academy.h : $(TABLESDIR)/csets-1.6/GEO-ITA.TXT 8bit_tab_to_h
 	./8bit_tab_to_h GEORGIAN-ACADEMY georgian_academy < $<
