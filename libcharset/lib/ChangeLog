@@ -1,3 +1,7 @@
+2001-01-30  Bruno Haible  <haible@clisp.cons.org>
+
+	* config.charset: Update for FreeBSD 4.2.
+
 2000-12-19  Jim Meyering  <jim@meyering.net>
 
 	* localcharset.c: Improve WIN32 macrology.
