@@ -334,7 +334,7 @@
       //   deutsch                 de_DE.ISO-8859-1
       //   dutch                   nl_NL.ISO-8859-1
       //   finnish                 fi_FI.ISO-8859-1
-      //   fran#ais                fr_FR.ISO-8859-1
+      //   français                fr_FR.ISO-8859-1
       //   french                  fr_FR.ISO-8859-1
       //   german                  de_DE.ISO-8859-1
       //   greek                   el_GR.ISO-8859-7
@@ -556,13 +556,16 @@
                 || streq(lang,"de") || streq(lang,"german") || streq(lang,"deutsch")
                 || streq(lang,"en") || streq(lang,"english")
                 || streq(lang,"es") || streq(lang,"spanish")
+                                    #ifndef ASCII_CHS
+                                    || streq(lang,"espa\361ol") || streq(lang,"espa\303\261ol") # español
+                                    #endif
                 || streq(lang,"eu") || streq(lang,"basque")
                 || streq(lang,"fi") || streq(lang,"finnish")
                 || streq(lang,"fo") || streq(lang,"faroese") || streq(lang,"faeroese")
                 || streq(lang,"fr") || streq(lang,"french")
-                                          #ifndef ASCII_CHS
-                                          || streq(lang,"français")
-                                          #endif
+                                    #ifndef ASCII_CHS
+                                    || streq(lang,"fran\347ais") || streq(lang,"fran\303\247ais") # français
+                                    #endif
                 || streq(lang,"ga") || streq(lang,"irish")
                 || streq(lang,"gd") || streq(lang,"scottish")
                 || streq(lang,"gl") || streq(lang,"galician")
