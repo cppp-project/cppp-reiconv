@@ -1,3 +1,8 @@
+2002-11-12  Bruno Haible  <bruno@clisp.org>
+
+	* da.po: New file, from Keld Simonsen <keld@dkuug.dk>.
+	* LINGUAS: Add da.
+
 2002-10-29  Bruno Haible  <bruno@clisp.org>
 
 	* id.po: New file, from Tedi Heriyanto <tedi_h@gmx.net>.
