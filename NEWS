@@ -1,7 +1,7 @@
 New in 1.7:
 
 * Added UTF-32, UTF-32BE, UTF-32LE converters.
-* Changed CP1255 and CP1258 converters to handle combining characters.
+* Changed CP1255, CP1258 and TCVN converters to handle combining characters.
 * Changed EUC-JP, SHIFT-JIS, CP932, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
   converters to use fullwidth Yen sign instead of halfwidth Yen sign, and
   fullwidth tilde instead of halfwidth tilde.
@@ -9,6 +9,7 @@ New in 1.7:
 * Changed the GB18030 converter to not reject unassigned and private-use
   Unicode characters.
 * Fixed a bug in the byte order mark treatment of the UCS-4 decoder.
+* The manual pages are now distributed also in HTML format.
 
 New in 1.6:
 * The iconv program's -f and -t options are now optional.

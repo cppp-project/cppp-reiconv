@@ -4,7 +4,6 @@ libiconv-1.7/tests/Georgian-PS.TXT                        libiconv-1.7/tests/Geo
 libiconv-1.7/tests/ARMSCII-8.IRREVERSIBLE.TXT             libiconv-1.7/tests/ARMSCII-8.IRREVERSIBLE-TXT
 libiconv-1.7/tests/CP932.IRREVERSIBLE.TXT                 libiconv-1.7/tests/CP932.IRREVERSIBLE-TXT
 libiconv-1.7/tests/CP950.IRREVERSIBLE.TXT                 libiconv-1.7/tests/CP950.IRREVERSIBLE-TXT
-libiconv-1.7/tests/EUC-JP.IRREVERSIBLE.TXT                libiconv-1.7/tests/EUC-JP.IRREVERSIBLE-TXT
 libiconv-1.7/tests/EUC-TW.IRREVERSIBLE.TXT                libiconv-1.7/tests/EUC-TW.IRREVERSIBLE-TXT
 libiconv-1.7/tests/ISO-2022-CN-EXT-snippet                libiconv-1.7/tests/ISO/2022CN-EXT-snippet
 libiconv-1.7/tests/Georgian-Academy.TXT                   libiconv-1.7/tests/Georgian/Academy.TXT
