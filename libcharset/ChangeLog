@@ -1,3 +1,7 @@
+2002-05-08  Bruno Haible  <bruno@clisp.org>
+
+	* README.woe32: Renamed from README.win32.
+
 2002-02-06  Bruno Haible  <bruno@clisp.org>
 
 	* m4/libtool.m4: Upgrade to libtool-1.4.2.

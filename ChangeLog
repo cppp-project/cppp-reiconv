@@ -1,5 +1,9 @@
 2002-05-08  Bruno Haible  <bruno@clisp.org>
 
+	* README.woe32: Renamed from README.win32.
+
+2002-05-08  Bruno Haible  <bruno@clisp.org>
+
 	* lib/iconv.c: Enable DOS encodings also when compiling for Woe32,
 	because the Woe32 consoles use them.
 

@@ -272,7 +272,7 @@ locale_charset ()
 
   static char buf[2 + 10 + 1];
 
-  /* Win32 has a function returning the locale's codepage as a number.  */
+  /* Woe32 has a function returning the locale's codepage as a number.  */
   sprintf (buf, "CP%u", GetACP ());
   codeset = buf;
 

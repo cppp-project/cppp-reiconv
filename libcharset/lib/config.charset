@@ -58,34 +58,34 @@
 #   CP865                     dos
 #   CP866                     freebsd dos
 #   CP869                     dos
-#   CP874                     win32 dos
+#   CP874                     woe32 dos
 #   CP922                     aix
-#   CP932                     aix win32 dos
+#   CP932                     aix woe32 dos
 #   CP943                     aix
-#   CP949                     osf win32 dos
-#   CP950                     win32 dos
+#   CP949                     osf woe32 dos
+#   CP950                     woe32 dos
 #   CP1046                    aix
 #   CP1124                    aix
 #   CP1125                    dos
 #   CP1129                    aix
-#   CP1250                    win32
-#   CP1251                    glibc win32
-#   CP1252                    aix win32
-#   CP1253                    win32
-#   CP1254                    win32
-#   CP1255                    win32
-#   CP1256                    win32
-#   CP1257                    win32
+#   CP1250                    woe32
+#   CP1251                    glibc woe32
+#   CP1252                    aix woe32
+#   CP1253                    woe32
+#   CP1254                    woe32
+#   CP1255                    woe32
+#   CP1256                    woe32
+#   CP1257                    woe32
 #   GB2312                    glibc aix hpux irix solaris freebsd       yes
 #   EUC-JP                    glibc aix hpux irix osf solaris freebsd   yes
 #   EUC-KR                    glibc aix hpux irix osf solaris freebsd   yes
 #   EUC-TW                    glibc aix hpux irix osf solaris
 #   BIG5                      glibc aix hpux osf solaris freebsd        yes
 #   BIG5-HKSCS                glibc solaris
-#   GBK                       aix osf solaris win32 dos
+#   GBK                       aix osf solaris woe32 dos
 #   GB18030                   glibc solaris
 #   SHIFT_JIS                 hpux osf solaris freebsd                  yes
-#   JOHAB                     glibc solaris win32
+#   JOHAB                     glibc solaris woe32
 #   TIS-620                   glibc aix hpux osf solaris
 #   VISCII                    glibc                                     yes
 #   HP-ROMAN8                 hpux
