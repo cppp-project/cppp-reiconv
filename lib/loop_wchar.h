@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -32,7 +32,9 @@ extern size_t mbrtowc ();
 #define mbsinit(ps) 1
 #endif
 #else
+#ifndef mbstate_t
 typedef int mbstate_t;
+#endif
 #endif
 
 /*
