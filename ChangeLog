@@ -1,3 +1,19 @@
+2001-08-25  Bruno Haible  <haible@clisp.cons.org>
+
+	Upgrade to autoconf-2.52.
+	* autoconf/autoconf: Upgrade to autoconf-2.52.
+	* autoconf/acgeneral.m4: Remove file.
+	* autoconf/acspecific.m4: Remove file.
+	* autoconf/autoconf.m4f: New file, from autoconf-2.52.
+	* autoconf/aclocal.m4: Require autoconf-2.52.
+	(CL_CANONICAL_HOST): Call AC_CANONICAL_HOST. Don't cache the result,
+	AC_CANONICAL_HOST does it itself. Add $SHELL in front of
+	$ac_config_guess and $ac_config_sub.
+	* Makefile.devel (AUTOCONF_FILES): Remove acgeneral.m4, acspecific.m4.
+	Add autoconf.m4f.
+	(configure): Use autoconf options -A, -l instead of -m.
+	* configure.in: Use AC_CONFIG_SUBDIRS, not AC_OUTPUT_SUBDIRS.
+
 2001-08-05  Bruno Haible  <haible@clisp.cons.org>
 
 	* autoconf/acgeneral.m4 (AC_MSG_RESULTPROTO): Remove macro.

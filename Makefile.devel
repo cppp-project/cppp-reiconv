@@ -42,10 +42,10 @@ autoconf/aclocal.m4 : $(ACLOCAL)
 
 configures : $(CONFIGURES)
 
-AUTOCONF_FILES = autoconf/aclocal.m4 autoconf/acgeneral.m4 autoconf/acspecific.m4
+AUTOCONF_FILES = autoconf/aclocal.m4 autoconf/autoconf.m4f
 
 configure : configure.in $(AUTOCONF_FILES)
-	autoconf/autoconf -m autoconf
+	autoconf/autoconf -A autoconf -l autoconf
 
 check-configures : $(CONFIGURES)
 	set -e; for f in $(CONFIGURES); do bash -x -n $$f; done
