@@ -42,7 +42,7 @@
 #ifdef _AIX
 #define USE_AIX
 #endif
-#ifdef __osf__
+#if defined(__osf__) || defined(VMS)
 #define USE_OSF1
 #endif
 #if defined(__DJGPP__) || (defined(_WIN32) && (defined(_MSC_VER) || defined(__MINGW32__)))
