@@ -1,5 +1,11 @@
 2001-06-25  Bruno Haible  <haible@clisp.cons.org>
 
+        * include/iconv.h.in (_LIBICONV_VERSION), README, windows/iconv.rc:
+          Bump version number.
+        * lib/Makefile.in (LIBICONV_VERSION_INFO): Define to 2:4:0.
+
+2001-06-25  Bruno Haible  <haible@clisp.cons.org>
+
 	* Makefile.devel (OTHERMACROS): Use libtool.m4 in libcharset subdir.
 
 2001-06-25  Bruno Haible  <haible@clisp.cons.org>
