@@ -1,3 +1,8 @@
+2003-02-14  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOCONF): Switch to autoconf-2.57.
+	(configure, config.h.in): Update rules.
+
 2003-01-03  Albert Chin  <libtool@thewrittenword.com>
 
 	* autoconf/ltmain.sh: Don't pass -R flags found in a .la's
