@@ -1035,11 +1035,71 @@ if test -z "$INSTALL_DATA"; then
   esac
 fi
 
+echo $ac_n "checking how to copy files""... $ac_c" 1>&6
+echo "configure:1040: checking how to copy files" >&5
+if eval "test \"`echo '$''{'cl_cv_prog_cp'+set}'`\" = set"; then
+  echo $ac_n "(cached) $ac_c" 1>&6
+else
+  
+echo "blabla" > conftest.x
+err=`/bin/sh -c "cp -p conftest.x conftest.y 2>&1"`
+if test -z "$err"; then
+  cl_cv_prog_cp='cp -p'
+else
+  cl_cv_prog_cp='cp'
+fi
+rm -f conftest*
+
+fi
+echo "$ac_t""$cl_cv_prog_cp" 1>&6
+CP="$cl_cv_prog_cp"
+
+echo $ac_n "checking how to make hard links""... $ac_c" 1>&6
+echo "configure:1059: checking how to make hard links" >&5
+if eval "test \"`echo '$''{'cl_cv_prog_LN'+set}'`\" = set"; then
+  echo $ac_n "(cached) $ac_c" 1>&6
+else
+  
+rm -f conftestdata conftestfile
+echo data > conftestfile
+if ln conftestfile conftestdata 2>/dev/null; then
+  cl_cv_prog_LN=ln
+else
+  cl_cv_prog_LN="$cl_cv_prog_cp"
+fi
+rm -f conftestdata conftestfile
+
+fi
+echo "$ac_t""$cl_cv_prog_LN" 1>&6
+LN="$cl_cv_prog_LN"
+
+echo $ac_n "checking whether ln -s works""... $ac_c" 1>&6
+echo "configure:1078: checking whether ln -s works" >&5
+if eval "test \"`echo '$''{'cl_cv_prog_LN_S'+set}'`\" = set"; then
+  echo $ac_n "(cached) $ac_c" 1>&6
+else
+  
+rm -f conftestdata
+if ln -s X conftestdata 2>/dev/null; then
+  cl_cv_prog_LN_S="ln -s"
+else
+  cl_cv_prog_LN_S="$cl_cv_prog_LN"
+fi
+rm -f conftestdata
+
+fi
+if test "$cl_cv_prog_LN_S" = "ln -s"; then
+  echo "$ac_t""yes" 1>&6
+else
+  echo "$ac_t""no" 1>&6
+fi
+LN_S="$cl_cv_prog_LN_S"
+
 
 
  ac_aux_dir=${srcdir}/autoconf
 echo $ac_n "checking host system type""... $ac_c" 1>&6
-echo "configure:1043: checking host system type" >&5
+echo "configure:1103: checking host system type" >&5
 if eval "test \"`echo '$''{'cl_cv_host'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1076,13 +1136,13 @@ host_os=`echo $host | sed 's/^\(.*\)-\(.*\)-\(.*\)$/\3/'`
 
 
 echo $ac_n "checking for AIX""... $ac_c" 1>&6
-echo "configure:1080: checking for AIX" >&5
+echo "configure:1140: checking for AIX" >&5
 if eval "test \"`echo '$''{'ac_cv_sys_aix'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
   
 cat > conftest.$ac_ext <<EOF
-#line 1086 "configure"
+#line 1146 "configure"
 #include "confdefs.h"
 #ifdef _AIX
   yes
@@ -1111,17 +1171,17 @@ fi
 
 ac_safe=`echo "minix/config.h" | sed 'y%./+-%__p_%'`
 echo $ac_n "checking for minix/config.h""... $ac_c" 1>&6
-echo "configure:1115: checking for minix/config.h" >&5
+echo "configure:1175: checking for minix/config.h" >&5
 if eval "test \"`echo '$''{'ac_cv_header_$ac_safe'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
-#line 1120 "configure"
+#line 1180 "configure"
 #include "confdefs.h"
 #include <minix/config.h>
 EOF
 ac_try="$ac_cpp conftest.$ac_ext >/dev/null 2>conftest.out"
-{ (eval echo configure:1125: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }
+{ (eval echo configure:1185: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }
 ac_err=`grep -v '^ *+' conftest.out | grep -v "^conftest.${ac_ext}\$"`
 if test -z "$ac_err"; then
   rm -rf conftest*
@@ -1159,7 +1219,7 @@ EOF
 fi
 
 echo $ac_n "checking for POSIXized ISC""... $ac_c" 1>&6
-echo "configure:1163: checking for POSIXized ISC" >&5
+echo "configure:1223: checking for POSIXized ISC" >&5
 if eval "test \"`echo '$''{'ac_cv_sys_isc_posix'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1252,7 +1312,7 @@ ac_prog=ld
 if test "$ac_cv_prog_gcc" = yes; then
   # Check if gcc -print-prog-name=ld gives a path.
   echo $ac_n "checking for ld used by GCC""... $ac_c" 1>&6
-echo "configure:1256: checking for ld used by GCC" >&5
+echo "configure:1316: checking for ld used by GCC" >&5
   ac_prog=`($CC -print-prog-name=ld) 2>&5`
   case "$ac_prog" in
   # Accept absolute paths.
@@ -1270,10 +1330,10 @@ echo "configure:1256: checking for ld used by GCC" >&5
   esac
 elif test "$with_gnu_ld" = yes; then
   echo $ac_n "checking for GNU ld""... $ac_c" 1>&6
-echo "configure:1274: checking for GNU ld" >&5
+echo "configure:1334: checking for GNU ld" >&5
 else
   echo $ac_n "checking for non-GNU ld""... $ac_c" 1>&6
-echo "configure:1277: checking for non-GNU ld" >&5
+echo "configure:1337: checking for non-GNU ld" >&5
 fi
 if eval "test \"`echo '$''{'ac_cv_path_LD'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
@@ -1309,7 +1369,7 @@ fi
 test -z "$LD" && { echo "configure: error: no acceptable ld found in \$PATH" 1>&2; exit 1; }
 
 echo $ac_n "checking if the linker ($LD) is GNU ld""... $ac_c" 1>&6
-echo "configure:1313: checking if the linker ($LD) is GNU ld" >&5
+echo "configure:1373: checking if the linker ($LD) is GNU ld" >&5
 if eval "test \"`echo '$''{'ac_cv_prog_gnu_ld'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1324,7 +1384,7 @@ echo "$ac_t""$ac_cv_prog_gnu_ld" 1>&6
 
 
 echo $ac_n "checking for BSD-compatible nm""... $ac_c" 1>&6
-echo "configure:1328: checking for BSD-compatible nm" >&5
+echo "configure:1388: checking for BSD-compatible nm" >&5
 if eval "test \"`echo '$''{'ac_cv_path_NM'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1360,27 +1420,6 @@ NM="$ac_cv_path_NM"
 echo "$ac_t""$NM" 1>&6
 
 
-echo $ac_n "checking whether ln -s works""... $ac_c" 1>&6
-echo "configure:1365: checking whether ln -s works" >&5
-if eval "test \"`echo '$''{'ac_cv_prog_LN_S'+set}'`\" = set"; then
-  echo $ac_n "(cached) $ac_c" 1>&6
-else
-  rm -f conftestdata
-if ln -s X conftestdata 2>/dev/null
-then
-  rm -f conftestdata
-  ac_cv_prog_LN_S="ln -s"
-else
-  ac_cv_prog_LN_S=ln
-fi
-fi
-LN_S="$ac_cv_prog_LN_S"
-if test "$ac_cv_prog_LN_S" = "ln -s"; then
-  echo "$ac_t""yes" 1>&6
-else
-  echo "$ac_t""no" 1>&6
-fi
-
 # Always use our own libtool.
 LIBTOOL='$(SHELL) $(top_builddir)/libtool'
 
@@ -1397,8 +1436,8 @@ test "$ac_cv_prog_gnu_ld" = yes && libtool_flags="$libtool_flags --with-gnu-ld"
 case "$host" in
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 1401 "configure"' > conftest.$ac_ext
-  if { (eval echo configure:1402: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
+  echo '#line 1440 "configure"' > conftest.$ac_ext
+  if { (eval echo configure:1441: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
     case "`/usr/bin/file conftest.o`" in
     *32-bit*)
       LD="${LD-ld} -32"
@@ -1431,7 +1470,7 @@ $libtool_flags --no-verify $ac_aux_dir/ltmain.sh $host \
 
 
 echo $ac_n "checking for iconv""... $ac_c" 1>&6
-echo "configure:1435: checking for iconv" >&5
+echo "configure:1474: checking for iconv" >&5
 if eval "test \"`echo '$''{'cl_cv_func_iconv'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1439,7 +1478,7 @@ else
 cl_cv_func_iconv=no
 cl_cv_lib_iconv=no
 cat > conftest.$ac_ext <<EOF
-#line 1443 "configure"
+#line 1482 "configure"
 #include "confdefs.h"
 #include <stdlib.h>
 #include <iconv.h>
@@ -1447,7 +1486,7 @@ int main() {
 iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL); iconv_close(cd);
 ; return 0; }
 EOF
-if { (eval echo configure:1451: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+if { (eval echo configure:1490: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   rm -rf conftest*
   cl_cv_func_iconv=yes
 else
@@ -1459,7 +1498,7 @@ if test "$cl_cv_func_iconv" = no; then
 cl_save_LIBS="$LIBS"
 LIBS="$LIBS -liconv"
 cat > conftest.$ac_ext <<EOF
-#line 1463 "configure"
+#line 1502 "configure"
 #include "confdefs.h"
 #include <stdlib.h>
 #include <iconv.h>
@@ -1467,7 +1506,7 @@ int main() {
 iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL); iconv_close(cd);
 ; return 0; }
 EOF
-if { (eval echo configure:1471: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+if { (eval echo configure:1510: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   rm -rf conftest*
   cl_cv_lib_iconv=yes
 cl_cv_func_iconv=yes
@@ -1487,13 +1526,13 @@ if test "$cl_cv_func_iconv" = yes; then
 EOF
 
 echo $ac_n "checking for iconv declaration""... $ac_c" 1>&6
-echo "configure:1491: checking for iconv declaration" >&5
+echo "configure:1530: checking for iconv declaration" >&5
 if eval "test \"`echo '$''{'cl_cv_proto_iconv'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
   
 cat > conftest.$ac_ext <<EOF
-#line 1497 "configure"
+#line 1536 "configure"
 #include "confdefs.h"
 
 #include <stdlib.h>
@@ -1518,7 +1557,7 @@ int main() {
 
 ; return 0; }
 EOF
-if { (eval echo configure:1522: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
+if { (eval echo configure:1561: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
   rm -rf conftest*
   cl_cv_proto_iconv_arg1=""
 else
@@ -1556,7 +1595,7 @@ fi
 
 
 echo $ac_n "checking byte ordering""... $ac_c" 1>&6
-echo "configure:1560: checking byte ordering" >&5
+echo "configure:1599: checking byte ordering" >&5
 if eval "test \"`echo '$''{'cl_cv_sys_endian'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1566,7 +1605,7 @@ if test "$cross_compiling" = yes; then
 
 else
   cat > conftest.$ac_ext <<EOF
-#line 1570 "configure"
+#line 1609 "configure"
 #include "confdefs.h"
 #ifdef __cplusplus
 extern "C" void exit(int);
@@ -1582,7 +1621,7 @@ int main () {
   exit (u.c[0] == 1);
 }
 EOF
-if { (eval echo configure:1586: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
+if { (eval echo configure:1625: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
   cl_cv_sys_endian="big endian"
 else
@@ -1605,7 +1644,7 @@ fi
 
 if test -z "$cl_cv_sys_endian"; then
 cat > conftest.$ac_ext <<EOF
-#line 1609 "configure"
+#line 1648 "configure"
 #include "confdefs.h"
 #if defined(m68k) || defined(mc68000) || defined(mc68020) || defined(sparc) || defined(__sparc__) || defined(MIPSEB) || defined(hppa) || defined(__hppa) || defined(m88000)
   yes
@@ -1622,7 +1661,7 @@ rm -f conftest*
 fi
 if test -z "$cl_cv_sys_endian"; then
 cat > conftest.$ac_ext <<EOF
-#line 1626 "configure"
+#line 1665 "configure"
 #include "confdefs.h"
 #if defined(i386) || defined(__i386) || defined(_I386) || defined(MIPSEL) || defined(__alpha)
   yes
@@ -1811,13 +1850,15 @@ s%@RANLIB@%$RANLIB%g
 s%@INSTALL@%$INSTALL%g
 s%@INSTALL_PROGRAM@%$INSTALL_PROGRAM%g
 s%@INSTALL_DATA@%$INSTALL_DATA%g
+s%@CP@%$CP%g
+s%@LN@%$LN%g
+s%@LN_S@%$LN_S%g
 s%@host@%$host%g
 s%@host_cpu@%$host_cpu%g
 s%@host_vendor@%$host_vendor%g
 s%@host_os@%$host_os%g
 s%@LD@%$LD%g
 s%@NM@%$NM%g
-s%@LN_S@%$LN_S%g
 s%@LIBTOOL@%$LIBTOOL%g
 s%@LIBICONV@%$LIBICONV%g
 s%@ICONV_CONST@%$ICONV_CONST%g

@@ -1,6 +1,6 @@
 dnl local autoconf macros
-dnl Bruno Haible 21.9.1997
-dnl Marcus Daniels 10.4.1997
+dnl Bruno Haible 2000-04-02
+dnl Marcus Daniels 1997-04-10
 dnl
 AC_PREREQ(2.12)dnl
 dnl
@@ -179,6 +179,60 @@ fi
 AC_SUBST(INSTALL_DATA)dnl
 ])dnl
 dnl
+AC_DEFUN(CL_PROG_CP,
+[AC_CACHE_CHECK(how to copy files, cl_cv_prog_cp, [
+echo "blabla" > conftest.x
+err=`/bin/sh -c "cp -p conftest.x conftest.y 2>&1"`
+if test -z "$err"; then
+  cl_cv_prog_cp='cp -p'
+else
+  cl_cv_prog_cp='cp'
+fi
+rm -f conftest*
+])
+CP="$cl_cv_prog_cp"
+AC_SUBST(CP)dnl
+])dnl
+dnl
+AC_DEFUN(CL_PROG_LN,
+[AC_REQUIRE([CL_PROG_CP])dnl
+AC_CACHE_CHECK(how to make hard links, cl_cv_prog_LN, [
+rm -f conftestdata conftestfile
+echo data > conftestfile
+if ln conftestfile conftestdata 2>/dev/null; then
+  cl_cv_prog_LN=ln
+else
+  cl_cv_prog_LN="$cl_cv_prog_cp"
+fi
+rm -f conftestdata conftestfile
+])
+LN="$cl_cv_prog_LN"
+AC_SUBST(LN)dnl
+])dnl
+dnl
+AC_DEFUN(CL_PROG_LN_S,
+[AC_REQUIRE([CL_PROG_LN])dnl
+dnl Make a symlink if possible; otherwise try a hard link. On filesystems
+dnl which support neither symlink nor hard link, use a plain copy.
+AC_MSG_CHECKING(whether ln -s works)
+AC_CACHE_VAL(cl_cv_prog_LN_S, [
+rm -f conftestdata
+if ln -s X conftestdata 2>/dev/null; then
+  cl_cv_prog_LN_S="ln -s"
+else
+  cl_cv_prog_LN_S="$cl_cv_prog_LN"
+fi
+rm -f conftestdata
+])dnl
+if test "$cl_cv_prog_LN_S" = "ln -s"; then
+  AC_MSG_RESULT(yes)
+else
+  AC_MSG_RESULT(no)
+fi
+LN_S="$cl_cv_prog_LN_S"
+AC_SUBST(LN_S)dnl
+])dnl
+dnl
 AC_DEFUN(CL_CANONICAL_HOST,
 [AC_REQUIRE([AC_PROG_CC]) dnl Actually: AC_REQUIRE([CL_CC_WORKS])
 dnl Set ac_aux_dir before the cache check, because AM_PROG_LIBTOOL needs it.
@@ -333,7 +387,7 @@ AC_REQUIRE([CL_PROG_RANLIB])dnl
 AC_REQUIRE([AC_PROG_CC])dnl
 AC_REQUIRE([AM_PROG_LD])dnl
 AC_REQUIRE([AM_PROG_NM])dnl
-AC_REQUIRE([AC_PROG_LN_S])dnl
+AC_REQUIRE([CL_PROG_LN_S])dnl
 dnl
 # Always use our own libtool.
 LIBTOOL='$(SHELL) $(top_builddir)/libtool'
