@@ -167,7 +167,7 @@ defaultIFS='
 	'
 IFS="${IFS-$defaultIFS}"
 
-oIFS=$IFS"
+oIFS="${IFS}";
 # Some sh's can't handle IFS=/ for some reason.
 IFS='%'
 set - `echo $dstdir | sed -e 's@/@%@g' -e 's@^%@/@'`
