@@ -506,7 +506,7 @@ void iconvlist (int (*do_one) (unsigned int namescount,
     j = 0;
     for (i = 0; i < aliascount1; i++) {
       const struct alias * p = &aliases[i];
-      if (p->name[0] != '\0'
+      if (p->name != NULL
           && p->encoding_index != ei_local_char
           && p->encoding_index != ei_local_wchar_t)
         aliasbuf[j++] = *p;
