@@ -206,10 +206,8 @@ clean : force
 	$(RM) *.exe
 	$(RM) tmp*
 	$(RM) UTF-8.TXT
-	$(RM) core
 
 distclean : clean
-	$(RM) Makefile
 
 maintainer-clean : distclean
 

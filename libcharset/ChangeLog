@@ -1,5 +1,15 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.msvc (PREFIX): New variable.
+	(prefix): Use it.
+	(distclean, maintainer-clean): Drop Unix specific removals.
+	* man/Makefile.msvc (PREFIX): New variable.
+	(prefix): Use it.
+	(clean): Drop unnecessary removals.
+	(distclean): Drop Unix specific removal.
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	* configure.in: Invoke AM_LANGINFO_CODESET, not jm_LANGINFO_CODESET.
 	* autoconf/ltmain.sh: Update from GNU gettext.
 	2003-02-18  Bruno Haible  <bruno@clisp.org>

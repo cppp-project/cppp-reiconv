@@ -1,5 +1,21 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.msvc (PREFIX): New variable.
+	(prefix): Use it.
+	(distclean, maintainer-clean): Drop Unix specific removals.
+	* lib/Makefile.msvc (PREFIX, IIPREFIX): New variables.
+	(prefix): Use it.
+	(IIprefix, IIexec_prefix, IIbindir, IIlibdir): New variables.
+	(clean): Drop Unix specific removal.
+	* src/Makefile.msvc (PREFIX): New variable.
+	(prefix): Use it.
+	(clean): Drop Unix specific removal.
+	(distclean): Likewise.
+	* tests/Makefile.msvc (clean): Drop Unix specific removal.
+	(distclean): Likewise.
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	* m4/endian.m4 (CL_WORDS_LITTLEENDIAN): Use 3-argument AC_DEFINE.
 
 2003-04-05  Bruno Haible  <bruno@clisp.org>

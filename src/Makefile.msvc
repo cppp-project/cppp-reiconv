@@ -10,6 +10,7 @@
 #     MFLAGS=-MT                Multi-threaded, statically linked  - libcmt.lib
 #     MFLAGS=-MD                Multi-threaded, dynamically linked - msvcrt.lib
 #   DEBUG=1   for compiling with debugging information
+#   PREFIX=Some\Directory   Base directory for installation
 !if !defined(DLL)
 DLL=0
 !endif
@@ -22,6 +23,9 @@ MFLAGS=
 !else
 MFLAGS=-MD
 !endif
+!endif
+!if !defined(PREFIX)
+PREFIX = c:\usr
 !endif
 
 !if $(DEBUG)
@@ -39,7 +43,7 @@ WARN_CFLAGS = -W1
 srcdir = .
 
 # Directories used by "make install":
-prefix = c:\usr
+prefix = $(PREFIX)
 exec_prefix = $(prefix)
 bindir = $(exec_prefix)\bin
 
@@ -89,10 +93,8 @@ clean : force
 	$(RM) *.obj
 	$(RM) *.dll
 	$(RM) *.exe
-	$(RM) core
 
 distclean : clean
-	$(RM) Makefile
 
 maintainer-clean : distclean
 
