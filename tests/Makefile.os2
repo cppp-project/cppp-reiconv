@@ -103,7 +103,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 #	$(srcdir)\check-stateless $(srcdir) KSC_5601 # redundant, see EUC-KR
 #	/* CJK encodings */
 	$(srcdir)\check-stateless $(srcdir) EUC-JP
-	$(srcdir)\check-stateless $(srcdir) SHIFT-JIS
+	$(srcdir)\check-stateless $(srcdir) SHIFT_JIS
 	$(srcdir)\check-stateless $(srcdir) CP932
 	$(srcdir)\check-stateful $(srcdir) ISO-2022-JP
 	$(srcdir)\check-stateful $(srcdir) ISO-2022-JP-2

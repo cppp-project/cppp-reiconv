@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -23,7 +23,7 @@
  */
 
 /*
- * Microsoft CP932 is a slightly extended version of SHIFT-JIS.
+ * Microsoft CP932 is a slightly extended version of SHIFT_JIS.
  * The differences between the EASTASIA/JIS/SHIFTJIS.TXT and the
  * VENDORS/MICSFT/WINDOWS/CP932.TXT tables found on ftp.unicode.org are
  * as follows:

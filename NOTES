@@ -180,11 +180,11 @@ A: libiconv, as an internationalization library, supports those character
        We implement this because it is mentioned as occurring in the web
        in the aforementioned statistics.
    Japanese
-     * EUC-JP, SHIFT-JIS, ISO-2022-JP
-       We implement these because they are widely used. EUC-JP and SHIFT-JIS
+     * EUC-JP, SHIFT_JIS, ISO-2022-JP
+       We implement these because they are widely used. EUC-JP and SHIFT_JIS
        are more used for files, whereas ISO-2022-JP is recommended for email.
      * CP932
-       We implement this because it is the Microsoft variant of SHIFT-JIS,
+       We implement this because it is the Microsoft variant of SHIFT_JIS,
        used on Windows.
      * ISO-2022-JP-2
        We implement this because it's the common way to represent mails which

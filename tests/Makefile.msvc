@@ -134,7 +134,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 #	$(srcdir)\check-stateless.bat $(srcdir) KSC_5601 # redundant, see EUC-KR
 #	/* CJK encodings */
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-JP
-	$(srcdir)\check-stateless.bat $(srcdir) SHIFT-JIS
+	$(srcdir)\check-stateless.bat $(srcdir) SHIFT_JIS
 	$(srcdir)\check-stateless.bat $(srcdir) CP932
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-JP
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-JP-2

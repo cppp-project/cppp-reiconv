@@ -16,7 +16,7 @@ New in 1.8:
 New in 1.7:
 * Added UTF-32, UTF-32BE, UTF-32LE converters.
 * Changed CP1255, CP1258 and TCVN converters to handle combining characters.
-* Changed EUC-JP, SHIFT-JIS, CP932, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
+* Changed EUC-JP, SHIFT_JIS, CP932, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
   converters to use fullwidth Yen sign instead of halfwidth Yen sign, and
   fullwidth tilde instead of halfwidth tilde.
 * Upgraded EUC-TW, ISO-2022-CN, ISO-2022-CN-EXT converters to Unicode 3.1.
@@ -57,7 +57,7 @@ New in 1.2:
 
 New in 1.1:
 * Added ISO-8859-16 converter.
-* Added CP932 converter, a variant of SHIFT-JIS.
+* Added CP932 converter, a variant of SHIFT_JIS.
 * Added CP949 converter, a variant of EUC-KR.
 * Improved the ISO-2022-CN-EXT converter: It now covers the ISO-IR-165 range.
 * Updated the ISO-8859-8 conversion table.
@@ -94,7 +94,7 @@ New in 0.2:
   decomposed into Jamo when needed.
 * Improved the CP932 converter.
 * Updated the CP1133, MULELAO-1 and ARMSCII-8 mappings.
-* The EUC-JP and SJIS converters now cover the user-defined range.
+* The EUC-JP and SHIFT_JIS converters now cover the user-defined range.
 * Fixed a possible buffer overrun in the JOHAB converter.
 * Fixed a bug in the UTF-7, ISO-2022-*, HZ decoders: a shift sequence a the
   end of the input no longer gives an error.

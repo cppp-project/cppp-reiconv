@@ -1,5 +1,9 @@
 2002-05-12  Bruno Haible  <bruno@clisp.org>
 
+	* tests/SHIFT_JIS.TXT: Renamed from tests/SHIFT-JIS.TXT.
+
+2002-05-12  Bruno Haible  <bruno@clisp.org>
+
 	* Makefile.devel (AUTOCONF): New variable.
 	(AUTOCONF_FILES): Remove autoconf/autoconf.m4f.
 	(configure): Use the AUTOCONF variable.
