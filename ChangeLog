@@ -1,3 +1,21 @@
+2004-07-31  Bruno Haible  <bruno@clisp.org>
+
+	Update to JISX 0213 plane 1 to 2004 version (ISO-IR-233).
+	* tools/Makefile (jisx0213.h): Bump version number.
+	* tools/JISX0213.TXT: Change mappings U+2015 -> U+2014,
+	U+2299 -> U+29BF, and add 10 new characters.
+	* tools/cjk_tab_to_h.c (output_title): Bump year.
+	(do_jisx0213): Update comments. Emit a conditional 'inline'.
+	* lib/jisx0213.h: Regenerated.
+	* lib/iso2022_jp3.h (iso2022_jp3_mbtowc): Accept escape sequence
+	ESC $ ( Q as a synonym of ESC $ ( O.
+	(iso2022_jp3_wctomb): Emit ESC $ ( Q instead of ESC $ ( O.
+	* tests/EUC-JISX0213.TXT: Change mappings U+2015 -> U+2014,
+	U+2299 -> U+29BF, and add 10 new characters.
+	* tests/SHIFT_JISX0213.TXT: Likewise.
+	* tests/ISO-2022-JP-3-snippet: Update.
+	* tests/ISO-2022-JP-3-snippet.UTF-8: Update.
+
 2004-07-22  Bruno Haible  <bruno@clisp.org>
 
 	* lib/encodings.def (ISO-8859-7): Add alias ISO_8859-7:2003.

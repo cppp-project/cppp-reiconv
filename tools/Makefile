@@ -477,7 +477,7 @@ cp1125.h : $(TABLESDIR)/csets-new/CP1125.TXT 8bit_tab_to_h
 
 
 jisx0213.h : JISX0213.TXT cjk_tab_to_h
-	./cjk_tab_to_h JISX0213:2000 jisx0213 < $< > $@
+	./cjk_tab_to_h JISX0213:2004 jisx0213 < $< > $@
 
 tds565.h : $(TABLESDIR)/recode-cvs/TDS565.TXT 8bit_tab_to_h
 	(echo '#'; cat $<) | ./8bit_tab_to_h TDS565 tds565 > $@
