@@ -1,5 +1,10 @@
 2002-06-14  Bruno Haible  <bruno@clisp.org>
 
+	* hr.po: New file, from Denis Lackovic <delacko@fly.srk.fer.hr>.
+	* LINGUAS: Add hr.
+
+2002-06-14  Bruno Haible  <bruno@clisp.org>
+
 	* pt_BR.po: Update from
 	Alexandre Folle de Menezes <afmenez@terra.com.br>.
 
