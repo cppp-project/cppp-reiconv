@@ -2526,9 +2526,11 @@ changequote([, ])dnl
   *) ac_rel_source="$ac_dots$srcdir/$ac_source" ;;
   esac
 
-  # Make a symlink if possible; otherwise try a hard link.
+  # Make a symlink if possible; otherwise try a hard link. On filesystems
+  # which support neither symlink nor hard link, use a plain copy.
   if ln -s $ac_rel_source $ac_dest 2>/dev/null ||
-    ln $srcdir/$ac_source $ac_dest; then :
+    ln $srcdir/$ac_source $ac_dest 2>/dev/null ||
+    cp -p $srcdir/$ac_source $ac_dest; then :
   else
     AC_MSG_ERROR(can not link $ac_dest to $srcdir/$ac_source)
   fi
