@@ -1,3 +1,8 @@
+2001-06-08  Bruno Haible  <haible@clisp.cons.org>
+
+        * autoconf/config.guess: Update to GNU version 2001-05-11.
+        * autoconf/config.sub: Likewise.
+
 2001-06-03  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/loop_unicode.h (unicode_loop_convert): Ignore Unicode 3.1 tag
