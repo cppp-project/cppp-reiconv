@@ -3,7 +3,7 @@
  */
 
 static int
-ucs2swapped_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+ucs2swapped_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   /* This function assumes that 'unsigned short' has exactly 16 bits. */
   if (sizeof(unsigned short) != 2) abort();
@@ -22,7 +22,7 @@ ucs2swapped_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 }
 
 static int
-ucs2swapped_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+ucs2swapped_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   /* This function assumes that 'unsigned short' has exactly 16 bits. */
   if (sizeof(unsigned short) != 2) abort();

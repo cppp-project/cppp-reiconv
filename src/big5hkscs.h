@@ -23,7 +23,7 @@
 #include "hkscs.h"
 
 static int
-big5hkscs_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+big5hkscs_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c = *s;
   /* Code set 0 (ASCII) */
@@ -48,7 +48,7 @@ big5hkscs_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 }
 
 static int
-big5hkscs_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+big5hkscs_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   unsigned char buf[2];
   int ret;

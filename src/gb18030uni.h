@@ -516,7 +516,7 @@ static const unsigned char gb18030uni_bitmap[4337] = {
 };
 
 static int
-gb18030uni_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+gb18030uni_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c1 = s[0];
   if (c1 >= 0x81 && c1 <= 0x84) {
@@ -546,7 +546,7 @@ gb18030uni_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
                     unsigned int bitmap_index = i - gb18030uni_charset2uni_ranges[2*k1] + gb18030uni_ranges[k1].bitmap_offset;
                     if ((gb18030uni_bitmap[bitmap_index >> 3] >> (bitmap_index & 7)) & 1) {
                       unsigned int diff = gb18030uni_ranges[k1].diff;
-                      *pwc = (wchar_t) (i + diff);
+                      *pwc = (ucs4_t) (i + diff);
                       return 4;
                     }
                   }
@@ -568,7 +568,7 @@ gb18030uni_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 }
 
 static int
-gb18030uni_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+gb18030uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   if (n >= 4) {
     unsigned int i = wc;

@@ -25,7 +25,7 @@ static const unsigned short gb18030ext_2uni_pagefe[95] = {
 };
 
 static int
-gb18030ext_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+gb18030ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c1 = s[0];
   if ((c1 == 0xa2) || (c1 >= 0xa8 && c1 <= 0xa9) || (c1 == 0xfe)) {
@@ -47,7 +47,7 @@ gb18030ext_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
             wc = gb18030ext_2uni_pagefe[i-23750];
         }
         if (wc != 0xfffd) {
-          *pwc = (wchar_t) wc;
+          *pwc = (ucs4_t) wc;
           return 2;
         }
       }
@@ -149,7 +149,7 @@ static const unsigned short gb18030ext_page4d[16] = {
 };
 
 static int
-gb18030ext_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+gb18030ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   if (n >= 2) {
     unsigned short c = 0;

@@ -16,7 +16,7 @@
 #include "gb18030uni.h"
 
 static int
-gb18030_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+gb18030_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   int ret;
 
@@ -38,7 +38,7 @@ gb18030_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 }
 
 static int
-gb18030_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+gb18030_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   int ret;
 

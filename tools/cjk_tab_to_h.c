@@ -202,7 +202,7 @@ static void output_charset2uni (const char* name, Encoding* enc)
   printf("\n");
 
   printf("static int\n");
-  printf("%s_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)\n", name);
+  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", name);
   printf("{\n");
   printf("  unsigned char c1 = s[0];\n");
   printf("  if (");
@@ -243,7 +243,7 @@ static void output_charset2uni (const char* name, Encoding* enc)
   }
   printf("        }\n");
   printf("        if (wc != 0xfffd) {\n");
-  printf("          *pwc = (wchar_t) wc;\n");
+  printf("          *pwc = (ucs4_t) wc;\n");
   printf("          return 2;\n");
   printf("        }\n");
   printf("      }\n");
@@ -309,7 +309,7 @@ static void output_charset2uni_noholes_monotonic (const char* name, Encoding* en
   printf("\n");
 
   printf("static int\n");
-  printf("%s_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)\n", name);
+  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", name);
   printf("{\n");
   printf("  unsigned char c1 = s[0];\n");
   printf("  if (");
@@ -362,7 +362,7 @@ static void output_charset2uni_noholes_monotonic (const char* name, Encoding* en
   }
   printf("        }\n");
   printf("        if (wc != 0xfffd) {\n");
-  printf("          *pwc = (wchar_t) wc;\n");
+  printf("          *pwc = (ucs4_t) wc;\n");
   printf("          return 2;\n");
   printf("        }\n");
   printf("      }\n");
@@ -474,7 +474,7 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
     if (p >= 0)
       printf("\n");
   }
-  printf("static int\n%s_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)\n", name);
+  printf("static int\n%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", name);
   printf("{\n");
   printf("  if (n >= 2) {\n");
   printf("    unsigned short c = 0;\n");
@@ -639,7 +639,7 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
   printf("\n");
 
   printf("static int\n");
-  printf("%s_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)\n", name);
+  printf("%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", name);
   printf("{\n");
   printf("  if (n >= 2) {\n");
   printf("    const Summary16 *summary = NULL;\n");
@@ -1400,7 +1400,7 @@ static void do_gb18030uni (const char* name)
   printf("\n");
 
   printf("static int\n");
-  printf("%s_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)\n", name);
+  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", name);
   printf("{\n");
   printf("  unsigned char c1 = s[0];\n");
   printf("  if (c1 >= 0x81 && c1 <= 0x84) {\n");
@@ -1430,7 +1430,7 @@ static void do_gb18030uni (const char* name)
   printf("                    unsigned int bitmap_index = i - %s_charset2uni_ranges[2*k1] + %s_ranges[k1].bitmap_offset;\n", name, name);
   printf("                    if ((%s_bitmap[bitmap_index >> 3] >> (bitmap_index & 7)) & 1) {\n", name);
   printf("                      unsigned int diff = %s_ranges[k1].diff;\n", name);
-  printf("                      *pwc = (wchar_t) (i + diff);\n");
+  printf("                      *pwc = (ucs4_t) (i + diff);\n");
   printf("                      return 4;\n");
   printf("                    }\n");
   printf("                  }\n");
@@ -1454,7 +1454,7 @@ static void do_gb18030uni (const char* name)
   printf("\n");
 
   printf("static int\n");
-  printf("%s_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)\n", name);
+  printf("%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", name);
   printf("{\n");
   printf("  if (n >= 4) {\n");
   printf("    unsigned int i = wc;\n");

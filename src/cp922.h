@@ -20,21 +20,21 @@ static const unsigned short cp922_2uni_3[16] = {
 };
 
 static int
-cp922_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+cp922_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c = *s;
   if (c < 0xa0)
-    *pwc = (wchar_t) c;
+    *pwc = (ucs4_t) c;
   else if (c < 0xb0)
-    *pwc = (wchar_t) cp922_2uni_1[c-0xa0];
+    *pwc = (ucs4_t) cp922_2uni_1[c-0xa0];
   else if (c < 0xd0)
-    *pwc = (wchar_t) c;
+    *pwc = (ucs4_t) c;
   else if (c < 0xe0)
-    *pwc = (wchar_t) cp922_2uni_2[c-0xd0];
+    *pwc = (ucs4_t) cp922_2uni_2[c-0xd0];
   else if (c < 0xf0)
-    *pwc = (wchar_t) c;
+    *pwc = (ucs4_t) c;
   else
-    *pwc = (wchar_t) cp922_2uni_3[c-0xf0];
+    *pwc = (ucs4_t) cp922_2uni_3[c-0xf0];
   return 1;
 }
 
@@ -59,7 +59,7 @@ static const unsigned char cp922_page01[32] = {
 };
 
 static int
-cp922_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+cp922_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   unsigned char c = 0;
   if (wc < 0x00a8) {

@@ -3,7 +3,7 @@
  */
 
 static int
-ucs4swapped_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+ucs4swapped_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   /* This function assumes that 'unsigned int' has exactly 32 bits. */
   if (sizeof(unsigned int) != 4) abort();
@@ -18,7 +18,7 @@ ucs4swapped_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
 }
 
 static int
-ucs4swapped_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+ucs4swapped_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   /* This function assumes that 'unsigned int' has exactly 32 bits. */
   if (sizeof(unsigned int) != 4) abort();

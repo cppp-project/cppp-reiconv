@@ -197,7 +197,7 @@ int main (int argc, char *argv[])
         fprintf(f, "\n");
       }
       final_ret_reached = false;
-      fprintf(f, "static int\n%s_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)\n", c_charsetname);
+      fprintf(f, "static int\n%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", c_charsetname);
       fprintf(f, "{\n");
       fprintf(f, "  unsigned char c = *s;\n");
       if (some_invalid) {
@@ -221,7 +221,7 @@ int main (int argc, char *argv[])
           if (t == -2) {
             final_ret_reached = true;
           } else if (t == -1) {
-            fprintf(f, "%s*pwc = (wchar_t) c;\n", indent);
+            fprintf(f, "%s*pwc = (ucs4_t) c;\n", indent);
             fprintf(f, "%sreturn 1;\n", indent);
           } else {
             fprintf(f, "%s", indent);
@@ -232,7 +232,7 @@ int main (int argc, char *argv[])
             if (some_invalid)
               fprintf(f, "unsigned short wc = ");
             else
-              fprintf(f, "*pwc = (wchar_t) ");
+              fprintf(f, "*pwc = (ucs4_t) ");
             fprintf(f, "%s_2uni", c_charsetname);
             if (tableno > 1)
               fprintf(f, "_%d", t+1);
@@ -242,7 +242,7 @@ int main (int argc, char *argv[])
             fprintf(f, "];\n");
             if (some_invalid) {
               fprintf(f, "%sif (wc != 0xfffd) {\n", indent);
-              fprintf(f, "%s  *pwc = (wchar_t) wc;\n", indent);
+              fprintf(f, "%s  *pwc = (ucs4_t) wc;\n", indent);
               fprintf(f, "%s  return 1;\n", indent);
               fprintf(f, "%s}\n", indent);
               final_ret_reached = true;
@@ -274,9 +274,9 @@ int main (int argc, char *argv[])
             }
           }
           if (t == -1)
-            fprintf(f, "*pwc = (wchar_t) c;\n");
+            fprintf(f, "*pwc = (ucs4_t) c;\n");
           else {
-            fprintf(f, "*pwc = (wchar_t) %s_2uni", c_charsetname);
+            fprintf(f, "*pwc = (ucs4_t) %s_2uni", c_charsetname);
             if (tableno > 1)
               fprintf(f, "_%d", t+1);
             fprintf(f, "[c");
@@ -403,7 +403,7 @@ int main (int argc, char *argv[])
         j1 = j2;
       }
       fix_0000 = false;
-      fprintf(f, "static int\n%s_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)\n", c_charsetname);
+      fprintf(f, "static int\n%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", c_charsetname);
       fprintf(f, "{\n");
       if (need_c)
         fprintf(f, "  unsigned char c = 0;\n");

@@ -35,7 +35,7 @@ static void emit_encoding (struct wctomb_funcs * ofuncs, const char* c_name)
 
   {
     /* See whether the encoding can encode the accents and quotation marks. */
-    wchar_t probe[6] = { 0x0060, 0x00b4, 0x2018, 0x2019, 0x3131, 0x3163, };
+    ucs4_t probe[6] = { 0x0060, 0x00b4, 0x2018, 0x2019, 0x3131, 0x3163, };
     int res[6];
     int i;
     for (i = 0; i < 6; i++) {

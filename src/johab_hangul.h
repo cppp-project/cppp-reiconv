@@ -83,7 +83,7 @@ static const signed char jamo_final_index[32] = {
 };
 
 static int
-johab_hangul_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
+johab_hangul_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c1 = s[0];
   if ((c1 >= 0x84 && c1 <= 0xd3)) {
@@ -104,13 +104,13 @@ johab_hangul_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
             if (index2 == fill) {
               unsigned char jamo3 = jamo_final_notinitial[bitspart3];
               if (jamo3 != NONE) {
-                *pwc = (wchar_t) 0x3130 + jamo3;
+                *pwc = (ucs4_t) 0x3130 + jamo3;
                 return 2;
               }
             } else if (index3 == fill) {
               unsigned char jamo2 = jamo_medial[bitspart2];
               if (jamo2 != NONE && jamo2 != FILL) {
-                *pwc = (wchar_t) 0x3130 + jamo2;
+                *pwc = (ucs4_t) 0x3130 + jamo2;
                 return 2;
               }
             }
@@ -119,7 +119,7 @@ johab_hangul_mbtowc (conv_t conv, wchar_t *pwc, const unsigned char *s, int n)
             if (index3 == fill) {
               unsigned char jamo1 = jamo_initial[bitspart1];
               if (jamo1 != NONE && jamo1 != FILL) {
-                *pwc = (wchar_t) 0x3130 + jamo1;
+                *pwc = (ucs4_t) 0x3130 + jamo1;
                 return 2;
               }
             }
@@ -176,7 +176,7 @@ static const char jamo_final_index_inverse[28] = {
 };
 
 static int
-johab_hangul_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
+johab_hangul_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   if (n >= 2) {
     if (wc >= 0x3131 && wc < 0x3164) {
@@ -211,7 +211,7 @@ johab_hangul_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
 /* Decompose wc into r[0..2], and return the number of resulting Jamo elements.
    Return RET_ILSEQ if decomposition is not possible. */
 
-static int johab_hangul_decompose (conv_t conv, wchar_t* r, wchar_t wc)
+static int johab_hangul_decompose (conv_t conv, ucs4_t* r, ucs4_t wc)
 {
   unsigned char buf[2];
   int ret = johab_hangul_wctomb(conv,buf,wc,2);
@@ -224,7 +224,7 @@ static int johab_hangul_decompose (conv_t conv, wchar_t* r, wchar_t wc)
     if (jamo1 != NONE && jamo2 != NONE && jamo3 != NONE) {
       /* They are not all three == FILL because that would correspond to
          johab = 0x8441, which doesn't exist. */
-      wchar_t* p = r;
+      ucs4_t* p = r;
       if (jamo1 != FILL)
         *p++ = 0x3130 + jamo1;
       if (jamo2 != FILL)

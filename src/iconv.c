@@ -243,7 +243,7 @@ size_t iconv (iconv_t icd,
     unsigned char* outptr = (unsigned char*) *outbuf;
     size_t outleft = *outbytesleft;
     while (inleft > 0) {
-      wchar_t wc;
+      ucs4_t wc;
       int incount;
       int outcount;
       incount = cd->ifuncs.xxx_mbtowc(cd,&wc,inptr,inleft);
@@ -279,7 +279,7 @@ size_t iconv (iconv_t icd,
             /* Decompose Hangul into Jamo. Use double-width Jamo (contained
                in all Korean encodings and ISO-2022-JP-2), not half-width Jamo
                (contained in Unicode only). */
-            wchar_t buf[3];
+            ucs4_t buf[3];
             int ret = johab_hangul_decompose(cd,buf,wc);
             if (ret != RET_ILSEQ) {
               /* we know 1 <= ret <= 3 */
@@ -323,7 +323,7 @@ size_t iconv (iconv_t icd,
               indx = cjk_variants_indx[wc-0x4e00];
             if (indx >= 0) {
               for (;; indx++) {
-                wchar_t buf[2];
+                ucs4_t buf[2];
                 unsigned short variant = cjk_variants[indx];
                 unsigned short last = variant & 0x8000;
                 variant &= 0x7fff;
@@ -363,7 +363,7 @@ size_t iconv (iconv_t icd,
           }
           if (wc >= 0x2018 && wc <= 0x201a) {
             /* Special case for quotation marks 0x2018, 0x2019, 0x201a */
-            wchar_t substitute =
+            ucs4_t substitute =
               (cd->oflags & HAVE_QUOTATION_MARKS
                ? (wc == 0x201a ? 0x2018 : wc)
                : (cd->oflags & HAVE_ACCENTS
