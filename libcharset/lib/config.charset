@@ -306,7 +306,7 @@ case "$os" in
 	echo "# country is not the one your DOS machine actually uses, just"
 	echo "# correct it in this file, and send a mail to"
 	echo "# Juan Manuel Guerrero <st001906@hrz1.hrz.tu-darmstadt.de>"
-	echo "# and Bruno Haible <haible@clisp.cons.org>."
+	echo "# and Bruno Haible <bruno@clisp.org>."
 	echo "#"
 	echo "C ASCII"
 	# ISO-8859-1 languages

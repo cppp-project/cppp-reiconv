@@ -115,7 +115,7 @@ This is a port of GNU Libcharset @VER@ to MSDOS/DJGPP.
 
         Send suggestions and bug reports concerning the DJGPP port to
         comp.os.msdos.djgpp or djgpp@delorie.com. Libcharset specific
-        bugs must be reported to Bruno Haible <haible@clisp.cons.org>.
+        bugs must be reported to Bruno Haible <bruno@clisp.org>.
 
 
           Guerrero, Juan Manuel <st001906@hrz1.hrz.tu-darmstadt.de>
