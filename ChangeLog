@@ -1,3 +1,9 @@
+2001-12-05  Bruno Haible  <bruno@clisp.org>
+
+	* lib/iconv.c (iconv_open): Recognize the empty encoding name. Avoid
+	  endless loop if locale_charset() returns the empty string.
+	* README, man/iconv_open.3: Add the empty encoding name.
+
 2001-11-10  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/Makefile.in (libiconv_plug_linux.so): Allow building it with a

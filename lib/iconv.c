@@ -209,10 +209,18 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       if (--count == 0)
         goto invalid;
     }
-    if (bp-buf > 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+    if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
       bp -= 10;
       *bp = '\0';
       transliterate = 1;
+    }
+    if (buf[0] == '\0') {
+      tocode = locale_charset();
+      /* Avoid an endless loop that could occur when using an older version
+         of localcharset.c. */
+      if (tocode[0] == '\0')
+        goto invalid;
+      continue;
     }
     ap = aliases_lookup(buf,bp-buf);
     if (ap == NULL) {
@@ -222,6 +230,10 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
     }
     if (ap->encoding_index == ei_local_char) {
       tocode = locale_charset();
+      /* Avoid an endless loop that could occur when using an older version
+         of localcharset.c. */
+      if (tocode[0] == '\0')
+        goto invalid;
       continue;
     }
     if (ap->encoding_index == ei_local_wchar_t) {
@@ -263,9 +275,17 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       if (--count == 0)
         goto invalid;
     }
-    if (bp-buf > 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
+    if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
       bp -= 10;
       *bp = '\0';
+    }
+    if (buf[0] == '\0') {
+      fromcode = locale_charset();
+      /* Avoid an endless loop that could occur when using an older version
+         of localcharset.c. */
+      if (fromcode[0] == '\0')
+        goto invalid;
+      continue;
     }
     ap = aliases_lookup(buf,bp-buf);
     if (ap == NULL) {
@@ -275,6 +295,10 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
     }
     if (ap->encoding_index == ei_local_char) {
       fromcode = locale_charset();
+      /* Avoid an endless loop that could occur when using an older version
+         of localcharset.c. */
+      if (fromcode[0] == '\0')
+        goto invalid;
       continue;
     }
     if (ap->encoding_index == ei_local_wchar_t) {

@@ -272,5 +272,11 @@ locale_charset ()
 	break;
       }
 
+  /* Don't return an empty string.  GNU libc and GNU libiconv interpret
+     the empty string as denoting "the locale's character encoding",
+     thus GNU libiconv would call this function a second time.  */
+  if (codeset[0] == '\0')
+    codeset = "ASCII";
+
   return codeset;
 }

@@ -48,6 +48,8 @@ It provides support for the encodings:
         (with machine dependent endianness and alignment, and with OS and
         locale dependent semantics)
         char, wchar_t
+        The empty encoding name "" is equivalent to "char": it denotes the
+        locale dependent character encoding.
 
 It can convert from any of these encodings to any other, through Unicode
 conversion.
