@@ -198,6 +198,7 @@ NEXTSTEP, ei_nextstep
 ARMSCII-8, ei_armscii_8
 GEORGIAN-ACADEMY, ei_georgian_academy
 GEORGIAN-PS, ei_georgian_ps
+KOI8-T, ei_koi8_t
 MULELAO-1, ei_mulelao
 CP1133, ei_cp1133
 IBM-CP1133, ei_cp1133

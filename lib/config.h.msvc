@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -17,8 +17,8 @@
    Suite 330, Boston, MA 02111-1307, USA.  */
 
 
-/* Define if you have <locale.h>. */
-#undef HAVE_LOCALE_H
+/* Define to 1 to enable a few rarely used encodings. */
+#undef ENABLE_EXTRA
 
 /* Define to a type if <wchar.h> does not define. */
 #undef mbstate_t
@@ -34,9 +34,6 @@
 
 /* Define if you have the wcrtomb() function. */
 #undef HAVE_WCRTOMB
-
-/* Define if you have the setlocale() function. */
-#undef HAVE_SETLOCALE
 
 /* Define if the machine's byte ordering is little endian. */
 #define WORDS_LITTLEENDIAN 1

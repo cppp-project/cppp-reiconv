@@ -14,7 +14,7 @@
 
 <hr>
 <!-- Creator     : groff version 1.17 -->
-<!-- CreationDate: Mon May 21 14:35:11 2001 -->
+<!-- CreationDate: Fri May 24 14:48:03 2002 -->
 <a name="NAME"></a>
 <h2>NAME</h2>
 <table width="100%" border=0 rules="none" frame="void"
@@ -29,8 +29,9 @@ iconv - character set conversion</td></table>
        cols="2" cellspacing="0" cellpadding="0">
 <tr valign="top" align="left">
 <td width="10%"></td><td width="90%">
-iconv [<b>-f</b> <i>encoding</i>] [<b>-t</b>
-<i>encoding</i>] [<i>inputfile</i> ...]</td></table>
+<pre>iconv [<b>-c</b>] [<b>-s</b>] [<b>-f</b> <i>encoding</i>] [<b>-t</b> <i>encoding</i>] [<i>inputfile</i> ...]
+iconv <b>-l
+</b></pre></td></table>
 <a name="DESCRIPTION"></a>
 <h2>DESCRIPTION</h2>
 
@@ -52,9 +53,35 @@ output.</td></table>
        cols="2" cellspacing="0" cellpadding="0">
 <tr valign="top" align="left">
 <td width="10%"></td><td width="90%">
+When option <b>-c</b> is given, characters that cannot be
+converted are silently discarded, instead of leading to a
+conversion error.</td></table>
+
+<table width="100%" border=0 rules="none" frame="void"
+       cols="2" cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td><td width="90%">
+When option <b>-s</b> is given, error messages about invalid
+or unconvertible characters are omitted, but the actual
+converted text is unaffected.</td></table>
+
+<table width="100%" border=0 rules="none" frame="void"
+       cols="2" cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td><td width="90%">
 The encodings permitted are system dependent. For the
 libiconv implementation, they are listed in the
 iconv_open(3) manual page.</td></table>
+
+<table width="100%" border=0 rules="none" frame="void"
+       cols="2" cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td><td width="90%">
+The <b>iconv -l</b> command lists the names of the supported
+encodings, in a system dependent format. For the libiconv
+implementation, the names are printed in upper case,
+separated by whitespace, and alias names of an encoding are
+listed on the same line as the encoding itself.</td></table>
 <a name="SEE ALSO"></a>
 <h2>SEE ALSO</h2>
 

@@ -2,7 +2,7 @@
 /* Command-line: gperf -t -L ANSI-C -H aliases_hash -N aliases_lookup -G -W aliases -7 -C -k '1,3-11,$' -i 1 lib/aliases.gperf  */
 struct alias { const char* name; unsigned int encoding_index; };
 
-#define TOTAL_KEYWORDS 308
+#define TOTAL_KEYWORDS 309
 #define MIN_WORD_LENGTH 2
 #define MAX_WORD_LENGTH 45
 #define MIN_HASH_VALUE 4
@@ -99,7 +99,8 @@ static const struct alias aliases[] =
     {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
     {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
     {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
-    {""}, {""}, {""}, {""}, {""}, {""}, {""},
+    {"KOI8-T", ei_koi8_t},
+    {""}, {""}, {""}, {""}, {""}, {""},
     {"MS-ANSI", ei_cp1252},
     {""}, {""}, {""}, {""}, {""}, {""},
     {"862", ei_cp862},
