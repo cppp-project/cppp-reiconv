@@ -1,10 +1,18 @@
+2000-07-04  Akira Hatakeyama  <akira@sra.co.jp>
+            Bruno Haible  <haible@clisp.cons.org>
+
+        * os2/iconv.def, README.os2, Makefile.os2, src/Makefile.os2,
+          tests/Makefile.os2, man/Makefile.os2, tests/check-stateful.cmd,
+          tests/check-stateless.cmd, tests/check-translit.cmd: New files.
+
 2000-06-28  Bruno Haible  <haible@clisp.cons.org>
 
-        * ucs2internal.h (ucs2internal_mbtowc): Avoid gcc warning about cast.
-        * ucs4internal.h (ucs4internal_mbtowc): Likewise.
-        * ucs2swapped.h (ucs2swapped_mbtowc, ucs2swapped_wctomb): Verify
+        * src/ucs2internal.h (ucs2internal_mbtowc): Avoid gcc warning about
+          cast.
+        * src/ucs4internal.h (ucs4internal_mbtowc): Likewise.
+        * src/ucs2swapped.h (ucs2swapped_mbtowc, ucs2swapped_wctomb): Verify
           sizeof(unsigned short).
-        * ucs4swapped.h (ucs4swapped_mbtowc, ucs4swapped_mbtowc): Verify
+        * src/ucs4swapped.h (ucs4swapped_mbtowc, ucs4swapped_mbtowc): Verify
           sizeof(unsigned int).
         Reported by François Pinard <pinard@iro.umontreal.ca>.
 
