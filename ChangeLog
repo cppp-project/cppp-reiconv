@@ -9,6 +9,7 @@
 	* m4/gettext.m4: Update from GNU gettext.
 	* m4/nls.m4: Update from GNU gettext.
 	* m4/po.m4: Update from GNU gettext.
+	* Makefile.devel (aclocal.m4): Depend on m4/nls.m4 and m4/po.m4.
 
 2003-04-12  Bruno Haible  <bruno@clisp.org>
 

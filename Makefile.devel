@@ -44,7 +44,7 @@ CONFIGURES_IN = configure.in
 #m4/endian.m4 : $(CLISP_DIR)/src/m4/endian.m4 ; cp -p $< $@-t && mv $@-t $@
 #m4/libtool.m4 : $(CLISP_DIR)/src/m4/libtool.m4 ; cp -p $< $@-t && mv $@-t $@
 
-aclocal.m4 : m4/general.m4 m4/proto.m4 m4/cp.m4 m4/ln.m4 m4/codeset.m4 m4/eilseq.m4 m4/endian.m4 m4/glibc21.m4 m4/isc-posix.m4 m4/lcmessage.m4 m4/alloca.m4 m4/canonicalize.m4 m4/error.m4 m4/mbstate_t.m4 m4/onceonly.m4 m4/pathmax.m4 m4/relocatable.m4 m4/setenv.m4 m4/stdbool.m4 m4/strerror.m4 m4/xreadlink.m4  m4/libtool.m4  m4/gettext.m4 m4/iconv.m4 m4/lib-ld.m4 m4/lib-link.m4 m4/lib-prefix.m4 m4/progtest.m4
+aclocal.m4 : m4/general.m4 m4/proto.m4 m4/cp.m4 m4/ln.m4 m4/codeset.m4 m4/eilseq.m4 m4/endian.m4 m4/glibc21.m4 m4/isc-posix.m4 m4/lcmessage.m4 m4/alloca.m4 m4/canonicalize.m4 m4/error.m4 m4/mbstate_t.m4 m4/onceonly.m4 m4/pathmax.m4 m4/relocatable.m4 m4/setenv.m4 m4/stdbool.m4 m4/strerror.m4 m4/xreadlink.m4  m4/libtool.m4  m4/gettext.m4 m4/iconv.m4 m4/lib-ld.m4 m4/lib-link.m4 m4/lib-prefix.m4 m4/nls.m4 m4/po.m4 m4/progtest.m4
 	aclocal -I m4 --output=$@
 
 configures : $(CONFIGURES)
