@@ -38,7 +38,7 @@ all : force
 install-lib : all force
 	cd lib && $(MAKE) -r install-lib libdir='$(libdir)' includedir='$(includedir)'
 	$(MKINSTALLDIRS) $(includedir)
-	$(INSTALL_DATA) $(srcdir)/include/libcharset.h $(includedir)/libcharset.h
+	$(INSTALL_DATA) include/libcharset.h $(includedir)/libcharset.h
 
 install : force
 	cd lib && $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
