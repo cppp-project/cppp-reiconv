@@ -11,9 +11,10 @@ Installation on Win32 (WinNT, Win95/98):
 
    For shared library (DLL):
 
-        nmake -f Makefile.msvc STATIC=0
+        nmake -f Makefile.msvc STATIC=0 MFLAGS=-MD
    or
-        nmake -f Makefile.msvc STATIC=0 check      [This runs the testsuite.]
+        nmake -f Makefile.msvc STATIC=0 MFLAGS=-MD check
+                                                   [This runs the testsuite.]
 
    For static library:
 
