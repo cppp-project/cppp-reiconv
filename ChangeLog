@@ -1,3 +1,8 @@
+2002-05-29  Bruno Haible  <bruno@clisp.org>
+
+	* configure.in: Call AC_PROG_INSTALL instead of CL_PROG_INSTALL.
+	* m4/install.m4: Remove file.
+
 2002-05-24  Bruno Haible  <bruno@clisp.org>
 
 	* lib/jisx0213.h: Use 'inline' only conditionally.
