@@ -1,3 +1,8 @@
+2003-05-10  Bruno Haible  <bruno@clisp.org>
+
+	* iconv_string.c (iconv_string): Don't return -1 just because the
+	string is longer than 4 KB.
+
 2002-02-13  Bruno Haible  <bruno@clisp.org>
 
 	* iconv.m4: Remove file. Obsoleted by m4/iconv.m4.
