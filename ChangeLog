@@ -1,3 +1,9 @@
+2001-12-15  Bruno Haible  <bruno@clisp.org>
+
+        * lib/euc_jp.h (euc_jp_wctomb): Add irreversible mappings for
+	Shift_JIS characters 0x5C and 0x7E.
+	* tests/EUC-JP.IRREVERSIBLE.TXT: New file.
+
 2001-12-05  Bruno Haible  <bruno@clisp.org>
 
 	* lib/iconv.c (iconv_open): Recognize the empty encoding name. Avoid

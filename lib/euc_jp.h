@@ -152,6 +152,16 @@ euc_jp_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     return 3;
   }
 
+  /* Extra compatibility with Shift_JIS.  */
+  if (wc == 0x00a5) {
+    r[0] = 0x5c;
+    return 1;
+  }
+  if (wc == 0x203e) {
+    r[0] = 0x7e;
+    return 1;
+  }
+
   /* User-defined range. See
    * Ken Lunde's "CJKV Information Processing", table 4-66, p. 206. */
   if (wc >= 0xe000 && wc < 0xe758) {
