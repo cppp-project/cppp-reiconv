@@ -1,6 +1,7 @@
 dnl local autoconf macros
 dnl Bruno Haible 2001-02-04
 dnl Marcus Daniels 1997-04-10
+dnl Sam Steingold 2002
 dnl
 AC_PREREQ(2.52)dnl
 dnl
