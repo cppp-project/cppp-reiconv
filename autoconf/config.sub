@@ -27,7 +27,7 @@
 
 # Changed by Bruno Haible, 1 May 1999.
 # The master version of this file is in
-# ftp://ftp2.cons.org/pub/lisp/clisp/source/.
+# ftp://clisp.cons.org/pub/lisp/clisp/source/.
 
 # Configuration subroutine to validate and canonicalize a configuration type.
 # Supply the specified configuration type as an argument.

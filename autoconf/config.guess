@@ -27,7 +27,7 @@
 #
 # Changed by Bruno Haible, 1 May 1999.
 # The master version of this file is in
-# ftp://ftp2.cons.org/pub/lisp/clisp/source/.
+# ftp://clisp.cons.org/pub/lisp/clisp/source/.
 #
 # This script attempts to guess a canonical system name similar to
 # config.sub.  If it succeeds, it prints the system name on stdout, and
