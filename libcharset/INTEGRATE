@@ -79,7 +79,7 @@ Integration of this library into your package:
 
         config.charset ref-add.sin ref-del.sin
 
-  - Augment target "add-local" by
+  - Augment target "all-local" by
 
         charset.alias ref-add.sed ref-del.sed
 
