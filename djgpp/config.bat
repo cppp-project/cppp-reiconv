@@ -102,17 +102,6 @@ if errorlevel 1 goto SedError
 update ir165.tmp %XSRC%/lib/iso/ir165.h
 rm ir165.tmp
 
-Rem Let libtool use _libs all the time.
-test -f %XSRC%/autoconf/ltconfig.orig
-if errorlevel 1 update %XSRC%/autoconf/ltconfig %XSRC%/autoconf/ltconfig.orig
-sed "/objdir=/s|\.libs|_libs|" %XSRC%/autoconf/ltconfig > ltconfig.tmp
-if errorlevel 1 goto SedError
-update ltconfig.tmp %XSRC%/autoconf/ltconfig
-test -f %XSRC%/libcharset/autoconf/ltconfig.orig
-if errorlevel 1 update %XSRC%/libcharset/autoconf/ltconfig %XSRC%/libcharset/autoconf/ltconfig.orig
-update ltconfig.tmp %XSRC%/libcharset/autoconf/ltconfig
-rm ltconfig.tmp
-
 Rem Change file's NL to CRLF.
 utod %XSRC%/tests/*.txt
 utod %XSRC%/tests/GEORGIAN/*.txt

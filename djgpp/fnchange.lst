@@ -128,7 +128,6 @@ libiconv-1.6.1/libcharset/include/libcharset.h.in           libiconv-1.6.1/libch
 libiconv-1.6.1/libcharset/include/libcharset.h.msvc-shared  libiconv-1.6.1/libcharset/include/libcharset_h.shared-msvc
 libiconv-1.6.1/libcharset/autoconf/config.guess             libiconv-1.6.1/libcharset/autoconf/config.guess
 libiconv-1.6.1/libcharset/autoconf/config.sub               libiconv-1.6.1/libcharset/autoconf/config.sub
-libiconv-1.6.1/libcharset/autoconf/ltconfig                 libiconv-1.6.1/libcharset/autoconf/ltconfig
 libiconv-1.6.1/libcharset/autoconf/ltmain.sh                libiconv-1.6.1/libcharset/autoconf/ltmain.sh
 libiconv-1.6.1/libcharset/autoconf/install-sh               libiconv-1.6.1/libcharset/autoconf/install-sh
 libiconv-1.6.1/libcharset/autoconf/aclocal.m4               libiconv-1.6.1/libcharset/autoconf/aclocal.m4

@@ -55,7 +55,6 @@ libcharset-1.0/include/libcharset.h.in           libcharset-1.0/include/libchars
 libcharset-1.0/include/libcharset.h.msvc-shared  libcharset-1.0/include/libcharset_h.shared-msvc
 libcharset-1.0/autoconf/config.guess             libcharset-1.0/autoconf/config.guess
 libcharset-1.0/autoconf/config.sub               libcharset-1.0/autoconf/config.sub
-libcharset-1.0/autoconf/ltconfig                 libcharset-1.0/autoconf/ltconfig
 libcharset-1.0/autoconf/ltmain.sh                libcharset-1.0/autoconf/ltmain.sh
 libcharset-1.0/autoconf/install-sh               libcharset-1.0/autoconf/install-sh
 libcharset-1.0/autoconf/aclocal.m4               libcharset-1.0/autoconf/aclocal.m4
