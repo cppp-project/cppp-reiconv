@@ -35,6 +35,7 @@
 
 	* configure.in: Call AC_PROG_INSTALL instead of CL_PROG_INSTALL.
 	* m4/install.m4: Remove file.
+	* Makefile.devel (autoconf/aclocal.m4): Don't depend on m4/install.m4.
 
 2002-05-24  Bruno Haible  <bruno@clisp.org>
 
