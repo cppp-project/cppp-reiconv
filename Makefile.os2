@@ -6,10 +6,11 @@
 # Directories used by "make install":
 prefix = @prefix@
 exec_prefix = $(prefix)
+datadir = $(prefix)/share
 libdir = $(exec_prefix)/lib
 shlibdir = $(exec_prefix)/dll
 includedir = $(prefix)/include
-mandir = $(prefix)/man
+mandir = $(datadir)/man
 
 #### End of system configuration section. ####
 
@@ -33,13 +34,13 @@ install : force
 	cp include/iconv.h $(includedir)/iconv.h
 	(cd lib && $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)' && cd ..)
 	(cd src && $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)' && cd ..)
-	(cd man && $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)' && cd ..)
+	(cd man && $(MAKE) -f Makefile.os2 install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)' mandir='$(mandir)' && cd ..)
 
 uninstall : force
 	rm -i $(includedir)/iconv.h
 	(cd lib && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)' && cd ..)
 	(cd src && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)' && cd ..)
-	(cd man && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)' && cd ..)
+	(cd man && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)' mandir='$(mandir)' && cd ..)
 
 check : all force
 	(cd lib   && $(MAKE) -f Makefile.os2 check && cd ..)

@@ -13,10 +13,11 @@ srcdir = .
 
 # Directories used by "make install":
 prefix = $(PREFIX)
-mandir = $(prefix)\man
+datadir = $(prefix)\share
+mandir = $(datadir)\man
 man1dir = $(mandir)\man1
 man3dir = $(mandir)\man3
-docdir = $(prefix)\doc\libiconv
+docdir = $(datadir)\doc\libiconv
 
 # Programs used by "make":
 RM = -del
@@ -34,6 +35,7 @@ all :
 
 install : all force
 	-mkdir $(prefix)
+	-mkdir $(datadir)
 	-mkdir $(mandir)
 	-mkdir $(man1dir)
 	$(INSTALL_DATA) iconv.1 $(man1dir)\iconv.1
@@ -41,7 +43,7 @@ install : all force
 	$(INSTALL_DATA) iconv_open.3 $(man3dir)\iconv_open.3
 	$(INSTALL_DATA) iconv.3 $(man3dir)\iconv.3
 	$(INSTALL_DATA) iconv_close.3 $(man3dir)\iconv_close.3
-	-mkdir $(prefix)\doc
+	-mkdir $(datadir)\doc
 	-mkdir $(docdir)
 	$(INSTALL_DATA) iconv.1.html $(docdir)\iconv.1.html
 	$(INSTALL_DATA) iconv_open.3.html $(docdir)\iconv_open.3.html
@@ -50,10 +52,11 @@ install : all force
 
 installdirs : force
 	-mkdir $(prefix)
+	-mkdir $(datadir)
 	-mkdir $(mandir)
 	-mkdir $(man1dir)
 	-mkdir $(man3dir)
-	-mkdir $(prefix)\doc
+	-mkdir $(datadir)\doc
 	-mkdir $(docdir)
 
 uninstall : force

@@ -11,7 +11,8 @@
 # Directories used by "make install":
 prefix = @prefix@
 exec_prefix = $(prefix)
-mandir = $(prefix)/man
+datadir = $(prefix)/share
+mandir = $(datadir)/man
 
 #### End of system configuration section. ####
 

@@ -1,3 +1,8 @@
+2003-04-12  Bruno Haible  <bruno@clisp.org>
+
+	* configure.in (mandir): Change default value.
+	* Makefile.in (datadir): New variable.
+
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
 	Support for relocatable installation.

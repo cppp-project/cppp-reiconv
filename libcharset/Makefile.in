@@ -10,6 +10,7 @@ srcdir = @srcdir@
 prefix = @prefix@
 local_prefix = /usr/local
 exec_prefix = @exec_prefix@
+datadir = @datadir@
 libdir = @libdir@
 includedir = @includedir@
 mandir = @mandir@
