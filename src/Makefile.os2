@@ -1,6 +1,6 @@
 # Makefile for libiconv/src, OS2/EMX specific
 #
-#	requires EMX/GCC developpment environment and
+#	requires EMX/GCC development environment and
 #	GNU fileutils and GNU textutils installed
 #
 #	define EMXPATH=<your EMX path> on install/uninstall

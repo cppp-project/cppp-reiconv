@@ -1,6 +1,6 @@
 # Makefile for libiconv/man, OS2/EMX specific
 #
-#	requires EMX/GCC developpment environment and
+#	requires EMX/GCC development environment and
 #	GNU futils installed
 #
 #	define EMXPATH=<your EMX path> on install/uninstall
