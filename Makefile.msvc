@@ -113,6 +113,7 @@ mostlyclean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
+	$(RM) lib\libcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
