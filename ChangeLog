@@ -1,3 +1,17 @@
+2002-11-07  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4: Upgrade to libtool-1.4.3.
+	* autoconf/ltmain.sh: Upgrade to libtool-1.4.3.
+
+2002-07-14  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4 (_LT_AC_LTCONFIG_HACK): Add support for GNU/FreeBSD.
+
+2002-06-12  Bruno Haible  <bruno@clisp.org>
+
+	* configure.in: Use new AC_* names of libtool macros. Invoke
+	AC_LIBTOOL_WIN32_DLL.
+
 2002-12-19  Bruno Haible  <bruno@clisp.org>
 
 	* lib/Makefile.in (libiconv_plug_solaris.so): Change rule if using gcc.

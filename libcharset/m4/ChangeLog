@@ -1,0 +1,8 @@
+2002-11-07  Bruno Haible  <bruno@clisp.org>
+
+	* libtool.m4: Upgrade to libtool-1.4.3.
+
+2002-07-14  Bruno Haible  <bruno@clisp.org>
+
+	* libtool.m4 (_LT_AC_LTCONFIG_HACK): Add support for GNU/FreeBSD.
+

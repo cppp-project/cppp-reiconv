@@ -1,5 +1,14 @@
 2002-11-07  Bruno Haible  <bruno@clisp.org>
 
+	* autoconf/ltmain.sh: Upgrade to libtool-1.4.3.
+
+2002-06-12  Bruno Haible  <bruno@clisp.org>
+
+	* configure.in: Use new AC_* names of libtool macros. Invoke
+	AC_LIBTOOL_WIN32_DLL.
+
+2002-11-07  Bruno Haible  <bruno@clisp.org>
+
 	Make "make install" without prior "make" work.
 	* Makefile.in (install): Depend on include/libcharset.h.
 	Reported by Martin Mokrejš <mmokrejs@natur.cuni.cz>.
