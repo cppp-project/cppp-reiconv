@@ -3,16 +3,28 @@
 #### Start of system configuration section. ####
 
 # Flags that can be set on the nmake command line:
-#   STATIC=1  for compiling a static .lib (default is a .dll with a stub .lib)
+#   STATIC=0  for compiling a .dll with a stub .lib (default is a static .lib)
+#             Note that this works only with MFLAGS=-MD.
+#   MFLAGS={-ML|-MT|-MD} for defining the compilation model
+#     MFLAGS=-ML (the default)  Single-threaded, statically linked - libc.lib
+#     MFLAGS=-MT                Multi-threaded, statically linked  - libcmt.lib
+#     MFLAGS=-MD                Multi-threaded, dynamically linked - msvcrt.lib
 #   DEBUG=1   for compiling with debugging information
 # Note that nmake command line flags are automatically passed to subdirectory
 # Makefiles. Therefore we don't need to pass them explicitly to subdirectory
 # Makefiles, but the subdirectory Makefiles need to have the same defaults.
 !if !defined(STATIC)
-STATIC=0
+STATIC=1
 !endif
 !if !defined(DEBUG)
 DEBUG=0
+!endif
+!if !defined(MFLAGS)
+!if $(STATIC)
+MFLAGS=
+!else
+MFLAGS=-MD
+!endif
 !endif
 
 # Directories used by "make install":
@@ -32,6 +44,11 @@ RM = del
 SHELL = /bin/sh
 
 all : config.h force
+!if $(STATIC)
+	$(LN) include\libcharset.h.in include\libcharset.h
+!else
+	$(LN) include\libcharset.h.msvc-shared include\libcharset.h
+!endif
 	cd lib
 	$(MAKE) -f Makefile.msvc all
 	cd ..
@@ -43,7 +60,7 @@ config.h : config.h.msvc
 install : force
 	cd lib; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(MKINSTALLDIRS) $(includedir)
-	$(INSTALL_DATA) $(srcdir)/include/libcharset.h $(includedir)/libcharset.h
+	$(INSTALL_DATA) include/libcharset.h $(includedir)/libcharset.h
 
 installdirs : force
 	cd lib; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
@@ -72,12 +89,14 @@ distclean : all
 	cd lib
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
+	$(RM) include\libcharset.h
 	$(RM) config.status config.log config.cache Makefile config.h
 
 maintainer-clean : all
 	cd lib
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
+	$(RM) include\libcharset.h
 	$(RM) config.status config.log config.cache Makefile config.h
 
 force :

@@ -1,3 +1,17 @@
+2000-11-21  Bruno Haible  <haible@clisp.cons.org>
+
+	* include/libcharset.h.in: Renamed from include/libcharset.h.
+	* windows/dllexport.h: New file.
+	* Makefile.devel (all): Add config.h.msvc,
+	include/libcharset.h.msvc-shared.
+	(config.h.msvc, include/libcharset.h.msvc-shared): New targets.
+	* Makefile.msvc (MFLAGS): New variable.
+	(all): Create include\libcharset.h.
+	(distclean, maintainer-clean): Remove include\libcharset.h.
+	* Makefile.in (CP): New variable.
+	(all): Create include/libcharset.h.
+	(distclean, maintainer-clean): Remove include/libcharset.h.
+
 2000-11-18  Bruno Haible  <haible@clisp.cons.org>
 
 	* Makefile.devel (config.h.in): Rename from config.h.

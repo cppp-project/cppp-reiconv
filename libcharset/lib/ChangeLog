@@ -1,3 +1,9 @@
+2000-11-21  Bruno Haible  <haible@clisp.cons.org>
+
+	* Makefile.msvc (MFLAGS): New variable.
+	(CFLAGS, charset.lib): Use it.
+	(INCLUDES): Use "..", not "..\include".
+
 2000-10-31  Bruno Haible  <haible@clisp.cons.org>
 
 	* Makefile.msvc: New file.
