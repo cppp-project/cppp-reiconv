@@ -102,12 +102,14 @@ check : all table-from.exe table-to.exe iconv.exe genutf8.exe
 	$(srcdir)\check-stateful $(srcdir) ISO-2022-JP-1
 	$(srcdir)\check-stateless $(srcdir) EUC-CN
 	$(srcdir)\check-stateless $(srcdir) GBK
+	$(srcdir)\check-stateless $(srcdir) GB18030
 	$(srcdir)\check-stateful $(srcdir) ISO-2022-CN
 	$(srcdir)\check-stateful $(srcdir) ISO-2022-CN-EXT
 	$(srcdir)\check-stateful $(srcdir) HZ
 	$(srcdir)\check-stateless $(srcdir) EUC-TW
 	$(srcdir)\check-stateless $(srcdir) BIG5
 	$(srcdir)\check-stateless $(srcdir) CP950
+	$(srcdir)\check-stateless $(srcdir) BIG5HKSCS
 	$(srcdir)\check-stateless $(srcdir) EUC-KR
 	$(srcdir)\check-stateless $(srcdir) CP949
 	$(srcdir)\check-stateless $(srcdir) JOHAB

@@ -193,6 +193,9 @@ A: libiconv, as an internationalization library, supports those character
        of simplified Chinese.
      * GBK
        We implement this because it appears to be used on Solaris and Windows.
+     * GB18030
+       We implement this because it is an official requirement in the
+       People's Republic of China.
      * ISO-2022-CN
        We implement this because it is in the RFCs, but I have no idea
        whether it is really used.
@@ -216,6 +219,9 @@ A: libiconv, as an internationalization library, supports those character
        Only the CWEX fonts use this encoding. Furthermore, the conversion
        tables in the big5p package are not coherent: If you convert directly,
        you get different results than when you convert via GBK.
+     * BIG5HKSCS
+       We implement it because it is the de-facto standard for traditional
+       Chinese in Hongkong.
    Korean
      * EUC-KR
        We implement these because they appear to be the widely used
@@ -323,8 +329,9 @@ A: 1. Explain the "why" in this file, above.
    directive to converters.h, and add an entry to the encodings.def file.
    5. Compile the package, and test your new encoding using a program like
    iconv(1) or clisp(1).
-   6. Augment the testsuite: Add a line to tests/Makefile.in. For a stateless
-   encoding, create the complete table as a TXT file. For a stateful encoding,
+   6. Augment the testsuite: Add a line to each of tests/Makefile.in,
+   tests/Makefile.msvc and tests/Makefile.os2. For a stateless encoding,
+   create the complete table as a TXT file. For a stateful encoding,
    provide a text snippet encoded using your new encoding and its UTF-8
    equivalent.
    7. Update the README and man/iconv_open.3, to mention the new encoding.

@@ -1,5 +1,23 @@
 2000-10-23  Bruno Haible  <haible@clisp.cons.org>
 
+        Implement and document GB18030 and BIG5HKSCS.
+        * tools/cjk_tab_to_h.c (row_byte_hkscs, byte_row_hkscs, do_hkscs): New
+          functions.
+          (do_gb18030uni): New function.
+          (main): Accept gb18030ext, gb18030uni, hkscs.
+        * src/gb18030ext.h, src/gb18030uni.h, src/gb18030.h: New files.
+        * src/hkscs.h, src/big5hkscs.h: New files.
+        * src/converters.h: Include gb18030.h and big5hkscs.h.
+        * src/encodings.def (GB18030, BIG5HKSCS): New encodings.
+        * README, man/iconv_open.3: Add GB18030, BIG5HKSCS.
+        * tests/Makefile.in (check): Check GB18030, BIG5HKSCS.
+        * tests/Makefile.msvc (check): Likewise.
+        * tests/Makefile.os2 (check): Likewise.
+        * tests/GB18030.TXT: New file.
+        * tests/BIG5HKSCS.TXT, tests/BIG5HKSCS.IRREVERSIBLE.TXT: New files.
+
+2000-10-23  Bruno Haible  <haible@clisp.cons.org>
+
         * tests/table-from.c (try, main): Use UCS-4-INTERNAL instead of
           UCS-2-INTERNAL, to avoid problems with UCS-2 surrogate handling.
         * tests/table-to.c (main): Likewise.

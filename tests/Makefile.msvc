@@ -111,12 +111,14 @@ check : all table-from.exe table-to.exe iconv.exe uniq-u.exe
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-JP-1
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-CN
 	$(srcdir)\check-stateless.bat $(srcdir) GBK
+	$(srcdir)\check-stateless.bat $(srcdir) GB18030
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-CN
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-CN-EXT
 	$(srcdir)\check-stateful.bat $(srcdir) HZ
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-TW
 	$(srcdir)\check-stateless.bat $(srcdir) BIG5
 	$(srcdir)\check-stateless.bat $(srcdir) CP950
+	$(srcdir)\check-stateless.bat $(srcdir) BIG5HKSCS
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-KR
 	$(srcdir)\check-stateless.bat $(srcdir) CP949
 	$(srcdir)\check-stateless.bat $(srcdir) JOHAB

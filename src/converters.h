@@ -199,12 +199,14 @@ typedef struct {
 
 #include "euc_cn.h"
 #include "ces_gbk.h"
+#include "gb18030.h"
 #include "iso2022_cn.h"
 #include "iso2022_cnext.h"
 #include "hz.h"
 #include "euc_tw.h"
 #include "ces_big5.h"
 #include "cp950.h"
+#include "big5hkscs.h"
 
 #include "euc_kr.h"
 #include "cp949.h"
