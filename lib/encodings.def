@@ -170,7 +170,7 @@ DEFENCODING(( "ISO-8859-1",             /* IANA */
               "LATIN1",                 /* IANA */
               "L1",                     /* IANA */
               "csISOLatin1",            /* IANA */
-            /*"ISO8859-1",                 X11R6.4 */
+            /*"ISO8859-1",                 X11R6.4, glibc */
             /*"ISO8859_1",                 JDK 1.1 */
             ),
             iso8859_1,
@@ -183,7 +183,7 @@ DEFENCODING(( "ISO-8859-2",             /* IANA */
               "LATIN2",                 /* IANA */
               "L2",                     /* IANA */
               "csISOLatin2",            /* IANA */
-            /*"ISO8859-2",                 X11R6.4 */
+            /*"ISO8859-2",                 X11R6.4, glibc */
             /*"ISO8859_2",                 JDK 1.1 */
             ),
             iso8859_2,
@@ -196,7 +196,7 @@ DEFENCODING(( "ISO-8859-3",             /* IANA */
               "LATIN3",                 /* IANA */
               "L3",                     /* IANA */
               "csISOLatin3",            /* IANA */
-            /*"ISO8859-3",                 X11R6.4 */
+            /*"ISO8859-3",                 X11R6.4, glibc */
             /*"ISO8859_3",                 JDK 1.1 */
             ),
             iso8859_3,
@@ -209,7 +209,7 @@ DEFENCODING(( "ISO-8859-4",             /* IANA */
               "LATIN4",                 /* IANA */
               "L4",                     /* IANA */
               "csISOLatin4",            /* IANA */
-            /*"ISO8859-4",                 X11R6.4 */
+            /*"ISO8859-4",                 X11R6.4, glibc */
             /*"ISO8859_4",                 JDK 1.1 */
             ),
             iso8859_4,
@@ -221,7 +221,7 @@ DEFENCODING(( "ISO-8859-5",             /* IANA */
               "ISO-IR-144",             /* IANA */
               "CYRILLIC",               /* IANA */
               "csISOLatinCyrillic",     /* IANA */
-            /*"ISO8859-5",                 X11R6.4 */
+            /*"ISO8859-5",                 X11R6.4, glibc */
             /*"ISO8859_5",                 JDK 1.1 */
             ),
             iso8859_5,
@@ -235,7 +235,7 @@ DEFENCODING(( "ISO-8859-6",             /* IANA */
               "ASMO-708",               /* IANA */
               "ARABIC",                 /* IANA */
               "csISOLatinArabic",       /* IANA */
-            /*"ISO8859-6",                 X11R6.4 */
+            /*"ISO8859-6",                 X11R6.4, glibc */
             /*"ISO8859_6",                 JDK 1.1 */
             ),
             iso8859_6,
@@ -250,7 +250,7 @@ DEFENCODING(( "ISO-8859-7",             /* IANA, RFC 1947 */
               "GREEK8",                 /* IANA */
               "GREEK",                  /* IANA */
               "csISOLatinGreek",        /* IANA */
-            /*"ISO8859-7",                 X11R6.4 */
+            /*"ISO8859-7",                 X11R6.4, glibc */
             /*"ISO8859_7",                 JDK 1.1 */
             ),
             iso8859_7,
@@ -262,7 +262,7 @@ DEFENCODING(( "ISO-8859-8",             /* IANA */
               "ISO-IR-138",             /* IANA */
               "HEBREW",                 /* IANA */
               "csISOLatinHebrew",       /* IANA */
-            /*"ISO8859-8",                 X11R6.4 */
+            /*"ISO8859-8",                 X11R6.4, glibc */
             /*"ISO8859_8",                 JDK 1.1 */
             ),
             iso8859_8,
@@ -275,7 +275,7 @@ DEFENCODING(( "ISO-8859-9",             /* IANA */
               "LATIN5",                 /* IANA */
               "L5",                     /* IANA */
               "csISOLatin5",            /* IANA */
-            /*"ISO8859-9",                 X11R6.4 */
+            /*"ISO8859-9",                 X11R6.4, glibc */
             /*"ISO8859_9",                 JDK 1.1 */
             ),
             iso8859_9,
@@ -288,7 +288,7 @@ DEFENCODING(( "ISO-8859-10",
               "LATIN6",                 /* IANA */
               "L6",                     /* IANA */
               "csISOLatin6",            /* IANA */
-            /*"ISO8859-10",                X11R6.4 */
+            /*"ISO8859-10",                X11R6.4, glibc */
             ),
             iso8859_10,
             { iso8859_10_mbtowc },        { iso8859_10_wctomb, NULL })
@@ -298,6 +298,7 @@ DEFENCODING(( "ISO-8859-13",            /* glibc */
               "ISO-IR-179",             /* glibc */
               "LATIN7",                 /* glibc */
               "L7",                     /* glibc */
+            /*"ISO8859-13",                glibc */
             ),
             iso8859_13,
             { iso8859_13_mbtowc },        { iso8859_13_wctomb, NULL })
@@ -308,6 +309,7 @@ DEFENCODING(( "ISO-8859-14",            /* glibc */
               "ISO-IR-199",
               "LATIN8",                 /* glibc */
               "L8",                     /* glibc */
+            /*"ISO8859-14",                glibc */
             ),
             iso8859_14,
             { iso8859_14_mbtowc },        { iso8859_14_wctomb, NULL })
@@ -316,6 +318,7 @@ DEFENCODING(( "ISO-8859-15",            /* glibc */
               "ISO_8859-15",            /* IANA */
               "ISO_8859-15:1998",       /* glibc */
               "ISO-IR-203",
+            /*"ISO8859-15",                glibc */
             ),
             iso8859_15,
             { iso8859_15_mbtowc },        { iso8859_15_wctomb, NULL })
@@ -324,6 +327,7 @@ DEFENCODING(( "ISO-8859-16",
               "ISO_8859-16",
               "ISO_8859-16:2000",
               "ISO-IR-226",
+            /*"ISO8859-16",                glibc */
             ),
             iso8859_16,
             { iso8859_16_mbtowc },        { iso8859_16_wctomb, NULL })
