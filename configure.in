@@ -77,6 +77,8 @@ AC_SUBST(ICONV_CONST)
 
 AC_CHECK_FUNCS(mbrtowc wcrtomb mbsinit setlocale)
 
+AC_EILSEQ
+
 CL_WORDS_LITTLEENDIAN
 
 dnl           check whether OS supports plug libraries
