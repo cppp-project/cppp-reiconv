@@ -44,6 +44,10 @@ RM = del
 SHELL = /bin/sh
 
 all : force
+	cd libcharset
+	$(MAKE) -f Makefile.msvc all
+	cd ..
+	$(LN) libcharset\include\libcharset.h src\libcharset.h
 !if $(STATIC)
 	$(LN) include\iconv.h.msvc-static include\iconv.h
 !else
@@ -80,6 +84,9 @@ uninstall : force
 	cd man; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 check : all
+	cd libcharset
+	$(MAKE) -f Makefile.msvc check
+	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc check
 	cd ..
@@ -91,6 +98,9 @@ check : all
 	cd ..
 
 mostlyclean : force
+	cd libcharset
+	$(MAKE) -f Makefile.msvc mostlyclean
+	cd ..
 	cd src
 	$(MAKE) -f Makefile.msvc mostlyclean
 	cd ..
@@ -102,6 +112,10 @@ mostlyclean : force
 	cd ..
 
 clean : force
+	cd libcharset
+	$(MAKE) -f Makefile.msvc clean
+	cd ..
+	$(RM) src\libcharset.h
 	cd src
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
@@ -113,6 +127,10 @@ clean : force
 	cd ..
 
 distclean : force
+	cd libcharset
+	$(MAKE) -f Makefile.msvc distclean
+	cd ..
+	$(RM) src\libcharset.h
 	cd src
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
@@ -126,6 +144,10 @@ distclean : force
 	$(RM) include\iconv.h
 
 maintainer-clean : force
+	cd libcharset
+	$(MAKE) -f Makefile.msvc maintainer-clean
+	cd ..
+	$(RM) src\libcharset.h
 	cd src
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..

@@ -82,6 +82,8 @@ SOURCES = $(srcdir)/iconv.c
 
 OBJECTS = iconv.obj
 
+LIBCHARSET_OBJECTS = ..\libcharset\lib\localcharset.obj
+
 # Set to iconv.res in order to include the resources information.
 RESOURCES =
 # RESOURCES = iconv.res
@@ -99,13 +101,13 @@ iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/encodings_local.
 
 iconv.lib : $(OBJECTS)
 	$(RM) iconv.lib
-	$(AR) $(AR_FLAGS)iconv.lib $(OBJECTS)
+	$(AR) $(AR_FLAGS)iconv.lib $(OBJECTS) $(LIBCHARSET_OBJECTS)
 
 !else
 
 # iconv.dll and iconv.lib are created together.
 iconv.lib : $(OBJECTS) $(RESOURCES)
-	$(CC) $(MFLAGS) -LD $(OBJECTS) $(RESOURCES)
+	$(CC) $(MFLAGS) -LD $(OBJECTS) $(LIBCHARSET_OBJECTS) $(RESOURCES)
 
 iconv.res : $(srcdir)/../windows/iconv.rc
 	rc -Fo iconv.res $(srcdir)/../windows/iconv.rc

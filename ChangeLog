@@ -1,3 +1,11 @@
+2000-11-21  Bruno Haible  <haible@clisp.cons.org>
+
+        * Makefile.msvc (all, check, mostlyclean, clean, distclean,
+           maintainer-clean): Recurse into libcharset.
+          (clean, distclean, maintainer-clean): Remove src\libcharset.h.
+        * src/Makefile.msvc (LIBCHARSET_OBJECTS): New variable.
+          (iconv.lib): Link with $(LIBCHARSET_OBJECTS).
+
 2000-11-18  Bruno Haible  <haible@clisp.cons.org>
 
         * src/cp950.h (cp950_mbtowc, cp950_wctomb): Change implementation
