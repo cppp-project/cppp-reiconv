@@ -1,87 +1,84 @@
-# Mesajele �n limba rom�n� pentru pachetul libiconv.
+# libiconv Simplified Chinese translation
 # Copyright (C) 2003 Free Software Foundation, Inc.
-# Eugen Hoanca <eugenh@urban-grafx.ro>, 2003.
-# Acest fi�ier este distribuit sub aceea�i licen�� ca �i pachetul libiconv
+# Wang Jian <lark@linux.net.cn>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv-1.9.1\n"
+"Project-Id-Version: libiconv 1.9.1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2003-05-06 13:32+0200\n"
-"PO-Revision-Date: 2003-05-17 15:15+0300\n"
-"Last-Translator: Eugen Hoanca <eugenh@urban-grafx.ro>\n"
-"Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2003-06-01 23:55+0800\n"
+"Last-Translator: Wang Jian <lark@linux.net.cn>\n"
+"Language-Team: Chinese (simplified) <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/iconv.c:59
 msgid "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr ""
-"Folosire: iconv [--binary] [-c] [-s] [-f din_cod] [-t �n_cod] [fi�ier ...]"
+msgstr "用法：iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 
 #: src/iconv.c:61
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr "Folosire: iconv [-c] [-s] [-f din_cod] [-t �n_cod] [fi�ier ...]"
+msgstr "用法：iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 
 #: src/iconv.c:64
 msgid "or:    iconv -l"
-msgstr "sau:   iconv -l"
+msgstr "或：  iconv -l"
 
 #: src/iconv.c:74
-#, fuzzy
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 msgstr ""
-"Acesta este software free; citi�i surselepentru condi�iile de copiere. NU\n"
-"exist� nici o garan�ie; nici m�carVANDABILITATEA sau MODIFICAREA �NTR-UN\n"
-"SCOP PRIVAT.\n"
+"这是自由软件；请查看源代码中的复制条件。本软件不提供任何担保，包括销售\n"
+"或者适用性担保。\n"
 
 #: src/iconv.c:77
 #, c-format
 msgid "Written by %s.\n"
-msgstr "Scris de %s.\n"
+msgstr "作者 %s。\n"
 
 #: src/iconv.c:114 src/iconv.c:146 src/iconv.c:196
 #, c-format
 msgid "iconv: %s: incomplete character or shift sequence\n"
-msgstr "iconv: %s: caracter sau secven�� de shift incomplete\n"
+msgstr "iconv：%s：不完整的字符或者换码序列\n"
 
 #: src/iconv.c:140 src/iconv.c:191
 #, c-format
 msgid "iconv: %s: cannot convert\n"
-msgstr "iconv: %s: nu pot converti\n"
+msgstr "iconv：%s：无法转换\n"
 
 #: src/iconv.c:162 src/iconv.c:201 src/iconv.c:320
 #, c-format
 msgid "iconv: %s: "
-msgstr "iconv: %s: "
+msgstr "iconv：%s："
 
 #: src/iconv.c:210
 #, c-format
 msgid "iconv: %s: I/O error\n"
-msgstr "iconv: %s: erori I/O\n"
+msgstr "iconv：%s：输入输出错误\n"
 
 #: src/iconv.c:304
 #, c-format
 msgid "iconv: conversion from %s unsupported\n"
-msgstr "iconv: conversia din %s nu este suportat�\n"
+msgstr "iconv：不支持从 %s 进行转换\n"
 
 #: src/iconv.c:306
 #, c-format
 msgid "iconv: conversion to %s unsupported\n"
-msgstr "iconv: conversia �n %s nu este suportat�\n"
+msgstr "iconv：不支持转换到 %s\n"
 
 #: src/iconv.c:308
 #, c-format
 msgid "iconv: conversion from %s to %s unsupported\n"
-msgstr "iconv: conversia din %s �n %s nu este suportat�\n"
+msgstr "iconv：不支持从 %s 转换到 %s\n"
 
 #: src/iconv.c:312
 msgid "(stdin)"
-msgstr "(stdin)"
+msgstr "(标准输入)"
 
 #: src/iconv.c:333
 msgid "iconv: I/O error\n"
-msgstr "iconv: eroare I/O\n"
+msgstr "iconv：输入输出错误\n"

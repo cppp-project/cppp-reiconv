@@ -1,3 +1,11 @@
+2003-06-11  Bruno Haible  <bruno@clisp.org>
+
+	* et.po: New file, from Toomas Soome <Toomas.Soome@microlink.ee>.
+	* ro.po: Update from Eugen Hoanca <eugenh@urban-grafx.ro>.
+	* ru.po: Update from Dmitry S. Sivachenko <mitya@cavia.pp.ru>.
+	* zh_CN.po: New file, from Wang Jian <lark@linux.net.cn>.
+	* LINGUAS: Add et and zh_CN.
+
 2003-05-07  Bruno Haible  <bruno@clisp.org>
 
 	* ga.po: Update from Kevin Patrick Scannell <scannell@slu.edu>.
