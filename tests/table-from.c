@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2001 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -117,7 +117,8 @@ int main (int argc, char* argv[])
                   result = try(cd,buf,4,&out);
                   if (result < 0) {
                   } else if (result > 0) {
-                    printf("0x%02X%02X%02X%02X\t0x%04X\n",i0,i1,i2,i3,out);
+                    if (out < 0x10000 || strcmp(charset,"GB18030"))
+                      printf("0x%02X%02X%02X%02X\t0x%04X\n",i0,i1,i2,i3,out);
                   } else {
                     fprintf(stderr,"%s: incomplete byte sequence\n",hexbuf(buf,4));
                     exit(1);

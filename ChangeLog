@@ -1,3 +1,10 @@
+2001-04-11  Bruno Haible  <haible@clisp.cons.org>
+
+        * tests/GB18030.TXT: Add mappings for all of U+0000..U+FFFF, including
+          unassigned code points.
+        * tests/table-from.c (main); When dumping GB18030, don't print code
+          points larger than U+FFFF.
+
 2001-03-21  Bruno Haible  <haible@clisp.cons.org>
 
         * INSTALL.generic (Particular Systems): Add recommendations for AIX 3.
