@@ -41,8 +41,18 @@ top_builddir = ..
 
 all : iconv
 
+# When linking with libintl and producing a shared libiconv, we need to omit
+# the -liconv flag that might be present in @LTLIBINTL@. Otherwise, on FreeBSD,
+# when a libiconv <= 1.7 is already installed and we install a libiconv >= 1.8,
+# we get a link error.
 iconv : iconv.@OBJEXT@ ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ ../lib/libiconv.la @LTLIBINTL@ -o $@
+	build_shared=`$(LIBTOOL) --config | grep '^build_libtool_libs=' | sed -e 's/build_libtool_libs=//'`; \
+	libintl=`if test "$$build_shared" = yes; then \
+		   echo " @LTLIBINTL@ " | sed -e 's, -liconv , ,g' -e 's, [^ ]*/libiconv\.[^ ]* , ,g'; \
+		 else \
+		   echo " @LTLIBINTL@ "; \
+		 fi` ; \
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ ../lib/libiconv.la $$libintl -o $@
 
 iconv.@OBJEXT@ : $(srcdir)/iconv.c
 	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv.c
