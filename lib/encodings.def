@@ -42,6 +42,7 @@ DEFENCODING(( "US-ASCII",               /* IANA */
               "ISO_646.IRV:1991",       /* IANA */
               "ISO-IR-6",               /* IANA */
               "ANSI_X3.4-1968",         /* IANA */
+              "ANSI_X3.4-1986",         /* IANA */
               "CP367",                  /* IANA */
               "IBM367",                 /* IANA */
               "US",                     /* IANA */
@@ -97,17 +98,17 @@ DEFENCODING(( "UCS-4LE",                /* glibc */
             ucs4le,
             { ucs4le_mbtowc, NULL },      { ucs4le_wctomb, NULL })
 
-DEFENCODING(( "UTF-16",                 /* RFC 2781 */
+DEFENCODING(( "UTF-16",                 /* IANA, RFC 2781 */
             ),
             utf16,
             { utf16_mbtowc, NULL },       { utf16_wctomb, NULL })
 
-DEFENCODING(( "UTF-16BE",               /* RFC 2781 */
+DEFENCODING(( "UTF-16BE",               /* IANA, RFC 2781 */
             ),
             utf16be,
             { utf16be_mbtowc, NULL },     { utf16be_wctomb, NULL })
 
-DEFENCODING(( "UTF-16LE",               /* RFC 2781 */
+DEFENCODING(( "UTF-16LE",               /* IANA, RFC 2781 */
             ),
             utf16le,
             { utf16le_mbtowc, NULL },     { utf16le_wctomb, NULL })
@@ -281,7 +282,7 @@ DEFENCODING(( "ISO-8859-9",             /* IANA */
             iso8859_9,
             { iso8859_9_mbtowc, NULL },   { iso8859_9_wctomb, NULL })
 
-DEFENCODING(( "ISO-8859-10",
+DEFENCODING(( "ISO-8859-10",            /* IANA */
               "ISO_8859-10",
               "ISO_8859-10:1992",       /* IANA */
               "ISO-IR-157",             /* IANA */
@@ -293,7 +294,7 @@ DEFENCODING(( "ISO-8859-10",
             iso8859_10,
             { iso8859_10_mbtowc, NULL },  { iso8859_10_wctomb, NULL })
 
-DEFENCODING(( "ISO-8859-13",            /* glibc */
+DEFENCODING(( "ISO-8859-13",            /* IANA, glibc */
               "ISO_8859-13",
               "ISO-IR-179",             /* glibc */
               "LATIN7",                 /* glibc */
@@ -303,18 +304,19 @@ DEFENCODING(( "ISO-8859-13",            /* glibc */
             iso8859_13,
             { iso8859_13_mbtowc, NULL },  { iso8859_13_wctomb, NULL })
 
-DEFENCODING(( "ISO-8859-14",            /* glibc */
-              "ISO_8859-14",
-              "ISO_8859-14:1998",       /* glibc */
-              "ISO-IR-199",
-              "LATIN8",                 /* glibc */
-              "L8",                     /* glibc */
+DEFENCODING(( "ISO-8859-14",            /* IANA, glibc */
+              "ISO_8859-14",            /* IANA */
+              "ISO_8859-14:1998",       /* IANA, glibc */
+              "ISO-IR-199",             /* IANA */
+              "LATIN8",                 /* IANA, glibc */
+              "L8",                     /* IANA, glibc */
+              "ISO-CELTIC",             /* IANA */
             /*"ISO8859-14",                glibc */
             ),
             iso8859_14,
             { iso8859_14_mbtowc, NULL },  { iso8859_14_wctomb, NULL })
 
-DEFENCODING(( "ISO-8859-15",            /* glibc */
+DEFENCODING(( "ISO-8859-15",            /* IANA, glibc */
               "ISO_8859-15",            /* IANA */
               "ISO_8859-15:1998",       /* glibc */
               "ISO-IR-203",
@@ -365,7 +367,7 @@ DEFENCODING(( "CP1251",                 /* JDK 1.1 */
             { cp1251_mbtowc, NULL },      { cp1251_wctomb, NULL })
 
 DEFENCODING(( "CP1252",                 /* JDK 1.1 */
-              "WINDOWS-1252",
+              "WINDOWS-1252",           /* IANA */
               "MS-ANSI",
             ),
             cp1252,
@@ -607,6 +609,7 @@ DEFENCODING(( "JIS_X0208",
               "JIS0208",
               "X0208",                  /* IANA */
               "ISO-IR-87",              /* IANA */
+              "JIS_C6226-1983",         /* IANA */
               "csISO87JISX0208",        /* IANA */
             /*"JISX0208.1983-0",           X11R6.4 */
             /*"JISX0208.1990-0",           X11R6.4 */
@@ -768,7 +771,8 @@ DEFENCODING(( "CP950",                  /* JDK 1.1 */
             cp950,
             { cp950_mbtowc, NULL },       { cp950_wctomb, NULL })
 
-DEFENCODING(( "BIG5HKSCS",              /* glibc */
+DEFENCODING(( "BIG5-HKSCS",             /* IANA */
+              "BIG5HKSCS",              /* glibc */
             ),
             big5hkscs,
             { big5hkscs_mbtowc, NULL },   { big5hkscs_wctomb, NULL })

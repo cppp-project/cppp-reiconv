@@ -1,3 +1,18 @@
+2001-06-06  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/encodings.def: Align with IANA character-set registry.
+          (US-ASCII): Add alias "ANSI_X3.4-1986".
+          (ISO-8859-14): Add alias "ISO-CELTIC".
+          (JIS_X0208): Add alias "JIS_C6226-1983".
+          (BIG5HKSCS): Add alias "BIG5-HKSCS".
+        * README, man/iconv_open.3: Rename BIG5HKSCS to BIG5-HKSCS.
+        * tests/Makefile.in (check): Likewise.
+        * tests/Makefile.os2 (check): Likewise.
+        * tests/Makefile.msvc (check): Likewise.
+        * tests/BIG5-HKSCS.TXT: Renamed from BIG5HKSCS.TXT.
+        * tests/BIG5-HKSCS.IRREVERSIBLE.TXT: Renamed from
+          BIG5HKSCS.IRREVERSIBLE.TXT.
+
 2001-06-02  Bruno Haible  <haible@clisp.cons.org>
 
         * tools/cjk_tab_to_h.c (Encoding): Add fffd field.
