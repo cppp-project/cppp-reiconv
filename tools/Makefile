@@ -284,14 +284,14 @@ GBKext.TXT : $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT $(TABLESDI
 gb18030ext.h : GB18030ext.TXT cjk_tab_to_h
 	(echo '#' ; cat GB18030ext.TXT) | ./cjk_tab_to_h 'GB18030 two-byte extension' gb18030ext > $@
 
-GB18030ext.TXT : $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT
-	cat $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT | sed -e 's/[ 	]*#.*$$//' | grep '^0x[0-9A-F]*	0x....$$' > tmpGBK.TXT ; diff tmpGBK.TXT $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT | grep '^> 0x....	0x....$$' | sed -e 's/^> //' > $@ && rm -f tmpGBK.TXT
+GB18030ext.TXT : $(TABLESDIR)/glibc-2.2.2-iconv/GB18030.TXT $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT
+	cat $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP936.TXT | sed -e 's/[ 	]*#.*$$//' | grep '^0x[0-9A-F]*	0x....$$' > tmpGBK.TXT ; diff tmpGBK.TXT $(TABLESDIR)/glibc-2.2.2-iconv/GB18030.TXT | grep '^> 0x....	0x....$$' | sed -e 's/^> //' > $@ && rm -f tmpGBK.TXT
 
 gb18030uni.h : GB18030uni.TXT cjk_tab_to_h
 	./cjk_tab_to_h 'GB18030 four-byte extension' gb18030uni < GB18030uni.TXT > $@
 
-GB18030uni.TXT : $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT
-	grep '^0x........	0x....$$' < $(TABLESDIR)/glibc-20001010-charmaps/GB18030.TXT > $@
+GB18030uni.TXT : $(TABLESDIR)/glibc-2.2.2-iconv/GB18030.TXT
+	grep '^0x........	0x....$$' < $(TABLESDIR)/glibc-2.2.2-iconv/GB18030.TXT > $@
 
 cns11643_1.h : $(TABLESDIR)/csets-new/CNS11643.TXT cjk_tab_to_h
 	grep '^\(#\|0x1\)' < $< | sed -e 's,^0x1,0x,' | ./cjk_tab_to_h 'CNS 11643-1986 plane 1' cns11643_1 > $@
