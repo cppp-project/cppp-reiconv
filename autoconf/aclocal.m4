@@ -340,7 +340,7 @@ AC_EGREP_CPP(yes,[#if defined(m68k) || defined(mc68000) || defined(mc68020) || d
 ], cl_cv_sys_endian="big endian")
 fi
 if test -z "$cl_cv_sys_endian"; then
-AC_EGREP_CPP(yes,[#if defined(i386) || defined(__i386) || defined(_I386) || defined(MIPSEL) || defined(__alpha)
+AC_EGREP_CPP(yes,[#if defined(i386) || defined(__i386) || defined(__i386__) || defined(_I386) || defined(MIPSEL) || defined(__alpha)
   yes
 #endif
 ], cl_cv_sys_endian="little endian")

@@ -1,3 +1,8 @@
+2000-09-25  Bruno Haible  <haible@clisp.cons.org>
+
+        * autoconf/aclocal.m4 (CL_WORDS_LITTLEENDIAN): Recognize __i386__
+          as equivalent to __i386. For OpenBSD.
+
 2000-09-21  Bruno Haible  <haible@clisp.cons.org>
 
         * src/utf16.h (utf16_wctomb): Reject single surrogates.
