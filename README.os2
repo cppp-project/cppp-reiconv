@@ -25,7 +25,7 @@ Installation on OS/2:
 
 - Installation:
 
-       make -f Makefile.os2 install prefix="X:\emx"
+       make -f Makefile.os2 install prefix="X:/emx"
 
   The prefix option specifies where you have EMX installed and wish the
   iconv library and headers to be installed.
