@@ -18,7 +18,7 @@ dnl Suite 330, Boston, MA 02111-1307, USA.  */
 
 AC_PREREQ(2.52)
 
-AC_INIT(libiconv,1.7)
+AC_INIT(libiconv,1.8)
 
 PACKAGE=$PACKAGE_NAME
 VERSION=$PACKAGE_VERSION

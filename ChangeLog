@@ -1,3 +1,10 @@
+2002-05-18  Bruno Haible  <bruno@clisp.org>
+
+        * configure.in (AC_INIT), include/iconv.h.in (_LIBICONV_VERSION),
+	README, windows/iconv.rc, djgpp/README, djgpp/fnchange.lst:
+        Bump version number.
+        * lib/Makefile.in (LIBICONV_VERSION_INFO): Define to 3:0:1.
+
 2002-02-06  Bruno Haible  <bruno@clisp.org>
 
 	* autoconf/ltmain.sh: Upgrade from libtool-1.4 to libtool-1.4.2.
