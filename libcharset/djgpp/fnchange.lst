@@ -1,5 +1,3 @@
-libiconv-1.6/libcharset/                                  libiconv-1.6/libcharset/
-libiconv-1.6/libcharset/tools/                            libiconv-1.6/libcharset/tools/
 libiconv-1.6/libcharset/tools/README                      libiconv-1.6/libcharset/tools/README
 libiconv-1.6/libcharset/tools/aix-3.2.5                   libiconv-1.6/libcharset/tools/aix-3.2.5
 libiconv-1.6/libcharset/tools/aix-4.1.5                   libiconv-1.6/libcharset/tools/aix-4.1.5
@@ -33,12 +31,10 @@ libiconv-1.6/libcharset/tools/glibc-2.2-XF86-3.3.6        libiconv-1.6/libcharse
 libiconv-1.6/libcharset/tools/glibc-2.2-XF86-4.0.1f       libiconv-1.6/libcharset/tools/glibc-2.2XF86-4.0.1f
 libiconv-1.6/libcharset/tools/locale_x11encoding.c        libiconv-1.6/libcharset/tools/locale_x11encoding.c
 libiconv-1.6/libcharset/tools/beos-5                      libiconv-1.6/libcharset/tools/beos-5
-libiconv-1.6/libcharset/m4/                               libiconv-1.6/libcharset/m4/
 libiconv-1.6/libcharset/m4/ChangeLog                      libiconv-1.6/libcharset/m4/ChangeLog
 libiconv-1.6/libcharset/m4/codeset.m4                     libiconv-1.6/libcharset/m4/codeset.m4
 libiconv-1.6/libcharset/m4/glibc21.m4                     libiconv-1.6/libcharset/m4/glibc21.m4
 libiconv-1.6/libcharset/m4/libtool.m4                     libiconv-1.6/libcharset/m4/libtool.m4
-libiconv-1.6/libcharset/lib/                              libiconv-1.6/libcharset/lib/
 libiconv-1.6/libcharset/lib/config.charset                libiconv-1.6/libcharset/lib/config.charset
 libiconv-1.6/libcharset/lib/localcharset.c                libiconv-1.6/libcharset/lib/localcharset.c
 libiconv-1.6/libcharset/lib/ref-add.sin                   libiconv-1.6/libcharset/lib/ref-add.sin
@@ -55,10 +51,8 @@ libiconv-1.6/libcharset/Makefile.in                       libiconv-1.6/libcharse
 libiconv-1.6/libcharset/configure.in                      libiconv-1.6/libcharset/configure.in
 libiconv-1.6/libcharset/configure                         libiconv-1.6/libcharset/configure
 libiconv-1.6/libcharset/INTEGRATE                         libiconv-1.6/libcharset/INTEGRATE
-libiconv-1.6/libcharset/include/                          libiconv-1.6/libcharset/include/
 libiconv-1.6/libcharset/include/libcharset.h.in           libiconv-1.6/libcharset/include/libcharset.h.in
 libiconv-1.6/libcharset/include/libcharset.h.msvc-shared  libiconv-1.6/libcharset/include/libcharset_h.shared-msvc
-libiconv-1.6/libcharset/autoconf/                         libiconv-1.6/libcharset/autoconf/
 libiconv-1.6/libcharset/autoconf/config.guess             libiconv-1.6/libcharset/autoconf/config.guess
 libiconv-1.6/libcharset/autoconf/config.sub               libiconv-1.6/libcharset/autoconf/config.sub
 libiconv-1.6/libcharset/autoconf/ltconfig                 libiconv-1.6/libcharset/autoconf/ltconfig
@@ -67,7 +61,6 @@ libiconv-1.6/libcharset/autoconf/install-sh               libiconv-1.6/libcharse
 libiconv-1.6/libcharset/autoconf/aclocal.m4               libiconv-1.6/libcharset/autoconf/aclocal.m4
 libiconv-1.6/libcharset/autoconf/mkinstalldirs            libiconv-1.6/libcharset/autoconf/mkinstalldirs
 libiconv-1.6/libcharset/config.h.in                       libiconv-1.6/libcharset/config.h.in
-libiconv-1.6/libcharset/windows/                          libiconv-1.6/libcharset/windows/
 libiconv-1.6/libcharset/windows/dllexport.h               libiconv-1.6/libcharset/windows/dllexport.h
 libiconv-1.6/libcharset/ChangeLog                         libiconv-1.6/libcharset/ChangeLog
 libiconv-1.6/libcharset/Makefile.msvc                     libiconv-1.6/libcharset/Makefile.msvc
