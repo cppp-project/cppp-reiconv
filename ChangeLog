@@ -1,3 +1,7 @@
+2000-02-15  Bruno Haible  <haible@clisp.cons.org>
+
+        * src/iconv.c (iconv): Add cast in xxx_reset call.
+
 2000-01-24  Bruno Haible  <haible@clisp.cons.org>
 
         * Version 1.1 released.

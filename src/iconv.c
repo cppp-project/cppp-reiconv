@@ -166,7 +166,8 @@ size_t iconv (iconv_t icd,
       return 0;
     } else {
       if (cd->ofuncs.xxx_reset) {
-        int outcount = cd->ofuncs.xxx_reset(cd,*outbuf,*outbytesleft);
+        int outcount =
+          cd->ofuncs.xxx_reset(cd,(unsigned char*)*outbuf,*outbytesleft);
         if (outcount < 0) {
           errno = E2BIG;
           return -1;
