@@ -1,3 +1,7 @@
+2002-09-27  Bruno Haible  <bruno@clisp.org>
+
+	* autoconf/mkinstalldirs: Upgrade to automake-1.7.2 version.
+
 2002-11-07  Bruno Haible  <bruno@clisp.org>
 
 	* autoconf/ltmain.sh: Upgrade to libtool-1.4.3.
