@@ -243,7 +243,7 @@ ac_config_guess=$ac_aux_dir/config.guess
 ac_config_sub=$ac_aux_dir/config.sub
 dnl Mostly copied from AC_CANONICAL_HOST.
 # Make sure we can run config.sub.
-if $ac_config_sub sun4 >/dev/null 2>&1; then :
+if ${CONFIG_SHELL-/bin/sh} $ac_config_sub sun4 >/dev/null 2>&1; then :
 else AC_MSG_ERROR(can not run $ac_config_sub)
 fi
 host_alias=$host
@@ -251,18 +251,21 @@ case "$host_alias" in
 NONE)
   case $nonopt in
   NONE) dnl config.guess needs to compile things
-        host_alias=`export CC; $ac_config_guess` ;;
+        host_alias=`export CC; ${CONFIG_SHELL-/bin/sh} $ac_config_guess` ;;
   *)    host_alias=$nonopt ;;
   esac ;;
 esac
 # Don't fail just because the system is not listed in GNU's database.
 if test -n "$host_alias"; then
-  host=`$ac_config_sub $host_alias`
+  host=`${CONFIG_SHELL-/bin/sh} $ac_config_sub $host_alias`
 else
+  host_alias=unknown
   host=unknown-unknown-unknown
 fi
+cl_cv_host_alias="$host_alias"
 cl_cv_host="$host"
 ])
+host_alias="$cl_cv_host_alias"
 host="$cl_cv_host"
 changequote(,)dnl
 host_cpu=`echo $host | sed 's/^\([^-]*\)-\([^-]*\)-\(.*\)$/\1/'`
