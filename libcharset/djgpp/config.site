@@ -36,6 +36,7 @@ ac_cv_path_EMACS=${EMACS='/dev/env/DJDIR/gnu/emacs/bin/emacs'}
 # package was configured.
 NM=${NM='/dev/env/DJDIR/bin/nm'}
 LD=${LD='/dev/env/DJDIR/bin/ld'}
+STRIP=${STRIP='/dev/env/DJDIR/bin/strip'}
 
 # Force the test for 'ln -s' to report no.
 ac_cv_prog_LN_S='cp -p'

@@ -12,7 +12,6 @@ s|aliases_local\.h|aliases/local\.h|g
 
 
 # Fixes for tests/Makefile.in
-/^check[ 	]*:.*table-from[ 	]*table-to/,/^$/ s,^	\+\$(srcdir)/,	$(SHELL) $(srcdir)/,
-s/check-stateless/stateless-check/g
-s/check-stateful/stateful-check/g
-s/check-translit/translit-check/g
+s|\$(srcdir)/check-stateless|$(SHELL) $(srcdir)/stateless-check|
+s|\$(srcdir)/check-stateful|$(SHELL) $(srcdir)/stateful-check|
+s|\$(srcdir)/check-translit|$(SHELL) $(srcdir)/translit-check|
