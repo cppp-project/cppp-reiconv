@@ -1,0 +1,87 @@
+# Vietnamese Translation for libiconv-1.9.1.
+# Copyright (C) 2005 Free Software Foundation, Inc.
+# Clytie Siddall <clytie@riverland.net.au>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libiconv 1.9.1\n"
+"Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
+"POT-Creation-Date: 2004-01-22 11:54+0100\n"
+"PO-Revision-Date: 2005-02-07 15:10+1030\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net> \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/iconv.c:54
+msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+msgstr "Cách sử dụng: iconv [-c] [-s] [-f từ_mã] [-t đến_mã] [tập_tin ...]"
+
+#: src/iconv.c:56
+msgid "or:    iconv -l"
+msgstr "hay:    iconv -l"
+
+#: src/iconv.c:66
+#, c-format
+msgid ""
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+"Phần mềm này tự do; hãy xem mã nguồn để tìm điều kiện sao chép.\n"
+"Không bảo đảm gì cả, dù khả năng bán hay khả năng làm việc dứt khoát.\n"
+
+#: src/iconv.c:69
+#, c-format
+msgid "Written by %s.\n"
+msgstr "Tác giả: %s.\n"
+
+#: src/iconv.c:105 src/iconv.c:137 src/iconv.c:187
+#, c-format
+msgid "iconv: %s: incomplete character or shift sequence\n"
+msgstr "iconv: %s: chưa gõ xong dãy ký tự hay sử dụng phím tăng tốc\n"
+
+#: src/iconv.c:131 src/iconv.c:182
+#, c-format
+msgid "iconv: %s: cannot convert\n"
+msgstr "iconv: %s: không chuyển đôi được\n"
+
+#: src/iconv.c:153 src/iconv.c:192 src/iconv.c:310
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv: %s: "
+
+#: src/iconv.c:201
+#, c-format
+msgid "iconv: %s: I/O error\n"
+msgstr "iconv: %s: lỗi I/O (nhập/xuất)\n"
+
+#: src/iconv.c:294
+#, c-format
+msgid "iconv: conversion from %s unsupported\n"
+msgstr "iconv: chưa hỗ trợ chuyển đôi từ %s\n"
+
+#: src/iconv.c:296
+#, c-format
+msgid "iconv: conversion to %s unsupported\n"
+msgstr "iconv: chưa hỗ trợ chuyển đôi đến %s\n"
+
+#: src/iconv.c:298
+#, c-format
+msgid "iconv: conversion from %s to %s unsupported\n"
+msgstr "iconv: chưa hỗ trợ chuyển đôi từ %s đến %s\n"
+
+#: src/iconv.c:302
+msgid "(stdin)"
+msgstr "(stdin)(dữ liệu nhập chuẩn)"
+
+#: src/iconv.c:323
+#, c-format
+msgid "iconv: I/O error\n"
+msgstr "iconv: lỗi I/O (nhập/xuất)\n"
+
+#~ msgid ""
+#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+#~ msgstr ""
+#~ "Cách sử dụng: iconv [--binary (nhị phân)] [-c] [-s] [-f từ_mã] [-t "
+#~ "đến_mã] [tập_tin ...]"
