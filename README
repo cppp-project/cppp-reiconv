@@ -1,4 +1,4 @@
-              LIBICONV - character set conversion library
+            GNU LIBICONV - character set conversion library
 
 This library provides an iconv() implementation, for use on systems which
 don't have one, or whose implementation cannot convert from/to Unicode.
@@ -97,6 +97,7 @@ This library can be built and installed in two variants:
 
 
 Distribution:
+    ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.6.1.tar.gz
     ftp://ftp.ilog.fr/pub/Users/haible/gnu/libiconv-1.6.1.tar.gz
 
 Homepage:
