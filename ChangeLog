@@ -1,3 +1,9 @@
+2000-10-03  Bruno Haible  <haible@clisp.cons.org>
+
+        * src/gentranslit.c (main): Don't output non-ASCII ISO-8859-1
+          character literals, use the numeric value instead.
+          Reported by Shin-Hsien Yeh <shyeh@alcatel.com.tw>.
+
 2000-09-29  Bruno Haible  <haible@clisp.cons.org>
 
         * autoconf/aclocal.m4 (CL_CANONICAL_HOST): Fix bug in 2000-05-23

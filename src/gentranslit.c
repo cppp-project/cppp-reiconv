@@ -66,8 +66,10 @@ int main (int argc, char *argv[])
         printf("\n %3d,",data[i]);
       else if (data[i] == '\'')
         printf("'\\'',");
-      else
+      else if (data[i] < 127)
         printf(" '%c',",data[i]);
+      else
+        printf("0x%02X,",data[i]);
     }
     printf("\n};\n");
   }
