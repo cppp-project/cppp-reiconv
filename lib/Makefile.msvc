@@ -1,4 +1,4 @@
-# Makefile for libiconv/lib
+# -*- Makefile -*- for libiconv/lib
 
 #### Start of system configuration section. ####
 
@@ -65,7 +65,7 @@ AR = lib
 AR_FLAGS = /out:
 
 LN = copy
-RM = del
+RM = -del
 
 # Programs used by "make install":
 INSTALL = @INSTALL@

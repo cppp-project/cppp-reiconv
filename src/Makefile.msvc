@@ -1,4 +1,4 @@
-# Makefile for libiconv/src
+# -*- Makefile -*- for libiconv/src
 
 #### Start of system configuration section. ####
 
@@ -42,7 +42,7 @@ srcdir = .
 CC = cl
 CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS)
 INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include
-RM = del
+RM = -del
 
 #### End of system configuration section. ####
 

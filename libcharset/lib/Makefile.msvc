@@ -1,4 +1,4 @@
-# Makefile for libcharset/lib
+# -*- Makefile -*- for libcharset/lib
 
 #### Start of system configuration section. ####
 
@@ -68,7 +68,7 @@ AR = lib
 AR_FLAGS = /out:
 
 LN = copy
-RM = del
+RM = -del
 
 # Programs used by "make install":
 INSTALL = @INSTALL@

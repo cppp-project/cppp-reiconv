@@ -1,4 +1,4 @@
-# Makefile for libcharset
+# -*- Makefile -*- for libcharset
 
 #### Start of system configuration section. ####
 
@@ -37,7 +37,7 @@ mandir = $(prefix)/man
 
 # Programs used by "make":
 LN = copy
-RM = del
+RM = -del
 
 #### End of system configuration section. ####
 

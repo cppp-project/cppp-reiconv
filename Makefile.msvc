@@ -37,7 +37,7 @@ mandir = $(prefix)/man
 
 # Programs used by "make":
 LN = copy
-RM = del
+RM = -del
 
 #### End of system configuration section. ####
 
