@@ -3,6 +3,7 @@
 
 SHELL = /bin/sh
 MAKE = make
+AUTOCONF = autoconf-2.52
 CP = cp
 RM = rm -f
 
@@ -14,7 +15,7 @@ autoconf/aclocal.m4 : $(wildcard m4/*.m4)
 configures : configure config.h.in
 
 configure : configure.in autoconf/aclocal.m4
-	autoconf -l autoconf
+	$(AUTOCONF) -l autoconf
 
 config.h.in : configure.in autoconf/aclocal.m4
 	autoheader -l autoconf

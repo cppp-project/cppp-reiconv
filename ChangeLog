@@ -1,5 +1,14 @@
 2002-05-12  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.devel (AUTOCONF): New variable.
+	(AUTOCONF_FILES): Remove autoconf/autoconf.m4f.
+	(configure): Use the AUTOCONF variable.
+	* autoconf/autoconf: Remove file.
+	* autoconf/autoconf.m4: Remove file.
+	* autoconf/autoconf.m4f: Remove file.
+
+2002-05-12  Bruno Haible  <bruno@clisp.org>
+
 	* tools/JISX0213.TXT: New file.
 	* tools/cjk_tab_to_h.c (do_jisx0213): New function.
 	(main): Accept "jisx0213".

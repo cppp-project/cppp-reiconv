@@ -4,6 +4,7 @@
 
 SHELL = /bin/sh
 MAKE = make
+AUTOCONF = autoconf-2.52
 GPERF = gperf
 CC = gcc
 CFLAGS = -O
@@ -50,10 +51,10 @@ autoconf/aclocal.m4 : m4/general.m4 m4/proto.m4 m4/ranlib.m4 m4/install.m4 m4/cp
 
 configures : $(CONFIGURES)
 
-AUTOCONF_FILES = autoconf/aclocal.m4 autoconf/autoconf.m4f
+AUTOCONF_FILES = autoconf/aclocal.m4
 
 configure : configure.in $(AUTOCONF_FILES)
-	autoconf/autoconf -A autoconf -l autoconf
+	$(AUTOCONF) -l autoconf
 
 check-configures : $(CONFIGURES)
 	set -e; for f in $(CONFIGURES); do bash -x -n $$f; done
