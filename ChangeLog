@@ -1,3 +1,16 @@
+2004-09-21  Juan Manuel Guerrero  <st001906@hrz1.hrz.tu-darmstadt.de>
+
+	* djgpp/config.bat: Update.
+	* djgpp/config.sed: Update.
+	* djgpp/config.site: Update.
+	* djgpp/edtest.bat: Update.
+	* djgpp/fnchange.in: Update.
+	* djgpp/Makefile.maint: Update.
+	* djgpp/makefile.sed: Update.
+	* djgpp/README.in: Update.
+	* djgpp/sources.sed: Update.
+	* djgpp/translit-check.sed: Update.
+
 2004-08-25  Bruno Haible  <bruno@clisp.org>
 
 	* m4/libtool.m4: Update from GNU gettext, based on libtool-1.5.6.

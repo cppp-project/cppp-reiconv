@@ -12,6 +12,7 @@ s|aliases_local\.h|aliases/local\.h|g
 
 
 # Fixes for tests/Makefile.in
+s|\$(srcdir)/check-translitfailure|$(SHELL) $(srcdir)/failuretranslit-check|
 s|\$(srcdir)/check-stateless|$(SHELL) $(srcdir)/stateless-check|
 s|\$(srcdir)/check-stateful|$(SHELL) $(srcdir)/stateful-check|
 s|\$(srcdir)/check-translit|$(SHELL) $(srcdir)/translit-check|

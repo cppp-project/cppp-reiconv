@@ -14,12 +14,12 @@ if errorlevel 1 goto SedError
 update ./stateless-check %XSRC%/tests/stateless-check
 rm -f ./stateless-check
 
-test -f %XSRC%/tests/translit-check.orig
-if errorlevel 1 update %XSRC%/tests/translit-check %XSRC%/tests/translit-check.orig
-sed -f %XSRC%/djgpp/translit-check.sed %XSRC%/tests/translit-check.orig > translit-check
+test -f %XSRC%/tests/failuretranslit-check.orig
+if errorlevel 1 update %XSRC%/tests/failuretranslit-check %XSRC%/tests/failuretranslit-check.orig
+sed -f %XSRC%/djgpp/translit-check.sed %XSRC%/tests/failuretranslit-check.orig > failuretranslit-check
 if errorlevel 1 goto SedError
-update ./translit-check %XSRC%/tests/translit-check
-rm -f ./translit-check
+update ./failuretranslit-check %XSRC%/tests/failuretranslit-check
+rm -f ./failuretranslit-check
 goto End
 
 :SedError
