@@ -1,5 +1,17 @@
 New in 1.8:
 * The iconv program has new options -l, -c, -s.
+* The iconv program is internationalized.
+* Updated the ISO-8859-16 converter.
+* Upgraded BIG5-HKSCS, EUC-TW, ISO-2022-CN, ISO-2022-CN-EXT converters to
+  Unicode 3.2.
+* Changed the ARMSCII-8 converter.
+* Extended the EUC-JP encoder so that YEN SIGN characters don't cause failures
+  in Shift_JIS to EUC-JP conversion.
+* Fixed a bug in the CP1255, CP1258, TCVN decoders: The base characters of
+  combining characters could be dropped at the end of the conversion buffer.
+* Fixed a bug in the transliteration that could lead to excessive memory
+  allocations in libintl when transliteration was needed.
+* Portability to BSD/OS and SCO 3.2.5.
 
 New in 1.7:
 * Added UTF-32, UTF-32BE, UTF-32LE converters.
