@@ -1,3 +1,17 @@
+2005-03-13  Bruno Haible  <bruno@clisp.org>
+
+	* include/iconv.h.in (iconv_unicode_char_hook, iconv_wide_char_hook,
+	iconv_hooks): New types.
+	(ICONV_SET_HOOKS): New macro.
+	* lib/converters.h (struct conv_struct): Add field 'hooks'.
+	* lib/iconv.c (iconv_open): Initialize hooks to NULL.
+	(iconvctl): Handle ICONV_SET_HOOKS.
+	* lib/loop_unicode.h (unicode_loop_convert, unicode_loop_reset): After
+	conversion of a character, call the uc_hook.
+	* lib/loop_wchar.h (wchar_id_loop_convert): After every character, call
+	the wc_hook.
+	* lib/genflags.c (iconv_hooks): Provide a dummy definition.
+
 2005-02-05  Bruno Haible  <bruno@clisp.org>
 
 	* src/iconv.c (main): In case of unsupported encodings, show a hint

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2003 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2003, 2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -96,12 +96,24 @@ extern int iconv_close (iconv_t cd);
 #define iconvctl libiconvctl
 extern int iconvctl (iconv_t cd, int request, void* argument);
 
+/* Hook performed after every successful conversion of a Unicode character. */
+typedef void (*iconv_unicode_char_hook) (unsigned int uc, void* data);
+/* Hook performed after every successful conversion of a wide character. */
+typedef void (*iconv_wide_char_hook) (wchar_t wc, void* data);
+/* Set of hooks. */
+struct iconv_hooks {
+  iconv_unicode_char_hook uc_hook;
+  iconv_wide_char_hook wc_hook;
+  void* data;
+};
+
 /* Requests for iconvctl. */
 #define ICONV_TRIVIALP            0  /* int *argument */
 #define ICONV_GET_TRANSLITERATE   1  /* int *argument */
 #define ICONV_SET_TRANSLITERATE   2  /* const int *argument */
 #define ICONV_GET_DISCARD_ILSEQ   3  /* int *argument */
 #define ICONV_SET_DISCARD_ILSEQ   4  /* const int *argument */
+#define ICONV_SET_HOOKS           5  /* const struct iconv_hooks *argument */
 
 /* Listing of locale independent encodings. */
 #define iconvlist libiconvlist

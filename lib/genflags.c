@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2002, 2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -28,6 +28,7 @@
 #define USE_EXTRA
 
 struct loop_funcs {};
+struct iconv_hooks {};
 #include "converters.h"
 
 static void emit_encoding (struct wctomb_funcs * ofuncs, const char* c_name)

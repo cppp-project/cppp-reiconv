@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2003 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2003, 2005 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -237,6 +237,10 @@ static size_t unicode_loop_convert (iconv_t icd,
         result = -1;
         break;
       }
+      #ifndef LIBICONV_PLUG
+      if (cd->hooks.uc_hook)
+        (*cd->hooks.uc_hook)(wc, cd->hooks.data);
+      #endif
       if (!(outcount <= outleft)) abort();
       outptr += outcount; outleft -= outcount;
     }
@@ -295,6 +299,10 @@ static size_t unicode_loop_reset (iconv_t icd,
           errno = E2BIG;
           return -1;
         }
+        #ifndef LIBICONV_PLUG
+        if (cd->hooks.uc_hook)
+          (*cd->hooks.uc_hook)(wc, cd->hooks.data);
+        #endif
         if (!(outcount <= outleft)) abort();
         outptr += outcount;
         outleft -= outcount;

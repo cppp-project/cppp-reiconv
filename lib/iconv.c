@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2004 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2005 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -413,6 +413,11 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
   /* Initialize the operation flags. */
   cd->transliterate = transliterate;
   cd->discard_ilseq = discard_ilseq;
+  #ifndef LIBICONV_PLUG
+  cd->hooks.uc_hook = NULL;
+  cd->hooks.wc_hook = NULL;
+  cd->hooks.data = NULL;
+  #endif
   /* Initialize additional fields. */
   if (from_wchar != to_wchar) {
     struct wchar_conv_struct * wcd = (struct wchar_conv_struct *) cd;
@@ -469,6 +474,15 @@ int iconvctl (iconv_t icd, int request, void* argument)
       return 0;
     case ICONV_SET_DISCARD_ILSEQ:
       cd->discard_ilseq = (*(const int *)argument ? 1 : 0);
+      return 0;
+    case ICONV_SET_HOOKS:
+      if (argument != NULL) {
+        cd->hooks = *(const struct iconv_hooks *)argument;
+      } else {
+        cd->hooks.uc_hook = NULL;
+        cd->hooks.wc_hook = NULL;
+        cd->hooks.data = NULL;
+      }
       return 0;
     default:
       errno = EINVAL;
