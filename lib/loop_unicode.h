@@ -42,7 +42,7 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
           goto johab_hangul_failed;
         }
         sub_outcount = cd->ofuncs.xxx_wctomb(cd,outptr,buf[i],outleft);
-        if (sub_outcount <= 0)
+        if (sub_outcount <= RET_ILUNI)
           goto johab_hangul_failed;
         if (!(sub_outcount <= outleft)) abort();
         outptr += sub_outcount; outleft -= sub_outcount;
@@ -86,7 +86,7 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
               goto variant_failed;
             }
             sub_outcount = cd->ofuncs.xxx_wctomb(cd,outptr,buf[i],outleft);
-            if (sub_outcount <= 0)
+            if (sub_outcount <= RET_ILUNI)
               goto variant_failed;
             if (!(sub_outcount <= outleft)) abort();
             outptr += sub_outcount; outleft -= sub_outcount;
@@ -134,7 +134,7 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
           goto translit_failed;
         }
         sub_outcount = cd->ofuncs.xxx_wctomb(cd,outptr,cp[i],outleft);
-        if (sub_outcount <= 0)
+        if (sub_outcount <= RET_ILUNI)
           goto translit_failed;
         if (!(sub_outcount <= outleft)) abort();
         outptr += sub_outcount; outleft -= sub_outcount;
@@ -191,6 +191,9 @@ static size_t unicode_loop_convert (iconv_t icd,
       outcount = cd->ofuncs.xxx_wctomb(cd,outptr,wc,outleft);
       if (outcount != RET_ILUNI)
         goto outcount_ok;
+      /* Handle Unicode tag characters (range U+E0000..U+E007F). */
+      if ((wc >> 7) == (0xe0000 >> 7))
+        goto outcount_zero;
       /* Try transliteration. */
       result++;
       if (cd->transliterate) {
@@ -212,6 +215,7 @@ static size_t unicode_loop_convert (iconv_t icd,
       }
       if (!(outcount <= outleft)) abort();
       outptr += outcount; outleft -= outcount;
+    outcount_zero: ;
     }
     if (!(incount <= inleft)) abort();
     inptr += incount; inleft -= incount;
@@ -242,6 +246,9 @@ static size_t unicode_loop_reset (iconv_t icd,
         int outcount = cd->ofuncs.xxx_wctomb(cd,outptr,wc,outleft);
         if (outcount != RET_ILUNI)
           goto outcount_ok;
+        /* Handle Unicode tag characters (range U+E0000..U+E007F). */
+        if ((wc >> 7) == (0xe0000 >> 7))
+          goto outcount_zero;
         /* Try transliteration. */
         result++;
         if (cd->transliterate) {
@@ -260,8 +267,11 @@ static size_t unicode_loop_reset (iconv_t icd,
           return -1;
         }
         if (!(outcount <= outleft)) abort();
-        *outbuf = (char*) (outptr + outcount);
-        *outbytesleft = outleft - outcount;
+        outptr += outcount;
+        outleft -= outcount;
+      outcount_zero:
+        *outbuf = (char*) outptr;
+        *outbytesleft = outleft;
       }
     }
     if (cd->ofuncs.xxx_reset) {

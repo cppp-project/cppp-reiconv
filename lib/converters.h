@@ -65,21 +65,21 @@ struct wctomb_funcs {
    * int xxx_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
    * converts the wide character wc to the character set xxx, and stores the
    * result beginning at r. Up to n bytes may be written at r. n is >= 1.
-   * Result is number of bytes written, or 0 if invalid, or -1 if n too small.
+   * Result is number of bytes written, or -1 if invalid, or -2 if n too small.
    */
   int (*xxx_reset) (conv_t conv, unsigned char *r, int n);
   /*
    * int xxx_reset (conv_t conv, unsigned char *r, int n)
    * stores a shift sequences returning to the initial state beginning at r.
    * Up to n bytes may be written at r. n is >= 0.
-   * Result is number of bytes written, or -1 if n too small.
+   * Result is number of bytes written, or -2 if n too small.
    */
 };
 
 /* Return code if invalid. (xxx_wctomb) */
-#define RET_ILUNI      0
+#define RET_ILUNI      -1
 /* Return code if output buffer is too small. (xxx_wctomb, xxx_reset) */
-#define RET_TOOSMALL   -1
+#define RET_TOOSMALL   -2
 
 /*
  * Contents of a conversion descriptor.

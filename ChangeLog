@@ -1,3 +1,23 @@
+2001-06-03  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/loop_unicode.h (unicode_loop_convert): Ignore Unicode 3.1 tag
+          characters if they cannot be converted.
+          (unicode_loop_reset): Likewise.
+        * lib/iso2022_jp2.h (STATE_TAG_NONE, STATE_TAG_LANGUAGE,
+           STATE_TAG_LANGUAGE_j, STATE_TAG_LANGUAGE_ja, STATE_TAG_LANGUAGE_k,
+           STATE_TAG_LANGUAGE_ko, STATE_TAG_LANGUAGE_z, STATE_TAG_LANGUAGE_zh):
+          New macros.
+          (SPLIT_STATE, COMBINE_STATE): Different differently for wctomb
+          direction.
+          (iso2022_jp2_wctomb): Keep track of Unicode 3.1 language tag.
+          If "ja", prefer conversion to Japanese character sets. If "zh",
+          prefer conversion to GB2312. If "ko", prefer conversion to KSC5601.
+
+        * lib/converters.h (RET_ILUNI): Change value from 0 to -1.
+          (RET_TOOSMALL): Change value from -1 to -2.
+        * lib/loop_unicode.h (unicode_transliterate): Allow xxx_wctomb to
+          return 0 written bytes.
+
 2001-06-06  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/encodings.def: Align with IANA character-set registry.

@@ -181,6 +181,9 @@ iso2022_cn_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
   unsigned char buf[3];
   int ret;
 
+  /* There is no need to handle Unicode 3.1 tag characters and to look for
+     "zh-CN" or "zh-TW" tags, because GB2312 and CNS11643 are disjoint. */
+
   /* Try ASCII. */
   ret = ascii_wctomb(conv,buf,wc,1);
   if (ret != RET_ILUNI) {
