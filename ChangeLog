@@ -1,7 +1,15 @@
+2003-06-23  Bruno Haible  <bruno@clisp.org>
+
+	Avoid compilation units that are empty after preprocessing.
+	* srclib/canonicalize.c: Add dummy declaration.
+	* srclib/strerror.c: Likewise.
+	* srclib/error.c: Include <stdio.h> even if there's nothing to be
+	compiled.
+
 2003-06-22  Bruno Haible  <bruno@clisp.org>
 
 	Portability to mingw32.
-	* m4/ssize.m4: New file, from GNU gettext.
+	* m4/ssize_t.m4: New file, from GNU gettext.
 	* m4/xreadlink.m4 (gl_XREADLINK): Require gt_TYPE_SSIZE_T.
 	Reported by Jeff Bonggren <jbon@cfl.rr.com>.
 
