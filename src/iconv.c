@@ -47,6 +47,7 @@
 # endif
 # ifdef __DJGPP__
 #  include <io.h> /* declares setmode() */
+#  include <unistd.h> /* declares isatty() */
 #  /* Avoid putting stdin/stdout in binary mode if it is connected to the
 #     console, because that would make it impossible for the user to
 #     interrupt the program through Ctrl-C or Ctrl-Break.  */

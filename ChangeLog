@@ -50,7 +50,7 @@
 
 2001-02-23  Bruno Haible  <haible@clisp.cons.org>
 
-        * src/iconv.c [DJGPP]: Include <io.h>.
+        * src/iconv.c [DJGPP]: Include <io.h> and <unistd.h>.
           (SET_BINARY) [O_BINARY]: New macro.
           (usage): Mention --binary if available.
           (convert): Use SET_BINARY instead of setmode.
