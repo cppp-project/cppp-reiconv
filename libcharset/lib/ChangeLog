@@ -1,3 +1,11 @@
+2003-06-07  Bruno Haible  <bruno@clisp.org>
+
+	Support for relocatable data files even on Woe32.
+	* Makefile.msvc (IIPREFIX, IIprefix, IIexec_prefix, IIbindir,
+	IIlibdir): New variables.
+	(PICFLAGS): Also define PIC. Define BUILDING_* flags here.
+	(CFLAGS): ... not here. Add flags for relocatability.
+
 2003-05-18  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.msvc (DEBUGFLAGS): New variable.

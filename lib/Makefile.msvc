@@ -60,7 +60,7 @@ PICFLAGS =
 # mscv4 doesn't know about this flag and ignores it.
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
 # -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
-PICFLAGS = -GD -DBUILDING_LIBICONV -DBUILDING_DLL
+PICFLAGS = -GD -DBUILDING_LIBICONV -DBUILDING_DLL -DPIC
 !endif
 
 !if $(DEBUG)
