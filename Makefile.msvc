@@ -92,7 +92,7 @@ uninstall : force
 	$(RM) $(includedir)/iconv.h
 	cd man; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
-check : all
+check : all force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc check
 	cd ..

@@ -41,7 +41,7 @@ uninstall : force
 	(cd src && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)' shlibdir='$(shlibdir)' && cd ..)
 	(cd man && $(MAKE) -f Makefile.os2 uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)' && cd ..)
 
-check : force
+check : all force
 	(cd lib   && $(MAKE) -f Makefile.os2 check && cd ..)
 	(cd src   && $(MAKE) -f Makefile.os2 check && cd ..)
 	(cd man   && $(MAKE) -f Makefile.os2 check && cd ..)
