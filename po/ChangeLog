@@ -1,3 +1,11 @@
+2002-05-31  Bruno Haible  <bruno@clisp.org>
+
+	* ca.po: New file, from Ivan Vilata i Balaguer <ivan@selidor.net>.
+	* eo.po: New file, from Edmund Grimley Evans <edmundo@rano.org>.
+	* hu.po: New file, from Emese Kovacs <emese@gnome.hu>.
+	* sk.po: New file, from Marcel Telka <marcel@telka.sk>.
+	* LINGUAS: Add ca, eo, hu, sk.
+
 2002-04-27  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* Makefile.in.in: New file, from gettext-0.11.1.
