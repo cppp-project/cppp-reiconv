@@ -1,5 +1,9 @@
 2003-05-22  Bruno Haible  <bruno@clisp.org>
 
+	* Version 1.9.1 released.
+
+2003-05-22  Bruno Haible  <bruno@clisp.org>
+
 	* lib/genaliases.c (main): Emit %pic instead of %null-strings.
 	Change type of 'name' field to 'int'.
 	* lib/genaliases2.c (emit_encoding): Add a 'tag' argument. Emit an
