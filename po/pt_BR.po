@@ -8,16 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.8\n"
 "POT-Creation-Date: 2002-04-28 04:19+0200\n"
-"PO-Revision-Date: 2002-06-13 15:00-0300\n"
+"PO-Revision-Date: 2002-07-22 03:50-0300\n"
 "Last-Translator: Alexandre Folle de Menezes <afmenez@terra.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: src/iconv.c:74
 msgid "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr "Uso: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [arquivo ...]"
+msgstr ""
+"Uso: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [arquivo ...]"
 
 #: src/iconv.c:76
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
@@ -32,9 +33,11 @@ msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 msgstr ""
-"Este é um software livre; veja o código fonte para condições de copyright. Não\n"
-"existe NENHUMA garantia; nem mesmo a garantia implícita de COMERCIABILIDADE ou\n"
-"ADEQUAÇÃO A QUALQUER FIM PARTICULAR.\n"
+"Este é um software livre; veja o código fonte para condições de copyright. "
+"Não\n"
+"existe NENHUMA garantia; nem mesmo a garantia implícita de COMERCIABILIDADE "
+"ou\n"
+"ADEQUAÇÃO À QUALQUER FINALIDADE PARTICULAR.\n"
 
 #: src/iconv.c:92
 #, c-format
@@ -49,7 +52,7 @@ msgstr "iconv: %s: seqüência de caracteres ou deslocamentos incompleta\n"
 #: src/iconv.c:155 src/iconv.c:206
 #, c-format
 msgid "iconv: %s: cannot convert\n"
-msgstr "iconv: %s: incapaz de converter\n"
+msgstr "iconv: %s: impossível converter\n"
 
 #: src/iconv.c:177 src/iconv.c:216 src/iconv.c:331
 #, c-format
