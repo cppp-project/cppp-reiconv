@@ -1,3 +1,23 @@
+2003-05-22  Bruno Haible  <bruno@clisp.org>
+
+	* lib/genaliases.c (main): Emit %pic instead of %null-strings.
+	Change type of 'name' field to 'int'.
+	* lib/genaliases2.c (emit_encoding): Add a 'tag' argument. Emit an
+	invocation of macro S(), including the tag and a counter.
+	(main): Use the command-line argument as tag.
+	* Makefile.devel (lib/aliases_aix.h, lib/aliases_osf1.h,
+	lib/aliases_dos.h, lib/aliases_extra.h): Pass a tag to the program.
+	* lib/iconv.c (stringpool2_t): New type.
+	(stringpool2_contents): New data table.
+	(stringpool2): New macro.
+	(sysdep_aliases): Make position-independent. Move #includes out to
+	aliases2.h.
+	(aliases2_lookup): Update.
+	(nalias): New type.
+	(compare_by_index): Use 'struct nalias' instead of 'struct alias'.
+	(iconvlist): Convert 'struct alias' to 'struct nalias' while copying.
+	* lib/aliases2.h: New file, extracted from lib/iconv.c.
+
 2003-05-20  Bruno Haible  <bruno@clisp.org>
 
 	* lib/iconv.c (iconvlist): Test p->name against NULL, not against "".

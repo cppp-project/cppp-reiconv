@@ -40,7 +40,7 @@ static void emit_encoding (const char* const* names, size_t n, const char* c_nam
 
 int main ()
 {
-  printf("struct alias { const char* name; unsigned int encoding_index; };\n");
+  printf("struct alias { int name; unsigned int encoding_index; };\n");
   printf("%%struct-type\n");
   printf("%%language=ANSI-C\n");
   printf("%%define hash-function-name aliases_hash\n");
@@ -49,7 +49,7 @@ int main ()
   printf("%%readonly-tables\n");
   printf("%%global-table\n");
   printf("%%define word-array-name aliases\n");
-  printf("%%null-strings\n");
+  printf("%%pic\n");
   printf("%%%%\n");
 
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \

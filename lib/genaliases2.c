@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2003 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -21,10 +21,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void emit_encoding (const char* const* names, size_t n, const char* c_name)
+static void emit_encoding (const char* tag, const char* const* names, size_t n, const char* c_name)
 {
-  for (; n > 0; names++, n--) {
-    printf("  { \"");
+  static unsigned int counter = 0;
+  for (; n > 0; names++, n--, counter++) {
+    printf("  S(%s_%u, \"",tag,counter);
     /* Output *names in upper case. */
     {
       const char* s = *names;
@@ -37,16 +38,17 @@ static void emit_encoding (const char* const* names, size_t n, const char* c_nam
         putc(c, stdout);
       }
     }
-    printf("\", ei_%s },\n", c_name);
+    printf("\", ei_%s )\n", c_name);
   }
 }
 
-int main ()
+int main (int argc, char* argv[])
 {
+  const char * tag = (argc > 1 ? argv[1] : "xxx");
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                           \
     static const char* const names[] = BRACIFY xxx_names;     \
-    emit_encoding(names,sizeof(names)/sizeof(names[0]),#xxx); \
+    emit_encoding(tag,names,sizeof(names)/sizeof(names[0]),#xxx); \
   }
 #define BRACIFY(...) { __VA_ARGS__ }
 #ifdef USE_AIX
