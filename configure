@@ -6659,7 +6659,321 @@ EOF
 fi
 done
 
-echo "$as_me:6662: checking byte ordering" >&5
+for ac_header in wchar.h
+do
+as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
+echo "$as_me:6665: checking for $ac_header" >&5
+echo $ECHO_N "checking for $ac_header... $ECHO_C" >&6
+if eval "test \"\${$as_ac_Header+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+#line 6671 "configure"
+#include "confdefs.h"
+#include <$ac_header>
+_ACEOF
+if { (eval echo "$as_me:6675: \"$ac_cpp conftest.$ac_ext\"") >&5
+  (eval $ac_cpp conftest.$ac_ext) 2>conftest.er1
+  ac_status=$?
+  egrep -v '^ *\+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:6681: \$? = $ac_status" >&5
+  (exit $ac_status); } >/dev/null; then
+  if test -s conftest.err; then
+    ac_cpp_err=$ac_c_preproc_warn_flag
+  else
+    ac_cpp_err=
+  fi
+else
+  ac_cpp_err=yes
+fi
+if test -z "$ac_cpp_err"; then
+  eval "$as_ac_Header=yes"
+else
+  echo "$as_me: failed program was:" >&5
+  cat conftest.$ac_ext >&5
+  eval "$as_ac_Header=no"
+fi
+rm -f conftest.err conftest.$ac_ext
+fi
+echo "$as_me:6700: result: `eval echo '${'$as_ac_Header'}'`" >&5
+echo "${ECHO_T}`eval echo '${'$as_ac_Header'}'`" >&6
+if test `eval echo '${'$as_ac_Header'}'` = yes; then
+  cat >>confdefs.h <<EOF
+#define `echo "HAVE_$ac_header" | $as_tr_cpp` 1
+EOF
+
+fi
+done
+
+  echo "$as_me:6710: checking for EILSEQ" >&5
+echo $ECHO_N "checking for EILSEQ... $ECHO_C" >&6
+if test "${ac_cv_decl_EILSEQ+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+    cat >conftest.$ac_ext <<_ACEOF
+#line 6717 "configure"
+#include "confdefs.h"
+
+#include <errno.h>
+#ifdef EILSEQ
+yes
+#endif
+
+_ACEOF
+if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
+  egrep "yes" >/dev/null 2>&1; then
+  have_eilseq=1
+fi
+rm -f conftest*
+
+    if test -n "$have_eilseq"; then
+            ac_cv_decl_EILSEQ=yes
+    else
+      cat >conftest.$ac_ext <<_ACEOF
+#line 6736 "configure"
+#include "confdefs.h"
+
+#include <errno.h>
+#if HAVE_WCHAR_H
+#include <wchar.h>
+#endif
+#ifdef EILSEQ
+yes
+#endif
+
+_ACEOF
+if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
+  egrep "yes" >/dev/null 2>&1; then
+  have_eilseq=1
+fi
+rm -f conftest*
+
+      if test -n "$have_eilseq"; then
+                        if test "$cross_compiling" = yes; then
+  # Depending upon the size, compute the lo and hi bounds.
+cat >conftest.$ac_ext <<_ACEOF
+#line 6758 "configure"
+#include "confdefs.h"
+
+#include <errno.h>
+#if HAVE_WCHAR_H
+#include <wchar.h>
+#endif
+
+int
+main ()
+{
+int _array_ [1 - 2 * !((EILSEQ) >= 0)]
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:6775: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>&5
+  ac_status=$?
+  echo "$as_me:6778: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+         { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:6781: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:6784: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_lo=0 ac_mid=0
+  while :; do
+    cat >conftest.$ac_ext <<_ACEOF
+#line 6789 "configure"
+#include "confdefs.h"
+
+#include <errno.h>
+#if HAVE_WCHAR_H
+#include <wchar.h>
+#endif
+
+int
+main ()
+{
+int _array_ [1 - 2 * !((EILSEQ) <= $ac_mid)]
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:6806: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>&5
+  ac_status=$?
+  echo "$as_me:6809: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+         { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:6812: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:6815: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_hi=$ac_mid; break
+else
+  echo "$as_me: failed program was:" >&5
+cat conftest.$ac_ext >&5
+ac_lo=`expr $ac_mid + 1`; ac_mid=`expr 2 '*' $ac_mid + 1`
+fi
+rm -f conftest.$ac_objext conftest.$ac_ext
+  done
+else
+  echo "$as_me: failed program was:" >&5
+cat conftest.$ac_ext >&5
+ac_hi=-1 ac_mid=-1
+  while :; do
+    cat >conftest.$ac_ext <<_ACEOF
+#line 6831 "configure"
+#include "confdefs.h"
+
+#include <errno.h>
+#if HAVE_WCHAR_H
+#include <wchar.h>
+#endif
+
+int
+main ()
+{
+int _array_ [1 - 2 * !((EILSEQ) >= $ac_mid)]
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:6848: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>&5
+  ac_status=$?
+  echo "$as_me:6851: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+         { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:6854: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:6857: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_lo=$ac_mid; break
+else
+  echo "$as_me: failed program was:" >&5
+cat conftest.$ac_ext >&5
+ac_hi=`expr $ac_mid - 1`; ac_mid=`expr 2 '*' $ac_mid`
+fi
+rm -f conftest.$ac_objext conftest.$ac_ext
+  done
+fi
+rm -f conftest.$ac_objext conftest.$ac_ext
+# Binary search between lo and hi bounds.
+while test "x$ac_lo" != "x$ac_hi"; do
+  ac_mid=`expr '(' $ac_hi - $ac_lo ')' / 2 + $ac_lo`
+  cat >conftest.$ac_ext <<_ACEOF
+#line 6873 "configure"
+#include "confdefs.h"
+
+#include <errno.h>
+#if HAVE_WCHAR_H
+#include <wchar.h>
+#endif
+
+int
+main ()
+{
+int _array_ [1 - 2 * !((EILSEQ) <= $ac_mid)]
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:6890: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>&5
+  ac_status=$?
+  echo "$as_me:6893: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+         { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:6896: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:6899: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_hi=$ac_mid
+else
+  echo "$as_me: failed program was:" >&5
+cat conftest.$ac_ext >&5
+ac_lo=`expr $ac_mid + 1`
+fi
+rm -f conftest.$ac_objext conftest.$ac_ext
+done
+ac_cv_decl_EILSEQ=$ac_lo
+else
+  if test "$cross_compiling" = yes; then
+  { { echo "$as_me:6912: error: cannot run test program while cross compiling" >&5
+echo "$as_me: error: cannot run test program while cross compiling" >&2;}
+   { (exit 1); exit 1; }; }
+else
+  cat >conftest.$ac_ext <<_ACEOF
+#line 6917 "configure"
+#include "confdefs.h"
+
+#include <errno.h>
+#if HAVE_WCHAR_H
+#include <wchar.h>
+#endif
+
+int
+main ()
+{
+FILE *f = fopen ("conftest.val", "w");
+if (!f)
+  exit (1);
+fprintf (f, "%d", (EILSEQ));
+fclose (f);
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest$ac_exeext
+if { (eval echo "$as_me:6938: \"$ac_link\"") >&5
+  (eval $ac_link) 2>&5
+  ac_status=$?
+  echo "$as_me:6941: \$? = $ac_status" >&5
+  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
+  { (eval echo "$as_me:6943: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:6946: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_decl_EILSEQ=`cat conftest.val`
+else
+  echo "$as_me: program exited with status $ac_status" >&5
+echo "$as_me: failed program was:" >&5
+cat conftest.$ac_ext >&5
+fi
+rm -f core core.* *.core conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+fi
+fi
+rm -f conftest.val
+      else
+                                ac_cv_decl_EILSEQ=ENOENT
+      fi
+    fi
+
+fi
+echo "$as_me:6964: result: $ac_cv_decl_EILSEQ" >&5
+echo "${ECHO_T}$ac_cv_decl_EILSEQ" >&6
+  if test "$ac_cv_decl_EILSEQ" != yes; then
+
+cat >>confdefs.h <<EOF
+#define EILSEQ $ac_cv_decl_EILSEQ
+EOF
+
+    EILSEQ="$ac_cv_decl_EILSEQ"
+
+  fi
+
+echo "$as_me:6976: checking byte ordering" >&5
 echo $ECHO_N "checking byte ordering... $ECHO_C" >&6
 if test "${cl_cv_sys_endian+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
@@ -6670,7 +6984,7 @@ if test "$cross_compiling" = yes; then
 
 else
   cat >conftest.$ac_ext <<_ACEOF
-#line 6673 "configure"
+#line 6987 "configure"
 #include "confdefs.h"
 int main () {
   /* Are we little or big endian?  From Harbison&Steele.  */
@@ -6684,15 +6998,15 @@ int main () {
 }
 _ACEOF
 rm -f conftest$ac_exeext
-if { (eval echo "$as_me:6687: \"$ac_link\"") >&5
+if { (eval echo "$as_me:7001: \"$ac_link\"") >&5
   (eval $ac_link) 2>&5
   ac_status=$?
-  echo "$as_me:6690: \$? = $ac_status" >&5
+  echo "$as_me:7004: \$? = $ac_status" >&5
   (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
-  { (eval echo "$as_me:6692: \"$ac_try\"") >&5
+  { (eval echo "$as_me:7006: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
-  echo "$as_me:6695: \$? = $ac_status" >&5
+  echo "$as_me:7009: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
   cl_cv_sys_endian="big endian"
 else
@@ -6705,7 +7019,7 @@ rm -f core core.* *.core conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
 fi
 if test -z "$cl_cv_sys_endian"; then
 cat >conftest.$ac_ext <<_ACEOF
-#line 6708 "configure"
+#line 7022 "configure"
 #include "confdefs.h"
 #if defined(m68k) || defined(__m68k__) || defined(mc68000) || defined(mc68020) || defined(__mc68020__) || defined(sparc) || defined(__sparc__) || defined(MIPSEB) || defined(__MIPSEB__) || defined(hppa) || defined(__hppa) || defined(m88000) || defined(__m88k__)
   yes
@@ -6721,7 +7035,7 @@ rm -f conftest*
 fi
 if test -z "$cl_cv_sys_endian"; then
 cat >conftest.$ac_ext <<_ACEOF
-#line 6724 "configure"
+#line 7038 "configure"
 #include "confdefs.h"
 #if defined(i386) || defined(__i386) || defined(__i386__) || defined(_I386) || defined(MIPSEL) || defined(__MIPSEL__) || defined(__alpha)
   yes
@@ -6740,7 +7054,7 @@ cl_cv_sys_endian="guessing little endian"
 fi
 
 fi
-echo "$as_me:6743: result: $cl_cv_sys_endian" >&5
+echo "$as_me:7057: result: $cl_cv_sys_endian" >&5
 echo "${ECHO_T}$cl_cv_sys_endian" >&6
 case "$cl_cv_sys_endian" in
   *little*) cat >>confdefs.h <<\EOF
@@ -6851,7 +7165,7 @@ DEFS=-DHAVE_CONFIG_H
 : ${CONFIG_STATUS=./config.status}
 ac_clean_files_save=$ac_clean_files
 ac_clean_files="$ac_clean_files $CONFIG_STATUS"
-{ echo "$as_me:6854: creating $CONFIG_STATUS" >&5
+{ echo "$as_me:7168: creating $CONFIG_STATUS" >&5
 echo "$as_me: creating $CONFIG_STATUS" >&6;}
 cat >$CONFIG_STATUS <<_ACEOF
 #! $SHELL
@@ -7023,7 +7337,7 @@ cat >>$CONFIG_STATUS <<\EOF
     echo "$ac_cs_version"; exit 0 ;;
   --he | --h)
     # Conflict between --help and --header
-    { { echo "$as_me:7026: error: ambiguous option: $1
+    { { echo "$as_me:7340: error: ambiguous option: $1
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: ambiguous option: $1
 Try \`$0 --help' for more information." >&2;}
@@ -7042,7 +7356,7 @@ Try \`$0 --help' for more information." >&2;}
     ac_need_defaults=false;;
 
   # This is an error.
-  -*) { { echo "$as_me:7045: error: unrecognized option: $1
+  -*) { { echo "$as_me:7359: error: unrecognized option: $1
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: unrecognized option: $1
 Try \`$0 --help' for more information." >&2;}
@@ -7084,7 +7398,7 @@ do
   "${TESTS_MAKEFILE}" ) CONFIG_FILES="$CONFIG_FILES ${TESTS_MAKEFILE}" ;;
   "include/iconv.h" ) CONFIG_FILES="$CONFIG_FILES include/iconv.h" ;;
   "lib/config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS lib/config.h" ;;
-  *) { { echo "$as_me:7087: error: invalid argument: $ac_config_target" >&5
+  *) { { echo "$as_me:7401: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
   esac
@@ -7196,6 +7510,7 @@ s,@ac_ct_STRIP@,$ac_ct_STRIP,;t t
 s,@LIBTOOL@,$LIBTOOL,;t t
 s,@LIBICONV@,$LIBICONV,;t t
 s,@ICONV_CONST@,$ICONV_CONST,;t t
+s,@EILSEQ@,$EILSEQ,;t t
 s,@OS@,$OS,;t t
 s,@GCC@,$GCC,;t t
 s,@PLUGLIB@,$PLUGLIB,;t t
@@ -7309,7 +7624,7 @@ done; }
   esac
 
   if test x"$ac_file" != x-; then
-    { echo "$as_me:7312: creating $ac_file" >&5
+    { echo "$as_me:7627: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
     rm -f "$ac_file"
   fi
@@ -7327,7 +7642,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:7330: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:7645: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -7340,7 +7655,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:7343: error: cannot find input file: $f" >&5
+           { { echo "$as_me:7658: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -7400,7 +7715,7 @@ for ac_file in : $CONFIG_HEADERS; do test "x$ac_file" = x: && continue
   * )   ac_file_in=$ac_file.in ;;
   esac
 
-  test x"$ac_file" != x- && { echo "$as_me:7403: creating $ac_file" >&5
+  test x"$ac_file" != x- && { echo "$as_me:7718: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
 
   # First look for the input files in the build tree, otherwise in the
@@ -7411,7 +7726,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:7414: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:7729: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -7424,7 +7739,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:7427: error: cannot find input file: $f" >&5
+           { { echo "$as_me:7742: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -7541,7 +7856,7 @@ cat >>$CONFIG_STATUS <<\EOF
   rm -f $tmp/in
   if test x"$ac_file" != x-; then
     if cmp -s $ac_file $tmp/config.h 2>/dev/null; then
-      { echo "$as_me:7544: $ac_file is unchanged" >&5
+      { echo "$as_me:7859: $ac_file is unchanged" >&5
 echo "$as_me: $ac_file is unchanged" >&6;}
     else
       ac_dir=`$as_expr X"$ac_file" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
@@ -7645,7 +7960,7 @@ if test "$no_recursion" != yes; then
     # parts of a large source tree are present.
     test -d $srcdir/$ac_subdir || continue
 
-    { echo "$as_me:7648: configuring in $ac_subdir" >&5
+    { echo "$as_me:7963: configuring in $ac_subdir" >&5
 echo "$as_me: configuring in $ac_subdir" >&6;}
     case $srcdir in
     .) ;;
@@ -7667,7 +7982,7 @@ done; }
 
        if test -d ./$ac_subdir; then :;
        else
-         { { echo "$as_me:7670: error: cannot create \`pwd\`/$ac_subdir" >&5
+         { { echo "$as_me:7985: error: cannot create \`pwd\`/$ac_subdir" >&5
 echo "$as_me: error: cannot create \`pwd\`/$ac_subdir" >&2;}
    { (exit 1); exit 1; }; }
        fi
@@ -7698,7 +8013,7 @@ echo "$as_me: error: cannot create \`pwd\`/$ac_subdir" >&2;}
     elif test -f $ac_sub_srcdir/configure.in; then
       ac_sub_configure=$ac_configure
     else
-      { echo "$as_me:7701: WARNING: no configuration information is in $ac_subdir" >&5
+      { echo "$as_me:8016: WARNING: no configuration information is in $ac_subdir" >&5
 echo "$as_me: WARNING: no configuration information is in $ac_subdir" >&2;}
       ac_sub_configure=
     fi
@@ -7712,12 +8027,12 @@ echo "$as_me: WARNING: no configuration information is in $ac_subdir" >&2;}
         ac_sub_cache_file=$ac_dots$cache_file ;;
       esac
 
-      { echo "$as_me:7715: running $ac_sub_configure $ac_sub_configure_args --cache-file=$ac_sub_cache_file --srcdir=$ac_sub_srcdir" >&5
+      { echo "$as_me:8030: running $ac_sub_configure $ac_sub_configure_args --cache-file=$ac_sub_cache_file --srcdir=$ac_sub_srcdir" >&5
 echo "$as_me: running $ac_sub_configure $ac_sub_configure_args --cache-file=$ac_sub_cache_file --srcdir=$ac_sub_srcdir" >&6;}
       # The eval makes quoting arguments work.
       eval $ac_sub_configure $ac_sub_configure_args \
            --cache-file=$ac_sub_cache_file --srcdir=$ac_sub_srcdir ||
-        { { echo "$as_me:7720: error: $ac_sub_configure failed for $ac_subdir" >&5
+        { { echo "$as_me:8035: error: $ac_sub_configure failed for $ac_subdir" >&5
 echo "$as_me: error: $ac_sub_configure failed for $ac_subdir" >&2;}
    { (exit 1); exit 1; }; }
     fi
