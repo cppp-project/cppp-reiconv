@@ -135,6 +135,7 @@ check : all table-from table-to ../src/iconv
 #	/* transliteration */
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
+	$(srcdir)/check-translitfailure $(srcdir) TranslitFail1 ISO-8859-1 ASCII
 
 table-from : table-from.@OBJEXT@ ../lib/libiconv.la
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) table-from.@OBJEXT@ ../lib/libiconv.la -o $@

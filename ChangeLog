@@ -1,3 +1,12 @@
+2002-01-06  Bruno Haible  <bruno@clisp.org>
+
+	* lib/loop_unicode.h (unicode_transliterate): If the transliteration
+	fails due to limited output encoding, return RET_ILUNI, not
+	RET_TOOSMALL. Reported by Nelson H. F. Beebe <beebe@math.utah.edu>.
+	* tests/check-translitfailure: New file.
+	* tests/TranslitFail1.ISO-8859-1: New file.
+	* tests/Makefile.in (check): Call check-translitfailure.
+
 2001-12-15  Bruno Haible  <bruno@clisp.org>
 
         * lib/euc_jp.h (euc_jp_wctomb): Add irreversible mappings for

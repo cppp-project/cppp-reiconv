@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -144,7 +144,7 @@ static int unicode_transliterate (conv_t cd, ucs4_t wc,
       cd->ostate = backup_state;
       outptr = backup_outptr;
       outleft = backup_outleft;
-      if (sub_outcount < 0)
+      if (sub_outcount != RET_ILUNI)
         return RET_TOOSMALL;
     }
   }
