@@ -73,7 +73,7 @@ else
 fi
 AC_SUBST(ICONV_CONST)
 
-AC_CHECK_FUNCS(mbrtowc wcrtomb setlocale)
+AC_CHECK_FUNCS(mbrtowc wcrtomb mbsinit setlocale)
 
 CL_WORDS_LITTLEENDIAN
 

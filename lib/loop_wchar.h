@@ -25,18 +25,23 @@
  */
 
 #if HAVE_WCRTOMB || HAVE_MBRTOWC
-#include <wchar.h>
-#define BUF_SIZE 64  /* assume MB_LEN_MAX <= 64 */
-/* Some systems, like BeOS, have multibyte encodings but lack mbstate_t.  */
-extern size_t mbrtowc ();
-#ifdef mbstate_t
-#define mbrtowc(pwc, s, n, ps) (mbrtowc)(pwc, s, n, 0)
-#define mbsinit(ps) 1
-#endif
+# include <wchar.h>
+# define BUF_SIZE 64  /* assume MB_LEN_MAX <= 64 */
+  /* Some systems, like BeOS, have multibyte encodings but lack mbstate_t.  */
+  extern size_t mbrtowc ();
+# ifdef mbstate_t
+#  define mbrtowc(pwc, s, n, ps) (mbrtowc)(pwc, s, n, 0)
+#  define mbsinit(ps) 1
+# endif
+# ifndef mbsinit
+#  if !HAVE_MBSINIT
+#   define mbsinit(ps) 1
+#  endif
+# endif
 #else
-#ifndef mbstate_t
-typedef int mbstate_t;
-#endif
+# ifndef mbstate_t
+   typedef int mbstate_t;
+# endif
 #endif
 
 /*
