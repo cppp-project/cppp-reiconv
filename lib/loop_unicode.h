@@ -162,6 +162,7 @@ static size_t unicode_loop_convert (iconv_t icd,
   unsigned char* outptr = (unsigned char*) *outbuf;
   size_t outleft = *outbytesleft;
   while (inleft > 0) {
+    state_t last_istate = cd->istate;
     ucs4_t wc;
     int incount;
     int outcount;
@@ -199,6 +200,7 @@ static size_t unicode_loop_convert (iconv_t icd,
     } else {
       /* Case 4: k bytes read, making up a wide character */
       if (outleft == 0) {
+        cd->istate = last_istate;
         errno = E2BIG;
         result = -1;
         break;
@@ -221,11 +223,13 @@ static size_t unicode_loop_convert (iconv_t icd,
       outcount = cd->ofuncs.xxx_wctomb(cd,outptr,0xFFFD,outleft);
       if (outcount != RET_ILUNI)
         goto outcount_ok;
+      cd->istate = last_istate;
       errno = EILSEQ;
       result = -1;
       break;
     outcount_ok:
       if (outcount < 0) {
+        cd->istate = last_istate;
         errno = E2BIG;
         result = -1;
         break;
@@ -256,6 +260,7 @@ static size_t unicode_loop_reset (iconv_t icd,
   } else {
     size_t result = 0;
     if (cd->ifuncs.xxx_flushwc) {
+      state_t last_istate = cd->istate;
       ucs4_t wc;
       if (cd->ifuncs.xxx_flushwc(cd, &wc)) {
         unsigned char* outptr = (unsigned char*) *outbuf;
@@ -278,10 +283,12 @@ static size_t unicode_loop_reset (iconv_t icd,
         outcount = cd->ofuncs.xxx_wctomb(cd,outptr,0xFFFD,outleft);
         if (outcount != RET_ILUNI)
           goto outcount_ok;
+        cd->istate = last_istate;
         errno = EILSEQ;
         return -1;
       outcount_ok:
         if (outcount < 0) {
+          cd->istate = last_istate;
           errno = E2BIG;
           return -1;
         }

@@ -222,6 +222,11 @@ static size_t wchar_to_loop_convert (iconv_t icd,
               return -1;
             }
             *(wchar_t*) *outbuf = wc;
+            /* Restoring the state is not needed because it is the initial
+               state anyway: For all known locale encodings, the multibyte
+               to wchar_t conversion doesn't have shift state, and we have
+               excluded partial accumulated characters. */
+            /* wcd->state = state; */
             *outbuf += sizeof(wchar_t);
             *outbytesleft -= sizeof(wchar_t);
           }

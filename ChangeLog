@@ -1,3 +1,15 @@
+2002-05-04  Bruno Haible  <bruno@clisp.org>
+
+	* lib/loop_unicode.h (unicode_loop_convert): When quitting the loop
+	without writing an output character, restore cd->istate to its value
+	before the xxx_mbtowc call. Otherwise we lose some characters during
+	CP1255/CP1258/TCVN to Unicode conversion.
+	(unicode_loop_reset): Likewise for the xxx_flushwc call.
+	* tests/CP1255-snippet, tests/CP1255-snippet.UTF-8: Make the test
+	files large enough to test against the bug.
+	* tests/CP1258-snippet, tests/CP1258-snippet.UTF-8: Likewise.
+	* tests/TCVN-snippet, tests/TCVN-snippet.UTF-8: Likewise.
+
 2002-04-28  Bruno Haible  <bruno@clisp.org>
 
 	* tools/Makefile (armscii_8.h): Use table from glibc-2.2.90.
