@@ -1,3 +1,7 @@
+2000-12-08  Bruno Haible  <haible@clisp.cons.org>
+
+	* Makefile.in (exec_prefix): Use configure's --exec-prefix argument.
+
 2000-12-02  Bruno Haible  <haible@clisp.cons.org>
 
 	* Makefile.msvc (check): Depend on target 'force' as well.
