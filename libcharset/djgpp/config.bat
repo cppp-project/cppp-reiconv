@@ -76,8 +76,11 @@ set HOSTNAME=%_HOSTNAME%
 set _HOSTNAME=
 set OS=
 
+Rem With libtool 1.4 -fPIC is the default. This completely breaks compilations
+Rem with djgpp, so we will always use --disable-shared to inhibit the usage of
+Rem -fPIC and -DPIC flags in libtool.
 echo Running the ./configure script...
-sh ./configure --src=%XSRC%
+sh ./configure --enable-static --disable-shared --src=%XSRC%
 if errorlevel 1 goto CfgError
 echo Done.
 goto End
