@@ -55,7 +55,7 @@ dst=""
 dir_arg=""
 
 while [ x"$1" != x ]; do
-    case $1 in
+    case "$1" in
 	-c) instcmd=$cpprog
 	    shift
 	    continue;;
@@ -116,7 +116,7 @@ if [ x"$dir_arg" != x ]; then
 	dst=$src
 	src=""
 
-	if [ -d $dst ]; then
+	if [ -d "$dst" ]; then
 		instcmd=:
 		chmodcmd=""
 	else
@@ -128,7 +128,7 @@ else
 # might cause directories to be created, which would be especially bad
 # if $src (and thus $dsttmp) contains '*'.
 
-	if [ -f $src -o -d $src ]
+	if [ -f "$src" -o -d "$src" ]
 	then
 		true
 	else
@@ -147,16 +147,16 @@ else
 # If destination is a directory, append the input filename; if your system
 # does not like double slashes in filenames, you may need to add some logic
 
-	if [ -d $dst ]
+	if [ -d "$dst" ]
 	then
-		dst=$dst/`basename $src`
+		dst=$dst/`basename "$src"`
 	else
 		true
 	fi
 fi
 
 ## this sed command emulates the dirname command
-dstdir=`echo $dst | sed -e 's,[^/]*$,,;s,/$,,;s,^$,.,'`
+dstdir=`echo "$dst" | sed -e 's,[^/]*$,,;s,/$,,;s,^$,.,'`
 
 # Make sure that the destination directory exists.
 #  this part is taken from Noah Friedman's mkinstalldirs script
@@ -167,10 +167,10 @@ defaultIFS='
 	'
 IFS="${IFS-$defaultIFS}"
 
-oIFS="${IFS}";
+oIFS=$IFS
 # Some sh's can't handle IFS=/ for some reason.
 IFS='%'
-set - `echo $dstdir | sed -e 's@/@%@g' -e 's@^%@/@'`
+set - `echo "$dstdir" | sed -e 's@/@%@g' -e 's@^%@/@'`
 IFS=$oIFS
 
 pathcomp=''
@@ -192,21 +192,21 @@ fi
 
 if [ x"$dir_arg" != x ]
 then
-	$doit $instcmd $dst &&
+	$doit $instcmd "$dst" &&
 
-	if [ x"$chowncmd" != x ]; then $doit $chowncmd $dst; else true ; fi &&
-	if [ x"$chgrpcmd" != x ]; then $doit $chgrpcmd $dst; else true ; fi &&
-	if [ x"$stripcmd" != x ]; then $doit $stripcmd $dst; else true ; fi &&
-	if [ x"$chmodcmd" != x ]; then $doit $chmodcmd $dst; else true ; fi
+	if [ x"$chowncmd" != x ]; then $doit $chowncmd "$dst"; else true ; fi &&
+	if [ x"$chgrpcmd" != x ]; then $doit $chgrpcmd "$dst"; else true ; fi &&
+	if [ x"$stripcmd" != x ]; then $doit $stripcmd "$dst"; else true ; fi &&
+	if [ x"$chmodcmd" != x ]; then $doit $chmodcmd "$dst"; else true ; fi
 else
 
 # If we're going to rename the final executable, determine the name now.
 
 	if [ x"$transformarg" = x ]
 	then
-		dstfile=`basename $dst`
+		dstfile=`basename "$dst"`
 	else
-		dstfile=`basename $dst $transformbasename |
+		dstfile=`basename "$dst" $transformbasename |
 			sed $transformarg`$transformbasename
 	fi
 
@@ -214,7 +214,7 @@ else
 
 	if [ x"$dstfile" = x ]
 	then
-		dstfile=`basename $dst`
+		dstfile=`basename "$dst"`
 	else
 		true
 	fi
@@ -226,12 +226,12 @@ else
 
 # Trap to clean up temp files at exit.
 
-	trap 'status=$?; rm -f $dsttmp $rmtmp && exit $status' 0
+	trap 'status=$?; rm -f "$dsttmp" "$rmtmp" && exit $status' 0
 	trap '(exit $?); exit' 1 2 13 15
 
 # Move or copy the file name to the temp name
 
-	$doit $instcmd $src $dsttmp &&
+	$doit $instcmd $src "$dsttmp" &&
 
 # and set any options; do chmod last to preserve setuid bits
 
@@ -239,10 +239,10 @@ else
 # ignore errors from any of these, just make sure not to ignore
 # errors from the above "$doit $instcmd $src $dsttmp" command.
 
-	if [ x"$chowncmd" != x ]; then $doit $chowncmd $dsttmp; else true;fi &&
-	if [ x"$chgrpcmd" != x ]; then $doit $chgrpcmd $dsttmp; else true;fi &&
-	if [ x"$stripcmd" != x ]; then $doit $stripcmd $dsttmp; else true;fi &&
-	if [ x"$chmodcmd" != x ]; then $doit $chmodcmd $dsttmp; else true;fi &&
+	if [ x"$chowncmd" != x ]; then $doit $chowncmd "$dsttmp";else true;fi &&
+	if [ x"$chgrpcmd" != x ]; then $doit $chgrpcmd "$dsttmp";else true;fi &&
+	if [ x"$stripcmd" != x ]; then $doit $stripcmd "$dsttmp";else true;fi &&
+	if [ x"$chmodcmd" != x ]; then $doit $chmodcmd "$dsttmp";else true;fi &&
 
 # Now remove or move any old file at destination location.  We try this
 # two ways since rm can't unlink itself on some systems and the destination
@@ -250,10 +250,10 @@ else
 # might fail but the new file should still install successfully.
 
 {
-	if [ -f $dstdir/$dstfile ]
+	if [ -f "$dstdir/$dstfile" ]
 	then
-		$doit $rmcmd -f $dstdir/$dstfile 2>/dev/null ||
-		$doit $mvcmd -f $dstdir/$dstfile $rmtmp 2>/dev/null ||
+		$doit $rmcmd -f "$dstdir/$dstfile" 2>/dev/null ||
+		$doit $mvcmd -f "$dstdir/$dstfile" "$rmtmp" 2>/dev/null ||
 		{
 		  echo "install: cannot unlink or rename $dstdir/$dstfile" >&2
 		  (exit 1); exit
@@ -265,7 +265,7 @@ else
 
 # Now rename the file to the real destination.
 
-	$doit $mvcmd $dsttmp $dstdir/$dstfile
+	$doit $mvcmd "$dsttmp" "$dstdir/$dstfile"
 
 fi &&
 

@@ -1,3 +1,7 @@
+2000-12-13  Bruno Haible  <haible@clisp.cons.org>
+
+	* autoconf/install-sh: Update to a newer version from fileutils.
+
 2000-12-12  Bruno Haible  <haible@clisp.cons.org>
 
 	* Makefile.in: Use $(MAKE) instead of $(MAKE) -r. Needed with Solaris
