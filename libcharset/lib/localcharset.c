@@ -37,12 +37,17 @@
 # include <stdlib.h>
 #endif
 
-#if HAVE_LANGINFO_CODESET
-# include <langinfo.h>
-#else
-# if HAVE_SETLOCALE
-#  include <locale.h>
+#if !(defined (_WIN32) || defined (__WIN32__))
+# if HAVE_LANGINFO_CODESET
+#  include <langinfo.h>
+# else
+#  if HAVE_SETLOCALE
+#   include <locale.h>
+#  endif
 # endif
+#else /* WIN32 */
+# define WIN32_LEAN_AND_MEAN
+# include <windows.h>
 #endif
 
 #ifndef DIRECTORY_SEPARATOR
@@ -73,6 +78,7 @@ get_charset_aliases ()
   cp = charset_aliases;
   if (cp == NULL)
     {
+#if !(defined (_WIN32) || defined (__WIN32__))
       FILE *fp;
       const char *dir = LIBDIR;
       const char *base = "charset.alias";
@@ -157,9 +163,20 @@ get_charset_aliases ()
 	    }
 	}
 
-      charset_aliases = cp;
       if (file_name != NULL)
 	free (file_name);
+
+#else /* WIN32 */
+
+      /* To avoid the troubles of installing a separate file in the same
+	 directory as the DLL and of retrieving the DLL's directory at
+	 runtime, simply inline the aliases here.  */
+
+      cp = "CP936" "\0" "GBK" "\0"
+	   "CP1361" "\0" "JOHAB" "\0";
+#endif
+
+      charset_aliases = cp;
     }
 
   return cp;
@@ -180,19 +197,21 @@ locale_charset ()
   const char *codeset;
   const char *aliases;
 
-#if HAVE_LANGINFO_CODESET
+#if !(defined (_WIN32) || defined (__WIN32__))
+
+# if HAVE_LANGINFO_CODESET
 
   /* Most systems support nl_langinfo (CODESET) nowadays.  */
   codeset = nl_langinfo (CODESET);
 
-#else
+# else
 
   /* On old systems which lack it, use setlocale and getenv.  */
   const char *locale = NULL;
 
-# if HAVE_SETLOCALE
+#  if HAVE_SETLOCALE
   locale = setlocale (LC_CTYPE, NULL);
-# endif
+#  endif
   if (locale == NULL || locale[0] == '\0')
     {
       locale = getenv ("LC_ALL");
@@ -208,6 +227,16 @@ locale_charset ()
      you set it to "language_COUNTRY.charset". In any case, we resolve it
      through the charset.alias file.  */
   codeset = locale;
+
+# endif
+
+#else /* WIN32 */
+
+  static char buf[12];
+
+  /* Win32 has a function returning the locale's codepage as a number.  */
+  sprintf(buf, "CP%u", GetACP());
+  codeset = buf;
 
 #endif
 
