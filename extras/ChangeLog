@@ -1,3 +1,11 @@
+2000-06-16  Bruno Haible  <haible@clisp.cons.org>
+
+        * iconv.m4: Change prefix to AM.
+
+2001-05-23  Bruno Haible  <haible@clisp.cons.org>
+
+        * iconv.m4 (jm_ICONV): Accept --with-libiconv-prefix option.
+
 2001-03-23  Bruno Haible  <haible@clisp.cons.org>
 
         * iconv.m4 (jm_ICONV): Tweak printing of prototype.

@@ -80,6 +80,8 @@ This library can be built and installed in two variants:
     - If you don't use automake, append extras/iconv.m4 to your aclocal.m4
       file.
     - If you do use automake, add extras/iconv.m4 to your m4 macro repository.
+    Note that 'iconv.m4' is also part of the GNU gettext package, which
+    installs it in /usr/local/share/aclocal/iconv.m4.
 
   - The libc plug/override mode. This works on GNU/Linux, Solaris and OSF/1
     systems only. It is a way to get good iconv support without having
