@@ -77,6 +77,11 @@ ALL = \
  uhc_1.h \
  uhc_2.h \
  johab_hangul.h \
+ cp856.h \
+ cp922.h \
+ cp1046.h \
+ cp1124.h \
+ cp1129.h \
  cjk_variants.h
 
 all : $(ALL)
@@ -302,6 +307,23 @@ uhc_2.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_to_
 
 johab_hangul.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/JOHAB.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0x\([8-C]...\|D[0-7]..\)' < $< ) | ./cjk_tab_to_h 'JOHAB Hangul' johab_hangul > $@
+
+
+cp856.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MISC/CP856.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP856 cp856 < $<
+
+cp922.h : $(TABLESDIR)/aix-4.3.2/IBM-922.TXT 8bit_tab_to_h
+	(echo '#' ; cat $<) | ./8bit_tab_to_h CP922 cp922
+
+cp1046.h : $(TABLESDIR)/aix-4.3.2/IBM-1046.TXT 8bit_tab_to_h
+	(echo '#' ; cat $<) | ./8bit_tab_to_h CP1046 cp1046
+
+cp1124.h : $(TABLESDIR)/aix-4.3.2/IBM-1124.TXT 8bit_tab_to_h
+	(echo '#' ; cat $<) | ./8bit_tab_to_h CP1124 cp1124
+
+cp1129.h : $(TABLESDIR)/aix-4.3.2/IBM-1129.TXT 8bit_tab_to_h
+	(echo '#' ; cat $<) | ./8bit_tab_to_h CP1129 cp1129
+
 
 cjk_variants.h : $(TABLESDIR)/yasuoka/UniVariants cjk_variants
 	./cjk_variants < $< > $@

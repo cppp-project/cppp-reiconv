@@ -205,3 +205,14 @@ typedef struct {
 #include "johab.h"
 #include "iso2022_kr.h"
 
+/* Encodings used by system dependent locales. */
+
+#if defined(USE_AIX) || defined(USE_ALL)
+#include "cp856.h"
+#include "cp922.h"
+#include "cp943.h"
+#include "cp1046.h"
+#include "cp1124.h"
+#include "cp1129.h"
+#endif
+

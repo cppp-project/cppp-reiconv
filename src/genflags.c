@@ -21,6 +21,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Consider all encodings, including the system dependent ones. */
+#define USE_ALL
+
 #include "converters.h"
 
 static void emit_encoding (struct wctomb_funcs * ofuncs, const char* c_name)

@@ -36,6 +36,7 @@
 /*
  * Table of all supported encodings.
  */
+#include "use_aliases2.h"
 struct encoding {
   struct mbtowc_funcs ifuncs; /* conversion multibyte -> unicode */
   struct wctomb_funcs ofuncs; /* conversion unicode -> multibyte */
@@ -64,6 +65,13 @@ static struct encoding const all_encodings[] = {
  *   #define MAX_WORD_LENGTH ...
  */
 #include "aliases.h"
+
+/*
+ * System dependent alias lookup function.
+ * Defines
+ *   const struct alias * aliases2_lookup (const char *str);
+ */
+#include "aliases2.h"
 
 #if 0
 /* Like !strcasecmp, except that the both strings can be assumed to be ASCII
@@ -118,8 +126,11 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       goto invalid;
   }
   ap = aliases_lookup(buf,bp-buf);
-  if (ap == NULL)
-    goto invalid;
+  if (ap == NULL) {
+    ap = aliases2_lookup(buf);
+    if (ap == NULL)
+      goto invalid;
+  }
   cd->oindex = ap->encoding_index;
   cd->ofuncs = all_encodings[ap->encoding_index].ofuncs;
   cd->oflags = all_encodings[ap->encoding_index].oflags;
@@ -137,8 +148,11 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       goto invalid;
   }
   ap = aliases_lookup(buf,bp-buf);
-  if (ap == NULL)
-    goto invalid;
+  if (ap == NULL) {
+    ap = aliases2_lookup(buf);
+    if (ap == NULL)
+      goto invalid;
+  }
   cd->iindex = ap->encoding_index;
   cd->ifuncs = all_encodings[ap->encoding_index].ifuncs;
   /* Initialize the states. */
@@ -167,7 +181,7 @@ size_t iconv (iconv_t icd,
     } else {
       if (cd->ofuncs.xxx_reset) {
         int outcount =
-          cd->ofuncs.xxx_reset(cd,(unsigned char*)*outbuf,*outbytesleft);
+          cd->ofuncs.xxx_reset(cd, (unsigned char *) *outbuf, *outbytesleft);
         if (outcount < 0) {
           errno = E2BIG;
           return -1;
