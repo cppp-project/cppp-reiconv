@@ -1,3 +1,9 @@
+2003-05-09  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/error.c: Update from gnulib with modifications.
+	* m4/strerror_r.m4: New file, from gnulib.
+	* Makefile.devel (aclocal.m4): Depend on it.
+
 2003-05-08  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.msvc (IIPREFIX): New variable.
