@@ -60,6 +60,7 @@ srcdir = .
 prefix = $(PREFIX)
 exec_prefix = $(prefix)
 bindir = $(exec_prefix)\bin
+includedir = $(prefix)\include
 
 # Programs used by "make":
 CC = cl

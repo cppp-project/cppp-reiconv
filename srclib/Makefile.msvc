@@ -85,7 +85,6 @@ SHELL = /bin/sh
 
 OBJECTS = \
   error.obj \
-  findprog.obj \
   progname.obj progreloc.obj \
   strtoul.obj \
   xmalloc.obj xstrdup.obj \
@@ -97,9 +96,6 @@ all : icrt.lib
 
 error.obj : error.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c error.c
-
-findprog.obj : findprog.c
-	$(CC) $(INCLUDES) $(CFLAGS) -c findprog.c
 
 progname.obj : progname.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c progname.c
