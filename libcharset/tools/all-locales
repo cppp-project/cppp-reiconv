@@ -16,6 +16,9 @@ case "$host_os" in
   freebsd*)
     cd /usr/share/locale && ls -1
     ;;
+  darwin*)
+    cd /usr/share/locale && ls -1 */LC_CTYPE | sed -e 's,/LC_CTYPE$,,'
+    ;;
   *)
     echo "Don't know how to determine list of locales on $host_os" 1>&2
     exit 1
