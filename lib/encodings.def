@@ -113,17 +113,17 @@ DEFENCODING(( "UTF-16LE",               /* IANA, RFC 2781 */
             utf16le,
             { utf16le_mbtowc, NULL },     { utf16le_wctomb, NULL })
 
-DEFENCODING(( "UTF-32",                 /* Unicode 3.1 */
+DEFENCODING(( "UTF-32",                 /* IANA, Unicode 3.1 */
             ),
             utf32,
             { utf32_mbtowc, NULL },       { utf32_wctomb, NULL })
 
-DEFENCODING(( "UTF-32BE",               /* Unicode 3.1 */
+DEFENCODING(( "UTF-32BE",               /* IANA, Unicode 3.1 */
             ),
             utf32be,
             { utf32be_mbtowc, NULL },     { utf32be_wctomb, NULL })
 
-DEFENCODING(( "UTF-32LE",               /* Unicode 3.1 */
+DEFENCODING(( "UTF-32LE",               /* IANA, Unicode 3.1 */
             ),
             utf32le,
             { utf32le_mbtowc, NULL },     { utf32le_wctomb, NULL })
@@ -325,15 +325,18 @@ DEFENCODING(( "ISO-8859-15",            /* IANA, glibc */
               "ISO_8859-15",            /* IANA */
               "ISO_8859-15:1998",       /* glibc */
               "ISO-IR-203",
+              "LATIN-9",                /* IANA */
               "ISO8859-15",             /* glibc, FreeBSD */
             ),
             iso8859_15,
             { iso8859_15_mbtowc, NULL },  { iso8859_15_wctomb, NULL })
 
-DEFENCODING(( "ISO-8859-16",
-              "ISO_8859-16",
-              "ISO_8859-16:2000",
-              "ISO-IR-226",
+DEFENCODING(( "ISO-8859-16",            /* IANA */
+              "ISO_8859-16",            /* IANA */
+              "ISO_8859-16:2001",       /* IANA */
+              "ISO-IR-226",             /* IANA */
+              "LATIN10",                /* IANA */
+              "L10",                    /* IANA */
               "ISO8859-16",             /* glibc, FreeBSD */
             ),
             iso8859_16,
@@ -729,13 +732,15 @@ DEFENCODING(( "EUC-CN",                 /* glibc */
             euc_cn,
             { euc_cn_mbtowc, NULL },      { euc_cn_wctomb, NULL })
 
-DEFENCODING(( "GBK",                    /* JDK 1.1 */
-              "CP936",
+DEFENCODING(( "GBK",                    /* IANA, JDK 1.1 */
+              "CP936",                  /* IANA */
+              "MS936",                  /* IANA */
+              "WINDOWS-936",            /* IANA */
             ),
             ces_gbk,
             { ces_gbk_mbtowc, NULL },     { ces_gbk_wctomb, NULL })
 
-DEFENCODING(( "GB18030",                /* glibc */
+DEFENCODING(( "GB18030",                /* IANA, glibc */
             ),
             gb18030,
             { gb18030_mbtowc, NULL },     { gb18030_wctomb, NULL })

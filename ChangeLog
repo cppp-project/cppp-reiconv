@@ -1,3 +1,11 @@
+2003-06-16  Bruno Haible  <bruno@clisp.org>
+
+	* lib/encodings.def (ISO-8859-15): Add alias LATIN-9.
+	(ISO-8859-16): Add aliases ISO_8859-16:2001, LATIN10, L10. Remove alias
+	ISO_8859-16:2000.
+	(GBK): Add aliases MS936, WINDOWS-936.
+	Reported by Guido Flohr <guido@imperia.net>.
+
 2003-05-09  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/canonicalize.c: Add #ifdef around versioned_symbol. Avoids an
