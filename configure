@@ -1117,14 +1117,14 @@ LN_S="$cl_cv_prog_LN_S"
 
 
  ac_aux_dir=${srcdir}/autoconf
+ac_config_guess=$ac_aux_dir/config.guess
+ac_config_sub=$ac_aux_dir/config.sub
 echo $ac_n "checking host system type""... $ac_c" 1>&6
-echo "configure:1122: checking host system type" >&5
+echo "configure:1124: checking host system type" >&5
 if eval "test \"`echo '$''{'cl_cv_host'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
   
-ac_config_guess=$ac_aux_dir/config.guess
-ac_config_sub=$ac_aux_dir/config.sub
 # Make sure we can run config.sub.
 if ${CONFIG_SHELL-/bin/sh} $ac_config_sub sun4 >/dev/null 2>&1; then :
 else { echo "configure: error: can not run $ac_config_sub" 1>&2; exit 1; }
