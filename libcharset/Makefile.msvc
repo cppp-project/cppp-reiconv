@@ -53,8 +53,10 @@ SHELL = /bin/sh
 
 all : config.h force
 !if !$(DLL)
+	$(LN) include\libcharset.h.in include\libcharset.h
 	$(LN) include\localcharset.h.in include\localcharset.h
 !else
+	$(LN) include\libcharset.h.msvc-shared include\libcharset.h
 	$(LN) include\localcharset.h.msvc-shared include\localcharset.h
 !endif
 	cd lib
@@ -71,6 +73,7 @@ install : force
 	cd ..
 	-mkdir $(prefix)
 	-mkdir $(includedir)
+	$(INSTALL_DATA) include\libcharset.h $(includedir)\libcharset.h
 	$(INSTALL_DATA) include\localcharset.h $(includedir)\localcharset.h
 
 installdirs : force
@@ -84,6 +87,7 @@ uninstall : force
 	cd lib
 	$(MAKE) -f Makefile.msvc uninstall
 	cd ..
+	$(RM) $(includedir)\libcharset.h
 	$(RM) $(includedir)\localcharset.h
 
 check : all force
@@ -93,6 +97,7 @@ check : all force
 
 mostlyclean : force
 	$(RM) config.h
+	$(RM) include\libcharset.h
 	$(RM) include\localcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc mostlyclean
@@ -100,6 +105,7 @@ mostlyclean : force
 
 clean : force
 	$(RM) config.h
+	$(RM) include\libcharset.h
 	$(RM) include\localcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc clean
@@ -107,6 +113,7 @@ clean : force
 
 distclean : force
 	$(RM) config.h
+	$(RM) include\libcharset.h
 	$(RM) include\localcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc distclean
@@ -114,6 +121,7 @@ distclean : force
 
 maintainer-clean : force
 	$(RM) config.h
+	$(RM) include\libcharset.h
 	$(RM) include\localcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc maintainer-clean

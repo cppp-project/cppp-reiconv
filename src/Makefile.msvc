@@ -50,7 +50,7 @@ bindir = $(exec_prefix)\bin
 # Programs used by "make":
 CC = cl
 CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS)
-INCLUDES = -I. -I$(srcdir) -I..\include -I$(srcdir)\..\include
+INCLUDES = -I. -I.. -I..\include -I..\srclib
 RM = -del
 
 # Programs used by "make install":

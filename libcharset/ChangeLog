@@ -1,5 +1,29 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	Support for relocatable installation.
+	* autoconf/config.libpath: New file, from GNU gettext.
+	* configure.in: Invoke AC_RELOCATABLE_LIBRARY.
+	* include/libcharset.h.in: New file.
+	* Makefile.devel (include/libcharset.h.msvc-shared): New rule.
+	(all): Depend on it.
+	(autoconf/aclocal.m4): Update aclocal invocation.
+	(config.h.msvc): Handle INSTALLPREFIX.
+	* Makefile.in (include/libcharset.h): New rule.
+	(all): Depend on it.
+	(install-lib, install): Also install libcharset.h.
+	(uninstall): Uninstall libcharset.h.
+	(distclean, maintainer-clean): Remove include/libcharset.h.
+	* Makefile.msvc (all): Create include/libcharset.h.
+	(install): Also install libcharset.h.
+	(uninstall): Uninstall libcharset.h.
+	(mostlyclean, clean, distclean, maintainer-clean): Remove
+	include/libcharset.h.
+	* INSTALL.generic: Document --enable-relocatable and
+	--with-libintl-prefix. Remove the recommendation to set CPPFLAGS and
+	LDFLAGS. The lib-link.m4 macros make this unnecessary.
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	* Makefile.msvc (PREFIX): New variable.
 	(prefix): Use it.
 	(distclean, maintainer-clean): Drop Unix specific removals.

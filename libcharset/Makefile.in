@@ -28,8 +28,12 @@ mkinstalldirs = $(SHELL) @top_srcdir@/autoconf/mkinstalldirs
 
 SHELL = /bin/sh
 
-all : include/localcharset.h force
+all : include/libcharset.h include/localcharset.h force
 	cd lib && $(MAKE) all
+
+include/libcharset.h :
+	if [ ! -d include ] ; then mkdir include ; fi
+	$(CP) $(srcdir)/include/libcharset.h.in include/libcharset.h
 
 include/localcharset.h :
 	if [ ! -d include ] ; then mkdir include ; fi
@@ -40,11 +44,13 @@ include/localcharset.h :
 install-lib : all force
 	cd lib && $(MAKE) install-lib libdir='$(libdir)' includedir='$(includedir)'
 	$(mkinstalldirs) $(includedir)
+	$(INSTALL_DATA) include/libcharset.h $(includedir)/libcharset.h
 	$(INSTALL_DATA) include/localcharset.h $(includedir)/localcharset.h
 
-install : include/localcharset.h force
+install : include/libcharset.h include/localcharset.h force
 	cd lib && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(mkinstalldirs) $(DESTDIR)$(includedir)
+	$(INSTALL_DATA) include/libcharset.h $(DESTDIR)$(includedir)/libcharset.h
 	$(INSTALL_DATA) include/localcharset.h $(DESTDIR)$(includedir)/localcharset.h
 
 installdirs : force
@@ -53,6 +59,7 @@ installdirs : force
 
 uninstall : force
 	cd lib && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	$(RM) $(DESTDIR)$(includedir)/libcharset.h
 	$(RM) $(DESTDIR)$(includedir)/localcharset.h
 
 check : force
@@ -66,12 +73,12 @@ clean : force
 
 distclean : force
 	cd lib && if test -f Makefile; then $(MAKE) distclean; fi
-	$(RM) include/localcharset.h
+	$(RM) include/libcharset.h include/localcharset.h
 	$(RM) config.status config.log config.cache Makefile config.h libtool
 
 maintainer-clean : force
 	cd lib && if test -f Makefile; then $(MAKE) maintainer-clean; fi
-	$(RM) include/localcharset.h
+	$(RM) include/libcharset.h include/localcharset.h
 	$(RM) config.status config.log config.cache Makefile config.h libtool
 
 force :

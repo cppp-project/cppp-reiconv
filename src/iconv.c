@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2003 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -17,6 +17,10 @@
    Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include "config.h"
+#ifndef ICONV_CONST
+# define ICONV_CONST const
+#endif
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,9 +32,14 @@
 #endif
 #include <fcntl.h>
 
+/* Ensure that iconv_no_i18n does not depend on libintl.  */
 #ifdef NO_I18N
 # undef ENABLE_NLS
+# undef ENABLE_RELOCATABLE
 #endif
+
+#include "progname.h"
+#include "relocatable.h"
 #include "gettext.h"
 
 #define _(str) gettext(str)
@@ -241,6 +250,7 @@ int main (int argc, char* argv[])
   int i;
   int status;
 
+  set_program_name (argv[0]);
 #if HAVE_SETLOCALE
   /* Needed for the locale dependent encodings, "char" and "wchar_t",
      and for gettext. */
@@ -251,7 +261,7 @@ int main (int argc, char* argv[])
 #endif
 #endif
 #if ENABLE_NLS
-  bindtextdomain("libiconv",LOCALEDIR);
+  bindtextdomain("libiconv",relocate(LOCALEDIR));
 #endif
   textdomain("libiconv");
   for (i = 1; i < argc;) {

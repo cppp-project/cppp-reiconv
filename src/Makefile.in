@@ -4,6 +4,7 @@
 
 # Directories used by "make":
 srcdir = @srcdir@
+top_srcdir = @top_srcdir@
 
 # Directories used by "make install":
 prefix = @prefix@
@@ -19,7 +20,7 @@ CC = @CC@
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
-INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
+INCLUDES = -I. -I$(srcdir) -I.. -I../include -I$(srcdir)/../include -I../srclib -I$(srcdir)/../srclib
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link
@@ -56,17 +57,25 @@ all : iconv_no_i18n iconv.@OBJEXT@
 
 # This is the temporary iconv executable, without internationalization.
 iconv_no_i18n : iconv_no_i18n.@OBJEXT@ ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv_no_i18n.@OBJEXT@ ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv_no_i18n.@OBJEXT@ ../srclib/libicrt.a ../lib/libiconv.la -o $@
 
 iconv_no_i18n.@OBJEXT@ : $(srcdir)/iconv_no_i18n.c $(srcdir)/iconv.c
-	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv_no_i18n.c
+	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DINSTALLDIR=\"$(bindir)\" -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv_no_i18n.c
 
 iconv.@OBJEXT@ : $(srcdir)/iconv.c
-	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv.c
+	$(CC) -c $(INCLUDES) -I../lib $(CFLAGS) $(CPPFLAGS) -DINSTALLDIR=\"$(bindir)\" -DLOCALEDIR=\"$(localedir)\" $(srcdir)/iconv.c
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
 ../lib/libiconv.la :
 	cd ../lib && $(MAKE) libiconv.la
+
+# Support for relocatability.
+RELOCATABLE_LIBRARY_PATH = $(libdir)
+RELOCATABLE_SRC_DIR = $(top_srcdir)/srclib
+RELOCATABLE_BUILD_DIR = ../srclib
+RELOCATABLE_CONFIG_H_DIR = ..
+@SET_RELOCATABLE@
+iconv_LDFLAGS = `if test -n '$(RELOCATABLE_LDFLAGS)'; then $(RELOCATABLE_LDFLAGS) $(bindir); fi`
 
 # During "make install", we can build the final iconv executable.
 # On HP-UX, in order to ensure that the new libiconv.sl will override the old
@@ -78,10 +87,10 @@ install : all force
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(exec_prefix) ; fi
 	if [ ! -d $(DESTDIR)$(bindir) ] ; then $(mkinstalldirs) $(DESTDIR)$(bindir) ; fi
 	case "@host_os@" in \
-	  hpux*) $(CC) $(LDFLAGS) iconv.@OBJEXT@ -L$(libdir) -liconv @LIBINTL@ -o iconv;; \
-	  *) $(LIBTOOL_LINK) $(CC) $(LDFLAGS) iconv.@OBJEXT@ ../lib/libiconv.la @LTLIBINTL@ -o iconv;; \
+	  hpux*) $(CC) $(LDFLAGS) $(iconv_LDFLAGS) iconv.@OBJEXT@ ../srclib/libicrt.a -L$(libdir) -liconv @LIBINTL@ -o iconv;; \
+	  *) $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(iconv_LDFLAGS) iconv.@OBJEXT@ ../srclib/libicrt.a ../lib/libiconv.la @LTLIBINTL@ -o iconv;; \
 	esac
-	$(LIBTOOL_INSTALL) $(INSTALL_PROGRAM) iconv $(DESTDIR)$(bindir)/iconv
+	$(INSTALL_PROGRAM_ENV) $(LIBTOOL_INSTALL) $(INSTALL_PROGRAM) iconv $(DESTDIR)$(bindir)/iconv
 
 installdirs : force
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(prefix) ; fi
@@ -100,7 +109,7 @@ clean : force
 	$(RM) -r .libs _libs
 
 distclean : clean
-	$(RM) Makefile config.h
+	$(RM) Makefile
 
 maintainer-clean : distclean
 

@@ -28,7 +28,7 @@ AC_PROG_MAKE_SET
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
 
-dnl           checks for programs
+dnl           checks for basic programs
 
 AC_PROG_CC
 AC_PROG_CPP
@@ -38,6 +38,12 @@ AC_PROG_INSTALL
 dnl           check for host type
 
 AC_CANONICAL_HOST
+
+dnl           checks for installer options
+
+AC_RELOCATABLE_LIBRARY
+
+dnl           checks for programs
 
 dnl           checks for UNIX variants that set DEFS
 

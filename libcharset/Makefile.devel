@@ -7,10 +7,10 @@ AUTOCONF = autoconf-2.57
 CP = cp
 RM = rm -f
 
-all : configures config.h.msvc include/localcharset.h.msvc-shared
+all : configures config.h.msvc include/libcharset.h.msvc-shared include/localcharset.h.msvc-shared
 
 autoconf/aclocal.m4 : $(wildcard m4/*.m4)
-	aclocal --acdir=m4 --output=$@
+	aclocal -I m4 --output=$@
 
 configures : configure config.h.in
 
@@ -22,9 +22,21 @@ config.h.in : configure.in autoconf/aclocal.m4
 	touch config.h.in
 
 config.h.msvc : config.h.in
-	sed -e 's/#undef HAVE_SETLOCALE$$/#define HAVE_SETLOCALE 1/' -e 's/#undef HAVE_STDDEF_H$$/#define HAVE_STDDEF_H 1/' -e 's/#undef HAVE_STDLIB_H$$/#define HAVE_STDLIB_H 1/' -e 's/#undef HAVE_STRING_H$$/#define HAVE_STRING_H 1/' < $< > $@
+	sed -e 's/#undef HAVE_SETLOCALE$$/#define HAVE_SETLOCALE 1/' \
+	    -e 's/#undef HAVE_STDDEF_H$$/#define HAVE_STDDEF_H 1/' \
+	    -e 's/#undef HAVE_STDLIB_H$$/#define HAVE_STDLIB_H 1/' \
+	    -e 's/#undef HAVE_STRING_H$$/#define HAVE_STRING_H 1/' \
+	    -e '/#undef INSTALLPREFIX$$/d' \
+	  < $< > $@
+
+include/libcharset.h.msvc-shared : include/libcharset.h.in windows/dllexport.h
+	sed -e 's/extern \([^"]\)/extern LIBCHARSET_DLL_EXPORTED \1/' \
+	    -e '/#define _LIBCHARSET_H/r windows/dllexport.h' \
+	  < $< > $@
 
 include/localcharset.h.msvc-shared : include/localcharset.h.in windows/dllexport.h
-	sed -e 's/extern \([^"]\)/extern LIBCHARSET_DLL_EXPORTED \1/' -e '/#define _LOCALCHARSET_H/r windows/dllexport.h' < $< > $@
+	sed -e 's/extern \([^"]\)/extern LIBCHARSET_DLL_EXPORTED \1/' \
+	    -e '/#define _LOCALCHARSET_H/r windows/dllexport.h' \
+	  < $< > $@
 
 force :
