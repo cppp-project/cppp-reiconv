@@ -16,9 +16,9 @@ provides the nl_langinfo function, in such a way that
 
                   nl_langinfo (CODESET)
 
-returns the encoding name. But the nl_langinfo functions still does not exist
-on some systems, and those where it exists it returns unstandardized variations
-of the encoding names, like (on Solaris) "PCK" for "Shift_JIS".
+returns the encoding name. But the nl_langinfo function still does not exist
+on some systems, and on those where it exists it returns unstandardized
+variations of the encoding names, like (on Solaris) "PCK" for "Shift_JIS".
 
 This library fixes these flaws and provides a function
 
