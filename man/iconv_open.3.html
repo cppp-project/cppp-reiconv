@@ -17,7 +17,7 @@
 
 <hr>
 <!-- Creator     : groff version 1.17 -->
-<!-- CreationDate: Wed Jun  6 20:34:24 2001 -->
+<!-- CreationDate: Mon Jan 14 13:02:39 2002 -->
 <a name="NAME"></a>
 <h2>NAME</h2>
 <table width="100%" border=0 rules="none" frame="void"
@@ -226,8 +226,15 @@ Full Unicode, in terms of <b>uint16_t</b> or
        cols="2" cellspacing="0" cellpadding="0">
 <tr valign="top" align="left">
 <td width="21%"></td><td width="79%">
-(with machine dependent endianness and alignment)
-UCS-2-INTERNAL, UCS-4-INTERNAL</td></table>
+(with machine dependent endianness and
+alignment)</td></table>
+
+<table width="100%" border=0 rules="none" frame="void"
+       cols="2" cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="21%"></td><td width="79%">
+<pre>UCS-2-INTERNAL, UCS-4-INTERNAL
+</pre></td></table>
 
 <table width="100%" border=0 rules="none" frame="void"
        cols="2" cellspacing="0" cellpadding="0">
@@ -242,7 +249,14 @@ Locale dependent, in terms of <b>char</b> or
 <td width="21%"></td><td width="79%">
 (with machine dependent endianness and alignment, and with
 semantics depending on the OS and the current LC_CTYPE
-locale facet) char, wchar_t</td></table>
+locale facet)</td></table>
+
+<table width="100%" border=0 rules="none" frame="void"
+       cols="2" cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="21%"></td><td width="79%">
+<pre>char, wchar_t
+</pre>The empty encoding name &quot;&quot; is equivalent to &quot;char&quot;: it denotes the locale dependent character encoding.</td></table>
 
 <table width="100%" border=0 rules="none" frame="void"
        cols="2" cellspacing="0" cellpadding="0">

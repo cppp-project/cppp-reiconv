@@ -129,3 +129,4 @@
 #define ei_cp864_oflags (0)
 #define ei_cp865_oflags (0)
 #define ei_cp869_oflags (HAVE_QUOTATION_MARKS)
+#define ei_cp1125_oflags (0)
