@@ -39,6 +39,7 @@ UCS-2-INTERNAL, ei_ucs2internal
 UCS-2-SWAPPED, ei_ucs2swapped
 UCS-4-INTERNAL, ei_ucs4internal
 UCS-4-SWAPPED, ei_ucs4swapped
+C99, ei_c99
 JAVA, ei_java
 ISO-8859-1, ei_iso8859_1
 ISO_8859-1, ei_iso8859_1
