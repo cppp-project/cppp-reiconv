@@ -1,5 +1,12 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
+	* configure.in: Bump version number to 1.9.
+	* include/iconv.h.in (_LIBICONV_VERSION): Bump.
+	* windows/iconv.rc: Bump version number.
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 4:0:2.
+
+2003-04-05  Bruno Haible  <bruno@clisp.org>
+
 	* Makefile.msvc (PREFIX): New variable.
 	(prefix): Use it.
 	(distclean, maintainer-clean): Drop Unix specific removals.
