@@ -6,6 +6,7 @@ ISO646-US, ei_ascii
 ISO_646.IRV:1991, ei_ascii
 ISO-IR-6, ei_ascii
 ANSI_X3.4-1968, ei_ascii
+ANSI_X3.4-1986, ei_ascii
 CP367, ei_ascii
 IBM367, ei_ascii
 US, ei_ascii
@@ -123,6 +124,7 @@ ISO_8859-14:1998, ei_iso8859_14
 ISO-IR-199, ei_iso8859_14
 LATIN8, ei_iso8859_14
 L8, ei_iso8859_14
+ISO-CELTIC, ei_iso8859_14
 ISO-8859-15, ei_iso8859_15
 ISO_8859-15, ei_iso8859_15
 ISO_8859-15:1998, ei_iso8859_15
@@ -230,6 +232,7 @@ JIS_X0208-1990, ei_jisx0208
 JIS0208, ei_jisx0208
 X0208, ei_jisx0208
 ISO-IR-87, ei_jisx0208
+JIS_C6226-1983, ei_jisx0208
 CSISO87JISX0208, ei_jisx0208
 JIS_X0212, ei_jisx0212
 JIS_X0212.1990-0, ei_jisx0212
@@ -292,6 +295,7 @@ BIGFIVE, ei_ces_big5
 CN-BIG5, ei_ces_big5
 CSBIG5, ei_ces_big5
 CP950, ei_cp950
+BIG5-HKSCS, ei_big5hkscs
 BIG5HKSCS, ei_big5hkscs
 EUC-KR, ei_euc_kr
 EUCKR, ei_euc_kr
