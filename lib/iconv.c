@@ -30,6 +30,9 @@
 #ifdef _AIX
 #define USE_AIX
 #endif
+#ifdef __osf__
+#define USE_OSF1
+#endif
 #ifdef __DJGPP__
 #define USE_DOS
 #endif
@@ -71,6 +74,9 @@ enum {
 #ifdef USE_AIX
 #include "encodings_aix.def"
 #endif
+#ifdef USE_OSF1
+#include "encodings_osf1.def"
+#endif
 #ifdef USE_DOS
 #include "encodings_dos.def"
 #endif
@@ -85,6 +91,9 @@ static struct encoding const all_encodings[] = {
 #include "encodings.def"
 #ifdef USE_AIX
 #include "encodings_aix.def"
+#endif
+#ifdef USE_OSF1
+#include "encodings_osf1.def"
 #endif
 #ifdef USE_DOS
 #include "encodings_dos.def"
@@ -115,10 +124,13 @@ static struct encoding const all_encodings[] = {
  * Defines
  *   const struct alias * aliases2_lookup (const char *str);
  */
-#if defined(USE_AIX) /* || ... */
+#if defined(USE_AIX) || defined(USE_OSF1) || defined(USE_DOS) /* || ... */
 static struct alias sysdep_aliases[] = {
 #ifdef USE_AIX
 #include "aliases_aix.h"
+#endif
+#ifdef USE_OSF1
+#include "aliases_osf1.h"
 #endif
 #ifdef USE_DOS
 #include "aliases_dos.h"

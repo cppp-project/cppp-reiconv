@@ -1,3 +1,20 @@
+2001-03-05  Bruno Haible  <haible@clisp.cons.org>
+
+        Provide all encodings used by OSF/1 5.1 locales.
+        * lib/dec_kanji.h: New file.
+        * lib/dec_hanyu.h: New file.
+        * lib/converters.h: Include them if USE_OSF1 is defined.
+        * lib/encodings_osf1.def: New file.
+        * lib/genflags.c (main): Include it. Define USE_OSF1.
+        * lib/genaliases2.c (main): Include it conditionally.
+        * lib/iconv.c: Define USE_OSF1 on OSF/1.
+          Include encodings_osf1.def and aliases_osf1.h.
+        * lib/Makefile.in (iconv.lo): Depend on encodings_osf1.def and
+          aliases_osf1.h.
+        * Makefile.devel (lib/aliases_osf1.h): New target.
+          (all): Depend on lib/aliases_osf1.h.
+          (lib/flags.h): Depend on lib/encodings_osf1.def.
+
 2001-03-01  Bruno Haible  <haible@clisp.cons.org>
 
         * tools/Makefile (cp775.h): New target.

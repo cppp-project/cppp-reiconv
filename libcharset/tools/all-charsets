@@ -25,6 +25,7 @@ do
     GB2312 | EUC-JP | EUC-KR | EUC-TW | BIG5 | BIG5HKSCS | GBK | GB18030 | SJIS | JOHAB | \
     TIS-620 | VISCII | \
     HP-ROMAN8 | HP-ARABIC8 | HP-GREEK8 | HP-HEBREW8 | HP-TURKISH8 | HP-KANA8 | \
+    DEC-KANJI | DEC-HANYU | \
     UTF-8 ) comment="";;
     * ) comment="bug";;
   esac

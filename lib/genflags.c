@@ -23,6 +23,7 @@
 
 /* Consider all encodings, including the system dependent ones. */
 #define USE_AIX
+#define USE_OSF1
 #define USE_DOS
 
 struct loop_funcs {};
@@ -96,6 +97,7 @@ int main ()
 /* Consider all encodings, including the system dependent ones. */
 #include "encodings.def"
 #include "encodings_aix.def"
+#include "encodings_osf1.def"
 #include "encodings_dos.def"
 #undef DEFENCODING
 

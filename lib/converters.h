@@ -225,6 +225,11 @@ typedef struct {
 #include "cp1129.h"
 #endif
 
+#ifdef USE_OSF1
+#include "dec_kanji.h"
+#include "dec_hanyu.h"
+#endif
+
 #ifdef USE_DOS
 #include "cp437.h"
 #include "cp775.h"
