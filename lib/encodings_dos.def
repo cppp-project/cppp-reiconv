@@ -89,3 +89,8 @@ DEFENCODING(( "CP869",                  /* IANA, JDK 1.1 */
             ),
             cp869,
             { cp869_mbtowc, NULL },       { cp869_wctomb, NULL })
+
+DEFENCODING(( "CP1125",                 /* ICU */
+            ),
+            cp1125,
+            { cp1125_mbtowc, NULL },      { cp1125_wctomb, NULL })

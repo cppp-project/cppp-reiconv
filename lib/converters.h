@@ -254,5 +254,6 @@ typedef struct {
 #include "cp864.h"
 #include "cp865.h"
 #include "cp869.h"
+#include "cp1125.h"
 #endif
 

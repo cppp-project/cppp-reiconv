@@ -1,3 +1,7 @@
+2001-10-23  Bruno Haible  <haible@clisp.cons.org>
+
+	* config.charset: msdos in uk_UA uses CP1125.
+
 2001-08-05  Bruno Haible  <haible@clisp.cons.org>
 
 	Make it possible to build libcharset with CC=gcc CFLAGS="-x c++".

@@ -1,3 +1,11 @@
+2001-10-23  Bruno Haible  <haible@clisp.cons.org>
+
+        * tools/Makefile (cp1125.h): New target.
+          (ALL): Add it.
+        * lib/cp1125.h: New file.
+        * lib/converters.h: Include it.
+        * lib/encodings_dos.def (CP1125): New encoding.
+
 2001-09-08  Bruno Haible  <haible@clisp.cons.org>
 
 	* autoconf/eilseq.m4: New file.

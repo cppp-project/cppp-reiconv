@@ -66,6 +66,7 @@
 #   CP950                     win32 dos
 #   CP1046                    aix
 #   CP1124                    aix
+#   CP1125                    dos
 #   CP1129                    aix
 #   CP1250                    win32
 #   CP1251                    glibc win32
@@ -396,6 +397,8 @@ case "$os" in
 	echo "mk_MK CP866" # not CP855 ??
 	echo "ru KOI8-R"    # not CP866 ??
 	echo "ru_RU KOI8-R" # not CP866 ??
+	echo "uk CP1125"
+	echo "uk_UA CP1125"
 	# ISO-8859-6 languages
 	echo "ar CP864"
 	echo "ar_AE CP864"

@@ -101,6 +101,7 @@ ALL = \
  cp864.h \
  cp865.h \
  cp869.h \
+ cp1125.h \
  cjk_variants.h
 
 all : $(ALL)
@@ -422,6 +423,9 @@ cp865.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP865.TXT 8bit_tab
 
 cp869.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP869.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP869 cp869 < $<
+
+cp1125.h : $(TABLESDIR)/csets-new/CP1125.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP1125 cp1125 < $<
 
 
 cjk_variants.h : $(TABLESDIR)/yasuoka/UniVariants cjk_variants
