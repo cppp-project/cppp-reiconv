@@ -1,3 +1,8 @@
+2002-01-17  Bruno Haible  <bruno@clisp.org>
+
+	* lib/tcvn.h (tcvn_2uni_1): Make it smaller.
+	(tcvn_mbtowc): Small optimization.
+
 2002-01-13  Bruno Haible  <bruno@clisp.org>
 
 	New options -l, -c, -s.
