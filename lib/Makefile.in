@@ -52,7 +52,7 @@ LIBCHARSET_OBJECTS = ../libcharset/lib/localcharset.lo
 all : libiconv.la @PLUGLIB@
 
 libiconv.la : $(OBJECTS)
-	$(LIBTOOL_LINK) $(CC) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) $(OBJECTS) $(LIBCHARSET_OBJECTS)
+	$(LIBTOOL_LINK) $(CC) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS) $(LIBCHARSET_OBJECTS)
 
 libiconv_plug.so : libiconv_plug_@OS@.so
 	$(RM) libiconv_plug.so
