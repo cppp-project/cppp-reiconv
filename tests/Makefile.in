@@ -1,0 +1,129 @@
+# Makefile for libiconv/tests
+
+#### Start of system configuration section. ####
+
+# Directories used by "make":
+srcdir = @srcdir@
+
+# Programs used by "make":
+CC = @CC@
+CFLAGS = @CFLAGS@
+CPP = @CPP@
+INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
+LIBTOOL = @LIBTOOL@
+LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
+LIBTOOL_LINK = $(LIBTOOL) --mode=link
+LIBTOOL_INSTALL = $(LIBTOOL) --mode=install
+LIBTOOL_UNINSTALL = $(LIBTOOL) --mode=uninstall
+RM = rm -f
+
+#### End of system configuration section. ####
+
+SHELL = /bin/sh
+
+# Needed by $(LIBTOOL).
+top_builddir = ..
+
+all :
+
+check : all table-from table-to iconv
+	$(srcdir)/check-stateless $(srcdir) ASCII
+#	/* General multi-byte encodings */
+	$(CC) $(CFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
+	./genutf8 > UTF-8.TXT && \
+	$(srcdir)/check-stateless . UTF-8 && \
+	$(RM) genutf8 UTF-8.TXT
+	$(srcdir)/check-stateful $(srcdir) UTF-7
+#	/* 8-bit encodings */
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-1
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-2
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-3
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-4
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-5
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-6
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-7
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-8
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-9
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-10
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-13
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-14
+	$(srcdir)/check-stateless $(srcdir) ISO-8859-15
+	$(srcdir)/check-stateless $(srcdir) KOI8-R
+	$(srcdir)/check-stateless $(srcdir) KOI8-U
+	$(srcdir)/check-stateless $(srcdir) KOI8-RU
+	$(srcdir)/check-stateless $(srcdir) CP1250
+	$(srcdir)/check-stateless $(srcdir) CP1251
+	$(srcdir)/check-stateless $(srcdir) CP1252
+	$(srcdir)/check-stateless $(srcdir) CP1253
+	$(srcdir)/check-stateless $(srcdir) CP1254
+	$(srcdir)/check-stateless $(srcdir) CP1255
+	$(srcdir)/check-stateless $(srcdir) CP1256
+	$(srcdir)/check-stateless $(srcdir) CP1257
+	$(srcdir)/check-stateless $(srcdir) CP1258
+	$(srcdir)/check-stateless $(srcdir) CP850
+	$(srcdir)/check-stateless $(srcdir) CP866
+	$(srcdir)/check-stateless $(srcdir) MacRoman
+	$(srcdir)/check-stateless $(srcdir) MacCentralEurope
+	$(srcdir)/check-stateless $(srcdir) MacIceland
+	$(srcdir)/check-stateless $(srcdir) MacCroatian
+	$(srcdir)/check-stateless $(srcdir) MacRomania
+	$(srcdir)/check-stateless $(srcdir) MacCyrillic
+	$(srcdir)/check-stateless $(srcdir) MacUkraine
+	$(srcdir)/check-stateless $(srcdir) MacGreek
+	$(srcdir)/check-stateless $(srcdir) MacTurkish
+	$(srcdir)/check-stateless $(srcdir) MacHebrew
+	$(srcdir)/check-stateless $(srcdir) MacArabic
+	$(srcdir)/check-stateless $(srcdir) MacThai
+	$(srcdir)/check-stateless $(srcdir) HP-ROMAN8
+	$(srcdir)/check-stateless $(srcdir) NEXTSTEP
+	$(srcdir)/check-stateless $(srcdir) ARMSCII-8
+	$(srcdir)/check-stateless $(srcdir) Georgian-Academy
+	$(srcdir)/check-stateless $(srcdir) Georgian-PS
+	$(srcdir)/check-stateless $(srcdir) MuleLao-1
+	$(srcdir)/check-stateless $(srcdir) CP1133
+	$(srcdir)/check-stateless $(srcdir) TIS-620
+	$(srcdir)/check-stateless $(srcdir) CP874
+	$(srcdir)/check-stateless $(srcdir) VISCII
+	$(srcdir)/check-stateless $(srcdir) TCVN
+#	/* CJK encodings */
+	$(srcdir)/check-stateless $(srcdir) EUC-JP
+	$(srcdir)/check-stateless $(srcdir) SHIFT-JIS
+	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP
+	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-2
+	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-1
+	$(srcdir)/check-stateless $(srcdir) EUC-CN
+	$(srcdir)/check-stateless $(srcdir) GBK
+	$(srcdir)/check-stateful $(srcdir) ISO-2022-CN
+	$(srcdir)/check-stateful $(srcdir) ISO-2022-CN-EXT
+	$(srcdir)/check-stateful $(srcdir) HZ
+	$(srcdir)/check-stateless $(srcdir) EUC-TW
+	$(srcdir)/check-stateless $(srcdir) BIG5
+	$(srcdir)/check-stateless $(srcdir) CP950
+	$(srcdir)/check-stateless $(srcdir) EUC-KR
+	$(srcdir)/check-stateless $(srcdir) JOHAB
+	$(srcdir)/check-stateful $(srcdir) ISO-2022-KR
+#	/* transliteration */
+	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ISO-8859-1
+	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
+
+table-from : $(srcdir)/table-from.c ../src/libiconv.la
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-from.c ../src/libiconv.la -o $@
+
+table-to : $(srcdir)/table-to.c ../src/libiconv.la
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../src/libiconv.la -o $@
+
+iconv : $(srcdir)/iconv.c ../src/libiconv.la
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/iconv.c ../src/libiconv.la -o $@
+
+mostlyclean : clean
+
+clean : force
+	$(RM) *.o *.lo table-from table-to iconv tmp-* genutf8 UTF-8.TXT core
+	$(RM) -r .libs _libs
+
+distclean : clean
+	$(RM) Makefile
+
+maintainer-clean : distclean
+
+force :

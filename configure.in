@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2000 Free Software Foundation, Inc.
 dnl This file is part of the GNU ICONV Library.
 dnl
 dnl The GNU ICONV Library is free software; you can redistribute it and/or
@@ -87,5 +87,9 @@ else
 fi
 AC_SUBST(PLUGLIB)
 
-test -d include || mkdir include
-AC_OUTPUT(Makefile src/Makefile man/Makefile include/libiconv.h)
+if test -d "${srcdir}/tests"; then
+  TESTS_MAKEFILE=tests/Makefile
+else
+  TESTS_MAKEFILE=""
+fi
+AC_OUTPUT(Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/libiconv.h)

@@ -211,7 +211,7 @@ johab_hangul_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
 /* Decompose wc into r[0..2], and return the number of resulting Jamo elements.
    Return RET_ILSEQ if decomposition is not possible. */
 
-static int johab_hangul_decompose (conv_t conv, unsigned char* r, wchar_t wc)
+static int johab_hangul_decompose (conv_t conv, wchar_t* r, wchar_t wc)
 {
   unsigned char buf[2];
   int ret = johab_hangul_wctomb(conv,buf,wc,2);
@@ -224,13 +224,13 @@ static int johab_hangul_decompose (conv_t conv, unsigned char* r, wchar_t wc)
     if (jamo1 != NONE && jamo2 != NONE && jamo3 != NONE) {
       /* They are not all three == FILL because that would correspond to
          johab = 0x8441, which doesn't exist. */
-      unsigned char* p = r;
+      wchar_t* p = r;
       if (jamo1 != FILL)
-        *p++ = jamo1;
+        *p++ = 0x3130 + jamo1;
       if (jamo2 != FILL)
-        *p++ = jamo2;
+        *p++ = 0x3130 + jamo2;
       if (jamo3 != FILL)
-        *p++ = jamo3;
+        *p++ = 0x3130 + jamo3;
       return p-r;
     }
   }

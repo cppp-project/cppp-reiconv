@@ -1,3 +1,5 @@
+              LIBICONV - character set conversion library
+
 This library provides an iconv() implementation, for use on systems which
 don't have one, or whose implementation cannot convert from/to Unicode.
 
@@ -6,7 +8,8 @@ It provides support for the encodings:
     European languages
         ASCII, ISO-8859-{1,2,3,4,5,7,9,10,13,14,15}, KOI8-R, KOI8-U, KOI8-RU,
         CP{1250,1251,1252,1253,1254,1257}, CP{850,866},
-        Mac{Roman,CentralEurope,Croatian,Romania,Cyrillic,Greek,Turkish},
+        Mac{Roman,CentralEurope,Iceland,Croatian,Romania},
+        Mac{Cyrillic,Ukraine,Greek,Turkish},
         Macintosh
     Semitic languages
         ISO-8859-{6,8}, CP{1255,1256}, Mac{Hebrew,Arabic}
@@ -35,7 +38,9 @@ It provides support for the encodings:
         UCS-2-INTERNAL, UCS-4-INTERNAL
 
 It can convert from any of these encodings to any other, through Unicode
-conversion.
+conversion. It has also some limited support for transliteration, i.e.
+when a character cannot be represented in the target character set, it can
+be approximated through one or several similarly looking characters.
 
 libiconv is for you if your application needs to support multiple character
 encodings, but that support lacks from your system.
@@ -70,5 +75,13 @@ This library can be built and installed in two variants:
 
     A program's source need not be modified, the program need not even be
     recompiled. Just set the LD_PRELOAD environment variable, that's it!
+
+
+Distribution:
+    ftp://ftp.ilog.fr/pub/Users/haible/gnu/libiconv-1.0.tar.gz
+
+Homepage:
+    http://clisp.cons.org/~haible/packages-libiconv.html
+
 
 Bruno Haible <haible@clisp.cons.org>

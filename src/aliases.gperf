@@ -25,6 +25,8 @@ UCS-2-INTERNAL, ei_ucs2internal
 UCS-2-SWAPPED, ei_ucs2swapped
 UCS-2-BE, ei_ucs2be
 UNICODEBIG, ei_ucs2be
+UNICODE-1-1, ei_ucs2be
+CSUNICODE11, ei_ucs2be
 UCS-2-LE, ei_ucs2le
 UNICODELITTLE, ei_ucs2le
 UCS-4-INTERNAL, ei_ucs4internal
@@ -158,6 +160,8 @@ IBM866, ei_cp866
 CSIBM866, ei_cp866
 MACROMAN, ei_mac_roman
 MACINTOSH, ei_mac_roman
+MAC, ei_mac_roman
+CSMACINTOSH, ei_mac_roman
 MACCENTRALEUROPE, ei_mac_centraleurope
 MACICELAND, ei_mac_iceland
 MACCROATIAN, ei_mac_croatian
@@ -207,12 +211,19 @@ JIS_X0208.1983-1, ei_jisx0208
 JIS_X0208-1983, ei_jisx0208
 JIS_X0208-1990, ei_jisx0208
 JIS0208, ei_jisx0208
+X0208, ei_jisx0208
+ISO-IR-87, ei_jisx0208
+CSISO87JISX0208, ei_jisx0208
 JIS_X0212, ei_jisx0212
 JIS_X0212.1990-0, ei_jisx0212
 JIS_X0212-1990, ei_jisx0212
 X0212, ei_jisx0212
 ISO-IR-159, ei_jisx0212
 CSISO159JISX02121990, ei_jisx0212
+GB_2312-80, ei_gb2312
+ISO-IR-58, ei_gb2312
+CSISO58GB231280, ei_gb2312
+CHINESE, ei_gb2312
 KSC_5601, ei_ksc5601
 KSC5601.1987-0, ei_ksc5601
 KS_C_5601-1987, ei_ksc5601

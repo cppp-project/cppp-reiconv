@@ -9,7 +9,7 @@
 .\"   GNU glibc-2 source code and manual
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"
-.TH ICONV 3  "November 27, 1999" "GNU" "Linux Programmer's Manual"
+.TH ICONV 3  "January 2, 2000" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv \- perform character set conversion
 .SH SYNOPSIS
@@ -66,8 +66,9 @@ A third state is when \fIinbuf\fP is NULL or \fI*inbuf\fP is NULL, and
 \fIoutbuf\fP is NULL or \fI*outbuf\fP is NULL. In this case, the \fBiconv\fP
 function sets \fIcd\fP's conversion state to the initial state.
 .SH "RETURN VALUE"
-The \fBiconv\fP function returns the number of characters converted during
-this call. In case of error, it sets \fBerrno\fP and returns (iconv_t)(-1).
+The \fBiconv\fP function returns the number of characters converted in a
+non-reversible way during this call; reversible conversions are not counted.
+In case of error, it sets \fBerrno\fP and returns (iconv_t)(-1).
 .SH ERRORS
 The following errors can occur, among others:
 .TP

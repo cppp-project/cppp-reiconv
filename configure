@@ -1717,7 +1717,11 @@ else
 fi
 
 
-test -d include || mkdir include
+if test -d "${srcdir}/tests"; then
+  TESTS_MAKEFILE=tests/Makefile
+else
+  TESTS_MAKEFILE=""
+fi
 trap '' 1 2 15
 cat > confcache <<\EOF
 # This file is a shell script that caches the results of configure
@@ -1818,7 +1822,7 @@ done
 
 ac_given_srcdir=$srcdir
 
-trap 'rm -fr `echo "Makefile src/Makefile man/Makefile include/libiconv.h src/config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
+trap 'rm -fr `echo "Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/libiconv.h src/config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
 EOF
 cat >> $CONFIG_STATUS <<EOF
 
@@ -1912,7 +1916,7 @@ EOF
 
 cat >> $CONFIG_STATUS <<EOF
 
-CONFIG_FILES=\${CONFIG_FILES-"Makefile src/Makefile man/Makefile include/libiconv.h"}
+CONFIG_FILES=\${CONFIG_FILES-"Makefile src/Makefile man/Makefile ${TESTS_MAKEFILE} include/libiconv.h"}
 EOF
 cat >> $CONFIG_STATUS <<\EOF
 for ac_file in .. $CONFIG_FILES; do if test "x$ac_file" != x..; then

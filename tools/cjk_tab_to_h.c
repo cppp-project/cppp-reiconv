@@ -790,12 +790,12 @@ static void read_table_ksc5601 (Encoding* enc)
       i2 = j & 0xff;
       if (scanf(" 0x%x", &j) != 1)
         exit(1);
-      i1 &= 0x7f;  /* KSC5601 specific */
-      i2 &= 0x7f;  /* KSC5601 specific */
       /* Take only the range covered by KS C 5601.1987-0 = KS C 5601.1989-0
          = KS X 1001.1992, ignore the rest. */
-      if (!(i1 >= 33 && i1 < 127 && i2 >= 33 && i2 < 127))
+      if (!(i1 >= 128+33 && i1 < 128+127 && i2 >= 128+33 && i2 < 128+127))
         continue;  /* KSC5601 specific */
+      i1 &= 0x7f;  /* KSC5601 specific */
+      i2 &= 0x7f;  /* KSC5601 specific */
       row = enc->byte_row(i1);
       col = enc->byte_col(i2);
       if (row < 0 || col < 0) {

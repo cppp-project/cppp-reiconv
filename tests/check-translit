@@ -1,0 +1,12 @@
+#!/bin/sh
+# Simple check of transliteration facilities.
+# Usage: check-translit SRCDIR FILE fromcode tocode
+srcdir="$1"
+file="$2"
+fromcode="$3"
+tocode="$4"
+set -e
+./iconv -f "$fromcode" -t "$tocode" < "${srcdir}"/"$file"."$fromcode" > tmp
+cmp "${srcdir}"/"$file"."$tocode" tmp
+rm -f tmp
+exit 0

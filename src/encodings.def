@@ -1,4 +1,4 @@
-/* Copyright (C) 1999 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -95,6 +95,8 @@ DEFENCODING(( "UCS-2-SWAPPED",
 
 DEFENCODING(( "UCS-2-BE",
               "UNICODEBIG", /* glibc compatibility */
+              "UNICODE-1-1",
+              "csUnicode11",
             ),
             ucs2be,
             { ucs2be_mbtowc },            { ucs2be_wctomb, NULL })
@@ -372,6 +374,8 @@ DEFENCODING(( "CP866",
 
 DEFENCODING(( "MacRoman",  /* This is the best table for MACINTOSH. The ones */
               "MACINTOSH", /* in glibc and FreeBSD-iconv are bad quality. */
+              "MAC",
+              "csMacintosh",
             ),
             mac_roman,
             { mac_roman_mbtowc },         { mac_roman_wctomb, NULL })
@@ -523,6 +527,9 @@ DEFENCODING(( "JIS_X0208",
               "JIS_X0208-1983",
               "JIS_X0208-1990",
               "JIS0208",
+              "X0208",
+              "ISO-IR-87",
+              "csISO87JISX0208",
             ),
             jisx0208,
             { jisx0208_mbtowc },          { jisx0208_wctomb, NULL })
@@ -536,6 +543,14 @@ DEFENCODING(( "JIS_X0212",
             ),
             jisx0212,
             { jisx0212_mbtowc },          { jisx0212_wctomb, NULL })
+
+DEFENCODING(( "GB_2312-80",
+              "ISO-IR-58",
+              "csISO58GB231280",
+              "CHINESE",
+            ),
+            gb2312,
+            { gb2312_mbtowc },            { gb2312_wctomb, NULL })
 
 DEFENCODING(( "KSC_5601",
               "KSC5601.1987-0",

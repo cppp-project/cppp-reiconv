@@ -1,3 +1,17 @@
+New in 1.0:
+* Added transliteration facilities.
+* Added a test suite.
+* Fixed the iconv(3) manual page and function: the return value was not
+  described correctly.
+* Fixed a bug in the CP1258 decoder: invalid bytes now yield EILSEQ instead of
+  U+FFFD.
+* Fixed a bug in the Georgian-PS encoder: accept U+00E6.
+* Fixed a bug in the EUC-JP encoder: reject 0x8E5C and 0x8E7E.
+* Fixed a bug in the KSC5601 and JOHAB converters: they recognized some Hangul
+  characters at some invalid code positions.
+* Fixed a bug in the EUC-TW decoder; it was severely broken.
+* Fixed a bug in the CP950 converter: it recognized a dubious BIG5 range.
+
 New in 0.3:
 * Reduced the size of the tables needed for the JOHAB converter.
 * Portability to Win32.

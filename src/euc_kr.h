@@ -51,21 +51,5 @@ euc_kr_wctomb (conv_t conv, unsigned char *r, wchar_t wc, int n)
     return 2;
   }
 
-  if (conv->transliterate) {
-    /* Decompose Hangul into Jamo */
-    ret = johab_hangul_decompose(conv,buf,wc);
-    if (ret != RET_ILSEQ) {
-      int i;
-      if (n < 2*ret)
-        return RET_TOOSMALL;
-      for (i = 0; i < ret; i++) {
-        r[0] = 0xa4;
-        r[1] = 0xa0+buf[i];
-        r += 2;
-      }
-      return 2*ret;
-    }
-  }
-
   return RET_ILSEQ;
 }

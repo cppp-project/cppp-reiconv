@@ -72,7 +72,8 @@ ALL = \
  big5.h \
  cp950ext.h \
  ksc5601.h \
- johab_hangul.h
+ johab_hangul.h \
+ cjk_variants.h
 
 all : $(ALL)
 
@@ -286,6 +287,9 @@ ksc5601.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_t
 johab_hangul.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/JOHAB.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0x\([8-C]...\|D[0-7]..\)' < $< ) | ./cjk_tab_to_h 'JOHAB Hangul' johab_hangul > $@
 
+cjk_variants.h : $(TABLESDIR)/yasuoka/UniVariants cjk_variants
+	./cjk_variants < $< > $@
+
 
 8bit_tab_to_h : 8bit_tab_to_h.c
 	gcc -O -Wall -g $< -o $@
@@ -293,9 +297,12 @@ johab_hangul.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/JOHAB.TXT cjk_ta
 cjk_tab_to_h : cjk_tab_to_h.c
 	gcc -O -Wall -g $< -o $@
 
+cjk_variants : cjk_variants.c
+	gcc -O -Wall -g $< -o $@
+
 
 clean : force
-	rm -f 8bit_tab_to_h cjk_tab_to_h $(ALL) GBKext.TXT
+	rm -f 8bit_tab_to_h cjk_tab_to_h cjk_variants $(ALL) GBKext.TXT
 
 force :
 

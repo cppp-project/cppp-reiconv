@@ -1,4 +1,4 @@
-/* Copyright (C) 1999 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -26,7 +26,7 @@
 #ifndef _LIBICONV_H
 #define _LIBICONV_H
 
-#define _LIBICONV_VERSION 0x0003    /* version number: (major<<8) + minor */
+#define _LIBICONV_VERSION 0x0100    /* version number: (major<<8) + minor */
 
 /* Include all possible include files which could define iconv_t. */
 /* The next line should include the system's <iconv.h> file. But if it

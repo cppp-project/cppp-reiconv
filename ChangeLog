@@ -1,0 +1,98 @@
+2000-01-04  Bruno Haible  <haible@clisp.cons.org>
+
+        * Version 1.0 released.
+        * include/libiconv.h.in (_LIBICONV_VERSION): Bump version number.
+        * src/Makefile.in (LIBICONV_VERSION_INFO): Define to 0:1:0.
+          (libiconv.la): Use LIBICONV_VERSION_INFO.
+
+2000-01-03  Bruno Haible  <haible@clisp.cons.org>
+
+        * tests/Makefile.in: New file.
+          tests/check-stateless, tests/table-from.c, tests/table-to.c,
+          tests/*.TXT, tests/genutf8.c: New files, checks for stateless
+          encodings.
+          tests/check-stateful, tests/iconv.c, tests/*-snippet*: New files,
+          checks for stateful encodings.
+        * Makefile.in (all, check, mostlyclean, clean, distclean,
+           maintainer-clean): Descend into tests directory.
+        * configure.in: Add tests/Makefile to AC_OUTPUT duties.
+
+        * src/gentranslit.c: New file.
+        * Makefile.devel (src/translit.h): New rule.
+        * src/translit.def, src/translit.h: New files.
+        * src/iconv.c: Include it.
+          (iconv): Transliterate using translit.h table.
+
+        * src/genflags.c: New file.
+        * Makefile.devel (src/flags.h): New rule.
+        * src/flags.h: New file.
+        * src/iconv.c: Include it.
+          (encoding): Add field 'oflags'.
+          (all_encodings): Initialize the field 'oflags'.
+          (iconv_open): Copy field 'oflags'.
+          (iconv): Transliterate quotation marks U+2018, U+2019, U+201A.
+        * src/Makefile.in (iconv.lo): Update dependencies.
+
+        * src/converters.h: New file, extracted from src/iconv.c.
+        * src/iconv.c: Include it.
+        * src/Makefile.in (iconv.lo): Update dependencies.
+
+        * tools/cjk_variants.c: New file.
+        * tools/Makefile (ALL): Add cjk_variants.h.
+          (cjk_variants.h, cjk_variants): New rules.
+        * src/cjk_variants.h: New file.
+        * src/iconv.c: Include it.
+          (iconv): Use cjk_variants for transliteration.
+
+        * man/iconv.3: Fix description of return value.
+        * euc_kr.h (euc_kr_wctomb): Remove Hangul transliteration.
+        * iso2022_kr.h (iso2022kr_wctomb): Likewise.
+        * src/iconv.c (iconv): Do Hangul transliteration here and increment
+          result once for every transliterated character.
+        * src/johab_hangul.h (johab_hangul_decompose): Change result array
+          from 'unsigned char*' to 'wchar_t*'.
+
+        * src/cp1258.h (cp1258_mbtowc): Return RET_ILSEQ instead of storing
+          0xfffd.
+
+        * src/georgian_ps.h (georgian_ps_wctomb): Accept 0x00e6.
+
+        * src/euc_jp.h (euc_jp_wctomb): Don't treat U+005C and U+007E like
+          Katakana.
+
+        * src/euc_tw.h (euc_tw_mbtowc): Fix typo.
+
+        * src/cp950.h (cp950_mbtowc, cp950_wctomb): Exclude the range
+          0xC6A1..0xC7FE.
+
+        * tools/cjk_tab_to_h.c (read_table_ksc5601): Some Hangul range was
+          not being excluded. Fix that.
+        * src/ksc5601.h: Regenerated.
+        * src/johab.h (johab_mbtowc): Don't accept 0xDA{A1..D3} - this is
+          valid in KSC5601/KSX1001 but not in JOHAB.
+
+        * src/iconv.c (conv_struct): Add fields iindex, oindex.
+          (iconv_open): Fill in iindex, oindex.
+
+        * src/encodings.def (UCS-2-BE): Add aliases "UNICODE-1-1" and
+          "csUnicode11", from IANA charset list.
+          (MacRoman): Add aliases "MAC" and "csMacintosh" for "MACINTOSH",
+          from IANA charset list.
+          (JIS_X0208): Add aliases "X0208", "ISO-IR-87", "csISO87JISX0208",
+          from IANA charset list.
+          (GB_2312-80): New encoding, from IANA charset list.
+
+        * README, man/iconv_open.3: Add MacIceland and MacUkraine.
+
+        * Makefile.devel: Add rules for src/aliases.h and src/aliases.gperf.
+          (all): Depend on src/aliases.h.
+        * src/Makefile.in: Remove rules for $(srcdir)/aliases.h and
+          $(srcdir)/aliases.gperf.
+          (clean): Clean up.
+
+        * src/Makefile.in (libiconv_plug_linux.so): Remove unneeded "-ldl".
+
+1999-12-31  Bruno Haible  <haible@clisp.cons.org>
+
+        * Version 0.3 released.
+

@@ -295,10 +295,14 @@ A: 1. Explain the "why" in this file, above.
    the new character set name, with the proper dimensions, but that shouldn't
    be too hard. This yields the CCS. The CES you have to write by hand.
    4. Store the resulting C code file in the src directory. Add a #include
-   directive to iconv.c, and add an entry to the encodings.def file.
+   directive to converters.h, and add an entry to the encodings.def file.
    5. Compile the package, and test your new encoding using a program like
    iconv(1) or clisp(1).
-   6. Update the README and man3/iconv_open.3, to mention the new encoding.
+   6. Augment the testsuite: Add a line to tests/Makefile.in. For a stateless
+   encoding, create the complete table as a TXT file. For a stateful encoding,
+   provide a text snippet encoded using your new encoding and its UTF-8
+   equivalent.
+   7. Update the README and man3/iconv_open.3, to mention the new encoding.
    Add a note in the NEWS file.
 
 Q: What about bidirectional text? Should it be tagged or reversed when
@@ -311,7 +315,6 @@ A: After reading RFC 1556: I don't think so. Support for ISO-8859-8-I and
    the same as ISO-8859-8-I. I'm confused.
 
 Other character sets not implemented:
-"macintosh" = "mac" = "csMacintosh"
 "MNEMONIC" = "csMnemonic"
 "MNEM" = "csMnem"
 "ISO-10646-UCS-Basic" = "csUnicodeASCII"
@@ -324,7 +327,22 @@ Other aliases not implemented (and not implemented in glibc-2.1 either):
   From MSIE4:
     ISO-8859-1: alias ISO8859-1
     ISO-8859-2: alias ISO8859-2
-    GB2312: aliases CHINESE CSISO58GB231280 GB_2312-80 ISO-IR-58
     KSC_5601: alias KS_C_5601
     UTF-8: aliases UNICODE-1-1-UTF-8 UNICODE-2-0-UTF-8
+
+
+Q: How can I integrate libiconv into my package?
+A: Just copy the entire libiconv package into a subdirectory of your package.
+   At configuration time, call libiconv's configure script with the
+   appropriate --srcdir option and maybe --enable-static or --disable-shared.
+   Then "cd libiconv && make && make install-lib libdir=... includedir=...".
+   'install-lib' is a special (not GNU standardized) target which installs
+   only the include file - in $(includedir) - and the library - in $(libdir) -
+   and does not use other directory variables. After "installing" libiconv
+   in your package's build directory, building of your package can proceed.
+
+Q: Why is the testsuite so big?
+A: Because some of the tests are very comprehensive.
+   If you don't feel like using the testsuite, you can simply remove the
+   tests/ directory.
 
