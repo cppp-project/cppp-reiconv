@@ -133,10 +133,45 @@ check : all table-from table-to ../src/iconv
 	$(srcdir)/check-stateless $(srcdir) CP949
 	$(srcdir)/check-stateless $(srcdir) JOHAB
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-KR
+#	/* system dependent and extra encodings */
+	$(MAKE) check-extra
 #	/* transliteration */
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
 	$(srcdir)/check-translitfailure $(srcdir) TranslitFail1 ISO-8859-1 ASCII
+
+check-extra: check-extra-@USE_EXTRA_ENCODINGS@
+check-extra-no:
+check-extra-yes: all table-from table-to ../src/iconv
+#	/* AIX specific encodings */
+	$(srcdir)/check-stateless $(srcdir) CP856
+	$(srcdir)/check-stateless $(srcdir) CP922
+#	$(srcdir)/check-stateless $(srcdir) CP943
+	$(srcdir)/check-stateless $(srcdir) CP1046
+	$(srcdir)/check-stateless $(srcdir) CP1124
+	$(srcdir)/check-stateless $(srcdir) CP1129
+	$(srcdir)/check-stateless $(srcdir) CP1161
+	$(srcdir)/check-stateless $(srcdir) CP1162
+	$(srcdir)/check-stateless $(srcdir) CP1163
+#	/* OSF/1 specific encodings */
+	$(srcdir)/check-stateless $(srcdir) DEC-KANJI
+	$(srcdir)/check-stateless $(srcdir) DEC-HANYU
+#	/* DOS specific encodings */
+	$(srcdir)/check-stateless $(srcdir) CP437
+	$(srcdir)/check-stateless $(srcdir) CP737
+	$(srcdir)/check-stateless $(srcdir) CP775
+	$(srcdir)/check-stateless $(srcdir) CP852
+	$(srcdir)/check-stateless $(srcdir) CP855
+	$(srcdir)/check-stateless $(srcdir) CP857
+	$(srcdir)/check-stateless $(srcdir) CP858
+	$(srcdir)/check-stateless $(srcdir) CP860
+	$(srcdir)/check-stateless $(srcdir) CP861
+	$(srcdir)/check-stateless $(srcdir) CP863
+	$(srcdir)/check-stateless $(srcdir) CP864
+	$(srcdir)/check-stateless $(srcdir) CP865
+	$(srcdir)/check-stateless $(srcdir) CP869
+	$(srcdir)/check-stateless $(srcdir) CP1125
+#	/* Extra encodings */
 
 table-from : table-from.@OBJEXT@ ../lib/libiconv.la
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) table-from.@OBJEXT@ ../lib/libiconv.la -o $@

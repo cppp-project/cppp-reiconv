@@ -1,5 +1,55 @@
 2002-05-09  Bruno Haible  <bruno@clisp.org>
 
+	New configure option --enable-extra-encodings.
+	* lib/encodings_extra.def: New file.
+	* lib/converters.h: Handle USE_EXTRA.
+	* lib/genaliases2.c (main): Handle USE_EXTRA.
+	* lib/genflags.c: Define USE_EXTRA.
+	(main): Include encodings_extra.def.
+	* lib/iconv.c: Handle ENABLE_EXTRA, conditionally set USE_EXTRA.
+	Handle USE_EXTRA.
+	* lib/config.h.in (ENABLE_EXTRA): New macro.
+	* configure.in: Accept option --enable-extra-encodings.
+	* Makefile.devel (all): Depend on lib/aliases_extra.h.
+	(lib/aliases_extra.h): New rule.
+	(lib/flags.h): Depend on lib/encodings_extra.def.
+	* tests/Makefile.in (check-extra, check-extra-no, check-extra-yes):
+	New rules.
+	(check): Invoke check-extra.
+	* tests/Makefile.msvc (check): Also check the DOS encodings.
+
+	Support for testing the AIX encodings.
+	* tests/CP856.TXT: New file.
+	* tests/CP922.TXT: New file.
+	* tests/CP1046.TXT: New file.
+	* tests/CP1124.TXT: New file.
+	* tests/CP1129.TXT: New file.
+	* tests/CP1161.TXT, tests/CP1161.IRREVERSIBLE.TXT: New files.
+	* tests/CP1162.TXT: New file.
+	* tests/CP1163.TXT, tests/CP1163.IRREVERSIBLE.TXT: New files.
+
+	Support for testing the OSF/1 encodings.
+	* tests/DEC-KANJI.TXT: New file.
+	* tests/DEC-HANYU.TXT, tests/DEC-HANYU.IRREVERSIBLE.TXT: New files.
+
+	Support for testing the DOS encodings.
+	* tests/CP437.TXT: New file.
+	* tests/CP737.TXT: New file.
+	* tests/CP775.TXT: New file.
+	* tests/CP852.TXT: New file.
+	* tests/CP855.TXT: New file.
+	* tests/CP857.TXT: New file.
+	* tests/CP858.TXT: New file.
+	* tests/CP860.TXT: New file.
+	* tests/CP861.TXT: New file.
+	* tests/CP863.TXT: New file.
+	* tests/CP864.TXT: New file.
+	* tests/CP865.TXT: New file.
+	* tests/CP869.TXT: New file.
+	* tests/CP1125.TXT: New file.
+
+2002-05-09  Bruno Haible  <bruno@clisp.org>
+
 	Implement more ASCII compatible DOS encodings.
 	* tools/Makefile (ALL): Add cp737.h, cp858.h, cp860.h, cp863.h.
 	(cp737.h, cp858.h, cp860.h, cp863.h): New rules.

@@ -25,6 +25,16 @@
 #include "config.h"
 #include "libcharset.h"
 
+#if ENABLE_EXTRA
+/*
+ * Consider all system dependent encodings, for any system,
+ * and the extra encodings.
+ */
+#define USE_AIX
+#define USE_OSF1
+#define USE_DOS
+#define USE_EXTRA
+#else
 /*
  * Consider those system dependent encodings that are needed for the
  * current system.
@@ -37,6 +47,7 @@
 #endif
 #if defined(__DJGPP__) || (defined(_WIN32) && (defined(_MSC_VER) || defined(__MINGW32__)))
 #define USE_DOS
+#endif
 #endif
 
 /*
@@ -82,6 +93,9 @@ enum {
 #ifdef USE_DOS
 #include "encodings_dos.def"
 #endif
+#ifdef USE_EXTRA
+#include "encodings_extra.def"
+#endif
 #include "encodings_local.def"
 #undef DEFENCODING
 ei_for_broken_compilers_that_dont_like_trailing_commas
@@ -99,6 +113,9 @@ static struct encoding const all_encodings[] = {
 #endif
 #ifdef USE_DOS
 #include "encodings_dos.def"
+#endif
+#ifdef USE_EXTRA
+#include "encodings_extra.def"
 #endif
 #undef DEFENCODING
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
@@ -126,7 +143,7 @@ static struct encoding const all_encodings[] = {
  * Defines
  *   const struct alias * aliases2_lookup (const char *str);
  */
-#if defined(USE_AIX) || defined(USE_OSF1) || defined(USE_DOS) /* || ... */
+#if defined(USE_AIX) || defined(USE_OSF1) || defined(USE_DOS) || defined(USE_EXTRA) /* || ... */
 static struct alias sysdep_aliases[] = {
 #ifdef USE_AIX
 #include "aliases_aix.h"
@@ -136,6 +153,9 @@ static struct alias sysdep_aliases[] = {
 #endif
 #ifdef USE_DOS
 #include "aliases_dos.h"
+#endif
+#ifdef USE_EXTRA
+#include "aliases_extra.h"
 #endif
 };
 #ifdef __GNUC__

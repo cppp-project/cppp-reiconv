@@ -153,6 +153,21 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) CP949
 	$(srcdir)\check-stateless.bat $(srcdir) JOHAB
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-KR
+#	/* DOS encodings */
+	$(srcdir)\check-stateless.bat $(srcdir) CP437
+	$(srcdir)\check-stateless.bat $(srcdir) CP737
+	$(srcdir)\check-stateless.bat $(srcdir) CP775
+	$(srcdir)\check-stateless.bat $(srcdir) CP852
+	$(srcdir)\check-stateless.bat $(srcdir) CP855
+	$(srcdir)\check-stateless.bat $(srcdir) CP857
+	$(srcdir)\check-stateless.bat $(srcdir) CP858
+	$(srcdir)\check-stateless.bat $(srcdir) CP860
+	$(srcdir)\check-stateless.bat $(srcdir) CP861
+	$(srcdir)\check-stateless.bat $(srcdir) CP863
+	$(srcdir)\check-stateless.bat $(srcdir) CP864
+	$(srcdir)\check-stateless.bat $(srcdir) CP865
+	$(srcdir)\check-stateless.bat $(srcdir) CP869
+	$(srcdir)\check-stateless.bat $(srcdir) CP1125
 #	/* transliteration */
 	$(srcdir)\check-translit.bat $(srcdir) Quotes UTF-8 ISO-8859-1
 	$(srcdir)\check-translit.bat $(srcdir) Quotes UTF-8 ASCII

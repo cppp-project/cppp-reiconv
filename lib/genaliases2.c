@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -57,6 +57,9 @@ int main ()
 #endif
 #ifdef USE_DOS
 #include "encodings_dos.def"
+#endif
+#ifdef USE_EXTRA
+#include "encodings_extra.def"
 #endif
 #undef BRACIFY
 #undef DEFENCODING

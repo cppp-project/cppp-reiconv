@@ -12,7 +12,7 @@ CP = cp
 RM = rm -f
 
 
-all : configures lib/config.h.msvc include/iconv.h.msvc-static include/iconv.h.msvc-shared lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html force
+all : configures lib/config.h.msvc include/iconv.h.msvc-static include/iconv.h.msvc-shared lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html force
 	cd libcharset && $(MAKE) -f Makefile.devel all
 
 
@@ -35,15 +35,15 @@ CONFIGURES_IN = configure.in
 
 CLISP_DIR = ..
 
-m4/general.m4 : $(CLISP_DIR)/src/m4/general.m4 ; cp -p $< $@-t && mv $@-t $@
-m4/proto.m4 : $(CLISP_DIR)/src/m4/proto.m4 ; cp -p $< $@-t && mv $@-t $@
-m4/ranlib.m4 : $(CLISP_DIR)/src/m4/ranlib.m4 ; cp -p $< $@-t && mv $@-t $@
-m4/install.m4 : $(CLISP_DIR)/src/m4/install.m4 ; cp -p $< $@-t && mv $@-t $@
-m4/cp.m4 : $(CLISP_DIR)/src/m4/cp.m4 ; cp -p $< $@-t && mv $@-t $@
-m4/ln.m4 : $(CLISP_DIR)/src/m4/ln.m4 ; cp -p $< $@-t && mv $@-t $@
-m4/endian.m4 : $(CLISP_DIR)/src/m4/endian.m4 ; cp -p $< $@-t && mv $@-t $@
-m4/libtool.m4 : $(CLISP_DIR)/src/m4/libtool.m4
-	sed -e 's,AC_CANONICAL_HOST,CL_CANONICAL_HOST,g' -e 's,AC_PROG_RANLIB,CL_PROG_RANLIB,g' -e 's,AC_PROG_LN_S,CL_PROG_LN_S,g' < $< > $@-t && mv $@-t $@
+#m4/general.m4 : $(CLISP_DIR)/src/m4/general.m4 ; cp -p $< $@-t && mv $@-t $@
+#m4/proto.m4 : $(CLISP_DIR)/src/m4/proto.m4 ; cp -p $< $@-t && mv $@-t $@
+#m4/ranlib.m4 : $(CLISP_DIR)/src/m4/ranlib.m4 ; cp -p $< $@-t && mv $@-t $@
+#m4/install.m4 : $(CLISP_DIR)/src/m4/install.m4 ; cp -p $< $@-t && mv $@-t $@
+#m4/cp.m4 : $(CLISP_DIR)/src/m4/cp.m4 ; cp -p $< $@-t && mv $@-t $@
+#m4/ln.m4 : $(CLISP_DIR)/src/m4/ln.m4 ; cp -p $< $@-t && mv $@-t $@
+#m4/endian.m4 : $(CLISP_DIR)/src/m4/endian.m4 ; cp -p $< $@-t && mv $@-t $@
+#m4/libtool.m4 : $(CLISP_DIR)/src/m4/libtool.m4
+#	sed -e 's,AC_CANONICAL_HOST,CL_CANONICAL_HOST,g' -e 's,AC_PROG_RANLIB,CL_PROG_RANLIB,g' -e 's,AC_PROG_LN_S,CL_PROG_LN_S,g' < $< > $@-t && mv $@-t $@
 
 autoconf/aclocal.m4 : m4/general.m4 m4/proto.m4 m4/ranlib.m4 m4/install.m4 m4/cp.m4 m4/ln.m4 m4/endian.m4 m4/libtool.m4
 	aclocal --acdir=m4 --output=$@
@@ -96,8 +96,13 @@ lib/aliases_dos.h : lib/encodings_dos.def lib/genaliases2.c
 	./genaliases > lib/aliases_dos.h
 	$(RM) genaliases
 
+lib/aliases_extra.h : lib/encodings_extra.def lib/genaliases2.c
+	$(CC) $(CFLAGS) -DUSE_EXTRA lib/genaliases2.c -o genaliases
+	./genaliases > lib/aliases_extra.h
+	$(RM) genaliases
 
-lib/flags.h : lib/encodings.def lib/encodings_aix.def lib/encodings_osf1.def lib/encodings_dos.def lib/converters.h lib/genflags.c
+
+lib/flags.h : lib/encodings.def lib/encodings_aix.def lib/encodings_osf1.def lib/encodings_dos.def lib/encodings_extra.def lib/converters.h lib/genflags.c
 	$(CC) $(CFLAGS) lib/genflags.c -o genflags
 	./genflags > lib/flags.h
 	$(RM) genflags

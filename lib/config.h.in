@@ -17,6 +17,9 @@
    Suite 330, Boston, MA 02111-1307, USA.  */
 
 
+/* Define to 1 to enable a few rarely used encodings. */
+#undef ENABLE_EXTRA
+
 /* Define to a type if <wchar.h> does not define. */
 #undef mbstate_t
 
