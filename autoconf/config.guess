@@ -468,6 +468,7 @@ EOF
 	    9000/[34]?? )         HP_ARCH=m68k ;;
 	    9000/[678][0-9][0-9])
               sed 's/^              //' << EOF >$dummy.c
+              #define _HPUX_SOURCE
               #include <stdlib.h>
               #include <unistd.h>
               
@@ -498,7 +499,7 @@ EOF
                   exit (0);
               }
 EOF
-	(CCOPTS= $CC_FOR_BUILD -D_HPUX_SOURCE $dummy.c -o $dummy 2>/dev/null ) && HP_ARCH=`./$dummy`
+	(CCOPTS= $CC_FOR_BUILD $dummy.c -o $dummy 2>/dev/null ) && HP_ARCH=`./$dummy`
 	rm -f $dummy.c $dummy
 	esac
 	HPUX_REV=`echo ${UNAME_RELEASE}|sed -e 's/[^.]*.[0B]*//'`
