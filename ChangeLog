@@ -1,5 +1,17 @@
 2004-01-21  Bruno Haible  <bruno@clisp.org>
 
+	* src/iconv.c (force_binary): Remove variable.
+	(usage): Don't document --binary any more.
+	(convert, main): Always switch to binary mode.
+	* tests/check-stateful.bat: Remove --binary option.
+	* tests/check-translit.bat: Likewise.
+	* tests/check-stateful.cmd: Likewise.
+	* tests/check-translit.cmd: Likewise.
+	* djgpp/stateful-check.sed: Remove MODE variable.
+	* djgpp/translit-check.sed: Likewise.
+
+2004-01-21  Bruno Haible  <bruno@clisp.org>
+
 	* man/iconv.3: Fix description of return value in case of error.
 	Reported by Jonathan Wakely <redi@users.sf.net>.
 

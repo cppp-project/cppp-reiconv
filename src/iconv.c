@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2003 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2004 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -45,21 +45,13 @@
 
 #define _(str) gettext(str)
 
-#if O_BINARY
-  static int force_binary = 0;
-#endif
-
 static int discard_unconvertible = 0;
 static int silent = 0;
 
 static void usage (int exitcode)
 {
   const char* helpstring1 =
-#if O_BINARY
-    _("Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]");
-#else
     _("Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]");
-#endif
   const char* helpstring2 =
     _("or:    iconv -l");
   fprintf(exitcode ? stderr : stdout, "%s\n%s\n", helpstring1, helpstring2);
@@ -100,8 +92,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
   int status = 0;
 
 #if O_BINARY
-  if (force_binary)
-    SET_BINARY(fileno(infile));
+  SET_BINARY(fileno(infile));
 #endif
   iconv(cd,NULL,NULL,NULL,NULL);
   for (;;) {
@@ -263,8 +254,8 @@ int main (int argc, char* argv[])
       print_version();
     }
 #if O_BINARY
+    /* Backward compatibility with iconv <= 1.9.1. */
     if (!strcmp(argv[i],"--binary")) {
-      force_binary = 1;
       i++;
       continue;
     }
@@ -291,8 +282,7 @@ int main (int argc, char* argv[])
     status = 0;
   } else {
 #if O_BINARY
-    if (force_binary)
-      SET_BINARY(fileno(stdout));
+    SET_BINARY(fileno(stdout));
 #endif
     if (fromcode == NULL)
       fromcode = "char";
