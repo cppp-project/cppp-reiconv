@@ -1,0 +1,118 @@
+# Makefile for libiconv/src
+
+#### Start of system configuration section. ####
+
+# Directories used by "make":
+srcdir = @srcdir@
+
+# Directories used by "make install":
+prefix = @prefix@
+local_prefix = /usr/local
+exec_prefix = $(prefix)
+libdir = $(exec_prefix)/lib
+
+# Programs used by "make":
+CC = @CC@
+CFLAGS = @CFLAGS@
+CPP = @CPP@
+INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
+LIBTOOL = @LIBTOOL@
+LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
+LIBTOOL_LINK = $(LIBTOOL) --mode=link
+LIBTOOL_INSTALL = $(LIBTOOL) --mode=install
+LIBTOOL_UNINSTALL = $(LIBTOOL) --mode=uninstall
+GPERF = gperf
+CP = cp
+MV = mv
+LN = ln
+LN_S = ln -s
+RM = rm -f
+
+# Programs used by "make install":
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+#### End of system configuration section. ####
+
+SHELL = /bin/sh
+
+# Needed by $(LIBTOOL).
+top_builddir = ..
+
+SOURCES = $(srcdir)/iconv.c
+
+OBJECTS = iconv.lo
+
+PLUG_SOURCES =
+
+all : libiconv.la @PLUGLIB@
+
+libiconv.la : $(OBJECTS)
+	$(LIBTOOL_LINK) $(CC) -o libiconv.la -rpath $(libdir) $(OBJECTS)
+
+libiconv_plug.so : libiconv_plug_@OS@.so
+	$(RM) libiconv_plug.so
+	$(LN_S) libiconv_plug_@OS@.so libiconv_plug.so
+
+libiconv_plug_linux.so : $(SOURCES)
+	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -ldl -shared -o libiconv_plug_linux.so
+
+libiconv_plug_solaris.so : $(SOURCES)
+	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -G -o libiconv_plug_solaris.so
+
+libiconv_plug_osf.so : $(SOURCES)
+	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -shared -o libiconv_plug_osf.so
+
+iconv.lo : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/aliases.h
+	$(LIBTOOL_COMPILE) $(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
+
+# We use "-7" to make a smaller table, but use "unsigned char" array indices
+# to avoid gcc warning.
+$(srcdir)/aliases.h : $(srcdir)/aliases.gperf
+	$(GPERF) -t -L ANSI-C -H aliases_hash -N aliases_lookup -7 -C -k '1,3-7,9-11,$$' $(srcdir)/aliases.gperf | sed -e 's/\[str/\[(unsigned char) str/' > tmp.h
+	$(CP) tmp.h $(srcdir)/aliases.h
+	$(RM) tmp.h
+
+$(srcdir)/aliases.gperf : $(srcdir)/encodings.def $(srcdir)/genaliases.c
+	$(CC) $(CFLAGS) $(srcdir)/genaliases.c -o genaliases
+	./genaliases > $(srcdir)/aliases.gperf
+	$(RM) genaliases
+
+# Installs the library and include files only. Typically called with only
+# $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
+install-lib : all force
+	if [ ! -d $(libdir) ] ; then mkdir $(libdir) ; fi
+	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libiconv.la $(libdir)/libiconv.la
+
+install : all force
+	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
+	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
+	if [ ! -d $(libdir) ] ; then mkdir $(libdir) ; fi
+	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libiconv.la $(libdir)/libiconv.la
+	if test -n "@PLUGLIB@"; then $(INSTALL_DATA) @PLUGLIB@ $(libdir)/@PLUGLIB@.new && mv $(libdir)/@PLUGLIB@.new $(libdir)/@PLUGLIB@ ; fi
+
+installdirs : force
+	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
+	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
+	if [ ! -d $(libdir) ] ; then mkdir $(libdir) ; fi
+
+uninstall : force
+	$(LIBTOOL_UNINSTALL) $(RM) $(libdir)/libiconv.la
+	if test -n "@PLUGLIB@"; then $(RM) $(libdir)/@PLUGLIB@ ; fi
+
+check : all
+
+mostlyclean : clean
+
+clean : force
+	$(RM) *.o *.lo *.a *.la libiconv_plug* tmp.h genaliases core
+	$(RM) -r .libs _libs
+
+distclean : clean
+	$(RM) config.status config.log config.cache Makefile config.h libtool
+
+maintainer-clean : distclean
+
+force :
+

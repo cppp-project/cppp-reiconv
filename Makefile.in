@@ -1,0 +1,85 @@
+# Makefile for libiconv
+
+#### Start of system configuration section. ####
+
+# Directories used by "make":
+srcdir = @srcdir@
+
+# Directories used by "make install":
+prefix = @prefix@
+local_prefix = /usr/local
+exec_prefix = $(prefix)
+libdir = $(exec_prefix)/lib
+includedir = $(prefix)/include
+mandir = $(prefix)/man
+
+# Programs used by "make":
+RM = rm -f
+@SET_MAKE@
+
+# Programs used by "make install":
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+#### End of system configuration section. ####
+
+SHELL = /bin/sh
+
+all : force
+	cd src; $(MAKE) -r all
+	cd man; $(MAKE) -r all
+
+# Installs the library and include files only. Typically called with only
+# $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
+install-lib : all force
+	cd src; $(MAKE) -r install-lib libdir='$(libdir)' includedir='$(includedir)'
+	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
+	$(INSTALL_DATA) include/libiconv.h $(includedir)/iconv.h
+
+install : force
+	cd src; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
+	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
+	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
+	$(INSTALL_DATA) include/libiconv.h $(includedir)/iconv.h
+	cd man; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+
+installdirs : force
+	cd src; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
+	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
+	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
+	cd man; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+
+uninstall : force
+	cd src; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	$(RM) $(includedir)/iconv.h
+	cd man; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+
+check : force
+	cd src; $(MAKE) -r check
+	cd man; $(MAKE) -r check
+
+mostlyclean : force
+	cd src; $(MAKE) -r mostlyclean
+	cd man; $(MAKE) -r mostlyclean
+
+clean : force
+	cd src; $(MAKE) -r clean
+	cd man; $(MAKE) -r clean
+
+distclean : force
+	cd src; if test -f Makefile; then $(MAKE) -r distclean; fi
+	cd man; if test -f Makefile; then $(MAKE) -r distclean; fi
+	$(RM) config.status config.log config.cache Makefile libtool
+	$(RM) include/libiconv.h
+
+maintainer-clean : force
+	cd src; if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
+	cd man; if test -f Makefile; then $(MAKE) -r maintainer-clean; fi
+	$(RM) config.status config.log config.cache Makefile libtool
+	$(RM) include/libiconv.h
+
+force :
+

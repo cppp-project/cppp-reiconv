@@ -1,0 +1,91 @@
+dnl Copyright (C) 1999 Free Software Foundation, Inc.
+dnl This file is part of the GNU ICONV Library.
+dnl
+dnl The GNU ICONV Library is free software; you can redistribute it and/or
+dnl modify it under the terms of the GNU Library General Public License as
+dnl published by the Free Software Foundation; either version 2 of the
+dnl License, or (at your option) any later version.
+dnl
+dnl The GNU ICONV Library is distributed in the hope that it will be useful,
+dnl but WITHOUT ANY WARRANTY; without even the implied warranty of
+dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+dnl Library General Public License for more details.
+dnl
+dnl You should have received a copy of the GNU Library General Public
+dnl License along with the GNU ICONV Library; see the file COPYING.LIB.  If not,
+dnl write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+dnl Boston, MA 02111-1307, USA.
+
+AC_PREREQ(2.12)
+
+AC_INIT(src/iconv.c)
+AC_CONFIG_HEADER(src/config.h)
+AC_PROG_MAKE_SET
+
+dnl           checks for programs
+
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_GCC_TRADITIONAL
+CL_PROG_RANLIB
+CL_PROG_INSTALL
+
+dnl           check for host type
+
+CL_CANONICAL_HOST(autoconf)
+
+dnl           checks for UNIX variants that set DEFS
+
+AC_AIX
+AC_MINIX
+AC_ISC_POSIX
+
+dnl           check for build configuration
+
+PACKAGE=libiconv
+AM_DISABLE_STATIC
+AM_PROG_LIBTOOL
+
+dnl           checks for header files
+
+AC_CHECK_HEADERS(iconv.h)
+if test $ac_cv_header_iconv_h = yes; then
+  INCLUDE_ICONV_H="#include <iconv.h>"
+  HAVE_ICONV_H=1
+else
+  INCLUDE_ICONV_H=""
+  HAVE_ICONV_H=0
+fi
+AC_SUBST(INCLUDE_ICONV_H)
+AC_SUBST(HAVE_ICONV_H)
+
+dnl           checks for functions and declarations
+
+CL_ICONV
+if test $cl_cv_func_iconv = yes -a -z "$cl_cv_proto_iconv_arg1"; then
+  ICONV_CONST=""
+else
+  ICONV_CONST="const"
+fi
+AC_SUBST(ICONV_CONST)
+
+CL_WORDS_LITTLEENDIAN
+
+dnl           check whether OS supports plug libraries
+
+OS=""
+case "$host_os" in
+  linux*)   OS="linux" ;;
+  solaris*) OS="solaris" ;;
+  osf*)     OS="osf" ;;
+esac
+if test -n "$OS"; then
+  AC_SUBST(OS)
+  PLUGLIB="libiconv_plug.so"
+else
+  PLUGLIB=""
+fi
+AC_SUBST(PLUGLIB)
+
+test -d include || mkdir include
+AC_OUTPUT(Makefile src/Makefile man/Makefile include/libiconv.h)

@@ -1,0 +1,74 @@
+This library provides an iconv() implementation, for use on systems which
+don't have one, or whose implementation cannot convert from/to Unicode.
+
+It provides support for the encodings:
+
+    European languages
+        ASCII, ISO-8859-{1,2,3,4,5,7,9,10,13,14,15}, KOI8-R, KOI8-U, KOI8-RU,
+        CP{1250,1251,1252,1253,1254,1257}, CP{850,866},
+        Mac{Roman,CentralEurope,Croatian,Romania,Cyrillic,Greek,Turkish},
+        Macintosh
+    Semitic languages
+        ISO-8859-{6,8}, CP{1255,1256}, Mac{Hebrew,Arabic}
+    Japanese
+        EUC-JP, SHIFT-JIS, ISO-2022-JP, ISO-2022-JP-2, ISO-2022-JP-1
+    Chinese
+        EUC-CN, HZ, GBK, EUC-TW, BIG5, CP950, ISO-2022-CN, ISO-2022-CN-EXT
+    Korean
+        EUC-KR, JOHAB, ISO-2022-KR
+    Armenian
+        ARMSCII-8
+    Georgian
+        Georgian-Academy, Georgian-PS
+    Thai
+        TIS-620, CP874, MacThai
+    Laotian
+        MuleLao-1, CP1133
+    Vietnamese
+        VISCII, TCVN, CP1258
+    Platform specifics
+        HP-ROMAN8, NEXTSTEP
+    Full Unicode
+        UTF-8, UCS-2, UCS-4, UTF-16, UTF-7, JAVA
+    Full Unicode, in terms of `uint16_t' or `uint32_t'
+        (with machine dependent endianness and alignment)
+        UCS-2-INTERNAL, UCS-4-INTERNAL
+
+It can convert from any of these encodings to any other, through Unicode
+conversion.
+
+libiconv is for you if your application needs to support multiple character
+encodings, but that support lacks from your system.
+
+Installation:
+
+As usual for GNU packages:
+
+    $ ./configure --prefix=/usr/local
+    $ make
+    $ make install
+
+This library can be built and installed in two variants:
+
+  - The library mode. This works on all systems, and uses a library
+    `libiconv.so' and a header file `<iconv.h>'. (Both are installed
+    through "make install".)
+
+    To use it, simply #include <iconv.h> and use the functions.
+
+  - The libc plug/override mode. This works on GNU/Linux, Solaris and OSF/1
+    systems only. It is a way to get good iconv support without having
+    glibc-2.1.
+    It installs a library `libiconv_plug.so'. This library can be used with
+    LD_PRELOAD, to override the iconv* functions present in the C library.
+
+    On GNU/Linux and Solaris:
+        $ export LD_PRELOAD=/usr/local/lib/libiconv_plug.so
+
+    On OSF/1:
+        $ export _RLD_LIST=/usr/local/lib/libiconv_plug.so:DEFAULT
+
+    A program's source need not be modified, the program need not even be
+    recompiled. Just set the LD_PRELOAD environment variable, that's it!
+
+Bruno Haible <haible@clisp.cons.org>

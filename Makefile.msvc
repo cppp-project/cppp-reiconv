@@ -1,0 +1,95 @@
+# Makefile for libiconv
+
+#### Start of system configuration section. ####
+
+# Directories used by "make install":
+prefix = /usr/local
+local_prefix = /usr/local
+exec_prefix = $(prefix)
+libdir = $(exec_prefix)/lib
+includedir = $(prefix)/include
+mandir = $(prefix)/man
+
+# Programs used by "make":
+LN = copy
+RM = del
+
+#### End of system configuration section. ####
+
+SHELL = /bin/sh
+
+all : force
+	$(LN) include\libiconv.h.msvc include\libiconv.h
+	cd src
+	$(MAKE) -f Makefile.msvc all
+	cd ..
+#	cd man
+#	$(MAKE) -f Makefile.msvc all
+#	cd ..
+
+install : force
+	cd src; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
+	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
+	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
+	$(INSTALL_DATA) include/libiconv.h $(includedir)/iconv.h
+	cd man; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+
+installdirs : force
+	cd src; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
+	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
+	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
+	cd man; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+
+uninstall : force
+	cd src; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	$(RM) $(includedir)/iconv.h
+	cd man; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
+
+check : force
+	cd src
+	$(MAKE) -f Makefile.msvc check
+	cd ..
+#	cd man
+#	$(MAKE) -f Makefile.msvc check
+#	cd ..
+
+mostlyclean : force
+	cd src
+	$(MAKE) -f Makefile.msvc mostlyclean
+	cd ..
+#	cd man
+#	$(MAKE) -f Makefile.msvc mostlyclean
+#	cd ..
+
+clean : force
+	cd src
+	$(MAKE) -f Makefile.msvc clean
+	cd ..
+#	cd man
+#	$(MAKE) -f Makefile.msvc clean
+#	cd ..
+
+distclean : force
+	cd src
+	$(MAKE) -f Makefile.msvc distclean
+	cd ..
+#	cd man
+#	$(MAKE) -f Makefile.msvc distclean
+#	cd ..
+	$(RM) config.status config.log config.cache Makefile
+	$(RM) include\libiconv.h
+
+maintainer-clean : force
+	cd src
+	$(MAKE) -f Makefile.msvc maintainer-clean
+	cd ..
+#	cd man
+#	$(MAKE) -f Makefile.msvc maintainer-clean
+#	cd ..
+	$(RM) config.status config.log config.cache Makefile
+	$(RM) include\libiconv.h
+
+force :
+

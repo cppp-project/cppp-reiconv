@@ -1,0 +1,88 @@
+/* Copyright (C) 1999 Free Software Foundation, Inc.
+   This file is part of the GNU ICONV Library.
+
+   The GNU ICONV Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The GNU ICONV Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the GNU ICONV Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+
+/* When installed, this file is called "iconv.h". */
+
+/* In the build directory, this file is called "libiconv.h", not "iconv.h",
+   because when compiling for LIBICONV_PLUG we need to include the system's
+   <iconv.h> file, and there is no portable way to do this if there is
+   another "iconv.h" file in any of the -I directories. */
+
+#ifndef _LIBICONV_H
+#define _LIBICONV_H
+
+#define _LIBICONV_VERSION 0x0003    /* version number: (major<<8) + minor */
+
+/* Include all possible include files which could define iconv_t. */
+/* The next line should include the system's <iconv.h> file. But if it
+   happens to include ourselves instead, it does not harm, because
+   _LIBICONV_H is already defined. */
+
+
+#if !(defined(LIBICONV_PLUG) && 0)
+/* Define iconv_t ourselves. */
+#undef iconv_t
+#define iconv_t libiconv_t
+typedef void* iconv_t;
+#endif
+
+/* Get size_t declaration. */
+#include <stddef.h>
+
+/* Get errno declaration and values. */
+#include <errno.h>
+#ifndef EILSEQ
+#define EILSEQ EINVAL
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+/* Allocates descriptor for code conversion from encoding `fromcode' to
+   encoding `tocode'. */
+#ifndef LIBICONV_PLUG
+#define iconv_open libiconv_open
+#endif
+extern iconv_t iconv_open (const char* tocode, const char* fromcode);
+
+/* Converts, using conversion descriptor `cd', at most `*inbytesleft' bytes
+   starting at `*inbuf', writing at most `*outbytesleft' bytes starting at
+   `*outbuf'.
+   Decrements `*inbytesleft' and increments `*inbuf' by the same amount.
+   Decrements `*outbytesleft' and increments `*outbuf' by the same amount. */
+#ifndef LIBICONV_PLUG
+#define iconv libiconv
+#endif
+extern size_t iconv (iconv_t cd, const char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
+
+/* Frees resources allocated for conversion descriptor `cd'. */
+#ifndef LIBICONV_PLUG
+#define iconv_close libiconv_close
+#endif
+extern int iconv_close (iconv_t cd);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif /* _LIBICONV_H */

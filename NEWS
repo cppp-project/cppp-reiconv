@@ -1,0 +1,27 @@
+New in 0.3:
+* Reduced the size of the tables needed for the JOHAB converter.
+* Portability to Win32.
+
+New in 0.2:
+* Added KOI8-RU, CP850, CP866, CP874, CP950, ISO-2022-CN-EXT, GBK and
+  ISO-2022-JP-1 converters.
+* Added MACINTOSH as an alias for MAC-ROMAN.
+* Added ASMO-708 as an alias for ISO-8859-6.
+* Added ELOT_928 as an alias for ISO-8859-7.
+* Improved the EUC-TW converter: Treat CNS 11643 plane 3.
+* Improved the ISO-2022-KR and EUC-KR converters: Hangul characters are
+  decomposed into Jamo when needed.
+* Improved the CP932 converter.
+* Updated the CP1133, MULELAO-1 and ARMSCII-8 mappings.
+* The EUC-JP and SJIS converters now cover the user-defined range.
+* Fixed a possible buffer overrun in the JOHAB converter.
+* Fixed a bug in the UTF-7, ISO-2022-*, HZ decoders: a shift sequence a the
+  end of the input no longer gives an error.
+* The HZ encoder now always terminates its output in the ASCII state.
+* Use a perfect hash table for looking up the aliases.
+
+New in 0.1:
+* Portability to Linux/glibc-2.0.x, Linux/libc5, OSF/1, FreeBSD.
+* Fixed a bug in the EUC-JP decoder. Extended the ISO-2022-JP-2 converter.
+* Made TIS-620 mapping consistent with glibc-2.1.
+

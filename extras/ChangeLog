@@ -1,0 +1,12 @@
+1999-12-18  Bruno Haible  <haible@clisp.cons.org>
+
+        * locale_charset.c (get_locale_charset): Recognize more language codes:
+          "af" (afrikaans), "ca" (catalan), "eu" (basque), "fo" (faeroese),
+          "ga" (irish), "gd" (scottish), "gl" (galician), "sq" (albanian),
+          "eo" (esperanto), "mt" (maltese), "be" (byelorussian),
+          "et" (estonian), "lt" (lithuanian), "lv" (latvian), "uk" (ukrainian).
+          Recognize more aliases: "english", "slovenian", "macedonian",
+          "serbian", "arabic".
+          Change default: KOI8-R for "ru" (russian) instead of ISO-8859-5,
+          ISO-8859-5 for "sr" instead of ISO-8859-2.
+

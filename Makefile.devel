@@ -1,0 +1,46 @@
+# This is the developer's makefile, not the user's makefile.
+# Don't use it unless you know exactly what you do!
+
+SHELL = /bin/sh
+MAKE = make
+
+
+all : configures src/config.h.msvc include/libiconv.h.msvc
+
+
+# Before making a new release:
+# - check that the encoding lists in README and iconv_open.3 are up to date,
+# - increment the version number in libiconv.h.in.
+# - do "make -f Makefile.devel".
+
+
+CONFIGURES = configure
+CONFIGURES_IN = configure.in
+
+CLISP_DIR = /home/bruno/clisp
+ACLOCAL = $(CLISP_DIR)/src/autoconf/aclocal.m4
+ACSELECT = $(CLISP_DIR)/src/autoconf/acselect
+OTHERMACROS = $(CLISP_DIR)/src/autoconf/libtool.m4
+
+autoconf/aclocal.m4 : $(ACLOCAL)
+	($(ACSELECT) `cat $(CONFIGURES_IN) | grep '^[A-Z][A-Z]_' | sed 's,[^A-Z_].*$$,,g' | sort | uniq` < $(ACLOCAL) ; cat $(OTHERMACROS) | sed -e 's,AC_CANONICAL_HOST,CL_CANONICAL_HOST,g' -e 's,AC_PROG_RANLIB,CL_PROG_RANLIB,g') > autoconf/aclocal.m4
+
+configures : $(CONFIGURES)
+
+AUTOCONF_FILES = autoconf/aclocal.m4 autoconf/acgeneral.m4 autoconf/acspecific.m4
+
+configure : configure.in $(AUTOCONF_FILES)
+	autoconf/autoconf -m autoconf
+
+check-configures : $(CONFIGURES)
+	set -e; for f in $(CONFIGURES); do bash -x -n $$f; done
+
+
+src/config.h.msvc : src/config.h.in
+	sed -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' < $< > $@
+
+include/libiconv.h.msvc : include/libiconv.h.in
+	sed -e 's/@INCLUDE_ICONV_H@//g' -e 's/@HAVE_ICONV_H@/0/' -e 's/@ICONV_CONST@/const/g' < $< > $@
+
+
+force :

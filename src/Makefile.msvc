@@ -1,0 +1,63 @@
+# Makefile for libiconv/src
+
+#### Start of system configuration section. ####
+
+# Directories used by "make":
+srcdir = .
+
+# Directories used by "make install":
+prefix = /usr/local
+local_prefix = /usr/local
+exec_prefix = $(prefix)
+libdir = $(exec_prefix)/lib
+
+# Programs used by "make":
+CC = cl
+CFLAGS = -O1
+CPP = cl -E
+INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
+AR = lib
+AR_FLAGS = /out:
+LN = copy
+RM = del
+
+# Programs used by "make install":
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+#### End of system configuration section. ####
+
+SHELL = /bin/sh
+
+SOURCES = $(srcdir)/iconv.c
+
+OBJECTS = iconv.obj
+
+all : iconv.lib
+
+config.h : config.h.msvc
+	$(RM) config.h
+	$(LN) config.h.msvc config.h
+
+iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/aliases.h config.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
+
+iconv.lib : $(OBJECTS)
+	$(RM) iconv.lib
+	$(AR) $(AR_FLAGS)iconv.lib $(OBJECTS)
+
+check : all
+
+mostlyclean : clean
+
+clean : force
+	$(RM) *.obj *.lib core
+
+distclean : clean
+	$(RM) config.status config.log config.cache Makefile config.h
+
+maintainer-clean : distclean
+
+force :
+
