@@ -1,3 +1,7 @@
+2001-02-24  Bruno Haible  <haible@clisp.cons.org>
+
+	* localcharset.c (locale_charset): Don't use setlocale(LC_CTYPE,NULL).
+
 2001-01-30  Bruno Haible  <haible@clisp.cons.org>
 
 	* config.charset: Update for FreeBSD 4.2.
