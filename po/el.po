@@ -1,0 +1,88 @@
+# Greek translation of libiconv.
+# Copyright (C) 2005 Free Software Foundation, Inc.
+# Balaskas Euaggelos <ebalaskas@cs.teiath.gr>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libiconv 1.9.1\n"
+"Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
+"POT-Creation-Date: 2004-01-22 11:54+0100\n"
+"PO-Revision-Date: 2004-12-25 22:15+0200\n"
+"Last-Translator: Balaskas Euaggelos <ebalaskas@ebalaskas.gr>\n"
+"Language-Team: Greek <nls@tux.hellug.gr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/iconv.c:54
+msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+msgstr "Χρήση: iconv [-c] [-s] [-f από_κώδικα] [-t tocode] [αρχείο...]"
+
+#: src/iconv.c:56
+msgid "or:    iconv -l"
+msgstr "είτε: iconv -l"
+
+#: src/iconv.c:66
+#, c-format
+msgid ""
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+"Αυτό είναι ένα χωρίς χρέωση πρόγραμμα΄ δείτε τον κώδικα για αντιγραφή "
+"συνθηκών. Δεν υπάρχει ΚΑΜΙΑ\n"
+" εγγύηση' ούτε ακόμα για ΕΜΠΟΡΕΥΜΑΤΟΠΟΙΗΣΗ ή ΚΑΤΑΛΗΛΟΤΗΤΑ ΓΙΑ ΕΝΑΝ "
+"ΣΥΓΚΕΚΡΙΜΕΝΟ ΣΚΟΠΟ.\n"
+
+#: src/iconv.c:69
+#, c-format
+msgid "Written by %s.\n"
+msgstr "Γράφτηκε από τον %s.\n"
+
+#: src/iconv.c:105 src/iconv.c:137 src/iconv.c:187
+#, c-format
+msgid "iconv: %s: incomplete character or shift sequence\n"
+msgstr "iconv: %s: μη ολοκληρωμένος χαρακτήρας ή shift συνέχεια\n"
+
+#: src/iconv.c:131 src/iconv.c:182
+#, c-format
+msgid "iconv: %s: cannot convert\n"
+msgstr "iconv: %s: δεν μπορεί να γίνει η μετατροπή\n"
+
+#: src/iconv.c:153 src/iconv.c:192 src/iconv.c:310
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv: %s: "
+
+#: src/iconv.c:201
+#, c-format
+msgid "iconv: %s: I/O error\n"
+msgstr "iconv: %s: I/O σφάλμα\n"
+
+#: src/iconv.c:294
+#, c-format
+msgid "iconv: conversion from %s unsupported\n"
+msgstr "iconv: μετατροπή από %s μη υποστηριζόμενη\n"
+
+#: src/iconv.c:296
+#, c-format
+msgid "iconv: conversion to %s unsupported\n"
+msgstr "iconv: μετατροπή σε %s μη υποστηριζόμενη\n"
+
+#: src/iconv.c:298
+#, c-format
+msgid "iconv: conversion from %s to %s unsupported\n"
+msgstr "iconv: μετατροπή από %s σε %s μη υποστηριζόμενη\n"
+
+#: src/iconv.c:302
+msgid "(stdin)"
+msgstr "(stdin)"
+
+#: src/iconv.c:323
+#, c-format
+msgid "iconv: I/O error\n"
+msgstr "iconv: I/O σφάλμα\n"
+
+#~ msgid ""
+#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+#~ msgstr ""
+#~ "Χρήση: iconv [--binary] [-c] [-s] [-f από_κώδικα] [-t tocode] [αρχείο...]"

@@ -1,3 +1,8 @@
+2005-01-10 Bruno Haible  <bruno@clisp.org>
+
+	* el.po: New file, from Balaskas Euaggelos <ebalaskas@ebalaskas.gr>.
+	* LINGUAS: Add el.
+
 2005-01-06 Bruno Haible  <bruno@clisp.org>
 
 	* sq.po: New file, from Laurent Dhima <laurenti@alblinux.net>.
