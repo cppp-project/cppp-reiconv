@@ -82,20 +82,20 @@ install-lib : all force
 	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libiconv.la $(libdir)/libiconv.la
 
 install : all force
-	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
-	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
-	if [ ! -d $(libdir) ] ; then mkdir $(libdir) ; fi
-	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libiconv.la $(libdir)/libiconv.la
-	if test -n "@PLUGLIB@"; then $(INSTALL_DATA) @PLUGLIB@ $(libdir)/@PLUGLIB@.new && mv $(libdir)/@PLUGLIB@.new $(libdir)/@PLUGLIB@ ; fi
+	if [ ! -d $(DESTDIR)$(prefix) ] ; then mkdir $(DESTDIR)$(prefix) ; fi
+	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then mkdir $(DESTDIR)$(exec_prefix) ; fi
+	if [ ! -d $(DESTDIR)$(libdir) ] ; then mkdir $(DESTDIR)$(libdir) ; fi
+	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libiconv.la $(DESTDIR)$(libdir)/libiconv.la
+	if test -n "@PLUGLIB@"; then $(INSTALL_DATA) @PLUGLIB@ $(DESTDIR)$(libdir)/@PLUGLIB@.new && mv $(DESTDIR)$(libdir)/@PLUGLIB@.new $(DESTDIR)$(libdir)/@PLUGLIB@ ; fi
 
 installdirs : force
-	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
-	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
-	if [ ! -d $(libdir) ] ; then mkdir $(libdir) ; fi
+	if [ ! -d $(DESTDIR)$(prefix) ] ; then mkdir $(DESTDIR)$(prefix) ; fi
+	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then mkdir $(DESTDIR)$(exec_prefix) ; fi
+	if [ ! -d $(DESTDIR)$(libdir) ] ; then mkdir $(DESTDIR)$(libdir) ; fi
 
 uninstall : force
-	$(LIBTOOL_UNINSTALL) $(RM) $(libdir)/libiconv.la
-	if test -n "@PLUGLIB@"; then $(RM) $(libdir)/@PLUGLIB@ ; fi
+	$(LIBTOOL_UNINSTALL) $(RM) $(DESTDIR)$(libdir)/libiconv.la
+	if test -n "@PLUGLIB@"; then $(RM) $(DESTDIR)$(libdir)/@PLUGLIB@ ; fi
 
 check : all
 

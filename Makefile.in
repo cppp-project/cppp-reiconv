@@ -40,22 +40,22 @@ install-lib : all force
 
 install : force
 	cd src; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
-	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
-	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
-	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
+	if [ ! -d $(DESTDIR)$(prefix) ] ; then mkdir $(DESTDIR)$(prefix) ; fi
+	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then mkdir $(DESTDIR)$(exec_prefix) ; fi
+	if [ ! -d $(DESTDIR)$(includedir) ] ; then mkdir $(DESTDIR)$(includedir) ; fi
+	$(INSTALL_DATA) include/iconv.h $(DESTDIR)$(includedir)/iconv.h
 	cd man; $(MAKE) -r install prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 installdirs : force
 	cd src; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	if [ ! -d $(prefix) ] ; then mkdir $(prefix) ; fi
-	if [ ! -d $(exec_prefix) ] ; then mkdir $(exec_prefix) ; fi
-	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
+	if [ ! -d $(DESTDIR)$(prefix) ] ; then mkdir $(DESTDIR)$(prefix) ; fi
+	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then mkdir $(DESTDIR)$(exec_prefix) ; fi
+	if [ ! -d $(DESTDIR)$(includedir) ] ; then mkdir $(DESTDIR)$(includedir) ; fi
 	cd man; $(MAKE) -r installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 uninstall : force
 	cd src; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
-	$(RM) $(includedir)/iconv.h
+	$(RM) $(DESTDIR)$(includedir)/iconv.h
 	cd man; $(MAKE) -r uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' mandir='$(mandir)'
 
 check : force
