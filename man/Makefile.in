@@ -9,7 +9,7 @@ srcdir = @srcdir@
 prefix = @prefix@
 local_prefix = /usr/local
 exec_prefix = @exec_prefix@
-mandir = $(prefix)/man
+mandir = @mandir@
 
 # Programs used by "make":
 RM = rm -f

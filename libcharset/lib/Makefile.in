@@ -9,7 +9,7 @@ srcdir = @srcdir@
 prefix = @prefix@
 local_prefix = /usr/local
 exec_prefix = @exec_prefix@
-libdir = $(exec_prefix)/lib
+libdir = @libdir@
 
 # Programs used by "make":
 CC = @CC@
