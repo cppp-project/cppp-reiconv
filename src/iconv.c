@@ -45,6 +45,15 @@
 #  define setmode _setmode
 #  define fileno _fileno
 # endif
+# ifdef __DJGPP__
+#  include <io.h> /* declares setmode() */
+#  /* Avoid putting stdin/stdout in binary mode if it is connected to the
+#     console, because that would make it impossible for the user to
+#     interrupt the program through Ctrl-C or Ctrl-Break.  */
+#  define SET_BINARY(fd) (!isatty(fd) ? (setmode(fd,O_BINARY), 0) : 0)
+# else
+#  define SET_BINARY(fd) setmode(fd,O_BINARY)
+# endif
 #endif
 
 #if O_BINARY
@@ -53,8 +62,13 @@
 
 static void usage (int exitcode)
 {
-  fprintf(exitcode ? stderr : stdout,
-          "Usage: iconv [-f fromcode] [-t tocode] [file ...]\n");
+  const char* helpstring =
+#if O_BINARY
+    "Usage: iconv [--binary] [-f fromcode] [-t tocode] [file ...]\n";
+#else
+    "Usage: iconv [-f fromcode] [-t tocode] [file ...]\n";
+#endif
+  fprintf(exitcode ? stderr : stdout, helpstring);
   exit(exitcode);
 }
 
@@ -78,7 +92,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
 
 #if O_BINARY
   if (force_binary)
-    setmode(fileno(infile),O_BINARY);
+    SET_BINARY(fileno(infile));
 #endif
   iconv(cd,NULL,NULL,NULL,NULL);
   for (;;) {
@@ -213,7 +227,7 @@ int main (int argc, char* argv[])
   }
 #if O_BINARY
   if (force_binary)
-    setmode(fileno(stdout),O_BINARY);
+    SET_BINARY(fileno(stdout));
 #endif
   if (fromcode == NULL)
     fromcode = "char";
