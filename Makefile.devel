@@ -22,8 +22,8 @@ all : configures lib/config.h.msvc include/iconv.h.msvc-static include/iconv.h.m
 #     windows/iconv.rc
 #     djgpp/README
 #     djgpp/fnchange.lst
-#     djgpp/libcharset/README
-#     djgpp/libcharset/fnchange.lst
+#     libcharset/djgpp/README
+#     libcharset/djgpp/fnchange.lst
 # - update the version info in lib/Makefile.in,
 # - do "make -f Makefile.devel".
 
