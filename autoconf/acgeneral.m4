@@ -2095,7 +2095,7 @@ trap 'rm -fr conftest* confdefs* core $ac_clean_files; exit 1' 1 2 15
 
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
 # Let make expand exec_prefix.
-test "x$exec_prefix" = xNONE && exec_prefix='$(prefix)'
+test "x$exec_prefix" = xNONE && exec_prefix='${prefix}'
 
 # Any assignment to VPATH causes Sun make to only execute
 # the first set of double-colon rules, so remove it if not needed.
