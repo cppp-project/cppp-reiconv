@@ -1,5 +1,17 @@
 2002-05-09  Bruno Haible  <bruno@clisp.org>
 
+	Implement more ASCII compatible DOS encodings.
+	* tools/Makefile (ALL): Add cp737.h, cp858.h, cp860.h, cp863.h.
+	(cp737.h, cp858.h, cp860.h, cp863.h): New rules.
+	* lib/cp737.h: New file.
+	* lib/cp858.h: New file.
+	* lib/cp860.h: New file.
+	* lib/cp863.h: New file.
+	* lib/converters.h: Include them.
+	* lib/encodings_dos.def (CP737, CP858, CP860, CP863): New encodings.
+
+2002-05-09  Bruno Haible  <bruno@clisp.org>
+
 	Implement new ASCII compatible encodings from IBM.
 	* tools/Makefile (ALL): Add cp1161.h, cp1162.h, cp1163.h.
 	(cp1161.h, cp1162.h, cp1163.h): New rules.

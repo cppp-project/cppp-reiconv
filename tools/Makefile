@@ -97,11 +97,15 @@ ALL = \
  cp1162.h \
  cp1163.h \
  cp437.h \
+ cp737.h \
  cp775.h \
  cp852.h \
  cp855.h \
  cp857.h \
+ cp858.h \
+ cp860.h \
  cp861.h \
+ cp863.h \
  cp864.h \
  cp865.h \
  cp869.h \
@@ -416,6 +420,9 @@ cp1163.h : $(TABLESDIR)/glibc-2.2.90-iconv/IBM1163.TXT
 cp437.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP437.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP437 cp437 < $<
 
+cp737.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP737.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP737 cp737 < $<
+
 cp775.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP775.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP775 cp775 < $<
 
@@ -428,8 +435,17 @@ cp855.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP855.TXT 8bit_tab
 cp857.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP857.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP857 cp857 < $<
 
+cp858.h : $(TABLESDIR)/windows-2000/CP858.TXT 8bit_tab_to_h
+	(echo '#' ; cat $<) | ./8bit_tab_to_h CP858 cp858
+
+cp860.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP860.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP860 cp860 < $<
+
 cp861.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP861.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP861 cp861 < $<
+
+cp863.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP863.TXT 8bit_tab_to_h
+	./8bit_tab_to_h CP863 cp863 < $<
 
 cp864.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/PC/CP864.TXT 8bit_tab_to_h
 	./8bit_tab_to_h CP864 cp864 < $<
