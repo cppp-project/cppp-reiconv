@@ -1,3 +1,6 @@
+New in 1.3.1:
+* Portability to OS/2 with emx+gcc.
+
 New in 1.3:
 * Added UCS-2BE, UCS-2LE, UCS-4BE, UCS-4LE converters.
 * Fixed the definition of EILSEQ on SunOS4.
