@@ -1,3 +1,8 @@
+2002-06-03  Bruno Haible  <bruno@clisp.org>
+
+	* gl.po: New file, from Jacobo Tarrio <jtarrio@trasno.net>.
+	* LINGUAS: Add gl.
+
 2002-05-31  Bruno Haible  <bruno@clisp.org>
 
 	* ca.po: New file, from Ivan Vilata i Balaguer <ivan@selidor.net>.
