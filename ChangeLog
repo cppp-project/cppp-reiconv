@@ -1,3 +1,8 @@
+2001-11-10  Bruno Haible  <haible@clisp.cons.org>
+
+        * lib/Makefile.in (libiconv_plug_linux.so): Allow building it with a
+          non-gcc compiler.
+
 2001-10-23  Bruno Haible  <haible@clisp.cons.org>
 
         * tools/Makefile (cp1125.h): New target.
