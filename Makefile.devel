@@ -23,7 +23,7 @@ all : configures src/config.h.msvc include/iconv.h.msvc src/aliases.h src/flags.
 CONFIGURES = configure
 CONFIGURES_IN = configure.in
 
-CLISP_DIR = /home/bruno/clisp
+CLISP_DIR = ..
 ACLOCAL = $(CLISP_DIR)/src/autoconf/aclocal.m4
 ACSELECT = $(CLISP_DIR)/src/autoconf/acselect
 OTHERMACROS = $(CLISP_DIR)/src/autoconf/libtool.m4
