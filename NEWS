@@ -9,7 +9,7 @@ New in 1.3:
 * Support for building as a shared library on Win32.
 
 New in 1.2:
-* Added UTF-16BE and UTF16LE converters.
+* Added UTF-16BE and UTF-16LE converters.
 * Changed the UTF-16 encoder.
 * Fixed the treatment of tab characters in the UTF-7 converter.
 * Fixed an internal error when output buffer was not large enough.
