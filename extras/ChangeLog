@@ -1,3 +1,12 @@
+2001-01-03  Bruno Haible  <haible@clisp.cons.org>
+
+        * iconv.m4 (jm_ICONV): Also check whether the iconv declaration
+          has const.
+
+2000-02-02  Bruno Haible  <haible@clisp.cons.org>
+
+        * iconv.m4: New file.
+
 2001-01-29  Bruno Haible  <haible@clisp.cons.org>
 
         * locale_charset.c: Remove file. Obsoleted by libcharset.
