@@ -5,8 +5,8 @@ A: libiconv, as an internationalization library, supports those character
    sets and encodings which are in wide-spread use in at least one territory
    of the world.
 
-   Hint1: On http://www.w3c.org/ you find a page "Languages, countries, and
-   the charsets typically used for them" (with a minor mistake about Albanian).
+   Hint1: On http://www.w3c.org/International/O-charset-lang.html you find a
+   page "Languages, countries, and the charsets typically used for them".
    From this table, we can conclude that the following are in active use:
 
      ISO-8859-1, CP1252   Afrikaans, Albanian, Basque, Catalan, Danish, Dutch,
@@ -22,7 +22,9 @@ A: libiconv, as an internationalization library, supports those character
      ISO-8859-7           Greek
      ISO-8859-8           Hebrew
      ISO-8859-9, CP1254   Turkish
-     ISO-8859-10          Estonian, Inuit, Lapp, Latvian, Lithuanian
+     ISO-8859-10          Inuit, Lapp
+     ISO-8859-13          Latvian, Lithuanian
+     ISO-8859-15          Estonian
      KOI8-R               Russian
      SHIFT_JIS            Japanese
      ISO-2022-JP          Japanese
