@@ -1,5 +1,11 @@
 2003-05-06  Bruno Haible  <bruno@clisp.org>
 
+	* m4/lib-link.m4: Update from GNU gettext.
+	* autoconf/config.rpath: Update from GNU gettext.
+
+	* m4/libtool.m4: Update from GNU gettext, based on libtool-1.5.
+	* autoconf/ltmain.sh: Update from GNU gettext, based on libtool-1.5.
+
 	* m4/gettext.m4: Update from GNU gettext.
 	* m4/nls.m4: Update from GNU gettext.
 	* m4/po.m4: Update from GNU gettext.

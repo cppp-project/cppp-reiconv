@@ -1,3 +1,7 @@
+2003-05-06  Bruno Haible  <bruno@clisp.org>
+
+	* autoconf/ltmain.sh: Update from GNU gettext, based on libtool-1.5.
+
 2003-04-12  Bruno Haible  <bruno@clisp.org>
 
 	* configure.in (mandir): Change default value.
