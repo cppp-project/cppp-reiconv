@@ -87,8 +87,8 @@ SHELL = /bin/sh
 
 all : iconv.exe
 
-iconv.exe : $(srcdir)/iconv.c ../lib/iconv.lib
-	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) -DINSTALLPREFIX=\"$(IIprefix)\" -DINSTALLDIR=\"$(IIbindir)\" $(srcdir)/iconv.c $(LIBINTL) ../lib/iconv.lib -Feiconv.exe
+iconv.exe : $(srcdir)/iconv.c ../srclib/icrt.lib ../lib/iconv.lib
+	$(CC) $(INCLUDES) -I..\lib $(CFLAGS) -DINSTALLPREFIX=\"$(IIprefix)\" -DINSTALLDIR=\"$(IIbindir)\" $(srcdir)/iconv.c ../srclib/icrt.lib $(LIBINTL) ../lib/iconv.lib -Feiconv.exe
 	$(RM) iconv.obj
 !if $(DLL)
 	copy ..\lib\iconv.dll iconv.dll

@@ -5,7 +5,8 @@
 	* src/Makefile.msvc (IIPREFIX, IIprefix, IIexec_prefix, IIbindir,
 	IIincludedir): New variables.
 	(INCLUDES): Add -I..\windows.
-	(iconv.exe): Define INSTALLPREFIX and INSTALLDIR.
+	(iconv.exe): Define INSTALLPREFIX and INSTALLDIR. Link with
+	../srclib/icrt.lib.
 	Patches by Perry Rapp.
 
 2003-05-07  Bruno Haible  <bruno@clisp.org>
