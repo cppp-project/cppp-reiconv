@@ -1,3 +1,10 @@
+2002-11-07  Bruno Haible  <bruno@clisp.org>
+
+	Make "make install" without prior "make" work.
+	* Makefile.in (lib/libcharset.h): New rule.
+	(all, install): Depend on it.
+	Reported by Martin Mokrejš <mmokrejs@natur.cuni.cz>.
+
 2002-10-28  Bruno Haible  <bruno@clisp.org>
 
 	* man/Makefile.in (install): Change directory back to the working

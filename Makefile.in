@@ -26,13 +26,15 @@ INSTALL_DATA = @INSTALL_DATA@
 
 SHELL = /bin/sh
 
-all : force
-	builddir="`pwd`"; cd libcharset && $(MAKE) all && $(MAKE) install-lib libdir="$$builddir/lib" includedir="$$builddir/lib"
+all : lib/libcharset.h force
 	cd lib && $(MAKE) all
 	cd src && $(MAKE) all
 	cd po && $(MAKE) all
 	cd man && $(MAKE) all
 	if test -d tests; then cd tests && $(MAKE) all; fi
+
+lib/libcharset.h :
+	builddir="`pwd`"; cd libcharset && $(MAKE) all && $(MAKE) install-lib libdir="$$builddir/lib" includedir="$$builddir/lib"
 
 # Installs the library and include files only. Typically called with only
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
@@ -41,7 +43,7 @@ install-lib : all force
 	if [ ! -d $(includedir) ] ; then mkdir $(includedir) ; fi
 	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
 
-install : force
+install : lib/libcharset.h force
 	cd libcharset && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd lib && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
