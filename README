@@ -28,7 +28,7 @@ It provides support for the encodings:
     Tajik
         KOI8-T
     Thai
-        TIS-620, CP874, MacThai
+        ISO-8859-11, TIS-620, CP874, MacThai
     Laotian
         MuleLao-1, CP1133
     Vietnamese
