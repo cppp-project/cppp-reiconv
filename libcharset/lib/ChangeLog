@@ -1,5 +1,10 @@
 2002-05-09  Bruno Haible  <bruno@clisp.org>
 
+	* config.charset: Update for newest glibc. Add canonical names
+	ISO-8859-14, KOI8-T, TCVN5712-1, GEORGIAN-PS.
+
+2002-05-09  Bruno Haible  <bruno@clisp.org>
+
 	* localcharset.c (get_charset_aliases): Add more Windows specific
 	aliases.
 

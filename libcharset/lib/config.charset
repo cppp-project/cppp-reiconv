@@ -42,9 +42,11 @@
 #   ISO-8859-8                glibc aix hpux osf solaris                yes
 #   ISO-8859-9                glibc aix hpux irix osf solaris           yes
 #   ISO-8859-13               glibc
+#   ISO-8859-14               glibc
 #   ISO-8859-15               glibc aix osf solaris freebsd
 #   KOI8-R                    glibc solaris freebsd                     yes
 #   KOI8-U                    glibc freebsd                             yes
+#   KOI8-T                    glibc
 #   CP437                     dos
 #   CP775                     dos
 #   CP850                     aix osf dos
@@ -73,7 +75,7 @@
 #   CP1252                    aix woe32
 #   CP1253                    woe32
 #   CP1254                    woe32
-#   CP1255                    woe32
+#   CP1255                    glibc woe32
 #   CP1256                    woe32
 #   CP1257                    woe32
 #   GB2312                    glibc aix hpux irix solaris freebsd       yes
@@ -82,12 +84,14 @@
 #   EUC-TW                    glibc aix hpux irix osf solaris
 #   BIG5                      glibc aix hpux osf solaris freebsd        yes
 #   BIG5-HKSCS                glibc solaris
-#   GBK                       aix osf solaris woe32 dos
+#   GBK                       glibc aix osf solaris woe32 dos
 #   GB18030                   glibc solaris
 #   SHIFT_JIS                 hpux osf solaris freebsd                  yes
 #   JOHAB                     glibc solaris woe32
 #   TIS-620                   glibc aix hpux osf solaris
 #   VISCII                    glibc                                     yes
+#   TCVN5712-1                glibc
+#   GEORGIAN-PS               glibc
 #   HP-ROMAN8                 hpux
 #   HP-ARABIC8                hpux
 #   HP-GREEK8                 hpux
