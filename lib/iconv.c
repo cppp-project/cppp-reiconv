@@ -427,6 +427,84 @@ int iconvctl (iconv_t icd, int request, void* argument)
   }
 }
 
+static int compare_by_index (const void * arg1, const void * arg2)
+{
+  const struct alias * alias1 = (const struct alias *) arg1;
+  const struct alias * alias2 = (const struct alias *) arg2;
+  return (int)alias1->encoding_index - (int)alias2->encoding_index;
+}
+
+static int compare_by_name (const void * arg1, const void * arg2)
+{
+  const char * name1 = *(const char **)arg1;
+  const char * name2 = *(const char **)arg2;
+  /* Compare alphabetically, but put "CS" names at the end. */
+  int sign = strcmp(name1,name2);
+  if (sign != 0) {
+    sign = ((name1[0]=='C' && name1[1]=='S') - (name2[0]=='C' && name2[1]=='S'))
+           * 4 + (sign >= 0 ? 1 : -1);
+  }
+  return sign;
+}
+
+void iconvlist (int (*do_one) (unsigned int namescount,
+                               const char * const * names,
+                               void* data),
+                void* data)
+{
+#define aliascount1  sizeof(aliases)/sizeof(aliases[0])
+#ifndef aliases2_lookup
+#define aliascount2  sizeof(sysdep_aliases)/sizeof(sysdep_aliases[0])
+#else
+#define aliascount2  0
+#endif
+#define aliascount  (aliascount1+aliascount2)
+  struct alias aliasbuf[aliascount];
+  const char * namesbuf[aliascount];
+  size_t num_aliases;
+  {
+    /* Put all existing aliases into a buffer. */
+    size_t i;
+    size_t j;
+    j = 0;
+    for (i = 0; i < aliascount1; i++) {
+      const struct alias * p = &aliases[i];
+      if (p->name[0] != '\0'
+          && p->encoding_index != ei_local_char
+          && p->encoding_index != ei_local_wchar_t)
+        aliasbuf[j++] = *p;
+    }
+#ifndef aliases2_lookup
+    for (i = 0; i < aliascount2; i++)
+      aliasbuf[j++] = sysdep_aliases[i];
+#endif
+    num_aliases = j;
+  }
+  /* Sort by encoding_index. */
+  if (num_aliases > 1)
+    qsort(aliasbuf, num_aliases, sizeof(struct alias), compare_by_index);
+  {
+    /* Process all aliases with the same encoding_index together. */
+    size_t j;
+    j = 0;
+    while (j < num_aliases) {
+      unsigned int ei = aliasbuf[j].encoding_index;
+      size_t i = 0;
+      do
+        namesbuf[i++] = aliasbuf[j++].name;
+      while (j < num_aliases && aliasbuf[j].encoding_index == ei);
+      if (i > 1)
+        qsort(namesbuf, i, sizeof(const char *), compare_by_name);
+      /* Call the callback. */
+      if (do_one(i,namesbuf,data))
+        break;
+    }
+  }
+#undef aliascount
+#undef aliascount2
+#undef aliascount1
+}
+
 int _libiconv_version = _LIBICONV_VERSION;
 
 #endif

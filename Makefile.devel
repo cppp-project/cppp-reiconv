@@ -65,7 +65,7 @@ include/iconv.h.msvc-shared : include/iconv.h.in windows/dllexport.h
 # We use "-7" to make a smaller table, but use "unsigned char" array indices
 # to avoid gcc warning.
 lib/aliases.h : lib/aliases.gperf
-	$(GPERF) -t -L ANSI-C -H aliases_hash -N aliases_lookup -7 -C -k '1,3-11,$$' -i 1 lib/aliases.gperf | sed -e 's/\[str/\[(unsigned char) str/' > tmp.h
+	$(GPERF) -t -L ANSI-C -H aliases_hash -N aliases_lookup -G -W aliases -7 -C -k '1,3-11,$$' -i 1 lib/aliases.gperf | sed -e 's/\[str/\[(unsigned char) str/' > tmp.h
 	$(CP) tmp.h lib/aliases.h
 	$(RM) tmp.h
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -101,6 +101,12 @@ extern int iconvctl (iconv_t cd, int request, void* argument);
 #define ICONV_GET_TRANSLITERATE   1  /* int *argument */
 #define ICONV_SET_TRANSLITERATE   2  /* const int *argument */
 
+/* Listing of locale independent encodings. */
+#define iconvlist libiconvlist
+extern void iconvlist (int (*do_one) (unsigned int namescount,
+                                      const char * const * names,
+                                      void* data),
+                       void* data);
 #endif
 
 

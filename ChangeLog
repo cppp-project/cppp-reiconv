@@ -1,3 +1,11 @@
+2002-01-13  Bruno Haible  <bruno@clisp.org>
+
+	Support for "iconv -l".
+	* include/iconv.h.in (iconvlist): New declaration.
+	* Makefile.devel (lib/aliases.h): Change gperf options.
+	* lib/iconv.c (compare_by_index, compare_by_name, iconvlist): New
+	functions.
+
 2002-01-06  Bruno Haible  <bruno@clisp.org>
 
 	* lib/loop_unicode.h (unicode_transliterate): If the transliteration
