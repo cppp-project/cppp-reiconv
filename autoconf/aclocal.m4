@@ -147,7 +147,7 @@ AC_CACHE_VAL(cl_cv_path_install,
 	      # AIX installbsd doesn't work without option "-g".
 	      :
 	    else
-	      ac_cv_path_install="$ac_dir/$ac_prog -c"
+	      cl_cv_path_install="$ac_dir/$ac_prog -c"
 	      break 2
 	    fi
 	  fi
@@ -264,9 +264,9 @@ fi
 cl_cv_host="$host"
 ])
 host="$cl_cv_host"
-host_cpu=`echo $host | sed 's/^\(.*\)-\(.*\)-\(.*\)$/\1/'`
-host_vendor=`echo $host | sed 's/^\(.*\)-\(.*\)-\(.*\)$/\2/'`
-host_os=`echo $host | sed 's/^\(.*\)-\(.*\)-\(.*\)$/\3/'`
+host_cpu=`echo $host | sed 's/^\([^-]*\)-\([^-]*\)-\(.*\)$/\1/'`
+host_vendor=`echo $host | sed 's/^\([^-]*\)-\([^-]*\)-\(.*\)$/\2/'`
+host_os=`echo $host | sed 's/^\([^-]*\)-\([^-]*\)-\(.*\)$/\3/'`
 AC_SUBST(host)dnl
 AC_SUBST(host_cpu)dnl
 AC_SUBST(host_vendor)dnl
