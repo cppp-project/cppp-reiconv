@@ -47,7 +47,7 @@ all : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc all
 	cd ..
-	$(LN) libcharset\include\libcharset.h src\libcharset.h
+	$(LN) libcharset\include\libcharset.h lib\libcharset.h
 !if $(STATIC)
 	$(LN) include\iconv.h.msvc-static include\iconv.h
 !else
@@ -130,7 +130,7 @@ clean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
-	$(RM) src\libcharset.h
+	$(RM) lib\libcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc clean
 	cd ..
@@ -148,7 +148,7 @@ distclean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
-	$(RM) src\libcharset.h
+	$(RM) lib\libcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc distclean
 	cd ..
@@ -168,7 +168,7 @@ maintainer-clean : force
 	cd libcharset
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..
-	$(RM) src\libcharset.h
+	$(RM) lib\libcharset.h
 	cd lib
 	$(MAKE) -f Makefile.msvc maintainer-clean
 	cd ..

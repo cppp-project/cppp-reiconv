@@ -1,3 +1,8 @@
+2000-11-30  Bruno Haible  <haible@clisp.cons.org>
+
+        * Makefile.msvc (all): File now named lib/libcharset.h.
+          (clean, distclean, maintainer-clean): Likewise.
+
 2000-11-23  Bruno Haible  <haible@clisp.cons.org>
 
         * lib/*: Move here all files from src/*.
