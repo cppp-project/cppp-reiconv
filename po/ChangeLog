@@ -1,3 +1,8 @@
+2003-07-31  Bruno Haible  <bruno@clisp.org>
+
+	* nl.po: New file, from Taco Witte <T.C.Witte@phys.uu.nl>.
+	* LINGUAS: Add nl.
+
 2003-06-11  Bruno Haible  <bruno@clisp.org>
 
 	* et.po: New file, from Toomas Soome <Toomas.Soome@microlink.ee>.

@@ -1,0 +1,83 @@
+# Dutch tranlation of libiconv
+# Copyright (C) 2003 Free Software Foundation, Inc.
+# This file is distributed under the same license as the libiconv package.
+# Taco Witte <T.C.Witte@phys.uu.nl>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libiconv 1.9.1\n"
+"POT-Creation-Date: 2003-05-06 13:32+0200\n"
+"PO-Revision-Date: 2003-07-27 14:00--100\n"
+"Last-Translator: Taco Witte <T.C.Witte@phys.uu.nl>\n"
+"Language-Team: Dutch <vertaling@nl.linux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/iconv.c:59
+msgid "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+msgstr "Gebruik: iconv [--binary] [-c] [-s] [-f vancode] [-t naarcode] [bestand ...]"
+
+#: src/iconv.c:61
+msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+msgstr "Gebruik: iconv [-c] [-s] [-f vancode] [-t naarcode] [bestand ...]"
+
+#: src/iconv.c:64
+msgid "or:    iconv -l"
+msgstr "of:    iconv -l"
+
+#: src/iconv.c:74
+msgid ""
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+
+#: src/iconv.c:77
+#, c-format
+msgid "Written by %s.\n"
+msgstr "Geschreven door %s.\n"
+
+#: src/iconv.c:114 src/iconv.c:146 src/iconv.c:196
+#, c-format
+msgid "iconv: %s: incomplete character or shift sequence\n"
+msgstr "iconv: %s: incompleet teken of verschuivingsreeks\n"
+
+#: src/iconv.c:140 src/iconv.c:191
+#, c-format
+msgid "iconv: %s: cannot convert\n"
+msgstr "iconv: %s: kan niet converteren\n"
+
+#: src/iconv.c:162 src/iconv.c:201 src/iconv.c:320
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv: %s: "
+
+#: src/iconv.c:210
+#, c-format
+msgid "iconv: %s: I/O error\n"
+msgstr "iconv: %s: I/O fout\n"
+
+#: src/iconv.c:304
+#, c-format
+msgid "iconv: conversion from %s unsupported\n"
+msgstr "iconv: conversie van %s niet ondersteund\n"
+
+#: src/iconv.c:306
+#, c-format
+msgid "iconv: conversion to %s unsupported\n"
+msgstr "iconv: conversie naar %s niet ondersteund\n"
+
+#: src/iconv.c:308
+#, c-format
+msgid "iconv: conversion from %s to %s unsupported\n"
+msgstr "iconv: conversie van %s naar %s niet ondersteund\n"
+
+#: src/iconv.c:312
+msgid "(stdin)"
+msgstr "(stdin)"
+
+#: src/iconv.c:333
+msgid "iconv: I/O error\n"
+msgstr "iconv: I/O fout\n"
