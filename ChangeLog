@@ -1,5 +1,9 @@
 2003-05-06  Bruno Haible  <bruno@clisp.org>
 
+	* lib/translit.def: Upgrade to Unicode 4.0.
+
+2003-05-06  Bruno Haible  <bruno@clisp.org>
+
 	* srclib/Makefile.am (DEFS): Fix spelling of DEPENDS_ON_LIBICONV.
 	* srclib/Makefile.msvc (CFLAGS): Likewise.
 
