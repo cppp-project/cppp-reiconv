@@ -1,3 +1,7 @@
+2003-05-07  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.vms: New file.
+
 2003-04-12  Bruno Haible  <bruno@clisp.org>
 
 	* lib/localcharset.c (get_charset_aliases): Add special case for VMS.

@@ -1,5 +1,17 @@
 2003-05-07  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.vms: New file.
+	* lib/Makefile.vms: New file.
+	* srclib/Makefile.vms: New file.
+	* src/Makefile.vms: New file.
+	* man/Makefile.vms: New file.
+	* tests/Makefile.vms: New file.
+	* Makefile.devel (config.h_vms, lib/config.h_vms, include/iconv.h_vms):
+	New rules.
+	(all): Depend on them.
+
+2003-05-07  Bruno Haible  <bruno@clisp.org>
+
 	* srclib/Makefile.msvc (OBJECTS): Remove findprog.obj.
 	(findprog.obj): Remove rule.
 	* src/Makefile.msvc (includedir): New variable.
