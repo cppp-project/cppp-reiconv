@@ -37,7 +37,12 @@
 # include <stdlib.h>
 #endif
 
-#if !(defined (_WIN32) || defined (__WIN32__))
+#if defined _WIN32 || defined __WIN32__
+# undef WIN32   /* avoid warning on mingw32 */
+# define WIN32
+#endif
+
+#ifndef WIN32
 # if HAVE_LANGINFO_CODESET
 #  include <langinfo.h>
 # else
@@ -78,7 +83,7 @@ get_charset_aliases ()
   cp = charset_aliases;
   if (cp == NULL)
     {
-#if !(defined (_WIN32) || defined (__WIN32__))
+#ifndef WIN32
       FILE *fp;
       const char *dir = LIBDIR;
       const char *base = "charset.alias";
@@ -197,7 +202,7 @@ locale_charset ()
   const char *codeset;
   const char *aliases;
 
-#if !(defined (_WIN32) || defined (__WIN32__))
+#ifndef WIN32
 
 # if HAVE_LANGINFO_CODESET
 
@@ -232,10 +237,10 @@ locale_charset ()
 
 #else /* WIN32 */
 
-  static char buf[12];
+  static char buf[2 + 10 + 1];
 
   /* Win32 has a function returning the locale's codepage as a number.  */
-  sprintf(buf, "CP%u", GetACP());
+  sprintf (buf, "CP%u", GetACP ());
   codeset = buf;
 
 #endif

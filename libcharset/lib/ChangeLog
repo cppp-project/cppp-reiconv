@@ -1,3 +1,8 @@
+2000-12-19  Jim Meyering  <jim@meyering.net>
+
+	* localcharset.c: Improve WIN32 macrology.
+	(locale_charset): Increase size of buffer.
+
 2000-12-18  Bruno Haible  <haible@clisp.cons.org>
 
 	* config.charset: Add support for BeOS.
