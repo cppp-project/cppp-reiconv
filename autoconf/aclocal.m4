@@ -129,7 +129,7 @@ AC_DEFUN(CL_PROG_INSTALL,
 # SunOS /usr/etc/install
 # IRIX /sbin/install
 # AIX /bin/install
-# AFS /usr/afsws/bin/install, which mishandles nonexistent args
+# AFS /usr/afsws/bin/install, which mis-handles nonexistent args
 # SVR4 /usr/ucb/install, which tries to use the nonexistent group "staff"
 # ./install, which can be erroneously created by make from ./install.sh.
 AC_MSG_CHECKING(for a BSD compatible install)
@@ -171,7 +171,7 @@ AC_CACHE_VAL(cl_cv_path_install,
   INSTALL="$cl_cv_path_install"
 fi
 dnl We do special magic for INSTALL instead of AC_SUBST, to get
-dnl relative paths right. 
+dnl relative paths right.
 AC_MSG_RESULT($INSTALL)
 AC_SUBST(INSTALL)dnl
 # Use test -z because SunOS4 sh mishandles braces in ${var-val}.
@@ -258,22 +258,24 @@ AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
 ])dnl
 dnl
-AC_DEFUN(CL_ICONV,
-[dnl Some systems have iconv in libc, some have it in libiconv (OSF/1 and
+AC_DEFUN(CL_ICONV,[
+dnl Some systems have iconv in libc, some have it in libiconv (OSF/1 and
 dnl those with the standalone libiconv installed).
 AC_CACHE_CHECK(for iconv, cl_cv_func_iconv, [
 cl_cv_func_iconv=no
 cl_cv_lib_iconv=no
 AC_TRY_LINK([#include <stdlib.h>
-#include <iconv.h>],
-[iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL); iconv_close(cd);],
+#include <iconv.h>
+],[iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL);
+iconv_close(cd);],
 cl_cv_func_iconv=yes)
 if test "$cl_cv_func_iconv" = no; then
 cl_save_LIBS="$LIBS"
 LIBS="$LIBS -liconv"
 AC_TRY_LINK([#include <stdlib.h>
-#include <iconv.h>],
-[iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL); iconv_close(cd);],
+#include <iconv.h>
+],[iconv_t cd = iconv_open("",""); iconv(cd,NULL,NULL,NULL,NULL);
+iconv_close(cd);],
 cl_cv_lib_iconv=yes
 cl_cv_func_iconv=yes)
 LIBS="$cl_save_LIBS"
@@ -3788,6 +3790,9 @@ yes
 #if HAVE_WCHAR_H
 #include <wchar.h>
 #endif
+/* The following two lines are a workaround against an autoconf-2.52 bug.  */
+#include <stdio.h>
+#include <stdlib.h>
 ])
       else
         dnl EILSEQ isn't defined by the system. Define EILSEQ ourselves, but
