@@ -135,7 +135,7 @@ table-to : $(srcdir)/table-to.c ../src/libiconv.la
 	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/table-to.c ../src/libiconv.la -o $@
 
 iconv : $(srcdir)/iconv.c ../src/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/iconv.c ../src/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -I../src $(srcdir)/iconv.c ../src/libiconv.la -o $@
 
 # The following rule is necessary to avoid a toplevel "make -n check" failure.
 ../src/libiconv.la :

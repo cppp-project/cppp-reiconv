@@ -127,7 +127,7 @@ table-to.exe : table-to.c
 	copy ..\src\iconv.dll iconv.dll
 
 iconv.exe : iconv.c
-	$(CC) $(CFLAGS) $(INCLUDES) iconv.c ../src/iconv.a
+	$(CC) $(CFLAGS) $(INCLUDES) -I../src iconv.c ../src/iconv.a
 	copy ..\src\iconv.dll iconv.dll
 
 genutf8.exe : genutf8.c

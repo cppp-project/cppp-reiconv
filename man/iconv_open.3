@@ -9,7 +9,7 @@
 .\"   GNU glibc-2 source code and manual
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"
-.TH ICONV_OPEN 3  "October 23, 2000" "GNU" "Linux Programmer's Manual"
+.TH ICONV_OPEN 3  "November 18, 2000" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv_open \- allocate descriptor for character set conversion
 .SH SYNOPSIS
@@ -79,6 +79,11 @@ JAVA
 Full Unicode, in terms of \fBuint16_t\fP or \fBuint32_t\fP
 (with machine dependent endianness and alignment)
 UCS-2-INTERNAL, UCS-4-INTERNAL
+.TP
+Locale dependent, in terms of \fBchar\fP or \fBwchar_t\fP
+(with machine dependent endianness and alignment, and with semantics
+depending on the OS and the current LC_CTYPE locale facet)
+char, wchar_t
 .PP
 When the string "//TRANSLIT" is appended to \fItocode\fP, transliteration
 is activated. This means that when a character cannot be represented in the

@@ -16,12 +16,16 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
+#include "config.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <iconv.h>
 #include <errno.h>
+#if HAVE_LOCALE_H
+#include <locale.h>
+#endif
 
 static void usage ()
 {
@@ -129,6 +133,10 @@ int main (int argc, char* argv[])
   int i;
   int status;
 
+#if HAVE_SETLOCALE
+  /* Needed for the locale dependent encodings, "char" and "wchar_t". */
+  setlocale(LC_CTYPE,"");
+#endif
   for (i = 1; i < argc;) {
     if (!strcmp(argv[i],"-f")) {
       if (i == argc-1) usage();

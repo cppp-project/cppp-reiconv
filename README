@@ -43,6 +43,10 @@ It provides support for the encodings:
     Full Unicode, in terms of `uint16_t' or `uint32_t'
         (with machine dependent endianness and alignment)
         UCS-2-INTERNAL, UCS-4-INTERNAL
+    Locale dependent, in terms of `char' or `wchar_t'
+        (with machine dependent endianness and alignment, and with OS and
+        locale dependent semantics)
+        char, wchar_t
 
 It can convert from any of these encodings to any other, through Unicode
 conversion.

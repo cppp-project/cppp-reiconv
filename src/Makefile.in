@@ -47,32 +47,32 @@ SOURCES = $(srcdir)/iconv.c
 
 OBJECTS = iconv.lo
 
-PLUG_SOURCES =
+LIBCHARSET_OBJECTS = ../libcharset/lib/localcharset.lo
 
 all : libiconv.la @PLUGLIB@
 
 libiconv.la : $(OBJECTS)
-	$(LIBTOOL_LINK) $(CC) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) $(OBJECTS)
+	$(LIBTOOL_LINK) $(CC) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) $(OBJECTS) $(LIBCHARSET_OBJECTS)
 
 libiconv_plug.so : libiconv_plug_@OS@.so
 	$(RM) libiconv_plug.so
 	$(LN_S) libiconv_plug_@OS@.so libiconv_plug.so
 
 libiconv_plug_linux.so : $(SOURCES)
-	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -shared -o libiconv_plug_linux.so
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_linux.so
 
 libiconv_plug_solaris.so : $(SOURCES)
-	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -G -o libiconv_plug_solaris.so
+	$(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -G -o libiconv_plug_solaris.so
 
 libiconv_plug_osf.so : $(SOURCES)
 	if test -n "@GCC@"; then \
-	  $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -shared -o libiconv_plug_osf.so; \
+	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -shared -o libiconv_plug_osf.so; \
 	else \
-	  $(CC) $(CFLAGS) $(INCLUDES) -DPIC -DLIBICONV_PLUG $(SOURCES) $(PLUG_SOURCES) -c -o iconv_plug.o; \
+	  $(LIBTOOL_LINK) $(CC) $(CFLAGS) $(INCLUDES) -DPIC -DLIBICONV_PLUG $(SOURCES) $(LIBCHARSET_OBJECTS) -c -o iconv_plug.o; \
 	  /bin/ld -shared -expect_unresolved \* -o libiconv_plug_osf.so iconv_plug.o; \
 	fi
 
-iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/aliases.h $(srcdir)/aliases_aix.h $(srcdir)/flags.h
+iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h $(srcdir)/aliases_aix.h $(srcdir)/flags.h
 	$(LIBTOOL_COMPILE) $(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
 
 # Installs the library and include files only. Typically called with only

@@ -165,7 +165,7 @@ table-to.exe : $(srcdir)/table-to.c ../src/iconv.lib
 !endif
 
 iconv.exe : $(srcdir)/iconv.c ../src/iconv.lib
-	$(CC) $(CFLAGS) $(INCLUDES) $(srcdir)/iconv.c ../src/iconv.lib -Feiconv.exe
+	$(CC) $(CFLAGS) $(INCLUDES) -I..\src $(srcdir)/iconv.c ../src/iconv.lib -Feiconv.exe
 	$(RM) iconv.obj
 !if !$(STATIC)
 	copy ..\src\iconv.dll iconv.dll

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
+/* Copyright (C) 2000 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -16,25 +16,14 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
+/* Names for locale dependent encodings. */
 
-/* Define if you have <locale.h>. */
-#undef HAVE_LOCALE_H
+DEFENCODING(( "CHAR",
+            ),
+            local_char,
+            { NULL },                     { NULL, NULL })
 
-/* Define if you have <iconv.h>, the iconv_t type, and the
-   iconv_open, iconv, iconv_close functions. */
-#undef HAVE_ICONV
-/* Define as const if the declaration of iconv() needs const. */
-#define ICONV_CONST const
-
-/* Define if you have the mbrtowc() function. */
-#undef HAVE_MBRTOWC
-
-/* Define if you have the wcrtomb() function. */
-#undef HAVE_WCRTOMB
-
-/* Define if you have the setlocale() function. */
-#undef HAVE_SETLOCALE
-
-/* Define if the machine's byte ordering is little endian. */
-#undef WORDS_LITTLEENDIAN
-
+DEFENCODING(( "WCHAR_T",                /* glibc */
+            ),
+            local_wchar_t,
+            { NULL },                     { NULL, NULL })

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2000 Free Software Foundation, Inc.
    This file is part of the GNU ICONV Library.
 
    The GNU ICONV Library is free software; you can redistribute it and/or
@@ -50,6 +50,7 @@ int main ()
   }
 #define BRACIFY(...) { __VA_ARGS__ }
 #include "encodings.def"
+#include "encodings_local.def"
 #undef BRACIFY
 #undef DEFENCODING
 

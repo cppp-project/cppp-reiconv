@@ -1,4 +1,5 @@
 New in 1.5:
+* New locale dependent encodings "char", "wchar_t".
 * Transliteration is now off by default. Use a //TRANSLIT suffix to enable it.
 * The JOHAB encoding is documented again.
 

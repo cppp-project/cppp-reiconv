@@ -1,5 +1,49 @@
 2000-11-18  Bruno Haible  <haible@clisp.cons.org>
 
+        Add support for locale dependent "char" and "wchar_t" encodings.
+        * libcharset: New subdirectory.
+        * src/loop_unicode.h: New file, extracted from src/iconv.c.
+        * src/loop_wchar.h: New file.
+        * src/loops.h: New file. Include loop_unicode.h and loop_wchar.h.
+        * src/encodings_local.def: New file.
+        * src/genaliases.c: Also create aliases for encodings_local.def.
+        * src/converters.h (conv_struct): Add lfuncs field.
+        * src/genflags.c: Add dummy definitions of struct loop_funcs.
+        * src/iconv.c: Include libcharset.h.
+          (loop_funcs): New structure.
+          Treat encodings_local.def like encodings.def.
+          Include loops.h.
+          (iconv_open): Move the bulk of the code to loop_unicode.h.
+          (iconv): Likewise.
+          (iconvctl): Extend determination of TRIVIALP to wchar_t conversion
+          descriptors.
+        * src/Makefile.in (PLUG_SOURCES): Remove variable.
+          (LIBCHARSET_OBJECTS): New variable.
+          (libiconv.la): Link in the LIBCHARSET_OBJECTS.
+          (libiconv_plug_linux.so, libiconv_plug_solaris.so,
+           libiconv_plug_osf.so): Link in the LIBCHARSET_OBJECTS, using
+          LIBTOOL_LINK.
+          (iconv.lo): Depend on encodings_local.def.
+        * src/Makefile.msvc (iconv.obj): Depend on encodings_local.def.
+        * src/Makefile.os2 (iconv.obj): Likewise.
+        * configure.in: Add tests for locale.h, mbrtowc, wcrtomb, setlocale.
+          Recurse into libcharset.
+        * src/config.h.in (HAVE_LOCALE_H, HAVE_MBRTOWC, HAVE_WCRTOMB,
+           HAVE_SETLOCALE): New macros.
+        * tests/iconv.c: Include config.h and locale.h.
+          (main): Call setlocale.
+        * tests/Makefile.in (iconv): Search for config.h in ../src.
+        * tests/Makefile.os2 (iconv.exe): Likewise.
+        * tests/Makefile.msvc (iconv.exe): Likewise.
+        * README, man/iconv_open.3: Document "char" and "wchar_t" encodings.
+        * Makefile.in: After "cd", use "&&" not ";".
+          (all, check, mostlyclean, clean, distclean, maintainer-clean):
+          Recurse into libcharset.
+        * Makefile.devel (all): Recurse into libcharset.
+          (src/aliases.gperf): Depend on src/encodings_local.def.
+
+2000-11-18  Bruno Haible  <haible@clisp.cons.org>
+
         * src/converters.h (ucs4_t): New type.
           (wchar_t): Remove locally defined override.
           (mbtowc_funcs, wctomb_funcs): Use ucs4_t instead of wchar_t.

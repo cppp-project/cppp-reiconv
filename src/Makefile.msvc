@@ -92,7 +92,7 @@ config.h : config.h.msvc
 	$(RM) config.h
 	$(LN) config.h.msvc config.h
 
-iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/aliases.h config.h
+iconv.obj : $(srcdir)/iconv.c $(srcdir)/encodings.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h config.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(srcdir)/iconv.c
 
 !if $(STATIC)

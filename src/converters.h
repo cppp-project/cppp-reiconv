@@ -74,6 +74,7 @@ struct wctomb_funcs {
  * Contents of a conversion descriptor.
  */
 struct conv_struct {
+  struct loop_funcs lfuncs;
   /* Input (conversion multibyte -> unicode) */
   int iindex;
   struct mbtowc_funcs ifuncs;

@@ -10,7 +10,8 @@ CP = cp
 RM = rm -f
 
 
-all : configures src/config.h.msvc include/iconv.h.msvc-static include/iconv.h.msvc-shared src/aliases.h src/aliases_aix.h src/flags.h src/translit.h
+all : configures src/config.h.msvc include/iconv.h.msvc-static include/iconv.h.msvc-shared src/aliases.h src/aliases_aix.h src/flags.h src/translit.h force
+	cd libcharset && $(MAKE) -f Makefile.devel all
 
 
 # Before making a new release:
@@ -60,7 +61,7 @@ src/aliases.h : src/aliases.gperf
 	$(CP) tmp.h src/aliases.h
 	$(RM) tmp.h
 
-src/aliases.gperf : src/encodings.def src/genaliases.c
+src/aliases.gperf : src/encodings.def src/encodings_local.def src/genaliases.c
 	$(CC) $(CFLAGS) src/genaliases.c -o genaliases
 	./genaliases > src/aliases.gperf
 	$(RM) genaliases
