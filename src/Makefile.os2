@@ -36,7 +36,7 @@ iconv.obj : iconv.c encodings.def aliases.h config.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c iconv.c
 
 iconv.dll : $(OBJECTS) ../os2/iconv.def # DLL itself
-	$(CC) -Zdll $(CFLAGS) -o $@ $(OBJECTS) iconv.def
+	$(CC) -Zdll $(CFLAGS) -o $@ $(OBJECTS) ../os2/iconv.def
 
 iconv.lib : ../os2/iconv.def            # Import Lib. for -Zomf
 	rm -f iconv.lib
