@@ -124,8 +124,12 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
       if (inbufrest == 0)
         break;
       else {
-        if (!silent)
+        if (!silent) {
+          fflush(stdout);
+          if (column > 0)
+            putc('\n',stderr);
           fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
+        }
         return 1;
       }
     } else {
@@ -150,14 +154,22 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               discard_unconvertible = 2;
               status = 1;
             } else {
-              if (!silent)
+              if (!silent) {
+                fflush(stdout);
+                if (column > 0)
+                  putc('\n',stderr);
                 fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
+              }
               return 1;
             }
           } else if (errno == EINVAL) {
             if (inbufsize == 0 || insize > 4096) {
-              if (!silent)
+              if (!silent) {
+                fflush(stdout);
+                if (column > 0)
+                  putc('\n',stderr);
                 fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
+              }
               return 1;
             } else {
               inbufrest = insize;
@@ -173,6 +185,9 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           } else if (errno != E2BIG) {
             if (!silent) {
               int saved_errno = errno;
+              fflush(stdout);
+              if (column > 0)
+                putc('\n',stderr);
               fprintf(stderr,_("iconv: %s:%u:%u: "),infilename,line,column);
               errno = saved_errno;
               perror("");
@@ -201,17 +216,28 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           discard_unconvertible = 2;
           status = 1;
         } else {
-          if (!silent)
+          if (!silent) {
+            fflush(stdout);
+            if (column > 0)
+              putc('\n',stderr);
             fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
+          }
           return 1;
         }
       } else if (errno == EINVAL) {
-        if (!silent)
+        if (!silent) {
+          fflush(stdout);
+          if (column > 0)
+            putc('\n',stderr);
           fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
+        }
         return 1;
       } else {
         if (!silent) {
           int saved_errno = errno;
+          fflush(stdout);
+          if (column > 0)
+            putc('\n',stderr);
           fprintf(stderr,_("iconv: %s:%u:%u: "),infilename,line,column);
           errno = saved_errno;
           perror("");
@@ -221,6 +247,9 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
     }
   }
   if (ferror(infile)) {
+    fflush(stdout);
+    if (column > 0)
+      putc('\n',stderr);
     fprintf(stderr,_("iconv: %s: I/O error\n"),infilename);
     return 1;
   }
