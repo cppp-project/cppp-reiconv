@@ -261,9 +261,9 @@ EUC-JP, ei_euc_jp
 EUCJP, ei_euc_jp
 EXTENDED_UNIX_CODE_PACKED_FORMAT_FOR_JAPANESE, ei_euc_jp
 CSEUCPKDFMTJAPANESE, ei_euc_jp
-SJIS, ei_sjis
 SHIFT_JIS, ei_sjis
 SHIFT-JIS, ei_sjis
+SJIS, ei_sjis
 MS_KANJI, ei_sjis
 CSSHIFTJIS, ei_sjis
 CP932, ei_cp932
