@@ -1,3 +1,7 @@
+2000-09-11  Bruno Haible  <haible@clisp.cons.org>
+
+        * src/utf7.h (utf7_mbtowc): Fix combining of UTF-16 surrogates.
+
 2000-07-04  Akira Hatakeyama  <akira@sra.co.jp>
             Bruno Haible  <haible@clisp.cons.org>
 

@@ -149,7 +149,7 @@ active:
       wchar_t wc2 = wc & 0xffff;
       if (!(wc1 >= 0xd800 && wc1 < 0xdc00)) abort();
       if (!(wc2 >= 0xdc00 && wc2 < 0xe000)) return RET_ILSEQ;
-      *pwc = 0x10000 + ((wc - 0xd800) << 10) + (wc2 - 0xdc00);
+      *pwc = 0x10000 + ((wc1 - 0xd800) << 10) + (wc2 - 0xdc00);
     } else {
       *pwc = wc;
     }
