@@ -561,7 +561,7 @@
                 || streq(lang,"fo") || streq(lang,"faroese") || streq(lang,"faeroese")
                 || streq(lang,"fr") || streq(lang,"french")
                                           #ifndef ASCII_CHS
-                                          || streq(lang,"français")
+                                          || streq(lang,"franÃ§ais")
                                           #endif
                 || streq(lang,"ga") || streq(lang,"irish")
                 || streq(lang,"gd") || streq(lang,"scottish")

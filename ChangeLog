@@ -59,7 +59,7 @@
           sizeof(unsigned short).
         * src/ucs4swapped.h (ucs4swapped_mbtowc, ucs4swapped_mbtowc): Verify
           sizeof(unsigned int).
-        Reported by François Pinard <pinard@iro.umontreal.ca>.
+        Reported by FranÃ§ois Pinard <pinard@iro.umontreal.ca>.
 
 2000-05-29  Bruno Haible  <haible@clisp.cons.org>
 
