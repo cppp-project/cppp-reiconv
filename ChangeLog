@@ -1,6 +1,13 @@
 2003-06-22  Bruno Haible  <bruno@clisp.org>
 
 	Portability to mingw32.
+	* m4/ssize.m4: New file, from GNU gettext.
+	* m4/xreadlink.m4 (gl_XREADLINK): Require gt_TYPE_SSIZE_T.
+	Reported by Jeff Bonggren <jbon@cfl.rr.com>.
+
+2003-06-22  Bruno Haible  <bruno@clisp.org>
+
+	Portability to mingw32.
 	* lib/relocatable.c [WIN32]: Include <windows.h>.
 	* srclib/relocatable.c: Likewise.
 	Reported by Jeff Bonggren <jbon@cfl.rr.com>.
