@@ -1,0 +1,20 @@
+This directory contains tools for maintaining the config.charset file.
+
+The main script is "all-charset". Before using it, you must configure
+this package. For all installed locales, it prints
+  - the result of the command "locale charmap",
+  - the result of "nl_langinfo (CODESET)",
+  - the result of "locale_charset ()".
+
+It uses the following auxiliary scripts and programs:
+  - all-locales
+    Prints all usable locales in the system, one per line.
+  - locale_charmap
+    Executes "locale charmap".
+  - locale_codeset.c
+    Prints nl_langinfo (CODESET).
+  - locale_charset.c
+    Prints locale_charset().
+
+The other files are test results from various operating systems.
+

@@ -1,0 +1,22 @@
+# This is the developer's makefile, not the user's makefile.
+# Don't use it unless you know exactly what you do!
+
+SHELL = /bin/sh
+MAKE = make
+CP = cp
+RM = rm -f
+
+all : configures
+
+autoconf/aclocal.m4 : $(wildcard m4/*.m4)
+	aclocal --acdir=m4 --output=$@
+
+configures : configure config.h
+
+configure : configure.in autoconf/aclocal.m4
+	autoconf -l autoconf
+
+config.h : configure.in autoconf/aclocal.m4
+	autoheader -l autoconf
+
+force :
