@@ -1,3 +1,7 @@
+2005-03-22  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (mkinstalldirs): Update.
+
 2005-01-06  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.msvc (CFLAGS): Define also INSTALLPREFIX.

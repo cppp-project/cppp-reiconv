@@ -31,7 +31,7 @@ RM = rm -f
 # Programs used by "make install":
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
-mkinstalldirs = $(SHELL) @top_srcdir@/autoconf/mkinstalldirs
+mkinstalldirs = $(SHELL) @top_srcdir@/build-aux/mkinstalldirs
 
 #### End of system configuration section. ####
 
