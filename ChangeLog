@@ -1,3 +1,7 @@
+2000-02-22  Bruno Haible  <haible@clisp.cons.org>
+
+        * src/utf7.h (direct_tab, xdirect_tab): Treat tab like space.
+
 2000-02-15  Bruno Haible  <haible@clisp.cons.org>
 
         * src/iconv.c (iconv): Add cast in xxx_reset call.
