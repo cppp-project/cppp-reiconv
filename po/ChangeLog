@@ -1,3 +1,9 @@
+2004-03-21 Bruno Haible  <bruno@clisp.org>
+
+	* af.po: New file, from Petri Jooste <rkwjpj@puk.ac.za>.
+	* ca.po: Update from Ivan Vilata i Balaguer <ivan@selidor.net>.
+	* LINGUAS: Add af.
+
 2003-11-13 Bruno Haible  <bruno@clisp.org>
 
 	* sr.po: New file, from Aleksandar Jelenak <jelenak@netlinkplus.net>.
