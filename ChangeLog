@@ -1,3 +1,11 @@
+2005-03-16  Bruno Haible  <bruno@clisp.org>
+
+	* m4/stdint.m4 (gl_STDINT_H): Define HAVE_LONG_LONG_64BIT instead of
+	HAVE_LONGLONG_64BIT.
+	* srclib/stdint_.h: Use HAVE_LONG_LONG_64BIT instead of
+	HAVE_LONGLONG_64BIT.
+	* srclib/Makefile.am (stdint.h): Likewise.
+
 2005-03-14  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (aclocal.m4): Depend also on allocsa.m4, eealloc.m4,
