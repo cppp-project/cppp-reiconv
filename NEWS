@@ -1,7 +1,11 @@
 New in 1.6:
+* The iconv program's -f and -t options are now optional.
+* Many more transliterations.
 * Added CP862 converter.
+* Changed the GB18030 converter.
 
 New in 1.5:
+* Added an iconv(1) program.
 * New locale dependent encodings "char", "wchar_t".
 * Transliteration is now off by default. Use a //TRANSLIT suffix to enable it.
 * The JOHAB encoding is documented again.
