@@ -1,5 +1,28 @@
 2005-03-13  Bruno Haible  <bruno@clisp.org>
 
+	Improved error messages.
+	* srclib/width.c: New file, from GNU clisp.
+	* srclib/uniwidth.h: New file, from GNU clisp with modifications.
+	* srclib/unitypes.h: New file, from GNU clisp with modifications.
+	* srclib/cjk.h: New file, from GNU clisp.
+	* srclib/streq.h: New file, from GNU clisp.
+	* srclib/stdint_.h: New file, from gnulib.
+	* m4/stdint.m4: New file, from gnulib.
+	* m4/inttypes.m4: New file, from gnulib.
+	* srclib/Makefile.am: Add gnulib module 'stdint' snippet.
+	(BUILT_SOURCES): New variable.
+	(libicrt_a_SOURCES): Add width.c, uniwidth.h, unitypes.h, cjk.h,
+	streq.h.
+	* configure.in: Invoke gl_STDINT_H.
+	* src/iconv.c: Include cjk.h, uniwidth.h.
+	(line, column, cjkcode): New variables.
+	(update_line_column): New function.
+	(convert): Initialize line and column. In all error message, show also
+	the line and column number.
+	(main): Initialize cjkcode. Set up hooks to call update_line_column.
+
+2005-03-13  Bruno Haible  <bruno@clisp.org>
+
 	* include/iconv.h.in (iconv_canonicalize): New declaration.
 	* lib/genaliases.c (emit_encoding): Take two output streams as
 	arguments. To the second stream, emit a shell command for extracting

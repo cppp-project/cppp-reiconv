@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2004 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2005 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -89,6 +89,7 @@ AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
 dnl           checks for typedefs
 
 AC_MBSTATE_T
+gl_STDINT_H
 
 dnl           checks for functions and declarations
 

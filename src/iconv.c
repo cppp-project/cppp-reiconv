@@ -41,6 +41,8 @@
 #include "binary-io.h"
 #include "progname.h"
 #include "relocatable.h"
+#include "uniwidth.h"
+#include "cjk.h"
 #include "gettext.h"
 
 #define _(str) gettext(str)
@@ -84,6 +86,26 @@ static int print_one (unsigned int namescount, const char * const * names,
   return 0;
 }
 
+/* Line number and column position. */
+static unsigned int line;
+static unsigned int column;
+static const char* cjkcode;
+/* Update the line number and column position after a character was
+   successfully converted. */
+static void update_line_column (unsigned int uc, void* data)
+{
+  if (uc == 0x000A) {
+    line++;
+    column = 0;
+  } else {
+    int width = uc_width(uc, cjkcode);
+    if (width >= 0)
+      column += width;
+    else if (uc == 0x0009)
+      column += 8 - (column % 8);
+  }
+}
+
 static int convert (iconv_t cd, FILE* infile, const char* infilename)
 {
   char inbuf[4096+4096];
@@ -94,6 +116,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
 #if O_BINARY
   SET_BINARY(fileno(infile));
 #endif
+  line = 1; column = 0;
   iconv(cd,NULL,NULL,NULL,NULL);
   for (;;) {
     size_t inbufsize = fread(inbuf+4096,1,4096,infile);
@@ -102,7 +125,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
         break;
       else {
         if (!silent)
-          fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
+          fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
         return 1;
       }
     } else {
@@ -128,13 +151,13 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               status = 1;
             } else {
               if (!silent)
-                fprintf(stderr,_("iconv: %s: cannot convert\n"),infilename);
+                fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
               return 1;
             }
           } else if (errno == EINVAL) {
             if (inbufsize == 0 || insize > 4096) {
               if (!silent)
-                fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
+                fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
               return 1;
             } else {
               inbufrest = insize;
@@ -150,7 +173,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           } else if (errno != E2BIG) {
             if (!silent) {
               int saved_errno = errno;
-              fprintf(stderr,_("iconv: %s: "),infilename);
+              fprintf(stderr,_("iconv: %s:%u:%u: "),infilename,line,column);
               errno = saved_errno;
               perror("");
             }
@@ -179,17 +202,17 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           status = 1;
         } else {
           if (!silent)
-            fprintf(stderr,_("iconv: %s: cannot convert\n"),infilename);
+            fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
           return 1;
         }
       } else if (errno == EINVAL) {
         if (!silent)
-          fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
+          fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
         return 1;
       } else {
         if (!silent) {
           int saved_errno = errno;
-          fprintf(stderr,_("iconv: %s: "),infilename);
+          fprintf(stderr,_("iconv: %s:%u:%u: "),infilename,line,column);
           errno = saved_errno;
           perror("");
         }
@@ -210,6 +233,7 @@ int main (int argc, char* argv[])
   const char* tocode = NULL;
   int do_list = 0;
   iconv_t cd;
+  struct iconv_hooks hooks;
   int i;
   int status;
 
@@ -303,6 +327,16 @@ int main (int argc, char* argv[])
       fprintf(stderr,_("iconv: try '%s -l' to get the list of supported encodings\n"),program_name);
       exit(1);
     }
+    /* Look at fromcode and tocode, to determine whether character widths
+       should be determined according to legacy CJK conventions. */
+    cjkcode = iconv_canonicalize(tocode);
+    if (!is_cjk_encoding(cjkcode))
+      cjkcode = iconv_canonicalize(fromcode);
+    /* Set up hooks for updating the line and column position. */
+    hooks.uc_hook = update_line_column;
+    hooks.wc_hook = NULL;
+    hooks.data = NULL;
+    iconvctl(cd, ICONV_SET_HOOKS, &hooks);
     if (i == argc)
       status = convert(cd,stdin,_("(stdin)"));
     else {

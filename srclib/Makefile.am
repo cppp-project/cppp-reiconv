@@ -1,5 +1,5 @@
 ## Makefile for the srclib subdirectory of GNU libiconv
-## Copyright (C) 2003-2004 Free Software Foundation, Inc.
+## Copyright (C) 2003-2005 Free Software Foundation, Inc.
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 ## Process this file with automake to produce Makefile.in.
 
 AUTOMAKE_OPTIONS = 1.5 gnits no-dependencies
+BUILT_SOURCES =
 EXTRA_DIST =
 MOSTLYCLEANFILES =
 
@@ -34,6 +35,7 @@ libicrt_a_SOURCES = \
   pathmax.h \
   progname.h progname.c progreloc.c \
   unlocked-io.h \
+  width.c uniwidth.h unitypes.h cjk.h streq.h \
   xalloc.h xmalloc.c xstrdup.c \
   xreadlink.h xreadlink.c
 
@@ -71,6 +73,20 @@ stdbool.h: stdbool_.h
 	sed -e 's/@''HAVE__BOOL''@/@HAVE__BOOL@/g' < $(srcdir)/stdbool_.h > stdbool.h
 MOSTLYCLEANFILES += stdbool.h
 # <<< gnulib module stdbool.
+
+
+# >>> gnulib module stdint.
+BUILT_SOURCES += $(STDINT_H)
+EXTRA_DIST += stdint_.h
+
+# We need the following in order to create an <stdint.h> when the system
+# doesn't have one that works with the given compiler.
+all-local $(libicrt_a_OBJECTS): $(STDINT_H)
+stdint.h: stdint_.h
+	sed -e 's/@''HAVE_LONG_64BIT''@/$(HAVE_LONG_64BIT)/g;s/@''HAVE_LONGLONG_64BIT@/$(HAVE_LONGLONG_64BIT)/g' < $(srcdir)/stdint_.h > $@-t
+	mv $@-t $@
+MOSTLYCLEANFILES += stdint.h stdint.h-t
+# <<< gnulib module stdint.
 
 
 # >>> gnulib module alloca.
