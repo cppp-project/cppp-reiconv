@@ -1,5 +1,11 @@
 2003-01-01  Bruno Haible  <bruno@clisp.org>
 
+	* src/Makefile.in (install): Use libiconv.la in ../lib, not in
+	$(libdir), so that installing with DESTDIR works.
+	Reported by Michael Adams <michael@michaeladams.org>.
+
+2003-01-01  Bruno Haible  <bruno@clisp.org>
+
 	* Makefile.in (mkinstalldirs): New variable.
 	(install-lib, install, installdirs): Use it instead of mkdir.
 	* lib/Makefile.in (mkinstalldirs): New variable.
