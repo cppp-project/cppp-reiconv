@@ -1,3 +1,7 @@
+2002-05-29  Bruno Haible  <bruno@clisp.org>
+
+	* Version 1.8 released.
+
 2002-05-26  Bruno Haible  <bruno@clisp.org>
 
 	* lib/c99.h: New file.

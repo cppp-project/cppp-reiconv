@@ -1,7 +1,10 @@
 New in 1.8:
 * The iconv program has new options -l, -c, -s.
 * The iconv program is internationalized.
-* New C99 converter.
+* Added C99 converter.
+* Added KOI8-T converter.
+* New configuration option --enable-extra-encodings that enables a bunch of
+  additional encodings; see the README for details.
 * Updated the ISO-8859-16 converter.
 * Upgraded BIG5-HKSCS, EUC-TW, ISO-2022-CN, ISO-2022-CN-EXT converters to
   Unicode 3.2.
