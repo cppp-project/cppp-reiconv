@@ -137,7 +137,7 @@ This library can be built and installed in two variants:
 
 
 Distribution:
-    ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.8.tar.gz
+    ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.9.2.tar.gz
 
 Homepage:
     http://www.gnu.org/software/libiconv/
