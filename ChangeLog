@@ -1,3 +1,11 @@
+2001-03-20  Bruno Haible  <haible@clisp.cons.org>
+
+        * tools/8bit_tab_to_h.c (main): Emit copyright notice to the output
+          file.
+        * tools/cjk_tab_to_h.c (output_title): Likewise.
+        * tools/cjk_variants.c (main): Likewise.
+        * lib/gentranslit.c (main): Likewise.
+
 2001-03-19  Bruno Haible  <haible@clisp.cons.org>
 
         * autoconf/aclocal.m4 (CL_CANONICAL_HOST): Always define

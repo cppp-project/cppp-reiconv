@@ -1,3 +1,20 @@
+/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+   This file is part of the GNU LIBICONV Tools.
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software Foundation,
+   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+
 /*
  * Generates an 8-bit character set table from a .TXT table as found on
  * ftp.unicode.org or from a table containing the 256 Unicode values as
@@ -126,6 +143,25 @@ int main (int argc, char *argv[])
         exit(1);
     }
 
+    fprintf(f, "/*\n");
+    fprintf(f, " * Copyright (C) 1999-2001 Free Software Foundation, Inc.\n");
+    fprintf(f, " * This file is part of the GNU LIBICONV Library.\n");
+    fprintf(f, " *\n");
+    fprintf(f, " * The GNU LIBICONV Library is free software; you can redistribute it\n");
+    fprintf(f, " * and/or modify it under the terms of the GNU Library General Public\n");
+    fprintf(f, " * License as published by the Free Software Foundation; either version 2\n");
+    fprintf(f, " * of the License, or (at your option) any later version.\n");
+    fprintf(f, " *\n");
+    fprintf(f, " * The GNU LIBICONV Library is distributed in the hope that it will be\n");
+    fprintf(f, " * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of\n");
+    fprintf(f, " * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU\n");
+    fprintf(f, " * Library General Public License for more details.\n");
+    fprintf(f, " *\n");
+    fprintf(f, " * You should have received a copy of the GNU Library General Public\n");
+    fprintf(f, " * License along with the GNU LIBICONV Library; see the file COPYING.LIB.\n");
+    fprintf(f, " * If not, write to the Free Software Foundation, Inc., 59 Temple Place -\n");
+    fprintf(f, " * Suite 330, Boston, MA 02111-1307, USA.\n");
+    fprintf(f, " */\n");
     fprintf(f, "\n");
     fprintf(f, "/*\n");
     fprintf(f, " * %s\n", charsetname);

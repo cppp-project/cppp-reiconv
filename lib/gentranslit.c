@@ -1,3 +1,21 @@
+/* Copyright (C) 1999-2001 Free Software Foundation, Inc.
+   This file is part of the GNU LIBICONV Library.
+
+   The GNU LIBICONV Library is free software; you can redistribute it
+   and/or modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
+
+   The GNU LIBICONV Library is distributed in the hope that it will be
+   useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the GNU LIBICONV Library; see the file COPYING.LIB.
+   If not, write to the Free Software Foundation, Inc., 59 Temple Place -
+   Suite 330, Boston, MA 02111-1307, USA.  */
+
 /*
  * Generates a table of small strings, used for transliteration, from a table
  * containing lines of the form
@@ -17,6 +35,25 @@ int main (int argc, char *argv[])
   if (argc != 1)
     exit(1);
 
+  printf("/*\n");
+  printf(" * Copyright (C) 1999-2001 Free Software Foundation, Inc.\n");
+  printf(" * This file is part of the GNU LIBICONV Library.\n");
+  printf(" *\n");
+  printf(" * The GNU LIBICONV Library is free software; you can redistribute it\n");
+  printf(" * and/or modify it under the terms of the GNU Library General Public\n");
+  printf(" * License as published by the Free Software Foundation; either version 2\n");
+  printf(" * of the License, or (at your option) any later version.\n");
+  printf(" *\n");
+  printf(" * The GNU LIBICONV Library is distributed in the hope that it will be\n");
+  printf(" * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of\n");
+  printf(" * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU\n");
+  printf(" * Library General Public License for more details.\n");
+  printf(" *\n");
+  printf(" * You should have received a copy of the GNU Library General Public\n");
+  printf(" * License along with the GNU LIBICONV Library; see the file COPYING.LIB.\n");
+  printf(" * If not, write to the Free Software Foundation, Inc., 59 Temple Place -\n");
+  printf(" * Suite 330, Boston, MA 02111-1307, USA.\n");
+  printf(" */\n");
   printf("\n");
   printf("/*\n");
   printf(" * Transliteration table\n");
