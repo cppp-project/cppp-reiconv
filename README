@@ -65,7 +65,7 @@ support for a few extra encodings:
     Turkmen
         TDS565
     Platform specifics
-        RISCOS-LATIN1
+        ATARIST, RISCOS-LATIN1
 
 It can convert from any of these encodings to any other, through Unicode
 conversion.

@@ -1,6 +1,7 @@
 New in 1.10:
 * Added ISO-8859-11 converter.
 * Updated the ISO-8859-7 converter.
+* Added ATARIST converter, available through --enable-extra-encodings.
 
 New in 1.9:
 * Many more transliterations.
