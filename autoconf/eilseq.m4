@@ -46,6 +46,9 @@ yes
 #if HAVE_WCHAR_H
 #include <wchar.h>
 #endif
+/* The following two lines are a workaround against an autoconf-2.52 bug.  */
+#include <stdio.h>
+#include <stdlib.h>
 ])
       else
         dnl EILSEQ isn't defined by the system. Define EILSEQ ourselves, but
