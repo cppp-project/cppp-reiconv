@@ -180,6 +180,7 @@ struct conv_struct {
 #include "georgian_academy.h"
 #include "georgian_ps.h"
 #include "koi8_t.h"
+#include "pt154.h"
 #include "mulelao.h"
 #include "cp1133.h"
 #include "tis620.h"

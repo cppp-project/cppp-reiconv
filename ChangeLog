@@ -1,3 +1,17 @@
+2005-05-03  Bruno Haible  <bruno@clisp.org>
+
+	* tools/Makefile (ALL): Add pt154.h.
+	(pt154.h): New rule.
+	* lib/encodings.def: Add PT154.
+	* lib/pt154.h: New file.
+	* lib/converters.h: Include it.
+        * README, man/iconv_open.3: Add PT154.
+	* NOTES: Mention PT154.
+	* tests/PT154.TXT: New file.
+	* tests/Makefile.in (check): Also test PT154.
+	* tests/Makefile.msvc (check): Likewise.
+	* tests/Makefile.os2 (check): Likewise.
+
 2005-03-29  Bruno Haible  <bruno@clisp.org>
 
 	Rename libiconv_plug.so to preloadable_libiconv.so.

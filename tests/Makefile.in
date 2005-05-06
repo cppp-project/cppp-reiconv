@@ -97,6 +97,7 @@ check : all table-from table-to ../src/iconv_no_i18n
 	$(srcdir)/check-stateless $(srcdir) Georgian-Academy
 	$(srcdir)/check-stateless $(srcdir) Georgian-PS
 	$(srcdir)/check-stateless $(srcdir) KOI8-T
+	$(srcdir)/check-stateless $(srcdir) PT154
 	$(srcdir)/check-stateless $(srcdir) MuleLao-1
 	$(srcdir)/check-stateless $(srcdir) CP1133
 	$(srcdir)/check-stateless $(srcdir) TIS-620

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2004 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -559,6 +559,15 @@ DEFENCODING(( "KOI8-T",
             ),
             koi8_t,
             { koi8_t_mbtowc, NULL },      { koi8_t_wctomb, NULL })
+
+DEFENCODING(( "PT154",                  /* IANA, glibc */
+              "PTCP154",                /* IANA */
+              "CP154",                  /* IANA */
+              "CYRILLIC-ASIAN",         /* IANA */
+              "csPTCP154",              /* IANA */
+            ),
+            pt154,
+            { pt154_mbtowc, NULL },       { pt154_wctomb, NULL })
 
 DEFENCODING(( "MULELAO-1",
             ),

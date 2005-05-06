@@ -161,6 +161,9 @@ A: libiconv, as an internationalization library, supports those character
      * KOI8-T
        We implement this because it is the locale encoding in glibc's Tajik
        locale.
+     * PT154
+       We implement this because it is the locale encoding in glibc's Kazakh
+       locale.
      * CP{1250,1251,1252,1253,1254,1255,1256,1257}
        We implement these because they are the predominant Windows encodings
        in Europe.
