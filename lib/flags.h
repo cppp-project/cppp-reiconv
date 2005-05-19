@@ -81,6 +81,7 @@
 #define ei_georgian_academy_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
 #define ei_georgian_ps_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
 #define ei_koi8_t_oflags (HAVE_QUOTATION_MARKS)
+#define ei_pt154_oflags (HAVE_QUOTATION_MARKS)
 #define ei_mulelao_oflags (0)
 #define ei_cp1133_oflags (0)
 #define ei_tis620_oflags (0)
@@ -145,4 +146,5 @@
 #define ei_shift_jisx0213_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
 #define ei_iso2022_jp3_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
 #define ei_tds565_oflags (0)
+#define ei_atarist_oflags (HAVE_ACCENTS)
 #define ei_riscos1_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
