@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2003 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2003, 2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -13,8 +13,8 @@
 
    You should have received a copy of the GNU Library General Public
    License along with the GNU LIBICONV Library; see the file COPYING.LIB.
-   If not, write to the Free Software Foundation, Inc., 59 Temple Place -
-   Suite 330, Boston, MA 02111-1307, USA.  */
+   If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+   Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 /* When installed, this file is called "iconv.h". */
 
@@ -96,12 +96,24 @@ extern int iconv_close (iconv_t cd);
 #define iconvctl libiconvctl
 extern int iconvctl (iconv_t cd, int request, void* argument);
 
+/* Hook performed after every successful conversion of a Unicode character. */
+typedef void (*iconv_unicode_char_hook) (unsigned int uc, void* data);
+/* Hook performed after every successful conversion of a wide character. */
+typedef void (*iconv_wide_char_hook) (wchar_t wc, void* data);
+/* Set of hooks. */
+struct iconv_hooks {
+  iconv_unicode_char_hook uc_hook;
+  iconv_wide_char_hook wc_hook;
+  void* data;
+};
+
 /* Requests for iconvctl. */
 #define ICONV_TRIVIALP            0  /* int *argument */
 #define ICONV_GET_TRANSLITERATE   1  /* int *argument */
 #define ICONV_SET_TRANSLITERATE   2  /* const int *argument */
 #define ICONV_GET_DISCARD_ILSEQ   3  /* int *argument */
 #define ICONV_SET_DISCARD_ILSEQ   4  /* const int *argument */
+#define ICONV_SET_HOOKS           5  /* const struct iconv_hooks *argument */
 
 /* Listing of locale independent encodings. */
 #define iconvlist libiconvlist
@@ -109,6 +121,10 @@ extern void iconvlist (int (*do_one) (unsigned int namescount,
                                       const char * const * names,
                                       void* data),
                        void* data);
+
+/* Canonicalize an encoding name.
+   The result is either a canonical encoding name, or name itself. */
+extern const char * iconv_canonicalize (const char * name);
 
 /* Support for relocatable packages.  */
 
