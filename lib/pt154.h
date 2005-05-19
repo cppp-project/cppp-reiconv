@@ -44,7 +44,7 @@ pt154_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
   if (c < 0x80)
     *pwc = (ucs4_t) c;
   else if (c >= 0xc0)
-    *pwd = (ucs4_t) c + 0x0350;
+    *pwc = (ucs4_t) c + 0x0350;
   else
     *pwc = (ucs4_t) pt154_2uni[c-0x80];
   return 1;
