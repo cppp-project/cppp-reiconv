@@ -487,7 +487,7 @@ jisx0213.h : JISX0213.TXT cjk_tab_to_h
 tds565.h : $(TABLESDIR)/recode-cvs/TDS565.TXT 8bit_tab_to_h
 	(echo '#'; cat $<) | ./8bit_tab_to_h TDS565 tds565 > $@
 
-atarist.h : $(TABLESDIR)/other/ATARIST.TXT
+atarist.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MISC/ATARIST.TXT
 	./8bit_tab_to_h 'Atari ST' atarist < $< > $@
 
 riscos1.h : $(TABLESDIR)/recode-cvs/RISCOS-LATIN1.TXT 8bit_tab_to_h
