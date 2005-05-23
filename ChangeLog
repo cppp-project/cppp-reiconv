@@ -1,3 +1,15 @@
+2005-05-21  Bruno Haible  <bruno@clisp.org>
+
+	Add EURO SIGN to EUC-TW converter.
+	* lib/cns11643_1.h (cns11643_1_2uni_page42): Add entry for 0x14242.
+	(cns11643_1_mbtowc): Update.
+	* lib/cns11643_inv.h (cns11643_inv_2charset): Add entry for 0x20AC.
+	(cns11643_inv_uni2indx_page*): Update.
+	* lib/dec_hanyu.h (dec_hanyu_mbtowc, dec_hanyu_wctomb): Consider only
+	part of row 42.
+	* tests/EUC-TW.TXT: Add entry for 0x20AC.
+	* tests/EUC-TW.IRREVERSIBLE.TXT: Likewise.
+
 2005-05-03  Bruno Haible  <bruno@clisp.org>
 
 	* tools/Makefile (ALL): Add pt154.h.
