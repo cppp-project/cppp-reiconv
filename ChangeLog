@@ -1,3 +1,13 @@
+2005-05-22  Bruno Haible  <bruno@clisp.org>
+
+	Implement and document BIG5-2003.
+	* lib/big5_2003.h: New file.
+	* lib/converters.h: Include it.
+	* lib/encodings_extra.def (BIG5-2003): New encoding.
+	* README, man/iconv_open.3: Add BIG5-2003.
+	* tests/Makefile.in (check-extra-yes): Check BIG5-2003.
+	* tests/BIG5-2003.TXT: New file.
+
 2005-05-21  Bruno Haible  <bruno@clisp.org>
 
 	Add EURO SIGN to EUC-TW converter.

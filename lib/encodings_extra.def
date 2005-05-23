@@ -31,6 +31,11 @@ DEFENCODING(( "ISO-2022-JP-3",
             iso2022_jp3,
             { iso2022_jp3_mbtowc, iso2022_jp3_flushwc }, { iso2022_jp3_wctomb, iso2022_jp3_reset })
 
+DEFENCODING(( "BIG5-2003",
+            ),
+            big5_2003,
+            { big5_2003_mbtowc, NULL },   { big5_2003_wctomb, NULL })
+
 DEFENCODING(( "TDS565",
               "ISO-IR-230",
             ),

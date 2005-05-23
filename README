@@ -64,6 +64,8 @@ support for a few extra encodings:
         CP864
     Japanese
         EUC-JISX0213, Shift_JISX0213, ISO-2022-JP-3
+    Chinese
+        BIG5-2003 (experimental)
     Turkmen
         TDS565
     Platform specifics

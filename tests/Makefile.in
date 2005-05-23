@@ -179,6 +179,7 @@ check-extra-yes: all table-from table-to ../src/iconv_no_i18n
 	$(srcdir)/check-stateless $(srcdir) EUC-JISX0213
 	$(srcdir)/check-stateless $(srcdir) SHIFT_JISX0213
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-3
+	$(srcdir)/check-stateless $(srcdir) BIG5-2003
 	$(srcdir)/check-stateless $(srcdir) TDS565
 	$(srcdir)/check-stateless $(srcdir) ATARIST
 	$(srcdir)/check-stateless $(srcdir) RISCOS-LATIN1

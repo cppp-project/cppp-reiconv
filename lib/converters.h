@@ -277,6 +277,7 @@ typedef struct {
 #include "euc_jisx0213.h"
 #include "shift_jisx0213.h"
 #include "iso2022_jp3.h"
+#include "big5_2003.h"
 #include "tds565.h"
 #include "atarist.h"
 #include "riscos1.h"
