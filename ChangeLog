@@ -1,3 +1,10 @@
+2005-06-09  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (mkinstalldirs): Use build-aux/ instead of autoconf/.
+	* lib/Makefile.in (mkinstalldirs): Likewise.
+	* src/Makefile.in (mkinstalldirs): Likewise.
+	* man/Makefile.in (mkinstalldirs): Likewise.
+
 2005-06-08  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/canonicalize.c (__realpath): Avoid gcc warnings on platforms
