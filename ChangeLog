@@ -1,6 +1,11 @@
+2004-08-08  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/progreloc.c (xstrdup): Define as strdup if no xmalloc should
+	be used.
+
 2004-04-28  Bruno Haible  <bruno@clisp.org>
 
-	* progreloc.c (ISSLASH, IS_PATH_WITH_DIR, FILE_SYSTEM_PREFIX_LEN):
+	* srclib/progreloc.c (ISSLASH, IS_PATH_WITH_DIR, FILESYSTEM_PREFIX_LEN):
 	Treat Cygwin like Windows, since it now accepts Windows pathnames.
 
 2005-06-09  Bruno Haible  <bruno@clisp.org>
