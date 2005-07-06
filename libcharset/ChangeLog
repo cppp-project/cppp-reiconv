@@ -1,3 +1,8 @@
+2005-07-05  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOHEADER, ACLOCAL): New variables.
+	(autoconf/aclocal.m4, config.h.in): Use them.
+
 2005-03-22  Bruno Haible  <bruno@clisp.org>
 
 	* build-aux: New directory, renamed from autoconf.

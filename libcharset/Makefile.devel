@@ -4,13 +4,15 @@
 SHELL = /bin/sh
 MAKE = make
 AUTOCONF = autoconf-2.59
+AUTOHEADER = autoheader-2.59
+ACLOCAL = aclocal-1.9
 CP = cp
 RM = rm -f
 
 all : configures config.h_vms config.h.msvc include/libcharset.h.msvc-shared include/localcharset.h.msvc-shared
 
 autoconf/aclocal.m4 : $(wildcard m4/*.m4)
-	aclocal -I m4 --output=$@
+	$(ACLOCAL) -I m4 --output=$@
 
 configures : configure config.h.in
 
@@ -18,7 +20,7 @@ configure : configure.in autoconf/aclocal.m4
 	$(AUTOCONF) --include autoconf
 
 config.h.in : configure.in autoconf/aclocal.m4
-	autoheader --include autoconf
+	$(AUTOHEADER) --include autoconf
 	touch config.h.in
 
 config.h_vms : config.h.in

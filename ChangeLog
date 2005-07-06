@@ -1,5 +1,10 @@
 2005-07-05  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.devel (ACLOCAL): New variable.
+	(aclocal.m4): Use it.
+
+2005-07-05  Bruno Haible  <bruno@clisp.org>
+
 	* m4/relocatable.m4 (AC_RELOCATABLE): On mingw, simply set
 	SET_RELOCATABLE to a trivial value.
 
