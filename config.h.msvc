@@ -121,7 +121,7 @@
 /* Define if you have the iconv() function. */
 #undef HAVE_ICONV
 
-/* Define to 1 if you have the <inttypes.h> header file. */
+/* Define if <inttypes.h> exists and doesn't clash with <sys/types.h>. */
 #undef HAVE_INTTYPES_H
 
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
@@ -160,7 +160,7 @@
 /* Define to 1 if you have the <stddef.h> header file. */
 #define HAVE_STDDEF_H 1
 
-/* Define to 1 if you have the <stdint.h> header file. */
+/* Define if you have a working <stdint.h> header file. */
 #undef HAVE_STDINT_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
@@ -177,6 +177,9 @@
 
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H 1
+
+/* Define to 1 if you have the <sys/inttypes.h> header file. */
+#undef HAVE_SYS_INTTYPES_H
 
 /* Define to 1 if you have the <sys/param.h> header file. */
 #undef HAVE_SYS_PARAM_H
@@ -214,7 +217,7 @@
 /* Define to the value of ${prefix}, as a string. */
 
 /* If malloc(0) is != NULL, define this to 1. Otherwise define this to 0. */
-#undef MALLOC_0_IS_NONNULL
+#define MALLOC_0_IS_NONNULL 1
 
 /* Name of package */
 #undef PACKAGE

@@ -145,6 +145,7 @@
 #define ei_euc_jisx0213_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
 #define ei_shift_jisx0213_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
 #define ei_iso2022_jp3_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
+#define ei_big5_2003_oflags (HAVE_QUOTATION_MARKS)
 #define ei_tds565_oflags (0)
 #define ei_atarist_oflags (HAVE_ACCENTS)
 #define ei_riscos1_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)

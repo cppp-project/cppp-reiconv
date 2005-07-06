@@ -46,6 +46,9 @@ install : all force
 	-mkdir $(localedir)\de
 	-mkdir $(localedir)\de\LC_MESSAGES
 	$(INSTALL_DATA) de.gmo $(localedir)\de\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\el
+	-mkdir $(localedir)\el\LC_MESSAGES
+	$(INSTALL_DATA) el.gmo $(localedir)\el\LC_MESSAGES\libiconv.mo
 	-mkdir $(localedir)\eo
 	-mkdir $(localedir)\eo\LC_MESSAGES
 	$(INSTALL_DATA) eo.gmo $(localedir)\eo\LC_MESSAGES\libiconv.mo
@@ -88,6 +91,9 @@ install : all force
 	-mkdir $(localedir)\pt_BR
 	-mkdir $(localedir)\pt_BR\LC_MESSAGES
 	$(INSTALL_DATA) pt_BR.gmo $(localedir)\pt_BR\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\rm
+	-mkdir $(localedir)\rm\LC_MESSAGES
+	$(INSTALL_DATA) rm.gmo $(localedir)\rm\LC_MESSAGES\libiconv.mo
 	-mkdir $(localedir)\ro
 	-mkdir $(localedir)\ro\LC_MESSAGES
 	$(INSTALL_DATA) ro.gmo $(localedir)\ro\LC_MESSAGES\libiconv.mo
@@ -100,6 +106,9 @@ install : all force
 	-mkdir $(localedir)\sl
 	-mkdir $(localedir)\sl\LC_MESSAGES
 	$(INSTALL_DATA) sl.gmo $(localedir)\sl\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\sq
+	-mkdir $(localedir)\sq\LC_MESSAGES
+	$(INSTALL_DATA) sq.gmo $(localedir)\sq\LC_MESSAGES\libiconv.mo
 	-mkdir $(localedir)\sr
 	-mkdir $(localedir)\sr\LC_MESSAGES
 	$(INSTALL_DATA) sr.gmo $(localedir)\sr\LC_MESSAGES\libiconv.mo
@@ -112,6 +121,9 @@ install : all force
 	-mkdir $(localedir)\uk
 	-mkdir $(localedir)\uk\LC_MESSAGES
 	$(INSTALL_DATA) uk.gmo $(localedir)\uk\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\vi
+	-mkdir $(localedir)\vi\LC_MESSAGES
+	$(INSTALL_DATA) vi.gmo $(localedir)\vi\LC_MESSAGES\libiconv.mo
 	-mkdir $(localedir)\wa
 	-mkdir $(localedir)\wa\LC_MESSAGES
 	$(INSTALL_DATA) wa.gmo $(localedir)\wa\LC_MESSAGES\libiconv.mo
@@ -131,6 +143,8 @@ installdirs : force
 	-mkdir $(localedir)\da\LC_MESSAGES
 	-mkdir $(localedir)\de
 	-mkdir $(localedir)\de\LC_MESSAGES
+	-mkdir $(localedir)\el
+	-mkdir $(localedir)\el\LC_MESSAGES
 	-mkdir $(localedir)\eo
 	-mkdir $(localedir)\eo\LC_MESSAGES
 	-mkdir $(localedir)\es
@@ -159,6 +173,8 @@ installdirs : force
 	-mkdir $(localedir)\pl\LC_MESSAGES
 	-mkdir $(localedir)\pt_BR
 	-mkdir $(localedir)\pt_BR\LC_MESSAGES
+	-mkdir $(localedir)\rm
+	-mkdir $(localedir)\rm\LC_MESSAGES
 	-mkdir $(localedir)\ro
 	-mkdir $(localedir)\ro\LC_MESSAGES
 	-mkdir $(localedir)\ru
@@ -167,6 +183,8 @@ installdirs : force
 	-mkdir $(localedir)\sk\LC_MESSAGES
 	-mkdir $(localedir)\sl
 	-mkdir $(localedir)\sl\LC_MESSAGES
+	-mkdir $(localedir)\sq
+	-mkdir $(localedir)\sq\LC_MESSAGES
 	-mkdir $(localedir)\sr
 	-mkdir $(localedir)\sr\LC_MESSAGES
 	-mkdir $(localedir)\sv
@@ -175,6 +193,8 @@ installdirs : force
 	-mkdir $(localedir)\tr\LC_MESSAGES
 	-mkdir $(localedir)\uk
 	-mkdir $(localedir)\uk\LC_MESSAGES
+	-mkdir $(localedir)\vi
+	-mkdir $(localedir)\vi\LC_MESSAGES
 	-mkdir $(localedir)\wa
 	-mkdir $(localedir)\wa\LC_MESSAGES
 	-mkdir $(localedir)\zh_CN
@@ -185,6 +205,7 @@ uninstall : force
 	$(RM) $(localedir)\ca\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\da\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\de\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\el\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\eo\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\es\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\et\LC_MESSAGES\libiconv.mo
@@ -199,14 +220,17 @@ uninstall : force
 	$(RM) $(localedir)\nl\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\pl\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\pt_BR\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\rm\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\ro\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\ru\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\sk\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\sl\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\sq\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\sr\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\sv\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\tr\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\uk\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\vi\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\wa\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\zh_CN\LC_MESSAGES\libiconv.mo
 

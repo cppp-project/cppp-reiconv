@@ -230,6 +230,11 @@ ARMSCII-8, ei_armscii_8
 GEORGIAN-ACADEMY, ei_georgian_academy
 GEORGIAN-PS, ei_georgian_ps
 KOI8-T, ei_koi8_t
+PT154, ei_pt154
+PTCP154, ei_pt154
+CP154, ei_pt154
+CYRILLIC-ASIAN, ei_pt154
+CSPTCP154, ei_pt154
 MULELAO-1, ei_mulelao
 CP1133, ei_cp1133
 IBM-CP1133, ei_cp1133
