@@ -7,6 +7,7 @@ New in 1.10:
 * Updated EUC-TW converter to include the Euro sign.
 * The preloadable library has been renamed from libiconv_plug.so to
   preloadable_libiconv.so.
+* Portability to mingw.
 
 New in 1.9:
 * Many more transliterations.
