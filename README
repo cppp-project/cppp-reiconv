@@ -140,8 +140,8 @@ This library can be built and installed in two variants:
     recompiled. Just set the LD_PRELOAD environment variable, that's it!
 
 
-Distribution:
-    ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.9.2.tar.gz
+Download:
+    ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.10.tar.gz
 
 Homepage:
     http://www.gnu.org/software/libiconv/
