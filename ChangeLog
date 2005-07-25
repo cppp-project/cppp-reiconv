@@ -1,3 +1,9 @@
+2005-07-25  Bruno Haible  <bruno@clisp.org>
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* lib/relocatable.h: Make this file includable in C++ mode: add extern
+	"C".
+
 2005-07-08  Bruno Haible  <bruno@clisp.org>
 
 	* Version 1.10 released.
