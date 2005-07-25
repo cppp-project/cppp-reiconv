@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.9.1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2004-01-22 11:54+0100\n"
+"POT-Creation-Date: 2005-07-07 14:54+0200\n"
 "PO-Revision-Date: 2003-06-01 23:55+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: Chinese (simplified) <i18n-translation@lists.linux.net.cn>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/iconv.c:54
+#: src/iconv.c:56
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr "用法：iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 
-#: src/iconv.c:56
+#: src/iconv.c:58
 msgid "or:    iconv -l"
 msgstr "或：  iconv -l"
 
-#: src/iconv.c:66
+#: src/iconv.c:68
 #, c-format
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
@@ -32,51 +32,61 @@ msgstr ""
 "这是自由软件；请查看源代码中的复制条件。本软件不提供任何担保，包括销售\n"
 "或者适用性担保。\n"
 
-#: src/iconv.c:69
+#: src/iconv.c:71
 #, c-format
 msgid "Written by %s.\n"
 msgstr "作者 %s。\n"
 
-#: src/iconv.c:105 src/iconv.c:137 src/iconv.c:187
-#, c-format
-msgid "iconv: %s: incomplete character or shift sequence\n"
+#: src/iconv.c:131 src/iconv.c:171 src/iconv.c:232
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: incomplete character or shift sequence\n"
 msgstr "iconv：%s：不完整的字符或者换码序列\n"
 
-#: src/iconv.c:131 src/iconv.c:182
-#, c-format
-msgid "iconv: %s: cannot convert\n"
+#: src/iconv.c:161 src/iconv.c:223
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: cannot convert\n"
 msgstr "iconv：%s：无法转换\n"
 
-#: src/iconv.c:153 src/iconv.c:192 src/iconv.c:310
-#, c-format
-msgid "iconv: %s: "
+#: src/iconv.c:191 src/iconv.c:241
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: "
 msgstr "iconv：%s："
 
-#: src/iconv.c:201
+#: src/iconv.c:253
 #, c-format
 msgid "iconv: %s: I/O error\n"
 msgstr "iconv：%s：输入输出错误\n"
 
-#: src/iconv.c:294
+#: src/iconv.c:351
 #, c-format
 msgid "iconv: conversion from %s unsupported\n"
 msgstr "iconv：不支持从 %s 进行转换\n"
 
-#: src/iconv.c:296
+#: src/iconv.c:353
 #, c-format
 msgid "iconv: conversion to %s unsupported\n"
 msgstr "iconv：不支持转换到 %s\n"
 
-#: src/iconv.c:298
+#: src/iconv.c:355
 #, c-format
 msgid "iconv: conversion from %s to %s unsupported\n"
 msgstr "iconv：不支持从 %s 转换到 %s\n"
 
-#: src/iconv.c:302
+#: src/iconv.c:356
+#, c-format
+msgid "iconv: try '%s -l' to get the list of supported encodings\n"
+msgstr ""
+
+#: src/iconv.c:370
 msgid "(stdin)"
 msgstr "(标准输入)"
 
-#: src/iconv.c:323
+#: src/iconv.c:378
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv：%s："
+
+#: src/iconv.c:391
 #, c-format
 msgid "iconv: I/O error\n"
 msgstr "iconv：输入输出错误\n"

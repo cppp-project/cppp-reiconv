@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.9.1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2004-01-22 11:54+0100\n"
+"POT-Creation-Date: 2005-07-07 14:54+0200\n"
 "PO-Revision-Date: 2004-04-05 20:24+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -14,16 +14,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.2\n"
 
-#: src/iconv.c:54
+#: src/iconv.c:56
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr ""
 "Po s' è siervi: iconv [-c] [-s] [-f ecôd._sourd] [-t ecôd._såme] [fitchî...]"
 
-#: src/iconv.c:56
+#: src/iconv.c:58
 msgid "or:    iconv -l"
 msgstr "oudonbén:       iconv -l"
 
-#: src/iconv.c:66
+#: src/iconv.c:68
 #, c-format
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
@@ -34,51 +34,61 @@ msgstr ""
 "I n' a NOLE WAERANTEYE; nén minme ki vos VINDRÎZ bén\n"
 "li programe ou ki vos vs è SIEVRÎZ BÉN PO ENE SÔRE OU L' ÔTE.\n"
 
-#: src/iconv.c:69
+#: src/iconv.c:71
 #, c-format
 msgid "Written by %s.\n"
 msgstr "Sicrît pa %s.\n"
 
-#: src/iconv.c:105 src/iconv.c:137 src/iconv.c:187
-#, c-format
-msgid "iconv: %s: incomplete character or shift sequence\n"
+#: src/iconv.c:131 src/iconv.c:171 src/iconv.c:232
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: incomplete character or shift sequence\n"
 msgstr "iconv: %s: caractere ou secwince di candjmint nén complete\n"
 
-#: src/iconv.c:131 src/iconv.c:182
-#, c-format
-msgid "iconv: %s: cannot convert\n"
+#: src/iconv.c:161 src/iconv.c:223
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: cannot convert\n"
 msgstr "iconv: %s: dji n' sai fé l' kiviersaedje\n"
 
-#: src/iconv.c:153 src/iconv.c:192 src/iconv.c:310
-#, c-format
-msgid "iconv: %s: "
+#: src/iconv.c:191 src/iconv.c:241
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: "
 msgstr "iconv: %s: "
 
-#: src/iconv.c:201
+#: src/iconv.c:253
 #, c-format
 msgid "iconv: %s: I/O error\n"
 msgstr "iconv: %s: aroke d' intrêye/rexhowe\n"
 
-#: src/iconv.c:294
+#: src/iconv.c:351
 #, c-format
 msgid "iconv: conversion from %s unsupported\n"
 msgstr "iconv: li cviersaedje a pårti d' l' ecôdaedje %s n' est nén sopoirté\n"
 
-#: src/iconv.c:296
+#: src/iconv.c:353
 #, c-format
 msgid "iconv: conversion to %s unsupported\n"
 msgstr "iconv: li cviersaedje viè l' ecôdaedje %s n' est nén sopoirté\n"
 
-#: src/iconv.c:298
+#: src/iconv.c:355
 #, c-format
 msgid "iconv: conversion from %s to %s unsupported\n"
 msgstr "iconv: li cviersaedje di l' ecôdaedje %s viè %s n' est nén sopoirté\n"
 
-#: src/iconv.c:302
+#: src/iconv.c:356
+#, c-format
+msgid "iconv: try '%s -l' to get the list of supported encodings\n"
+msgstr ""
+
+#: src/iconv.c:370
 msgid "(stdin)"
 msgstr "(intrêye sitandård)"
 
-#: src/iconv.c:323
+#: src/iconv.c:378
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv: %s: "
+
+#: src/iconv.c:391
 #, c-format
 msgid "iconv: I/O error\n"
 msgstr "iconv: aroke d' intrêye/rexhowe\n"

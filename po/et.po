@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.9.1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2004-01-22 11:54+0100\n"
+"POT-Creation-Date: 2005-07-07 14:54+0200\n"
 "PO-Revision-Date: 2003-05-29 10:35+0300\n"
 "Last-Translator: Toomas Soome <Toomas.Soome@microlink.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/iconv.c:54
+#: src/iconv.c:56
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr "Kasutamine: iconv [-c] [-s] [-f koodist] [-t koodi] [fail ...]"
 
-#: src/iconv.c:56
+#: src/iconv.c:58
 msgid "or:    iconv -l"
 msgstr "või:    iconv -l"
 
-#: src/iconv.c:66
+#: src/iconv.c:68
 #, c-format
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
@@ -33,51 +33,61 @@ msgstr ""
 "PUUDUB; ka müügiks või mingil eesmärgil kasutamiseks, vastavalt seadustega\n"
 "lubatud piiridele.\n"
 
-#: src/iconv.c:69
+#: src/iconv.c:71
 #, c-format
 msgid "Written by %s.\n"
 msgstr "Kirjutanud %s.\n"
 
-#: src/iconv.c:105 src/iconv.c:137 src/iconv.c:187
-#, c-format
-msgid "iconv: %s: incomplete character or shift sequence\n"
+#: src/iconv.c:131 src/iconv.c:171 src/iconv.c:232
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: incomplete character or shift sequence\n"
 msgstr "iconv: %s: mittetäielik sümbol või nihkejärjend\n"
 
-#: src/iconv.c:131 src/iconv.c:182
-#, c-format
-msgid "iconv: %s: cannot convert\n"
+#: src/iconv.c:161 src/iconv.c:223
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: cannot convert\n"
 msgstr "iconv: %s: ei saa teisendada\n"
 
-#: src/iconv.c:153 src/iconv.c:192 src/iconv.c:310
-#, c-format
-msgid "iconv: %s: "
+#: src/iconv.c:191 src/iconv.c:241
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: "
 msgstr "iconv: %s: "
 
-#: src/iconv.c:201
+#: src/iconv.c:253
 #, c-format
 msgid "iconv: %s: I/O error\n"
 msgstr "iconv: %s: S/V viga\n"
 
-#: src/iconv.c:294
+#: src/iconv.c:351
 #, c-format
 msgid "iconv: conversion from %s unsupported\n"
 msgstr "iconv: teisendust tabelist %s ei toetata\n"
 
-#: src/iconv.c:296
+#: src/iconv.c:353
 #, c-format
 msgid "iconv: conversion to %s unsupported\n"
 msgstr "iconv: teisendust tabelisse %s ei toetata\n"
 
-#: src/iconv.c:298
+#: src/iconv.c:355
 #, c-format
 msgid "iconv: conversion from %s to %s unsupported\n"
 msgstr "iconv: teisendust %s -> %s ei toetata\n"
 
-#: src/iconv.c:302
+#: src/iconv.c:356
+#, c-format
+msgid "iconv: try '%s -l' to get the list of supported encodings\n"
+msgstr ""
+
+#: src/iconv.c:370
 msgid "(stdin)"
 msgstr "(standardsisend)"
 
-#: src/iconv.c:323
+#: src/iconv.c:378
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv: %s: "
+
+#: src/iconv.c:391
 #, c-format
 msgid "iconv: I/O error\n"
 msgstr "iconv: S/V viga\n"

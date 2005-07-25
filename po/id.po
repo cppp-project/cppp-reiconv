@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.8\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2004-01-22 11:54+0100\n"
+"POT-Creation-Date: 2005-07-07 14:54+0200\n"
 "PO-Revision-Date: 2002-10-15 15:22GMT+0700\n"
 "Last-Translator: Tedi Heriyanto <tedi_h@gmx.net>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
-#: src/iconv.c:54
+#: src/iconv.c:56
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr "Penggunaan: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 
-#: src/iconv.c:56
+#: src/iconv.c:58
 msgid "or:    iconv -l"
 msgstr "atau:    iconv -l"
 
-#: src/iconv.c:66
+#: src/iconv.c:68
 #, c-format
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
@@ -34,51 +34,61 @@ msgstr ""
 "This is free software; see the source for copying conditions.  There is NO\n"
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 
-#: src/iconv.c:69
+#: src/iconv.c:71
 #, c-format
 msgid "Written by %s.\n"
 msgstr "Ditulis oleh %s.\n"
 
-#: src/iconv.c:105 src/iconv.c:137 src/iconv.c:187
-#, c-format
-msgid "iconv: %s: incomplete character or shift sequence\n"
+#: src/iconv.c:131 src/iconv.c:171 src/iconv.c:232
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: incomplete character or shift sequence\n"
 msgstr "iconv: %s: karakter atau urutan shift tidak lengkap\n"
 
-#: src/iconv.c:131 src/iconv.c:182
-#, c-format
-msgid "iconv: %s: cannot convert\n"
+#: src/iconv.c:161 src/iconv.c:223
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: cannot convert\n"
 msgstr "iconv: %s: tidak dapat mengkonversi\n"
 
-#: src/iconv.c:153 src/iconv.c:192 src/iconv.c:310
-#, c-format
-msgid "iconv: %s: "
+#: src/iconv.c:191 src/iconv.c:241
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: "
 msgstr "iconv: %s: "
 
-#: src/iconv.c:201
+#: src/iconv.c:253
 #, c-format
 msgid "iconv: %s: I/O error\n"
 msgstr "iconv: %s: kesalahan I/O\n"
 
-#: src/iconv.c:294
+#: src/iconv.c:351
 #, c-format
 msgid "iconv: conversion from %s unsupported\n"
 msgstr "iconv: konversi dari %s tidak didukung\n"
 
-#: src/iconv.c:296
+#: src/iconv.c:353
 #, c-format
 msgid "iconv: conversion to %s unsupported\n"
 msgstr "iconv: konversi ke %s tidak didukung\n"
 
-#: src/iconv.c:298
+#: src/iconv.c:355
 #, c-format
 msgid "iconv: conversion from %s to %s unsupported\n"
 msgstr "iconv: konversi dari %s to %s tidak didukung\n"
 
-#: src/iconv.c:302
+#: src/iconv.c:356
+#, c-format
+msgid "iconv: try '%s -l' to get the list of supported encodings\n"
+msgstr ""
+
+#: src/iconv.c:370
 msgid "(stdin)"
 msgstr "(stdin)"
 
-#: src/iconv.c:323
+#: src/iconv.c:378
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv: %s: "
+
+#: src/iconv.c:391
 #, c-format
 msgid "iconv: I/O error\n"
 msgstr "iconv: kesalahan I/O\n"
