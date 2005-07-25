@@ -44,7 +44,7 @@ lib/localcharset.h :
 install-lib : all force
 	cd lib && $(MAKE) install-lib libdir='$(libdir)' includedir='$(includedir)'
 	if [ ! -d $(includedir) ] ; then $(mkinstalldirs) $(includedir) ; fi
-	$(INSTALL_DATA) include/iconv.h $(includedir)/iconv.h
+	$(INSTALL_DATA) include/iconv.h.inst $(includedir)/iconv.h
 
 install : lib/localcharset.h force
 	cd libcharset && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
@@ -54,7 +54,7 @@ install : lib/localcharset.h force
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(exec_prefix) ; fi
 	if [ ! -d $(DESTDIR)$(includedir) ] ; then $(mkinstalldirs) $(DESTDIR)$(includedir) ; fi
-	$(INSTALL_DATA) include/iconv.h $(DESTDIR)$(includedir)/iconv.h
+	$(INSTALL_DATA) include/iconv.h.inst $(DESTDIR)$(includedir)/iconv.h
 	cd po && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)'
 	cd man && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)' mandir='$(mandir)'
 
@@ -118,7 +118,7 @@ distclean : force
 	if test -d tests; then cd tests && if test -f Makefile; then $(MAKE) distclean; fi; fi
 	$(RM) config.status config.log config.cache Makefile libtool
 	$(RM) config.h stamp-h1 lib/stamp-h2
-	$(RM) include/iconv.h
+	$(RM) include/iconv.h include/iconv.h.inst
 
 maintainer-clean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) maintainer-clean; fi
@@ -131,7 +131,7 @@ maintainer-clean : force
 	if test -d tests; then cd tests && if test -f Makefile; then $(MAKE) maintainer-clean; fi; fi
 	$(RM) config.status config.log config.cache Makefile libtool
 	$(RM) config.h stamp-h1 lib/stamp-h2
-	$(RM) include/iconv.h
+	$(RM) include/iconv.h include/iconv.h.inst
 
 force :
 

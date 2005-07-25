@@ -19,7 +19,7 @@ dnl Fifth Floor, Boston, MA 02110-1301, USA.
 AC_PREREQ(2.13)
 
 PACKAGE=libcharset
-VERSION=1.3
+VERSION=1.4
 
 AC_INIT(lib/localcharset.c)
 AC_CONFIG_AUX_DIR(build-aux)
@@ -65,6 +65,7 @@ dnl           check for build configuration
 
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
+gl_VISIBILITY
 
 dnl           checks for header files and functions
 
@@ -73,4 +74,8 @@ jm_GLIBC21
 AC_CHECK_HEADERS(stddef.h stdlib.h string.h)
 AC_CHECK_FUNCS(setlocale)
 
-AC_OUTPUT(Makefile lib/Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([lib/Makefile])
+AC_CONFIG_FILES([include/localcharset.h:include/localcharset.h.build.in])
+AC_CONFIG_FILES([include/localcharset.h.inst:include/localcharset.h.in])
+AC_OUTPUT

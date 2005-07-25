@@ -78,6 +78,7 @@ dnl           check for build configuration
 AC_DISABLE_STATIC
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
+gl_VISIBILITY
 AM_ICONV
 AM_GNU_GETTEXT([external])
 
@@ -146,10 +147,16 @@ AH_BOTTOM([
 #endif
 ])
 
-if test -d "${srcdir}/tests"; then
-  TESTS_MAKEFILE=tests/Makefile
-else
-  TESTS_MAKEFILE=""
-fi
 AC_CONFIG_SUBDIRS(libcharset)
-AC_OUTPUT(Makefile lib/Makefile srclib/Makefile src/Makefile po/Makefile.in man/Makefile ${TESTS_MAKEFILE} include/iconv.h)
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([lib/Makefile])
+AC_CONFIG_FILES([srclib/Makefile])
+AC_CONFIG_FILES([src/Makefile])
+AC_CONFIG_FILES([po/Makefile.in])
+AC_CONFIG_FILES([man/Makefile])
+if test -d "${srcdir}/tests"; then
+  AC_CONFIG_FILES([tests/Makefile])
+fi
+AC_CONFIG_FILES([include/iconv.h:include/iconv.h.build.in])
+AC_CONFIG_FILES([include/iconv.h.inst:include/iconv.h.in])
+AC_OUTPUT

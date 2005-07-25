@@ -13,11 +13,13 @@ libdir = @libdir@
 
 # Programs used by "make":
 CC = @CC@
-CFLAGS = @CFLAGS@
+CFLAGS = @CFLAGS@ @CFLAG_VISIBILITY@
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 INCLUDES = -I. -I$(srcdir) -I.. -I$(srcdir)/.. -I../include
-DEFS = -DLIBDIR=\"$(libdir)\" \
+# -DBUILDING_LIBCHARSET: Change expansion of LIBCHARSET_DLL_EXPORTED macro.
+# -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
+DEFS = -DLIBDIR=\"$(libdir)\" -DBUILDING_LIBCHARSET -DBUILDING_DLL \
 -DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(libdir)\" -DNO_XMALLOC \
 -Dset_relocation_prefix=libcharset_set_relocation_prefix \
 -Drelocate=libcharset_relocate @DEFS@

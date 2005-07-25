@@ -1,3 +1,6 @@
+New in 1.11:
+* Tidy up the list of symbols exported from libiconv (assumes gcc >= 4.0).
+
 New in 1.10:
 * Added ISO-8859-11 converter.
 * Updated the ISO-8859-7 converter.

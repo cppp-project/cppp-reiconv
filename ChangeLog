@@ -1,3 +1,24 @@
+2005-07-24  Bruno Haible  <bruno@clisp.org>
+
+	Tidy up exported symbols.
+	* m4/visibility.m4: New file.
+	* include/export.h: New file.
+	* configure.in: Invoke gl_VISIBILITY. Use AC_CONFIG_FILES. Arrange to
+	create also include/iconv.h.inst.
+	* Makefile.devel (all): Depend on include/iconv.h.build.in.
+	(aclocal.m4): Depend on m4/visibility.m4.
+	(include/iconv.h.build.in): New rule.
+	* Makefile.in (install-lib, install): Install include/iconv.h.inst,
+	not the include/iconv.h that was used for building.
+	(distclean, maintainer-clean): Remove also include/iconv.h.inst.
+	* lib/Makefile.in (CFLAGS): Add @CFLAG_VISIBILITY@.
+	(DEFS): Also define BUILDING_LIBICONV and BUILDING_DLL.
+	* lib/config.h.in (HAVE_VISIBILITY): New macro.
+	* lib/relocatable.h (RELOCATABLE_DLL_EXPORTED) [HAVE_VISIBILITY]:
+	Define to the gcc visibility attribute.
+	* srclib/relocatable.h (RELOCATABLE_DLL_EXPORTED) [HAVE_VISIBILITY]:
+	Likewise.
+
 2005-07-25  Bruno Haible  <bruno@clisp.org>
 
 	2003-08-24  Bruno Haible  <bruno@clisp.org>

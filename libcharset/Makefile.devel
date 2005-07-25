@@ -9,7 +9,7 @@ ACLOCAL = aclocal-1.9
 CP = cp
 RM = rm -f
 
-all : configures config.h_vms config.h.msvc include/libcharset.h.msvc-shared include/localcharset.h.msvc-shared
+all : configures config.h_vms config.h.msvc include/libcharset.h.msvc-shared include/localcharset.h.build.in include/localcharset.h.msvc-shared
 
 autoconf/aclocal.m4 : $(wildcard m4/*.m4)
 	$(ACLOCAL) -I m4 --output=$@
@@ -51,6 +51,11 @@ config.h.msvc : config.h.in
 include/libcharset.h.msvc-shared : include/libcharset.h.in windows/dllexport.h
 	sed -e 's/extern \([^"]\)/extern LIBCHARSET_DLL_EXPORTED \1/' \
 	    -e '/#define _LIBCHARSET_H/r windows/dllexport.h' \
+	  < $< > $@
+
+include/localcharset.h.build.in : include/localcharset.h.in include/export.h
+	sed -e 's/extern \([^"]\)/extern LIBCHARSET_DLL_EXPORTED \1/' \
+	    -e '/#define _LOCALCHARSET_H/r include/export.h' \
 	  < $< > $@
 
 include/localcharset.h.msvc-shared : include/localcharset.h.in windows/dllexport.h

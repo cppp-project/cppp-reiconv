@@ -1,3 +1,18 @@
+2005-07-24  Bruno Haible  <bruno@clisp.org>
+
+	Tidy up exported symbols.
+	* include/export.h: New file.
+	* configure.in Invoke gl_VISIBILITY. Use AC_CONFIG_FILES. Arrange to
+	create also include/localcharset.h.inst.
+	(VERSION): Bump to 1.4.
+	* Makefile.devel (all): Depend on include/localcharset.h.build.in.
+	(include/localcharset.h.build.in): New rule.
+	* Makefile.in (all): Remove dependency on include/localcharset.h.
+	(include/localcharset.h): Remove rule.
+	(install-lib, install): Install include/localcharset.h.inst,
+	not the include/localcharset.h that was used for building.
+	(distclean, maintainer-clean): Remove also include/localcharset.h.inst.
+
 2005-07-08  Bruno Haible  <bruno@clisp.org>
 
 	* m4/libtool.m4 (postinstall_cmds) [cygwin,mingw,pw32]: Make DLL
