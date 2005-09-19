@@ -1,6 +1,7 @@
 2005-07-24  Bruno Haible  <bruno@clisp.org>
 
 	Tidy up exported symbols.
+	* m4/visibility.m4: New file.
 	* include/export.h: New file.
 	* configure.in Invoke gl_VISIBILITY. Use AC_CONFIG_FILES. Arrange to
 	create also include/localcharset.h.inst.
@@ -22,6 +23,11 @@
 
 	* configure.in: Bump version number.
 	* windows/charset.rc: Likewise.
+
+2005-07-05  Bruno Haible  <bruno@clisp.org>
+
+	* m4/relocatable.m4 (AC_RELOCATABLE): On mingw, simply set
+	SET_RELOCATABLE to a trivial value.
 
 2005-07-05  Bruno Haible  <bruno@clisp.org>
 
@@ -107,6 +113,7 @@
 2003-04-05  Bruno Haible  <bruno@clisp.org>
 
 	Support for relocatable installation.
+	* m4/relocatable.m4: New file, from GNU gettext.
 	* autoconf/config.libpath: New file, from GNU gettext.
 	* configure.in: Invoke AC_RELOCATABLE_LIBRARY.
 	* include/libcharset.h.in: New file.
@@ -146,6 +153,8 @@
 		Fix the 2002-09-16 fix.
 		* ltmain.sh (install): If "ln -s -f" fails (this is the case
 		with /usr/bin/ln on Solaris 2.7), fall back to "rm && ln -s".
+	* m4/codeset.m4: Update from GNU gettext-0.10.40.
+	* m4/glibc21.m4: Update from GNU gettext-0.10.40.
 
 2003-03-17  Bruno Haible  <bruno@clisp.org>
 
@@ -209,7 +218,12 @@
 
 2002-11-07  Bruno Haible  <bruno@clisp.org>
 
+	* m4/libtool.m4: Upgrade to libtool-1.4.3.
 	* autoconf/ltmain.sh: Upgrade to libtool-1.4.3.
+
+2002-07-14  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4 (_LT_AC_LTCONFIG_HACK): Add support for GNU/FreeBSD.
 
 2002-06-12  Bruno Haible  <bruno@clisp.org>
 
