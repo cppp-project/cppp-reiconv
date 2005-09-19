@@ -1,3 +1,10 @@
+2005-08-12  Bruno Haible  <bruno@clisp.org>
+
+	* lib/big5_2003.h: Map 0xF9FA..0xF9FD differently.
+	* tests/BIG5-2003.TXT: Likewise.
+	* tests/BIG5-2003.IRREVERSIBLE.TXT: New file.
+	Reported by Ping Yeh <ping@pingyeh.net>.
+
 2005-07-24  Bruno Haible  <bruno@clisp.org>
 
 	Tidy up exported symbols.

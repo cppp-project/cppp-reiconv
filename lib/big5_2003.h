@@ -90,12 +90,24 @@
  *
  * 7. Box drawing characters are added at 0xF9DD..0xF9FE.
  *
+ *    Note: 4 of these characters are mapped in a non-inversible way, because
+ *    Unicode does not yet include the corresponding characters:
+ *
+ *     code                                           Unicode approximation
+ *    0xF9FA  BOX DRAWINGS DOUBLE ARC DOWN AND RIGHT  0x2554
+ *    0xF9FB  BOX DRAWINGS DOUBLE ARC DOWN AND LEFT   0x2557
+ *    0xF9FC  BOX DRAWINGS DOUBLE ARC UP AND RIGHT    0x255A
+ *    0xF9FD  BOX DRAWINGS DOUBLE ARC UP AND LEFT     0x255D
+ *
  * 8. Private area mappings are added:
  *
  *              code                 Unicode
  *    0x{81..8D}{40..7E,A1..FE}  U+EEB8..U+F6B0
  *    0x{8E..A0}{40..7E,A1..FE}  U+E311..U+EEB7
  *    0x{FA..FE}{40..7E,A1..FE}  U+E000..U+E310
+ *
+ *    These mappings are not contained in the BSMI Big5-2003 standard. However,
+ *    they were contained in a draft of it.
  */
 
 static const unsigned short big5_2003_2uni_pagea1[314] = {
@@ -164,7 +176,7 @@ static const unsigned short big5_2003_2uni_pagef9[41] = {
   0x255d, 0x2552, 0x2564, 0x2555, 0x255e, 0x256a, 0x2561, 0x2558,
   0x2567, 0x255b, 0x2553, 0x2565, 0x2556, 0x255f, 0x256b, 0x2562,
   0x2559, 0x2568, 0x255c, 0x2551, 0x2550,
-  0x25dc, 0x25dd, 0x25df, 0x25de, /* not 0x2554, 0x2557, 0x255a, 0x255d, */
+  0x2554, 0x2557, 0x255a, 0x255d, /* not invertible */
   0x2593,
 };
 
@@ -321,10 +333,6 @@ big5_2003_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
       }
       if (wc == 0x2574) { buf[0] = 0xa1; buf[1] = 0x5a; ret = 2; break; }
       if (wc == 0x2593) { buf[0] = 0xf9; buf[1] = 0xfe; ret = 2; break; }
-      if (wc == 0x25dc) { buf[0] = 0xf9; buf[1] = 0xfa; ret = 2; break; }
-      if (wc == 0x25dd) { buf[0] = 0xf9; buf[1] = 0xfb; ret = 2; break; }
-      if (wc == 0x25de) { buf[0] = 0xf9; buf[1] = 0xfd; ret = 2; break; }
-      if (wc == 0x25df) { buf[0] = 0xf9; buf[1] = 0xfc; ret = 2; break; }
       break;
     case 0x26:
       if (wc == 0x2609 || wc == 0x2641)
