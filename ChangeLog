@@ -1,3 +1,17 @@
+2005-11-11  Bruno Haible  <bruno@clisp.org>
+
+	* lib/euc_jp.h (euc_jp_wctomb): When writing a 3-bytes byte sequence
+	and only two bytes are available in the output buffer, return
+	RET_TOOSMALL instead of overrunning the output buffer.
+	* lib/isoir165.h (isoir165_wctomb): When only one byte is available
+	in the output buffer, don't overrun the output buffer.
+	Reported by William Bardwell <bardwell@curl.com>.
+
+2005-09-18  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4: Update, based on libtool-1.5.20.
+	* build-aux/ltmain.sh: Update, based on libtool-1.5.20.
+
 2005-08-12  Bruno Haible  <bruno@clisp.org>
 
 	* lib/big5_2003.h: Map 0xF9FA..0xF9FD differently.
