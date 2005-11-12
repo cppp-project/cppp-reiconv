@@ -127,7 +127,7 @@ isoir165_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
   unsigned char buf[2];
   int ret;
 
-  /* Try the Unicode -> GB2312 table table. */
+  /* Try the Unicode -> GB2312 table. */
   ret = gb2312_wctomb(conv,buf,wc,2);
   if (ret != RET_ILUNI) {
     if (ret != 2) abort();
