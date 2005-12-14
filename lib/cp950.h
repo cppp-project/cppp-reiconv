@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2005 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -59,6 +59,13 @@
  *
  *    We implement this omission, because said range is marked "uncertain"
  *    in the unicode.org BIG5 table.
+ *
+ * The table found on Microsoft's website furthermore adds:
+ *
+ * 4. A single character:
+ *
+ *     code   CP950.TXT
+ *    0xA3E1  0x20AC # EURO SIGN
  */
 
 static const unsigned short cp950_2uni_pagea1[314] = {
@@ -135,6 +142,10 @@ cp950_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
           if (ret != RET_ILSEQ)
             return ret;
         }
+        if (c == 0xa3 && c2 == 0xe1) {
+          *pwc = 0x20ac;
+          return 2;
+        }
       }
     }
     if (c == 0xf9) {
@@ -169,6 +180,7 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
       break;
     case 0x20:
       if (wc == 0x2027) { buf[0] = 0xa1; buf[1] = 0x45; ret = 2; break; }
+      if (wc == 0x20ac) { buf[0] = 0xa3; buf[1] = 0xe1; ret = 2; break; }
       if (wc == 0x2022 || wc == 0x203e)
         return RET_ILUNI;
       break;

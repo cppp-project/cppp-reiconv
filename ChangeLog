@@ -1,3 +1,10 @@
+2005-11-14  Bruno Haible  <bruno@clisp.org>
+
+	Follow Euro sign addition done in 1999 in
+	http://www.microsoft.com/globaldev/reference/dbcs/950/950_A3.mspx
+	* lib/cp950.h (cp950_mbtowc, cp950_wctomb): Add mapping for 0xA3E1.
+	* tests/CP950.TXT: Add mapping for 0xA3E1.
+
 2005-11-11  Bruno Haible  <bruno@clisp.org>
 
 	* lib/euc_jp.h (euc_jp_wctomb): When writing a 3-bytes byte sequence
