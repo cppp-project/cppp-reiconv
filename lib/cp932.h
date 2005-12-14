@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2005 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -41,7 +41,8 @@
  *    0x8192  0x00A3 # POUND SIGN            0xFFE1 # FULLWIDTH POUND SIGN
  *    0x81CA  0x00AC # NOT SIGN              0xFFE2 # FULLWIDTH NOT SIGN
  *
- *    We don't implement these changes. SHIFTJIS.TXT makes more sense.
+ *    We don't implement the latter 6 of these changes, only the first one.
+ *    SHIFTJIS.TXT makes more sense.
  *
  * 3. A few new rows. See cp932ext.h.
  */
