@@ -1,5 +1,6 @@
 New in 1.11:
 * Updated CP950 converter to include the Euro sign.
+* Added a few irreversible mappings to the CP932 converter.
 * Tidy up the list of symbols exported from libiconv (assumes gcc >= 4.0).
 
 New in 1.10:
