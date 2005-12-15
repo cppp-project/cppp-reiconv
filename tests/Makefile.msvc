@@ -151,6 +151,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-JP-1
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-CN
 	$(srcdir)\check-stateless.bat $(srcdir) GBK
+	$(srcdir)\check-stateless.bat $(srcdir) CP936
 	$(srcdir)\check-stateless.bat $(srcdir) GB18030
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-CN
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-CN-EXT

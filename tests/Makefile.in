@@ -123,6 +123,7 @@ check : all table-from table-to ../src/iconv_no_i18n
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-JP-1
 	$(srcdir)/check-stateless $(srcdir) EUC-CN
 	$(srcdir)/check-stateless $(srcdir) GBK
+	$(srcdir)/check-stateless $(srcdir) CP936
 	$(srcdir)/check-stateless $(srcdir) GB18030
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-CN
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-CN-EXT

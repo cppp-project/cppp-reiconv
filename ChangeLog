@@ -1,3 +1,18 @@
+2005-12-15  Bruno Haible  <bruno@clisp.org>
+
+	Make CP936 follow what Microsoft does.
+	* lib/cp936.h: New file.
+	* lib/gbk.h: Update comments.
+	* lib/ces_gbk.h: Update comments.
+	* lib/converters.h: Include cp936.h.
+	* lib/encodings.def (CP936): New encoding.
+	(GBK): Remove CP936 aliases.
+	* README, man/iconv_open.3: Add CP936.
+	* tests/Makefile.in (check): Check CP936.
+	* tests/Makefile.msvc (check): Likewise.
+	* tests/Makefile.os2 (check): Likewise.
+	* tests/CP936.TXT: New file.
+
 2005-11-14  Bruno Haible  <bruno@clisp.org>
 
 	* lib/cp932.h (cp932_wctomb): Map U+FF5E, U+2225, U+FF0D, U+FFE0,

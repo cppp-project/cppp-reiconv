@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2005 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -34,6 +34,8 @@
  */
 
 /*
+ * The following was written in 1999:
+ *
  * CP936 is nearly identical to GBK. It differs as follows:
  *
  * 1. Some characters in the GB2312 range are defined differently:
@@ -45,9 +47,7 @@
  * 2. 19 characters added in the range 0xA6E0-0xA6F5.
  *
  * 3. 4 characters added in the range 0xA8BB-0xA8C0.
- */
-
-/*
+ *
  * Since all three tables I have looked at
  *   - the CP936 table by Microsoft, found on ftp.unicode.org,
  *   - the GBK table by Sun, investigated on a Solaris 2.7 machine,
@@ -58,7 +58,9 @@
  * vendors don't care about it. In either case, CP936 is the de facto
  * standard under the name "GBK", and we should better support it.
  *
- * So in what follows, when we write "GBK" we always mean "CP936".
+ * So in what follows, when we write "GBK" we always mean "CP936 as of 1999".
+ *
+ * However, since 1999, Microsoft has added new mappings to CP936...
  */
 
 #include "gbkext1.h"

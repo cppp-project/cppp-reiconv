@@ -782,12 +782,16 @@ DEFENCODING(( "EUC-CN",                 /* glibc */
             { euc_cn_mbtowc, NULL },      { euc_cn_wctomb, NULL })
 
 DEFENCODING(( "GBK",                    /* IANA, JDK 1.1 */
-              "CP936",                  /* IANA */
-              "MS936",                  /* IANA */
-              "WINDOWS-936",            /* IANA */
             ),
             ces_gbk,
             { ces_gbk_mbtowc, NULL },     { ces_gbk_wctomb, NULL })
+
+DEFENCODING(( "CP936",                  /* IANA */
+              "MS936",                  /* IANA */
+              "WINDOWS-936",            /* IANA */
+            ),
+            cp936,
+            { cp936_mbtowc, NULL },       { cp936_wctomb, NULL })
 
 DEFENCODING(( "GB18030",                /* IANA, glibc */
             /*"CP54936",                   Windows */

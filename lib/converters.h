@@ -222,6 +222,7 @@ typedef struct {
 
 #include "euc_cn.h"
 #include "ces_gbk.h"
+#include "cp936.h"
 #include "gb18030.h"
 #include "iso2022_cn.h"
 #include "iso2022_cnext.h"
