@@ -315,9 +315,9 @@ GB2312, ei_euc_cn
 CN-GB, ei_euc_cn
 CSGB2312, ei_euc_cn
 GBK, ei_ces_gbk
-CP936, ei_ces_gbk
-MS936, ei_ces_gbk
-WINDOWS-936, ei_ces_gbk
+CP936, ei_cp936
+MS936, ei_cp936
+WINDOWS-936, ei_cp936
 GB18030, ei_gb18030
 ISO-2022-CN, ei_iso2022_cn
 CSISO2022CN, ei_iso2022_cn
