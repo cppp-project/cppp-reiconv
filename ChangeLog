@@ -1,6 +1,16 @@
 2005-12-15  Bruno Haible  <bruno@clisp.org>
 
+	Add private area mappings to CP950.
+	* lib/cp950.h (cp950_mbtowc, cp950_wctomb): Map U+E000..U+F6B0 like
+	most others do it.
+	* tests/CP950.TXT: Add mappings for U+E000..U+F6B0.
+
+2005-12-15  Bruno Haible  <bruno@clisp.org>
+
 	Make CP936 follow what Microsoft does.
+	In http://www.microsoft.com/globaldev/reference/dbcs/936.mspx they
+	added a 0x80 - U+20AC mapping to the code chart, but not to the
+	tooltips and not to the list of mappings.
 	* lib/cp936.h: New file.
 	* lib/gbk.h: Update comments.
 	* lib/ces_gbk.h: Update comments.
@@ -13,14 +23,14 @@
 	* tests/Makefile.os2 (check): Likewise.
 	* tests/CP936.TXT: New file.
 
-2005-11-14  Bruno Haible  <bruno@clisp.org>
+2005-12-14  Bruno Haible  <bruno@clisp.org>
 
 	* lib/cp932.h (cp932_wctomb): Map U+FF5E, U+2225, U+FF0D, U+FFE0,
 	U+FFE1 like Microsoft does it.
 	* lib/CP932.IRREVERSIBLE.TXT: Add these mappings.
 	Reported by Lei Wang <lwang@qilinsoft.com>.
 
-2005-11-14  Bruno Haible  <bruno@clisp.org>
+2005-12-14  Bruno Haible  <bruno@clisp.org>
 
 	Follow Euro sign addition done in 1999 in
 	http://www.microsoft.com/globaldev/reference/dbcs/950/950_A3.mspx
