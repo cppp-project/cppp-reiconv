@@ -48,6 +48,18 @@
  *    because it would collide with the mapping of 0xFA54.
  *
  * 3. A few new rows. See cp932ext.h.
+ *
+ * Many variants of CP932 (in GNU libc, JDK, OSF/1, Windows-2000, ICU) also
+ * add:
+ *
+ * 4. Private area mappings:
+ *
+ *              code                 Unicode
+ *    0x{F0..F9}{40..7E,80..FC}  U+E000..U+E757
+ *
+ * We add them too because, although there are backward compatibility problems
+ * when a character from a private area is moved to an official Unicode code
+ * point, they are useful for some people in practice.
  */
 
 #include "cp932ext.h"
