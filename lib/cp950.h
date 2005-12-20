@@ -162,11 +162,13 @@ cp950_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
             return 2;
           }
           if (c >= 0xfa) {
+            /* User-defined characters */
             *pwc = 0xe000 + 157 * (c - 0xfa) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
             return 2;
           }
         } else {
           /* 0x81 <= c < 0xa1. */
+          /* User-defined characters */
           *pwc = (c >= 0x8e ? 0xdb18 : 0xeeb8) + 157 * (c - 0x81)
                  + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
           return 2;
@@ -228,6 +230,7 @@ cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     case 0xec: case 0xed: case 0xee: case 0xef: case 0xf0: case 0xf1:
     case 0xf2: case 0xf3: case 0xf4: case 0xf5: case 0xf6:
       {
+        /* User-defined characters */
         unsigned int i = wc - 0xe000;
         if (i < 5809) {
           unsigned int c1 = i / 157;

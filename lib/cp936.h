@@ -63,6 +63,7 @@ cp936_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
       *pwc = 0x20ac;
       return 1;
     }
+    /* User-defined characters */
     if (c >= 0xa1 && c <= 0xa2) {
       if (n < 2)
         return RET_TOOFEW(0);
@@ -99,6 +100,7 @@ cp936_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
   }
   /* Then handle the additional mappings. */
   if (wc >= 0xe000 && wc < 0xe586) {
+    /* User-defined characters */
     if (n < 2)
       return RET_TOOFEW(0);
     if (wc < 0xe4c6) {
