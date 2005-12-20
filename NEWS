@@ -3,6 +3,7 @@ New in 1.11:
   to include the Euro sign and private area characters. CP936 is no longer an
   alias of GBK.
 * Updated CP950 converter to include the Euro sign and private area characters.
+* Updated CP949 converter to include private area characters.
 * Added a few irreversible mappings to the CP932 converter.
 * Tidy up the list of symbols exported from libiconv (assumes gcc >= 4.0).
 

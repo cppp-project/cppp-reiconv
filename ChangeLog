@@ -1,3 +1,10 @@
+2005-12-20  Bruno Haible  <bruno@clisp.org>
+
+	Add private area mappings to CP949.
+	* lib/cp949.h (cp949_mbtowc, cp949_wctomb): Map U+E000..U+E0BB like
+	many others do it.
+	* tests/CP949.TXT: Add mappings for U+E000..U+E0BB.
+
 2005-12-15  Bruno Haible  <bruno@clisp.org>
 
 	Add private area mappings to CP950.
