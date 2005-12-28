@@ -1,5 +1,23 @@
 2005-12-22  Bruno Haible  <bruno@clisp.org>
 
+	Extend GB18030 converter to cover the entire Unicode PUA.
+	* lib/gb18030.h: Update comments, based on second printing.
+	(gb18030_mbtowc): Add mapping for range U+E000..U+E765.
+	(gb18030_pua2charset): New array.
+	(gb18030_wctomb): Add mapping for range U+E000..U+E765 and the two-byte
+	part of range U+E766..U+E864.
+	* lib/gb18030ext.h (gb18030ext_2uni_pagefe): Add mappings to private
+	area.
+	(gb18030ext_mbtowc): Add mapping for the two-byte part of range
+	U+E766..U+E864.
+	* lib/gb18030uni.h (gb18030uni_charset2uni_ranges,
+	gb18030uni_uni2charset_ranges, gb18030uni_ranges): Add 12 more
+	intervals.
+	(gb18030uni_mbtowc, gb18030uni_wctomb): Update.
+	* tests/GB18030.TXT: Complete mappings to private area.
+
+2005-12-22  Bruno Haible  <bruno@clisp.org>
+
 	* lib/gbk.h: Update comments.
 
 2005-12-20  Bruno Haible  <bruno@clisp.org>
