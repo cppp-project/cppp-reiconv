@@ -1,3 +1,9 @@
+2005-12-20  Bruno Haible  <bruno@clisp.org>
+
+	* tests/table-to.c (main): Test the mappings up to U+10FFFF, not only
+	up to U+2FFFF. Tolerate that Unicode language tags are silently mapped
+	to nothing.
+
 2005-12-22  Bruno Haible  <bruno@clisp.org>
 
 	Extend GB18030 converter to cover the entire Unicode PUA.

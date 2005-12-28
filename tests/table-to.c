@@ -58,7 +58,7 @@ int main (int argc, char* argv[])
   {
     unsigned int i;
     unsigned char buf[10];
-    for (i = 0; i < (bmp_only ? 0x10000 : 0x30000); i++) {
+    for (i = 0; i < (bmp_only ? 0x10000 : 0x110000); i++) {
       unsigned int in = i;
       const char* inbuf = (const char*) &in;
       size_t inbytesleft = sizeof(unsigned int);
@@ -79,16 +79,19 @@ int main (int argc, char* argv[])
           exit(1);
         }
       } else if (result == 0) /* ignore conversions with transliteration */ {
-        unsigned int j, jmax;
-        if (inbytesleft != 0 || outbytesleft == sizeof(buf)) {
+        if (inbytesleft == 0 && outbytesleft < sizeof(buf)) {
+          unsigned int jmax = sizeof(buf) - outbytesleft;
+          unsigned int j;
+          printf("0x");
+          for (j = 0; j < jmax; j++)
+            printf("%02X",buf[j]);
+          printf("\t0x%04X\n",i);
+        } else if (inbytesleft == 0 && i >= 0xe0000 && i < 0xe0080) {
+          /* Language tags may silently be dropped. */
+        } else {
           fprintf(stderr,"0x%02X: inbytes = %ld, outbytes = %ld\n",i,(long)(sizeof(unsigned int)-inbytesleft),(long)(sizeof(buf)-outbytesleft));
           exit(1);
         }
-        jmax = sizeof(buf) - outbytesleft;
-        printf("0x");
-        for (j = 0; j < jmax; j++)
-          printf("%02X",buf[j]);
-        printf("\t0x%04X\n",i);
       }
     }
   }
