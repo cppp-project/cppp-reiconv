@@ -152,7 +152,16 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) EUC-CN
 	$(srcdir)\check-stateless.bat $(srcdir) GBK
 	$(srcdir)\check-stateless.bat $(srcdir) CP936
-	$(srcdir)\check-stateless.bat $(srcdir) GB18030
+	$(CC) $(INCLUDES) $(CFLAGS) $(srcdir)\gengb18030z.c -Fegengb18030z.exe
+	$(RM) gengb18030z.obj
+	.\gengb18030z > GB18030Z.TXT
+	copy /b $(srcdir)\GB18030-BMP.TXT + GB18030Z.TXT GB18030TMP.TXT
+	$(RM) GB18030Z.TXT
+	sort < GB18030TMP.TXT > GB18030.TXT
+	$(RM) GB18030TMP.TXT
+	$(srcdir)\check-stateless.bat . GB18030
+	$(RM) gengb18030z.exe
+	$(RM) GB18030.TXT
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-CN
 	$(srcdir)\check-stateful.bat $(srcdir) ISO-2022-CN-EXT
 	$(srcdir)\check-stateful.bat $(srcdir) HZ
@@ -211,6 +220,9 @@ clean : force
 	$(RM) *.exe
 	$(RM) tmp*
 	$(RM) UTF-8.TXT
+	$(RM) GB18030Z.TXT
+	$(RM) GB18030TMP.TXT
+	$(RM) GB18030.TXT
 
 distclean : clean
 

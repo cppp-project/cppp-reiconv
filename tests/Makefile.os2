@@ -19,7 +19,7 @@ srcdir = .
 
 all :
 
-check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
+check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe gengb18030z.exe
 	$(srcdir)\check-stateless $(srcdir) ASCII
 #	/* General multi-byte encodings */
 	.\genutf8 > UTF-8.TXT
@@ -114,6 +114,12 @@ check : all table-from.exe table-to.exe ../src/iconv.exe genutf8.exe
 	$(srcdir)\check-stateless $(srcdir) GBK
 	$(srcdir)\check-stateless $(srcdir) CP936
 	$(srcdir)\check-stateless $(srcdir) GB18030
+	.\gengb18030z > GB18030Z.TXT
+	copy /b $(srcdir)\GB18030-BMP.TXT + GB18030Z.TXT GB18030TMP.TXT
+	$(RM) GB18030Z.TXT
+	sort < GB18030TMP.TXT > GB18030.TXT
+	$(RM) GB18030TMP.TXT
+	$(srcdir)\check-stateless . GB18030
 	$(srcdir)\check-stateful $(srcdir) ISO-2022-CN
 	$(srcdir)\check-stateful $(srcdir) ISO-2022-CN-EXT
 	$(srcdir)\check-stateful $(srcdir) HZ
@@ -141,10 +147,13 @@ table-to.exe : table-to.c
 genutf8.exe : genutf8.c
 	$(CC) $(INCLUDES) $(CFLAGS) genutf8.c
 
+gengb18030z.exe : gengb18030z.c
+	$(CC) $(INCLUDES) $(CFLAGS) gengb18030z.c
+
 mostlyclean : clean
 
 clean : force
-	rm -f *.obj *.dll *.exe tmp* UTF-8.TXT core
+	rm -f *.obj *.dll *.exe tmp* UTF-8.TXT GB18030Z.TXT GB18030TMP.TXT GB18030.TXT core
 
 distclean : clean
 	rm -f Makefile
