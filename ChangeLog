@@ -63,6 +63,8 @@
 	Invoke gl_FUNC_GLIBC_UNLOCKED_IO instead of jm_FUNC_GLIBC_UNLOCKED_IO.
 	Invoke gl_ERROR instead of gt_FUNC_ERROR_AT_LINE.
 	Don't invoke AC_AIX and AC_MINIX, done by gl_USE_SYSTEM_EXTENSIONS.
+	Temporarily redefine AC_LIBOBJ and AC_REPLACE_FUNCS, so as to fill
+	SRCLIBOBJS instead of LIBOBJS.
 	* srclib/alloca_.h: Update from GNU gettext.
 	* srclib/allocsa.h: Update from GNU gettext.
 	* srclib/canonicalize.c: Update from GNU gettext.
@@ -88,6 +90,7 @@
 	* srclib/xreadlink.c: Update from GNU gettext.
 	* srclib/xstrdup.c: Update from GNU gettext.
 	* srclib/Makefile.am (DEFS): Also define EXEEXT.
+	(libicrt_a_LIBADD): Use SRCLIBOBJS instead of LIBOBJS.
 	* src/Makefile.in (EXEEXT): New variable.
 	* build-aux/install-reloc: Update from GNU gettext.
 	* build-aux/reloc-ldflags: Update from GNU gettext.

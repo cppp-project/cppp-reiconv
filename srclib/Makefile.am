@@ -52,7 +52,7 @@ LIBADD_SOURCE = \
 
 # How to build libicrt.a.
 
-libicrt_a_LIBADD = @LIBOBJS@
+libicrt_a_LIBADD = @SRCLIBOBJS@
 
 # List of files to be distributed.
 
