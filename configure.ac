@@ -40,6 +40,15 @@ dnl           check for host type
 
 AC_CANONICAL_HOST
 
+dnl           hack
+
+dnl Hack to work around limitations of automake and error.m4 regarding LIBOBJS.
+dnl "srclib/Makefile.am:32: automatically discovered file `error.h' should not be explicitly mentioned"
+AC_DEFUN([my_SRCLIB_OBJ],[SRCLIBOBJS="$SRCLIBOBJS $1.$ac_objext"])
+AC_DEFUN([my_SRCLIB_REPLACE_FUNCS], [AC_CHECK_FUNCS([$1], , [my_SRCLIB_OBJ($ac_func)])])
+m4_pushdef([AC_LIBOBJ], m4_defn([my_SRCLIB_OBJ]))
+m4_pushdef([AC_REPLACE_FUNCS], m4_defn([my_SRCLIB_REPLACE_FUNCS]))
+
 dnl           checks for installer options
 
 AC_RELOCATABLE
@@ -92,13 +101,6 @@ gl_STDINT_H
 
 dnl           checks for functions and declarations
 
-dnl Hack to work around limitations of automake and error.m4 regarding LIBOBJS.
-dnl "srclib/Makefile.am:32: automatically discovered file `error.h' should not be explicitly mentioned"
-AC_DEFUN([my_SRCLIB_OBJ],[SRCLIBOBJS="$SRCLIBOBJS $1.$ac_objext"])
-AC_DEFUN([my_SRCLIB_REPLACE_FUNCS], [AC_CHECK_FUNCS([$1], , [my_SRCLIB_OBJ($ac_func)])])
-m4_pushdef([AC_LIBOBJ], m4_defn([my_SRCLIB_OBJ]))
-m4_pushdef([AC_REPLACE_FUNCS], m4_defn([my_SRCLIB_REPLACE_FUNCS]))
-
 if test "$am_cv_func_iconv" = yes -a -z "$am_cv_proto_iconv_arg1"; then
   ICONV_CONST=""
 else
@@ -125,6 +127,8 @@ AM_STDBOOL_H
 gl_FUNC_STRERROR
 gl_FUNC_READLINK
 gl_XREADLINK
+
+dnl           hack
 
 dnl End of hack to work around limitations of automake and error.m4.
 m4_popdef([AC_REPLACE_FUNCS])

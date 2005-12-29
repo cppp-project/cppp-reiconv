@@ -91,6 +91,7 @@
 	* srclib/xstrdup.c: Update from GNU gettext.
 	* srclib/Makefile.am (DEFS): Also define EXEEXT.
 	(libicrt_a_LIBADD): Use SRCLIBOBJS instead of LIBOBJS.
+	(libicrt_a_DEPENDENCIES): New variable.
 	* src/Makefile.in (EXEEXT): New variable.
 	* build-aux/install-reloc: Update from GNU gettext.
 	* build-aux/reloc-ldflags: Update from GNU gettext.
