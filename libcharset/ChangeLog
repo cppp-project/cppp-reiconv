@@ -1,5 +1,13 @@
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
+	* m4/codeset.m4: Update from GNU gettext.
+	* m4/glibc21.m4: Update from GNU gettext.
+	* m4/relocatable.m4: Update from GNU gettext.
+	* configure: Invoke gl_GLIBC21 instead of jm_GLIBC21.
+	* lib/relocatable.c: Update from GNU gettext.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
 	* m4/libtool.m4: Update, based on libtool-1.5.22.
 	* build-aux/ltmain.sh: Update, based on libtool-1.5.22.
 
