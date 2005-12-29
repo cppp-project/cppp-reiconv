@@ -1,0 +1,98 @@
+# Traditional Chinese Messages for libiconv
+# Copyright (C) 2003, 05 Free Software Foundation, Inc.
+# Wang Jian <lark@linux.net.cn>, 2003
+# Wei-Lun Chao <chaoweilun@pcmail.com.tw>, 2005
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libiconv 1.9.1\n"
+"Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
+"POT-Creation-Date: 2005-07-07 14:54+0200\n"
+"PO-Revision-Date: 2005-08-25 10:54+0800\n"
+"Last-Translator: Wei-Lun Chao <chaoweilun@pcmail.com.tw>\n"
+"Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/iconv.c:56
+msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+msgstr "用法：iconv [-c] [-s] [-f 來源編碼] [-t 目的編碼] [檔案 ...]"
+
+#: src/iconv.c:58
+msgid "or:    iconv -l"
+msgstr "或：  iconv -l"
+
+#: src/iconv.c:68
+#, c-format
+msgid ""
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+"這是自由軟體；請檢視原始碼中的複製條件。本軟體不提供任何擔保，包括銷售\n"
+"或是適用性擔保。\n"
+
+#: src/iconv.c:71
+#, c-format
+msgid "Written by %s.\n"
+msgstr "作者 %s。\n"
+
+#: src/iconv.c:131 src/iconv.c:171 src/iconv.c:232
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: incomplete character or shift sequence\n"
+msgstr "iconv：%s：不完整的字元或是換碼序列\n"
+
+#: src/iconv.c:161 src/iconv.c:223
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: cannot convert\n"
+msgstr "iconv：%s：無法轉換\n"
+
+#: src/iconv.c:191 src/iconv.c:241
+#, fuzzy, c-format
+msgid "iconv: %s:%u:%u: "
+msgstr "iconv：%s："
+
+#: src/iconv.c:253
+#, c-format
+msgid "iconv: %s: I/O error\n"
+msgstr "iconv：%s：輸入輸出錯誤\n"
+
+#: src/iconv.c:351
+#, c-format
+msgid "iconv: conversion from %s unsupported\n"
+msgstr "iconv：不支援從 %s 進行轉換\n"
+
+#: src/iconv.c:353
+#, c-format
+msgid "iconv: conversion to %s unsupported\n"
+msgstr "iconv：不支援轉換到 %s\n"
+
+#: src/iconv.c:355
+#, c-format
+msgid "iconv: conversion from %s to %s unsupported\n"
+msgstr "iconv：不支援從 %s 轉換到 %s\n"
+
+#: src/iconv.c:356
+#, c-format
+msgid "iconv: try '%s -l' to get the list of supported encodings\n"
+msgstr ""
+
+#: src/iconv.c:370
+msgid "(stdin)"
+msgstr "(標準輸入)"
+
+#: src/iconv.c:378
+#, c-format
+msgid "iconv: %s: "
+msgstr "iconv：%s："
+
+#: src/iconv.c:391
+#, c-format
+msgid "iconv: I/O error\n"
+msgstr "iconv：輸入輸出錯誤\n"
+
+#~ msgid ""
+#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+#~ msgstr ""
+#~ "用法：iconv [--binary] [-c] [-s] [-f 來源編碼] [-t 目的編碼] [檔案 ...]"
