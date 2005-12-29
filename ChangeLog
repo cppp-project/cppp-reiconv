@@ -1,5 +1,75 @@
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
+	* m4/alloca.m4: Update from GNU gettext.
+	* m4/allocsa.m4: Update from GNU gettext.
+	* m4/canonicalize.m4: Update from GNU gettext.
+	* m4/codeset.m4: Update from GNU gettext.
+	* m4/eealloc.m4: Update from GNU gettext.
+	* m4/error.m4: Update from GNU gettext.
+	* m4/extensions.m4: Update from GNU gettext.
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/glibc21.m4: Update from GNU gettext.
+	* m4/iconv.m4: Update from GNU gettext.
+	* m4/intmax.m4: Update from GNU gettext.
+	* m4/inttypes_h.m4: New file, from GNU gettext.
+	* m4/isc-posix.m4: Update from GNU gettext.
+	* m4/lcmessage.m4: Update from GNU gettext.
+	* m4/longdouble.m4: Update from GNU gettext.
+	* m4/longlong.m4: Update from GNU gettext.
+	* m4/mbstate_t.m4: Update from GNU gettext.
+	* m4/nls.m4: Update from GNU gettext.
+	* m4/onceonly.m4: Update from GNU gettext.
+	* m4/pathmax.m4: Update from GNU gettext.
+	* m4/po.m4: Update from GNU gettext.
+	* m4/printf-posix.m4: Update from GNU gettext.
+	* m4/progtest.m4: Update from GNU gettext.
+	* m4/readlink.m4: Update from GNU gettext.
+	* m4/relocatable.m4: Update from GNU gettext.
+	* m4/setenv.m4: Update from GNU gettext.
+	* m4/signed.m4: Update from GNU gettext.
+	* m4/ssize_t.m4: Update from GNU gettext.
+	* m4/stdbool.m4: Update from GNU gettext.
+	* m4/stdint_h.m4: New file, from GNU gettext.
+	* m4/strerror.m4: Update from GNU gettext.
+	* m4/strerror_r.m4: Update from GNU gettext.
+	* m4/unlocked-io.m4: Update from GNU gettext.
+	* m4/wchar_t.m4: Update from GNU gettext.
+	* m4/wint_t.m4: Update from GNU gettext.
+	* m4/xreadlink.m4: Update from GNU gettext.
+	* Makefile.devel (aclocal.m4): Depend on m4/inttypes_h.m4 and
+	m4/stdint_h.m4 as well.
+	* configure.in: Invoke AC_TYPE_MBSTATE_T instead of AC_MBSTATE_T.
+	Invoke gl_FUNC_GLIBC_UNLOCKED_IO instead of jm_FUNC_GLIBC_UNLOCKED_IO.
+	* srclib/alloca_.h: Update from GNU gettext.
+	* srclib/allocsa.h: Update from GNU gettext.
+	* srclib/canonicalize.c: Update from GNU gettext.
+	* srclib/error.h: Update from GNU gettext.
+	* srclib/error.c: Update from GNU gettext.
+	* srclib/gettext.h: Update from GNU gettext.
+	* srclib/memmove.c: Update from GNU gettext.
+	* srclib/progname.h: Update from GNU gettext.
+	* srclib/progname.c: Update from GNU gettext.
+	* srclib/progreloc.c: Update from GNU gettext.
+	* srclib/readlink.c: Update from GNU gettext.
+	* srclib/relocatable.c: Update from GNU gettext.
+	* srclib/relocwrapper.c: Update from GNU gettext.
+	* srclib/setenv.h: Update from GNU gettext.
+	* srclib/setenv.c: Update from GNU gettext.
+	* srclib/stdbool_.h: Update from GNU gettext.
+	* srclib/stdint_.h: Update from gnulib.
+	* srclib/strerror.c: Update from GNU gettext.
+	* srclib/unlocked-io.h: Update from GNU gettext.
+	* srclib/unsetenv.c: Update from GNU gettext.
+	* srclib/xalloc.h: Update from GNU gettext.
+	* srclib/xmalloc.c: Update from GNU gettext.
+	* srclib/xreadlink.c: Update from GNU gettext.
+	* srclib/xstrdup.c: Update from GNU gettext.
+	* build-aux/install-reloc: Update from GNU gettext.
+	* build-aux/reloc-ldflags: Update from GNU gettext.
+	* build-aux/config.rpath: Update from GNU gettext.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
 	* m4/libtool.m4: Update, based on libtool-1.5.22.
 	* build-aux/ltmain.sh: Update, based on libtool-1.5.22.
 

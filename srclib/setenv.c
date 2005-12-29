@@ -1,4 +1,4 @@
-/* Copyright (C) 1992,1995-1999,2000-2003 Free Software Foundation, Inc.
+/* Copyright (C) 1992,1995-1999,2000-2003,2005 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -16,16 +16,13 @@
    write to the Free Software Foundation, Inc., 51 Franklin Street,
    Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-#if HAVE_CONFIG_H
+#ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
 #include <alloca.h>
 
 #include <errno.h>
-#if !_LIBC
-# if !defined errno && !defined HAVE_ERRNO_DECL
-extern int errno;
-# endif
+#ifndef __set_errno
 # define __set_errno(ev) ((errno) = (ev))
 #endif
 
