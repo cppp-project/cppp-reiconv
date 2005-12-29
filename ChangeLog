@@ -1,5 +1,9 @@
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
+	* src/iconv.c (print_version): Update copyright year.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
 	* configure.ac: Renamed from configure.in.
 	* Makefile.devel (CONFIGURES_IN, configure, config.h.in): Update.
 
