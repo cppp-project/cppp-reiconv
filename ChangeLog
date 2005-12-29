@@ -1,3 +1,8 @@
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4: Update, based on libtool-1.5.22.
+	* build-aux/ltmain.sh: Update, based on libtool-1.5.22.
+
 2005-12-24  Bruno Haible  <bruno@clisp.org>
 
 	Check the whole range of GB18030.
