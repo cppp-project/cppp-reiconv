@@ -42,6 +42,9 @@ SHELL = /bin/sh
 # Needed by $(LIBTOOL).
 top_builddir = ..
 
+# Needed by SET_RELOCATABLE.
+EXEEXT = @EXEEXT@
+
 # We cannot link with libintl until libiconv is installed. (When we call
 # libtool with arguments "../lib/libiconv.la -lintl", libtool will call ld
 # with "../lib/.libs/libiconv.so $libdir/libintl.so $libdir/libiconv.so",
