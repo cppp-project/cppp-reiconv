@@ -35,7 +35,7 @@ all : configures config.h.in srclib/Makefile.in config.h_vms config.h.msvc lib/c
 
 
 CONFIGURES = configure
-CONFIGURES_IN = configure.in
+CONFIGURES_IN = configure.ac
 
 #CLISP_DIR = ..
 #m4/general.m4 : $(CLISP_DIR)/src/m4/general.m4 ; cp -p $< $@-t && mv $@-t $@
@@ -52,13 +52,13 @@ configures : $(CONFIGURES)
 
 AUTOCONF_FILES = aclocal.m4
 
-configure : configure.in $(AUTOCONF_FILES)
+configure : configure.ac $(AUTOCONF_FILES)
 	$(AUTOCONF)
 
 check-configures : $(CONFIGURES)
 	set -e; for f in $(CONFIGURES); do bash -x -n $$f; done
 
-config.h.in : configure.in $(AUTOCONF_FILES)
+config.h.in : configure.ac $(AUTOCONF_FILES)
 	$(AUTOHEADER)
 	touch $@
 

@@ -1,5 +1,10 @@
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
+	* configure.ac: Renamed from configure.in.
+	* Makefile.devel (CONFIGURES_IN, configure, config.h.in): Update.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
 	* configure.in: Bump version number.
 	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
 	* windows/iconv.rc: Likewise.

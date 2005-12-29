@@ -16,10 +16,10 @@ autoconf/aclocal.m4 : $(wildcard m4/*.m4)
 
 configures : configure config.h.in
 
-configure : configure.in autoconf/aclocal.m4
+configure : configure.ac autoconf/aclocal.m4
 	$(AUTOCONF) --include autoconf
 
-config.h.in : configure.in autoconf/aclocal.m4
+config.h.in : configure.ac autoconf/aclocal.m4
 	$(AUTOHEADER) --include autoconf
 	touch config.h.in
 
