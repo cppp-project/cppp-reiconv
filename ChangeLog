@@ -87,6 +87,7 @@
 	* srclib/xmalloc.c: Update from GNU gettext.
 	* srclib/xreadlink.c: Update from GNU gettext.
 	* srclib/xstrdup.c: Update from GNU gettext.
+	* srclib/Makefile.am (DEFS): Also define EXEEXT.
 	* build-aux/install-reloc: Update from GNU gettext.
 	* build-aux/reloc-ldflags: Update from GNU gettext.
 	* build-aux/config.rpath: Update from GNU gettext.
