@@ -20,7 +20,7 @@ AC_PREREQ(2.52)
 AC_INIT
 AC_CONFIG_SRCDIR(lib/iconv.c)
 AC_CONFIG_AUX_DIR(build-aux)
-AM_INIT_AUTOMAKE(libiconv, 1.10)
+AM_INIT_AUTOMAKE(libiconv, 1.11)
 AC_CONFIG_HEADERS(config.h lib/config.h)
 AC_PROG_MAKE_SET
 
@@ -89,7 +89,7 @@ AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
 
 dnl           checks for typedefs
 
-AC_MBSTATE_T
+AC_TYPE_MBSTATE_T
 gl_STDINT_H
 
 dnl           checks for functions and declarations
@@ -112,7 +112,7 @@ CL_WORDS_LITTLEENDIAN
 
 gl_FUNC_ALLOCA
 gl_CANONICALIZE
-jm_FUNC_GLIBC_UNLOCKED_IO
+gl_FUNC_GLIBC_UNLOCKED_IO
 gt_FUNC_ERROR_AT_LINE
 gl_PATHMAX
 gt_FUNC_SETENV

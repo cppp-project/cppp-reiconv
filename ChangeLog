@@ -1,5 +1,12 @@
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
+	* configure.in: Bump version number.
+	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
+	* windows/iconv.rc: Likewise.
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 5:1:3.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
 	* build-aux/config.guess: Update to GNU version 2005-12-23.
 	* build-aux/config.sub: Likewise.
 	* build-aux/config.libpath: Update from GNU gettext.
