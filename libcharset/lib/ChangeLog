@@ -1,3 +1,10 @@
+2005-12-04  Bruno Haible  <bruno@clisp.org>
+
+	Cygwin portability.
+	* relocatable.c: Include <windows.h> also on Cygwin.
+	(DllMain): Add support for Cygwin.
+	(get_shared_library_fullname): Update.
+
 2005-07-24  Bruno Haible  <bruno@clisp.org>
 
 	Tidy up exported symbols.
@@ -367,4 +374,3 @@
 	CP874, CP949, CP950, CP1250, CP1253, CP1254, CP1255, CP1256, CP1257
 	to the list of canonical encodings. Rename EUC-CN to GB2312.
 	* localcharset.c (locale_charset): Add support for Win32.
-

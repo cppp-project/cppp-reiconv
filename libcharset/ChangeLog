@@ -10,7 +10,6 @@
 	* m4/glibc21.m4: Update from GNU gettext.
 	* m4/relocatable.m4: Update from GNU gettext.
 	* configure: Invoke gl_GLIBC21 instead of jm_GLIBC21.
-	* lib/relocatable.c: Update from GNU gettext.
 
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
