@@ -119,7 +119,7 @@ libiconv-1.8/libcharset/INSTALL.generic                   libiconv-1.8/libcharse
 libiconv-1.8/libcharset/README                            libiconv-1.8/libcharset/README
 libiconv-1.8/libcharset/Makefile.devel                    libiconv-1.8/libcharset/Makefile.devel
 libiconv-1.8/libcharset/Makefile.in                       libiconv-1.8/libcharset/Makefile.in
-libiconv-1.8/libcharset/configure.in                      libiconv-1.8/libcharset/configure.in
+libiconv-1.8/libcharset/configure.ac                      libiconv-1.8/libcharset/configure.ac
 libiconv-1.8/libcharset/configure                         libiconv-1.8/libcharset/configure
 libiconv-1.8/libcharset/INTEGRATE                         libiconv-1.8/libcharset/INTEGRATE
 libiconv-1.8/libcharset/include/localcharset.h.in         libiconv-1.8/libcharset/include/localcharset.h.in
