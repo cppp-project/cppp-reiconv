@@ -1,5 +1,11 @@
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
+	* build-aux/config.guess: Update to GNU version 2005-12-23.
+	* build-aux/config.sub: Likewise.
+	* build-aux/config.libpath: Update from GNU gettext.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
 	* m4/codeset.m4: Update from GNU gettext.
 	* m4/glibc21.m4: Update from GNU gettext.
 	* m4/relocatable.m4: Update from GNU gettext.
