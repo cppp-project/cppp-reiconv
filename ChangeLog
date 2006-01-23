@@ -1,5 +1,10 @@
 2006-01-22  Bruno Haible  <bruno@clisp.org>
 
+	* src/iconv.c (xmalloc, xalloc_die) [NO_I18N]: Define to avoid using
+	gettext().
+
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
 	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 6:0:4.
 
 2006-01-22  Bruno Haible  <bruno@clisp.org>
