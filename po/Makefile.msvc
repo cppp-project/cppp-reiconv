@@ -130,6 +130,9 @@ install : all force
 	-mkdir $(localedir)\zh_CN
 	-mkdir $(localedir)\zh_CN\LC_MESSAGES
 	$(INSTALL_DATA) zh_CN.gmo $(localedir)\zh_CN\LC_MESSAGES\libiconv.mo
+	-mkdir $(localedir)\zh_TW
+	-mkdir $(localedir)\zh_TW\LC_MESSAGES
+	$(INSTALL_DATA) zh_TW.gmo $(localedir)\zh_TW\LC_MESSAGES\libiconv.mo
 
 installdirs : force
 	-mkdir $(prefix)
@@ -199,6 +202,8 @@ installdirs : force
 	-mkdir $(localedir)\wa\LC_MESSAGES
 	-mkdir $(localedir)\zh_CN
 	-mkdir $(localedir)\zh_CN\LC_MESSAGES
+	-mkdir $(localedir)\zh_TW
+	-mkdir $(localedir)\zh_TW\LC_MESSAGES
 
 uninstall : force
 	$(RM) $(localedir)\af\LC_MESSAGES\libiconv.mo
@@ -233,6 +238,7 @@ uninstall : force
 	$(RM) $(localedir)\vi\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\wa\LC_MESSAGES\libiconv.mo
 	$(RM) $(localedir)\zh_CN\LC_MESSAGES\libiconv.mo
+	$(RM) $(localedir)\zh_TW\LC_MESSAGES\libiconv.mo
 
 check : all
 

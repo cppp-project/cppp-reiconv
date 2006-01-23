@@ -39,14 +39,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 subdir = srclib
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	canonicalize.c memmove.c readlink.c relocatable.c setenv.c \
-	strerror.c unsetenv.c
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/alloca.m4 \
-	$(top_srcdir)/m4/allocsa.m4 $(top_srcdir)/m4/canonicalize.m4 \
-	$(top_srcdir)/m4/codeset.m4 $(top_srcdir)/m4/cp.m4 \
-	$(top_srcdir)/m4/eealloc.m4 $(top_srcdir)/m4/eilseq.m4 \
+	$(top_srcdir)/m4/canonicalize.m4 $(top_srcdir)/m4/codeset.m4 \
+	$(top_srcdir)/m4/cp.m4 $(top_srcdir)/m4/eilseq.m4 \
 	$(top_srcdir)/m4/endian.m4 $(top_srcdir)/m4/error.m4 \
 	$(top_srcdir)/m4/extensions.m4 $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/inttypes.m4 \
@@ -59,8 +56,8 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/alloca.m4 \
 	$(top_srcdir)/m4/relocatable.m4 $(top_srcdir)/m4/setenv.m4 \
 	$(top_srcdir)/m4/ssize_t.m4 $(top_srcdir)/m4/stdbool.m4 \
 	$(top_srcdir)/m4/stdint.m4 $(top_srcdir)/m4/strerror.m4 \
-	$(top_srcdir)/m4/unlocked-io.m4 $(top_srcdir)/m4/xreadlink.m4 \
-	$(top_srcdir)/configure.in
+	$(top_srcdir)/m4/unlocked-io.m4 $(top_srcdir)/m4/visibility.m4 \
+	$(top_srcdir)/m4/xreadlink.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/build-aux/mkinstalldirs
@@ -69,7 +66,6 @@ CONFIG_CLEAN_FILES =
 LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 libicrt_a_AR = $(AR) $(ARFLAGS)
-libicrt_a_DEPENDENCIES = @LIBOBJS@
 am_libicrt_a_OBJECTS = allocsa.$(OBJEXT) error.$(OBJEXT) \
 	progname.$(OBJEXT) progreloc.$(OBJEXT) width.$(OBJEXT) \
 	xmalloc.$(OBJEXT) xstrdup.$(OBJEXT) xreadlink.$(OBJEXT)
@@ -105,6 +101,7 @@ AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CFLAG_VISIBILITY = @CFLAG_VISIBILITY@
 CP = @CP@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -113,7 +110,7 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DEFS = -DDEPENDS_ON_LIBICONV=1 -DDEPENDS_ON_LIBINTL=1 @DEFS@
+DEFS = -DEXEEXT=\"$(EXEEXT)\" -DDEPENDS_ON_LIBICONV=1 -DDEPENDS_ON_LIBINTL=1 @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 ECHO = @ECHO@
@@ -127,8 +124,10 @@ F77 = @F77@
 FFLAGS = @FFLAGS@
 GCC = @GCC@
 GMSGFMT = @GMSGFMT@
+GMSGFMT_015 = @GMSGFMT_015@
 HAVE_LONG_64BIT = @HAVE_LONG_64BIT@
 HAVE_LONG_LONG_64BIT = @HAVE_LONG_LONG_64BIT@
+HAVE_VISIBILITY = @HAVE_VISIBILITY@
 HAVE__BOOL = @HAVE__BOOL@
 ICONV_CONST = @ICONV_CONST@
 INSTALL_DATA = @INSTALL_DATA@
@@ -136,6 +135,7 @@ INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 INTLLIBS = @INTLLIBS@
+INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
 LDFLAGS = @LDFLAGS@
 LIBICONV = @LIBICONV@
 LIBINTL = @LIBINTL@
@@ -150,6 +150,7 @@ LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
+MSGFMT_015 = @MSGFMT_015@
 MSGMERGE = @MSGMERGE@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
@@ -170,6 +171,7 @@ RELOCATABLE_VIA_LD_TRUE = @RELOCATABLE_VIA_LD_TRUE@
 SET_MAKE = @SET_MAKE@
 SET_RELOCATABLE = @SET_RELOCATABLE@
 SHELL = @SHELL@
+SRCLIBOBJS = @SRCLIBOBJS@
 STDBOOL_H = @STDBOOL_H@
 STDINT_H = @STDINT_H@
 STRIP = @STRIP@
@@ -177,6 +179,7 @@ USE_EXTRA_ENCODINGS = @USE_EXTRA_ENCODINGS@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
+XGETTEXT_015 = @XGETTEXT_015@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_AS = @ac_ct_AS@
 ac_ct_CC = @ac_ct_CC@
@@ -269,7 +272,8 @@ LIBADD_SOURCE = \
 
 
 # How to build libicrt.a.
-libicrt_a_LIBADD = @LIBOBJS@
+libicrt_a_LIBADD = @SRCLIBOBJS@
+libicrt_a_DEPENDENCIES = @SRCLIBOBJS@
 INCLUDES = -I. -I$(srcdir)
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
