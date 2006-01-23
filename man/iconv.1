@@ -9,7 +9,7 @@
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"   POSIX 2001 draft6
 .\"
-.TH ICONV 1  "January 21, 2006" "GNU" "Linux Programmer's Manual"
+.TH ICONV 1  "January 22, 2006" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv \- character set conversion
 .SH SYNOPSIS
@@ -42,6 +42,36 @@ Options controlling conversion problems:
 \fB-c\fP
 When this option is given, characters that cannot be converted are silently
 discarded, instead of leading to a conversion error.
+.TP
+\fB--unicode-subst=\fP\fIformatstring\fP
+When this option is given, Unicode characters that cannot be represented in
+the target encoding are replaced with a placeholder string that is constructed
+from the given \fIformatstring\fP, applied to the Unicode code point. The
+\fIformatstring\fP must be a format string in the same format as for the
+.I printf
+command or the
+.I printf()
+function, taking either no argument or exactly one unsigned integer argument.
+.TP
+\fB--byte-subst=\fP\fIformatstring\fP
+When this option is given, bytes in the input that are not valid in the source
+encoding are replaced with a placeholder string that is constructed from the
+given \fIformatstring\fP, applied to the byte's value. The \fIformatstring\fP
+must be a format string in the same format as for the
+.I printf
+command or the
+.I printf()
+function, taking either no argument or exactly one unsigned integer argument.
+.TP
+\fB--widechar-subst=\fP\fIformatstring\fP
+When this option is given, wide characters in the input that are not valid in
+the source encoding are replaced with a placeholder string that is constructed
+from the given \fIformatstring\fP, applied to the byte's value. The
+\fIformatstring\fP must be a format string in the same format as for the
+.I printf
+command or the
+.I printf()
+function, taking either no argument or exactly one unsigned integer argument.
 .PP
 Options controlling error output:
 .TP
@@ -58,6 +88,16 @@ itself.
 .TP
 \fBiconv -f ISO-8859-1 -t UTF-8\fP
 converts input from the old West-European encoding ISO-8859-1 to Unicode.
+.PP
+.nf
+\fBiconv -f KOI8-R --byte-subst="<0x%x>"\fP
+\fB                --unicode-subst="<U+%04X>"\fP
+.fi
+.RS
+converts input from the old Russian encoding KOI8-R to the locale encoding,
+substituting an angle bracket notation with hexadecimal numbers for invalid
+bytes and for valid but unconvertible characters.
+.RE
 .TP
 \fBiconv --list\fP
 lists the supported encodings.

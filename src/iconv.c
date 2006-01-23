@@ -21,6 +21,7 @@
 # define ICONV_CONST const
 #endif
 
+#include <limits.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,22 +42,104 @@
 #include "binary-io.h"
 #include "progname.h"
 #include "relocatable.h"
+#include "xalloc.h"
 #include "uniwidth.h"
 #include "cjk.h"
 #include "gettext.h"
 
 #define _(str) gettext(str)
 
+/* Locale independent test for a decimal digit.
+   Argument can be  'char' or 'unsigned char'.  (Whereas the argument of
+   <ctype.h> isdigit must be an 'unsigned char'.)  */
+#undef isdigit
+#define isdigit(c) ((unsigned int) ((c) - '0') < 10)
+
+/* Locale independent test for a printable character.
+   Argument can be  'char' or 'unsigned char'.  (Whereas the argument of
+   <ctype.h> isdigit must be an 'unsigned char'.)  */
+#define c_isprint(c) ((c) >= ' ' && (c) <= '~')
+
+/* ========================================================================= */
+
 static int discard_unconvertible = 0;
 static int silent = 0;
 
 static void usage (int exitcode)
 {
-  const char* helpstring1 =
-    _("Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]");
-  const char* helpstring2 =
-    _("or:    iconv -l");
-  fprintf(exitcode ? stderr : stdout, "%s\n%s\n", helpstring1, helpstring2);
+  if (exitcode != 0) {
+    const char* helpstring1 =
+      _("Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]");
+    const char* helpstring2 =
+      _("or:    iconv -l");
+    fprintf(stderr, "%s\n%s\n", helpstring1, helpstring2);
+    fprintf(stderr, _("Try `%s --help' for more information.\n"), program_name);
+  } else {
+    /* xgettext: no-wrap */
+    printf(_("\
+Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"),
+           program_name);
+    /* xgettext: no-wrap */
+    printf(_("\
+or:    %s -l\n"),
+           program_name);
+    printf("\n");
+    /* xgettext: no-wrap */
+    printf(_("\
+Converts text from one encoding to another encoding.\n"));
+    printf("\n");
+    /* xgettext: no-wrap */
+    printf(_("\
+Options controlling the input and output format:\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  -f ENCODING, --from-code=ENCODING\n\
+                              the encoding of the input\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  -t ENCODING, --to-code=ENCODING\n\
+                              the encoding of the output\n"));
+    printf("\n");
+    /* xgettext: no-wrap */
+    printf(_("\
+Options controlling conversion problems:\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  -c                          discard unconvertible characters\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  --unicode-subst=FORMATSTRING\n\
+                              substitution for unconvertible Unicode characters\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  --byte-subst=FORMATSTRING   substitution for unconvertible bytes\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  --widechar-subst=FORMATSTRING\n\
+                              substitution for unconvertible wide characters\n"));
+    printf("\n");
+    /* xgettext: no-wrap */
+    printf(_("\
+Options controlling error output:\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  -s, --silent                suppress error messages about conversion problems\n"));
+    printf("\n");
+    /* xgettext: no-wrap */
+    printf(_("\
+Informative output:\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  -l, --list                  list the supported encodings\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  --help                      display this help and exit\n"));
+    /* xgettext: no-wrap */
+    printf(_("\
+  --version                   output version information and exit\n"));
+    printf("\n");
+    fputs(_("Report bugs to <bug-gnu-libiconv@gnu.org>.\n"),stdout);
+  }
   exit(exitcode);
 }
 
@@ -86,6 +169,8 @@ static int print_one (unsigned int namescount, const char * const * names,
   return 0;
 }
 
+/* ========================================================================= */
+
 /* Line number and column position. */
 static unsigned int line;
 static unsigned int column;
@@ -106,11 +191,364 @@ static void update_line_column (unsigned int uc, void* data)
   }
 }
 
+/* ========================================================================= */
+
+/* Production of placeholder strings as fallback for unconvertible
+   characters. */
+
+/* Check that the argument is a format string taking either no argument
+   or exactly one unsigned integer argument. Returns the maximum output
+   size of the format string. */
+static size_t check_subst_formatstring (const char *format, const char *param_name)
+{
+  /* C format strings are described in POSIX (IEEE P1003.1 2001), section
+     XSH 3 fprintf().  See also Linux fprintf(3) manual page.
+     For simplicity, we don't accept
+       - the '%m$' reordering syntax,
+       - the 'I' flag,
+       - width specifications referring to an argument,
+       - precision specifications referring to an argument,
+       - size specifiers,
+       - format specifiers other than 'o', 'u', 'x', 'X'.
+     What remains?
+     A directive
+       - starts with '%',
+       - is optionally followed by any of the characters '#', '0', '-', ' ',
+         '+', "'", each of which acts as a flag,
+       - is optionally followed by a width specification: a nonempty digit
+         sequence,
+       - is optionally followed by '.' and a precision specification: a
+         nonempty digit sequence,
+       - is finished by a specifier
+         - '%', that needs no argument,
+         - 'o', 'u', 'x', 'X', that need an unsigned integer argument.
+   */
+  size_t maxsize = 0;
+  unsigned int unnumbered_arg_count = 0;
+
+  for (; *format != '\0';) {
+    if (*format++ == '%') {
+      /* A directive. */
+      unsigned int width = 0;
+      unsigned int precision = 0;
+      unsigned int length;
+      /* Parse flags. */
+      for (;;) {
+        if (*format == ' ' || *format == '+' || *format == '-'
+            || *format == '#' || *format == '0' || *format == '\'')
+          format++;
+        else
+          break;
+      }
+      /* Parse width. */
+      if (*format == '*') {
+        fprintf(stderr,_("iconv: %s argument: A format directive with a variable width is not allowed here.\n"),param_name);
+        exit(1);
+      }
+      if (isdigit (*format)) {
+        do {
+          width = 10*width + (*format - '0');
+          format++;
+        } while (isdigit (*format));
+      }
+      /* Parse precision. */
+      if (*format == '.') {
+        format++;
+        if (*format == '*') {
+          fprintf(stderr,_("iconv: %s argument: A format directive with a variable precision is not allowed here.\n"),param_name);
+          exit(1);
+        }
+        if (isdigit (*format)) {
+          do {
+            precision = 10*precision + (*format - '0');
+            format++;
+          } while (isdigit (*format));
+        }
+      }
+      /* Parse size. */
+      switch (*format) {
+        case 'h': case 'l': case 'L': case 'q':
+        case 'j': case 'z': case 'Z': case 't':
+          fprintf(stderr,_("iconv: %s argument: A format directive with a size is not allowed here.\n"),param_name);
+          exit(1);
+      }
+      /* Parse end of directive. */
+      switch (*format) {
+        case '%':
+          length = 1;
+          break;
+        case 'u': case 'o': case 'x': case 'X':
+          if (*format == 'u') {
+            length = (unsigned int) (sizeof (unsigned int) * CHAR_BIT
+                                     * 0.30103 /* binary -> decimal */
+                                    )
+                     + 1; /* turn floor into ceil */
+            if (length < precision)
+              length = precision;
+            length *= 2; /* estimate for FLAG_GROUP */
+            length += 1; /* account for leading sign */
+          } else if (*format == 'o') {
+            length = (unsigned int) (sizeof (unsigned int) * CHAR_BIT
+                                     * 0.333334 /* binary -> octal */
+                                    )
+                     + 1; /* turn floor into ceil */
+            if (length < precision)
+              length = precision;
+            length += 1; /* account for leading sign */
+          } else { /* 'x', 'X' */
+            length = (unsigned int) (sizeof (unsigned int) * CHAR_BIT
+                                     * 0.25 /* binary -> hexadecimal */
+                                    )
+                     + 1; /* turn floor into ceil */
+            if (length < precision)
+              length = precision;
+            length += 2; /* account for leading sign or alternate form */
+          }
+          unnumbered_arg_count++;
+          break;
+        default:
+          if (*format == '\0')
+            fprintf(stderr,_("iconv: %s argument: The string ends in the middle of a directive.\n"),param_name);
+          else if (c_isprint(*format))
+            fprintf(stderr,_("iconv: %s argument: The character '%c' is not a valid conversion specifier.\n"),param_name,*format);
+          else
+            fprintf(stderr,_("iconv: %s argument: The character that terminates the format directive is not a valid conversion specifier.\n"),param_name);
+          exit(1);
+      }
+      format++;
+      if (length < width)
+        length = width;
+      maxsize += length;
+    } else
+      maxsize++;
+  }
+  if (unnumbered_arg_count > 1) {
+    fprintf(stderr,_("iconv: %s argument: The format string consumes more than one argument: %u arguments.\n"),param_name,unnumbered_arg_count);
+    exit(1);
+  }
+  return maxsize;
+}
+
+/* Format strings. */
+static const char* ilseq_byte_subst;
+static const char* ilseq_wchar_subst;
+static const char* ilseq_unicode_subst;
+
+/* Maximum result size for each format string. */
+static size_t ilseq_byte_subst_size;
+static size_t ilseq_wchar_subst_size;
+static size_t ilseq_unicode_subst_size;
+
+/* Buffer of size ilseq_byte_subst_size+1. */
+static char* ilseq_byte_subst_buffer;
+#if HAVE_WCHAR_T
+/* Buffer of size ilseq_wchar_subst_size+1. */
+static char* ilseq_wchar_subst_buffer;
+#endif
+/* Buffer of size ilseq_unicode_subst_size+1. */
+static char* ilseq_unicode_subst_buffer;
+
+/* Auxiliary variables for subst_mb_to_uc_fallback. */
+/* Converter from locale encoding to UCS-4. */
+static iconv_t subst_mb_to_uc_cd;
+/* Buffer of size ilseq_byte_subst_size. */
+static unsigned int* subst_mb_to_uc_temp_buffer;
+
+static void subst_mb_to_uc_fallback
+            (const char* inbuf, size_t inbufsize,
+             void (*write_replacement) (const unsigned int *buf, size_t buflen,
+                                        void* callback_arg),
+             void* callback_arg,
+             void* data)
+{
+  for (; inbufsize > 0; inbuf++, inbufsize--) {
+    const char* inptr;
+    size_t inbytesleft;
+    char* outptr;
+    size_t outbytesleft;
+    sprintf(ilseq_byte_subst_buffer,
+            ilseq_byte_subst, (unsigned int)(unsigned char)*inbuf);
+    inptr = ilseq_byte_subst_buffer;
+    inbytesleft = strlen(ilseq_byte_subst_buffer);
+    outptr = (char*)subst_mb_to_uc_temp_buffer;
+    outbytesleft = ilseq_byte_subst_size*sizeof(unsigned int);
+    iconv(subst_mb_to_uc_cd,NULL,NULL,NULL,NULL);
+    if (iconv(subst_mb_to_uc_cd, (ICONV_CONST char**)&inptr,&inbytesleft, &outptr,&outbytesleft)
+        == (size_t)(-1)
+        || iconv(subst_mb_to_uc_cd, NULL,NULL, &outptr,&outbytesleft)
+           == (size_t)(-1)) {
+      fprintf(stderr,_("iconv: cannot convert byte substitution to Unicode: %s\n"),ilseq_byte_subst_buffer);
+      exit(1);
+    }
+    if (!(outbytesleft%sizeof(unsigned int) == 0))
+      abort();
+    write_replacement(subst_mb_to_uc_temp_buffer,
+                      ilseq_byte_subst_size-(outbytesleft/sizeof(unsigned int)),
+                      callback_arg);
+  }
+}
+
+/* Auxiliary variables for subst_uc_to_mb_fallback. */
+/* Converter from locale encoding to target encoding. */
+static iconv_t subst_uc_to_mb_cd;
+/* Buffer of size ilseq_unicode_subst_size*4. */
+static char* subst_uc_to_mb_temp_buffer;
+
+static void subst_uc_to_mb_fallback
+            (unsigned int code,
+             void (*write_replacement) (const char *buf, size_t buflen,
+                                        void* callback_arg),
+             void* callback_arg,
+             void* data)
+{
+  const char* inptr;
+  size_t inbytesleft;
+  char* outptr;
+  size_t outbytesleft;
+  sprintf(ilseq_unicode_subst_buffer, ilseq_unicode_subst, code);
+  inptr = ilseq_unicode_subst_buffer;
+  inbytesleft = strlen(ilseq_unicode_subst_buffer);
+  outptr = subst_uc_to_mb_temp_buffer;
+  outbytesleft = ilseq_unicode_subst_size*4;
+  iconv(subst_uc_to_mb_cd,NULL,NULL,NULL,NULL);
+  if (iconv(subst_uc_to_mb_cd, (ICONV_CONST char**)&inptr,&inbytesleft, &outptr,&outbytesleft)
+      == (size_t)(-1)
+      || iconv(subst_uc_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
+         == (size_t)(-1)) {
+    fprintf(stderr,_("iconv: cannot convert unicode substitution to target encoding: %s\n"),ilseq_unicode_subst_buffer);
+    exit(1);
+  }
+  write_replacement(subst_uc_to_mb_temp_buffer,
+                    ilseq_unicode_subst_size*4-outbytesleft,
+                    callback_arg);
+}
+
+#if HAVE_WCHAR_T
+
+/* Auxiliary variables for subst_mb_to_wc_fallback. */
+/* Converter from locale encoding to wchar_t. */
+static iconv_t subst_mb_to_wc_cd;
+/* Buffer of size ilseq_byte_subst_size. */
+static wchar_t* subst_mb_to_wc_temp_buffer;
+
+static void subst_mb_to_wc_fallback
+            (const char* inbuf, size_t inbufsize,
+             void (*write_replacement) (const wchar_t *buf, size_t buflen,
+                                        void* callback_arg),
+             void* callback_arg,
+             void* data)
+{
+  for (; inbufsize > 0; inbuf++, inbufsize--) {
+    const char* inptr;
+    size_t inbytesleft;
+    char* outptr;
+    size_t outbytesleft;
+    sprintf(ilseq_byte_subst_buffer,
+            ilseq_byte_subst, (unsigned int)(unsigned char)*inbuf);
+    inptr = ilseq_byte_subst_buffer;
+    inbytesleft = strlen(ilseq_byte_subst_buffer);
+    outptr = (char*)subst_mb_to_wc_temp_buffer;
+    outbytesleft = ilseq_byte_subst_size*sizeof(wchar_t);
+    iconv(subst_mb_to_wc_cd,NULL,NULL,NULL,NULL);
+    if (iconv(subst_mb_to_wc_cd, (ICONV_CONST char**)&inptr,&inbytesleft, &outptr,&outbytesleft)
+        == (size_t)(-1)
+        || iconv(subst_mb_to_wc_cd, NULL,NULL, &outptr,&outbytesleft)
+           == (size_t)(-1)) {
+      fprintf(stderr,_("iconv: cannot convert byte substitution to wide string: %s\n"),ilseq_byte_subst_buffer);
+      exit(1);
+    }
+    if (!(outbytesleft%sizeof(wchar_t) == 0))
+      abort();
+    write_replacement(subst_mb_to_wc_temp_buffer,
+                      ilseq_byte_subst_size-(outbytesleft/sizeof(wchar_t)),
+                      callback_arg);
+  }
+}
+
+/* Auxiliary variables for subst_wc_to_mb_fallback. */
+/* Converter from locale encoding to target encoding. */
+static iconv_t subst_wc_to_mb_cd;
+/* Buffer of size ilseq_wchar_subst_size*4.
+   Hardcode factor 4, because MB_LEN_MAX is not reliable on some platforms. */
+static char* subst_wc_to_mb_temp_buffer;
+
+static void subst_wc_to_mb_fallback
+            (wchar_t code,
+             void (*write_replacement) (const char *buf, size_t buflen,
+                                        void* callback_arg),
+             void* callback_arg,
+             void* data)
+{
+  const char* inptr;
+  size_t inbytesleft;
+  char* outptr;
+  size_t outbytesleft;
+  sprintf(ilseq_wchar_subst_buffer, ilseq_wchar_subst, (unsigned int) code);
+  inptr = ilseq_wchar_subst_buffer;
+  inbytesleft = strlen(ilseq_wchar_subst_buffer);
+  outptr = subst_wc_to_mb_temp_buffer;
+  outbytesleft = ilseq_wchar_subst_size*4;
+  iconv(subst_wc_to_mb_cd,NULL,NULL,NULL,NULL);
+  if (iconv(subst_wc_to_mb_cd, (ICONV_CONST char**)&inptr,&inbytesleft, &outptr,&outbytesleft)
+      == (size_t)(-1)
+      || iconv(subst_wc_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
+         == (size_t)(-1)) {
+    fprintf(stderr,_("iconv: cannot convert widechar substitution to target encoding: %s\n"),ilseq_wchar_subst_buffer);
+    exit(1);
+  }
+  write_replacement(subst_wc_to_mb_temp_buffer,
+                    ilseq_wchar_subst_size*4-outbytesleft,
+                    callback_arg);
+}
+
+#else
+
+#define subst_mb_to_wc_fallback NULL
+#define subst_wc_to_mb_fallback NULL
+
+#endif
+
+/* Auxiliary variables for subst_mb_to_mb_fallback. */
+/* Converter from locale encoding to target encoding. */
+static iconv_t subst_mb_to_mb_cd;
+/* Buffer of size ilseq_byte_subst_size*4. */
+static char* subst_mb_to_mb_temp_buffer;
+
+static void subst_mb_to_mb_fallback (const char* inbuf, size_t inbufsize)
+{
+  for (; inbufsize > 0; inbuf++, inbufsize--) {
+    const char* inptr;
+    size_t inbytesleft;
+    char* outptr;
+    size_t outbytesleft;
+    sprintf(ilseq_byte_subst_buffer,
+            ilseq_byte_subst, (unsigned int)(unsigned char)*inbuf);
+    inptr = ilseq_byte_subst_buffer;
+    inbytesleft = strlen(ilseq_byte_subst_buffer);
+    outptr = subst_mb_to_mb_temp_buffer;
+    outbytesleft = ilseq_byte_subst_size*4;
+    iconv(subst_mb_to_mb_cd,NULL,NULL,NULL,NULL);
+    if (iconv(subst_mb_to_mb_cd, (ICONV_CONST char**)&inptr,&inbytesleft, &outptr,&outbytesleft)
+        == (size_t)(-1)
+        || iconv(subst_mb_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
+           == (size_t)(-1)) {
+      fprintf(stderr,_("iconv: cannot convert byte substitution to target encoding: %s\n"),ilseq_byte_subst_buffer);
+      exit(1);
+    }
+    fwrite(subst_mb_to_mb_temp_buffer,1,ilseq_byte_subst_size*4-outbytesleft,
+           stdout);
+  }
+}
+
+/* ========================================================================= */
+
 static int convert (iconv_t cd, FILE* infile, const char* infilename)
 {
   char inbuf[4096+4096];
   size_t inbufrest = 0;
-  char outbuf[4096];
+  char initial_outbuf[4096];
+  char *outbuf = initial_outbuf;
+  size_t outbufsize = sizeof(initial_outbuf);
   int status = 0;
 
 #if O_BINARY
@@ -124,13 +562,16 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
       if (inbufrest == 0)
         break;
       else {
+        if (ilseq_byte_subst != NULL)
+          subst_mb_to_mb_fallback(inbuf+4096-inbufrest, inbufrest);
         if (!silent) {
           fflush(stdout);
           if (column > 0)
             putc('\n',stderr);
           fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
         }
-        return 1;
+        status = 1;
+        goto done;
       }
     } else {
       const char* inptr = inbuf+4096-inbufrest;
@@ -138,12 +579,14 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
       inbufrest = 0;
       while (insize > 0) {
         char* outptr = outbuf;
-        size_t outsize = sizeof(outbuf);
+        size_t outsize = outbufsize;
         size_t res = iconv(cd,(ICONV_CONST char**)&inptr,&insize,&outptr,&outsize);
         if (outptr != outbuf) {
           int saved_errno = errno;
-          if (fwrite(outbuf,1,outptr-outbuf,stdout) < outptr-outbuf)
-            return 1;
+          if (fwrite(outbuf,1,outptr-outbuf,stdout) < outptr-outbuf) {
+            status = 1;
+            goto done;
+          }
           errno = saved_errno;
         }
         if (res == (size_t)(-1)) {
@@ -160,7 +603,8 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
                   putc('\n',stderr);
                 fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
               }
-              return 1;
+              status = 1;
+              goto done;
             }
           } else if (errno == EINVAL) {
             if (inbufsize == 0 || insize > 4096) {
@@ -170,7 +614,8 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
                   putc('\n',stderr);
                 fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
               }
-              return 1;
+              status = 1;
+              goto done;
             } else {
               inbufrest = insize;
               if (insize > 0) {
@@ -182,7 +627,17 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               }
               break;
             }
-          } else if (errno != E2BIG) {
+          } else if (errno == E2BIG) {
+            if (outptr==outbuf) {
+              /* outbuf is too small. Double its size. */
+              if (outbuf != initial_outbuf)
+                free(outbuf);
+              outbufsize = 2*outbufsize;
+              if (outbufsize==0) /* integer overflow? */
+                xalloc_die();
+              outbuf = (char*)xmalloc(outbufsize);
+            }
+          } else {
             if (!silent) {
               int saved_errno = errno;
               fflush(stdout);
@@ -192,20 +647,23 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               errno = saved_errno;
               perror("");
             }
-            return 1;
+            status = 1;
+            goto done;
           }
         }
       }
     }
   }
-  {
+  for (;;) {
     char* outptr = outbuf;
-    size_t outsize = sizeof(outbuf);
+    size_t outsize = outbufsize;
     size_t res = iconv(cd,NULL,NULL,&outptr,&outsize);
     if (outptr != outbuf) {
       int saved_errno = errno;
-      if (fwrite(outbuf,1,outptr-outbuf,stdout) < outptr-outbuf)
-        return 1;
+      if (fwrite(outbuf,1,outptr-outbuf,stdout) < outptr-outbuf) {
+        status = 1;
+        goto done;
+      }
       errno = saved_errno;
     }
     if (res == (size_t)(-1)) {
@@ -222,7 +680,8 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               putc('\n',stderr);
             fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
           }
-          return 1;
+          status = 1;
+          goto done;
         }
       } else if (errno == EINVAL) {
         if (!silent) {
@@ -231,7 +690,18 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
             putc('\n',stderr);
           fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
         }
-        return 1;
+        status = 1;
+        goto done;
+      } else if (errno == E2BIG) {
+        if (outptr==outbuf) {
+          /* outbuf is too small. Double its size. */
+          if (outbuf != initial_outbuf)
+            free(outbuf);
+          outbufsize = 2*outbufsize;
+          if (outbufsize==0) /* integer overflow? */
+            xalloc_die();
+          outbuf = (char*)xmalloc(outbufsize);
+        }
       } else {
         if (!silent) {
           int saved_errno = errno;
@@ -242,19 +712,27 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           errno = saved_errno;
           perror("");
         }
-        return 1;
+        status = 1;
+        goto done;
       }
-    }
+    } else
+      break;
   }
   if (ferror(infile)) {
     fflush(stdout);
     if (column > 0)
       putc('\n',stderr);
     fprintf(stderr,_("iconv: %s: I/O error\n"),infilename);
-    return 1;
+    status = 1;
+    goto done;
   }
+ done:
+  if (outbuf != initial_outbuf)
+    free(outbuf);
   return status;
 }
+
+/* ========================================================================= */
 
 int main (int argc, char* argv[])
 {
@@ -262,6 +740,7 @@ int main (int argc, char* argv[])
   const char* tocode = NULL;
   int do_list = 0;
   iconv_t cd;
+  struct iconv_fallbacks fallbacks;
   struct iconv_hooks hooks;
   int i;
   int status;
@@ -327,6 +806,54 @@ int main (int argc, char* argv[])
       i++;
       continue;
     }
+    if (/* --by ... --byte-subst */
+        (len >= 4 && len <= 12 && !strncmp(argv[i],"--byte-subst",len))
+        /* --byte-subst=... */
+        || (len >= 13 && !strncmp(argv[i],"--byte-subst=",13))) {
+      if (len < 13) {
+        if (i == argc-1) usage(1);
+        ilseq_byte_subst = argv[i+1];
+        i += 2;
+      } else {
+        ilseq_byte_subst = argv[i]+13;
+        i++;
+      }
+      ilseq_byte_subst_size =
+        check_subst_formatstring(ilseq_byte_subst, "--byte-subst");
+      continue;
+    }
+    if (/* --w ... --widechar-subst */
+        (len >= 3 && len <= 16 && !strncmp(argv[i],"--widechar-subst",len))
+        /* --widechar-subst=... */
+        || (len >= 17 && !strncmp(argv[i],"--widechar-subst=",17))) {
+      if (len < 17) {
+        if (i == argc-1) usage(1);
+        ilseq_wchar_subst = argv[i+1];
+        i += 2;
+      } else {
+        ilseq_wchar_subst = argv[i]+17;
+        i++;
+      }
+      ilseq_wchar_subst_size =
+        check_subst_formatstring(ilseq_wchar_subst, "--widechar-subst");
+      continue;
+    }
+    if (/* --u ... --unicode-subst */
+        (len >= 3 && len <= 15 && !strncmp(argv[i],"--unicode-subst",len))
+        /* --unicode-subst=... */
+        || (len >= 16 && !strncmp(argv[i],"--unicode-subst=",16))) {
+      if (len < 16) {
+        if (i == argc-1) usage(1);
+        ilseq_unicode_subst = argv[i+1];
+        i += 2;
+      } else {
+        ilseq_unicode_subst = argv[i]+16;
+        i++;
+      }
+      ilseq_unicode_subst_size =
+        check_subst_formatstring(ilseq_unicode_subst, "--unicode-subst");
+      continue;
+    }
     if /* --s ... --silent */
        (len >= 3 && len <= 8 && !strncmp(argv[i],"--silent",len)) {
       silent = 1;
@@ -342,8 +869,8 @@ int main (int argc, char* argv[])
     }
 #if O_BINARY
     /* Backward compatibility with iconv <= 1.9.1. */
-    if /* --b ... --binary */
-       (len >= 3 && len <= 8 && !strncmp(argv[i],"--binary",len)) {
+    if /* --bi ... --binary */
+       (len >= 4 && len <= 8 && !strncmp(argv[i],"--binary",len)) {
       i++;
       continue;
     }
@@ -392,6 +919,47 @@ int main (int argc, char* argv[])
     cjkcode = iconv_canonicalize(tocode);
     if (!is_cjk_encoding(cjkcode))
       cjkcode = iconv_canonicalize(fromcode);
+    /* Set up fallback routines for handling impossible conversions. */
+    if (ilseq_byte_subst != NULL)
+      ilseq_byte_subst_buffer = (char*)xmalloc((ilseq_byte_subst_size+1)*sizeof(char));
+    if (!discard_unconvertible) {
+      #if HAVE_WCHAR_T
+      if (ilseq_wchar_subst != NULL)
+        ilseq_wchar_subst_buffer = (char*)xmalloc((ilseq_wchar_subst_size+1)*sizeof(char));
+      #endif
+      if (ilseq_unicode_subst != NULL)
+        ilseq_unicode_subst_buffer = (char*)xmalloc((ilseq_unicode_subst_size+1)*sizeof(char));
+      if (ilseq_byte_subst != NULL) {
+        subst_mb_to_uc_cd = iconv_open("UCS-4-INTERNAL","char");
+        subst_mb_to_uc_temp_buffer = (unsigned int*)xmalloc(ilseq_byte_subst_size*sizeof(unsigned int));
+        #if HAVE_WCHAR_T
+        subst_mb_to_wc_cd = iconv_open("wchar_t","char");
+        subst_mb_to_wc_temp_buffer = (wchar_t*)xmalloc(ilseq_byte_subst_size*sizeof(wchar_t));
+        #endif
+        subst_mb_to_mb_cd = iconv_open(tocode,"char");
+        subst_mb_to_mb_temp_buffer = (char*)xmalloc(ilseq_byte_subst_size*4);
+      }
+      #if HAVE_WCHAR_T
+      if (ilseq_wchar_subst != NULL) {
+        subst_wc_to_mb_cd = iconv_open(tocode,"char");
+        subst_wc_to_mb_temp_buffer = (char*)xmalloc(ilseq_wchar_subst_size*4);
+      }
+      #endif
+      if (ilseq_unicode_subst != NULL) {
+        subst_uc_to_mb_cd = iconv_open(tocode,"char");
+        subst_uc_to_mb_temp_buffer = (char*)xmalloc(ilseq_unicode_subst_size*4);
+      }
+      fallbacks.mb_to_uc_fallback =
+        (ilseq_byte_subst != NULL ? subst_mb_to_uc_fallback : NULL);
+      fallbacks.uc_to_mb_fallback =
+        (ilseq_unicode_subst != NULL ? subst_uc_to_mb_fallback : NULL);
+      fallbacks.mb_to_wc_fallback =
+        (ilseq_byte_subst != NULL ? subst_mb_to_wc_fallback : NULL);
+      fallbacks.wc_to_mb_fallback =
+        (ilseq_wchar_subst != NULL ? subst_wc_to_mb_fallback : NULL);
+      fallbacks.data = NULL;
+      iconvctl(cd, ICONV_SET_FALLBACKS, &fallbacks);
+    }
     /* Set up hooks for updating the line and column position. */
     hooks.uc_hook = update_line_column;
     hooks.wc_hook = NULL;

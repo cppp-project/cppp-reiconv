@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2005 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2006 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -415,6 +415,11 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
   cd->transliterate = transliterate;
   cd->discard_ilseq = discard_ilseq;
   #ifndef LIBICONV_PLUG
+  cd->fallbacks.mb_to_uc_fallback = NULL;
+  cd->fallbacks.uc_to_mb_fallback = NULL;
+  cd->fallbacks.mb_to_wc_fallback = NULL;
+  cd->fallbacks.wc_to_mb_fallback = NULL;
+  cd->fallbacks.data = NULL;
   cd->hooks.uc_hook = NULL;
   cd->hooks.wc_hook = NULL;
   cd->hooks.data = NULL;
@@ -483,6 +488,17 @@ int iconvctl (iconv_t icd, int request, void* argument)
         cd->hooks.uc_hook = NULL;
         cd->hooks.wc_hook = NULL;
         cd->hooks.data = NULL;
+      }
+      return 0;
+    case ICONV_SET_FALLBACKS:
+      if (argument != NULL) {
+        cd->fallbacks = *(const struct iconv_fallbacks *)argument;
+      } else {
+        cd->fallbacks.mb_to_uc_fallback = NULL;
+        cd->fallbacks.uc_to_mb_fallback = NULL;
+        cd->fallbacks.mb_to_wc_fallback = NULL;
+        cd->fallbacks.wc_to_mb_fallback = NULL;
+        cd->fallbacks.data = NULL;
       }
       return 0;
     default:

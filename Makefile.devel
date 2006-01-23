@@ -167,13 +167,13 @@ include/iconv.h.build.in : include/iconv.h.in include/export.h
 	  < $< > $@
 
 include/iconv.h_vms : include/iconv.h.in
-	sed -e 's/@ICONV_CONST@//g' < $< > $@
+	sed -e 's/@ICONV_CONST@//g' -e 's/@HAVE_WCHAR_T@/1/g' < $< > $@
 
 include/iconv.h.msvc-static : include/iconv.h.in
-	sed -e 's/@ICONV_CONST@/const/g' < $< > $@
+	sed -e 's/@ICONV_CONST@/const/g' -e 's/@HAVE_WCHAR_T@/1/g' < $< > $@
 
 include/iconv.h.msvc-shared : include/iconv.h.in windows/dllexport.h
-	sed -e 's/@ICONV_CONST@/const/g' \
+	sed -e 's/@ICONV_CONST@/const/g' -e 's/@HAVE_WCHAR_T@/1/g' \
 	    -e 's/extern \([^"]\)/extern LIBICONV_DLL_EXPORTED \1/' \
 	    -e '/_LIBICONV_VERSION/r windows/dllexport.h' \
 	  < $< > $@

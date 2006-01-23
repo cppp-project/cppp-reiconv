@@ -1,3 +1,60 @@
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
+	New feature: character-dependent substitutions.
+	* include/iconv.h.in (iconv_unicode_mb_to_uc_fallback,
+	iconv_unicode_uc_to_mb_fallback, iconv_wchar_mb_to_wc_fallback,
+	iconv_wchar_wc_to_mb_fallback): New types.
+	(struct iconv_fallbacks): New structure type.
+	(ICONV_SET_FALLBACKS): New macro.
+	* configure.ac: Invoke gt_TYPE_WCHAR_T and substitute HAVE_WCHAR_T.
+	* Makefile.os2 (all): Also substitute @HAVE_WCHAR_T@ in build/iconv.h.
+	* Makefile.devel (include/iconv.h_vms, include/iconv.h.msvc-static,
+	include/iconv.h.msvc-shared): Also substitute @HAVE_WCHAR_T@.
+	* lib/converters.h (struct conv_struct): Add field 'fallbacks'.
+	* lib/loop_unicode.h (struct uc_to_mb_fallback_locals): New type.
+	(uc_to_mb_write_replacement): New function.
+	(struct mb_to_uc_fallback_locals): New type.
+	(mb_to_uc_write_replacement): New function.
+	(unicode_loop_convert): Call mb_to_uc_fallback and uc_to_mb_fallback.
+	(unicode_loop_reset): Call uc_to_mb_fallback.
+	* lib/loop_wchar.h (struct wc_to_mb_fallback_locals): New type.
+	(wc_to_mb_write_replacement): New function.
+	(wchar_from_loop_convert): Call wc_to_mb_fallback.
+	(struct mb_to_wc_fallback_locals): New type.
+	(mb_to_wc_write_replacement): New function.
+	(wchar_to_loop_convert): Call mb_to_wc_fallback.
+	* lib/iconv.c (iconv_open): Initialize the 'fallbacks' field.
+	(iconvctl): Handle ICONV_SET_FALLBACKS.
+	* lib/genflags.c (struct iconv_fallbacks): New dummy definition.
+	* src/iconv.c: Include limits.h.
+	(isdigit, c_isprint): New macros.
+	(usage): Document long options and new options.
+	(check_subst_formatstring): New function.
+	(ilseq_byte_subst, ilseq_wchar_subst, ilseq_unicode_subst): New
+	variables.
+	(ilseq_byte_subst_size, ilseq_wchar_subst_size,
+	ilseq_unicode_subst_size): New variables.
+	(ilseq_byte_subst_buffer, ilseq_wchar_subst_buffer,
+	ilseq_unicode_subst_buffer): New variables.
+	(subst_mb_to_uc_cd, subst_mb_to_uc_temp_buffer): New variables.
+	(subst_mb_to_uc_fallback): New function.
+	(subst_uc_to_mb_cd, subst_uc_to_mb_temp_buffer): New variables.
+	(subst_uc_to_mb_fallback): New function.
+	(subst_mb_to_wc_cd, subst_mb_to_wc_temp_buffer): New variables.
+	(subst_mb_to_wc_fallback): New function.
+	(subst_wc_to_mb_cd, subst_wc_to_mb_temp_buffer): New variables.
+	(subst_wc_to_mb_fallback): New function.
+	(subst_mb_to_mb_cd, subst_mb_to_mb_temp_buffer): New variables.
+	(subst_mb_to_mb_fallback): New function.
+	(convert): Enlarge the outbuf when the conversion failed with E2BIG.
+	(main): Handle new options --byte-subst, --widechar-subst,
+	--unicode-subst.
+	* man/iconv.1: Document --unicode-subst, --byte-subst, --widechar-subst
+	options.
+	* tests/check-subst: New file.
+	* tests/Makefile.in (check): Also invoke check-subst.
+	Suggested by James Taylor <james@oakseed.demon.co.uk>.
+
 2006-01-21  Bruno Haible  <bruno@clisp.org>
 
 	* src/iconv.c (print_version): Bump copyright year.
