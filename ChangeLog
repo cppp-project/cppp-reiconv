@@ -1,5 +1,14 @@
 2006-01-22  Bruno Haible  <bruno@clisp.org>
 
+	* src/iconv.c: Include error.h, exit.h.
+	(print_version): Use EXIT_SUCCESS.
+	(check_subst_formatstring, subst_mb_to_uc_fallback,
+	subst_uc_to_mb_fallback, subst_mb_to_wc_fallback,
+	subst_wc_to_mb_fallback, subst_mb_to_mb_fallback, convert, main): Use
+	error() instead of fprintf to stderr.
+
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
 	New feature: character-dependent substitutions.
 	* include/iconv.h.in (iconv_unicode_mb_to_uc_fallback,
 	iconv_unicode_uc_to_mb_fallback, iconv_wchar_mb_to_wc_fallback,
