@@ -46,7 +46,7 @@ SHELL = /bin/sh
 
 # Before making a release, change this according to the libtool documentation,
 # section "Library interface versions".
-LIBICONV_VERSION_INFO = 5:1:3
+LIBICONV_VERSION_INFO = 6:0:4
 
 # Needed by $(LIBTOOL).
 top_builddir = ..

@@ -1,5 +1,9 @@
 2006-01-22  Bruno Haible  <bruno@clisp.org>
 
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 6:0:4.
+
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
 	* src/iconv.c: Include error.h, exit.h.
 	(print_version): Use EXIT_SUCCESS.
 	(check_subst_formatstring, subst_mb_to_uc_fallback,
