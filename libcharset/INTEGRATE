@@ -10,7 +10,7 @@ Integration of this library into your package:
 * Add the following lines to your configure.ac file:
 
     AC_CANONICAL_HOST
-    jm_LANGINFO_CODESET
+    AM_LANGINFO_CODESET
     jm_GLIBC21
     AC_CHECK_HEADERS(stddef.h stdlib.h string.h)
     AC_CHECK_FUNCS(setlocale)
