@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2005 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2006 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -64,7 +64,7 @@ static void print_version (void)
 {
   printf("iconv (GNU libiconv %d.%d)\n",
          _libiconv_version >> 8, _libiconv_version & 0xff);
-  printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2005");
+  printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2006");
   printf(_("\
 This is free software; see the source for copying conditions.  There is NO\n\
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"));
@@ -281,38 +281,69 @@ int main (int argc, char* argv[])
 #endif
   textdomain("libiconv");
   for (i = 1; i < argc;) {
+    size_t len = strlen(argv[i]);
     if (!strcmp(argv[i],"--")) {
       i++;
       break;
     }
-    if (!strcmp(argv[i],"-f")) {
-      if (i == argc-1) usage(1);
+    if (!strcmp(argv[i],"-f")
+        /* --f ... --from-code */
+        || (len >= 3 && len <= 11 && !strncmp(argv[i],"--from-code",len))
+        /* --from-code=... */
+        || (len >= 12 && !strncmp(argv[i],"--from-code=",12))) {
+      if (len < 12)
+        if (i == argc-1) usage(1);
       if (fromcode != NULL) usage(1);
-      fromcode = argv[i+1];
-      i += 2;
+      if (len < 12) {
+        fromcode = argv[i+1];
+        i += 2;
+      } else {
+        fromcode = argv[i]+12;
+        i++;
+      }
       continue;
     }
-    if (!strcmp(argv[i],"-t")) {
-      if (i == argc-1) usage(1);
+    if (!strcmp(argv[i],"-t")
+        /* --t ... --to-code */
+        || (len >= 3 && len <= 9 && !strncmp(argv[i],"--to-code",len))
+        /* --from-code=... */
+        || (len >= 10 && !strncmp(argv[i],"--to-code=",10))) {
+      if (len < 10)
+        if (i == argc-1) usage(1);
       if (tocode != NULL) usage(1);
-      tocode = argv[i+1];
-      i += 2;
+      if (len < 10) {
+        tocode = argv[i+1];
+        i += 2;
+      } else {
+        tocode = argv[i]+10;
+        i++;
+      }
       continue;
     }
-    if (!strcmp(argv[i],"-l")) {
+    if (!strcmp(argv[i],"-l")
+        /* --l ... --list */
+        || (len >= 3 && len <= 6 && !strncmp(argv[i],"--list",len))) {
       do_list = 1;
       i++;
       continue;
     }
-    if (!strcmp(argv[i],"--help")) {
+    if /* --s ... --silent */
+       (len >= 3 && len <= 8 && !strncmp(argv[i],"--silent",len)) {
+      silent = 1;
+      continue;
+    }
+    if /* --h ... --help */
+       (len >= 3 && len <= 6 && !strncmp(argv[i],"--help",len)) {
       usage(0);
     }
-    if (!strcmp(argv[i],"--version")) {
+    if /* --v ... --version */
+       (len >= 3 && len <= 9 && !strncmp(argv[i],"--version",len)) {
       print_version();
     }
 #if O_BINARY
     /* Backward compatibility with iconv <= 1.9.1. */
-    if (!strcmp(argv[i],"--binary")) {
+    if /* --b ... --binary */
+       (len >= 3 && len <= 8 && !strncmp(argv[i],"--binary",len)) {
       i++;
       continue;
     }

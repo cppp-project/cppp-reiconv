@@ -1,3 +1,10 @@
+2006-01-21  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (print_version): Bump copyright year.
+	(main): Accept long options --from-code, --to-code, --list, --silent.
+	Accept abbreviated long options, like getopt() does.
+	* man/iconv.1: Document long options.
+
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
 	* src/iconv.c (print_version): Update copyright year.

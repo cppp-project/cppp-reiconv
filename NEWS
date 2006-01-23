@@ -1,4 +1,10 @@
 New in 1.11:
+* The iconv program now understands long options:
+    long option    equivalent to
+    --from-code    -f
+    --to-code      -t
+    --list         -l
+    --silent       -s
 * The CP936 converter is now different from the GBK converter: it has changed
   to include the Euro sign and private area characters. CP936 is no longer an
   alias of GBK.
