@@ -1,4 +1,9 @@
 @echo off
+Rem Configure libiconv for DJGPP.
+
+Rem WARNING WARNING WARNING: This file needs to have DOS CRLF end-of-line
+Rem format, or else stock DOS/Windows shells will refuse to run it.
+
 echo Configuring GNU libiconv for DJGPP v2.x...
 Rem The SmallEnv tests protect against fixed and too small size
 Rem of the environment in stock DOS shell.
@@ -111,10 +116,10 @@ set XSRC=%1
 if not "%XSRC%" == "%1" goto SmallEnv
 goto NextArgument
 :CollectArgument
-set _ARGS=#%ARGS%#%1#
-if not "%_ARGS%" == "#%ARGS%#%1#" goto SmallEnv
-echo %_ARGS% | grep -q "###"
-if errorlevel 1 set ARGS=%ARGS% %1
+set _ARGS=%ARGS% %1
+if not "%_ARGS%" == "%ARGS% %1" if not "%_ARGS%" == "%ARGS%%1" goto SmallEnv
+echo %_ARGS% | grep -q "[^ ]"
+if not errorlevel 0 set ARGS=%_ARGS%
 set _ARGS=
 :NextArgument
 shift
@@ -183,8 +188,8 @@ test -f %XSRC%/config.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/configh.in %XSRC%/config.h-in
 test -f %XSRC%/config.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/config_h.in %XSRC%/config.h-in
-test -f %XSRC%/include/iconv.h-in
-if not errorlevel 1 redir -e /dev/null mv -f %XSRC%/include/iconv.h-in %XSRC%/include/iconv.h-in
+test -f %XSRC%/include/iconv.h.in
+if not errorlevel 1 redir -e /dev/null mv -f %XSRC%/include/iconv.h.in %XSRC%/include/iconv.h-in
 test -f %XSRC%/include/iconv.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/include/iconv.h %XSRC%/include/iconv.h-in
 test -f %XSRC%/include/iconv.h-in
@@ -199,16 +204,16 @@ test -f %XSRC%/libcharset/config.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/configh.in %XSRC%/libcharset/config.h-in
 test -f %XSRC%/libcharset/config.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/config_h.in %XSRC%/libcharset/config.h-in
-test -f %XSRC%/libcharset/include/libcharset.h-in
-if not errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/libcharset.h-in %XSRC%/libcharset/include/libcharset.h-in
+test -f %XSRC%/libcharset/include/libcharset.h.in
+if not errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/libcharset.h.in %XSRC%/libcharset/include/libcharset.h-in
 test -f %XSRC%/libcharset/include/libcharset.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/libcharset.h %XSRC%/libcharset/include/libcharset.h-in
 test -f %XSRC%/libcharset/include/libcharset.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/libcharseth.in %XSRC%/libcharset/include/libcharset.h-in
 test -f %XSRC%/libcharset/include/libcharset.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/libcharset_h.in %XSRC%/libcharset/include/libcharset.h-in
-test -f %XSRC%/libcharset/include/localcharset.h-in
-if not errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/localcharset.h-in %XSRC%/libcharset/include/localcharset.h-in
+test -f %XSRC%/libcharset/include/localcharset.h.in
+if not errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/localcharset.h.in %XSRC%/libcharset/include/localcharset.h-in
 test -f %XSRC%/libcharset/include/localcharset.h-in
 if errorlevel 1 redir -e /dev/null mv -f %XSRC%/libcharset/include/localcharset.h %XSRC%/libcharset/include/localcharset.h-in
 test -f %XSRC%/libcharset/include/localcharset.h-in
@@ -383,7 +388,7 @@ if not errorlevel 0 goto MissingNLSTools
 
 Rem Recreate the files in the %XSRC%/po subdir with our ported tools.
 redir -e /dev/null rm %XSRC%/po/*.gmo
-redir -e /dev/null rm %XSRC%/po/sed.pot
+redir -e /dev/null rm %XSRC%/po/libiconv.pot
 redir -e /dev/null rm %XSRC%/po/cat-id-tbl.c
 redir -e /dev/null rm %XSRC%/po/stamp-cat-id
 

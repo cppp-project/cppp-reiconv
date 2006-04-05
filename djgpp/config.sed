@@ -12,7 +12,7 @@
   /^lispdir *	*=/ c\\\
 lispdir = \$(prefix)/gnu/emacs/site-lisp\
   /^docdir *	*=/ c\\\
-docdir = \$(prefix)/gnudocs/libiconv.192\
+docdir = \$(prefix)/gnudocs/libiconv.110\
   /(datadir)\\/doc/d\
   s,config\\.h\\.in,config.h-in,g;t t\
   s,\\.\\([1-9]\\)\\.html,_\\1.html,g;t t\
@@ -131,7 +131,7 @@ install_sh=`echo "$install_sh" | sed 's%/dev.*/libiconv-[0-9]\\{1,1\\}[-.0-9]*%$
 /^    ln \$srcdir/s%||%|| cp -pf $srcdir/$ac_source $ac_dest ||%
 
 # Add DJGPP version information.
-/^[ 	]*VERSION=/ s/\([0-9]\.[0-9]*[-.0-9]*\)/"\1  (DJGPP port 2004-09-20 (r1))"/
+/^[ 	]*VERSION=/ s/\([0-9]\.[0-9]*[-.0-9]*\)/"\1  (DJGPP port 2006-03-21 (r1))"/
 
 # We need makeinfo to make the html formated docs.
 /\$am_missing_run[ 	]*makeinfo/ s,\$am_missing_run,,

@@ -1,5 +1,11 @@
 # Fixes for lib/iconv.c.
 # All encodings files recide in encdings dir now.
+/^#[ 	]*include/ s|"canonical\.h|"canonical/canonical.h|
+/^#[ 	]*include/ s|"canonical_aix\.h|"canonical/aix.h|
+/^#[ 	]*include/ s|"canonical_dos\.h|"canonical/dos.h|
+/^#[ 	]*include/ s|"canonical_osf1\.h|"canonical/osf1.h|
+/^#[ 	]*include/ s|"canonical_local\.h|"canonical/local.h|
+/^#[ 	]*include/ s|"canonical_extra\.h|"canonical/extra.h|
 /^#[ 	]*include/ s|"encodings\.def|"encodings/encodings.def|
 /^#[ 	]*include/ s|"encodings_aix\.def|"encodings/aix.def|
 /^#[ 	]*include/ s|"encodings_dos\.def|"encodings/dos.def|

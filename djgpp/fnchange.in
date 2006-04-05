@@ -1,7 +1,7 @@
 @V@/config.h.in                                   @V@/config.h-in
 @V@/config.h.msvc                                 @V@/config.h-msvc
-@V@/autoconf/install-reloc                        @V@/autoconf/install.reloc
-@V@/autoconf/install-sh                           @V@/autoconf/install.sh
+@V@/build-aux/install-reloc                       @V@/build-aux/install.reloc
+@V@/build-aux/install-sh                          @V@/build-aux/install.sh
 @V@/m4/strerror_r.m4                              @V@/m4/strerr_r.m4
 @V@/include/iconv.h.in                            @V@/include/iconv.h-in
 @V@/include/iconv.h.msvc-static                   @V@/include/iconv_h.static-msvc
@@ -52,6 +52,15 @@
 @V@/lib/cns11643_inv.h                            @V@/lib/cns/11643_inv.h
 @V@/lib/config.h.in                               @V@/lib/config.h-in
 @V@/lib/config.h.msvc                             @V@/lib/config.h-msvc
+@V@/lib/canonical.h                               @V@/lib/canonical/canonical.h
+@V@/lib/canonical.h                               @V@/lib/canonical/canonical.h
+@V@/lib/canonical.h                               @V@/lib/canonical/canonical.h
+@V@/lib/canonical.h                               @V@/lib/canonical/canonical.h
+@V@/lib/canonical_aix.h                           @V@/lib/canonical/aix.h
+@V@/lib/canonical_dos.h                           @V@/lib/canonical/dos.h
+@V@/lib/canonical_extra.h                         @V@/lib/canonical/extra.h
+@V@/lib/canonical_osf1.h                          @V@/lib/canonical/osf1.h
+@V@/lib/canonical_local.h                         @V@/lib/canonical/local.h
 @V@/lib/encodings.def                             @V@/lib/encodings/encodings.def
 @V@/lib/encodings_aix.def                         @V@/lib/encodings/aix.def
 @V@/lib/encodings_dos.def                         @V@/lib/encodings/dos.def
@@ -72,6 +81,7 @@
 @V@/lib/iso646_jp.h                               @V@/lib/iso/646_jp.h
 @V@/lib/iso8859_1.h                               @V@/lib/iso/8859_1.h
 @V@/lib/iso8859_10.h                              @V@/lib/iso/8859_10.h
+@V@/lib/iso8859_11.h                              @V@/lib/iso/8859_11.h
 @V@/lib/iso8859_13.h                              @V@/lib/iso/8859_13.h
 @V@/lib/iso8859_14.h                              @V@/lib/iso/8859_14.h
 @V@/lib/iso8859_15.h                              @V@/lib/iso/8859_15.h
@@ -126,6 +136,7 @@
 @V@/tests/ISO-2022-KR-snippet.UTF-8               @V@/tests/ISO/2022KR-snippet.UTF-8
 @V@/tests/ISO-8859-1.TXT                          @V@/tests/ISO/8859-1.TXT
 @V@/tests/ISO-8859-10.TXT                         @V@/tests/ISO/8859-10.TXT
+@V@/tests/ISO-8859-11.TXT                         @V@/tests/ISO/8859-11.TXT
 @V@/tests/ISO-8859-13.TXT                         @V@/tests/ISO/8859-13.TXT
 @V@/tests/ISO-8859-14.TXT                         @V@/tests/ISO/8859-14.TXT
 @V@/tests/ISO-8859-15.TXT                         @V@/tests/ISO/8859-15.TXT
@@ -166,6 +177,8 @@
 @V@/tests/CP1258.IRREVERSIBLE.TXT                 @V@/tests/CP1258.IRREVERSIBLE-TXT
 @V@/tests/TCVN.IRREVERSIBLE.TXT                   @V@/tests/TCVN.IRREVERSIBLE-TXT
 @V@/tests/CP1255.IRREVERSIBLE.TXT                 @V@/tests/CP1255.IRREVERSIBLE-TXT
-@V@/tests/TranslitFail1.ISO-8859-1                @V@/tests/Translit/Fail1.ISO-8859-1
+@V@/tests/TranslitFail1.ISO-8859-1                @V@/tests/_Translit/Fail1.ISO-8859-1
+@V@/tests/Translit1.ISO-8859-1                    @V@/tests/_Translit/1.ISO-8859-1
+@V@/tests/Translit1.ASCII                         @V@/tests/_Translit/1.ASCII
 @V@/tests/SHIFT_JIS.TXT                           @V@/tests/SHIFT/JIS.TXT
 @V@/tests/SHIFT_JISX0213.TXT                      @V@/tests/SHIFT/JISX0213.TXT
