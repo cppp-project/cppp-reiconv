@@ -103,6 +103,17 @@ MOSTLYCLEANFILES += alloca.h
 # <<< gnulib module alloca.
 
 
+# >>> gnulib module unistd.
+BUILT_SOURCES += $(UNISTD_H)
+
+# We need the following in order to create an empty placeholder for
+# <unistd.h> when the system doesn't have one.
+unistd.h:
+	echo '/* Empty placeholder for $@.  */' >$@
+MOSTLYCLEANFILES += unistd.h
+# <<< gnulib module unistd.
+
+
 # Woe32 support.
 
 EXTRA_DIST += Makefile.msvc

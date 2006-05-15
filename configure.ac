@@ -93,6 +93,7 @@ dnl           checks for header files
 
 AC_HEADER_STDC
 AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
+gl_HEADER_UNISTD
 
 dnl           checks for typedefs
 

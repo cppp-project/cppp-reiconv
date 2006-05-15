@@ -1,5 +1,5 @@
-# gettext.m4 serial 44 (gettext-0.15)
-dnl Copyright (C) 1995-2005 Free Software Foundation, Inc.
+# gettext.m4 serial 49 (gettext-0.15)
+dnl Copyright (C) 1995-2006 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -94,7 +94,7 @@ AC_DEFUN([AM_GNU_GETTEXT],
   gt_INTL_MACOSX
 
   dnl Set USE_NLS.
-  AM_NLS
+  AC_REQUIRE([AM_NLS])
 
   ifelse(gt_included_intl, yes, [
     BUILD_INCLUDED_LIBINTL=no
@@ -353,7 +353,7 @@ dnl            USE_INCLUDED_LIBINTL, BUILD_INCLUDED_LIBINTL.
 AC_DEFUN([AM_INTL_SUBDIR],
 [
   AC_REQUIRE([AC_PROG_INSTALL])dnl
-  AC_REQUIRE([AM_MKINSTALLDIRS])dnl
+  AC_REQUIRE([AM_PROG_MKDIR_P])dnl defined by automake
   AC_REQUIRE([AC_PROG_CC])dnl
   AC_REQUIRE([AC_CANONICAL_HOST])dnl
   AC_REQUIRE([gt_GLIBC2])dnl
@@ -418,6 +418,24 @@ AC_DEFUN([AM_INTL_SUBDIR],
 
   AM_LANGINFO_CODESET
   gt_LC_MESSAGES
+
+  dnl Compilation on mingw and Cygwin needs special Makefile rules, because
+  dnl 1. when we install a shared library, we must arrange to export
+  dnl    auxiliary pointer variables for every exported variable,
+  dnl 2. when we install a shared library and a static library simultaneously,
+  dnl    the include file specifies __declspec(dllimport) and therefore we
+  dnl    must arrange to define the auxiliary pointer variables for the
+  dnl    exported variables _also_ in the static library.
+  if test "$enable_shared" = yes; then
+    case "$host_os" in
+      cygwin*) is_woe32dll=yes ;;
+      *) is_woe32dll=no ;;
+    esac
+  else
+    is_woe32dll=no
+  fi
+  WOE32DLL=$is_woe32dll
+  AC_SUBST([WOE32DLL])
 
   dnl Rename some macros and functions used for locking.
   AH_BOTTOM([
@@ -492,7 +510,7 @@ AC_DEFUN([gt_INTL_SUBDIR_CORE],
   AC_REQUIRE([gt_INTTYPES_PRI])dnl
   AC_REQUIRE([gl_LOCK])dnl
 
-  AC_TRY_COMPILE(
+  AC_TRY_LINK(
     [int foo (int a) { a = __builtin_expect (a, 10); return a == 10 ? 0 : 1; }],
     [],
     [AC_DEFINE([HAVE_BUILTIN_EXPECT], 1,
