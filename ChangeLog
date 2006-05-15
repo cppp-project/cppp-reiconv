@@ -1,3 +1,15 @@
+2006-05-15  Bruno Haible  <bruno@clisp.org>
+
+	* build-aux/config.rpath: Add support for Sun C 5.9 on Linux.
+
+2006-05-05  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4 (AC_LIBTOOL_LANG_CXX_CONFIG): Add support for Sun C++
+	5.9 on Linux.
+	(AC_LIBTOOL_PROG_COMPILER_PIC): Add support for Sun C 5.9 and
+	Sun C++ 5.9.
+	(AC_LIBTOOL_PROG_LD_SHLIBS): Add support for Sun C 5.9.
+
 2006-03-31  Juan Manuel Guerrero <juan.guerrero@gmx.de>
 
 	* djgpp/*: Update.
