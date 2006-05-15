@@ -1,5 +1,20 @@
 2006-05-15  Bruno Haible  <bruno@clisp.org>
 
+	Support for building shared libraries on mingw and Cygwin.
+	* configure.ac (WOE32DLL, DLL_VARIABLE): New variables.
+	* include/iconv.h.in (_libiconv_version): Mark as DLL_VARIABLE.
+	* woe32dll/export.h: New file, from GNU gettext.
+	* woe32dll/iconv-exports.h: New file.
+	* Makefile.devel (include/iconv.h_vms, include/iconv.h.msvc-static,
+	include/iconv.h.msvc-shared): Remove the DLL_VARIABLE annotation.
+	* lib/Makefile.in (LDFLAGS): Add WOE32DLL dependent flags.
+	(LDFLAGS_yes, LDFLAGS_no): New variables.
+	(OBJECTS): Add WOE32DLL dependent objects.
+	(OBJECTS_yes, OBJECTS_no): New variables.
+	(iconv-exports.lo): New rule.
+
+2006-05-15  Bruno Haible  <bruno@clisp.org>
+
 	* srclib/gettext.h: Update from GNU gettext.
 	* srclib/pathmax.h: Update from GNU gettext.
 	* srclib/progreloc.c: Update from GNU gettext.

@@ -15,7 +15,9 @@ libdir = @libdir@
 CC = @CC@
 CFLAGS = @CFLAGS@ @CFLAG_VISIBILITY@
 CPPFLAGS = @CPPFLAGS@
-LDFLAGS = @LDFLAGS@
+LDFLAGS = @LDFLAGS@ $(LDFLAGS_@WOE32DLL@)
+LDFLAGS_yes = -Wl,--export-all-symbols
+LDFLAGS_no =
 INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
 # -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
@@ -53,7 +55,9 @@ top_builddir = ..
 
 SOURCES = $(srcdir)/iconv.c $(srcdir)/../libcharset/lib/localcharset.c $(srcdir)/relocatable.c
 
-OBJECTS = iconv.lo localcharset.lo relocatable.lo
+OBJECTS = iconv.lo localcharset.lo relocatable.lo $(OBJECTS_@WOE32DLL@)
+OBJECTS_yes = iconv-exports.lo
+OBJECTS_no =
 
 all : @PLUGLIB@ libiconv.la
 
@@ -98,6 +102,9 @@ localcharset.lo : $(srcdir)/../libcharset/lib/localcharset.c $(srcdir)/relocatab
 
 relocatable.lo : $(srcdir)/relocatable.c $(srcdir)/relocatable.h
 	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(DEFS) -c $(srcdir)/relocatable.c
+
+iconv-exports.lo : $(srcdir)/../woe32dll/iconv-exports.c
+	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(DEFS) -c $(srcdir)/../woe32dll/iconv-exports.c
 
 # Installs the library and include files only. Typically called with only
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.

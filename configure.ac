@@ -162,6 +162,30 @@ else
 fi
 AC_SUBST(PLUGLIB)
 
+dnl Compilation on mingw and Cygwin needs special Makefile rules, because
+dnl 1. when we install a shared library, we must arrange to export
+dnl    auxiliary pointer variables for every exported variable,
+dnl 2. when we install a shared library and a static library simultaneously,
+dnl    the include file specifies __declspec(dllimport) and therefore we
+dnl    must arrange to define the auxiliary pointer variables for the
+dnl    exported variables _also_ in the static library.
+if test "$enable_shared" = yes; then
+  case "$host_os" in
+    mingw* | cygwin*) is_woe32dll=yes ;;
+    *) is_woe32dll=no ;;
+  esac
+else
+  is_woe32dll=no
+fi
+WOE32DLL=$is_woe32dll
+AC_SUBST([WOE32DLL])
+if test $is_woe32dll = yes; then
+  DLL_VARIABLE='__declspec (dllimport)'
+else
+  DLL_VARIABLE=
+fi
+AC_SUBST([DLL_VARIABLE])
+
 AH_BOTTOM([
 /* On Windows, variables that may be in a DLL must be marked specially.  */
 #if defined _MSC_VER && defined _DLL
