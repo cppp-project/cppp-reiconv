@@ -49,6 +49,12 @@ AC_DEFUN([my_SRCLIB_REPLACE_FUNCS], [AC_CHECK_FUNCS([$1], , [my_SRCLIB_OBJ($ac_f
 m4_pushdef([AC_LIBOBJ], m4_defn([my_SRCLIB_OBJ]))
 m4_pushdef([AC_REPLACE_FUNCS], m4_defn([my_SRCLIB_REPLACE_FUNCS]))
 
+dnl           checks for UNIX variants that set DEFS
+
+AC_GNU_SOURCE
+gl_USE_SYSTEM_EXTENSIONS
+AC_ISC_POSIX
+
 dnl           checks for installer options
 
 AC_RELOCATABLE
@@ -68,12 +74,6 @@ AC_PROG_RANLIB
 CL_PROG_CP
 CL_PROG_LN
 AC_PROG_LN_S
-
-dnl           checks for UNIX variants that set DEFS
-
-AC_GNU_SOURCE
-gl_USE_SYSTEM_EXTENSIONS
-AC_ISC_POSIX
 
 dnl           checks for compiler output filename suffixes
 
