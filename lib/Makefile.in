@@ -18,7 +18,7 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@ $(LDFLAGS_@WOE32DLL@)
 LDFLAGS_yes = -Wl,--export-all-symbols
 LDFLAGS_no =
-INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include
+INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include -I.. -I$(srcdir)/..
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
 # -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
 DEFS = -DLIBDIR=\"$(libdir)\" -DBUILDING_LIBICONV -DBUILDING_DLL \

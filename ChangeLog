@@ -11,7 +11,8 @@
 	* woe32dll/iconv-exports.h: New file.
 	* Makefile.devel (include/iconv.h_vms, include/iconv.h.msvc-static,
 	include/iconv.h.msvc-shared): Remove the DLL_VARIABLE annotation.
-	* lib/Makefile.in (LDFLAGS): Add WOE32DLL dependent flags.
+	* lib/Makefile.in (INCLUDES): Add -I for parent directory.
+	(LDFLAGS): Add WOE32DLL dependent flags.
 	(LDFLAGS_yes, LDFLAGS_no): New variables.
 	(OBJECTS): Add WOE32DLL dependent objects.
 	(OBJECTS_yes, OBJECTS_no): New variables.
