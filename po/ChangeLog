@@ -1,3 +1,9 @@
+2006-05-16  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in.in: Update from GNU gettext.
+	* Makevars (XGETTEXT_OPTIONS): Add more flags.
+	(USE_MSGCTXT): New variable.
+
 2005-12-29  Bruno Haible  <bruno@clisp.org>
 
 	* zh_TW.po: New file, from Wei-Lun Chao <chaoweilun@pcmail.com.tw>.
