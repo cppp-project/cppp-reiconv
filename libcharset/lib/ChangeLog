@@ -1,7 +1,19 @@
-2006-05-15  Bruno Haible  <bruno@clisp.org>
+2006-05-16  Bruno Haible  <bruno@clisp.org>
 
-	* localcharset.c: Update from GNU gettext.
-	* config.charset: Update from GNU gettext.
+	* localcharset.c [CYGWIN]: Include <windows.h>.
+	(get_charset_aliases): For Cygwin, return the same CPxxx aliases list
+	as under WIN32.
+	(locale_charset) [CYGWIN]: Try to retrieve the encoding from the
+	environment variables. Fall back to GetACP().
+
+2006-04-05  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset: Update Juan Manuel Guerrero's address.
+
+2006-01-10  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Assume ANSI C. Fixes a gcc warning.
+	Reported by Werner Lemberg <wl@gnu.org>.
 
 2005-12-04  Bruno Haible  <bruno@clisp.org>
 
