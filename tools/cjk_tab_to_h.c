@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2004 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2004, 2006 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software; you can redistribute it and/or modify
@@ -76,7 +76,7 @@ typedef struct {
 static void output_title (const char *charsetname)
 {
   printf("/*\n");
-  printf(" * Copyright (C) 1999-2004 Free Software Foundation, Inc.\n");
+  printf(" * Copyright (C) 1999-2006 Free Software Foundation, Inc.\n");
   printf(" * This file is part of the GNU LIBICONV Library.\n");
   printf(" *\n");
   printf(" * The GNU LIBICONV Library is free software; you can redistribute it\n");
@@ -2130,7 +2130,8 @@ int main (int argc, char *argv[])
     do_uhc_2(name);
   else if (!strcmp(name,"big5") || !strcmp(name,"cp950ext"))
     do_big5(name);
-  else if (!strcmp(name,"hkscs"))
+  else if (!strcmp(name,"hkscs1999") || !strcmp(name,"hkscs2001")
+           || !strcmp(name,"hkscs2004"))
     do_hkscs(name);
   else if (!strcmp(name,"johab_hangul"))
     do_johab_hangul(name);

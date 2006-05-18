@@ -85,7 +85,9 @@ ALL = \
  cns11643_inv.h \
  big5.h \
  cp950ext.h \
- hkscs.h \
+ hkscs1999.h \
+ hkscs2001.h \
+ hkscs2004.h \
  ksc5601.h \
  uhc_1.h \
  uhc_2.h \
@@ -389,8 +391,14 @@ big5.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/OTHER/BIG5.TXT cjk_tab_to_h
 cp950ext.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP950.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0xF9\(D[6-9A-F]\|[EF][0-9A-F]\)' < $< ) | ./cjk_tab_to_h 'CP950 extensions' cp950ext > $@
 
-hkscs.h : $(TABLESDIR)/big5hkscs/HKSCS.TXT cjk_tab_to_h
-	(echo '#' ; cat $<) | ./cjk_tab_to_h HKSCS hkscs > $@
+hkscs1999.h : $(TABLESDIR)/big5hkscs/HKSCS-1999_2006.TXT cjk_tab_to_h
+	(echo '#' ; grep -v , $<) | ./cjk_tab_to_h HKSCS:1999 hkscs1999 > $@
+
+hkscs2001.h : $(TABLESDIR)/big5hkscs/HKSCS-2001_2006-DELTA.TXT cjk_tab_to_h
+	(echo '#' ; grep -v , $<) | ./cjk_tab_to_h HKSCS:2001 hkscs2001 > $@
+
+hkscs2004.h : $(TABLESDIR)/big5hkscs/HKSCS-2004_2006-DELTA.TXT cjk_tab_to_h
+	(echo '#' ; grep -v , $<) | ./cjk_tab_to_h HKSCS:2004 hkscs2004 > $@
 
 # We use a modified KSC 5601 = KSX 1001 table. Jungshik Shin <jshin@mailaps.org>
 # reports that Prof. GIM Geongseog (KIM Keyongseok) <gimgs@asadal.cs.pusan.ac.kr>

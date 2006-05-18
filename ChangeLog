@@ -1,5 +1,41 @@
 2006-05-17  Bruno Haible  <bruno@clisp.org>
 
+	Implement newer releases of BIG5-HKSCS.
+	* tools/Makefile (ALL): Remove hkscs.h, add hkscs1999.h, hkscs2001.h,
+	hkscs2004.h.
+	(hkscs.h): Remove rule.
+	(hkscs1999.h, hkscs2001.h, hkscs2004.h): New rules.
+	* tools/cjk_tab_to_h.c (output_title): Update year.
+	(main): Recognize hkscs1999, hkscs2001, hkscs2004.
+	* lib/encodings.def: Rename BIG5-HKSCS to BIG5-HKSCS:1999. Add
+	BIG5-HKSCS:2001, BIG5-HKSCS:2004. Make all three stateful.
+	* lib/hkscs.h: Remove file.
+	* lib/hkscs1999.h: New file.
+	* lib/hkscs2001.h: New file.
+	* lib/hkscs2004.h: New file.
+	* lib/big5hkscs.h: Remove file.
+	* lib/big5hkscs1999.h: New file.
+	* lib/big5hkscs2001.h: New file.
+	* lib/big5hkscs2004.h: New file.
+	* lib/converters.h: Include the new files.
+	* README, man/iconv_open.3: Add BIG5-HKSCS:1999, BIG5-HKSCS:2001.
+	* tests/BIG5-HKSCS.TXT: Remove file.
+	* tests/BIG5-HKSCS.IRREVERSIBLE.TXT: Remove file.
+	* tests/BIG5-HKSCS-1999.TXT: New file.
+	* tests/BIG5-HKSCS-1999.IRREVERSIBLE.TXT: New file.
+	* tests/BIG5-HKSCS-2001.TXT: New file.
+	* tests/BIG5-HKSCS-2001.IRREVERSIBLE.TXT: New file.
+	* tests/BIG5-HKSCS-2004.TXT: New file.
+	* tests/BIG5-HKSCS-2004.IRREVERSIBLE.TXT: New file.
+	* tests/check-stateless: Convert colon in the charset name to a dash in
+	the file name.
+	* tests/Makefile.in (check): Check BIG5-HKSCS:1999, BIG5-HKSCS:2001,
+	BIG5-HKSCS:2004 instead of just BIG5-HKSCS.
+	* tests/Makefile.msvc (check): Don't check BIG5-HKSCS.
+	* tests/Makefile.os2 (check): Likewise.
+
+2006-05-17  Bruno Haible  <bruno@clisp.org>
+
 	* srclib/progreloc.c: Update from GNU gettext.
 
 2006-05-16  Bruno Haible  <bruno@clisp.org>

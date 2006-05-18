@@ -231,7 +231,9 @@ typedef struct {
 #include "euc_tw.h"
 #include "ces_big5.h"
 #include "cp950.h"
-#include "big5hkscs.h"
+#include "big5hkscs1999.h"
+#include "big5hkscs2001.h"
+#include "big5hkscs2004.h"
 
 #include "euc_kr.h"
 #include "cp949.h"

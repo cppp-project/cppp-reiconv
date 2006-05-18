@@ -14,6 +14,9 @@ New in 1.11:
 * Updated GB18030 converter to include all private area characters.
 * Updated CP950 converter to include the Euro sign and private area characters.
 * Updated CP949 converter to include private area characters.
+* Updated the BIG5-HKSCS converter. The old BIG5-HKSCS converter is renamed to
+  BIG5-HKSCS:1999 and updated to Unicode 4. New converters BIG5-HKSCS:2001 and
+  BIG5-HKSCS:2004 are added. BIG5-HKSCS is now an alias for BIG5-HKSCS:2004.
 * Added a few irreversible mappings to the CP932 converter.
 * Tidy up the list of symbols exported from libiconv (assumes gcc >= 4.0).
 
