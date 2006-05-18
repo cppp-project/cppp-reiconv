@@ -135,6 +135,9 @@
 /* Define if you have the 'long long' type. */
 #undef HAVE_LONG_LONG
 
+/* Define to 1 if you have the <mach-o/dyld.h> header file. */
+#undef HAVE_MACH_O_DYLD_H
+
 /* Define to 1 if you have the `mbrtowc' function. */
 #undef HAVE_MBRTOWC
 
@@ -222,6 +225,9 @@
 
 /* Define to 1 if the system has the type `_Bool'. */
 #undef HAVE__BOOL
+
+/* Define to 1 if you have the `_NSGetExecutablePath' function. */
+#undef HAVE__NSGETEXECUTABLEPATH
 
 /* Define as const if the declaration of iconv() needs const. */
 #undef ICONV_CONST
