@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002, 2006 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -19,11 +19,11 @@
  */
 
 /*
- * BIG5-HKSCS
+ * BIG5-HKSCS:1999
  */
 
 /*
- * BIG5-HKSCS can be downloaded from
+ * BIG5-HKSCS:1999 can be downloaded from
  *   http://www.info.gov.hk/digital21/eng/hkscs/download.html
  *   http://www.info.gov.hk/digital21/eng/hkscs/index.html
  *
@@ -35,60 +35,156 @@
  *   0xF9{D6..FE}                    41 characters
  *   0x{FA..FE}{40..7E,A1..FE}      763 characters
  *
- * It thereby introduces an irreversible mapping
- *   0x8BF8   0x9F9C
- *   0xC074   0x9F9C
+ * Note that some HKSCS characters are not contained in Unicode 3.2
+ * and are therefore best represented as sequences of Unicode characters:
+ *   0x8862  U+00CA U+0304  LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND MACRON
+ *   0x8864  U+00CA U+030C  LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND CARON
+ *   0x88A3  U+00EA U+0304  LATIN SMALL LETTER E WITH CIRCUMFLEX AND MACRON
+ *   0x88A5  U+00EA U+030C  LATIN SMALL LETTER E WITH CIRCUMFLEX AND CARON
  */
 
-#include "hkscs.h"
+#include "hkscs1999.h"
+#include "flushwc.h"
 
 static int
-big5hkscs_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+big5hkscs1999_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
-  unsigned char c = *s;
-  /* Code set 0 (ASCII) */
-  if (c < 0x80)
-    return ascii_mbtowc(conv,pwc,s,n);
-  /* Code set 1 (BIG5 extended) */
-  if (c >= 0xa1 && c < 0xff) {
-    if (n < 2)
-      return RET_TOOFEW(0);
-    {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff)) {
-        if (!((c == 0xc6 && c2 >= 0xa1) || c == 0xc7)) {
-          int ret = big5_mbtowc(conv,pwc,s,2);
-          if (ret != RET_ILSEQ)
-            return ret;
+  ucs4_t last_wc = conv->istate;
+  if (last_wc) {
+    /* Output the buffered character. */
+    conv->istate = 0;
+    *pwc = last_wc;
+    return 0; /* Don't advance the input pointer. */
+  } else {
+    unsigned char c = *s;
+    /* Code set 0 (ASCII) */
+    if (c < 0x80)
+      return ascii_mbtowc(conv,pwc,s,n);
+    /* Code set 1 (BIG5 extended) */
+    if (c >= 0xa1 && c < 0xff) {
+      if (n < 2)
+        return RET_TOOFEW(0);
+      {
+        unsigned char c2 = s[1];
+        if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff)) {
+          if (!((c == 0xc6 && c2 >= 0xa1) || c == 0xc7)) {
+            int ret = big5_mbtowc(conv,pwc,s,2);
+            if (ret != RET_ILSEQ)
+              return ret;
+          }
         }
       }
     }
+    {
+      int ret = hkscs1999_mbtowc(conv,pwc,s,n);
+      if (ret != RET_ILSEQ)
+        return ret;
+    }
+    if (c == 0x88) {
+      if (n < 2)
+        return RET_TOOFEW(0);
+      {
+        unsigned char c2 = s[1];
+        if (c2 == 0x62 || c2 == 0x64 || c2 == 0xa3 || c2 == 0xa5) {
+          /* It's a composed character. */
+          ucs4_t wc1 = ((c2 >> 3) << 2) + 0x009a; /* = 0x00ca or 0x00ea */
+          ucs4_t wc2 = ((c2 & 6) << 2) + 0x02fc; /* = 0x0304 or 0x030c */
+          /* We cannot output two Unicode characters at once. So,
+             output the first character and buffer the second one. */
+          *pwc = wc1;
+          conv->istate = wc2;
+          return 2;
+        }
+      }
+    }
+    return RET_ILSEQ;
   }
-  return hkscs_mbtowc(conv,pwc,s,n);
+}
+
+#define big5hkscs1999_flushwc normal_flushwc
+
+static int
+big5hkscs1999_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+{
+  int count = 0;
+  unsigned char last = conv->ostate;
+
+  if (last) {
+    /* last is = 0x66 or = 0xa7. */
+    if (wc == 0x0304 || wc == 0x030c) {
+      /* Output the combined character. */
+      if (n >= 2) {
+        r[0] = 0x88;
+        r[1] = last + ((wc & 24) >> 2) - 4; /* = 0x62 or 0x64 or 0xa3 or 0xa5 */
+        conv->ostate = 0;
+        return 2;
+      } else
+        return RET_TOOSMALL;
+    }
+
+    /* Output the buffered character. */
+    if (n < 2)
+      return RET_TOOSMALL;
+    r[0] = 0x88;
+    r[1] = last;
+    r += 2;
+    count = 2;
+  }
+
+  /* Code set 0 (ASCII) */
+  if (wc < 0x0080) {
+    /* Plain ASCII character. */
+    if (n > count) {
+      r[0] = (unsigned char) wc;
+      conv->ostate = 0;
+      return count+1;
+    } else
+      return RET_TOOSMALL;
+  } else {
+    unsigned char buf[2];
+    int ret;
+
+    /* Code set 1 (BIG5 extended) */
+    ret = big5_wctomb(conv,buf,wc,2);
+    if (ret != RET_ILUNI) {
+      if (ret != 2) abort();
+      if (!((buf[0] == 0xc6 && buf[1] >= 0xa1) || buf[0] == 0xc7)) {
+        if (n >= count+2) {
+          r[0] = buf[0];
+          r[1] = buf[1];
+          conv->ostate = 0;
+          return count+2;
+        } else
+          return RET_TOOSMALL;
+      }
+    }
+    ret = hkscs1999_wctomb(conv,buf,wc,2);
+    if (ret != RET_ILUNI) {
+      if (ret != 2) abort();
+      if (n >= count+2) {
+        r[0] = buf[0];
+        r[1] = buf[1];
+        conv->ostate = 0;
+        return count+2;
+      } else
+        return RET_TOOSMALL;
+    }
+    return RET_ILUNI;
+  }
 }
 
 static int
-big5hkscs_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+big5hkscs1999_reset (conv_t conv, unsigned char *r, int n)
 {
-  unsigned char buf[2];
-  int ret;
+  unsigned char last = conv->ostate;
 
-  /* Code set 0 (ASCII) */
-  ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILUNI)
-    return ret;
-
-  /* Code set 1 (BIG5 extended) */
-  ret = big5_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILUNI) {
-    if (ret != 2) abort();
-    if (!((buf[0] == 0xc6 && buf[1] >= 0xa1) || buf[0] == 0xc7)) {
-      if (n < 2)
-        return RET_TOOSMALL;
-      r[0] = buf[0];
-      r[1] = buf[1];
-      return 2;
-    }
-  }
-  return hkscs_wctomb(conv,r,wc,n);
+  if (last) {
+    if (n < 2)
+      return RET_TOOSMALL;
+    r[0] = 0x88;
+    r[1] = last;
+    /* conv->ostate = 0; will be done by the caller */
+    return 2;
+  } else
+    return 0;
 }
