@@ -161,6 +161,13 @@ big5hkscs1999_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
     ret = hkscs1999_wctomb(conv,buf,wc,2);
     if (ret != RET_ILUNI) {
       if (ret != 2) abort();
+      if ((wc & ~0x0020) == 0x00ca) {
+        /* A possible first character of a multi-character sequence. We have to
+           buffer it. */
+        if (!(buf[0] == 0x88 && (buf[1] == 0x66 || buf[1] == 0xa7))) abort();
+        conv->ostate = buf[1]; /* = 0x66 or = 0xa7 */
+        return count+0;
+      }
       if (n >= count+2) {
         r[0] = buf[0];
         r[1] = buf[1];
