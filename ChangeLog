@@ -1,3 +1,14 @@
+2006-05-20  Bruno Haible  <bruno@clisp.org>
+
+	* tests/BIG5-HKSCS-1999-snippet: New file.
+	* tests/BIG5-HKSCS-1999-snippet.UTF-8: New file.
+	* tests/BIG5-HKSCS-2001-snippet: New file.
+	* tests/BIG5-HKSCS-2001-snippet.UTF-8: New file.
+	* tests/BIG5-HKSCS-2004-snippet: New file.
+	* tests/BIG5-HKSCS-2004-snippet.UTF-8: New file.
+	* tests/Makefile.in (check): Test also the stateful parts of
+	BIG5-HKSCS:1999, BIG5-HKSCS:2001, BIG5-HKSCS:2004.
+
 2006-05-17  Bruno Haible  <bruno@clisp.org>
 
 	Implement newer releases of BIG5-HKSCS.
