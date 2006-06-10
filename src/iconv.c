@@ -40,13 +40,40 @@
 #endif
 
 #include "binary-io.h"
-#include "error.h"
 #include "exit.h"
 #include "progname.h"
 #include "relocatable.h"
 #include "xalloc.h"
 #include "uniwidth.h"
 #include "cjk.h"
+
+/* Ensure that iconv_no_i18n does not depend on libintl.  */
+#ifdef NO_I18N
+#include <stdarg.h>
+static void
+error (int status, int errnum, const char *message, ...)
+{
+  va_list args;
+
+  fflush(stdout);
+  fprintf(stderr,"%s: ",program_name);
+  va_start(args,message);
+  vfprintf(stderr,message,args);
+  va_end(args);
+  if (errnum) {
+    const char *s = strerror(errnum);
+    if (s == NULL)
+      s = "Unknown system error";
+  }
+  putc('\n',stderr);
+  fflush(stderr);
+  if (status)
+    exit(status);
+}
+#else
+# include "error.h"
+#endif
+
 #include "gettext.h"
 
 #define _(str) gettext(str)
