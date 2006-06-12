@@ -1,7 +1,14 @@
+2006-06-12  Bruno Haible  <bruno@clisp.org>
+
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/inttypes-h.m4: New file, from GNU gettext.
+	* m4/inttypes.m4: Remove file.
+	* Makefile.devel (aclocal.m4): Update dependencies.
+
 2006-06-10  Bruno Haible  <bruno@clisp.org>
 
-	* src/iconv.c (error) [NO_I18N]: Define here instead of including error.h.
-	Fixes link failure introduced on 2006-01-22.
+	* src/iconv.c (error) [NO_I18N]: Define here instead of including
+	error.h. Fixes link failure introduced on 2006-01-22.
 
 2006-03-28  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
 
