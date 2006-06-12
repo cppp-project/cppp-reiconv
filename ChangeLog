@@ -3,6 +3,7 @@
 	* m4/gettext.m4: Update from GNU gettext.
 	* m4/inttypes-h.m4: New file, from GNU gettext.
 	* m4/inttypes.m4: Remove file.
+	* m4/stdint.h (gl_STDINT_H): Update.
 	* Makefile.devel (aclocal.m4): Update dependencies.
 
 2006-06-10  Bruno Haible  <bruno@clisp.org>
