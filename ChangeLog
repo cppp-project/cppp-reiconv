@@ -1,5 +1,13 @@
 2006-06-16  Bruno Haible  <bruno@clisp.org>
 
+	* m4/full-header-path.m4: New file, from gnulib.
+	* m4/size_max.m4: New file, from gnulib.
+	* m4/stdint.m4: Update from gnulib.
+	* srclib/stdint_.h: Update from gnulib.
+	* Makefile.devel (aclocal.m4): Update dependencies.
+
+2006-06-16  Bruno Haible  <bruno@clisp.org>
+
 	* m4/ssize_t.m4: Update from GNU gettext.
 
 2006-06-12  Bruno Haible  <bruno@clisp.org>
