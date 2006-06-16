@@ -1,9 +1,13 @@
+2006-06-16  Bruno Haible  <bruno@clisp.org>
+
+	* m4/ssize_t.m4: Update from GNU gettext.
+
 2006-06-12  Bruno Haible  <bruno@clisp.org>
 
 	* m4/gettext.m4: Update from GNU gettext.
 	* m4/inttypes-h.m4: New file, from GNU gettext.
 	* m4/inttypes.m4: Remove file.
-	* m4/stdint.h (gl_STDINT_H): Update.
+	* m4/stdint.m4 (gl_STDINT_H): Update.
 	* Makefile.devel (aclocal.m4): Update dependencies.
 
 2006-06-10  Bruno Haible  <bruno@clisp.org>
