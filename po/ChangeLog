@@ -1,3 +1,7 @@
+2006-06-23  Bruno Haible  <bruno@clisp.org>
+
+	* vi.po: Update from Clytie Siddall <clytie@riverland.net.au>.
+
 2006-05-16  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.in.in: Update from GNU gettext.
