@@ -1,5 +1,5 @@
 ## Makefile for the srclib subdirectory of GNU libiconv
-## Copyright (C) 2003-2005 Free Software Foundation, Inc.
+## Copyright (C) 2003-2006 Free Software Foundation, Inc.
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -85,7 +85,8 @@ EXTRA_DIST += stdint_.h
 # doesn't have one that works with the given compiler.
 all-local $(libicrt_a_OBJECTS): $(STDINT_H)
 stdint.h: stdint_.h
-	sed -e 's/@''HAVE_STDINT_H''@/$(HAVE_STDINT_H)/g' \
+	sed -e 's/@''HAVE_WCHAR_H''@/$(HAVE_WCHAR_H)/g' \
+	    -e 's/@''HAVE_STDINT_H''@/$(HAVE_STDINT_H)/g' \
 	    -e 's|@''FULL_PATH_STDINT_H''@|$(FULL_PATH_STDINT_H)|g' \
 	    -e 's/@''HAVE_INTTYPES_H''@/$(HAVE_INTTYPES_H)/g' \
 	    -e 's|@''FULL_PATH_INTTYPES_H''@|$(FULL_PATH_INTTYPES_H)|g' \
