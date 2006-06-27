@@ -1,4 +1,4 @@
-dnl Copyright (C) 2000-2003, 2005 Free Software Foundation, Inc.
+dnl Copyright (C) 2000-2003, 2005-2006 Free Software Foundation, Inc.
 dnl This file is part of the GNU CHARSET Library.
 dnl
 dnl The GNU CHARSET Library is free software; you can redistribute it and/or
@@ -27,11 +27,6 @@ AC_CONFIG_HEADER(config.h)
 AC_PROG_MAKE_SET
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
-
-dnl           installation directories
-
-dnl Prefer modern Filesystem Hierarchy Standard over antiquated GNU standards.
-test "$mandir" != '${prefix}/man' || mandir='${datadir}/man'
 
 dnl           checks for basic programs
 

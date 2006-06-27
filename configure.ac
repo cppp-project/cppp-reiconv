@@ -24,11 +24,6 @@ AM_INIT_AUTOMAKE(libiconv, 1.11)
 AC_CONFIG_HEADERS(config.h lib/config.h)
 AC_PROG_MAKE_SET
 
-dnl           installation directories
-
-dnl Prefer modern Filesystem Hierarchy Standard over antiquated GNU standards.
-test "$mandir" != '${prefix}/man' || mandir='${datadir}/man'
-
 dnl           checks for basic programs
 
 AC_PROG_CC

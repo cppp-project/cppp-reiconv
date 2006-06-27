@@ -9,6 +9,7 @@ srcdir = @srcdir@
 prefix = @prefix@
 local_prefix = /usr/local
 exec_prefix = @exec_prefix@
+datarootdir = @datarootdir@
 datadir = @datadir@
 libdir = @libdir@
 includedir = @includedir@
@@ -55,8 +56,8 @@ install : lib/localcharset.h force
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(exec_prefix) ; fi
 	if [ ! -d $(DESTDIR)$(includedir) ] ; then $(mkinstalldirs) $(DESTDIR)$(includedir) ; fi
 	$(INSTALL_DATA) include/iconv.h.inst $(DESTDIR)$(includedir)/iconv.h
-	cd po && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)'
-	cd man && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)' mandir='$(mandir)'
+	cd po && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)'
+	cd man && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)' mandir='$(mandir)'
 
 installdirs : force
 	cd libcharset && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
@@ -66,8 +67,8 @@ installdirs : force
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(exec_prefix) ; fi
 	if [ ! -d $(DESTDIR)$(includedir) ] ; then $(mkinstalldirs) $(DESTDIR)$(includedir) ; fi
-	cd po && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)'
-	cd man && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)' mandir='$(mandir)'
+	cd po && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)'
+	cd man && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)' mandir='$(mandir)'
 
 uninstall : force
 	cd libcharset && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
@@ -75,8 +76,8 @@ uninstall : force
 	cd srclib && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd src && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	$(RM) $(DESTDIR)$(includedir)/iconv.h
-	cd po && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)'
-	cd man && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' datadir='$(datadir)' mandir='$(mandir)'
+	cd po && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)'
+	cd man && $(MAKE) uninstall prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)' mandir='$(mandir)'
 
 check : all force
 	cd libcharset && $(MAKE) check

@@ -9,10 +9,11 @@ srcdir = @srcdir@
 prefix = @prefix@
 local_prefix = /usr/local
 exec_prefix = @exec_prefix@
+datarootdir = @datarootdir@
 datadir = @datadir@
 mandir = @mandir@
-docdir = $(datadir)/doc/libiconv
-htmldir = $(docdir)
+docdir = @docdir@
+htmldir = @htmldir@
 
 # Programs used by "make":
 RM = rm -f

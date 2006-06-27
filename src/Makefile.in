@@ -12,8 +12,9 @@ local_prefix = /usr/local
 exec_prefix = @exec_prefix@
 bindir = @bindir@
 libdir = @libdir@
+datarootdir = @datarootdir@
 datadir = @datadir@
-localedir = $(datadir)/locale
+localedir = @localedir@
 
 # Programs used by "make":
 CC = @CC@
