@@ -9,7 +9,7 @@
 	* src/Makefile.in (datarootdir): New variable.
 	(localedir): Use autoconf-substituted value.
 
-2006-06-26  Bruno Haible  <bruno@clisp.org>
+2006-06-27  Bruno Haible  <bruno@clisp.org>
 
 	* m4/stdint.m4: Update from gnulib.
 	* srclib/stdint_.h: Update from gnulib.
