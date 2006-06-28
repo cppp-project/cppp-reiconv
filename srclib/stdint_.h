@@ -26,7 +26,7 @@
 
 /* Get wchar_t, WCHAR_MIN, WCHAR_MAX.  */
 #include <stddef.h>
-/* Some systems define WCHAR_MIN, WCHAR_MAX in <wchar.h>, not <stddef.h>.  */
+/* BSD/OS 4.2 defines WCHAR_MIN, WCHAR_MAX in <wchar.h>, not <stddef.h>.  */
 #if !(defined(WCHAR_MIN) && defined(WCHAR_MAX)) && @HAVE_WCHAR_H@
 # include <wchar.h>
 #endif
@@ -261,6 +261,8 @@ typedef unsigned long uintptr_t;
    public header files. */
 
 #if !@HAVE_INTMAX_T@
+/* Remove possible redundant definition from gnulib's config.h first.  */
+# undef intmax_t
 # ifdef _STDINT_H_HAVE_INT64
 typedef int64_t  intmax_t;
 # else
@@ -268,6 +270,8 @@ typedef int32_t  intmax_t;
 # endif
 #endif
 #if !@HAVE_UINTMAX_T@
+/* Remove possible redundant definition from gnulib's config.h first.  */
+# undef uintmax_t
 # ifdef _STDINT_H_HAVE_UINT64
 typedef uint64_t uintmax_t;
 # else
