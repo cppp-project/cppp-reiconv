@@ -353,7 +353,10 @@ static size_t check_subst_formatstring (const char *format, const char *param_na
       maxsize++;
   }
   if (unnumbered_arg_count > 1)
-    error(EXIT_FAILURE,0,_("%s argument: The format string consumes more than one argument: %u arguments."),param_name,unnumbered_arg_count);
+    error(EXIT_FAILURE,0,ngettext("%s argument: The format string consumes more than one argument: %u argument.",
+                                  "%s argument: The format string consumes more than one argument: %u arguments.",
+                                  unnumbered_arg_count),
+                         param_name,unnumbered_arg_count);
   return maxsize;
 }
 
@@ -515,7 +518,7 @@ static void subst_wc_to_mb_fallback
       == (size_t)(-1)
       || iconv(subst_wc_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
          == (size_t)(-1))
-    error(EXIT_FAILURE,0,_("iconv: cannot convert widechar substitution to target encoding: %s"),ilseq_wchar_subst_buffer);
+    error(EXIT_FAILURE,0,_("cannot convert widechar substitution to target encoding: %s"),ilseq_wchar_subst_buffer);
   write_replacement(subst_wc_to_mb_temp_buffer,
                     ilseq_wchar_subst_size*4-outbytesleft,
                     callback_arg);
@@ -552,7 +555,7 @@ static void subst_mb_to_mb_fallback (const char* inbuf, size_t inbufsize)
         == (size_t)(-1)
         || iconv(subst_mb_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
            == (size_t)(-1))
-      error(EXIT_FAILURE,0,_("iconv: cannot convert byte substitution to target encoding: %s"),ilseq_byte_subst_buffer);
+      error(EXIT_FAILURE,0,_("cannot convert byte substitution to target encoding: %s"),ilseq_byte_subst_buffer);
     fwrite(subst_mb_to_mb_temp_buffer,1,ilseq_byte_subst_size*4-outbytesleft,
            stdout);
   }
