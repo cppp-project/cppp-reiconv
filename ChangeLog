@@ -3,6 +3,7 @@
 	* src/iconv.c (check_subst_formatstring): Use ngettext.
 	(subst_wc_to_mb_fallback, subst_mb_to_mb_fallback): Fix error messages
 	after 2006-01-22 change.
+	* configure.ac: Require a gettext version with ngettext.
 
 2006-06-28  Bruno Haible  <bruno@clisp.org>
 

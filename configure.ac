@@ -82,7 +82,7 @@ AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 gl_VISIBILITY
 AM_ICONV
-AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT([external], [need-ngettext])
 
 dnl           checks for header files
 
