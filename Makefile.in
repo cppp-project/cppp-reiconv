@@ -97,6 +97,7 @@ mostlyclean : force
 	cd po && $(MAKE) mostlyclean
 	cd man && $(MAKE) mostlyclean
 	if test -d tests; then cd tests && $(MAKE) mostlyclean; fi
+	rm -rf bin
 
 clean : force
 	cd libcharset && $(MAKE) clean
@@ -107,6 +108,7 @@ clean : force
 	cd po && $(MAKE) clean
 	cd man && $(MAKE) clean
 	if test -d tests; then cd tests && $(MAKE) clean; fi
+	rm -rf bin
 
 distclean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) distclean; fi
@@ -120,6 +122,7 @@ distclean : force
 	$(RM) config.status config.log config.cache Makefile libtool
 	$(RM) config.h stamp-h1 lib/stamp-h2
 	$(RM) include/iconv.h include/iconv.h.inst
+	rm -rf bin
 
 maintainer-clean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) maintainer-clean; fi
@@ -133,6 +136,7 @@ maintainer-clean : force
 	$(RM) config.status config.log config.cache Makefile libtool
 	$(RM) config.h stamp-h1 lib/stamp-h2
 	$(RM) include/iconv.h include/iconv.h.inst
+	rm -rf bin
 
 force :
 

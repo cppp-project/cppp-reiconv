@@ -113,7 +113,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.@OBJEXT@ *.lo iconv_no_i18n$(EXEEXT) iconv$(EXEEXT) core
+	$(RM) *.@OBJEXT@ *.lo iconv_no_i18n iconv_no_i18n$(EXEEXT) iconv$(EXEEXT) core
 	$(RM) -r .libs _libs
 
 distclean : clean
