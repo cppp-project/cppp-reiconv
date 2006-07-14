@@ -214,7 +214,7 @@ table-to.@OBJEXT@ : $(srcdir)/table-to.c
 mostlyclean : clean
 
 clean : force
-	$(RM) *.@OBJEXT@ *.lo table-from table-from@EXEEXT@ table-to table-to@EXEEXT@ tmp-* genutf8 genutf8@EXEEXT@ UTF-8.TXT gengb18030z gengb18030z@EXEEXT@ GB18030.TXT core
+	$(RM) *.@OBJEXT@ *.lo table-from table-from@EXEEXT@ table-to table-to@EXEEXT@ tmp-* genutf8 genutf8@EXEEXT@ UTF-8.TXT gengb18030z gengb18030z@EXEEXT@ GB18030.TXT core *.stackdump
 	$(RM) -r .libs _libs
 
 distclean : clean

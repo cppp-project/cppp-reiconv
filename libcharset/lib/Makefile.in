@@ -129,7 +129,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo *.a *.la *.o.lock core charset.alias ref-add.sed ref-del.sed
+	$(RM) *.o *.lo *.a *.la *.o.lock core *.stackdump charset.alias ref-add.sed ref-del.sed
 	$(RM) -r .libs _libs
 
 distclean : clean

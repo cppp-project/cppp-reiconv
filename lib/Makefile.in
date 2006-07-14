@@ -133,7 +133,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo *.a *.la preloadable_libiconv* core so_locations
+	$(RM) *.o *.lo *.a *.la preloadable_libiconv* core *.stackdump so_locations
 	$(RM) -r .libs _libs
 
 distclean : clean

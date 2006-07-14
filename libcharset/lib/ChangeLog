@@ -1,3 +1,7 @@
+2006-07-14  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (clean): Remove also *.stackdump.
+
 2006-06-17  Bruno Haible  <bruno@clisp.org>
 
 	* config.charset: Update for NetBSD 3.0.

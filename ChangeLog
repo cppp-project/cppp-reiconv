@@ -1,5 +1,11 @@
 2006-07-14  Bruno Haible  <bruno@clisp.org>
 
+	* lib/Makefile.in (clean): Remove also *.stackdump.
+	* src/Makefile.in (clean): Likewise.
+	* tests/Makefile.in (clean): Likewise.
+
+2006-07-14  Bruno Haible  <bruno@clisp.org>
+
 	* src/Makefile.in (clean): Remove also iconv_no_i18n. Needed for
 	cygwin or mingw.
 	* tests/Makefile.in (clean): Remove also the programs, without
