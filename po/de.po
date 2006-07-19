@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2006-06-12 14:00+0200\n"
+"POT-Creation-Date: 2006-07-19 21:16+0200\n"
 "PO-Revision-Date: 2006-07-04 05:11+0200\n"
 "Last-Translator: Bruno Haible <bruno@clisp.org>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -210,92 +210,97 @@ msgstr ""
 "keine gültige Umwandlung."
 
 #: src/iconv.c:356
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"%s argument: The format string consumes more than one argument: %u argument."
+msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
-msgstr ""
+msgstr[0] ""
+"»%s«-Argument: Die Formatzeichenkette verbraucht mehr als ein Argument: %u "
+"Argumente."
+msgstr[1] ""
 "»%s«-Argument: Die Formatzeichenkette verbraucht mehr als ein Argument: %u "
 "Argumente."
 
-#: src/iconv.c:408
+#: src/iconv.c:411
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
 msgstr "Kann Byte-Ersatz nicht nach Unicode umwandeln: %s"
 
-#: src/iconv.c:444
+#: src/iconv.c:447
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
 msgstr "Kann Unicode-Zeichen-Ersatz nicht in die Zielkodierung umwandeln: %s"
 
-#: src/iconv.c:481
+#: src/iconv.c:484
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
 msgstr "Kann Byte-Ersatz nicht in eine »wide«-Zeichenkette umwandeln: %s"
 
-#: src/iconv.c:518
-#, c-format
-msgid "iconv: cannot convert widechar substitution to target encoding: %s"
+#: src/iconv.c:521
+#, fuzzy, c-format
+msgid "cannot convert widechar substitution to target encoding: %s"
 msgstr ""
 "iconv: Kann den »wide«-Zeichen-Ersatz nicht in die Zielkodierung umwandeln: %"
 "s"
 
-#: src/iconv.c:555
-#, c-format
-msgid "iconv: cannot convert byte substitution to target encoding: %s"
+#: src/iconv.c:558
+#, fuzzy, c-format
+msgid "cannot convert byte substitution to target encoding: %s"
 msgstr "Kann Byte-Ersatz nicht in die Zielkodierung umwandeln: %s"
 
-#: src/iconv.c:589 src/iconv.c:633 src/iconv.c:707
+#: src/iconv.c:592 src/iconv.c:636 src/iconv.c:710
 #, c-format
 msgid "%s:%u:%u: incomplete character or shift sequence"
 msgstr "%s:%u:%u: unvollständiges Zeichen oder unvollständige Umschaltfolge"
 
-#: src/iconv.c:622 src/iconv.c:697
+#: src/iconv.c:625 src/iconv.c:700
 #, c-format
 msgid "%s:%u:%u: cannot convert"
 msgstr "%s:%u:%u: Kann nicht umwandeln."
 
-#: src/iconv.c:664 src/iconv.c:727
+#: src/iconv.c:667 src/iconv.c:730
 #, c-format
 msgid "%s:%u:%u"
 msgstr "%s:%u:%u"
 
-#: src/iconv.c:739
+#: src/iconv.c:742
 #, c-format
 msgid "%s: I/O error"
 msgstr "%s: Ein-/Ausgabefehler"
 
-#: src/iconv.c:923
+#: src/iconv.c:926
 #, c-format
 msgid "conversion from %s unsupported"
 msgstr "Umwandlung ausgehend von %s ist nicht unterstützt."
 
-#: src/iconv.c:925
+#: src/iconv.c:928
 #, c-format
 msgid "conversion to %s unsupported"
 msgstr "Umwandlung nach %s ist nicht unterstützt."
 
-#: src/iconv.c:927
+#: src/iconv.c:930
 #, c-format
 msgid "conversion from %s to %s unsupported"
 msgstr "Umwandlung von %s nach %s ist nicht unterstützt."
 
-#: src/iconv.c:928
+#: src/iconv.c:931
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
 msgstr ""
 "Versuchen Sie »%s -l«, um eine Liste aller unterstützten Kodierungen zu "
 "erhalten."
 
-#: src/iconv.c:982
+#: src/iconv.c:985
 msgid "(stdin)"
 msgstr "(Standard-Eingabe)"
 
-#: src/iconv.c:990
+#: src/iconv.c:993
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/iconv.c:1001
+#: src/iconv.c:1004
 #, c-format
 msgid "I/O error"
 msgstr "Ein-/Ausgabefehler"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2006-06-12 14:00+0200\n"
+"POT-Creation-Date: 2006-07-19 21:16+0200\n"
 "PO-Revision-Date: 2006-07-02 10:42+0100\n"
 "Last-Translator: Edmund GRIMLEY EVANS <edmundo@rano.org>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
@@ -184,87 +184,91 @@ msgstr ""
 "konvertospecifo."
 
 #: src/iconv.c:356
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"%s argument: The format string consumes more than one argument: %u argument."
+msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
-msgstr ""
+msgstr[0] ""
+"%s argumento: La formatoĉeno konsumas pli ol unu argumenton: %u argumentoj."
+msgstr[1] ""
 "%s argumento: La formatoĉeno konsumas pli ol unu argumenton: %u argumentoj."
 
-#: src/iconv.c:408
+#: src/iconv.c:411
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
 msgstr "ne povas konverti bitoksubstituon al Unikodo: %s"
 
-#: src/iconv.c:444
+#: src/iconv.c:447
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
 msgstr "ne povas konverti unikodan substituon al celkodo: %s"
 
-#: src/iconv.c:481
+#: src/iconv.c:484
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
 msgstr "ne povas konverti bitoksubstituon al larĝa signoĉeno: %s"
 
-#: src/iconv.c:518
-#, c-format
-msgid "iconv: cannot convert widechar substitution to target encoding: %s"
+#: src/iconv.c:521
+#, fuzzy, c-format
+msgid "cannot convert widechar substitution to target encoding: %s"
 msgstr "iconv: ne povas konverti larĝasignan substituon al celkodo: %s"
 
-#: src/iconv.c:555
-#, c-format
-msgid "iconv: cannot convert byte substitution to target encoding: %s"
+#: src/iconv.c:558
+#, fuzzy, c-format
+msgid "cannot convert byte substitution to target encoding: %s"
 msgstr "iconv: ne povas konverti bitoksubstituon al celkodo: %s"
 
-#: src/iconv.c:589 src/iconv.c:633 src/iconv.c:707
+#: src/iconv.c:592 src/iconv.c:636 src/iconv.c:710
 #, c-format
 msgid "%s:%u:%u: incomplete character or shift sequence"
 msgstr "%s:%u:%u: malkompleta signo aŭ reĝimŝanĝa kodo"
 
-#: src/iconv.c:622 src/iconv.c:697
+#: src/iconv.c:625 src/iconv.c:700
 #, c-format
 msgid "%s:%u:%u: cannot convert"
 msgstr "%s:%u:%u: ne povas konverti"
 
-#: src/iconv.c:664 src/iconv.c:727
+#: src/iconv.c:667 src/iconv.c:730
 #, c-format
 msgid "%s:%u:%u"
 msgstr "%s:%u:%u"
 
-#: src/iconv.c:739
+#: src/iconv.c:742
 #, c-format
 msgid "%s: I/O error"
 msgstr "%s: leg/skrib-eraro"
 
-#: src/iconv.c:923
+#: src/iconv.c:926
 #, c-format
 msgid "conversion from %s unsupported"
 msgstr "konvertado de %s ne disponata"
 
-#: src/iconv.c:925
+#: src/iconv.c:928
 #, c-format
 msgid "conversion to %s unsupported"
 msgstr "konvertado al %s ne disponata"
 
-#: src/iconv.c:927
+#: src/iconv.c:930
 #, c-format
 msgid "conversion from %s to %s unsupported"
 msgstr "konvertado de %s al %s ne disponata"
 
-#: src/iconv.c:928
+#: src/iconv.c:931
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
 msgstr "provu '%s -l' por ricevi liston de konataj kodoj"
 
-#: src/iconv.c:982
+#: src/iconv.c:985
 msgid "(stdin)"
 msgstr "(normala enigo)"
 
-#: src/iconv.c:990
+#: src/iconv.c:993
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/iconv.c:1001
+#: src/iconv.c:1004
 #, c-format
 msgid "I/O error"
 msgstr "leg/skrib-eraro"

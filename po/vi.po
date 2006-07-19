@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv-1.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2006-06-12 14:00+0200\n"
+"POT-Creation-Date: 2006-07-19 21:16+0200\n"
 "PO-Revision-Date: 2006-06-23 16:38+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com> \n"
@@ -188,89 +188,92 @@ msgstr ""
 "đổi hợp lệ."
 
 #: src/iconv.c:356
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"%s argument: The format string consumes more than one argument: %u argument."
+msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
-msgstr "Đối số %s: chuỗi dạng thức ăn nhiều đối số: %u đối số."
+msgstr[0] "Đối số %s: chuỗi dạng thức ăn nhiều đối số: %u đối số."
+msgstr[1] "Đối số %s: chuỗi dạng thức ăn nhiều đối số: %u đối số."
 
-#: src/iconv.c:408
+#: src/iconv.c:411
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
 msgstr "không thể chuyển đổi sự thay thế byte sang Unicode: %s"
 
-#: src/iconv.c:444
+#: src/iconv.c:447
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
 msgstr "không thể chuyển đổi sự thay thế Unicode sang bảng mã đích: %s"
 
-#: src/iconv.c:481
+#: src/iconv.c:484
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
 msgstr "không thể chuyển đổi sự thay thế byte sang chuỗi rộng: %s"
 
-#: src/iconv.c:518
-#, c-format
-msgid "iconv: cannot convert widechar substitution to target encoding: %s"
+#: src/iconv.c:521
+#, fuzzy, c-format
+msgid "cannot convert widechar substitution to target encoding: %s"
 msgstr ""
 "iconv: không thể chuyển đổi sự thay thế ký tự rộng sang bảng mã đích: %s"
 
-#: src/iconv.c:555
-#, c-format
-msgid "iconv: cannot convert byte substitution to target encoding: %s"
+#: src/iconv.c:558
+#, fuzzy, c-format
+msgid "cannot convert byte substitution to target encoding: %s"
 msgstr "iconv: không thể chuyển đổi sự thay thế byte sang bảng mã đích: %s"
 
-#: src/iconv.c:589 src/iconv.c:633 src/iconv.c:707
+#: src/iconv.c:592 src/iconv.c:636 src/iconv.c:710
 #, c-format
 msgid "%s:%u:%u: incomplete character or shift sequence"
 msgstr "%s:%u:%u: dây kiểu ký tự hay dịch chưa hoàn toàn"
 
-#: src/iconv.c:622 src/iconv.c:697
+#: src/iconv.c:625 src/iconv.c:700
 #, c-format
 msgid "%s:%u:%u: cannot convert"
 msgstr "%s:%u:%u: không thể chuyển đổi"
 
 # Variable: don't translate / Biến: đừng dịch
-#: src/iconv.c:664 src/iconv.c:727
+#: src/iconv.c:667 src/iconv.c:730
 #, c-format
 msgid "%s:%u:%u"
 msgstr "%s:%u:%u"
 
-#: src/iconv.c:739
+#: src/iconv.c:742
 #, c-format
 msgid "%s: I/O error"
 msgstr "%s: lỗi nhập/xuất"
 
-#: src/iconv.c:923
+#: src/iconv.c:926
 #, c-format
 msgid "conversion from %s unsupported"
 msgstr "không hỗ trợ khả năng chuyển đổi từ %s"
 
-#: src/iconv.c:925
+#: src/iconv.c:928
 #, c-format
 msgid "conversion to %s unsupported"
 msgstr "không hỗ trợ khả năng chuyển đổi sang %s"
 
-#: src/iconv.c:927
+#: src/iconv.c:930
 #, c-format
 msgid "conversion from %s to %s unsupported"
 msgstr "không hỗ trợ khả năng chuyển đổi từ %s sang %s"
 
-#: src/iconv.c:928
+#: src/iconv.c:931
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
 msgstr "hãy thử lệnh « %s -l » để xem danh sách các bảng mã được hỗ trợ"
 
-#: src/iconv.c:982
+#: src/iconv.c:985
 msgid "(stdin)"
 msgstr "(thiết bị nhập chuẩn)"
 
 # Variable: don't translate / Biến: đừng dịch
-#: src/iconv.c:990
+#: src/iconv.c:993
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/iconv.c:1001
+#: src/iconv.c:1004
 #, c-format
 msgid "I/O error"
 msgstr "Lỗi nhập/xuất"
