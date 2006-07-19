@@ -1,134 +1,157 @@
+# translation of libiconv-1.11-pre1.po to Deutsch
 # German messages for GNU libiconv.
-# Copyright (C) 2002 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the GNU libiconv package.
-# Bruno Haible <bruno@clisp.org>, 2002.
+# Bruno Haible <bruno@clisp.org>, 2002, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU libiconv 1.8\n"
+"Project-Id-Version: libiconv 1.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2006-01-23 14:26+0100\n"
-"PO-Revision-Date: 2002-04-28 04:26+0200\n"
+"POT-Creation-Date: 2006-06-12 14:00+0200\n"
+"PO-Revision-Date: 2006-07-04 05:11+0200\n"
 "Last-Translator: Bruno Haible <bruno@clisp.org>\n"
-"Language-Team: German <de@li.org>\n"
+"Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.0.2\n"
 
-#: src/iconv.c:80
+#: src/iconv.c:107
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr ""
 "Aufruf: iconv [-c] [-s] [-f AUSGANGS-KODIERUNG] [-t ZIEL-KODIERUNG] "
 "[DATEI ...]"
 
-#: src/iconv.c:82
+#: src/iconv.c:109
 msgid "or:    iconv -l"
 msgstr "oder:   iconv -l"
 
-#: src/iconv.c:84
+#: src/iconv.c:111
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr ""
+msgstr "»%s --help« gibt weitere Informationen.\n"
 
-#: src/iconv.c:87
+#: src/iconv.c:114
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"
-msgstr ""
+msgstr "Aufruf: %s [OPTION...] [-f KODIERUNG] [-t KODIERUNG] [EINBABEDATEI...]\n"
 
-#: src/iconv.c:91
-#, fuzzy, c-format, no-wrap
+#: src/iconv.c:118
+#, c-format, no-wrap
 msgid "or:    %s -l\n"
-msgstr "oder:   iconv -l"
+msgstr "oder:   %s -l\n"
 
-#: src/iconv.c:96
+#: src/iconv.c:123
 #, c-format, no-wrap
 msgid "Converts text from one encoding to another encoding.\n"
-msgstr ""
+msgstr "Wandelt Text von einer Kodierung in eine andere Kodierung um.\n"
 
-#: src/iconv.c:100
+#: src/iconv.c:127
 #, c-format, no-wrap
 msgid "Options controlling the input and output format:\n"
-msgstr ""
+msgstr "Optionen für das Ein- und Ausgabeformat:\n"
 
-#: src/iconv.c:103
+#: src/iconv.c:130
 #, c-format, no-wrap
 msgid ""
 "  -f ENCODING, --from-code=ENCODING\n"
 "                              the encoding of the input\n"
 msgstr ""
+"  -f KODIERUNG, --from-code=KODIERUNG\n"
+"                              die Kodierung der Eingabe\n"
 
-#: src/iconv.c:107
+#: src/iconv.c:134
 #, c-format, no-wrap
 msgid ""
 "  -t ENCODING, --to-code=ENCODING\n"
 "                              the encoding of the output\n"
 msgstr ""
+"  -t KODIERUNG, --to-code=KODIERUNG\n"
+"                              die Kodierung der Ausgabe\n"
 
-#: src/iconv.c:112
+#: src/iconv.c:139
 #, c-format, no-wrap
 msgid "Options controlling conversion problems:\n"
-msgstr ""
+msgstr "Optionen für die Behandlung von Umwandlungsproblemen:\n"
 
-#: src/iconv.c:115
+#: src/iconv.c:142
 #, c-format, no-wrap
 msgid "  -c                          discard unconvertible characters\n"
 msgstr ""
+"  -c                          Zeichen, die nicht umgewandelt werden können,\n"
+"                                wegwerfen\n"
 
-#: src/iconv.c:118
+#: src/iconv.c:145
 #, c-format, no-wrap
 msgid ""
 "  --unicode-subst=FORMATSTRING\n"
 "                              substitution for unconvertible Unicode characters\n"
 msgstr ""
+"  --unicode-subst=FORMATZEICHENKETTE\n"
+"                              Ersatz für Unicode-Zeichen, die nicht umgewandelt\n"
+"                                werden können\n"
 
-#: src/iconv.c:122
+#: src/iconv.c:149
 #, c-format, no-wrap
 msgid "  --byte-subst=FORMATSTRING   substitution for unconvertible bytes\n"
 msgstr ""
+"  --byte-subst=FORMATZEICHENKETTE\n"
+"                              Ersatz für Bytes, die nicht umgewandelt werden\n"
+"                                können\n"
 
-#: src/iconv.c:125
+#: src/iconv.c:152
 #, c-format, no-wrap
 msgid ""
 "  --widechar-subst=FORMATSTRING\n"
 "                              substitution for unconvertible wide characters\n"
 msgstr ""
+"  --widechar-subst=FORMATZEICHENKETTE\n"
+"                              Ersatz für »wide«-Zeichen, die nicht umgewandelt\n"
+"                                werden können\n"
 
-#: src/iconv.c:130
+#: src/iconv.c:157
 #, c-format, no-wrap
 msgid "Options controlling error output:\n"
-msgstr ""
+msgstr "Optionen für die Ausgabe von Fehlern:\n"
 
-#: src/iconv.c:133
+#: src/iconv.c:160
 #, c-format, no-wrap
 msgid "  -s, --silent                suppress error messages about conversion problems\n"
 msgstr ""
+"  -s, --silent                Fehlermeldungen über Probleme bei der Umwandlung\n"
+"                                unterdrücken\n"
 
-#: src/iconv.c:137
+#: src/iconv.c:164
 #, c-format, no-wrap
 msgid "Informative output:\n"
-msgstr ""
+msgstr "Informative Ausgabe:\n"
 
-#: src/iconv.c:140
+#: src/iconv.c:167
 #, c-format, no-wrap
 msgid "  -l, --list                  list the supported encodings\n"
-msgstr ""
+msgstr "  -l, --list                  die unterstützten Kodierungen anzeigen\n"
 
-#: src/iconv.c:143
+#: src/iconv.c:170
 #, c-format, no-wrap
 msgid "  --help                      display this help and exit\n"
-msgstr ""
+msgstr "  --help                      diese Hilfe anzeigen und beenden\n"
 
-#: src/iconv.c:146
+#: src/iconv.c:173
 #, c-format, no-wrap
 msgid "  --version                   output version information and exit\n"
-msgstr ""
+msgstr "  --version                   Versionsinformation anzeigen und beenden\n"
 
-#: src/iconv.c:149
+#: src/iconv.c:176
 msgid "Report bugs to <bug-gnu-libiconv@gnu.org>.\n"
 msgstr ""
+"Fehler bitte (auf Englisch, mit LC_ALL=C) an <bug-gnu-libiconv@gnu.org>\n"
+"melden.\n"
+"Für die deutsche Übersetzung ist die Mailingliste\n"
+"<translation-team-de@lists.sourceforge.net> zuständig.\n"
 
-#: src/iconv.c:159
+#: src/iconv.c:186
 #, c-format
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
@@ -138,136 +161,150 @@ msgstr ""
 "gibt keine Garantie; auch nicht für VERKAUFBARKEIT oder FÜR SPEZIELLE "
 "ZWECKE.\n"
 
-#: src/iconv.c:162
+#: src/iconv.c:189
 #, c-format
 msgid "Written by %s.\n"
 msgstr "Geschrieben von %s.\n"
 
-#: src/iconv.c:253
+#: src/iconv.c:280
 #, c-format
 msgid ""
 "%s argument: A format directive with a variable width is not allowed here."
 msgstr ""
+"»%s«-Argument: Eine Formatierungsanweisung mit variabler Breite ist hier "
+"nicht erlaubt."
 
-#: src/iconv.c:264
+#: src/iconv.c:291
 #, c-format
 msgid ""
 "%s argument: A format directive with a variable precision is not allowed "
 "here."
 msgstr ""
+"»%s«-Argument: Eine Formatierungsanweisung mit variabler Genauigkeit ist "
+"hier nicht erlaubt."
 
-#: src/iconv.c:276
+#: src/iconv.c:303
 #, c-format
 msgid "%s argument: A format directive with a size is not allowed here."
 msgstr ""
+"»%s«-Argument: Eine Formatierungsanweisung mit Größenangabe ist hier nicht "
+"erlaubt."
 
-#: src/iconv.c:314
+#: src/iconv.c:341
 #, c-format
 msgid "%s argument: The string ends in the middle of a directive."
-msgstr ""
+msgstr "»%s«-Argument: Die Zeichenkette endet mitten in einer Anweisung."
 
-#: src/iconv.c:316
+#: src/iconv.c:343
 #, c-format
 msgid "%s argument: The character '%c' is not a valid conversion specifier."
-msgstr ""
+msgstr "»%s«-Argument: Das Zeichen »%c« bezeichnet keine gültige Umwandlung."
 
-#: src/iconv.c:318
+#: src/iconv.c:345
 #, c-format
 msgid ""
 "%s argument: The character that terminates the format directive is not a "
 "valid conversion specifier."
 msgstr ""
+"»%s«-Argument: Das Zeichen am Ende der Formatierungsanweisung bezeichnet "
+"keine gültige Umwandlung."
 
-#: src/iconv.c:329
+#: src/iconv.c:356
 #, c-format
 msgid ""
 "%s argument: The format string consumes more than one argument: %u arguments."
 msgstr ""
+"»%s«-Argument: Die Formatzeichenkette verbraucht mehr als ein Argument: %u "
+"Argumente."
 
-#: src/iconv.c:381
+#: src/iconv.c:408
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
-msgstr ""
+msgstr "Kann Byte-Ersatz nicht nach Unicode umwandeln: %s"
 
-#: src/iconv.c:417
+#: src/iconv.c:444
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
-msgstr ""
+msgstr "Kann Unicode-Zeichen-Ersatz nicht in die Zielkodierung umwandeln: %s"
 
-#: src/iconv.c:454
+#: src/iconv.c:481
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
-msgstr ""
+msgstr "Kann Byte-Ersatz nicht in eine »wide«-Zeichenkette umwandeln: %s"
 
-#: src/iconv.c:491
+#: src/iconv.c:518
 #, c-format
 msgid "iconv: cannot convert widechar substitution to target encoding: %s"
 msgstr ""
+"iconv: Kann den »wide«-Zeichen-Ersatz nicht in die Zielkodierung umwandeln: %"
+"s"
 
-#: src/iconv.c:528
+#: src/iconv.c:555
 #, c-format
 msgid "iconv: cannot convert byte substitution to target encoding: %s"
-msgstr ""
+msgstr "Kann Byte-Ersatz nicht in die Zielkodierung umwandeln: %s"
 
-#: src/iconv.c:562 src/iconv.c:606 src/iconv.c:680
-#, fuzzy, c-format
+#: src/iconv.c:589 src/iconv.c:633 src/iconv.c:707
+#, c-format
 msgid "%s:%u:%u: incomplete character or shift sequence"
-msgstr "iconv: %s: unvollständiges Zeichen oder unvollständige Umschaltfolge\n"
+msgstr "%s:%u:%u: unvollständiges Zeichen oder unvollständige Umschaltfolge"
 
-#: src/iconv.c:595 src/iconv.c:670
-#, fuzzy, c-format
+#: src/iconv.c:622 src/iconv.c:697
+#, c-format
 msgid "%s:%u:%u: cannot convert"
-msgstr "iconv: %s: Kann nicht umwandeln.\n"
+msgstr "%s:%u:%u: Kann nicht umwandeln."
 
-#: src/iconv.c:637 src/iconv.c:700
-#, fuzzy, c-format
+#: src/iconv.c:664 src/iconv.c:727
+#, c-format
 msgid "%s:%u:%u"
-msgstr "iconv: %s: "
+msgstr "%s:%u:%u"
 
-#: src/iconv.c:712
-#, fuzzy, c-format
+#: src/iconv.c:739
+#, c-format
 msgid "%s: I/O error"
-msgstr "iconv: %s: Ein-/Ausgabefehler\n"
+msgstr "%s: Ein-/Ausgabefehler"
 
-#: src/iconv.c:896
-#, fuzzy, c-format
+#: src/iconv.c:923
+#, c-format
 msgid "conversion from %s unsupported"
-msgstr "iconv: Umwandlung ausgehend von %s ist nicht unterstützt.\n"
+msgstr "Umwandlung ausgehend von %s ist nicht unterstützt."
 
-#: src/iconv.c:898
-#, fuzzy, c-format
+#: src/iconv.c:925
+#, c-format
 msgid "conversion to %s unsupported"
-msgstr "iconv: Umwandlung nach %s ist nicht unterstützt.\n"
+msgstr "Umwandlung nach %s ist nicht unterstützt."
 
-#: src/iconv.c:900
-#, fuzzy, c-format
+#: src/iconv.c:927
+#, c-format
 msgid "conversion from %s to %s unsupported"
-msgstr "iconv: Umwandlung von %s nach %s ist nicht unterstützt.\n"
+msgstr "Umwandlung von %s nach %s ist nicht unterstützt."
 
-#: src/iconv.c:901
+#: src/iconv.c:928
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
 msgstr ""
+"Versuchen Sie »%s -l«, um eine Liste aller unterstützten Kodierungen zu "
+"erhalten."
 
-#: src/iconv.c:955
+#: src/iconv.c:982
 msgid "(stdin)"
 msgstr "(Standard-Eingabe)"
 
-#: src/iconv.c:963
+#: src/iconv.c:990
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
-#: src/iconv.c:974
-#, fuzzy
+#: src/iconv.c:1001
+#, c-format
 msgid "I/O error"
-msgstr "iconv: Ein-/Ausgabefehler\n"
-
-#~ msgid "iconv: %s: "
-#~ msgstr "iconv: %s: "
+msgstr "Ein-/Ausgabefehler"
 
 #~ msgid ""
 #~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 #~ msgstr ""
 #~ "Aufruf: iconv [--binary] [-c] [-s]\n"
 #~ "              [-f AUSGANGS-KODIERUNG] [-t ZIEL-KODIERUNG] [DATEI ...]"
+
+#~ msgid "iconv: %s: "
+#~ msgstr "iconv: %s: "
