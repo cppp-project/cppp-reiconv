@@ -31,7 +31,6 @@ noinst_LIBRARIES = libicrt.a
 
 libicrt_a_SOURCES = \
   allocsa.h allocsa.c \
-  error.h error.c \
   exit.h \
   pathmax.h \
   progname.h progname.c progreloc.c \
@@ -44,6 +43,7 @@ libicrt_a_SOURCES = \
 
 LIBADD_SOURCE = \
   canonicalize.h canonicalize.c \
+  error.h error.c \
   memmove.c \
   readlink.c \
   relocatable.h relocatable.c \

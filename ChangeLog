@@ -4,6 +4,11 @@
 
 2005-07-19  Bruno Haible  <bruno@clisp.org>
 
+	* srclib/Makefile.am (libicrt_a_SOURCES): Remove error.h, error.c.
+	(LIBADD_SOURCE): Add them here.
+
+2005-07-19  Bruno Haible  <bruno@clisp.org>
+
 	* build-aux/config.guess: Update to GNU version 2006-07-02.
 	* build-aux/config.sub: Likewise.
 
