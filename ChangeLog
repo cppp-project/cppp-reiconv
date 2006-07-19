@@ -1,3 +1,12 @@
+2006-07-19  Bruno Haible  <bruno@clisp.org>
+
+	* Version 1.11 released.
+
+2005-07-19  Bruno Haible  <bruno@clisp.org>
+
+	* build-aux/config.guess: Update to GNU version 2006-07-02.
+	* build-aux/config.sub: Likewise.
+
 2006-07-14  Bruno Haible  <bruno@clisp.org>
 
 	* lib/Makefile.in (clean): Remove also *.stackdump.
