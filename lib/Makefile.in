@@ -62,7 +62,7 @@ OBJECTS_no =
 all : @PLUGLIB@ libiconv.la
 
 libiconv.la : $(OBJECTS)
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS)
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS)
 
 preloadable_libiconv.so : preloadable_libiconv_@OS@.so
 	$(RM) preloadable_libiconv.so

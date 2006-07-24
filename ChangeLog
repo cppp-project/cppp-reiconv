@@ -1,3 +1,12 @@
+2006-07-23  Bruno Haible  <bruno@clisp.org>
+
+	* lib/Makefile.in (libiconv.la): Use the CFLAGS during linking.
+	* src/Makefile.in (iconv_no_i18n): Likewise.
+	(install): Likewise.
+	* tests/Makefile.in (table-from, table-to): Likewise.
+	Needed because the CFLAGS can e.g. trigger profiling.
+	Reported by Russell Aspinwall <russell.aspinwall@flomerics.co.uk>.
+
 2006-07-19  Bruno Haible  <bruno@clisp.org>
 
 	* Version 1.11 released.

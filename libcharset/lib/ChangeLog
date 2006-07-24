@@ -1,3 +1,9 @@
+2006-07-23  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (libcharset.la): Use the CFLAGS during linking.
+	Needed because the CFLAGS can e.g. trigger profiling.
+	Reported by Russell Aspinwall <russell.aspinwall@flomerics.co.uk>.
+
 2006-07-14  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.in (clean): Remove also *.stackdump.

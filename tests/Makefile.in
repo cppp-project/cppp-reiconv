@@ -196,13 +196,13 @@ check-extra-yes: all table-from table-to ../src/iconv_no_i18n
 	$(srcdir)/check-stateless $(srcdir) RISCOS-LATIN1
 
 table-from : table-from.@OBJEXT@ ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) table-from.@OBJEXT@ ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) table-from.@OBJEXT@ ../lib/libiconv.la -o $@
 
 table-from.@OBJEXT@ : $(srcdir)/table-from.c
 	$(CC) -c $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(srcdir)/table-from.c
 
 table-to : table-to.@OBJEXT@ ../lib/libiconv.la
-	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) table-to.@OBJEXT@ ../lib/libiconv.la -o $@
+	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) table-to.@OBJEXT@ ../lib/libiconv.la -o $@
 
 table-to.@OBJEXT@ : $(srcdir)/table-to.c
 	$(CC) -c $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(srcdir)/table-to.c
