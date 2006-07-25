@@ -1,3 +1,7 @@
+2006-07-25  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.vms: Remove file.
+
 2006-07-23  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.in (libcharset.la): Use the CFLAGS during linking.

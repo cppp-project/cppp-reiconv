@@ -16,7 +16,7 @@ CP = cp
 RM = rm -f
 
 
-all : configures config.h.in srclib/Makefile.in config.h_vms config.h.msvc lib/config.h_vms lib/config.h.msvc include/iconv.h.build.in include/iconv.h_vms include/iconv.h.msvc-static include/iconv.h.msvc-shared lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html po/Makefile.msvc force
+all : configures config.h.in srclib/Makefile.in config.h.msvc lib/config.h.msvc include/iconv.h.build.in include/iconv.h.msvc-static include/iconv.h.msvc-shared lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html po/Makefile.msvc force
 	cd libcharset && $(MAKE) -f Makefile.devel all
 
 
@@ -67,47 +67,6 @@ srclib/Makefile.in : srclib/Makefile.am
 	$(AUTOMAKE) --gnits srclib/Makefile
 
 
-config.h_vms : config.h.in
-	sed -e 's/#undef ENABLE_NLS$$/#define ENABLE_NLS 1/' \
-	    -e 's/#undef ENABLE_RELOCATABLE$$/#define ENABLE_RELOCATABLE 1/' \
-	    -e 's/#undef HAVE_ALLOCA$$/#define HAVE_ALLOCA 1/' \
-	    -e 's/#undef HAVE_DECL_STRERROR$$/#define HAVE_DECL_STRERROR 1/' \
-	    -e 's/#undef HAVE_DLFCN_H$$/#define HAVE_DLFCN_H 1/' \
-	    -e 's/#undef HAVE_ERRNO_DECL$$/#define HAVE_ERRNO_DECL 1/' \
-	    -e 's/#undef HAVE_GETCWD$$/#define HAVE_GETCWD 1/' \
-	    -e 's/#undef HAVE_ICONV$$/#define HAVE_ICONV 1/' \
-	    -e 's/#undef HAVE_INTTYPES_H$$/#define HAVE_INTTYPES_H 1/' \
-	    -e 's/#undef HAVE_LANGINFO_CODESET$$/#define HAVE_LANGINFO_CODESET 1/' \
-	    -e 's/#undef HAVE_LIMITS_H$$/#define HAVE_LIMITS_H 1/' \
-	    -e 's/#undef HAVE_LOCALE_H$$/#define HAVE_LOCALE_H 1/' \
-	    -e 's/#undef HAVE_MBRTOWC$$/#define HAVE_MBRTOWC 1/' \
-	    -e 's/#undef HAVE_MBSINIT$$/#define HAVE_MBSINIT 1/' \
-	    -e 's/#undef HAVE_MEMMOVE$$/#define HAVE_MEMMOVE 1/' \
-	    -e 's/#undef HAVE_MEMORY_H$$/#define HAVE_MEMORY_H 1/' \
-	    -e 's/#undef HAVE_SETENV$$/#define HAVE_SETENV 1/' \
-	    -e 's/#undef HAVE_SETLOCALE$$/#define HAVE_SETLOCALE 1/' \
-	    -e 's/#undef HAVE_STDBOOL_H$$/#define HAVE_STDBOOL_H 1/' \
-	    -e 's/#undef HAVE_STDDEF_H$$/#define HAVE_STDDEF_H 1/' \
-	    -e 's/#undef HAVE_STDLIB_H$$/#define HAVE_STDLIB_H 1/' \
-	    -e 's/#undef HAVE_STRERROR$$/#define HAVE_STRERROR 1/' \
-	    -e 's/#undef HAVE_STRINGS_H$$/#define HAVE_STRINGS_H 1/' \
-	    -e 's/#undef HAVE_STRING_H$$/#define HAVE_STRING_H 1/' \
-	    -e 's/#undef HAVE_SYS_PARAM_H$$/#define HAVE_SYS_PARAM_H 1/' \
-	    -e 's/#undef HAVE_SYS_STAT_H$$/#define HAVE_SYS_STAT_H 1/' \
-	    -e 's/#undef HAVE_SYS_TYPES_H$$/#define HAVE_SYS_TYPES_H 1/' \
-	    -e 's/#undef HAVE_UNISTD_H$$/#define HAVE_UNISTD_H 1/' \
-	    -e 's/#undef HAVE_UNSETENV$$/#define HAVE_UNSETENV 1/' \
-	    -e 's/#undef HAVE_VPRINTF$$/#define HAVE_VPRINTF 1/' \
-	    -e 's/#undef HAVE_WCHAR_H$$/#define HAVE_WCHAR_H 1/' \
-	    -e 's/#undef HAVE_WCRTOMB$$/#define HAVE_WCRTOMB 1/' \
-	    -e 's/#undef ICONV_CONST$$/#define ICONV_CONST/' \
-	    -e 's/#undef MALLOC_0_IS_NONNULL$$/#define MALLOC_0_IS_NONNULL 0/' \
-	    -e 's/#undef STDC_HEADERS$$/#define STDC_HEADERS 1/' \
-	    -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' \
-	    -e 's/#undef realpath$$/#define realpath rpl_realpath/' \
-	    -e '/#undef INSTALLPREFIX$$/d' \
-	  < $< > $@
-
 config.h.msvc : config.h.in
 	sed -e 's/#undef ENABLE_RELOCATABLE$$/#define ENABLE_RELOCATABLE 1/' \
 	    -e 's/#undef HAVE_ALLOCA$$/#define HAVE_ALLOCA 1/' \
@@ -136,21 +95,6 @@ config.h.msvc : config.h.in
 	    -e '/#undef INSTALLPREFIX$$/d' \
 	  < $< > $@
 
-lib/config.h_vms : lib/config.h.in
-	sed -e 's/#undef ENABLE_RELOCATABLE$$/#define ENABLE_RELOCATABLE 1/' \
-	    -e 's/#undef HAVE_ICONV$$/#define HAVE_ICONV 1/' \
-	    -e 's/#define ICONV_CONST const$$/#define ICONV_CONST/' \
-	    -e 's/#undef HAVE_LANGINFO_CODESET$$/#define HAVE_LANGINFO_CODESET 1/' \
-	    -e 's/#undef HAVE_MBRTOWC$$/#define HAVE_MBRTOWC 1/' \
-	    -e 's/#undef HAVE_SETLOCALE$$/#define HAVE_SETLOCALE 1/' \
-	    -e 's/#undef HAVE_STDDEF_H$$/#define HAVE_STDDEF_H 1/' \
-	    -e 's/#undef HAVE_STDLIB_H$$/#define HAVE_STDLIB_H 1/' \
-	    -e 's/#undef HAVE_STRING_H$$/#define HAVE_STRING_H 1/' \
-	    -e 's/#undef HAVE_WCRTOMB$$/#define HAVE_WCRTOMB 1/' \
-	    -e 's/#undef WORDS_LITTLEENDIAN$$/#define WORDS_LITTLEENDIAN 1/' \
-	    -e '/#undef INSTALLPREFIX$$/d' \
-	  < $< > $@
-
 lib/config.h.msvc : lib/config.h.in
 	sed -e 's/#undef ENABLE_RELOCATABLE$$/#define ENABLE_RELOCATABLE 1/' \
 	    -e 's/#undef HAVE_SETLOCALE$$/#define HAVE_SETLOCALE 1/' \
@@ -164,11 +108,6 @@ lib/config.h.msvc : lib/config.h.in
 include/iconv.h.build.in : include/iconv.h.in include/export.h
 	sed -e 's/extern \([^"]\)/extern LIBICONV_DLL_EXPORTED \1/' \
 	    -e '/_LIBICONV_VERSION/r include/export.h' \
-	  < $< > $@
-
-include/iconv.h_vms : include/iconv.h.in
-	sed -e 's/@ICONV_CONST@//g' -e 's/@HAVE_WCHAR_T@/1/g' \
-	    -e 's/ @DLL_VARIABLE@//g' \
 	  < $< > $@
 
 include/iconv.h.msvc-static : include/iconv.h.in
