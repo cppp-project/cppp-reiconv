@@ -7,6 +7,9 @@
 	* src/Makefile.os2: Remove file.
 	* man/Makefile.os2: Remove file.
 	* tests/Makefile.os2: Remove file.
+	* tests/check-stateful.cmd: Remove file.
+	* tests/check-stateless.cmd: Remove file.
+	* tests/check-translit.cmd: Remove file.
 
 2006-07-25  Bruno Haible  <bruno@clisp.org>
 
