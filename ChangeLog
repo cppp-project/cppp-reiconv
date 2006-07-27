@@ -1,3 +1,13 @@
+2006-07-27  Bruno Haible  <bruno@clisp.org>
+
+	Remove OS/2 build support that doesn't assume GNU make and GNU bash.
+	* README.os2: Remove file.
+	* Makefile.os2: Remove file.
+	* lib/Makefile.os2: Remove file.
+	* src/Makefile.os2: Remove file.
+	* man/Makefile.os2: Remove file.
+	* tests/Makefile.os2: Remove file.
+
 2006-07-25  Bruno Haible  <bruno@clisp.org>
 
 	Remove MSVC/nmake build support.
