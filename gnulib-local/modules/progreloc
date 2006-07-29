@@ -1,0 +1,23 @@
+Description:
+Support for relocatable installation.
+
+Files:
+lib/progreloc.c
+
+Depends-on:
+canonicalize
+relocatable
+xreadlink
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Bruno Haible
+
