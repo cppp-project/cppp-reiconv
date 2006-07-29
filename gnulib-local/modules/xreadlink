@@ -8,6 +8,7 @@ m4/xreadlink.m4
 
 Depends-on:
 readlink
+ssize_t
 xalloc
 
 configure.ac:
