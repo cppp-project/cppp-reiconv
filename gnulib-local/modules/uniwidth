@@ -1,0 +1,27 @@
+Description:
+Display width functions.
+
+Files:
+lib/uniwidth.h
+lib/unitypes.h
+lib/width.c
+lib/cjk.h
+lib/streq.h
+
+Depends-on:
+stdint
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += uniwidth.h unitypes.h width.c cjk.h streq.h
+
+Include:
+"uniwidth.h"
+
+License:
+LGPL
+
+Maintainer:
+Bruno Haible
+
