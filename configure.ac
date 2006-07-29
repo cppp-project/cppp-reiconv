@@ -16,7 +16,7 @@ dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
 dnl If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
 dnl Fifth Floor, Boston, MA 02110-1301, USA.
 
-AC_PREREQ(2.52)
+AC_PREREQ([2.60])
 AC_INIT
 AC_CONFIG_SRCDIR(lib/iconv.c)
 AC_CONFIG_AUX_DIR(build-aux)
@@ -48,6 +48,7 @@ dnl           checks for UNIX variants that set DEFS
 
 AC_GNU_SOURCE
 gl_USE_SYSTEM_EXTENSIONS
+gl_EARLY
 AC_ISC_POSIX
 
 dnl           checks for installer options
@@ -132,6 +133,8 @@ AM_STDBOOL_H
 gl_FUNC_STRERROR
 gl_FUNC_READLINK
 gl_XREADLINK
+
+gl_INIT
 
 dnl           hack
 

@@ -1,3 +1,109 @@
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
+	Switch to using gnulib.
+	* configure.ac (AC_PREREQ): Require autoconf-2.60.
+	Invoke gl_EARLY and gl_INIT.
+	* Makefile.devel (all): Depend on srclib/Makefile.am.
+	(aclocal.m4): Pass -I srcm4 to aclocal. Simplify dependencies, assuming
+	GNU make.
+	(GNULIB_MODULES): New variable.
+	(srclib/Makefile.am): New rule.
+	* gnulib-local: New directory.
+	* gnulib-local/m4/alloca.m4: Moved here from m4/alloca.m4.
+	* gnulib-local/m4/canonicalize.m4: Moved here from m4/canonicalize.m4.
+	* gnulib-local/m4/pathmax.m4: Moved here from m4/pathmax.m4.
+	* gnulib-local/m4/relocatable.m4: Moved here from m4/relocatable.m4.
+	* gnulib-local/m4/xreadlink.m4: Moved here from m4/xreadlink.m4.
+	* gnulib-local/lib/alloca_.h: Moved here from srclib/alloca_.h.
+	* gnulib-local/lib/canonicalize.h: Moved here from srclib/canonicalize.h.
+	* gnulib-local/lib/canonicalize.c: Moved here from srclib/canonicalize.c.
+	* gnulib-local/lib/cjk.h: Moved here from srclib/cjk.h.
+	* gnulib-local/lib/error.h.diff: New file.
+	* gnulib-local/lib/progname.h.diff: New file.
+	* gnulib-local/lib/relocatable.h: Moved here from srclib/relocatable.h.
+	* gnulib-local/lib/relocatable.c: Moved here from srclib/relocatable.c.
+	* gnulib-local/lib/relocwrapper.c: Moved here from srclib/relocwrapper.c.
+	* gnulib-local/lib/streq.h: Moved here from srclib/streq.h.
+	* gnulib-local/lib/strerror.c.diff: New file.
+	* gnulib-local/lib/unitypes.h: Moved here from srclib/unitypes.h.
+	* gnulib-local/lib/uniwidth.h: Moved here from srclib/uniwidth.h.
+	* gnulib-local/lib/width.c: Moved here from srclib/width.c.
+	* gnulib-local/lib/xalloc.h: Moved here from srclib/xalloc.h.
+	* gnulib-local/lib/xmalloc.c: Moved here from srclib/xmalloc.c.
+	* gnulib-local/lib/xstrdup.c: Moved here from srclib/xstrdup.c.
+	* gnulib-local/lib/xreadlink.h: Moved here from srclib/xreadlink.h.
+	* gnulib-local/lib/xreadlink.c: Moved here from srclib/xreadlink.c.
+	* gnulib-local/modules/canonicalize: New file.
+	* gnulib-local/modules/progreloc: New file.
+	* gnulib-local/modules/relocatable: New file.
+	* gnulib-local/modules/relocwrapper: New file.
+	* gnulib-local/modules/uniwidth: New file.
+	* gnulib-local/modules/xalloc: New file.
+	* gnulib-local/modules/xreadlink: New file.
+
+	* m4/allocsa.m4: Remove file. Now taken from gnulib.
+	* m4/codeset.m4: Likewise.
+	* m4/eealloc.m4: Likewise.
+	* m4/error.m4: Likewise.
+	* m4/extensions.m4: Likewise.
+	* m4/full-header-path.m4: Likewise.
+	* m4/gettext.m4: Likewise.
+	* m4/glibc21.m4: Likewise.
+	* m4/iconv.m4: Likewise.
+	* m4/intmax.m4: Likewise.
+	* m4/inttypes-h.m4: Likewise.
+	* m4/inttypes_h.m4: Likewise.
+	* m4/isc-posix.m4: Likewise.
+	* m4/lcmessage.m4: Likewise.
+	* m4/lib-ld.m4: Likewise.
+	* m4/lib-link.m4: Likewise.
+	* m4/lib-prefix.m4: Likewise.
+	* m4/longdouble.m4: Likewise.
+	* m4/longlong.m4: Likewise.
+	* m4/mbstate_t.m4: Likewise.
+	* m4/nls.m4: Likewise.
+	* m4/onceonly.m4: Likewise.
+	* m4/po.m4: Likewise.
+	* m4/printf-posix.m4: Likewise.
+	* m4/progtest.m4: Likewise.
+	* m4/readlink.m4: Likewise.
+	* m4/setenv.m4: Likewise.
+	* m4/signed.m4: Likewise.
+	* m4/size_max.m4: Likewise.
+	* m4/ssize_t.m4: Likewise.
+	* m4/stdbool.m4: Likewise.
+	* m4/stdint.m4: Likewise.
+	* m4/stdint_h.m4: Likewise.
+	* m4/strerror.m4: Likewise.
+	* m4/strerror_r.m4: Likewise.
+	* m4/unistd_h.m4: Likewise.
+	* m4/unlocked-io.m4: Likewise.
+	* m4/visibility.m4: Likewise.
+	* m4/wchar_t.m4: Likewise.
+	* m4/wint_t.m4: Likewise.
+
+	* srclib/allocsa.h: Remove file. Now taken from gnulib.
+	* srclib/allocsa.c: Likewise.
+	* srclib/binary-io.h: Likewise.
+	* srclib/error.h: Likewise.
+	* srclib/error.c: Likewise.
+	* srclib/exit.h: Likewise.
+	* srclib/gettext.h: Likewise.
+	* srclib/memmove.c: Likewise.
+	* srclib/pathmax.h: Likewise.
+	* srclib/progname.h: Likewise.
+	* srclib/progname.c: Likewise.
+	* srclib/progreloc.c: Likewise.
+	* srclib/readlink.c: Likewise.
+	* srclib/setenv.h: Likewise.
+	* srclib/setenv.c: Likewise.
+	* srclib/stdbool_.h: Likewise.
+	* srclib/stdint_.h: Likewise.
+	* srclib/strerror.c: Likewise.
+	* srclib/unlocked-io.h: Likewise.
+	* srclib/unsetenv.c: Likewise.
+	* srclib/Makefile.am: Remove file.
+
 2006-07-27  Bruno Haible  <bruno@clisp.org>
 
 	Remove OS/2 build support that doesn't assume GNU make and GNU bash.
