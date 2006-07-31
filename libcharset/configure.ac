@@ -32,7 +32,6 @@ dnl           checks for basic programs
 
 AC_PROG_CC
 AC_PROG_CPP
-AC_PROG_GCC_TRADITIONAL
 AC_PROG_INSTALL
 
 dnl           check for host type
@@ -49,7 +48,6 @@ dnl           checks for UNIX variants that set DEFS
 
 AC_AIX
 AC_MINIX
-AC_ISC_POSIX
 
 dnl           checks for compiler output filename suffixes
 

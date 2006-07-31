@@ -28,7 +28,6 @@ dnl           checks for basic programs
 
 AC_PROG_CC
 AC_PROG_CPP
-AC_PROG_GCC_TRADITIONAL
 AC_PROG_INSTALL
 
 dnl           check for host type
@@ -47,7 +46,6 @@ m4_pushdef([AC_REPLACE_FUNCS], m4_defn([my_SRCLIB_REPLACE_FUNCS]))
 dnl           checks for UNIX variants that set DEFS
 
 gl_EARLY
-AC_ISC_POSIX
 
 dnl           checks for installer options
 
@@ -84,7 +82,6 @@ AM_GNU_GETTEXT([external], [need-ngettext])
 
 dnl           checks for header files
 
-AC_HEADER_STDC
 AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
 
 dnl           checks for typedefs
