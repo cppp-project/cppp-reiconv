@@ -1,5 +1,11 @@
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
+	Note: gnulib macros no longer invoke AC_TYPE_SIZE_T nor
+	AC_CHECK_TYPE([ptrdiff_t], , [AC_DEFINE([ptrdiff_t], [long], ...)])
+	because we now assume that the system defines size_t and ptrdiff_t.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
 	Switch to using gnulib.
 	* configure.ac (AC_PREREQ): Require autoconf-2.60.
 	Invoke gl_EARLY and gl_INIT.
