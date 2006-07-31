@@ -1,5 +1,10 @@
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
+	* configure.ac: Remove macro invocations that are redundant through
+	gl_EARLY and gl_INIT.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
 	* gnulib-local/m4/alloca.m4 (gl_PREREQ_ALLOCA): Add a dummy statement.
 	Avoids a sh syntax error.
 

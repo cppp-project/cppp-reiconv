@@ -46,8 +46,6 @@ m4_pushdef([AC_REPLACE_FUNCS], m4_defn([my_SRCLIB_REPLACE_FUNCS]))
 
 dnl           checks for UNIX variants that set DEFS
 
-AC_GNU_SOURCE
-gl_USE_SYSTEM_EXTENSIONS
 gl_EARLY
 AC_ISC_POSIX
 
@@ -66,7 +64,6 @@ AC_SUBST([USE_EXTRA_ENCODINGS])
 
 dnl           checks for programs
 
-AC_PROG_RANLIB
 CL_PROG_CP
 CL_PROG_LN
 AC_PROG_LN_S
@@ -89,12 +86,10 @@ dnl           checks for header files
 
 AC_HEADER_STDC
 AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
-gl_HEADER_UNISTD
 
 dnl           checks for typedefs
 
 AC_TYPE_MBSTATE_T
-gl_STDINT_H
 gt_TYPE_WCHAR_T
 
 dnl           checks for functions and declarations
@@ -121,18 +116,6 @@ AM_LANGINFO_CODESET
 AC_EILSEQ
 
 CL_WORDS_LITTLEENDIAN
-
-gl_FUNC_ALLOCA
-gl_ALLOCSA
-gl_CANONICALIZE
-gl_FUNC_GLIBC_UNLOCKED_IO
-gl_ERROR
-gl_PATHMAX
-gt_FUNC_SETENV
-AM_STDBOOL_H
-gl_FUNC_STRERROR
-gl_FUNC_READLINK
-gl_XREADLINK
 
 gl_INIT
 
