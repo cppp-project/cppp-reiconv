@@ -11,7 +11,6 @@
 	* gnulib-local: New directory.
 	* gnulib-local/m4/alloca.m4: Moved here from m4/alloca.m4.
 	* gnulib-local/m4/canonicalize.m4: Moved here from m4/canonicalize.m4.
-	* gnulib-local/m4/pathmax.m4: Moved here from m4/pathmax.m4.
 	* gnulib-local/m4/relocatable.m4: Moved here from m4/relocatable.m4.
 	* gnulib-local/m4/xreadlink.m4: Moved here from m4/xreadlink.m4.
 	* gnulib-local/lib/alloca_.h: Moved here from srclib/alloca_.h.
@@ -63,6 +62,7 @@
 	* m4/mbstate_t.m4: Likewise.
 	* m4/nls.m4: Likewise.
 	* m4/onceonly.m4: Likewise.
+	* m4/pathmax.m4: Likewise.
 	* m4/po.m4: Likewise.
 	* m4/printf-posix.m4: Likewise.
 	* m4/progtest.m4: Likewise.
