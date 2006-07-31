@@ -1,5 +1,9 @@
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
+	* gnulib-local/m4/relocatable.m4: Add comments.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
 	* gnulib-local/modules/libiconv-misc: New file.
 	* Makefile.devel (GNULIB_MODULES): Add libiconv-misc.
 
