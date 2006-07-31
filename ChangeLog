@@ -1,5 +1,12 @@
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
+	* gnulib-local/lib/xreadlink.c: Assume <stdlib.h> exists.
+	* src/iconv.c: Assume <locale.h> exists.
+	* configure.ac: Remove tests for <locale.h>, <stddef.h>, <stdlib.h>,
+	<string.h>.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
 	* configure.ac: Remove obsolete calls AC_PROG_GCC_TRADITIONAL,
 	AC_ISC_POSIX, AC_HEADER_STDC.
 

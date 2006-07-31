@@ -28,9 +28,7 @@
 #include <string.h>
 #include <iconv.h>
 #include <errno.h>
-#if HAVE_LOCALE_H
 #include <locale.h>
-#endif
 #include <fcntl.h>
 
 /* Ensure that iconv_no_i18n does not depend on libintl.  */

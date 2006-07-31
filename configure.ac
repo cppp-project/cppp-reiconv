@@ -80,16 +80,12 @@ gl_VISIBILITY
 AM_ICONV
 AM_GNU_GETTEXT([external], [need-ngettext])
 
-dnl           checks for header files
-
-AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
-
 dnl           checks for typedefs
 
 AC_TYPE_MBSTATE_T
 gt_TYPE_WCHAR_T
 
-dnl           checks for functions and declarations
+dnl           checks for header files, functions and declarations
 
 if test "$am_cv_func_iconv" = yes -a -z "$am_cv_proto_iconv_arg1"; then
   ICONV_CONST=""
