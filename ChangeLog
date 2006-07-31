@@ -1,5 +1,12 @@
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
+	* gnulib-local/modules/libiconv-misc: New file.
+	* Makefile.devel (GNULIB_MODULES): Add libiconv-misc.
+
+	* Makefile.devel (srclib/Makefile.am): Pass --no-libtool.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
 	Note: gnulib macros no longer invoke AC_TYPE_SIZE_T nor
 	AC_CHECK_TYPE([ptrdiff_t], , [AC_DEFINE([ptrdiff_t], [long], ...)])
 	because we now assume that the system defines size_t and ptrdiff_t.

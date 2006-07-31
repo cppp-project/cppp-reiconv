@@ -76,11 +76,12 @@ GNULIB_MODULES = \
   unistd \
   uniwidth \
   unlocked-io \
-  xalloc
+  xalloc \
+  libiconv-misc
 
 srclib/Makefile.am :
 	if test -n "$$GNULIB_TOOL"; then \
-	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --local-dir=gnulib-local \
+	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --no-libtool --local-dir=gnulib-local \
 	    --import $(GNULIB_MODULES); \
 	fi
 
