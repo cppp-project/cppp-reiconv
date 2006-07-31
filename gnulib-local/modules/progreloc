@@ -13,6 +13,8 @@ xreadlink
 configure.ac:
 
 Makefile.am:
+AM_CPPFLAGS += -DEXEEXT=\"$(EXEEXT)\"
+lib_SOURCES += progreloc.c
 
 Include:
 
