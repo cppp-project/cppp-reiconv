@@ -1,5 +1,11 @@
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
+	* tests/check-subst: Set CHARSETALIASDIR.
+	Needed so that "make check" works before "make install" on systems
+	such as NetBSD.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
 	* Makefile.devel (aclocal.m4): Depend on srclib/Makefile.am.
 	(AUTOCONF_FILES): Add the existing *.m4 files.
 
