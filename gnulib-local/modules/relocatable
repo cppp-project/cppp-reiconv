@@ -10,6 +10,7 @@ Depends-on:
 configure.ac:
 
 Makefile.am:
+lib_SOURCES += relocatable.h
 
 Include:
 "relocatable.h"
