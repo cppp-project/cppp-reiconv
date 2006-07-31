@@ -44,12 +44,12 @@ CONFIGURES_IN = configure.ac
 #m4/endian.m4 : $(CLISP_DIR)/src/m4/endian.m4 ; cp -p $< $@-t && mv $@-t $@
 #m4/libtool.m4 : $(CLISP_DIR)/src/m4/libtool.m4 ; cp -p $< $@-t && mv $@-t $@
 
-aclocal.m4 : $(CONFIGURES_IN) $(wildcard m4/*.m4) $(wildcard srcm4/*.m4)
+aclocal.m4 : $(CONFIGURES_IN) srclib/Makefile.am $(wildcard m4/*.m4) $(wildcard srcm4/*.m4)
 	$(ACLOCAL) -I m4 -I srcm4 --output=$@
 
 configures : $(CONFIGURES)
 
-AUTOCONF_FILES = aclocal.m4
+AUTOCONF_FILES = aclocal.m4 $(wildcard m4/*.m4) $(wildcard srcm4/*.m4)
 
 configure : configure.ac $(AUTOCONF_FILES)
 	$(AUTOCONF)
