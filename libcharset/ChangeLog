@@ -1,5 +1,9 @@
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
+	* configure.ac: Assume <stddef.h>, <stdlib.h>, <string.h> exist.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
 	* configure.ac: Remove obsolete calls AC_PROG_GCC_TRADITIONAL,
 	AC_ISC_POSIX.
 

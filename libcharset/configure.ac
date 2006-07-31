@@ -64,7 +64,6 @@ dnl           checks for header files and functions
 
 AM_LANGINFO_CODESET
 gl_GLIBC21
-AC_CHECK_HEADERS(stddef.h stdlib.h string.h)
 AC_CHECK_FUNCS(setlocale)
 
 AC_CONFIG_FILES([Makefile])
