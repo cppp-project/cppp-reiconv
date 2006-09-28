@@ -1,14 +1,14 @@
 # Estonian translations for libiconv.
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
-# Toomas Soome <Toomas.Soome@microlink.ee>, 2003.
+# Toomas Soome <Toomas.Soome@microlink.ee>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.9.1\n"
+"Project-Id-Version: libiconv 1.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2006-07-19 21:16+0200\n"
-"PO-Revision-Date: 2003-05-29 10:35+0300\n"
+"PO-Revision-Date: 2006-07-28 10:58+0300\n"
 "Last-Translator: Toomas Soome <Toomas.Soome@microlink.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,27 +26,27 @@ msgstr "või:    iconv -l"
 #: src/iconv.c:111
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr ""
+msgstr "Lisainfo saamiseks kasutage `%s --help'.\n"
 
 #: src/iconv.c:114
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"
-msgstr ""
+msgstr "Kasutamine: %s [VÕTI...] [-f KODEERING] [-t KODEERING] [SISENDFAIL...]\n"
 
 #: src/iconv.c:118
-#, fuzzy, c-format, no-wrap
+#, c-format, no-wrap
 msgid "or:    %s -l\n"
-msgstr "või:    iconv -l"
+msgstr "või:    %s -l\n"
 
 #: src/iconv.c:123
 #, c-format, no-wrap
 msgid "Converts text from one encoding to another encoding.\n"
-msgstr ""
+msgstr "Teisendab teksti ühest kooditabelist teise.\n"
 
 #: src/iconv.c:127
 #, c-format, no-wrap
 msgid "Options controlling the input and output format:\n"
-msgstr ""
+msgstr "Sisendi ja väljundi vormingut kontrollivad võtmed:\n"
 
 #: src/iconv.c:130
 #, c-format, no-wrap
@@ -54,6 +54,8 @@ msgid ""
 "  -f ENCODING, --from-code=ENCODING\n"
 "                              the encoding of the input\n"
 msgstr ""
+"  -f KODEERING, --from-code=KODEERING\n"
+"                              sisendi kooditabel\n"
 
 #: src/iconv.c:134
 #, c-format, no-wrap
@@ -61,16 +63,18 @@ msgid ""
 "  -t ENCODING, --to-code=ENCODING\n"
 "                              the encoding of the output\n"
 msgstr ""
+"  -t KODEERING, --to-code=KODEERING\n"
+"                              väljundi kooditabel\n"
 
 #: src/iconv.c:139
 #, c-format, no-wrap
 msgid "Options controlling conversion problems:\n"
-msgstr ""
+msgstr "Teisendamisel tekkivate probleemide kontrolli võtmed:\n"
 
 #: src/iconv.c:142
 #, c-format, no-wrap
 msgid "  -c                          discard unconvertible characters\n"
-msgstr ""
+msgstr "  -c                          eemalda mitteteisendatavad sümbolid\n"
 
 #: src/iconv.c:145
 #, c-format, no-wrap
@@ -78,11 +82,13 @@ msgid ""
 "  --unicode-subst=FORMATSTRING\n"
 "                              substitution for unconvertible Unicode characters\n"
 msgstr ""
+"  --unicode-subst=VORMING\n"
+"                              mitteteisendavate Unikoodi sümbolite asendus\n"
 
 #: src/iconv.c:149
 #, c-format, no-wrap
 msgid "  --byte-subst=FORMATSTRING   substitution for unconvertible bytes\n"
-msgstr ""
+msgstr "  --byte-subst=VORMING        mitteteisendatavate baitide asendus\n"
 
 #: src/iconv.c:152
 #, c-format, no-wrap
@@ -90,40 +96,42 @@ msgid ""
 "  --widechar-subst=FORMATSTRING\n"
 "                              substitution for unconvertible wide characters\n"
 msgstr ""
+"  --widechar-subst=VORMING\n"
+"                              mitteteisendatavate mitmebaidi sümbolite asendus\n"
 
 #: src/iconv.c:157
 #, c-format, no-wrap
 msgid "Options controlling error output:\n"
-msgstr ""
+msgstr "Vigade väljundi kontrollimise võtmed:\n"
 
 #: src/iconv.c:160
 #, c-format, no-wrap
 msgid "  -s, --silent                suppress error messages about conversion problems\n"
-msgstr ""
+msgstr "  -s, --silent                keela probleemidest teatamine\n"
 
 #: src/iconv.c:164
 #, c-format, no-wrap
 msgid "Informative output:\n"
-msgstr ""
+msgstr "Infoväljund:\n"
 
 #: src/iconv.c:167
 #, c-format, no-wrap
 msgid "  -l, --list                  list the supported encodings\n"
-msgstr ""
+msgstr "  -l, --list                  väljasta toetatud kooditabelite nimekiri\n"
 
 #: src/iconv.c:170
 #, c-format, no-wrap
 msgid "  --help                      display this help and exit\n"
-msgstr ""
+msgstr "  --help                      väljasta see abiinfo ja lõpeta töö\n"
 
 #: src/iconv.c:173
 #, c-format, no-wrap
 msgid "  --version                   output version information and exit\n"
-msgstr ""
+msgstr "  --version                   väljasta versiooni info ja lõpeta töö\n"
 
 #: src/iconv.c:176
 msgid "Report bugs to <bug-gnu-libiconv@gnu.org>.\n"
-msgstr ""
+msgstr "Vigadest teatage palun aadressil <bug-gnu-libiconv@gnu.org>.\n"
 
 #: src/iconv.c:186
 #, c-format
@@ -144,29 +152,29 @@ msgstr "Kirjutanud %s.\n"
 #, c-format
 msgid ""
 "%s argument: A format directive with a variable width is not allowed here."
-msgstr ""
+msgstr "%s argument: Muutuva pikkusega vorming ei ole siin lubatud."
 
 #: src/iconv.c:291
 #, c-format
 msgid ""
 "%s argument: A format directive with a variable precision is not allowed "
 "here."
-msgstr ""
+msgstr "%s argument: Muutuva täpsusega vorming ei ole siin lubatud."
 
 #: src/iconv.c:303
 #, c-format
 msgid "%s argument: A format directive with a size is not allowed here."
-msgstr ""
+msgstr "%s argument: Suuruse määranguga vorming ei ole siin lubatud."
 
 #: src/iconv.c:341
 #, c-format
 msgid "%s argument: The string ends in the middle of a directive."
-msgstr ""
+msgstr "%s argument: Sõne lõppeb keset direktiivi."
 
 #: src/iconv.c:343
 #, c-format
 msgid "%s argument: The character '%c' is not a valid conversion specifier."
-msgstr ""
+msgstr "%s argument: Sümbol '%c' ei ole lubatud teisenduses."
 
 #: src/iconv.c:345
 #, c-format
@@ -174,80 +182,83 @@ msgid ""
 "%s argument: The character that terminates the format directive is not a "
 "valid conversion specifier."
 msgstr ""
+"%s argument: Vormingi direktiivi lõpetav sümbol ei ole teisenduses lubatud."
 
 #: src/iconv.c:356
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s argument: The format string consumes more than one argument: %u argument."
 msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
 msgstr[0] ""
+"%s argument: Vormingu sõne nõuab enam kui ühte argumenti: %u argumenti."
 msgstr[1] ""
+"%s argument: Vormingu sõne nõuab enam kui ühte argumenti: %u argumenti."
 
 #: src/iconv.c:411
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
-msgstr ""
+msgstr "baidiasendust ei saa Unikoodi teisendada: %s"
 
 #: src/iconv.c:447
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
-msgstr ""
+msgstr "unikoodi asendust ei saa sihttabelisse teisendada: %s"
 
 #: src/iconv.c:484
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
-msgstr ""
+msgstr "baidiasendust ei saa mitmebaidiliste sümbolitega sõneks teisendada: %s"
 
 #: src/iconv.c:521
-#, c-format
+#, fuzzy, c-format
 msgid "cannot convert widechar substitution to target encoding: %s"
-msgstr ""
+msgstr "iconv: mitmebaidilisi sümboleid ei saa sihttabelisse teisendada: %s"
 
 #: src/iconv.c:558
-#, c-format
+#, fuzzy, c-format
 msgid "cannot convert byte substitution to target encoding: %s"
-msgstr ""
+msgstr "iconv: baitide asendust ei saa sihttabelisse teisendada: %s"
 
 #: src/iconv.c:592 src/iconv.c:636 src/iconv.c:710
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u: incomplete character or shift sequence"
-msgstr "iconv: %s: mittetäielik sümbol või nihkejärjend\n"
+msgstr "%s:%u:%u: mittetäielik sümbol või nihkejärjend"
 
 #: src/iconv.c:625 src/iconv.c:700
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u: cannot convert"
-msgstr "iconv: %s: ei saa teisendada\n"
+msgstr "%s:%u:%u: ei saa teisendada"
 
 #: src/iconv.c:667 src/iconv.c:730
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u"
-msgstr "iconv: %s: "
+msgstr "%s:%u:%u"
 
 #: src/iconv.c:742
-#, fuzzy, c-format
+#, c-format
 msgid "%s: I/O error"
-msgstr "iconv: %s: S/V viga\n"
+msgstr "%s: S/V viga"
 
 #: src/iconv.c:926
-#, fuzzy, c-format
+#, c-format
 msgid "conversion from %s unsupported"
-msgstr "iconv: teisendust tabelist %s ei toetata\n"
+msgstr "teisendust tabelist %s ei toetata"
 
 #: src/iconv.c:928
-#, fuzzy, c-format
+#, c-format
 msgid "conversion to %s unsupported"
-msgstr "iconv: teisendust tabelisse %s ei toetata\n"
+msgstr "teisendust tabelisse %s ei toetata"
 
 #: src/iconv.c:930
-#, fuzzy, c-format
+#, c-format
 msgid "conversion from %s to %s unsupported"
-msgstr "iconv: teisendust %s -> %s ei toetata\n"
+msgstr "teisendust tabelist %s tabelisse %s ei toetata"
 
 #: src/iconv.c:931
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
-msgstr ""
+msgstr "Toetatud kooditabelite niekirja saate käsuga '%s -l'"
 
 #: src/iconv.c:985
 msgid "(stdin)"
@@ -256,17 +267,9 @@ msgstr "(standardsisend)"
 #: src/iconv.c:993
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: src/iconv.c:1004
-#, fuzzy, c-format
+#, c-format
 msgid "I/O error"
-msgstr "iconv: S/V viga\n"
-
-#~ msgid "iconv: %s: "
-#~ msgstr "iconv: %s: "
-
-#~ msgid ""
-#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-#~ msgstr ""
-#~ "Kasutamine: iconv [--binary] [-c] [-s] [-f koodist] [-t koodi] [fail ...]"
+msgstr "S/V viga"
