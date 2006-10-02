@@ -1,4 +1,4 @@
-# -*- mode:po; coding:iso-latin-2; -*- Slovenian messages for libiconv.
+# -*- mode:po; coding:utf-8; -*- Slovenian messages for libiconv.
 # Copyright (C) 2002, 2006 Free Software Foundation, Inc.
 # Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>, 2002, 2006.
 # This file is distributed under the same license as the libiconv package.
