@@ -1,19 +1,19 @@
 # -*- mode:po; coding:iso-latin-2; -*- Slovenian messages for libiconv.
-# Copyright (C) 2002 Free Software Foundation, Inc.
-# Primo� Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>, 2002.
+# Copyright (C) 2002, 2006 Free Software Foundation, Inc.
+# Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>, 2002, 2006.
 # This file is distributed under the same license as the libiconv package.
 # $Id$
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.8\n"
+"Project-Id-Version: libiconv 1.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2006-07-19 21:16+0200\n"
-"PO-Revision-Date: 2002-08-13 15:09+0200\n"
-"Last-Translator: Primo� Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>\n"
+"PO-Revision-Date: 2006-09-28 14:33+0200\n"
+"Last-Translator: Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/iconv.c:107
@@ -27,27 +27,27 @@ msgstr "ali:   iconv -l"
 #: src/iconv.c:111
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr ""
+msgstr "Poskusite »%s --help« za več informacij.\n"
 
 #: src/iconv.c:114
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"
-msgstr ""
+msgstr "Uporaba: %s [IZBIRA...] [-f KODIRANJE] [-t KODIRANJE] [DATOTEKA...]\n"
 
 #: src/iconv.c:118
-#, fuzzy, c-format, no-wrap
+#, c-format, no-wrap
 msgid "or:    %s -l\n"
-msgstr "ali:   iconv -l"
+msgstr "ali:     %s -l\n"
 
 #: src/iconv.c:123
 #, c-format, no-wrap
 msgid "Converts text from one encoding to another encoding.\n"
-msgstr ""
+msgstr "Pretvori besedilo iz enega kodnega nabora v drugega.\n"
 
 #: src/iconv.c:127
 #, c-format, no-wrap
 msgid "Options controlling the input and output format:\n"
-msgstr ""
+msgstr "Izbire, ki določajo vhodni in izhodni zapis:\n"
 
 #: src/iconv.c:130
 #, c-format, no-wrap
@@ -55,6 +55,8 @@ msgid ""
 "  -f ENCODING, --from-code=ENCODING\n"
 "                              the encoding of the input\n"
 msgstr ""
+"  -f KODIRANJE, --from-code=KODIRANJE\n"
+"                              kodni nabor vhoda\n"
 
 #: src/iconv.c:134
 #, c-format, no-wrap
@@ -62,16 +64,18 @@ msgid ""
 "  -t ENCODING, --to-code=ENCODING\n"
 "                              the encoding of the output\n"
 msgstr ""
+"  -t KODIRANJE, --to-code=KODIRANJE\n"
+"                              kodni nabor izhoda\n"
 
 #: src/iconv.c:139
 #, c-format, no-wrap
 msgid "Options controlling conversion problems:\n"
-msgstr ""
+msgstr "Izbire, ki določajo odziv na težave pri pretvorbi:\n"
 
 #: src/iconv.c:142
 #, c-format, no-wrap
 msgid "  -c                          discard unconvertible characters\n"
-msgstr ""
+msgstr "  -c                          zavrzi znake, ki jih ni mogoče pretvoriti\n"
 
 #: src/iconv.c:145
 #, c-format, no-wrap
@@ -79,11 +83,13 @@ msgid ""
 "  --unicode-subst=FORMATSTRING\n"
 "                              substitution for unconvertible Unicode characters\n"
 msgstr ""
+"  --unicode-subst=OBLIKOVNI_NIZ\n"
+"                              zamenjava za nepretvorljive unikodne znake\n"
 
 #: src/iconv.c:149
 #, c-format, no-wrap
 msgid "  --byte-subst=FORMATSTRING   substitution for unconvertible bytes\n"
-msgstr ""
+msgstr "  --byte-subst=OBLIKOVNI_NIZ  zamenjava za nepretvorljive bajte\n"
 
 #: src/iconv.c:152
 #, c-format, no-wrap
@@ -91,40 +97,42 @@ msgid ""
 "  --widechar-subst=FORMATSTRING\n"
 "                              substitution for unconvertible wide characters\n"
 msgstr ""
+"  --widechar-subst=OBLIKOVNI_NIZ\n"
+"                              zamenjava za nepretvorljive široke znake\n"
 
 #: src/iconv.c:157
 #, c-format, no-wrap
 msgid "Options controlling error output:\n"
-msgstr ""
+msgstr "Izbire, ki določajo izpis napak:\n"
 
 #: src/iconv.c:160
 #, c-format, no-wrap
 msgid "  -s, --silent                suppress error messages about conversion problems\n"
-msgstr ""
+msgstr "  -s, --silent                brez poročil o napakah pri pretvorbi\n"
 
 #: src/iconv.c:164
 #, c-format, no-wrap
 msgid "Informative output:\n"
-msgstr ""
+msgstr "Informativni izpis:\n"
 
 #: src/iconv.c:167
 #, c-format, no-wrap
 msgid "  -l, --list                  list the supported encodings\n"
-msgstr ""
+msgstr "  -l, --list                  izpiši podprte nabore znakov\n"
 
 #: src/iconv.c:170
 #, c-format, no-wrap
 msgid "  --help                      display this help and exit\n"
-msgstr ""
+msgstr "  --help                      izpiši ta navodila in končaj\n"
 
 #: src/iconv.c:173
 #, c-format, no-wrap
 msgid "  --version                   output version information and exit\n"
-msgstr ""
+msgstr "  --version                   izpiši informacijo o različici in končaj\n"
 
 #: src/iconv.c:176
 msgid "Report bugs to <bug-gnu-libiconv@gnu.org>.\n"
-msgstr ""
+msgstr "Napake javite na <bug-gnu-libiconv@gnu.org>.\n"
 
 #: src/iconv.c:186
 #, c-format
@@ -132,8 +140,8 @@ msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 msgstr ""
-"To je prost program; pogoji, pod katerimi ga lahko razmno�ujete in\n"
-"raz�irjate, so navedeni v izvorni kodi. Za program ni NOBENEGA jamstva,\n"
+"To je prost program; pogoji, pod katerimi ga lahko razmnožujete in\n"
+"razširjate, so navedeni v izvorni kodi. Za program ni NOBENEGA jamstva,\n"
 "niti jamstev USTREZNOSTI ZA PRODAJO ali PRIMERNOSTI ZA UPORABO.\n"
 
 #: src/iconv.c:189
@@ -145,7 +153,7 @@ msgstr "Avtor %s.\n"
 #, c-format
 msgid ""
 "%s argument: A format directive with a variable width is not allowed here."
-msgstr ""
+msgstr "argument %s: oblikovna direktiva z nestalno širino tu ni dovoljena."
 
 #: src/iconv.c:291
 #, c-format
@@ -153,21 +161,22 @@ msgid ""
 "%s argument: A format directive with a variable precision is not allowed "
 "here."
 msgstr ""
+"argument %s: oblikovna direktiva z nestalno natančnostjo tu ni dovoljena."
 
 #: src/iconv.c:303
 #, c-format
 msgid "%s argument: A format directive with a size is not allowed here."
-msgstr ""
+msgstr "argument %s: oblikovna direktiva z velikostjo tu ni dovoljena."
 
 #: src/iconv.c:341
 #, c-format
 msgid "%s argument: The string ends in the middle of a directive."
-msgstr ""
+msgstr "argument %s: niz se konča sredi direktive."
 
 #: src/iconv.c:343
 #, c-format
 msgid "%s argument: The character '%c' is not a valid conversion specifier."
-msgstr ""
+msgstr "argument %s: znak %c ni veljavno določilo pretvorbe."
 
 #: src/iconv.c:345
 #, c-format
@@ -175,80 +184,85 @@ msgid ""
 "%s argument: The character that terminates the format directive is not a "
 "valid conversion specifier."
 msgstr ""
+"argument %s: znak, ki zaključuje oblikovno direktivo, ni veljavno določilo "
+"pretvorbe."
 
 #: src/iconv.c:356
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s argument: The format string consumes more than one argument: %u argument."
 msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
 msgstr[0] ""
+"argument %s: oblikovni niz porabi več kot en argument: %u argumentov."
 msgstr[1] ""
+"argument %s: oblikovni niz porabi več kot en argument: %u argumentov."
 
 #: src/iconv.c:411
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
-msgstr ""
+msgstr "nadomestnega bajta ni mogoče pretvoriti v unikod: %s"
 
 #: src/iconv.c:447
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
-msgstr ""
+msgstr "nadomestnega unikoda ni mogoče pretvoriti v ciljni nabor: %s"
 
 #: src/iconv.c:484
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
-msgstr ""
+msgstr "nadomestnega bajta ni mogoče pretvoriti v široki niz: %s"
 
 #: src/iconv.c:521
-#, c-format
+#, fuzzy, c-format
 msgid "cannot convert widechar substitution to target encoding: %s"
 msgstr ""
+"iconv: pretvorba nadomestnega širokega znaka v ciljni nabor ni mogoča: %s"
 
 #: src/iconv.c:558
-#, c-format
+#, fuzzy, c-format
 msgid "cannot convert byte substitution to target encoding: %s"
-msgstr ""
+msgstr "iconv: pretvorba nadomestnega bajta v ciljni nabor ni mogoča: %s"
 
 #: src/iconv.c:592 src/iconv.c:636 src/iconv.c:710
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u: incomplete character or shift sequence"
-msgstr "iconv: %s: nepopolni znak ali pomi�no zaporedje\n"
+msgstr "%s:%u:%u nepopolni znak ali pomično zaporedje"
 
 #: src/iconv.c:625 src/iconv.c:700
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u: cannot convert"
-msgstr "iconv: %s: pretvorba ni mogo�a\n"
+msgstr "%s:%u:%u pretvorba ni mogoča"
 
 #: src/iconv.c:667 src/iconv.c:730
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u"
-msgstr "iconv: %s: "
+msgstr "%s:%u:%u"
 
 #: src/iconv.c:742
-#, fuzzy, c-format
+#, c-format
 msgid "%s: I/O error"
-msgstr "iconv: %s: V/I napaka\n"
+msgstr "%s: V/I napaka"
 
 #: src/iconv.c:926
-#, fuzzy, c-format
+#, c-format
 msgid "conversion from %s unsupported"
-msgstr "iconv: pretvorba iz nabora %s ni podprta\n"
+msgstr "pretvorba iz nabora %s ni podprta"
 
 #: src/iconv.c:928
-#, fuzzy, c-format
+#, c-format
 msgid "conversion to %s unsupported"
-msgstr "iconv: pretvorba v nabor %s ni podprta\n"
+msgstr "pretvorba v nabor %s ni podprta"
 
 #: src/iconv.c:930
-#, fuzzy, c-format
+#, c-format
 msgid "conversion from %s to %s unsupported"
-msgstr "iconv: pretvorba iz nabora %s v nabor %s ni podprta\n"
+msgstr "pretvorba iz nabora %s v nabor %s ni podprta"
 
 #: src/iconv.c:931
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
-msgstr ""
+msgstr "poskusite »%s -l« za seznam podprtih naborov znakov"
 
 #: src/iconv.c:985
 msgid "(stdin)"
@@ -257,18 +271,18 @@ msgstr "(stdin)"
 #: src/iconv.c:993
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: src/iconv.c:1004
-#, fuzzy, c-format
+#, c-format
 msgid "I/O error"
-msgstr "iconv: V/I napaka\n"
-
-#~ msgid "iconv: %s: "
-#~ msgstr "iconv: %s: "
+msgstr "V/I napaka"
 
 #~ msgid ""
 #~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 #~ msgstr ""
 #~ "Uporaba: iconv [--binary] [-c] [-s] [-f vh_nabor] [-t izh_nabor] "
 #~ "[datoteka ...]"
+
+#~ msgid "iconv: %s: "
+#~ msgstr "iconv: %s: "
