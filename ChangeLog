@@ -1,3 +1,9 @@
+2006-10-14  Bruno Haible  <bruno@clisp.org>
+
+	* COPYING: New file.
+	* README: Clarify copyright of the iconv program.
+	Reported by Charles Wilson <cwilson@fastmail.fm>.
+
 2006-08-08  Bruno Haible  <bruno@clisp.org>
 
 	* INSTALL.generic: Add a recommendation for Tru64.

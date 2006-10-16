@@ -82,7 +82,9 @@ activated when "//TRANSLIT" is appended to the target encoding name.
 libiconv is for you if your application needs to support multiple character
 encodings, but that support lacks from your system.
 
-Installation:
+
+Installation
+------------
 
 As usual for GNU packages:
 
@@ -140,13 +142,28 @@ This library can be built and installed in two variants:
     recompiled. Just set the LD_PRELOAD environment variable, that's it!
 
 
-Download:
+Copyright
+---------
+
+The libiconv and libcharset _libraries_ and their header files are under LGPL,
+see file COPYING.LIB.
+
+The iconv _program_ and the documentation are under GPL, see file COPYING.
+
+
+Download
+--------
+
     ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.11.tar.gz
 
-Homepage:
+Homepage
+--------
+
     http://www.gnu.org/software/libiconv/
 
-Bug reports to:
+Bug reports to
+--------------
+
     <bug-gnu-libiconv@gnu.org>
 
 
