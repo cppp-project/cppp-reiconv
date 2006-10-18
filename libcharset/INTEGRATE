@@ -13,7 +13,6 @@ Integration of this library into your package:
     AM_LANGINFO_CODESET
     jm_GLIBC21
     AC_CHECK_HEADERS(stddef.h stdlib.h string.h)
-    AC_CHECK_FUNCS(setlocale)
 
   and make sure that it sets and AC_SUBSTs the PACKAGE variable.
 

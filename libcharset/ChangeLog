@@ -1,3 +1,7 @@
+2006-10-18  Bruno Haible  <bruno@clisp.org>
+
+	* INTEGRATE: Remove recommendation to test for setlocale.
+
 2006-07-29  Bruno Haible  <bruno@clisp.org>
 
 	* configure.ac: Assume <stddef.h>, <stdlib.h>, <string.h> exist.
