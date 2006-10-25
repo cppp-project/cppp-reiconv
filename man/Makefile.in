@@ -29,6 +29,9 @@ mkinstalldirs = $(SHELL) @top_srcdir@/build-aux/mkinstalldirs
 
 SHELL = /bin/sh
 
+# Used by docdir.
+PACKAGE = @PACKAGE@
+
 all :
 
 install : force
