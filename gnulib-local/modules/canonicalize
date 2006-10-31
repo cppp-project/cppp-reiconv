@@ -16,13 +16,12 @@ configure.ac:
 gl_CANONICALIZE
 
 Makefile.am:
-lib_SOURCES += canonicalize.h
 
 Include:
 "canonicalize.h"
 
 License:
-GPL
+LGPL
 
 Maintainer:
 Bruno Haible

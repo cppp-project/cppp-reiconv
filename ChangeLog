@@ -1,3 +1,42 @@
+2006-10-31  Bruno Haible  <bruno@clisp.org>
+
+	Update from GNU gettext.
+	2006-10-29  Bruno Haible  <bruno@clisp.org>
+		Make it compile in C++ mode.
+		* gnulib-local/lib/xalloc.h (xrealloc): Define as template
+		with appropriate return type.
+		* gnulib-local/lib/xstrdup.c (xstrdup): Cast xmalloc result.
+	2006-10-26  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/modules/canonicalize (Makefile.am): Remove
+		EXTRA_DIST. Now done by gnulib-tool.
+		* gnulib-local/modules/relocatable (Makefile.am): Likewise.
+		* gnulib-local/modules/relocwrapper (Makefile.am): Likewise.
+	2006-10-25  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/m4/relocatable.m4 (AC_RELOCATABLE_BODY):
+		Renamed from AC_RELOCATABLE, without the AC_LIBOBJ invocation.
+		(AC_RELOCATABLE): New macro. Invoke AC_LIBOBJ here.
+		* gnulib-local/modules/relocwrapper (configure.ac): Invoke
+		AC_RELOCATABLE instead of requiring it.
+	2006-10-12  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/modules/canonicalize (Makefile.am): Distribute
+		all files in lib/ through EXTRA_DIST.
+		* gnulib-local/modules/relocatable (Makefile.am): Likewise.
+	2006-09-14  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/lib/canonicalize.c: Include <config.h>
+		unconditionally.
+		* gnulib-local/lib/relocatable.c: Likewise.
+		* lib/relocatable.c: Likewise.
+		* gnulib-local/lib/relocwrapper.c: Likewise.
+		* gnulib-local/lib/xmalloc.c: Likewise.
+		* gnulib-local/lib/xreadlink.c: Likewise.
+		* gnulib-local/lib/xstrdup.c: Likewise.
+	2006-08-02  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/modules/canonicalize: Put under LGPL.
+		* gnulib-local/modules/relocatable: Likewise.
+	2006-07-18  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/xalloc.h (xzalloc): New declaration.
+		* gnulib-local/xmalloc.c (xzalloc): New function.
+
 2006-10-24  Bruno Haible  <bruno@clisp.org>
 
 	* man/Makefile.in (PACKAGE): New variable. Needed for docdir.

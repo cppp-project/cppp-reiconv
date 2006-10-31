@@ -1,3 +1,9 @@
+2006-10-31  Bruno Haible  <bruno@clisp.org>
+
+	Update from GNU gettext.
+	2006-09-14  Bruno Haible  <bruno@clisp.org>
+		* lib/relocatable.c: Likewise.
+
 2006-10-17  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* localcharset.c: Do not check HAVE_SETLOCALE.

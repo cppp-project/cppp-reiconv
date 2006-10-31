@@ -1,3 +1,11 @@
+2006-10-31  Bruno Haible  <bruno@clisp.org>
+
+	Update from GNU gettext.
+	2006-10-25  Bruno Haible  <bruno@clisp.org>
+		* m4/relocatable.m4 (AC_RELOCATABLE_BODY): Renamed from
+		AC_RELOCATABLE, without the AC_LIBOBJ invocation.
+		(AC_RELOCATABLE): New macro. Invoke AC_LIBOBJ here.
+
 2006-10-18  Bruno Haible  <bruno@clisp.org>
 
 	* INTEGRATE: Remove recommendation to test for setlocale.
