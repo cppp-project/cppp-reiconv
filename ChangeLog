@@ -1,3 +1,14 @@
+2006-12-20  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (all): Depend on srclib/Makefile.gnulib, not
+	srclib/Makefile.am.
+	(aclocal.m4): Likewise. Touch the resulting file, since aclocal not
+	always does it.
+	(srclib/Makefile.gnulib): Renamed from srclib/Makefile.am. Pass
+	option --makefile-name.
+	(srclib/Makefile.in): Depend on srclib/Makefile.gnulib too.
+	* srclib/Makefile.am: New file that includes srclib/Makefile.gnulib.
+
 2006-10-31  Bruno Haible  <bruno@clisp.org>
 
 	Update from GNU gettext.

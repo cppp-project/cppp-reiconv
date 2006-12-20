@@ -16,7 +16,7 @@ CP = cp
 RM = rm -f
 
 
-all : configures config.h.in srclib/Makefile.am srclib/Makefile.in include/iconv.h.build.in lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html force
+all : configures config.h.in srclib/Makefile.gnulib srclib/Makefile.in include/iconv.h.build.in lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h lib/flags.h lib/translit.h man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html force
 	cd libcharset && $(MAKE) -f Makefile.devel all
 
 
@@ -44,8 +44,8 @@ CONFIGURES_IN = configure.ac
 #m4/endian.m4 : $(CLISP_DIR)/src/m4/endian.m4 ; cp -p $< $@-t && mv $@-t $@
 #m4/libtool.m4 : $(CLISP_DIR)/src/m4/libtool.m4 ; cp -p $< $@-t && mv $@-t $@
 
-aclocal.m4 : $(CONFIGURES_IN) srclib/Makefile.am $(wildcard m4/*.m4) $(wildcard srcm4/*.m4)
-	$(ACLOCAL) -I m4 -I srcm4 --output=$@
+aclocal.m4 : $(CONFIGURES_IN) srclib/Makefile.gnulib $(wildcard m4/*.m4) $(wildcard srcm4/*.m4)
+	$(ACLOCAL) -I m4 -I srcm4 --output=$@ && touch $@
 
 configures : $(CONFIGURES)
 
@@ -79,13 +79,13 @@ GNULIB_MODULES = \
   xalloc \
   libiconv-misc
 
-srclib/Makefile.am :
+srclib/Makefile.gnulib :
 	if test -n "$$GNULIB_TOOL"; then \
-	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --no-libtool --local-dir=gnulib-local \
+	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --makefile-name=Makefile.gnulib --no-libtool --local-dir=gnulib-local \
 	    --import $(GNULIB_MODULES); \
 	fi
 
-srclib/Makefile.in : srclib/Makefile.am
+srclib/Makefile.in : srclib/Makefile.am srclib/Makefile.gnulib
 	$(AUTOMAKE) --gnits srclib/Makefile
 
 
