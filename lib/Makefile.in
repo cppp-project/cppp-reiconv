@@ -112,11 +112,22 @@ install-lib : all force
 	if [ ! -d $(libdir) ] ; then $(mkinstalldirs) $(libdir) ; fi
 	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libiconv.la $(libdir)/libiconv.la
 
+# On AIX, libiconv.a must include the object files of /lib/libiconv.a,
+# otherwise the setlocale() call fails when invoked from executables linked
+# with -rpath $(libdir), even if linked without -liconv.
 install : all force
 	if [ ! -d $(DESTDIR)$(prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(prefix) ; fi
 	if [ ! -d $(DESTDIR)$(exec_prefix) ] ; then $(mkinstalldirs) $(DESTDIR)$(exec_prefix) ; fi
 	if [ ! -d $(DESTDIR)$(libdir) ] ; then $(mkinstalldirs) $(DESTDIR)$(libdir) ; fi
 	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libiconv.la $(DESTDIR)$(libdir)/libiconv.la
+	case "@host_os@" in \
+	  aix*) (cd $(DESTDIR)$(libdir) && \
+	         objects=`ar t libiconv.a`" "`ar t /lib/libiconv.a` && \
+	         ar x libiconv.a && ar x /lib/libiconv.a && \
+	         ar q libiconv.new.a $$objects && \
+	         rm -f $$objects && \
+	         mv -f libiconv.new.a libiconv.a) ;; \
+	esac
 	if test -n "@PLUGLIB@"; then $(INSTALL_DATA) @PLUGLIB@ $(DESTDIR)$(libdir)/@PLUGLIB@.new && mv $(DESTDIR)$(libdir)/@PLUGLIB@.new $(DESTDIR)$(libdir)/@PLUGLIB@ ; fi
 
 installdirs : force
