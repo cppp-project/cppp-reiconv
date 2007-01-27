@@ -1,5 +1,13 @@
 2007-01-26  Bruno Haible  <bruno@clisp.org>
 
+	Moved unitypes.h to gnulib.
+	* gnulib-local/lib/unitypes.h: Remove file.
+	* gnulib-local/modules/uniwidth (Files): Remove lib/unitypes.h.
+	(Depends-on): Add unitypes.
+	(lib_SOURCES): Remove unitypes.h.
+
+2007-01-26  Bruno Haible  <bruno@clisp.org>
+
 	Moved canonicalize to gnulib.
 	* gnulib-local/modules/canonicalize: Remove file.
 	* gnulib-local/lib/canonicalize.h: Remove file.
