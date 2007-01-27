@@ -1,5 +1,13 @@
 2007-01-26  Bruno Haible  <bruno@clisp.org>
 
+	Moved streq.h to gnulib.
+	* gnulib-local/lib/streq.h: Remove file.
+	* gnulib-local/modules/uniwidth (Files): Remove lib/streq.h.
+	(Depends-on): Add streq.
+	(lib_SOURCES): Remove streq.h.
+
+2007-01-26  Bruno Haible  <bruno@clisp.org>
+
 	Moved unitypes.h to gnulib.
 	* gnulib-local/lib/unitypes.h: Remove file.
 	* gnulib-local/modules/uniwidth (Files): Remove lib/unitypes.h.
