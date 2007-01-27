@@ -1,3 +1,13 @@
+2007-01-26  Bruno Haible  <bruno@clisp.org>
+
+	Moved canonicalize to gnulib.
+	* gnulib-local/modules/canonicalize: Remove file.
+	* gnulib-local/lib/canonicalize.h: Remove file.
+	* gnulib-local/lib/canonicalize.c: Remove file.
+	* gnulib-local/m4/canonicalize.m4: Remove file.
+	* gnulib-local/modules/progreloc (Depends-on): Replace 'canonicalize'
+	with 'canonicalize-lgpl'.
+
 2006-12-20  Bruno Haible  <bruno@clisp.org>
 
 	* lib/Makefile.in (install): On AIX, add the contents of
