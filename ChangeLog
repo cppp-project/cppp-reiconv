@@ -1,5 +1,17 @@
 2007-02-03  Bruno Haible  <bruno@clisp.org>
 
+	* tools/Makefile (ksc5601.h): Add one extra character.
+	* lib/ksc5601.h: Regenerated.
+	* lib/cp949.h (cp949_mbtowc, cp949_wctomb): Exclude the new character.
+	* tests/EUC-KR.TXT: Add CIRCLED HANGUL IEUNG U.
+	* tests/JOHAB.TXT: Likewise.
+	Reported by Jungshik Shin (신정식, 申政湜) <jungshik@google.com>.
+
+	* lib/euc_kr.h: Update comments.
+	* lib/johab.h: Likewise.
+
+2007-02-03  Bruno Haible  <bruno@clisp.org>
+
 	* tools/cjk_tab_to_h.c (output_title): Bump copyright year.
 
 2007-01-26  Bruno Haible  <bruno@clisp.org>

@@ -1,5 +1,6 @@
 New in 1.12:
 * On AIX, an libiconv no longer causes setlocale() to fail.
+* Upgraded EUC-KR, JOHAB to include the Korean postal code sign.
 
 New in 1.11:
 * The iconv program has new options --unicode-subst, --byte-subst,
