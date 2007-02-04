@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2004, 2006 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2004, 2006-2007 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software; you can redistribute it and/or modify
@@ -76,7 +76,7 @@ typedef struct {
 static void output_title (const char *charsetname)
 {
   printf("/*\n");
-  printf(" * Copyright (C) 1999-2006 Free Software Foundation, Inc.\n");
+  printf(" * Copyright (C) 1999-2007 Free Software Foundation, Inc.\n");
   printf(" * This file is part of the GNU LIBICONV Library.\n");
   printf(" *\n");
   printf(" * The GNU LIBICONV Library is free software; you can redistribute it\n");
