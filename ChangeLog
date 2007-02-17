@@ -1,3 +1,7 @@
+2007-02-16  Juan Manuel Guerrero  <juan.guerrero@gmx.de>
+
+	* djgpp/*: Update.
+
 2007-02-03  Bruno Haible  <bruno@clisp.org>
 
 	* tools/Makefile (ksc5601.h): Add one extra character.
@@ -529,7 +533,7 @@
 
 	* build-aux/config.rpath: Add support for Sun C 5.9 on Linux.
 
-2006-03-31  Juan Manuel Guerrero <juan.guerrero@gmx.de>
+2006-03-31  Juan Manuel Guerrero  <juan.guerrero@gmx.de>
 
 	* djgpp/*: Update.
 
