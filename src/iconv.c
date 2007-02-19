@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2006 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2007 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -38,7 +38,6 @@
 #endif
 
 #include "binary-io.h"
-#include "exit.h"
 #include "progname.h"
 #include "relocatable.h"
 #include "xalloc.h"
