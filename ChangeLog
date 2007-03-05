@@ -8,6 +8,8 @@
 	* gnulib-local/modules/relocwrapper: Remove file.
 	* gnulib-local/m4/relocatable.m4: Remove file.
 	* gnulib-local/lib/strerror.c.diff: Remove file.
+	* src/Makefile.in: Remove SET_RELOCATABLE invocation. Instead get
+	RELOCATABLE_LDFLAGS and INSTALL_PROGRAM_ENV.
 
 2007-02-19  Bruno Haible  <bruno@clisp.org>
 
