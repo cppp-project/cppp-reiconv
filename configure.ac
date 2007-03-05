@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2006 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2007 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -49,7 +49,7 @@ gl_EARLY
 
 dnl           checks for installer options
 
-AC_RELOCATABLE
+gl_RELOCATABLE([srclib])
 
 AC_ARG_ENABLE([extra-encodings],
   [AC_HELP_STRING([--enable-extra-encodings],

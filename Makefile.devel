@@ -71,8 +71,7 @@ GNULIB_MODULES = \
   mbstate \
   memmove \
   progname \
-  relocatable \
-  relocwrapper \
+  relocatable-prog \
   unistd \
   uniwidth \
   unlocked-io \
