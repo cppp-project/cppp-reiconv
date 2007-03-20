@@ -1,3 +1,13 @@
+2007-03-19  Bruno Haible  <bruno@clisp.org>
+
+	Assume that mkinstalldirs also creates the necessary parent directories.
+	* Makefile.in (install, installdirs): Don't explicitly create the
+	parent directories.
+	* lib/Makefile.in (install, installdirs): Likewise.
+	* src/Makefile.in (install, installdirs): Likewise.
+	* man/Makefile.in (install, installdirs): Likewise.
+	Reported by Thomas Klausner <tk@giga.or.at>.
+
 2007-03-04  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (GNULIB_MODULES): Add relocatable-prog. Remove
