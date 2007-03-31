@@ -1,5 +1,9 @@
 2007-03-31  Bruno Haible  <bruno@clisp.org>
 
+	* man/*.[13]: Syntactic simplifications.
+
+2007-03-31  Bruno Haible  <bruno@clisp.org>
+
 	Follow broken iconv() prototype in POSIX.
 	* configure.ac (ICONV_CONST): Set to empty if the system has no iconv.
 	Reported by Andreas Krennmair <ak@synflood.at>.
