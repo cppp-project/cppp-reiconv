@@ -87,10 +87,10 @@ gt_TYPE_WCHAR_T
 
 dnl           checks for header files, functions and declarations
 
-if test "$am_cv_func_iconv" = yes -a -z "$am_cv_proto_iconv_arg1"; then
-  ICONV_CONST=""
-else
+if test "$am_cv_func_iconv" = yes -a -n "$am_cv_proto_iconv_arg1"; then
   ICONV_CONST="const"
+else
+  ICONV_CONST=""
 fi
 AC_SUBST(ICONV_CONST)
 
