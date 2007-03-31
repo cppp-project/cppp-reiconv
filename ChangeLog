@@ -1,5 +1,10 @@
 2007-03-31  Bruno Haible  <bruno@clisp.org>
 
+	* man/iconv.1: Mark as POSIX compliant.
+	* man/iconv_open.3: Likewise.
+	* man/iconv.3: Likewise.
+	* man/iconv_close.3: Likewise.
+
 	* man/*.[13]: Syntactic simplifications.
 
 2007-03-31  Bruno Haible  <bruno@clisp.org>
