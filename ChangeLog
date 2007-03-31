@@ -1,5 +1,14 @@
 2007-03-31  Bruno Haible  <bruno@clisp.org>
 
+	* man/iconv.1: Use HYPHEN-MINUS signs instead of HYPHENs where
+	appropriate.
+	* man/iconv_open.3: Likewise.
+	* man/iconv.3: Likewise.
+	* man/iconv_close.3: Likewise.
+	* man/iconvctl.3: Likewise.
+
+2007-03-31  Bruno Haible  <bruno@clisp.org>
+
 	* man/iconv.1: Mark as POSIX compliant.
 	* man/iconv_open.3: Likewise.
 	* man/iconv.3: Likewise.
