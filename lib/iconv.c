@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2006 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2007 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -271,7 +271,9 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       continue;
     }
     if (ap->encoding_index == ei_local_wchar_t) {
-#if __STDC_ISO_10646__
+      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
+         This is also the case on native Woe32 systems.  */
+#if __STDC_ISO_10646__ || ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__)
       if (sizeof(wchar_t) == 4) {
         to_index = ei_ucs4internal;
         break;
@@ -345,7 +347,9 @@ iconv_t iconv_open (const char* tocode, const char* fromcode)
       continue;
     }
     if (ap->encoding_index == ei_local_wchar_t) {
-#if __STDC_ISO_10646__
+      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
+         This is also the case on native Woe32 systems.  */
+#if __STDC_ISO_10646__ || ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__)
       if (sizeof(wchar_t) == 4) {
         from_index = ei_ucs4internal;
         break;
@@ -683,7 +687,9 @@ const char * iconv_canonicalize (const char * name)
       continue;
     }
     if (ap->encoding_index == ei_local_wchar_t) {
-#if __STDC_ISO_10646__
+      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
+         This is also the case on native Woe32 systems.  */
+#if __STDC_ISO_10646__ || ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__)
       if (sizeof(wchar_t) == 4) {
         index = ei_ucs4internal;
         break;

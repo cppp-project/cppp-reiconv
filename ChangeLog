@@ -1,3 +1,9 @@
+2007-04-23  Bruno Haible  <bruno@clisp.org>
+
+	* lib/iconv.c (iconv_open, iconv_canonicalize): Treat native Woe32
+	systems like those which define __STDC_ISO_10646__.
+	Reported by Keith Marshall <keithmarshall@users.sourceforge.net>.
+
 2007-03-31  Bruno Haible  <bruno@clisp.org>
 
 	* man/iconv.1: Use HYPHEN-MINUS signs instead of HYPHENs where
