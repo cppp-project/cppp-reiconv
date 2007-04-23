@@ -1,5 +1,11 @@
 2007-04-23  Bruno Haible  <bruno@clisp.org>
 
+	* tests/check-subst: Use the output of 'printf' only if it didn't
+	crash. Needed to work around a buffer overflow in Solaris /bin/printf.
+	Reported by Arto C. Nirkko <anirkko@insel.ch>.
+
+2007-04-23  Bruno Haible  <bruno@clisp.org>
+
 	* lib/iconv.c (iconv_open, iconv_canonicalize): Treat native Woe32
 	systems like those which define __STDC_ISO_10646__.
 	Reported by Keith Marshall <keithmarshall@users.sourceforge.net>.
