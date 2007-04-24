@@ -427,8 +427,8 @@
 
 2006-06-28  Bruno Haible  <bruno@clisp.org>
 
-        * m4/gettext.m4: Update from GNU gettext.
-        * m4/po.m4: Update from GNU gettext.
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/po.m4: Update from GNU gettext.
 
 2006-06-27  Bruno Haible  <bruno@clisp.org>
 
@@ -1018,7 +1018,7 @@
 	* lib/encodings.def: Add PT154.
 	* lib/pt154.h: New file.
 	* lib/converters.h: Include it.
-        * README, man/iconv_open.3: Add PT154.
+	* README, man/iconv_open.3: Add PT154.
 	* NOTES: Mention PT154.
 	* tests/PT154.TXT: New file.
 	* tests/Makefile.in (check): Also test PT154.
@@ -2224,10 +2224,10 @@
 
 2002-05-18  Bruno Haible  <bruno@clisp.org>
 
-        * configure.in (AC_INIT), include/iconv.h.in (_LIBICONV_VERSION),
+	* configure.in (AC_INIT), include/iconv.h.in (_LIBICONV_VERSION),
 	README, windows/iconv.rc, djgpp/README, djgpp/fnchange.lst:
-        Bump version number.
-        * lib/Makefile.in (LIBICONV_VERSION_INFO): Define to 3:0:1.
+	Bump version number.
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Define to 3:0:1.
 
 2002-02-06  Bruno Haible  <bruno@clisp.org>
 
@@ -2581,7 +2581,7 @@
 
 2001-12-15  Bruno Haible  <bruno@clisp.org>
 
-        * lib/euc_jp.h (euc_jp_wctomb): Add irreversible mappings for
+	* lib/euc_jp.h (euc_jp_wctomb): Add irreversible mappings for
 	Shift_JIS characters 0x5C and 0x7E.
 	* tests/EUC-JP.IRREVERSIBLE.TXT: New file.
 
