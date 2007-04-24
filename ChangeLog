@@ -1,3 +1,8 @@
+2007-04-24  Bruno Haible  <bruno@clisp.org>
+
+	* man/iconv_open.3: Tweak explanation of TRANSLIT.
+	Reported by Perry Rapp.
+
 2007-04-23  Bruno Haible  <bruno@clisp.org>
 
 	* tests/check-subst: Use the output of 'printf' only if it didn't

@@ -9,7 +9,7 @@
 .\"   GNU glibc-2 source code and manual
 .\"   OpenGroup's Single Unix specification http://www.UNIX-systems.org/online.html
 .\"
-.TH ICONV_OPEN 3  "March 31, 2007" "GNU" "Linux Programmer's Manual"
+.TH ICONV_OPEN 3  "April 24, 2007" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv_open \- allocate descriptor for character set conversion
 .SH SYNOPSIS
@@ -172,8 +172,8 @@ locale dependent character encoding.
 .PP
 When the string "//TRANSLIT" is appended to \fItocode\fP, transliteration
 is activated. This means that when a character cannot be represented in the
-target character set, it can be approximated through one or several
-similarly looking characters.
+target character set, it can be approximated through one or several characters
+that look similar to the original character.
 .PP
 When the string "//IGNORE" is appended to \fItocode\fP, characters that
 cannot be represented in the target character set will be silently discarded.
