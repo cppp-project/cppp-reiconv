@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2006 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2007 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -598,6 +598,14 @@ DEFENCODING(( "PT154",                  /* IANA, glibc */
             ),
             pt154,
             { pt154_mbtowc, NULL },       { pt154_wctomb, NULL })
+
+DEFENCODING(( "RK1048",                 /* IANA, glibc */
+              "STRK1048-2002",          /* IANA */
+              "KZ-1048",                /* IANA */
+              "csKZ1048",               /* IANA */
+            ),
+            rk1048,
+            { rk1048_mbtowc, NULL },      { rk1048_wctomb, NULL })
 
 DEFENCODING(( "MULELAO-1",
             ),

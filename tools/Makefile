@@ -54,6 +54,7 @@ ALL = \
  georgian_ps.h \
  koi8_t.h \
  pt154.h \
+ rk1048.h \
  mulelao.h \
  cp1133.h \
  tis620.h \
@@ -272,6 +273,9 @@ koi8_t.h : $(TABLESDIR)/glibc-2.2.90-iconv/KOI8-T.TXT
 
 pt154.h : $(TABLESDIR)/IANA/PTCP154.TXT
 	./8bit_tab_to_h PT154 pt154 < $<
+
+rk1048.h : $(TABLESDIR)/IANA/KZ-1048.TXT
+	(echo '#' ; cat $<) | ./8bit_tab_to_h RK1048 rk1048
 
 mulelao.h : $(TABLESDIR)/csets-new/MULELAO1.TXT 8bit_tab_to_h
 	./8bit_tab_to_h MULELAO-1 mulelao < $<

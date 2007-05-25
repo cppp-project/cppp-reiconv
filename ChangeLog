@@ -1,3 +1,16 @@
+2007-05-25  Bruno Haible  <bruno@clisp.org>
+
+	* tools/Makefile (ALL): Add rk1048.h.
+	(rk1048.h): New rule.
+	* lib/encodings.def: Add RK1048.
+	* lib/rk1048.h: New file.
+	* lib/converters.h: Include it.
+	* README, man/iconv_open.3: Add RK1048.
+	* NOTES: Mention RK1048.
+	* tests/RK1048.TXT: New file.
+	* tests/Makefile.in (check): Also test RK1048.
+	Suggested by Timur Birsh <team9@host.kz>.
+
 2007-04-24  Bruno Haible  <bruno@clisp.org>
 
 	* man/iconv_open.3: Tweak explanation of TRANSLIT.

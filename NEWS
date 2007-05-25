@@ -1,4 +1,5 @@
 New in 1.12:
+* Added RK1048 converter.
 * On AIX, an libiconv no longer causes setlocale() to fail.
 * Upgraded EUC-KR, JOHAB to include the Korean postal code sign.
 
