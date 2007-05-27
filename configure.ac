@@ -160,6 +160,19 @@ else
 fi
 AC_SUBST([DLL_VARIABLE])
 
+dnl On mingw and Cygwin, we can activate special Makefile rules which add
+dnl version information to the shared libraries and executables.
+case "$host_os" in
+  mingw* | cygwin*) is_woe32=yes ;;
+  *) is_woe32=no ;;
+esac
+WOE32=$is_woe32
+AC_SUBST([WOE32])
+if test $WOE32 = yes; then
+  dnl Check for a program that compiles Windows resource files.
+  AC_CHECK_TOOL([WINDRES], [windres])
+fi
+
 AH_BOTTOM([
 /* On Windows, variables that may be in a DLL must be marked specially.  */
 #if defined _MSC_VER && defined _DLL

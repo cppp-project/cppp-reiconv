@@ -30,6 +30,7 @@ LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link
 LIBTOOL_INSTALL = $(LIBTOOL) --mode=install
 LIBTOOL_UNINSTALL = $(LIBTOOL) --mode=uninstall
+WINDRES = @WINDRES@
 CP = cp
 MV = mv
 LN = @LN@
@@ -50,14 +51,18 @@ SHELL = /bin/sh
 # section "Library interface versions".
 LIBICONV_VERSION_INFO = 6:0:4
 
+PACKAGE_VERSION = @VERSION@
+
 # Needed by $(LIBTOOL).
 top_builddir = ..
 
 SOURCES = $(srcdir)/iconv.c $(srcdir)/../libcharset/lib/localcharset.c $(srcdir)/relocatable.c
 
-OBJECTS = iconv.lo localcharset.lo relocatable.lo $(OBJECTS_@WOE32DLL@)
-OBJECTS_yes = iconv-exports.lo
-OBJECTS_no =
+OBJECTS = iconv.lo localcharset.lo relocatable.lo $(OBJECTS_EXP_@WOE32DLL@) $(OBJECTS_RES_@WOE32@)
+OBJECTS_EXP_yes = iconv-exports.lo
+OBJECTS_EXP_no =
+OBJECTS_RES_yes = libiconv.res
+OBJECTS_RES_no =
 
 all : @PLUGLIB@ libiconv.la
 
@@ -106,6 +111,9 @@ relocatable.lo : $(srcdir)/relocatable.c $(srcdir)/relocatable.h
 iconv-exports.lo : $(srcdir)/../woe32dll/iconv-exports.c
 	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(DEFS) -c $(srcdir)/../woe32dll/iconv-exports.c
 
+libiconv.res : $(srcdir)/../windows/libiconv.rc
+	$(WINDRES) `$(SHELL) $(srcdir)/../windows/windres-options --escape $(PACKAGE_VERSION)` -i $< -o $@ --output-format=coff
+
 # Installs the library and include files only. Typically called with only
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
 install-lib : all force
@@ -140,7 +148,7 @@ check : all
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo *.a *.la preloadable_libiconv* core *.stackdump so_locations
+	$(RM) *.o *.lo libiconv.res *.a *.la preloadable_libiconv* core *.stackdump so_locations
 	$(RM) -r .libs _libs
 
 distclean : clean

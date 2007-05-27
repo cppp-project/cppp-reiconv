@@ -1,5 +1,28 @@
 2007-05-27  Bruno Haible  <bruno@clisp.org>
 
+	* windows/libiconv.rc: New file.
+	* windows/iconv.rc: New file.
+	* windows/windres-options: New file.
+	* configure.ac (WOE32): New variable.
+	(WINDRES) [WOE32]: New variable.
+	* lib/Makefile.in (WINDRES): New variable.
+	(PACKAGE_VERSION): New variable.
+	(OBJECTS_EXP_yes): Renamed from OBJECTS_yes.
+	(OBJECTS_EXP_no): Renamed from OBJECTS_no.
+	(OBJECTS_RES_yes, OBJECTS_RES_no): New variables.
+	(OBJECTS): Add one of them.
+	(libiconv.res): New rule.
+	(clean): Remove also libiconv.res.
+	* src/Makefile.in (WINDRES): New variable.
+	(PACKAGE_VERSION): New variable.
+	(OBJECTS_RES_yes, OBJECTS_RES_no): New variables.
+	(all, iconv_no_i18n, install): Use them.
+	(iconv.res): New rule.
+	(clean): Remove also iconv.res.
+	Suggested and inspired by work by Perry Rapp.
+
+2007-05-27  Bruno Haible  <bruno@clisp.org>
+
 	Follow broken iconv() prototype in POSIX.
 	* configure.ac (ICONV_CONST): Set to empty if the system has no iconv.
 	* lib/config.h.in (ICONV_CONST): Change default value to an empty
