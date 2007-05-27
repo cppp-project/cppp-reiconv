@@ -1,3 +1,12 @@
+2007-05-27  Bruno Haible  <bruno@clisp.org>
+
+	Follow broken iconv() prototype in POSIX.
+	* configure.ac (ICONV_CONST): Set to empty if the system has no iconv.
+	* lib/config.h.in (ICONV_CONST): Change default value to an empty
+	comment.
+	* src/iconv.c (ICONV_CONST): Change default value to empty.
+	Reported by Andreas Krennmair <ak@synflood.at>.
+
 2007-05-25  Bruno Haible  <bruno@clisp.org>
 
 	* tools/Makefile (ALL): Add rk1048.h.
@@ -45,12 +54,6 @@
 	* man/iconv_close.3: Likewise.
 
 	* man/*.[13]: Syntactic simplifications.
-
-2007-03-31  Bruno Haible  <bruno@clisp.org>
-
-	Follow broken iconv() prototype in POSIX.
-	* configure.ac (ICONV_CONST): Set to empty if the system has no iconv.
-	Reported by Andreas Krennmair <ak@synflood.at>.
 
 2007-03-19  Bruno Haible  <bruno@clisp.org>
 

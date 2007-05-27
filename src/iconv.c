@@ -18,7 +18,7 @@
 
 #include "config.h"
 #ifndef ICONV_CONST
-# define ICONV_CONST const
+# define ICONV_CONST
 #endif
 
 #include <limits.h>
