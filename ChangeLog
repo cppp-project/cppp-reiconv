@@ -1,3 +1,7 @@
+2007-06-09  Bruno Haible  <bruno@clisp.org>
+
+	* gnulib-local/lib/relocwrapper.c: Remove file.
+
 2007-05-27  Bruno Haible  <bruno@clisp.org>
 
 	* windows/libiconv.rc: New file.
