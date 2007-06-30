@@ -179,10 +179,10 @@ Informative output:\n"));
     printf(_("\
   --version                   output version information and exit\n"));
     printf("\n");
-    /* TRANSLATORS: This one line message is only for English.
-       When translating, append a second line, telling where to report
-       translation bugs; put in your translation team's email address or
-       homepage.  */
+    /* TRANSLATORS: The placeholder indicates the bug-reporting address
+       for this package.  Please add _another line_ saying
+       "Report translation bugs to <...>\n" with the address for translation
+       bugs (typically your translation team's web or email address).  */
     fputs(_("Report bugs to <bug-gnu-libiconv@gnu.org>.\n"),stdout);
   }
   exit(exitcode);
