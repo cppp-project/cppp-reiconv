@@ -101,22 +101,31 @@ static void usage (int exitcode)
 {
   if (exitcode != 0) {
     const char* helpstring1 =
+      /* TRANSLATORS: The first line of the short usage message.  */
       _("Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]");
     const char* helpstring2 =
+      /* TRANSLATORS: The second line of the short usage message.
+         Align it correctly against the first line.  */
       _("or:    iconv -l");
     fprintf(stderr, "%s\n%s\n", helpstring1, helpstring2);
     fprintf(stderr, _("Try `%s --help' for more information.\n"), program_name);
   } else {
     /* xgettext: no-wrap */
+    /* TRANSLATORS: The first line of the long usage message.
+       The %s placeholder expands to the program name.  */
     printf(_("\
 Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"),
            program_name);
     /* xgettext: no-wrap */
+    /* TRANSLATORS: The second line of the long usage message.
+       Align it correctly against the first line.
+       The %s placeholder expands to the program name.  */
     printf(_("\
 or:    %s -l\n"),
            program_name);
     printf("\n");
     /* xgettext: no-wrap */
+    /* TRANSLATORS: Description of the iconv program.  */
     printf(_("\
 Converts text from one encoding to another encoding.\n"));
     printf("\n");
@@ -170,6 +179,10 @@ Informative output:\n"));
     printf(_("\
   --version                   output version information and exit\n"));
     printf("\n");
+    /* TRANSLATORS: This one line message is only for English.
+       When translating, append a second line, telling where to report
+       translation bugs; put in your translation team's email address or
+       homepage.  */
     fputs(_("Report bugs to <bug-gnu-libiconv@gnu.org>.\n"),stdout);
   }
   exit(exitcode);
@@ -179,10 +192,11 @@ static void print_version (void)
 {
   printf("iconv (GNU libiconv %d.%d)\n",
          _libiconv_version >> 8, _libiconv_version & 0xff);
-  printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2006");
+  printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2007");
   printf(_("\
 This is free software; see the source for copying conditions.  There is NO\n\
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"));
+  /* TRANSLATORS: The %s placeholder expands to an author's name.  */
   printf(_("Written by %s.\n"),"Bruno Haible");
   exit(EXIT_SUCCESS);
 }
@@ -274,7 +288,11 @@ static size_t check_subst_formatstring (const char *format, const char *param_na
       }
       /* Parse width. */
       if (*format == '*')
-        error(EXIT_FAILURE,0,_("%s argument: A format directive with a variable width is not allowed here."),param_name);
+        error(EXIT_FAILURE,0,
+              /* TRANSLATORS: An error message.
+                 The %s placeholder expands to a command-line option.  */
+              _("%s argument: A format directive with a variable width is not allowed here."),
+              param_name);
       if (isdigit (*format)) {
         do {
           width = 10*width + (*format - '0');
@@ -285,7 +303,11 @@ static size_t check_subst_formatstring (const char *format, const char *param_na
       if (*format == '.') {
         format++;
         if (*format == '*')
-          error(EXIT_FAILURE,0,_("%s argument: A format directive with a variable precision is not allowed here."),param_name);
+          error(EXIT_FAILURE,0,
+                /* TRANSLATORS: An error message.
+                   The %s placeholder expands to a command-line option.  */
+                _("%s argument: A format directive with a variable precision is not allowed here."),
+                param_name);
         if (isdigit (*format)) {
           do {
             precision = 10*precision + (*format - '0');
@@ -297,7 +319,11 @@ static size_t check_subst_formatstring (const char *format, const char *param_na
       switch (*format) {
         case 'h': case 'l': case 'L': case 'q':
         case 'j': case 'z': case 'Z': case 't':
-          error(EXIT_FAILURE,0,_("%s argument: A format directive with a size is not allowed here."),param_name);
+          error(EXIT_FAILURE,0,
+                /* TRANSLATORS: An error message.
+                   The %s placeholder expands to a command-line option.  */
+                _("%s argument: A format directive with a size is not allowed here."),
+                param_name);
       }
       /* Parse end of directive. */
       switch (*format) {
@@ -335,11 +361,24 @@ static size_t check_subst_formatstring (const char *format, const char *param_na
           break;
         default:
           if (*format == '\0')
-            error(EXIT_FAILURE,0,_("%s argument: The string ends in the middle of a directive."),param_name);
+            error(EXIT_FAILURE,0,
+                  /* TRANSLATORS: An error message.
+                     The %s placeholder expands to a command-line option.  */
+                  _("%s argument: The string ends in the middle of a directive."),
+                  param_name);
           else if (c_isprint(*format))
-            error(EXIT_FAILURE,0,_("%s argument: The character '%c' is not a valid conversion specifier."),param_name,*format);
+            error(EXIT_FAILURE,0,
+                  /* TRANSLATORS: An error message.
+                     The %s placeholder expands to a command-line option.
+                     The %c placeholder expands to an unknown format directive.  */
+                  _("%s argument: The character '%c' is not a valid conversion specifier."),
+                  param_name,*format);
           else
-            error(EXIT_FAILURE,0,_("%s argument: The character that terminates the format directive is not a valid conversion specifier."),param_name);
+            error(EXIT_FAILURE,0,
+                  /* TRANSLATORS: An error message.
+                     The %s placeholder expands to a command-line option.  */
+                  _("%s argument: The character that terminates the format directive is not a valid conversion specifier."),
+                  param_name);
           abort(); /*NOTREACHED*/
       }
       format++;
@@ -350,10 +389,14 @@ static size_t check_subst_formatstring (const char *format, const char *param_na
       maxsize++;
   }
   if (unnumbered_arg_count > 1)
-    error(EXIT_FAILURE,0,ngettext("%s argument: The format string consumes more than one argument: %u argument.",
-                                  "%s argument: The format string consumes more than one argument: %u arguments.",
-                                  unnumbered_arg_count),
-                         param_name,unnumbered_arg_count);
+    error(EXIT_FAILURE,0,
+          /* TRANSLATORS: An error message.
+             The %s placeholder expands to a command-line option.
+             The %u placeholder expands to the number of arguments consumed by the format string.  */
+          ngettext("%s argument: The format string consumes more than one argument: %u argument.",
+                   "%s argument: The format string consumes more than one argument: %u arguments.",
+                   unnumbered_arg_count),
+          param_name,unnumbered_arg_count);
   return maxsize;
 }
 
@@ -405,7 +448,11 @@ static void subst_mb_to_uc_fallback
         == (size_t)(-1)
         || iconv(subst_mb_to_uc_cd, NULL,NULL, &outptr,&outbytesleft)
            == (size_t)(-1))
-      error(EXIT_FAILURE,0,_("cannot convert byte substitution to Unicode: %s"),ilseq_byte_subst_buffer);
+      error(EXIT_FAILURE,0,
+            /* TRANSLATORS: An error message.
+               The %s placeholder expands to a piece of text, specified through --byte-subst.  */
+            _("cannot convert byte substitution to Unicode: %s"),
+            ilseq_byte_subst_buffer);
     if (!(outbytesleft%sizeof(unsigned int) == 0))
       abort();
     write_replacement(subst_mb_to_uc_temp_buffer,
@@ -441,7 +488,11 @@ static void subst_uc_to_mb_fallback
       == (size_t)(-1)
       || iconv(subst_uc_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
          == (size_t)(-1))
-    error(EXIT_FAILURE,0,_("cannot convert unicode substitution to target encoding: %s"),ilseq_unicode_subst_buffer);
+    error(EXIT_FAILURE,0,
+          /* TRANSLATORS: An error message.
+             The %s placeholder expands to a piece of text, specified through --unicode-subst.  */
+          _("cannot convert unicode substitution to target encoding: %s"),
+          ilseq_unicode_subst_buffer);
   write_replacement(subst_uc_to_mb_temp_buffer,
                     ilseq_unicode_subst_size*4-outbytesleft,
                     callback_arg);
@@ -478,7 +529,11 @@ static void subst_mb_to_wc_fallback
         == (size_t)(-1)
         || iconv(subst_mb_to_wc_cd, NULL,NULL, &outptr,&outbytesleft)
            == (size_t)(-1))
-      error(EXIT_FAILURE,0,_("cannot convert byte substitution to wide string: %s"),ilseq_byte_subst_buffer);
+      error(EXIT_FAILURE,0,
+            /* TRANSLATORS: An error message.
+               The %s placeholder expands to a piece of text, specified through --byte-subst.  */
+            _("cannot convert byte substitution to wide string: %s"),
+            ilseq_byte_subst_buffer);
     if (!(outbytesleft%sizeof(wchar_t) == 0))
       abort();
     write_replacement(subst_mb_to_wc_temp_buffer,
@@ -515,7 +570,11 @@ static void subst_wc_to_mb_fallback
       == (size_t)(-1)
       || iconv(subst_wc_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
          == (size_t)(-1))
-    error(EXIT_FAILURE,0,_("cannot convert widechar substitution to target encoding: %s"),ilseq_wchar_subst_buffer);
+    error(EXIT_FAILURE,0,
+          /* TRANSLATORS: An error message.
+             The %s placeholder expands to a piece of text, specified through --widechar-subst.  */
+          _("cannot convert widechar substitution to target encoding: %s"),
+          ilseq_wchar_subst_buffer);
   write_replacement(subst_wc_to_mb_temp_buffer,
                     ilseq_wchar_subst_size*4-outbytesleft,
                     callback_arg);
@@ -552,13 +611,60 @@ static void subst_mb_to_mb_fallback (const char* inbuf, size_t inbufsize)
         == (size_t)(-1)
         || iconv(subst_mb_to_mb_cd, NULL,NULL, &outptr,&outbytesleft)
            == (size_t)(-1))
-      error(EXIT_FAILURE,0,_("cannot convert byte substitution to target encoding: %s"),ilseq_byte_subst_buffer);
+      error(EXIT_FAILURE,0,
+            /* TRANSLATORS: An error message.
+               The %s placeholder expands to a piece of text, specified through --byte-subst.  */
+            _("cannot convert byte substitution to target encoding: %s"),
+            ilseq_byte_subst_buffer);
     fwrite(subst_mb_to_mb_temp_buffer,1,ilseq_byte_subst_size*4-outbytesleft,
            stdout);
   }
 }
 
 /* ========================================================================= */
+
+/* Error messages during conversion.  */
+
+static void conversion_error_EILSEQ (const char* infilename)
+{
+  fflush(stdout);
+  if (column > 0)
+    putc('\n',stderr);
+  error(0,0,
+        /* TRANSLATORS: An error message.
+           The placeholders expand to the input file name, a line number, and a column number.  */
+        _("%s:%u:%u: cannot convert"),
+        infilename,line,column);
+}
+
+static void conversion_error_EINVAL (const char* infilename)
+{
+  fflush(stdout);
+  if (column > 0)
+    putc('\n',stderr);
+  error(0,0,
+        /* TRANSLATORS: An error message.
+           The placeholders expand to the input file name, a line number, and a column number.
+           A "shift sequence" is a sequence of bytes that changes the state of the converter;
+           this concept exists only for "stateful" encodings like ISO-2022-JP.  */
+        _("%s:%u:%u: incomplete character or shift sequence"),
+        infilename,line,column);
+}
+
+static void conversion_error_other (int errnum, const char* infilename)
+{
+  fflush(stdout);
+  if (column > 0)
+    putc('\n',stderr);
+  error(0,errnum,
+        /* TRANSLATORS: The first part of an error message.
+           It is followed by a colon and a detail message.
+           The placeholders expand to the input file name, a line number, and a column number.  */
+        _("%s:%u:%u"),
+        infilename,line,column);
+}
+
+/* Convert the input given in infile.  */
 
 static int convert (iconv_t cd, FILE* infile, const char* infilename)
 {
@@ -582,12 +688,8 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
       else {
         if (ilseq_byte_subst != NULL)
           subst_mb_to_mb_fallback(inbuf+4096-inbufrest, inbufrest);
-        if (!silent) {
-          fflush(stdout);
-          if (column > 0)
-            putc('\n',stderr);
-          error(0,0,_("%s:%u:%u: incomplete character or shift sequence"),infilename,line,column);
-        }
+        if (!silent)
+          conversion_error_EINVAL(infilename);
         status = 1;
         goto done;
       }
@@ -615,23 +717,15 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               discard_unconvertible = 2;
               status = 1;
             } else {
-              if (!silent) {
-                fflush(stdout);
-                if (column > 0)
-                  putc('\n',stderr);
-                error(0,0,_("%s:%u:%u: cannot convert"),infilename,line,column);
-              }
+              if (!silent)
+                conversion_error_EILSEQ(infilename);
               status = 1;
               goto done;
             }
           } else if (errno == EINVAL) {
             if (inbufsize == 0 || insize > 4096) {
-              if (!silent) {
-                fflush(stdout);
-                if (column > 0)
-                  putc('\n',stderr);
-                error(0,0,_("%s:%u:%u: incomplete character or shift sequence"),infilename,line,column);
-              }
+              if (!silent)
+                conversion_error_EINVAL(infilename);
               status = 1;
               goto done;
             } else {
@@ -656,13 +750,8 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               outbuf = (char*)xmalloc(outbufsize);
             }
           } else {
-            if (!silent) {
-              int saved_errno = errno;
-              fflush(stdout);
-              if (column > 0)
-                putc('\n',stderr);
-              error(0,saved_errno,_("%s:%u:%u"),infilename,line,column);
-            }
+            if (!silent)
+              conversion_error_other(errno,infilename);
             status = 1;
             goto done;
           }
@@ -690,22 +779,14 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           discard_unconvertible = 2;
           status = 1;
         } else {
-          if (!silent) {
-            fflush(stdout);
-            if (column > 0)
-              putc('\n',stderr);
-            error(0,0,_("%s:%u:%u: cannot convert"),infilename,line,column);
-          }
+          if (!silent)
+            conversion_error_EILSEQ(infilename);
           status = 1;
           goto done;
         }
       } else if (errno == EINVAL) {
-        if (!silent) {
-          fflush(stdout);
-          if (column > 0)
-            putc('\n',stderr);
-          error(0,0,_("%s:%u:%u: incomplete character or shift sequence"),infilename,line,column);
-        }
+        if (!silent)
+          conversion_error_EINVAL(infilename);
         status = 1;
         goto done;
       } else if (errno == E2BIG) {
@@ -719,13 +800,8 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           outbuf = (char*)xmalloc(outbufsize);
         }
       } else {
-        if (!silent) {
-          int saved_errno = errno;
-          fflush(stdout);
-          if (column > 0)
-            putc('\n',stderr);
-          error(0,saved_errno,_("%s:%u:%u"),infilename,line,column);
-        }
+        if (!silent)
+          conversion_error_other(errno,infilename);
         status = 1;
         goto done;
       }
@@ -736,7 +812,11 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
     fflush(stdout);
     if (column > 0)
       putc('\n',stderr);
-    error(0,0,_("%s: I/O error"),infilename);
+    error(0,0,
+          /* TRANSLATORS: An error message.
+             The placeholder expands to the input file name.  */
+          _("%s: I/O error"),
+          infilename);
     status = 1;
     goto done;
   }
@@ -920,12 +1000,28 @@ int main (int argc, char* argv[])
     cd = iconv_open(tocode,fromcode);
     if (cd == (iconv_t)(-1)) {
       if (iconv_open("UCS-4",fromcode) == (iconv_t)(-1))
-        error(0,0,_("conversion from %s unsupported"),fromcode);
+        error(0,0,
+              /* TRANSLATORS: An error message.
+                 The placeholder expands to the encoding name, specified through --from-code.  */
+              _("conversion from %s unsupported"),
+              fromcode);
       else if (iconv_open(tocode,"UCS-4") == (iconv_t)(-1))
-        error(0,0,_("conversion to %s unsupported"),tocode);
+        error(0,0,
+              /* TRANSLATORS: An error message.
+                 The placeholder expands to the encoding name, specified through --to-code.  */
+              _("conversion to %s unsupported"),
+              tocode);
       else
-        error(0,0,_("conversion from %s to %s unsupported"),fromcode,tocode);
-      error(EXIT_FAILURE,0,_("try '%s -l' to get the list of supported encodings"),program_name);
+        error(0,0,
+              /* TRANSLATORS: An error message.
+                 The placeholders expand to the encoding names, specified through --from-code and --to-code, respectively.  */
+              _("conversion from %s to %s unsupported"),
+              fromcode,tocode);
+      error(EXIT_FAILURE,0,
+            /* TRANSLATORS: Additional advice after an error message.
+               The %s placeholder expands to the program name.  */
+            _("try '%s -l' to get the list of supported encodings"),
+            program_name);
     }
     /* Look at fromcode and tocode, to determine whether character widths
        should be determined according to legacy CJK conventions. */
@@ -979,7 +1075,9 @@ int main (int argc, char* argv[])
     hooks.data = NULL;
     iconvctl(cd, ICONV_SET_HOOKS, &hooks);
     if (i == argc)
-      status = convert(cd,stdin,_("(stdin)"));
+      status = convert(cd,stdin,
+                       /* TRANSLATORS: A filename substitute denoting standard input.  */
+                       _("(stdin)"));
     else {
       status = 0;
       for (; i < argc; i++) {
@@ -987,7 +1085,12 @@ int main (int argc, char* argv[])
         FILE* infile = fopen(infilename,"r");
         if (infile == NULL) {
           int saved_errno = errno;
-          error(0,saved_errno,_("%s"),infilename);
+          error(0,saved_errno,
+                /* TRANSLATORS: The first part of an error message.
+                   It is followed by a colon and a detail message.
+                   The %s placeholder expands to the input file name.  */
+                _("%s"),
+                infilename);
           status = 1;
         } else {
           status |= convert(cd,infile,infilename);
@@ -998,7 +1101,9 @@ int main (int argc, char* argv[])
     iconv_close(cd);
   }
   if (ferror(stdout) || fclose(stdout)) {
-    error(0,0,_("I/O error"));
+    error(0,0,
+          /* TRANSLATORS: An error message.  */
+          _("I/O error"));
     status = 1;
   }
   exit(status);

@@ -1,3 +1,11 @@
+2007-06-30  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c: Provide translator comments for many messages.
+	(conversion_error_EILSEQ, conversion_error_EINVAL,
+	conversion_error_other): New functions, extracted from convert.
+	(convert): Use them.
+	Reported by Tim Van Holder <tim.van.holder@telenet.be>.
+
 2007-06-09  Bruno Haible  <bruno@clisp.org>
 
 	* gnulib-local/lib/relocwrapper.c: Remove file.
