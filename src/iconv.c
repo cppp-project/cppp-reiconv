@@ -193,9 +193,12 @@ static void print_version (void)
   printf("iconv (GNU libiconv %d.%d)\n",
          _libiconv_version >> 8, _libiconv_version & 0xff);
   printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2007");
-  printf(_("\
-This is free software; see the source for copying conditions.  There is NO\n\
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"));
+  /* xgettext: no-wrap */
+  fputs (_("\
+License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>\n\
+This is free software: you are free to change and redistribute it.\n\
+There is NO WARRANTY, to the extent permitted by law.\n\
+"),stdout);
   /* TRANSLATORS: The %s placeholder expands to an author's name.  */
   printf(_("Written by %s.\n"),"Bruno Haible");
   exit(EXIT_SUCCESS);
