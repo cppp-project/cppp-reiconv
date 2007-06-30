@@ -36,14 +36,6 @@ all : configures config.h.in srclib/Makefile.gnulib srclib/Makefile.in include/i
 CONFIGURES = configure
 CONFIGURES_IN = configure.ac
 
-#CLISP_DIR = ..
-#m4/general.m4 : $(CLISP_DIR)/src/m4/general.m4 ; cp -p $< $@-t && mv $@-t $@
-#m4/proto.m4 : $(CLISP_DIR)/src/m4/proto.m4 ; cp -p $< $@-t && mv $@-t $@
-#m4/cp.m4 : $(CLISP_DIR)/src/m4/cp.m4 ; cp -p $< $@-t && mv $@-t $@
-#m4/ln.m4 : $(CLISP_DIR)/src/m4/ln.m4 ; cp -p $< $@-t && mv $@-t $@
-#m4/endian.m4 : $(CLISP_DIR)/src/m4/endian.m4 ; cp -p $< $@-t && mv $@-t $@
-#m4/libtool.m4 : $(CLISP_DIR)/src/m4/libtool.m4 ; cp -p $< $@-t && mv $@-t $@
-
 aclocal.m4 : $(CONFIGURES_IN) srclib/Makefile.gnulib $(wildcard m4/*.m4) $(wildcard srcm4/*.m4)
 	$(ACLOCAL) -I m4 -I srcm4 --output=$@ && touch $@
 
