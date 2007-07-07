@@ -9,6 +9,7 @@
 	* gnulib-local/lib/cjk.h: Remove file, moved to gnulib.
 	* gnulib-local/modules/uniwidth: Remove file.
 	* Makefile.devel (GNULIB_MODULES): Remove uniwidth, add uniwidth/width.
+	* src/iconv.c: Include uniwidth/cjk.h instead of cjk.h.
 
 2007-06-30  Bruno Haible  <bruno@clisp.org>
 
