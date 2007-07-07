@@ -65,7 +65,7 @@ GNULIB_MODULES = \
   progname \
   relocatable-prog \
   unistd \
-  uniwidth \
+  uniwidth/width \
   unlocked-io \
   xalloc \
   libiconv-misc

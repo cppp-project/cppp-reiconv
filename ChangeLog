@@ -1,3 +1,11 @@
+2007-07-07  Bruno Haible  <bruno@clisp.org>
+
+	* gnulib-local/lib/uniwidth.h: Remove file, moved to gnulib.
+	* gnulib-local/lib/width.c: Remove file, moved to gnulib.
+	* gnulib-local/lib/cjk.h: Remove file, moved to gnulib.
+	* gnulib-local/modules/uniwidth: Remove file.
+	* Makefile.devel (GNULIB_MODULES): Remove uniwidth, add uniwidth/width.
+
 2007-06-30  Bruno Haible  <bruno@clisp.org>
 
 	* src/iconv.c (print_version): Use the standard --version output, see
