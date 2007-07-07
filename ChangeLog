@@ -1,5 +1,9 @@
 2007-07-07  Bruno Haible  <bruno@clisp.org>
 
+	* autogen.sh: Add an option --skip-gnulib.
+
+2007-07-07  Bruno Haible  <bruno@clisp.org>
+
 	* gnulib-local/lib/uniwidth.h: Remove file, moved to gnulib.
 	* gnulib-local/lib/width.c: Remove file, moved to gnulib.
 	* gnulib-local/lib/cjk.h: Remove file, moved to gnulib.

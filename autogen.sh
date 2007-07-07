@@ -1,6 +1,8 @@
 #!/bin/sh
-# Convenience script for regenerating all aclocal.m4, config.h.in, Makefile.in,
-# configure files with new versions of autoconf or automake.
+# Convenience script for regenerating all autogeneratable files that are
+# omitted from the version control repository. In particular, this script
+# also regenerates all aclocal.m4, config.h.in, Makefile.in, configure files
+# with new versions of autoconf or automake.
 #
 # This script requires autoconf-2.60 and automake-1.9 in the PATH.
 # It also requires either
@@ -24,33 +26,49 @@
 # along with this program; if not, write to the Free Software Foundation,
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-# Usage: ./autogen.sh
+# Usage: ./autogen.sh [--skip-gnulib]
+#
+# Usage from a CVS checkout:                 ./autogen.sh
+# This uses an up-to-date gnulib checkout.
+#
+# Usage from a released tarball:             ./autogen.sh --skip-gnulib
+# This does not use a gnulib checkout.
 
-if test -z "$GNULIB_TOOL"; then
-  # Check out gnulib in a subdirectory 'gnulib'.
-  GNULIB_CVS_ROOT=':pserver:anonymous@cvs.savannah.gnu.org:/sources/gnulib'
-  GNULIB_CVS_REPOSITORY='gnulib'
-  if test -d gnulib; then
-    (cd gnulib && cvs update -d -P)
-  else
-    cvs -d "$GNULIB_CVS_ROOT" checkout $GNULIB_CVS_REPOSITORY
+skip_gnulib=false
+while :; do
+  case "$1" in
+    --skip-gnulib) skip_gnulib=true; shift;;
+    *) break ;;
+  esac
+done
+
+if test $skip_gnulib = false; then
+  if test -z "$GNULIB_TOOL"; then
+    # Check out gnulib in a subdirectory 'gnulib'.
+    GNULIB_CVS_ROOT=':pserver:anonymous@cvs.savannah.gnu.org:/sources/gnulib'
+    GNULIB_CVS_REPOSITORY='gnulib'
+    if test -d gnulib; then
+      (cd gnulib && cvs update -d -P)
+    else
+      cvs -d "$GNULIB_CVS_ROOT" checkout $GNULIB_CVS_REPOSITORY
+    fi
+    # Now it should contain a gnulib-tool.
+    if test -f gnulib/gnulib-tool; then
+      GNULIB_TOOL=`pwd`/gnulib/gnulib-tool
+    else
+      echo "** warning: gnulib-tool not found" 1>&2
+    fi
   fi
-  # Now it should contain a gnulib-tool.
-  if test -f gnulib/gnulib-tool; then
-    GNULIB_TOOL=`pwd`/gnulib/gnulib-tool
-  else
-    echo "** warning: gnulib-tool not found" 1>&2
+  # Skip the gnulib-tool step if gnulib-tool was not found.
+  if test -n "$GNULIB_TOOL"; then
+    if test -f srcm4/gnulib-cache.m4; then
+      mv -f srcm4/gnulib-cache.m4 srcm4/gnulib-cache.m4~
+    fi
+    if test -f srclib/Makefile.gnulib; then
+      mv -f srclib/Makefile.gnulib srclib/Makefile.gnulib~
+    fi
+    make -f Makefile.devel srclib/Makefile.gnulib GNULIB_TOOL="$GNULIB_TOOL"
   fi
-fi
-# Skip the gnulib-tool step if gnulib-tool was not found.
-if test -n "$GNULIB_TOOL"; then
-  if test -f srcm4/gnulib-cache.m4; then
-    mv -f srcm4/gnulib-cache.m4 srcm4/gnulib-cache.m4~
-  fi
-  if test -f srclib/Makefile.gnulib; then
-    mv -f srclib/Makefile.gnulib srclib/Makefile.gnulib~
-  fi
-  make -f Makefile.devel srclib/Makefile.gnulib GNULIB_TOOL="$GNULIB_TOOL"
 fi
 
 rm -f configure config.h.in include/iconv.h.build.in
