@@ -1,3 +1,12 @@
+2007-09-15  Bruno Haible  <bruno@clisp.org>
+
+	* eo.po: Update from Edmund Grimley Evans <edmundo@rano.org>.
+	* ga.po: Update from Kevin Scannell <kscanne@gmail.com>.
+	* nl.po: Update from Tim Van Holder <tim.van.holder@telenet.be>.
+	* sv.po: Update from Daniel Nylander <po@danielnylander.se>.
+	* vi.po: Update from Clytie Siddall <clytie@riverland.net.au>.
+	* wa.po: Update from Pablo Saratxaga <pablo@walon.org>.
+
 2007-05-30  Bruno Haible  <bruno@clisp.org>
 
 	* sv.po: Update from Daniel Nylander <po@danielnylander.se>.
