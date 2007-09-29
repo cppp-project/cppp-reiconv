@@ -45,7 +45,7 @@ done
 if test $skip_gnulib = false; then
   if test -z "$GNULIB_TOOL"; then
     # Check out gnulib in a subdirectory 'gnulib'.
-    GNULIB_CVS_ROOT=':pserver:anonymous@cvs.savannah.gnu.org:/sources/gnulib'
+    GNULIB_CVS_ROOT=':pserver:anonymous@pserver.git.sv.gnu.org:/gnulib.git'
     GNULIB_CVS_REPOSITORY='gnulib'
     if test -d gnulib; then
       (cd gnulib && cvs update -d -P)
