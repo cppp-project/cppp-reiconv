@@ -50,7 +50,7 @@ if test $skip_gnulib = false; then
     if test -d gnulib; then
       (cd gnulib && cvs update -d -P)
     else
-      cvs -d "$GNULIB_CVS_ROOT" checkout $GNULIB_CVS_REPOSITORY
+      cvs -d "$GNULIB_CVS_ROOT" checkout -d $GNULIB_CVS_REPOSITORY HEAD
     fi
     # Now it should contain a gnulib-tool.
     if test -f gnulib/gnulib-tool; then
