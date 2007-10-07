@@ -1,5 +1,11 @@
 2007-10-07  Bruno Haible  <bruno@clisp.org>
 
+	Update program license to GPLv3.
+	* COPYING: Replace with GPL 3.
+	* windows/iconv.rc (Comments): Update.
+
+2007-10-07  Bruno Haible  <bruno@clisp.org>
+
 	* gnulib-local/lib/alloca.in.h: Renamed from gnulib-local/lib/alloca_.h.
 
 2007-03-30  Bruno Haible  <bruno@clisp.org>
