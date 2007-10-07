@@ -1,3 +1,13 @@
+2007-03-30  Bruno Haible  <bruno@clisp.org>
+
+	* gnulib-local/lib/alloca_.h: Change prefix of double-inclusion guard
+	macro to _GL_.
+
+2006-06-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnulib-local/lib/alloca_.h (alloca) [defined alloca]: Don't define or
+	declare.
+
 2007-09-29  Bruno Haible  <bruno@clisp.org>
 
 	* autogen.sh (GNULIB_CVS_ROOT): Change to read-only git mirror
