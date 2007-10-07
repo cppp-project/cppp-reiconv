@@ -1,4 +1,6 @@
 New in 1.12:
+* The iconv program is now licensed under the GPL version 3, instead of the
+  GPL version 2. The libiconv library continues to be licensed under LGPL.
 * Added RK1048 converter.
 * On AIX, an existing system libiconv no longer causes setlocale() to fail.
 * Upgraded EUC-KR, JOHAB to include the Korean postal code sign.
