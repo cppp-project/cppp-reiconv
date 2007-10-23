@@ -1,5 +1,10 @@
 2007-10-23  Bruno Haible  <bruno@clisp.org>
 
+	* build-aux/config.guess: Update to GNU version 2007-07-22.
+	* build-aux/config.sub: Likewise.
+
+2007-10-23  Bruno Haible  <bruno@clisp.org>
+
 	* configure.ac: Bump version number to 1.12.
 	* README: Likewise.
 
@@ -540,12 +545,12 @@
 
 	* Version 1.11 released.
 
-2005-07-19  Bruno Haible  <bruno@clisp.org>
+2006-07-19  Bruno Haible  <bruno@clisp.org>
 
 	* srclib/Makefile.am (libicrt_a_SOURCES): Remove error.h, error.c.
 	(LIBADD_SOURCE): Add them here.
 
-2005-07-19  Bruno Haible  <bruno@clisp.org>
+2006-07-19  Bruno Haible  <bruno@clisp.org>
 
 	* build-aux/config.guess: Update to GNU version 2006-07-02.
 	* build-aux/config.sub: Likewise.
