@@ -1,5 +1,10 @@
 2007-10-23  Bruno Haible  <bruno@clisp.org>
 
+	* configure.ac: Bump version number to 1.12.
+	* README: Likewise.
+
+2007-10-23  Bruno Haible  <bruno@clisp.org>
+
 	Move relocatability infrastructure to gnulib.
 	* gnulib-local/lib/relocatable.h: Remove file.
 	* gnulib-local/lib/relocatable.c: Remove file.
