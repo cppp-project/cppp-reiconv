@@ -1,5 +1,11 @@
 2007-10-23  Bruno Haible  <bruno@clisp.org>
 
+	Move relocatability infrastructure to gnulib.
+	* gnulib-local/lib/relocatable.h: Remove file.
+	* gnulib-local/lib/relocatable.c: Remove file.
+
+2007-10-23  Bruno Haible  <bruno@clisp.org>
+
 	Update from GNU gettext.
 	2006-11-26  Bruno Haible  <bruno@clisp.org>
 		* gnulib-local/lib/xalloc.h (xmemdup): Add a typesafe C++
