@@ -21,10 +21,20 @@
 
 #include <string.h>
 
+/* Return a newly allocated copy of the N bytes of memory starting at P.  */
+
+void *
+xmemdup (const void *p, size_t n)
+{
+  void *q = xmalloc (n);
+  memcpy (q, p, n);
+  return q;
+}
+
 /* Return a newly allocated copy of STRING.  */
 
 char *
 xstrdup (const char *string)
 {
-  return strcpy ((char *) xmalloc (strlen (string) + 1), string);
+  return strcpy (XNMALLOC (strlen (string) + 1, char), string);
 }

@@ -1,5 +1,28 @@
 2007-10-23  Bruno Haible  <bruno@clisp.org>
 
+	Update from GNU gettext.
+	2006-11-26  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/lib/xalloc.h (xmemdup): Add a typesafe C++
+		template variant.
+		Based on a patch from Paul Eggert in gnulib.
+	2006-11-06  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/lib/xalloc.h (xcharalloc): New macro.
+		(xmemdup): New declaration.
+		* gnulib-local/lib/xstrdup.c (xmemdup): New function.
+	2006-11-03  Bruno Haible  <bruno@clisp.org>
+		* gnulib-local/lib/xalloc.h (XMALLOC, XNMALLOC, XZALLOC,
+		XCALLOC): New macros.
+		(xnboundedmalloc): New inline function.
+		* gnulib-local/lib/xstrdup.c (xstrdup): Use XNMALLOC instead of
+		xmalloc.
+	2006-11-02  Bruno Haible  <bruno@clisp.org>
+		* lib/xalloc.h (xnmalloc): New declaration. From gnulib
+		xalloc.h.
+		* lib/xmalloc.c (fixup_null_alloc): Write NULL, not 0.
+		(xnmalloc): New function.
+
+2007-10-23  Bruno Haible  <bruno@clisp.org>
+
 	Moved module xreadlink to gnulib.
 	* gnulib-local/modules/xreadlink: Remove file.
 	* gnulib-local/lib/xreadlink.h: Remove file.
