@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.11-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2006-07-19 21:16+0200\n"
+"POT-Creation-Date: 2007-10-24 02:02+0200\n"
 "PO-Revision-Date: 2006-07-28 10:58+0300\n"
 "Last-Translator: Toomas Soome <Toomas.Soome@microlink.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -15,10 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/iconv.c:107
+#. TRANSLATORS: The first line of the short usage message.
+#: src/iconv.c:105
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr "Kasutamine: iconv [-c] [-s] [-f koodist] [-t koodi] [fail ...]"
 
+#. TRANSLATORS: The second line of the short usage message.
+#. Align it correctly against the first line.
 #: src/iconv.c:109
 msgid "or:    iconv -l"
 msgstr "või:    iconv -l"
@@ -28,27 +31,33 @@ msgstr "või:    iconv -l"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Lisainfo saamiseks kasutage `%s --help'.\n"
 
-#: src/iconv.c:114
+#. TRANSLATORS: The first line of the long usage message.
+#. The %s placeholder expands to the program name.
+#: src/iconv.c:116
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"
 msgstr "Kasutamine: %s [VÕTI...] [-f KODEERING] [-t KODEERING] [SISENDFAIL...]\n"
 
-#: src/iconv.c:118
+#. TRANSLATORS: The second line of the long usage message.
+#. Align it correctly against the first line.
+#. The %s placeholder expands to the program name.
+#: src/iconv.c:123
 #, c-format, no-wrap
 msgid "or:    %s -l\n"
 msgstr "või:    %s -l\n"
 
-#: src/iconv.c:123
+#. TRANSLATORS: Description of the iconv program.
+#: src/iconv.c:129
 #, c-format, no-wrap
 msgid "Converts text from one encoding to another encoding.\n"
 msgstr "Teisendab teksti ühest kooditabelist teise.\n"
 
-#: src/iconv.c:127
+#: src/iconv.c:133
 #, c-format, no-wrap
 msgid "Options controlling the input and output format:\n"
 msgstr "Sisendi ja väljundi vormingut kontrollivad võtmed:\n"
 
-#: src/iconv.c:130
+#: src/iconv.c:136
 #, c-format, no-wrap
 msgid ""
 "  -f ENCODING, --from-code=ENCODING\n"
@@ -57,7 +66,7 @@ msgstr ""
 "  -f KODEERING, --from-code=KODEERING\n"
 "                              sisendi kooditabel\n"
 
-#: src/iconv.c:134
+#: src/iconv.c:140
 #, c-format, no-wrap
 msgid ""
 "  -t ENCODING, --to-code=ENCODING\n"
@@ -66,17 +75,17 @@ msgstr ""
 "  -t KODEERING, --to-code=KODEERING\n"
 "                              väljundi kooditabel\n"
 
-#: src/iconv.c:139
+#: src/iconv.c:145
 #, c-format, no-wrap
 msgid "Options controlling conversion problems:\n"
 msgstr "Teisendamisel tekkivate probleemide kontrolli võtmed:\n"
 
-#: src/iconv.c:142
+#: src/iconv.c:148
 #, c-format, no-wrap
 msgid "  -c                          discard unconvertible characters\n"
 msgstr "  -c                          eemalda mitteteisendatavad sümbolid\n"
 
-#: src/iconv.c:145
+#: src/iconv.c:151
 #, c-format, no-wrap
 msgid ""
 "  --unicode-subst=FORMATSTRING\n"
@@ -85,12 +94,12 @@ msgstr ""
 "  --unicode-subst=VORMING\n"
 "                              mitteteisendavate Unikoodi sümbolite asendus\n"
 
-#: src/iconv.c:149
+#: src/iconv.c:155
 #, c-format, no-wrap
 msgid "  --byte-subst=FORMATSTRING   substitution for unconvertible bytes\n"
 msgstr "  --byte-subst=VORMING        mitteteisendatavate baitide asendus\n"
 
-#: src/iconv.c:152
+#: src/iconv.c:158
 #, c-format, no-wrap
 msgid ""
 "  --widechar-subst=FORMATSTRING\n"
@@ -99,84 +108,100 @@ msgstr ""
 "  --widechar-subst=VORMING\n"
 "                              mitteteisendatavate mitmebaidi sümbolite asendus\n"
 
-#: src/iconv.c:157
+#: src/iconv.c:163
 #, c-format, no-wrap
 msgid "Options controlling error output:\n"
 msgstr "Vigade väljundi kontrollimise võtmed:\n"
 
-#: src/iconv.c:160
+#: src/iconv.c:166
 #, c-format, no-wrap
 msgid "  -s, --silent                suppress error messages about conversion problems\n"
 msgstr "  -s, --silent                keela probleemidest teatamine\n"
 
-#: src/iconv.c:164
+#: src/iconv.c:170
 #, c-format, no-wrap
 msgid "Informative output:\n"
 msgstr "Infoväljund:\n"
 
-#: src/iconv.c:167
+#: src/iconv.c:173
 #, c-format, no-wrap
 msgid "  -l, --list                  list the supported encodings\n"
 msgstr "  -l, --list                  väljasta toetatud kooditabelite nimekiri\n"
 
-#: src/iconv.c:170
+#: src/iconv.c:176
 #, c-format, no-wrap
 msgid "  --help                      display this help and exit\n"
 msgstr "  --help                      väljasta see abiinfo ja lõpeta töö\n"
 
-#: src/iconv.c:173
+#: src/iconv.c:179
 #, c-format, no-wrap
 msgid "  --version                   output version information and exit\n"
 msgstr "  --version                   väljasta versiooni info ja lõpeta töö\n"
 
-#: src/iconv.c:176
+#. TRANSLATORS: The placeholder indicates the bug-reporting address
+#. for this package.  Please add _another line_ saying
+#. "Report translation bugs to <...>\n" with the address for translation
+#. bugs (typically your translation team's web or email address).
+#: src/iconv.c:186
 msgid "Report bugs to <bug-gnu-libiconv@gnu.org>.\n"
 msgstr "Vigadest teatage palun aadressil <bug-gnu-libiconv@gnu.org>.\n"
 
-#: src/iconv.c:186
-#, c-format
+#: src/iconv.c:197
+#, no-wrap
 msgid ""
-"This is free software; see the source for copying conditions.  There is NO\n"
-"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+"License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>\n"
+"This is free software: you are free to change and redistribute it.\n"
+"There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"See on vaba tarkvara; kopeerimise tingimused leiate lähtetekstist. Garantii\n"
-"PUUDUB; ka müügiks või mingil eesmärgil kasutamiseks, vastavalt seadustega\n"
-"lubatud piiridele.\n"
 
-#: src/iconv.c:189
+#. TRANSLATORS: The %s placeholder expands to an author's name.
+#: src/iconv.c:203
 #, c-format
 msgid "Written by %s.\n"
 msgstr "Kirjutanud %s.\n"
 
-#: src/iconv.c:280
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a command-line option.
+#: src/iconv.c:297
 #, c-format
 msgid ""
 "%s argument: A format directive with a variable width is not allowed here."
 msgstr "%s argument: Muutuva pikkusega vorming ei ole siin lubatud."
 
-#: src/iconv.c:291
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a command-line option.
+#: src/iconv.c:312
 #, c-format
 msgid ""
 "%s argument: A format directive with a variable precision is not allowed "
 "here."
 msgstr "%s argument: Muutuva täpsusega vorming ei ole siin lubatud."
 
-#: src/iconv.c:303
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a command-line option.
+#: src/iconv.c:328
 #, c-format
 msgid "%s argument: A format directive with a size is not allowed here."
 msgstr "%s argument: Suuruse määranguga vorming ei ole siin lubatud."
 
-#: src/iconv.c:341
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a command-line option.
+#: src/iconv.c:370
 #, c-format
 msgid "%s argument: The string ends in the middle of a directive."
 msgstr "%s argument: Sõne lõppeb keset direktiivi."
 
-#: src/iconv.c:343
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a command-line option.
+#. The %c placeholder expands to an unknown format directive.
+#: src/iconv.c:377
 #, c-format
 msgid "%s argument: The character '%c' is not a valid conversion specifier."
 msgstr "%s argument: Sümbol '%c' ei ole lubatud teisenduses."
 
-#: src/iconv.c:345
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a command-line option.
+#: src/iconv.c:383
 #, c-format
 msgid ""
 "%s argument: The character that terminates the format directive is not a "
@@ -184,7 +209,10 @@ msgid ""
 msgstr ""
 "%s argument: Vormingi direktiivi lõpetav sümbol ei ole teisenduses lubatud."
 
-#: src/iconv.c:356
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a command-line option.
+#. The %u placeholder expands to the number of arguments consumed by the format string.
+#: src/iconv.c:399
 #, fuzzy, c-format
 msgid ""
 "%s argument: The format string consumes more than one argument: %u argument."
@@ -195,81 +223,127 @@ msgstr[0] ""
 msgstr[1] ""
 "%s argument: Vormingu sõne nõuab enam kui ühte argumenti: %u argumenti."
 
-#: src/iconv.c:411
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a piece of text, specified through --byte-subst.
+#: src/iconv.c:457
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
 msgstr "baidiasendust ei saa Unikoodi teisendada: %s"
 
-#: src/iconv.c:447
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a piece of text, specified through --unicode-subst.
+#: src/iconv.c:497
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
 msgstr "unikoodi asendust ei saa sihttabelisse teisendada: %s"
 
-#: src/iconv.c:484
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a piece of text, specified through --byte-subst.
+#: src/iconv.c:538
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
 msgstr "baidiasendust ei saa mitmebaidiliste sümbolitega sõneks teisendada: %s"
 
-#: src/iconv.c:521
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a piece of text, specified through --widechar-subst.
+#: src/iconv.c:579
 #, fuzzy, c-format
 msgid "cannot convert widechar substitution to target encoding: %s"
 msgstr "iconv: mitmebaidilisi sümboleid ei saa sihttabelisse teisendada: %s"
 
-#: src/iconv.c:558
+#. TRANSLATORS: An error message.
+#. The %s placeholder expands to a piece of text, specified through --byte-subst.
+#: src/iconv.c:620
 #, fuzzy, c-format
 msgid "cannot convert byte substitution to target encoding: %s"
 msgstr "iconv: baitide asendust ei saa sihttabelisse teisendada: %s"
 
-#: src/iconv.c:592 src/iconv.c:636 src/iconv.c:710
-#, c-format
-msgid "%s:%u:%u: incomplete character or shift sequence"
-msgstr "%s:%u:%u: mittetäielik sümbol või nihkejärjend"
-
-#: src/iconv.c:625 src/iconv.c:700
+#. TRANSLATORS: An error message.
+#. The placeholders expand to the input file name, a line number, and a column number.
+#: src/iconv.c:639
 #, c-format
 msgid "%s:%u:%u: cannot convert"
 msgstr "%s:%u:%u: ei saa teisendada"
 
-#: src/iconv.c:667 src/iconv.c:730
+#. TRANSLATORS: An error message.
+#. The placeholders expand to the input file name, a line number, and a column number.
+#. A "shift sequence" is a sequence of bytes that changes the state of the converter;
+#. this concept exists only for "stateful" encodings like ISO-2022-JP.
+#: src/iconv.c:653
+#, c-format
+msgid "%s:%u:%u: incomplete character or shift sequence"
+msgstr "%s:%u:%u: mittetäielik sümbol või nihkejärjend"
+
+#. TRANSLATORS: The first part of an error message.
+#. It is followed by a colon and a detail message.
+#. The placeholders expand to the input file name, a line number, and a column number.
+#: src/iconv.c:666
 #, c-format
 msgid "%s:%u:%u"
 msgstr "%s:%u:%u"
 
-#: src/iconv.c:742
+#. TRANSLATORS: An error message.
+#. The placeholder expands to the input file name.
+#: src/iconv.c:821
 #, c-format
 msgid "%s: I/O error"
 msgstr "%s: S/V viga"
 
-#: src/iconv.c:926
+#. TRANSLATORS: An error message.
+#. The placeholder expands to the encoding name, specified through --from-code.
+#: src/iconv.c:1009
 #, c-format
 msgid "conversion from %s unsupported"
 msgstr "teisendust tabelist %s ei toetata"
 
-#: src/iconv.c:928
+#. TRANSLATORS: An error message.
+#. The placeholder expands to the encoding name, specified through --to-code.
+#: src/iconv.c:1015
 #, c-format
 msgid "conversion to %s unsupported"
 msgstr "teisendust tabelisse %s ei toetata"
 
-#: src/iconv.c:930
+#. TRANSLATORS: An error message.
+#. The placeholders expand to the encoding names, specified through --from-code and --to-code, respectively.
+#: src/iconv.c:1021
 #, c-format
 msgid "conversion from %s to %s unsupported"
 msgstr "teisendust tabelist %s tabelisse %s ei toetata"
 
-#: src/iconv.c:931
+#. TRANSLATORS: Additional advice after an error message.
+#. The %s placeholder expands to the program name.
+#: src/iconv.c:1026
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
 msgstr "Toetatud kooditabelite niekirja saate käsuga '%s -l'"
 
-#: src/iconv.c:985
+#. TRANSLATORS: A filename substitute denoting standard input.
+#: src/iconv.c:1083
 msgid "(stdin)"
 msgstr "(standardsisend)"
 
-#: src/iconv.c:993
+#. TRANSLATORS: The first part of an error message.
+#. It is followed by a colon and a detail message.
+#. The %s placeholder expands to the input file name.
+#: src/iconv.c:1095
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/iconv.c:1004
+#. TRANSLATORS: An error message.
+#: src/iconv.c:1109
 #, c-format
 msgid "I/O error"
 msgstr "S/V viga"
+
+#~ msgid ""
+#~ "This is free software; see the source for copying conditions.  There is "
+#~ "NO\n"
+#~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
+#~ "PURPOSE.\n"
+#~ msgstr ""
+#~ "See on vaba tarkvara; kopeerimise tingimused leiate lähtetekstist. "
+#~ "Garantii\n"
+#~ "PUUDUB; ka müügiks või mingil eesmärgil kasutamiseks, vastavalt "
+#~ "seadustega\n"
+#~ "lubatud piiridele.\n"
