@@ -2,6 +2,7 @@
 
 	* Makefile.devel (AUTOCONF, AUTOHEADER): Require version 2.61.
 	(AUTOMAKE, ACLOCAL): Require version 1.10.
+	(srclib/Makefile.in): Avoid error from automake.
 
 2007-10-26  Bruno Haible  <bruno@clisp.org>
 
