@@ -4,10 +4,10 @@
 
 SHELL = /bin/sh
 MAKE = make
-AUTOCONF = autoconf-2.60
-AUTOHEADER = autoheader-2.60
-AUTOMAKE = automake-1.9
-ACLOCAL = aclocal-1.9
+AUTOCONF = autoconf-2.61
+AUTOHEADER = autoheader-2.61
+AUTOMAKE = automake-1.10
+ACLOCAL = aclocal-1.10
 GPERF = gperf
 CC = gcc
 CFLAGS = -O

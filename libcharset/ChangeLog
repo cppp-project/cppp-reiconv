@@ -1,3 +1,8 @@
+2007-11-11  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOCONF, AUTOHEADER): Require version 2.61.
+	(ACLOCAL): Require version 1.10.
+
 2007-10-26  Bruno Haible  <bruno@clisp.org>
 
 	* m4/libtool.m4: Update, based on libtool-1.5.24.
