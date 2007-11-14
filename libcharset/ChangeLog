@@ -1,3 +1,7 @@
+2007-11-14  Bruno Haible  <bruno@clisp.org>
+
+	* tools/all-locales: Add "C" for Darwin. Treat OpenBSD like Darwin.
+
 2007-11-11  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOCONF, AUTOHEADER): Require version 2.61.
