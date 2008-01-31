@@ -1,23 +1,25 @@
 # Slovak translation of the libiconv.
-# Copyright (C) 2002, 2003 Free Software Foundation, Inc.
-# Marcel Telka <marcel@telka.sk>, 2002, 2003.
+# Copyright (C) 2002, 2003, 2008 Free Software Foundation, Inc.
+# Marcel Telka <marcel@telka.sk>, 2002, 2003, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.9.1\n"
+"Project-Id-Version: libiconv 1.12\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2007-10-25 00:19+0200\n"
-"PO-Revision-Date: 2003-09-05 07:05+0200\n"
+"PO-Revision-Date: 2008-01-31 09:14+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural= (n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 
 #. TRANSLATORS: The first line of the short usage message.
 #: src/iconv.c:105
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr "Použitie: iconv [-c] [-s] [-f z_kódu] [-t do kódu] [súbor ...]"
+msgstr "Použitie: iconv [-c] [-s] [-f zkódovania] [-t dokódovania] [súbor ...]"
 
 #. TRANSLATORS: The second line of the short usage message.
 #. Align it correctly against the first line.
@@ -28,33 +30,33 @@ msgstr "alebo:    iconv -l"
 #: src/iconv.c:111
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr ""
+msgstr "Pre viac informácií skúste použiť `%s --help'.\n"
 
 #. TRANSLATORS: The first line of the long usage message.
 #. The %s placeholder expands to the program name.
 #: src/iconv.c:116
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"
-msgstr ""
+msgstr "Použitie: %s [VOĽBA...] [-f KÓDOVANIA] [-t KÓDOVANIE] [VSTUPNÝSÚBOR...]\n"
 
 #. TRANSLATORS: The second line of the long usage message.
 #. Align it correctly against the first line.
 #. The %s placeholder expands to the program name.
 #: src/iconv.c:123
-#, fuzzy, c-format, no-wrap
+#, c-format, no-wrap
 msgid "or:    %s -l\n"
-msgstr "alebo:    iconv -l"
+msgstr "alebo:    %s -l\n"
 
 #. TRANSLATORS: Description of the iconv program.
 #: src/iconv.c:129
 #, c-format, no-wrap
 msgid "Converts text from one encoding to another encoding.\n"
-msgstr ""
+msgstr "Konvertuje text z jedného kódovania do iného kódovania.\n"
 
 #: src/iconv.c:133
 #, c-format, no-wrap
 msgid "Options controlling the input and output format:\n"
-msgstr ""
+msgstr "Voľby ovplyvňujúce vstupný a výstupný formát:\n"
 
 #: src/iconv.c:136
 #, c-format, no-wrap
@@ -62,6 +64,8 @@ msgid ""
 "  -f ENCODING, --from-code=ENCODING\n"
 "                              the encoding of the input\n"
 msgstr ""
+"  -f KÓDOVANIE, --from-code=KÓDOVANIE\n"
+"                              kódovanie vstupu\n"
 
 #: src/iconv.c:140
 #, c-format, no-wrap
@@ -69,16 +73,18 @@ msgid ""
 "  -t ENCODING, --to-code=ENCODING\n"
 "                              the encoding of the output\n"
 msgstr ""
+"  -t KÓDOVANIE, --to-code=KÓDOVANIE\n"
+"                              kódovanie výstupu\n"
 
 #: src/iconv.c:145
 #, c-format, no-wrap
 msgid "Options controlling conversion problems:\n"
-msgstr ""
+msgstr "Voľby ovplyvňujúce problémy s konverziou:\n"
 
 #: src/iconv.c:148
 #, c-format, no-wrap
 msgid "  -c                          discard unconvertible characters\n"
-msgstr ""
+msgstr "  -c                          vynechať nekonvertovateľné znaky\n"
 
 #: src/iconv.c:151
 #, c-format, no-wrap
@@ -86,11 +92,13 @@ msgid ""
 "  --unicode-subst=FORMATSTRING\n"
 "                              substitution for unconvertible Unicode characters\n"
 msgstr ""
+"  --unicode-subst=FORMÁTOVÝREŤAZEC\n"
+"                              náhrada pre nekonvertovateľné znaky Unicode\n"
 
 #: src/iconv.c:155
 #, c-format, no-wrap
 msgid "  --byte-subst=FORMATSTRING   substitution for unconvertible bytes\n"
-msgstr ""
+msgstr "  --byte-subst=FORMÁTOVÝREŤAZEC   náhrada pre nekonvertovateľné bajty\n"
 
 #: src/iconv.c:158
 #, c-format, no-wrap
@@ -98,36 +106,38 @@ msgid ""
 "  --widechar-subst=FORMATSTRING\n"
 "                              substitution for unconvertible wide characters\n"
 msgstr ""
+"  --widechar-subst=FORMÁTOVÝREŤAZEC\n"
+"                              náhrada pre nekonvertovateľné široké znaky\n"
 
 #: src/iconv.c:163
 #, c-format, no-wrap
 msgid "Options controlling error output:\n"
-msgstr ""
+msgstr "Voľby ovplyvňujúce chybový výstup:\n"
 
 #: src/iconv.c:166
 #, c-format, no-wrap
 msgid "  -s, --silent                suppress error messages about conversion problems\n"
-msgstr ""
+msgstr "  -s, --silent                potlačí chybové správy o problémoch s konverziou\n"
 
 #: src/iconv.c:170
 #, c-format, no-wrap
 msgid "Informative output:\n"
-msgstr ""
+msgstr "Infomatívny výstup:\n"
 
 #: src/iconv.c:173
 #, c-format, no-wrap
 msgid "  -l, --list                  list the supported encodings\n"
-msgstr ""
+msgstr "  -l, --list                  zoznam podporovaných kódovaní\n"
 
 #: src/iconv.c:176
 #, c-format, no-wrap
 msgid "  --help                      display this help and exit\n"
-msgstr ""
+msgstr "  --help                      zobraziť túto pomoc a skončiť\n"
 
 #: src/iconv.c:179
 #, c-format, no-wrap
 msgid "  --version                   output version information and exit\n"
-msgstr ""
+msgstr "  --version                   vypísať informáciu o verzii a skončiť\n"
 
 #. TRANSLATORS: The placeholder indicates the bug-reporting address
 #. for this package.  Please add _another line_ saying
@@ -136,6 +146,9 @@ msgstr ""
 #: src/iconv.c:186
 msgid "Report bugs to <bug-gnu-libiconv@gnu.org>.\n"
 msgstr ""
+"Chyby môžete oznamovať na adresu <bug-gnu-libiconv@gnu.org> (iba anglicky).\n"
+"Komentáre k slovenskému prekladu zasielajte na adresu <sk-i18n@lists.linux."
+"sk>.\n"
 
 #: src/iconv.c:197
 #, no-wrap
@@ -144,6 +157,9 @@ msgid ""
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
+"Licencia GPLv2+: GNU GPL verzia 2 alebo novšia <http://gnu.org/licenses/gpl.html>\n"
+"Toto je slobodný softvér: môžete ho voľne meniť a šíriť ďalej.\n"
+"Neposkytuje sa ŽIADNA ZÁRUKA, v rozsahu povolenom zákonmi.\n"
 
 #. TRANSLATORS: The %s placeholder expands to an author's name.
 #: src/iconv.c:203
@@ -158,6 +174,8 @@ msgstr "Napísal %s.\n"
 msgid ""
 "%s argument: A format directive with a variable width is not allowed here."
 msgstr ""
+"Parameter %s: Formátovacia direktíva s premenlivou šírkou tu nie je "
+"prípustná."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a command-line option.
@@ -167,6 +185,8 @@ msgid ""
 "%s argument: A format directive with a variable precision is not allowed "
 "here."
 msgstr ""
+"Parameter %s: Formátovacia direktíva s premenlivou presnosťou tu nie je "
+"prípustná."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a command-line option.
@@ -174,13 +194,14 @@ msgstr ""
 #, c-format
 msgid "%s argument: A format directive with a size is not allowed here."
 msgstr ""
+"Parameter %s: Formátovacia direktíva s určením šírky tu nie je prípustná."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a command-line option.
 #: src/iconv.c:370
 #, c-format
 msgid "%s argument: The string ends in the middle of a directive."
-msgstr ""
+msgstr "Parameter %s: Reťazec končí v strede direktívy."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a command-line option.
@@ -188,7 +209,7 @@ msgstr ""
 #: src/iconv.c:377
 #, c-format
 msgid "%s argument: The character '%c' is not a valid conversion specifier."
-msgstr ""
+msgstr "Parameter %s: Znak '%c' nie je platným konverzným špecifikátorom."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a command-line option.
@@ -198,6 +219,8 @@ msgid ""
 "%s argument: The character that terminates the format directive is not a "
 "valid conversion specifier."
 msgstr ""
+"Parameter %s: Znak, ktorý ukončuje formátovaciu direktívu nie je platným "
+"konverzným špecifikátorom."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a command-line option.
@@ -209,28 +232,35 @@ msgid ""
 msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
 msgstr[0] ""
+"Parameter %s: Formátovací reťazec pohltí viac ako jeden parameter: %u "
+"parametrov."
 msgstr[1] ""
+"Parameter %s: Formátovací reťazec pohltí viac ako jeden parameter: %u "
+"parameter."
+msgstr[2] ""
+"Parameter %s: Formátovací reťazec pohltí viac ako jeden parameter: %u "
+"parametre."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --byte-subst.
 #: src/iconv.c:457
 #, c-format
 msgid "cannot convert byte substitution to Unicode: %s"
-msgstr ""
+msgstr "nie je možné konvertovať náhradu bajtov do Unicode: %s"
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --unicode-subst.
 #: src/iconv.c:497
 #, c-format
 msgid "cannot convert unicode substitution to target encoding: %s"
-msgstr ""
+msgstr "nie je možné konvertovať náhradu Unicode do cieľového kódovania: %s"
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --byte-subst.
 #: src/iconv.c:538
 #, c-format
 msgid "cannot convert byte substitution to wide string: %s"
-msgstr ""
+msgstr "nie je možné konvertovať náhradu bajtov na široký reťazec: %s"
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --widechar-subst.
@@ -238,72 +268,73 @@ msgstr ""
 #, c-format
 msgid "cannot convert widechar substitution to target encoding: %s"
 msgstr ""
+"nie je možné konvertovať náhradu širokého znaku do cieľového kódovania: %s"
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --byte-subst.
 #: src/iconv.c:620
 #, c-format
 msgid "cannot convert byte substitution to target encoding: %s"
-msgstr ""
+msgstr "nie je možné konvertovať náhradu bajtov do cieľového kódovania: %s"
 
 #. TRANSLATORS: An error message.
 #. The placeholders expand to the input file name, a line number, and a column number.
 #: src/iconv.c:639
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u: cannot convert"
-msgstr "iconv: %s: nemôžem konvertovať\n"
+msgstr "%s:%u:%u: nie je možné konvertovať"
 
 #. TRANSLATORS: An error message.
 #. The placeholders expand to the input file name, a line number, and a column number.
 #. A "shift sequence" is a sequence of bytes that changes the state of the converter;
 #. this concept exists only for "stateful" encodings like ISO-2022-JP.
 #: src/iconv.c:653
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u: incomplete character or shift sequence"
-msgstr "iconv: %s: nekompletný znak alebo preraďovacia sekvencia\n"
+msgstr "%s:%u:%u: nekompletný znak alebo preraďovacia sekvencia"
 
 #. TRANSLATORS: The first part of an error message.
 #. It is followed by a colon and a detail message.
 #. The placeholders expand to the input file name, a line number, and a column number.
 #: src/iconv.c:666
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u"
-msgstr "iconv: %s: "
+msgstr "%s:%u:%u"
 
 #. TRANSLATORS: An error message.
 #. The placeholder expands to the input file name.
 #: src/iconv.c:821
-#, fuzzy, c-format
+#, c-format
 msgid "%s: I/O error"
-msgstr "iconv: %s: V/V chyba\n"
+msgstr "%s: V/V chyba"
 
 #. TRANSLATORS: An error message.
 #. The placeholder expands to the encoding name, specified through --from-code.
 #: src/iconv.c:1009
-#, fuzzy, c-format
+#, c-format
 msgid "conversion from %s unsupported"
-msgstr "iconv: konverzia z %s nie je podporovaná\n"
+msgstr "konverzia z %s nie je podporovaná"
 
 #. TRANSLATORS: An error message.
 #. The placeholder expands to the encoding name, specified through --to-code.
 #: src/iconv.c:1015
-#, fuzzy, c-format
+#, c-format
 msgid "conversion to %s unsupported"
-msgstr "iconv: konverzia do %s nie je podporovaná\n"
+msgstr "konverzia do %s nie je podporovaná"
 
 #. TRANSLATORS: An error message.
 #. The placeholders expand to the encoding names, specified through --from-code and --to-code, respectively.
 #: src/iconv.c:1021
-#, fuzzy, c-format
+#, c-format
 msgid "conversion from %s to %s unsupported"
-msgstr "iconv: konverzia z %s do %s nie je podporovaná\n"
+msgstr "konverzia z %s do %s nie je podporovaná"
 
 #. TRANSLATORS: Additional advice after an error message.
 #. The %s placeholder expands to the program name.
 #: src/iconv.c:1026
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
-msgstr ""
+msgstr "skúste '%s -l' aby ste získali zoznam podporovaných kódovaní"
 
 #. TRANSLATORS: A filename substitute denoting standard input.
 #: src/iconv.c:1083
@@ -316,30 +347,10 @@ msgstr "(štandardný vstup)"
 #: src/iconv.c:1095
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: An error message.
 #: src/iconv.c:1109
-#, fuzzy, c-format
+#, c-format
 msgid "I/O error"
-msgstr "iconv: V/V chyba\n"
-
-#~ msgid ""
-#~ "This is free software; see the source for copying conditions.  There is "
-#~ "NO\n"
-#~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
-#~ "PURPOSE.\n"
-#~ msgstr ""
-#~ "Toto je voľne šíriteľný softvér; pre podmienky kopírovania pozri zdrojový "
-#~ "kód.\n"
-#~ "Neposkytuje sa ŽIADNA záruka; ani čo sa týka OBCHODOVATEĽNOSTI alebo "
-#~ "VHODNOSTI\n"
-#~ "NA KONKRÉTNY ÚČEL.\n"
-
-#~ msgid "iconv: %s: "
-#~ msgstr "iconv: %s: "
-
-#~ msgid ""
-#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-#~ msgstr ""
-#~ "Použitie: iconv [--binary] [-c] [-s] [-f z_kódu] [-t do_kódu] [súbor ...]"
+msgstr "V/V chyba"
