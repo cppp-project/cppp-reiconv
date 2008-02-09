@@ -1,17 +1,18 @@
 # Swedish messages for libiconv.
-# Copyright (C) 2002, 2006, 2007 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
-# Daniel Nylander <po@danielnylander.se>, 2006, 2007.
 # Christian Rose <menthos@menthos.com>, 2002.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.11\n"
+"Project-Id-Version: libiconv 1.12\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2007-10-25 00:19+0200\n"
-"PO-Revision-Date: 2007-07-24 00:26+0100\n"
+"PO-Revision-Date: 2008-02-09 20:58+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -158,6 +159,9 @@ msgid ""
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
+"Licens GPLv2+: GNU GPL version 2 eller senare <http://gnu.org/licenses/gpl.html>\n"
+"Det här är fri programvara: du kan ändra och distribuera den.\n"
+"Det finns INGEN GARANTI, så långt lagen tillåter.\n"
 
 #. TRANSLATORS: The %s placeholder expands to an author's name.
 #: src/iconv.c:203
