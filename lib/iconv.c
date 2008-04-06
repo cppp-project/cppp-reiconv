@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2007 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2008 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -80,21 +80,22 @@ struct encoding {
   struct wctomb_funcs ofuncs; /* conversion unicode -> multibyte */
   int oflags;                 /* flags for unicode -> multibyte conversion */
 };
+#define DEFALIAS(xxx_alias,xxx) /* nothing */
 enum {
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   ei_##xxx ,
 #include "encodings.def"
 #ifdef USE_AIX
-#include "encodings_aix.def"
+# include "encodings_aix.def"
 #endif
 #ifdef USE_OSF1
-#include "encodings_osf1.def"
+# include "encodings_osf1.def"
 #endif
 #ifdef USE_DOS
-#include "encodings_dos.def"
+# include "encodings_dos.def"
 #endif
 #ifdef USE_EXTRA
-#include "encodings_extra.def"
+# include "encodings_extra.def"
 #endif
 #include "encodings_local.def"
 #undef DEFENCODING
@@ -106,16 +107,16 @@ static struct encoding const all_encodings[] = {
   { xxx_ifuncs1,xxx_ifuncs2, xxx_ofuncs1,xxx_ofuncs2, ei_##xxx##_oflags },
 #include "encodings.def"
 #ifdef USE_AIX
-#include "encodings_aix.def"
+# include "encodings_aix.def"
 #endif
 #ifdef USE_OSF1
-#include "encodings_osf1.def"
+# include "encodings_osf1.def"
 #endif
 #ifdef USE_DOS
-#include "encodings_dos.def"
+# include "encodings_dos.def"
 #endif
 #ifdef USE_EXTRA
-#include "encodings_extra.def"
+# include "encodings_extra.def"
 #endif
 #undef DEFENCODING
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
@@ -123,6 +124,7 @@ static struct encoding const all_encodings[] = {
 #include "encodings_local.def"
 #undef DEFENCODING
 };
+#undef DEFALIAS
 
 /*
  * Conversion loops.
@@ -136,7 +138,17 @@ static struct encoding const all_encodings[] = {
  *   const struct alias * aliases_lookup (const char *str, unsigned int len);
  *   #define MAX_WORD_LENGTH ...
  */
-#include "aliases.h"
+#if defined _AIX
+# include "aliases_sysaix.h"
+#elif defined hpux || defined __hpux
+# include "aliases_syshpux.h"
+#elif defined __osf__
+# include "aliases_sysosf1.h"
+#elif defined __sun
+# include "aliases_syssolaris.h"
+#else
+# include "aliases.h"
+#endif
 
 /*
  * System dependent alias lookup function.
@@ -603,20 +615,48 @@ void iconvlist (int (*do_one) (unsigned int namescount,
  * Instead of strings, it contains offsets into stringpool and stringpool2.
  */
 static const unsigned short all_canonical[] = {
-#include "canonical.h"
+#if defined _AIX
+# include "canonical_sysaix.h"
+#elif defined hpux || defined __hpux
+# include "canonical_syshpux.h"
+#elif defined __osf__
+# include "canonical_sysosf1.h"
+#elif defined __sun
+# include "canonical_syssolaris.h"
+#else
+# include "canonical.h"
+#endif
 #ifdef USE_AIX
-#include "canonical_aix.h"
+# if defined _AIX
+#  include "canonical_aix_sysaix.h"
+# else
+#  include "canonical_aix.h"
+# endif
 #endif
 #ifdef USE_OSF1
-#include "canonical_osf1.h"
+# if defined __osf__
+#  include "canonical_osf1_sysosf1.h"
+# else
+#  include "canonical_osf1.h"
+# endif
 #endif
 #ifdef USE_DOS
-#include "canonical_dos.h"
+# include "canonical_dos.h"
 #endif
 #ifdef USE_EXTRA
-#include "canonical_extra.h"
+# include "canonical_extra.h"
 #endif
-#include "canonical_local.h"
+#if defined _AIX
+# include "canonical_local_sysaix.h"
+#elif defined hpux || defined __hpux
+# include "canonical_local_syshpux.h"
+#elif defined __osf__
+# include "canonical_local_sysosf1.h"
+#elif defined __sun
+# include "canonical_local_syssolaris.h"
+#else
+# include "canonical_local.h"
+#endif
 };
 
 const char * iconv_canonicalize (const char * name)

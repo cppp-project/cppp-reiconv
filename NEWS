@@ -1,3 +1,8 @@
+New in 1.13:
+* The library and the iconv program now understand platform dependent aliases,
+  for better compatibility with the platform's own iconv_open function.
+  Examples: "646" on Solaris, "iso88591" on HP-UX, "IBM-1252" on AIX.
+
 New in 1.12:
 * The iconv program is now licensed under the GPL version 3, instead of the
   GPL version 2. The libiconv library continues to be licensed under LGPL.

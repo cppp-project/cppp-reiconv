@@ -1,5 +1,49 @@
 2008-04-06  Bruno Haible  <bruno@clisp.org>
 
+	Support all possible nl_langinfo(CODESET) results on the respective
+	platforms, according to libcharset/lib/config.charset.
+	* lib/encodings.def: Add DEFALIAS statements, conditional on
+	USE_AIX_ALIASES, USE_HPUX_ALIASES, USE_OSF1_ALIASES,
+	USE_SOLARIS_ALIASES.
+	* lib/encodings_aix.def: Add DEFALIAS statements, conditional on
+	USE_AIX_ALIASES.
+	* lib/encodings_osf1.def: Add DEFALIAS statements, conditional on
+	USE_OSF1_ALIASES.
+	* lib/genaliases.c (emit_alias): New function, extracted from
+	emit_encoding.
+	(emit_encoding): Use it.
+	(main): Define DEFALIAS.
+	* lib/genaliases2.c (counter): New variable, extracted from
+	emit_encoding.
+	(emit_alias): New function, extracted from emit_encoding.
+	(emit_encoding): Use it.
+	(main): Define DEFALIAS.
+	* lib/genflags.c (main): Define DEFALIAS.
+	* lib/iconv.c (all_encodings): Define DEFALIAS.
+	Include the system dependent variant of aliases.h on the appropriate
+	systems.
+	(all_canonical): Include the system dependent variant of canonical.h,
+	canonical_aix.h, canonical_osf1.h, canonical_local.h on the appropriate
+	systems.
+	* lib/aliases2.h: Include the system dependent variant of
+	aliases_aix.h or aliases_osf1.h on the appropriate systems.
+	* lib/Makefile.in (iconv.lo): Depend on aliases_sysaix.h,
+	aliases_syshpux.h, aliases_sysosf1.h, aliases_syssolaris.h,
+	aliases_aix_sysaix.h, lib/aliases_osf1_sysosf1.h, and also
+	aliases_extra.h, translit.h.
+	* Makefile.devel (all): Depend on lib/aliases_sysaix.h,
+	lib/aliases_syshpux.h, lib/aliases_sysosf1.h, lib/aliases_syssolaris.h,
+	lib/aliases_aix_sysaix.h, lib/aliases_osf1_sysosf1.h.
+	(lib/aliases_sysaix.h, lib/aliases_syshpux.h, lib/aliases_sysosf1.h,
+	lib/aliases_syssolaris.h): New rules.
+	(lib/aliases_aix_sysaix.h): New rule.
+	(lib/aliases_osf1_sysosf1.h): New rule.
+	* autogen.sh: Also remove lib/aliases_sysaix.h, lib/aliases_syshpux.h,
+	lib/aliases_sysosf1.h, lib/aliases_syssolaris.h,
+	lib/aliases_aix_sysaix.h, lib/aliases_osf1_sysosf1.h.
+
+2008-04-06  Bruno Haible  <bruno@clisp.org>
+
 	* build-aux/config.libpath: Remove file, brought in by gnulib-tool.
 	* build-aux/config.rpath: Remove file, brought in by gnulib-tool.
 

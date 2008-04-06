@@ -99,7 +99,14 @@ preloadable_libiconv_osf.so : $(SOURCES)
 	  rm -rf objects; \
 	fi
 
-iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/encodings_osf1.def $(srcdir)/encodings_dos.def $(srcdir)/encodings_local.def $(srcdir)/aliases.h $(srcdir)/aliases_aix.h $(srcdir)/aliases_osf1.h $(srcdir)/aliases_dos.h $(srcdir)/flags.h
+iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h \
+           $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/encodings_osf1.def $(srcdir)/encodings_dos.def $(srcdir)/encodings_local.def \
+           $(srcdir)/aliases.h $(srcdir)/aliases_sysaix.h $(srcdir)/aliases_syshpux.h $(srcdir)/aliases_sysosf1.h $(srcdir)/aliases_syssolaris.h \
+           $(srcdir)/aliases_aix.h $(srcdir)/aliases_aix_sysaix.h \
+           $(srcdir)/aliases_osf1.h $(srcdir)/aliases_osf1_sysosf1.h \
+           $(srcdir)/aliases_dos.h \
+           $(srcdir)/aliases_extra.h \
+           $(srcdir)/flags.h $(srcdir)/translit.h
 	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(DEFS) -c $(srcdir)/iconv.c
 
 localcharset.lo : $(srcdir)/../libcharset/lib/localcharset.c $(srcdir)/relocatable.h

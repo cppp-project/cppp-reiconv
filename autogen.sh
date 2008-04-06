@@ -71,7 +71,11 @@ if test $skip_gnulib = false; then
 fi
 
 rm -f configure config.h.in include/iconv.h.build.in
-rm -f lib/aliases.h lib/aliases_aix.h lib/aliases_osf1.h lib/aliases_dos.h lib/aliases_extra.h
+rm -f lib/aliases.h lib/aliases_sysaix.h lib/aliases_syshpux.h lib/aliases_sysosf1.h lib/aliases_syssolaris.h
+rm -f lib/aliases_aix.h lib/aliases_aix_sysaix.h
+rm -f lib/aliases_osf1.h lib/aliases_osf1_sysosf1.h
+rm -f lib/aliases_dos.h
+rm -f lib/aliases_extra.h
 rm -f lib/flags.h
 rm -f lib/translit.h
 rm -f man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html
