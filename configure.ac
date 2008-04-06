@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2007 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2008 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -119,23 +119,6 @@ m4_popdef([AC_REPLACE_FUNCS])
 m4_popdef([AC_LIBOBJ])
 AC_SUBST([SRCLIBOBJS])
 
-dnl           check whether OS supports plug libraries
-
-OS=""
-case "$host_os" in
-  linux*)   OS="linux" ;;
-  solaris*) OS="solaris" ;;
-  osf*)     OS="osf" ;;
-esac
-if test -n "$OS"; then
-  AC_SUBST(OS)
-  AC_SUBST(GCC)
-  PLUGLIB="preloadable_libiconv.so"
-else
-  PLUGLIB=""
-fi
-AC_SUBST(PLUGLIB)
-
 dnl Compilation on mingw and Cygwin needs special Makefile rules, because
 dnl 1. when we install a shared library, we must arrange to export
 dnl    auxiliary pointer variables for every exported variable,
@@ -183,6 +166,7 @@ AH_BOTTOM([
 ])
 
 AC_CONFIG_SUBDIRS(libcharset)
+AC_CONFIG_SUBDIRS(preload)
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([lib/Makefile])
 AC_CONFIG_FILES([srclib/Makefile])

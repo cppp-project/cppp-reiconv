@@ -1,5 +1,23 @@
 2008-04-06  Bruno Haible  <bruno@clisp.org>
 
+	More portable way of building the preloadable library.
+	* preload/Makefile.devel: New file.
+	* preload/Makefile.in: New file, based on lib/Makefile.in.
+	* preload/configure.ac: New file, based on configure.ac.
+	* Makefile.devel (all): Recurse into preload directory.
+	* Makefile.in (all, install, installdirs, uninstall, check,
+	mostlyclean, clean, distclean, maintainer-clean): Recurse into preload
+	directory.
+	* configure.ac: Likewise.
+	(OS, GCC, PLUGLIB): Remove definitions.
+	* lib/Makefile.in (all): Don't depend on PLUGLIB.
+	(preloadable_libiconv.so, preloadable_libiconv_linux.so,
+	preloadable_libiconv_solaris.so, preloadable_libiconv_osf.so): Remove
+	rules.
+	(install, uninstall, clean): Don't handle the preloadable library here.
+
+2008-04-06  Bruno Haible  <bruno@clisp.org>
+
 	Avoid a gcc warning.
 	* lib/loop_unicode.h (unicode_loop_convert): Add a cast.
 

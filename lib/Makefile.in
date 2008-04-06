@@ -64,40 +64,10 @@ OBJECTS_EXP_no =
 OBJECTS_RES_yes = libiconv.res
 OBJECTS_RES_no =
 
-all : @PLUGLIB@ libiconv.la
+all : libiconv.la
 
 libiconv.la : $(OBJECTS)
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS)
-
-preloadable_libiconv.so : preloadable_libiconv_@OS@.so
-	$(RM) preloadable_libiconv.so
-	$(LN_S) preloadable_libiconv_@OS@.so preloadable_libiconv.so
-
-preloadable_libiconv_linux.so : $(SOURCES)
-	if test -n "@GCC@"; then \
-	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) -shared -o preloadable_libiconv_linux.so; \
-	else \
-	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -KPIC -DPIC -DLIBICONV_PLUG $(SOURCES) -shared -o preloadable_libiconv_linux.so; \
-	fi
-
-preloadable_libiconv_solaris.so : $(SOURCES)
-	if test -n "@GCC@"; then \
-	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) -shared -o preloadable_libiconv_solaris.so; \
-	else \
-	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -KPIC -DPIC -DLIBICONV_PLUG $(SOURCES) -G -o preloadable_libiconv_solaris.so; \
-	fi
-
-preloadable_libiconv_osf.so : $(SOURCES)
-	if test -n "@GCC@"; then \
-	  $(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -fPIC -DPIC -DLIBICONV_PLUG $(SOURCES) -shared -o preloadable_libiconv_osf.so; \
-	else \
-	  mkdir objects; \
-	  for f in $(SOURCES); do \
-	    $(CC) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(DEFS) -DPIC -DLIBICONV_PLUG -c $$f -o objects/`basename $$f | sed -e 's,\.c$$,.o,'`; \
-	  done; \
-	  /bin/ld -shared -expect_unresolved \* -o preloadable_libiconv_osf.so objects/*.o; \
-	  rm -rf objects; \
-	fi
 
 iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h \
            $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/encodings_osf1.def $(srcdir)/encodings_dos.def $(srcdir)/encodings_local.def \
@@ -141,21 +111,19 @@ install : all force
 	         rm -f $$objects && \
 	         mv -f libiconv.new.a libiconv.a) ;; \
 	esac
-	if test -n "@PLUGLIB@"; then $(INSTALL_DATA) @PLUGLIB@ $(DESTDIR)$(libdir)/@PLUGLIB@.new && mv $(DESTDIR)$(libdir)/@PLUGLIB@.new $(DESTDIR)$(libdir)/@PLUGLIB@ ; fi
 
 installdirs : force
 	if [ ! -d $(DESTDIR)$(libdir) ] ; then $(mkinstalldirs) $(DESTDIR)$(libdir) ; fi
 
 uninstall : force
 	$(LIBTOOL_UNINSTALL) $(RM) $(DESTDIR)$(libdir)/libiconv.la
-	if test -n "@PLUGLIB@"; then $(RM) $(DESTDIR)$(libdir)/@PLUGLIB@ ; fi
 
 check : all
 
 mostlyclean : clean
 
 clean : force
-	$(RM) *.o *.lo libiconv.res *.a *.la preloadable_libiconv* core *.stackdump so_locations
+	$(RM) *.o *.lo libiconv.res *.a *.la core *.stackdump so_locations
 	$(RM) -r .libs _libs
 
 distclean : clean
