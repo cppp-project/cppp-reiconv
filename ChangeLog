@@ -1,5 +1,9 @@
 2008-04-06  Bruno Haible  <bruno@clisp.org>
 
+	* src/iconv.c (print_version): Bump year.
+
+2008-04-06  Bruno Haible  <bruno@clisp.org>
+
 	Support all possible nl_langinfo(CODESET) results on the respective
 	platforms, according to libcharset/lib/config.charset.
 	* lib/encodings.def: Add DEFALIAS statements, conditional on
