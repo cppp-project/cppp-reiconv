@@ -1,5 +1,10 @@
 2008-04-06  Bruno Haible  <bruno@clisp.org>
 
+	Avoid a gcc warning.
+	* lib/loop_unicode.h (unicode_loop_convert): Add a cast.
+
+2008-04-06  Bruno Haible  <bruno@clisp.org>
+
 	* src/iconv.c (print_version): Bump year.
 
 2008-04-06  Bruno Haible  <bruno@clisp.org>

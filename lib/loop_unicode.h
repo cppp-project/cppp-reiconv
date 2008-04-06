@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2003, 2005-2006 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2003, 2005-2006, 2008 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -319,7 +319,7 @@ static size_t unicode_loop_convert (iconv_t icd,
           locals.l_outbuf = outptr;
           locals.l_outbytesleft = outleft;
           locals.l_errno = 0;
-          cd->fallbacks.mb_to_uc_fallback(inptr, incount,
+          cd->fallbacks.mb_to_uc_fallback((const char*)inptr, incount,
                                           mb_to_uc_write_replacement,
                                           &locals,
                                           cd->fallbacks.data);
