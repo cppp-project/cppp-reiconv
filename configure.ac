@@ -73,9 +73,7 @@ AC_EXEEXT
 
 dnl           check for build configuration
 
-AC_DISABLE_STATIC
-AC_LIBTOOL_WIN32_DLL
-AC_PROG_LIBTOOL
+LT_INIT([disable-static win32-dll])
 gl_VISIBILITY
 AM_ICONV
 AM_GNU_GETTEXT([external], [need-ngettext])

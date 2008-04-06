@@ -62,8 +62,7 @@ dnl wants to the libiconv library itself to be installed shared or static or
 dnl both.
 enable_shared=yes
 enable_static=no
-AC_LIBTOOL_WIN32_DLL
-AC_PROG_LIBTOOL
+LT_INIT([win32-dll])
 gl_VISIBILITY
 
 dnl           check whether OS supports plug libraries

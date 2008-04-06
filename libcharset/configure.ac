@@ -1,4 +1,4 @@
-dnl Copyright (C) 2000-2003, 2005-2007 Free Software Foundation, Inc.
+dnl Copyright (C) 2000-2003, 2005-2008 Free Software Foundation, Inc.
 dnl This file is part of the GNU CHARSET Library.
 dnl
 dnl The GNU CHARSET Library is free software; you can redistribute it and/or
@@ -56,8 +56,7 @@ AC_EXEEXT
 
 dnl           check for build configuration
 
-AC_LIBTOOL_WIN32_DLL
-AC_PROG_LIBTOOL
+LT_INIT([win32-dll])
 gl_VISIBILITY
 
 dnl           checks for header files and functions
