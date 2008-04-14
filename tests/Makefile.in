@@ -34,7 +34,7 @@ check : all table-from table-to ../src/iconv_no_i18n
 	$(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(srcdir)/genutf8.c -o genutf8 && \
 	./genutf8 > UTF-8.TXT && \
 	$(srcdir)/check-stateless . UTF-8 && \
-	$(RM) genutf8@EXEEXT@ UTF-8.TXT
+	$(RM) -r genutf8@EXEEXT@ genutf8.dSYM UTF-8.TXT
 	$(srcdir)/check-stateful $(srcdir) UCS-2BE
 	$(srcdir)/check-stateful $(srcdir) UCS-2LE
 	$(srcdir)/check-stateful $(srcdir) UCS-4BE
@@ -128,7 +128,7 @@ check : all table-from table-to ../src/iconv_no_i18n
 	$(CC) $(LDFLAGS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(srcdir)/gengb18030z.c -o gengb18030z && \
 	{ cat $(srcdir)/GB18030-BMP.TXT ; ./gengb18030z ; } | sort > GB18030.TXT && \
 	$(srcdir)/check-stateless . GB18030 && \
-	$(RM) gengb18030z@EXEEXT@ GB18030.TXT
+	$(RM) -r gengb18030z@EXEEXT@ gengb18030z.dSYM GB18030.TXT
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-CN
 	$(srcdir)/check-stateful $(srcdir) ISO-2022-CN-EXT
 	$(srcdir)/check-stateful $(srcdir) HZ
