@@ -46,8 +46,7 @@ dnl           checks for programs
 
 dnl           checks for UNIX variants that set DEFS
 
-AC_AIX
-AC_MINIX
+AC_USE_SYSTEM_EXTENSIONS
 
 dnl           checks for compiler output filename suffixes
 

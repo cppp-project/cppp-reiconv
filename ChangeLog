@@ -1,3 +1,11 @@
+2008-04-14  Bruno Haible  <bruno@clisp.org>
+
+	* preload/configure.ac: Invoke AC_USE_SYSTEM_EXTENSIONS instead of
+	AC_AIX and AC_MINIX.
+	* Makefile.devel (AUTOCONF, AUTOHEADER): Require autoconf-2.62.
+	* preload/Makefile.devel (AUTOCONF): Likewise.
+	* autogen.sh: Likewise.
+
 2008-04-06  Bruno Haible  <bruno@clisp.org>
 
 	* m4/libtool.m4: Update from libtool-2.2.2, with modifications:
