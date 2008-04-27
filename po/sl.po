@@ -1,17 +1,18 @@
 # -*- mode:po; coding:utf-8; -*- Slovenian messages for libiconv.
-# Copyright (C) 2002, 2006, 2007 Free Software Foundation, Inc.
-# Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>, 2002, 2006, 2007.
+# Copyright (C) 2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
+# Primož Peterlin <primozz.peterlin@gmail.com>, 2002, 2006, 2007, 2008.
 # $Id$
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.11\n"
+"Project-Id-Version: libiconv 1.12\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2007-10-25 00:19+0200\n"
-"PO-Revision-Date: 2007-10-15 16:03+0200\n"
+"PO-Revision-Date: 2008-04-26 09:48+0200\n"
 "Last-Translator: Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +28,7 @@ msgstr "Uporaba: iconv [-c] [-s] [-f vh_nabor] [-t izh_nabor] [datoteka ...]<"
 #. Align it correctly against the first line.
 #: src/iconv.c:109
 msgid "or:    iconv -l"
-msgstr "ali:   iconv -l"
+msgstr "ali:     iconv -l"
 
 #: src/iconv.c:111
 #, c-format
@@ -156,6 +157,9 @@ msgid ""
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
+"GPLv2+: GNU GPL, 2. izdaja ali poznejša <http://www.gnu.org/licenses/gpl.html>\n"
+"To je prosto programje; lahko ga redistribuirate in/ali spreminjate.\n"
+"Za izdelek ni NOBENEGA JAMSTVA, do z zakonom dovoljene meje.\n"
 
 #. TRANSLATORS: The %s placeholder expands to an author's name.
 #: src/iconv.c:203
