@@ -1,3 +1,7 @@
+2008-05-22  Bruno Haible  <bruno@clisp.org>
+
+	* README.woe32: Update with info from GNU gettext's README.woe32.
+
 2008-05-18  Bruno Haible  <bruno@clisp.org>
 
 	* m4/libtool.m4: Update from libtool-2.2.4, with modifications:
