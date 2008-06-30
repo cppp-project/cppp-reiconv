@@ -1,5 +1,6 @@
 2008-06-30  Bruno Haible  <bruno@clisp.org>
 
+	Fix sed expressions to work with the old sed-3.02 on MSYS.
 	* windows/windres-options (sed_extract_major, sed_extract_minor,
 	sed_extract_subminor): Put a semicolon before the closing brace. Use
 	an i\ command instead of an a\ command.
