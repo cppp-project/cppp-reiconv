@@ -1,3 +1,12 @@
+2008-06-30  Bruno Haible  <bruno@clisp.org>
+
+	* windows/windres-options (sed_extract_major, sed_extract_minor,
+	sed_extract_subminor): Put a semicolon before the closing brace. Use
+	an i\ command instead of an a\ command.
+	Reported by Sunil Negi <sunil.negi@morningstar.com>
+	in <http://article.gmane.org/gmane.comp.gnu.mingw.msys/4410>
+	via Keith Marshall <keithmarshall@users.sourceforge.net>.
+
 2008-05-22  Bruno Haible  <bruno@clisp.org>
 
 	* README.woe32: Update with info from GNU gettext's README.woe32.
