@@ -1,3 +1,8 @@
+2008-09-06  Bruno Haible  <bruno@clisp.org>
+
+	* lib/gbk.h (gbk_wctomb): Fix an out-of-bounds write.
+	Reported at <http://savannah.gnu.org/bugs/?24214>.
+
 2008-06-30  Bruno Haible  <bruno@clisp.org>
 
 	Fix sed expressions to work with the old sed-3.02 on MSYS.
