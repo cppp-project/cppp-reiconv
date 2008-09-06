@@ -1,7 +1,8 @@
 2008-09-06  Bruno Haible  <bruno@clisp.org>
 
 	* lib/gbk.h (gbk_wctomb): Fix an out-of-bounds write.
-	Reported at <http://savannah.gnu.org/bugs/?24214>.
+	Reported by Roman Rybalko <roman_rybalko@users.sourceforge.net>
+	at <http://savannah.gnu.org/bugs/?24214>.
 
 2008-06-30  Bruno Haible  <bruno@clisp.org>
 
