@@ -1,5 +1,9 @@
 2008-09-07  Bruno Haible  <bruno@clisp.org>
 
+	* man/iconv.3: Clarify the processing of shift-sequences.
+
+2008-09-07  Bruno Haible  <bruno@clisp.org>
+
 	* m4/libtool.m4: Update from libtool-2.2.6, with modifications:
 	2008-04-06  Bruno Haible  <bruno@clisp.org>
 		* m4/libtool.m4 (LT_INIT): When setting LIBTOOL, use
