@@ -1,5 +1,39 @@
 2008-09-07  Bruno Haible  <bruno@clisp.org>
 
+	Make behaviour when encountering invalid input after a shift sequence
+	more consistent.
+	* lib/converters.h (RET_SHIFT_ILSEQ): New macro.
+	(RET_ILSEQ): Define in terms of RET_SHIFT_ILSEQ.
+	(RET_TOOFEW): Change to avoid collisions with RET_SHIFT_ILSEQ.
+	(DECODE_SHIFT_ILSEQ, DECODE_TOOFEW): New macros.
+	* lib/loop_unicode.h (unicode_loop_convert): Take into account the
+	shift count contained in the negative return values.
+	* lib/hz.h (hz_mbtowc): When encountering invalid input, store the
+	modified state and return RET_SHIFT_ILSEQ.
+	* lib/iso2022_cn.h (iso2022_cn_mbtowc): Likewise.
+	* lib/iso2022_cnext.h (iso2022_cn_ext_mbtowc): Likewise.
+	* lib/iso2022_jp.h (iso2022_jp_mbtowc): Likewise.
+	* lib/iso2022_jp1.h (iso2022_jp1_mbtowc): Likewise.
+	* lib/iso2022_jp2.h (iso2022_jp2_mbtowc): Likewise.
+	* lib/iso2022_jp3.h (iso2022_jp3_mbtowc): Likewise.
+	* lib/iso2022_kr.h (iso2022_kr_mbtowc): Likewise.
+	* lib/ucs2.h (ucs2_mbtowc): Likewise.
+	* lib/ucs4.h (ucs4_mbtowc): Likewise.
+	* lib/utf16.h (utf16_mbtowc): Likewise.
+	* lib/utf32.h (utf32_mbtowc): Likewise.
+	* lib/utf7.h (utf7_mbtowc): Likewise.
+	* lib/utf16be.h (utf16be_mbtowcutf16be_mbtowc): When encountering
+	invalid input, return RET_SHIFT_ILSEQ.
+	* lib/utf16le.h (utf16le_mbtowc): Likewise.
+	* tests/test-shiftseq.c: New file.
+	* tests/Makefile.in (check): Run test-shiftseq.
+	(test-shiftseq, test-shiftseq.@OBJEXT@): New rules.
+	(clean): Remove test-shiftseq executable.
+	Reported by Roman Rybalko <roman_rybalko@users.sourceforge.net>
+	at <http://savannah.gnu.org/bugs/?24216>.
+
+2008-09-07  Bruno Haible  <bruno@clisp.org>
+
 	* man/iconv.3: Clarify the processing of shift-sequences.
 
 2008-09-07  Bruno Haible  <bruno@clisp.org>
