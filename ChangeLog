@@ -1,3 +1,7 @@
+2008-09-14  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (GNULIB_MODULES): Add strerror.
+
 2008-09-07  Bruno Haible  <bruno@clisp.org>
 
 	Make behaviour when encountering invalid input after a shift sequence

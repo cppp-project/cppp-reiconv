@@ -74,6 +74,7 @@ GNULIB_MODULES = \
   memmove \
   progname \
   relocatable-prog \
+  strerror \
   unistd \
   uniwidth/width \
   unlocked-io \
