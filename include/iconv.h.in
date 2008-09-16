@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2003, 2005-2006 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2003, 2005-2006, 2008 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -65,24 +65,24 @@ extern "C" {
 #endif
 
 
-/* Allocates descriptor for code conversion from encoding `fromcode' to
-   encoding `tocode'. */
+/* Allocates descriptor for code conversion from encoding ‘fromcode’ to
+   encoding ‘tocode’. */
 #ifndef LIBICONV_PLUG
 #define iconv_open libiconv_open
 #endif
 extern iconv_t iconv_open (const char* tocode, const char* fromcode);
 
-/* Converts, using conversion descriptor `cd', at most `*inbytesleft' bytes
-   starting at `*inbuf', writing at most `*outbytesleft' bytes starting at
-   `*outbuf'.
-   Decrements `*inbytesleft' and increments `*inbuf' by the same amount.
-   Decrements `*outbytesleft' and increments `*outbuf' by the same amount. */
+/* Converts, using conversion descriptor ‘cd’, at most ‘*inbytesleft’ bytes
+   starting at ‘*inbuf’, writing at most ‘*outbytesleft’ bytes starting at
+   ‘*outbuf’.
+   Decrements ‘*inbytesleft’ and increments ‘*inbuf’ by the same amount.
+   Decrements ‘*outbytesleft’ and increments ‘*outbuf’ by the same amount. */
 #ifndef LIBICONV_PLUG
 #define iconv libiconv
 #endif
 extern size_t iconv (iconv_t cd, @ICONV_CONST@ char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
 
-/* Frees resources allocated for conversion descriptor `cd'. */
+/* Frees resources allocated for conversion descriptor ‘cd’. */
 #ifndef LIBICONV_PLUG
 #define iconv_close libiconv_close
 #endif
