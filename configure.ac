@@ -100,6 +100,28 @@ fi
 AC_SUBST(HAVE_WCHAR_T)
 
 AC_CHECK_FUNCS([getc_unlocked mbrtowc wcrtomb mbsinit setlocale])
+
+dnl mbstate_t is used if HAVE_WCRTOMB || HAVE_MBRTOWC, see lib/loop_wchar.h.
+if test $ac_cv_func_wcrtomb = yes || test $ac_cv_func_mbrtowc = yes; then
+  USE_MBSTATE_T=1
+else
+  USE_MBSTATE_T=0
+fi
+AC_SUBST(USE_MBSTATE_T)
+
+AC_CACHE_CHECK([whether <wchar.h> is standalone],
+  [gl_cv_header_wchar_h_standalone],
+  [AC_COMPILE_IFELSE([[#include <wchar.h>
+wchar_t w;]],
+    [gl_cv_header_wchar_h_standalone=yes],
+    [gl_cv_header_wchar_h_standalone=no])])
+if test $gl_cv_header_wchar_h_standalone = yes; then
+  BROKEN_WCHAR_H=0
+else
+  BROKEN_WCHAR_H=1
+fi
+AC_SUBST(BROKEN_WCHAR_H)
+
 AC_REPLACE_FUNCS([memmove])
 
 AM_LANGINFO_CODESET
