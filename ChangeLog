@@ -1,5 +1,9 @@
 2008-09-16  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.devel (AUTOCONF, AUTOHEADER): Switch to version 2.63.
+
+2008-09-16  Bruno Haible  <bruno@clisp.org>
+
 	* include/iconv.h.in: Use Unicode single-quotes in comments.
 
 2008-09-14  Bruno Haible  <bruno@clisp.org>
