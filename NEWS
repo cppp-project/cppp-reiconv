@@ -6,6 +6,9 @@ New in 1.13:
   by invalid input, the iconv function now increments the input pointer past
   the shift sequence before returning (size_t)(-1) with errno = EILSEQ. This
   is also like GNU libc's iconv() behaves.
+* The library exports a new function iconv_open_into() that stores the
+  conversion descriptor in pre-allocated memory, rather than allocating fresh
+  memory for it.
 
 New in 1.12:
 * The iconv program is now licensed under the GPL version 3, instead of the
