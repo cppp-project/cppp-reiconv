@@ -1,3 +1,8 @@
+2008-09-21  Tadamasa Teranishi  <yw3t-trns@asahi-net.or.jp>
+
+	* lib/encodings_extra.def: Add aliases for EUC-JISX0213, SHIFT_JISX0213,
+	ISO-2022-JP-2004, found on <http://x0213.org/codetable/index.en.html>.
+
 2008-09-20  Bruno Haible  <bruno@clisp.org>
 
 	* man/iconv_open_into.3: New file.
