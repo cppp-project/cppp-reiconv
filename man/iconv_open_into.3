@@ -8,7 +8,7 @@
 .\" References consulted:
 .\"   iconv.h
 .\"
-.TH ICONV_OPEN_INTO 3  "September 20, 2008" "GNU" "Linux Programmer's Manual"
+.TH ICONV_OPEN_INTO 3  "September 21, 2008" "GNU" "Linux Programmer's Manual"
 .SH NAME
 iconv_open_into \- initialize descriptor for character set conversion
 .SH SYNOPSIS
@@ -26,9 +26,12 @@ memory pointed to by \fIresultp\fP.
 .PP
 The values permitted for \fIfromcode\fP and \fItocode\fP are the same as for
 the function \fBiconv_open\fP.
+.PP
+After a successful return from this function, \fIresultp\fP can be be used
+as an \fBiconv_t\fP object with the \fBiconv\fP function.
 .SH "RETURN VALUE"
-The \fBiconv_open_into\fP function fills \fB*resultp\fP and returns 0 if it
-succeeds. In case of error, it sets \fBerrno\fP and returns \-1.
+The \fBiconv_open_into\fP function fills \fB*\fP\fIresultp\fP and returns 0 if
+it succeeds. In case of error, it sets \fBerrno\fP and returns \-1.
 .SH ERRORS
 The following error can occur, among others:
 .TP
