@@ -74,6 +74,8 @@ GNULIB_MODULES = \
   memmove \
   progname \
   relocatable-prog \
+  sigpipe \
+  stdio \
   strerror \
   unistd \
   uniwidth/width \

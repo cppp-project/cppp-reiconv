@@ -1,3 +1,7 @@
+2008-09-26  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (GNULIB_MODULES): Add sigpipe, stdio.
+
 2008-09-21  Tadamasa Teranishi  <yw3t-trns@asahi-net.or.jp>
 
 	* lib/encodings_extra.def: Add aliases for EUC-JISX0213, SHIFT_JISX0213,
