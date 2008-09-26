@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.8\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2007-10-25 00:19+0200\n"
+"POT-Creation-Date: 2008-09-26 14:10+0200\n"
 "PO-Revision-Date: 2002-07-22 03:50-0300\n"
 "Last-Translator: Alexandre Folle de Menezes <afmenez@terra.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #. TRANSLATORS: The first line of the short usage message.
 #: src/iconv.c:105
@@ -268,9 +269,9 @@ msgstr "iconv: %s: seqüência de caracteres ou deslocamentos incompleta\n"
 #. It is followed by a colon and a detail message.
 #. The placeholders expand to the input file name, a line number, and a column number.
 #: src/iconv.c:666
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u"
-msgstr "iconv: %s: "
+msgstr ""
 
 #. TRANSLATORS: An error message.
 #. The placeholder expands to the input file name.
@@ -327,6 +328,11 @@ msgid "I/O error"
 msgstr "iconv: erro de E/S\n"
 
 #~ msgid ""
+#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+#~ msgstr ""
+#~ "Uso: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [arquivo ...]"
+
+#~ msgid ""
 #~ "This is free software; see the source for copying conditions.  There is "
 #~ "NO\n"
 #~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
@@ -340,8 +346,3 @@ msgstr "iconv: erro de E/S\n"
 
 #~ msgid "iconv: %s: "
 #~ msgstr "iconv: %s: "
-
-#~ msgid ""
-#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-#~ msgstr ""
-#~ "Uso: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [arquivo ...]"

@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.8\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2007-10-25 00:19+0200\n"
+"POT-Creation-Date: 2008-09-26 14:10+0200\n"
 "PO-Revision-Date: 2002-05-30 12:06+0200\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@trasno.net>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -266,9 +267,9 @@ msgstr "iconv: %s: secuencia de caracteres ou desprazamentos incompleta\n"
 #. It is followed by a colon and a detail message.
 #. The placeholders expand to the input file name, a line number, and a column number.
 #: src/iconv.c:666
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u"
-msgstr "iconv: %s: "
+msgstr ""
 
 #. TRANSLATORS: An error message.
 #. The placeholder expands to the input file name.
@@ -325,6 +326,12 @@ msgid "I/O error"
 msgstr "iconv: erro de E/S\n"
 
 #~ msgid ""
+#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+#~ msgstr ""
+#~ "Emprego: iconv [--binary] [-c] [-s] [-f decodigo] [-t acodigo] "
+#~ "[ficheiro ...]"
+
+#~ msgid ""
 #~ "This is free software; see the source for copying conditions.  There is "
 #~ "NO\n"
 #~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
@@ -337,9 +344,3 @@ msgstr "iconv: erro de E/S\n"
 
 #~ msgid "iconv: %s: "
 #~ msgstr "iconv: %s: "
-
-#~ msgid ""
-#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-#~ msgstr ""
-#~ "Emprego: iconv [--binary] [-c] [-s] [-f decodigo] [-t acodigo] "
-#~ "[ficheiro ...]"

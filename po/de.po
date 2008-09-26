@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNU libiconv 1.12\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2007-10-25 00:19+0200\n"
+"POT-Creation-Date: 2008-09-26 14:10+0200\n"
 "PO-Revision-Date: 2008-01-08 11:18+0200\n"
 "Last-Translator: Bruno Haible <bruno@clisp.org>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -200,8 +200,8 @@ msgid ""
 "%s argument: A format directive with a variable precision is not allowed "
 "here."
 msgstr ""
-"»%s«-Argument: Eine Formatierungsanweisung mit variabler Genauigkeit ist hier "
-"nicht erlaubt."
+"»%s«-Argument: Eine Formatierungsanweisung mit variabler Genauigkeit ist "
+"hier nicht erlaubt."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a command-line option.
@@ -280,7 +280,8 @@ msgstr "Kann Byte-Ersatz nicht in eine »wide«-Zeichenkette umwandeln: %s"
 #: src/iconv.c:579
 #, c-format
 msgid "cannot convert widechar substitution to target encoding: %s"
-msgstr "Kann den »wide«-Zeichen-Ersatz nicht in die Zielkodierung umwandeln: %s"
+msgstr ""
+"Kann den »wide«-Zeichen-Ersatz nicht in die Zielkodierung umwandeln: %s"
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --byte-subst.

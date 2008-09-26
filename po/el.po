@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libiconv 1.9.1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
-"POT-Creation-Date: 2007-10-25 00:19+0200\n"
+"POT-Creation-Date: 2008-09-26 14:10+0200\n"
 "PO-Revision-Date: 2004-12-25 22:15+0200\n"
 "Last-Translator: Balaskas Euaggelos <ebalaskas@ebalaskas.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -266,9 +267,9 @@ msgstr "iconv: %s: μη ολοκληρωμένος χαρακτήρας ή shift
 #. It is followed by a colon and a detail message.
 #. The placeholders expand to the input file name, a line number, and a column number.
 #: src/iconv.c:666
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%u:%u"
-msgstr "iconv: %s: "
+msgstr ""
 
 #. TRANSLATORS: An error message.
 #. The placeholder expands to the input file name.
@@ -325,6 +326,11 @@ msgid "I/O error"
 msgstr "iconv: I/O σφάλμα\n"
 
 #~ msgid ""
+#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
+#~ msgstr ""
+#~ "Χρήση: iconv [--binary] [-c] [-s] [-f από_κώδικα] [-t tocode] [αρχείο...]"
+
+#~ msgid ""
 #~ "This is free software; see the source for copying conditions.  There is "
 #~ "NO\n"
 #~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
@@ -337,8 +343,3 @@ msgstr "iconv: I/O σφάλμα\n"
 
 #~ msgid "iconv: %s: "
 #~ msgstr "iconv: %s: "
-
-#~ msgid ""
-#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-#~ msgstr ""
-#~ "Χρήση: iconv [--binary] [-c] [-s] [-f από_κώδικα] [-t tocode] [αρχείο...]"
