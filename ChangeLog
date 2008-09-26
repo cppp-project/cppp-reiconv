@@ -1,6 +1,9 @@
 2008-09-26  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (GNULIB_MODULES): Add sigpipe, stdio.
+	* tests/Makefile.in (check, table-from, table-to, test-shiftseq): Link
+	all programs against libicrt.a. Needed for the stdio function
+	replacements on mingw.
 
 2008-09-21  Tadamasa Teranishi  <yw3t-trns@asahi-net.or.jp>
 
