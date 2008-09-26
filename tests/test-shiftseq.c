@@ -48,7 +48,7 @@ void main1 (void)
     inleft = 9;
     outptr = buf;
     outleft = sizeof (buf);
-    r = iconv (cd, (char **) &inptr, &inleft, &outptr, &outleft);
+    r = iconv (cd, (ICONV_CONST char **) &inptr, &inleft, &outptr, &outleft);
     /*
     printf ("r = %d  errno = %d  inconsumed = %d outproduced = %d\n",
             r, errno, inptr - input, outptr - buf);
@@ -82,7 +82,7 @@ void main2 (void)
     inleft = 5;
     outptr = buf;
     outleft = sizeof (buf);
-    r = iconv (cd, (char **) &inptr, &inleft, &outptr, &outleft);
+    r = iconv (cd, (ICONV_CONST char **) &inptr, &inleft, &outptr, &outleft);
     /*
     printf ("r = %d  errno = %d  inconsumed = %d outproduced = %d\n",
             r, errno, inptr - input, outptr - buf);
@@ -96,7 +96,7 @@ void main2 (void)
       abort();
 
     inleft = input + 20 - inptr;
-    r = iconv (cd, (char **) &inptr, &inleft, &outptr, &outleft);
+    r = iconv (cd, (ICONV_CONST char **) &inptr, &inleft, &outptr, &outleft);
     /*
     printf ("r = %d  errno = %d  inconsumed = %d outproduced = %d\n",
             r, errno, inptr - input, outptr - buf);
