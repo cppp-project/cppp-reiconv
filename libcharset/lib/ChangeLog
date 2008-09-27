@@ -1,3 +1,8 @@
+2008-04-13  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c (OS2): Don't redefine if already defined.
+	Reported by Elbert Pol <e.pol@chello.nl>.
+
 2007-11-14  Bruno Haible  <bruno@clisp.org>
 
 	* config.charset: Update for OpenBSD 4.1.
