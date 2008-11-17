@@ -9,6 +9,8 @@
 #   - the GNULIB_TOOL environment variable pointing to the gnulib-tool script
 #     in a gnulib checkout, or
 #   - the cvs program in the PATH and an internet connection.
+# It also requires
+#   - the gperf program.
 
 # Copyright (C) 2003-2008 Free Software Foundation, Inc.
 #
