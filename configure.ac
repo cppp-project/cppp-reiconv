@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2008 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2009 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -18,10 +18,10 @@ dnl Fifth Floor, Boston, MA 02110-1301, USA.
 
 AC_PREREQ([2.60])
 AC_INIT
-AC_CONFIG_SRCDIR(lib/iconv.c)
-AC_CONFIG_AUX_DIR(build-aux)
-AM_INIT_AUTOMAKE(libiconv, 1.12)
-AC_CONFIG_HEADERS(config.h lib/config.h)
+AC_CONFIG_SRCDIR([lib/iconv.c])
+AC_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE([libiconv], [1.12])
+AC_CONFIG_HEADERS([config.h lib/config.h])
 AC_PROG_MAKE_SET
 
 dnl           checks for basic programs
@@ -90,14 +90,14 @@ if test "$am_cv_func_iconv" = yes -a -n "$am_cv_proto_iconv_arg1"; then
 else
   ICONV_CONST=""
 fi
-AC_SUBST(ICONV_CONST)
+AC_SUBST([ICONV_CONST])
 
 if test $gt_cv_c_wchar_t = yes; then
   HAVE_WCHAR_T=1
 else
   HAVE_WCHAR_T=0
 fi
-AC_SUBST(HAVE_WCHAR_T)
+AC_SUBST([HAVE_WCHAR_T])
 
 AC_CHECK_FUNCS([getc_unlocked mbrtowc wcrtomb mbsinit setlocale])
 
@@ -107,7 +107,7 @@ if test $ac_cv_func_wcrtomb = yes || test $ac_cv_func_mbrtowc = yes; then
 else
   USE_MBSTATE_T=0
 fi
-AC_SUBST(USE_MBSTATE_T)
+AC_SUBST([USE_MBSTATE_T])
 
 AC_CACHE_CHECK([whether <wchar.h> is standalone],
   [gl_cv_header_wchar_h_standalone],
@@ -120,7 +120,7 @@ if test $gl_cv_header_wchar_h_standalone = yes; then
 else
   BROKEN_WCHAR_H=1
 fi
-AC_SUBST(BROKEN_WCHAR_H)
+AC_SUBST([BROKEN_WCHAR_H])
 
 AC_REPLACE_FUNCS([memmove])
 
@@ -185,8 +185,8 @@ AH_BOTTOM([
 #endif
 ])
 
-AC_CONFIG_SUBDIRS(libcharset)
-AC_CONFIG_SUBDIRS(preload)
+AC_CONFIG_SUBDIRS([libcharset])
+AC_CONFIG_SUBDIRS([preload])
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([lib/Makefile])
 AC_CONFIG_FILES([srclib/Makefile])
