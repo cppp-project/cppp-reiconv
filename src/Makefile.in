@@ -49,6 +49,9 @@ top_builddir = ..
 # Needed by SET_RELOCATABLE.
 EXEEXT = @EXEEXT@
 
+# Needed by RELOCATABLE_LDFLAGS.
+host = @host@
+
 OBJECTS_RES_yes = iconv.res
 OBJECTS_RES_no =
 
