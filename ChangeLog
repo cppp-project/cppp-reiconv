@@ -1,3 +1,7 @@
+2009-01-17  Bruno Haible  <bruno@clisp.org>
+
+	* lib/genflags.c: Include <string.h>.
+
 2009-01-14  Bruno Haible  <bruno@clisp.org>
 
 	* configure.ac: More consistent m4 quoting.
