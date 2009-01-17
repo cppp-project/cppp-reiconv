@@ -109,6 +109,8 @@ install : all force
 	  fi ; \
 	fi
 
+install-strip : install
+
 installdirs : force
 	$(mkinstalldirs) $(DESTDIR)$(libdir)
 

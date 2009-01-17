@@ -112,6 +112,8 @@ install : all force
 	         mv -f libiconv.new.a libiconv.a) ;; \
 	esac
 
+install-strip : install
+
 installdirs : force
 	if [ ! -d $(DESTDIR)$(libdir) ] ; then $(mkinstalldirs) $(DESTDIR)$(libdir) ; fi
 

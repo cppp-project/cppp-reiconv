@@ -1,3 +1,8 @@
+2009-01-16  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (install-strip): New target.
+	Reported by Alon Bar-Lev <alon.barlev@gmail.com>.
+
 2008-04-13  Bruno Haible  <bruno@clisp.org>
 
 	* localcharset.c (OS2): Don't redefine if already defined.

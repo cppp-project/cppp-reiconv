@@ -59,6 +59,17 @@ install : lib/localcharset.h force
 	cd po && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)'
 	cd man && $(MAKE) install prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)' mandir='$(mandir)'
 
+install-strip : lib/localcharset.h force
+	cd libcharset && $(MAKE) install-strip prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd lib && $(MAKE) install-strip prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd preload && $(MAKE) install-strip prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd srclib && $(MAKE) install-strip prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	cd src && $(MAKE) install-strip prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
+	if [ ! -d $(DESTDIR)$(includedir) ] ; then $(mkinstalldirs) $(DESTDIR)$(includedir) ; fi
+	$(INSTALL_DATA) include/iconv.h.inst $(DESTDIR)$(includedir)/iconv.h
+	cd po && $(MAKE) install-strip prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)'
+	cd man && $(MAKE) install-strip prefix='$(prefix)' exec_prefix='$(exec_prefix)' datarootdir='$(datarootdir)' datadir='$(datadir)' mandir='$(mandir)'
+
 installdirs : force
 	cd libcharset && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'
 	cd lib && $(MAKE) installdirs prefix='$(prefix)' exec_prefix='$(exec_prefix)' libdir='$(libdir)'

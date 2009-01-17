@@ -30,6 +30,10 @@ AC_PROG_CC
 AC_PROG_CPP
 AC_PROG_INSTALL
 
+AC_PATH_PROG([STRIP], [strip], [:]) dnl sets STRIP
+AM_PROG_INSTALL_STRIP               dnl overrides STRIP when cross-compiling,
+                                    dnl sets INSTALL_STRIP_PROGRAM
+
 dnl           check for host type
 
 AC_CANONICAL_HOST

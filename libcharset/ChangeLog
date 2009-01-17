@@ -1,3 +1,8 @@
+2009-01-16  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (install-strip): New target.
+	Reported by Alon Bar-Lev <alon.barlev@gmail.com>.
+
 2009-01-14  Bruno Haible  <bruno@clisp.org>
 
 	* configure.ac: More consistent m4 quoting.

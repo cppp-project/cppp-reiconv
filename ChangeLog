@@ -1,5 +1,17 @@
 2009-01-17  Bruno Haible  <bruno@clisp.org>
 
+	Add support for "make install-strip".
+	* configure.ac: Search for 'strip'. Invoke AM_PROG_INSTALL_STRIP.
+	* Makefile.in (install-strip): New rule.
+	* src/Makefile.in (STRIP, INSTALL_STRIP_PROGRAM, install_sh): New variables.
+	(install-strip): New rule.
+	* lib/Makefile.in (install-strip): New target.
+	* preload/Makefile.in (install-strip): Likewise.
+	* man/Makefile.in (install-strip): Likewise.
+	Reported by Alon Bar-Lev <alon.barlev@gmail.com>.
+
+2009-01-17  Bruno Haible  <bruno@clisp.org>
+
 	Update after gnulib changed.
 	* src/Makefile.in (RELOCATABLE_STRIP): New variable.
 
