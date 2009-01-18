@@ -1,5 +1,9 @@
 2009-01-18  Bruno Haible  <bruno@clisp.org>
 
+	* tools/darwin-9.5: New file.
+
+2009-01-18  Bruno Haible  <bruno@clisp.org>
+
 	* tools/locale_monthnames.c: New file.
 
 2009-01-16  Bruno Haible  <bruno@clisp.org>
