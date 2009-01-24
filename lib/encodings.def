@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2008 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2009 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -529,6 +529,15 @@ DEFENCODING(( "CP866",                  /* IANA, JDK 1.1 */
             ),
             cp866,
             { cp866_mbtowc, NULL },       { cp866_wctomb, NULL })
+
+DEFENCODING(( "CP1131",                 /* FreeBSD, MacOS X */
+            ),
+            cp1131,
+            { cp1131_mbtowc, NULL },      { cp1131_wctomb, NULL })
+#ifdef USE_AIX_ALIASES
+DEFALIAS(     "IBM-1131",               /* AIX */
+            cp1131)
+#endif
 
 /* Macintosh 8-bit encodings */
 

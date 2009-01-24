@@ -1,3 +1,15 @@
+2009-01-24  Bruno Haible  <bruno@clisp.org>
+
+	* tools/Makefile (ALL): Add cp1131.h.
+	(cp1131.h): New rule.
+	* lib/encodings.def: Add CP1131.
+	* lib/cp1131.h: New file.
+	* lib/converters.h: Include it.
+	* README, man/iconv_open.3: Add CP1131.
+	* NOTES: Mention CP1131.
+	* tests/CP1131.TXT: New file.
+	* tests/Makefile.in (check): Also test CP1131.
+
 2009-01-17  Bruno Haible  <bruno@clisp.org>
 
 	Add support for "make install-strip".

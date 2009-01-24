@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002, 2004-2008 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002, 2004-2009 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -169,6 +169,7 @@ struct conv_struct {
 #include "cp850.h"
 #include "cp862.h"
 #include "cp866.h"
+#include "cp1131.h"
 #include "mac_roman.h"
 #include "mac_centraleurope.h"
 #include "mac_iceland.h"

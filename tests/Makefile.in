@@ -79,6 +79,7 @@ check : all table-from table-to ../src/iconv_no_i18n test-shiftseq
 	$(srcdir)/check-stateless $(srcdir) CP850
 	$(srcdir)/check-stateless $(srcdir) CP862
 	$(srcdir)/check-stateless $(srcdir) CP866
+	$(srcdir)/check-stateless $(srcdir) CP1131
 	$(srcdir)/check-stateless $(srcdir) MacRoman
 	$(srcdir)/check-stateless $(srcdir) MacCentralEurope
 	$(srcdir)/check-stateless $(srcdir) MacIceland

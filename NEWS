@@ -9,6 +9,7 @@ New in 1.13:
 * The library exports a new function iconv_open_into() that stores the
   conversion descriptor in pre-allocated memory, rather than allocating fresh
   memory for it.
+* Added CP1131 converter.
 
 New in 1.12:
 * The iconv program is now licensed under the GPL version 3, instead of the
