@@ -95,14 +95,26 @@ install-lib : all force
 # avoid installing it.
 
 install : all force
-	$(mkinstalldirs) $(DESTDIR)$(libdir)
+	if test @GLIBC21@ = no; then \
+	  case '@host_os@' in \
+	    cygwin* | mingw* | pw32* | cegcc*) \
+	      need_charset_alias=false ;; \
+	    *) \
+	      need_charset_alias=true ;; \
+	  esac ; \
+	else \
+	  need_charset_alias=false ; \
+	fi ; \
+	if $$need_charset_alias; then \
+	  $(mkinstalldirs) $(DESTDIR)$(libdir) ; \
+	fi ; \
 	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libcharset.la $(DESTDIR)$(libdir)/libcharset.la
 	if test -f $(DESTDIR)$(libdir)/charset.alias; then \
 	  sed -f ref-add.sed $(DESTDIR)$(libdir)/charset.alias > $(DESTDIR)$(libdir)/t-charset.alias; \
 	  $(INSTALL_DATA) $(DESTDIR)$(libdir)/t-charset.alias $(DESTDIR)$(libdir)/charset.alias; \
 	  rm -f $(DESTDIR)$(libdir)/t-charset.alias; \
 	else \
-	  if test @GLIBC21@ = no; then \
+	  if $$need_charset_alias; then \
 	    sed -f ref-add.sed charset.alias > $(DESTDIR)$(libdir)/t-charset.alias; \
 	    $(INSTALL_DATA) $(DESTDIR)$(libdir)/t-charset.alias $(DESTDIR)$(libdir)/charset.alias; \
 	    rm -f $(DESTDIR)$(libdir)/t-charset.alias; \
@@ -112,7 +124,19 @@ install : all force
 install-strip : install
 
 installdirs : force
-	$(mkinstalldirs) $(DESTDIR)$(libdir)
+	if test @GLIBC21@ = no; then \
+	  case '@host_os@' in \
+	    cygwin* | mingw* | pw32* | cegcc*) \
+	      need_charset_alias=false ;; \
+	    *) \
+	      need_charset_alias=true ;; \
+	  esac ; \
+	else \
+	  need_charset_alias=false ; \
+	fi ; \
+	if $$need_charset_alias; then \
+	  $(mkinstalldirs) $(DESTDIR)$(libdir) ; \
+	fi ; \
 
 uninstall : force
 	$(LIBTOOL_UNINSTALL) $(RM) $(DESTDIR)$(libdir)/libcharset.la
