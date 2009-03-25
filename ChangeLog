@@ -1,3 +1,14 @@
+2009-03-25  Bruno Haible  <bruno@clisp.org>
+
+	Fix the handling of Windows resources in shared libraries.
+	* configure.ac: Invoke LT_LANG for 'WIndows Resource'.
+	* lib/Makefile.in (RC): New variable.
+	(WINDRES): Remove variable.
+	(OBJECTS_RES_yes): Add .lo suffix.
+	(libiconv.res.lo): Renamed from libiconv.res. Use libtool --tag=RC.
+	(clean): Simplify.
+	Based on a patch by Roumen Petrov <bugtrack@roumenpetrov.info>.
+
 2009-03-14  Bruno Haible  <bruno@clisp.org>
 
 	* autogen.sh: Checkout gnulib using 'git' instead of 'cvs'.

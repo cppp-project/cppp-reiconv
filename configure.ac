@@ -78,6 +78,11 @@ AC_EXEEXT
 dnl           check for build configuration
 
 LT_INIT([disable-static win32-dll])
+
+dnl Prepares the libtool configuration for handling of Windows resources, and
+dnl sets the RC variable to a program that compiles Windows resource files.
+LT_LANG([Windows Resource])
+
 gl_VISIBILITY
 AM_ICONV
 AM_GNU_GETTEXT([external], [need-ngettext])
@@ -168,7 +173,7 @@ fi
 AC_SUBST([DLL_VARIABLE])
 
 dnl On mingw and Cygwin, we can activate special Makefile rules which add
-dnl version information to the shared libraries and executables.
+dnl version information to the executables.
 case "$host_os" in
   mingw* | cygwin*) is_woe32=yes ;;
   *) is_woe32=no ;;
