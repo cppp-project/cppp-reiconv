@@ -1,3 +1,8 @@
+2009-03-24  Bruno Haible  <bruno@clisp.org>
+
+	* bg.po: New file, from Roumen Petrov <transl@roumenpetrov.info>.
+	* LINGUAS: Add bg.
+
 2009-01-24  Bruno Haible  <bruno@clisp.org>
 
 	* id.po: Update from Arif E. Nugroho <arif_endro@yahoo.com>.
