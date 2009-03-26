@@ -1,5 +1,10 @@
 2009-03-25  Bruno Haible  <bruno@clisp.org>
 
+	* build-aux/config.guess: Update to GNU version 2009-02-03.
+	* build-aux/config.sub: Likewise.
+
+2009-03-25  Bruno Haible  <bruno@clisp.org>
+
 	* configure.ac: Bump version number to 1.13.
 	* README: Likewise.
 	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
