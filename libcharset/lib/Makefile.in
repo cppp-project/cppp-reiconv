@@ -107,9 +107,7 @@ install : all force
 	else \
 	  need_charset_alias=false ; \
 	fi ; \
-	if $$need_charset_alias; then \
-	  $(mkinstalldirs) $(DESTDIR)$(libdir) ; \
-	fi ; \
+	$(mkinstalldirs) $(DESTDIR)$(libdir) ; \
 	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libcharset.la $(DESTDIR)$(libdir)/libcharset.la
 	if test -f $(DESTDIR)$(libdir)/charset.alias; then \
 	  sed -f ref-add.sed $(DESTDIR)$(libdir)/charset.alias > $(DESTDIR)$(libdir)/t-charset.alias; \
@@ -126,21 +124,7 @@ install : all force
 install-strip : install
 
 installdirs : force
-	if test @GLIBC21@ = no; then \
-	  case '@host_os@' in \
-	    darwin[56]*) \
-	      need_charset_alias=true ;; \
-	    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
-	      need_charset_alias=false ;; \
-	    *) \
-	      need_charset_alias=true ;; \
-	  esac ; \
-	else \
-	  need_charset_alias=false ; \
-	fi ; \
-	if $$need_charset_alias; then \
-	  $(mkinstalldirs) $(DESTDIR)$(libdir) ; \
-	fi ; \
+	$(mkinstalldirs) $(DESTDIR)$(libdir)
 
 uninstall : force
 	$(LIBTOOL_UNINSTALL) $(RM) $(DESTDIR)$(libdir)/libcharset.la
