@@ -4,6 +4,11 @@
 
 2009-03-26  Bruno Haible  <bruno@clisp.org>
 
+	* src/iconv.c: Update copyright header to GPLv3+.
+	(print_version): Update license info.
+
+2009-03-26  Bruno Haible  <bruno@clisp.org>
+
 	* src/iconv.c (print_version): Bump year.
 
 2009-03-25  Bruno Haible  <bruno@clisp.org>
