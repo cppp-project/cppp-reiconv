@@ -83,6 +83,19 @@ dnl Prepares the libtool configuration for handling of Windows resources, and
 dnl sets the RC variable to a program that compiles Windows resource files.
 LT_LANG([Windows Resource])
 
+dnl On mingw and Cygwin, we can activate special Makefile rules which add
+dnl version information to the executables.
+case "$host_os" in
+  mingw* | cygwin*) is_woe32=yes ;;
+  *) is_woe32=no ;;
+esac
+WOE32=$is_woe32
+AC_SUBST([WOE32])
+if test $WOE32 = yes; then
+  dnl Check for a program that compiles Windows resource files.
+  AC_CHECK_TOOL([WINDRES], [windres])
+fi
+
 gl_VISIBILITY
 AM_ICONV
 AM_GNU_GETTEXT([external], [need-ngettext])
@@ -171,19 +184,6 @@ else
   DLL_VARIABLE=
 fi
 AC_SUBST([DLL_VARIABLE])
-
-dnl On mingw and Cygwin, we can activate special Makefile rules which add
-dnl version information to the executables.
-case "$host_os" in
-  mingw* | cygwin*) is_woe32=yes ;;
-  *) is_woe32=no ;;
-esac
-WOE32=$is_woe32
-AC_SUBST([WOE32])
-if test $WOE32 = yes; then
-  dnl Check for a program that compiles Windows resource files.
-  AC_CHECK_TOOL([WINDRES], [windres])
-fi
 
 AH_BOTTOM([
 /* On Windows, variables that may be in a DLL must be marked specially.  */

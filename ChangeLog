@@ -1,3 +1,7 @@
+2009-04-11  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Move the statements for WOE32 and WINDRES.
+
 2009-03-26  Bruno Haible  <bruno@clisp.org>
 
 	* Version 1.13 released.
