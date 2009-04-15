@@ -1,3 +1,8 @@
+2009-04-15  Bruno Haible  <bruno@clisp.org>
+
+	* src/Makefile.in (install, uninstall): Append the $(EXEEXT) suffix
+	explicitly. Needed on Cygwin.
+
 2009-04-11  Bruno Haible  <bruno@clisp.org>
 
 	* configure.ac: Move the statements for WOE32 and WINDRES.
