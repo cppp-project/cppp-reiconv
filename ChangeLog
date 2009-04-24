@@ -1,3 +1,10 @@
+2009-04-24  Bruno Haible  <bruno@clisp.org>
+
+	Fix a compilation error on HP-UX 11.00, introduced on 2008-09-16.
+	* src/iconv_open2.h: Don't initialize nonexistent field if
+	!(HAVE_WCRTOMB || HAVE_MBRTOWC).
+	Patch by Joel Brobecker <brobecker@adacore.com>.
+
 2009-04-15  Bruno Haible  <bruno@clisp.org>
 
 	* src/Makefile.in (install, uninstall): Append the $(EXEEXT) suffix
