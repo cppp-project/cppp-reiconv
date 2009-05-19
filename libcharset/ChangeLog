@@ -1,3 +1,8 @@
+2009-05-19  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOMAKE, ACLOCAL): Switch to version 1.11.
+	* autogen.sh: Update comments.
+
 2009-01-25  Bruno Haible  <bruno@clisp.org>
 
 	Don't install charset.alias on MacOS X >= 10.3.
