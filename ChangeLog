@@ -1,3 +1,8 @@
+2009-06-04  Bruno Haible  <bruno@clisp.org>
+
+	* preload/Makefile.devel (AUTOCONF): Switch to version 2.63.
+	(ACLOCAL): Switch to version 1.11.
+
 2009-05-19  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOMAKE, ACLOCAL): Switch to version 1.11.
