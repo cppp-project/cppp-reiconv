@@ -1,3 +1,6 @@
+New in 1.11.1:
+* Portability fixes for the MSVC platform.
+
 New in 1.11:
 * The iconv program has new options --unicode-subst, --byte-subst,
   --widechar-subst that allow to specify substitutions for characters that

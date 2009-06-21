@@ -1,3 +1,19 @@
+2007-12-08  Bruno Haible  <bruno@clisp.org>
+
+	* Version 1.11.1 released.
+
+2007-12-03  Bruno Haible  <bruno@clisp.org>
+
+	Portability fixes for MSVC.
+	* srclib/Makefile.msvc (CFLAGS): Define EXEEXT.
+	(OBJECTS): Add width.obj.
+	(width.obj): New rule.
+	* srclib/Makefile.vms (OBJECTS): Add width.obj.
+	(width.obj): New rule.
+	* windows/stdint.h: New file.
+	* windows/unistd.h: New file.
+	Reported by Milan Gornik <milan.gornik@dmsgroup.co.yu>.
+
 2006-07-19  Bruno Haible  <bruno@clisp.org>
 
 	* Version 1.11 released.

@@ -64,7 +64,7 @@ INCINTL = -I$(includedir)
 LIBINTL = $(libdir)\intl.lib
 !endif
 
-CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H $(NLSFLAGS) -DDEPENDS_ON_LIBICONV=1 -DDEPENDS_ON_LIBINTL=1
+CFLAGS = $(MFLAGS) $(WARN_CFLAGS) $(OPTIMFLAGS) -DHAVE_CONFIG_H -DEXEEXT=\".exe\" $(NLSFLAGS) -DDEPENDS_ON_LIBICONV=1 -DDEPENDS_ON_LIBINTL=1
 
 INCLUDES = -I. -I.. -I..\windows $(INCINTL)
 
@@ -87,6 +87,7 @@ OBJECTS = \
   allocsa.obj \
   error.obj \
   progname.obj progreloc.obj \
+  width.obj \
   xmalloc.obj xstrdup.obj \
   \
   relocatable.obj \
@@ -105,6 +106,9 @@ progname.obj : progname.c
 
 progreloc.obj : progreloc.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c progreloc.c
+
+width.obj : width.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c width.c
 
 xmalloc.obj : xmalloc.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c xmalloc.c
