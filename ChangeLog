@@ -1,5 +1,9 @@
 2009-06-30  Bruno Haible  <bruno@clisp.org>
 
+	* Version 1.13.1 released.
+
+2009-06-30  Bruno Haible  <bruno@clisp.org>
+
 	* configure.ac: Bump version number to 1.13.1.
 	* README: Likewise.
 
