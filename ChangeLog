@@ -1,3 +1,14 @@
+2009-07-07  Bruno Haible  <bruno@clisp.org>
+
+	Fix an endless loop.
+	* lib/loop_wchar.h (wchar_to_loop_convert): Handle the case of
+	incomplete input correctly.
+	* tests/test-to-wchar.c: New file.
+	* tests/Makefile.in (tests-to-wchar, tests-to-wchar.o): New rules.
+	(check): Depend on and run tests-to-wchar.
+	(clean): Add tests-to-wchar.
+	Reported by Tristan Gingold <gingold@adacore.com>.
+
 2009-06-30  Bruno Haible  <bruno@clisp.org>
 
 	* Version 1.13.1 released.
