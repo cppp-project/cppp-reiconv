@@ -85,7 +85,7 @@ GNULIB_MODULES = \
 
 srclib/Makefile.gnulib :
 	if test -n "$$GNULIB_TOOL"; then \
-	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --makefile-name=Makefile.gnulib --no-libtool --local-dir=gnulib-local \
+	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --makefile-name=Makefile.gnulib --no-libtool --local-dir=gnulib-local --no-vc-files \
 	    --import $(GNULIB_MODULES); \
 	fi
 
