@@ -1,3 +1,7 @@
+2009-08-15  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOCONF, AUTOHEADER): Switch to version 2.64.
+
 2009-05-19  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOMAKE, ACLOCAL): Switch to version 1.11.
