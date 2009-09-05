@@ -1,3 +1,8 @@
+2009-09-01  Bruno Haible  <bruno@clisp.org>
+
+	* README.woe32: Put the -mno-cygwin option into CC and CXX.
+	Recommended by Paolo Bonzini and Eric Blake.
+
 2009-08-15  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOCONF, AUTOHEADER): Switch to version 2.64.
