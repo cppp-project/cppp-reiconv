@@ -1,3 +1,8 @@
+2009-10-18  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Invoke gl_FCNTL_O_FLAGS.
+	* INTEGRATE: Mention fcntl_h.m4 and the gl_FCNTL_O_FLAGS invocation.
+
 2009-08-15  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOCONF, AUTOHEADER): Switch to version 2.64.
