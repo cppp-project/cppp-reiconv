@@ -1,5 +1,9 @@
 2009-10-18  Bruno Haible  <bruno@clisp.org>
 
+	* README: Update.
+
+2009-10-18  Bruno Haible  <bruno@clisp.org>
+
 	* configure.ac: Invoke gl_FCNTL_O_FLAGS.
 	* INTEGRATE: Mention fcntl_h.m4 and the gl_FCNTL_O_FLAGS invocation.
 
