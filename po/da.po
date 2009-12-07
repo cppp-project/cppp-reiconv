@@ -1,17 +1,16 @@
 # translation of libiconv-1.12.po to Danish
-# Swedish messages for libiconv.
 # Copyright (C) 2002, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
 #
 # Christian Rose <menthos@menthos.com>, 2002.
 # Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008.
-# Keld Simonsen <keld@dkuug.dk>, 2009.
+# Keld Simonsen <keld@keldix.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libiconv-1.12\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2009-06-30 22:53+0200\n"
-"PO-Revision-Date: 2009-11-26 11:31+0100\n"
+"PO-Revision-Date: 2009-12-03 16:31+0100\n"
 "Last-Translator: Keld Simonsen <keld@keldix.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -24,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: The first line of the short usage message.
 #: src/iconv.c:103
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr "Brug: iconv [-c] [-s] [-f frakode] [-t tilkode] [fil ...]"
+msgstr "Brug: iconv [-c] [-s] [-f fra-kode] [-t til-kode] [fil ...]"
 
 #. TRANSLATORS: The second line of the short usage message.
 #. Align it correctly against the first line.
@@ -56,7 +55,7 @@ msgstr "eller: %s -l\n"
 #: src/iconv.c:127
 #, c-format, no-wrap
 msgid "Converts text from one encoding to another encoding.\n"
-msgstr "Konverterer tekst fra en kodning til en anden kodning.\n"
+msgstr "Konverterer tekst fra én kodning til en anden kodning.\n"
 
 #: src/iconv.c:131
 #, c-format, no-wrap
@@ -89,7 +88,7 @@ msgstr "Flag som kontrollerer konverteringsproblemer:\n"
 #: src/iconv.c:146
 #, c-format, no-wrap
 msgid "  -c                          discard unconvertible characters\n"
-msgstr "  -c                          forkast tegn som ikke kan konverteres\n"
+msgstr "  -c                          smid tegn væk som ikke kan konverteres\n"
 
 #: src/iconv.c:149
 #, c-format, no-wrap
@@ -103,7 +102,7 @@ msgstr ""
 #: src/iconv.c:153
 #, c-format, no-wrap
 msgid "  --byte-subst=FORMATSTRING   substitution for unconvertible bytes\n"
-msgstr "  --bytte-subst=FORMATSTRENG   erstatning for ikke konverterbare byte\n"
+msgstr "  --byte-subst=FORMATSTRENG   erstatning for ikke konverterbare byte\n"
 
 # Breda tegn? Finns det bedre ord?
 #: src/iconv.c:156
@@ -235,9 +234,9 @@ msgid ""
 msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
 msgstr[0] ""
-"Argument %s: Formatstrengen konsumerer flere end et argument: %u argument."
+"Argument %s: Formatstrengen forbruger mere end ét argument: %u argument."
 msgstr[1] ""
-"Argument %s: Formatstrengen konsumerer flere end et argument: %u argumenter."
+"Argument %s: Formatstrengen forbruger mere end ét argument: %u argumenter."
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --byte-subst.
@@ -272,7 +271,7 @@ msgstr "kan ikke konvertere bredtegns-erstatning til målkodning: %s"
 #: src/iconv.c:618
 #, c-format
 msgid "cannot convert byte substitution to target encoding: %s"
-msgstr "kan ikke konvertere bytte-erstatning til målkodning: %s"
+msgstr "kan ikke konvertere byte-erstatning til målkodning: %s"
 
 #. TRANSLATORS: An error message.
 #. The placeholders expand to the input file name, a line number, and a column number.
@@ -331,7 +330,7 @@ msgstr "konvertering fra %s til %s understøttes ikke"
 #: src/iconv.c:1024
 #, c-format
 msgid "try '%s -l' to get the list of supported encodings"
-msgstr "prøv \"%s -l\" for at få listen på kodninger som understøttes"
+msgstr "prøv \"%s -l\" for at få vist listen af understøttede kodninger"
 
 #. TRANSLATORS: A filename substitute denoting standard input.
 #: src/iconv.c:1081
