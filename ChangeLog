@@ -1,5 +1,12 @@
 2009-12-11  Bruno Haible  <bruno@clisp.org>
 
+	* include/iconv.h.in: Untabify.
+	* gnulib-local/lib/xalloc.h: Untabify.
+	* woe32dll/export.h: Untabify.
+	* tests/uniq-u.c: Untabify.
+
+2009-12-11  Bruno Haible  <bruno@clisp.org>
+
 	* srclib/Makefile.am (MOSTLYCLEANDIRS): New macro.
 
 2009-12-11  Bruno Haible  <bruno@clisp.org>
