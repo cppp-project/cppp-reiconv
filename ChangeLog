@@ -1,5 +1,9 @@
 2009-12-11  Bruno Haible  <bruno@clisp.org>
 
+	* srclib/Makefile.am (MOSTLYCLEANDIRS): New macro.
+
+2009-12-11  Bruno Haible  <bruno@clisp.org>
+
 	* Makefile.devel (AUTOCONF, AUTOHEADER): Switch to version 2.65.
 	* preload/Makefile.devel (AUTOCONF): Likewise.
 
