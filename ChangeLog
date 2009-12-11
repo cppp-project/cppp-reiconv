@@ -1,3 +1,8 @@
+2009-12-11  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOCONF, AUTOHEADER): Switch to version 2.65.
+	* preload/Makefile.devel (AUTOCONF): Likewise.
+
 2009-11-22  Bruno Haible  <bruno@clisp.org>
 
 	* tests/check-subst: Add reference to the Solaris printf bug.
