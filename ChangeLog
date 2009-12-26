@@ -1,3 +1,8 @@
+2009-12-26  Bruno Haible  <bruno@clisp.org>
+
+	* windows/libiconv.rc: Update.
+	* windows/iconv.rc: Update.
+
 2009-12-11  Bruno Haible  <bruno@clisp.org>
 
 	* include/iconv.h.in: Untabify.
