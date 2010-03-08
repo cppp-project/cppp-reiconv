@@ -1,3 +1,8 @@
+2010-03-08  Bruno Haible  <bruno@clisp.org>
+
+	* ja.po: New file, from Yasuaki Taniguchi <yasuakit@gmail.com>.
+	* LINGUAS: Add ja.
+
 2009-12-06  Bruno Haible  <bruno@clisp.org>
 
 	* da.po: Update from Keld Simonsen <keld@keldix.com>.
