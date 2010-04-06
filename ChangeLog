@@ -1,3 +1,9 @@
+2010-04-06  Bruno Haible  <bruno@clisp.org>
+
+	Avoid a compilation error of gnulib's test-iconv-h-c++.cc on mingw.
+	* include/iconv.h.in: Restrict the extern "C" { ... } scope so that it
+	doesn't contains #include directives.
+
 2010-03-30  Bruno Haible  <bruno@clisp.org>
 
 	* README.woe32: Update for Cygwin 1.7.x.
