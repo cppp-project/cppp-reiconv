@@ -1,3 +1,9 @@
+2010-05-08  Bruno Haible  <bruno@clisp.org>
+
+	* tools/cygwin-1.7.2: New file.
+	* lib/config.charset: Update comments for Cygwin 1.7.
+	* lib/localcharset.c: Likewise.
+
 2010-03-30  Bruno Haible  <bruno@clisp.org>
 
 	* README.woe32: Mention Cygwin.
