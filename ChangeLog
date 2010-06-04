@@ -1,5 +1,12 @@
 2010-06-04  Bruno Haible  <bruno@clisp.org>
 
+	Addendum to 2009-10-18 commit.
+	* m4/fcntl-o.m4: New file, from gnulib.
+	* configure.ac: Invoke gl_FCNTL_O_FLAGS.
+	* lib/config.h.in (HAVE_WORKING_O_NOFOLLOW): New macro.
+
+2010-06-04  Bruno Haible  <bruno@clisp.org>
+
 	* m4/libtool.m4: Update from libtool-2.2.8, with modifications:
 	2008-04-06  Bruno Haible  <bruno@clisp.org>
 		* m4/libtool.m4 (LT_INIT): When setting LIBTOOL, use

@@ -1,5 +1,11 @@
 2010-06-04  Bruno Haible  <bruno@clisp.org>
 
+	Addendum to 2009-10-18 commit.
+	* m4/fcntl-o.m4: New file, from gnulib.
+	* m4/fcntl_h.m4: Remove file.
+
+2010-06-04  Bruno Haible  <bruno@clisp.org>
+
 	* m4/libtool.m4: Update from libtool-2.2.8, with modifications:
 	2008-04-06  Bruno Haible  <bruno@clisp.org>
 		* m4/libtool.m4 (LT_INIT): When setting LIBTOOL, use

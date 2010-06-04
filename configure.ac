@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2009 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2010 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -147,6 +147,7 @@ AC_SUBST([BROKEN_WCHAR_H])
 AC_REPLACE_FUNCS([memmove])
 
 AM_LANGINFO_CODESET
+gl_FCNTL_O_FLAGS
 
 AC_EILSEQ
 
