@@ -3,8 +3,8 @@
 
 SHELL = /bin/sh
 MAKE = make
-AUTOCONF = autoconf-2.66
-AUTOHEADER = autoheader-2.66
+AUTOCONF = autoconf-2.67
+AUTOHEADER = autoheader-2.67
 ACLOCAL = aclocal-1.11
 CP = cp
 RM = rm -f

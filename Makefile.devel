@@ -4,8 +4,8 @@
 
 SHELL = /bin/sh
 MAKE = make
-AUTOCONF = autoconf-2.66
-AUTOHEADER = autoheader-2.66
+AUTOCONF = autoconf-2.67
+AUTOHEADER = autoheader-2.67
 AUTOMAKE = automake-1.11
 ACLOCAL = aclocal-1.11
 GPERF = gperf
