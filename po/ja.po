@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: GNU libiconv 1.12\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2009-06-30 22:53+0200\n"
-"PO-Revision-Date: 2010-03-08 12:20+0900\n"
+"PO-Revision-Date: 2010-08-24 18:49+0900\n"
 "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -80,7 +80,7 @@ msgstr ""
 #: src/iconv.c:143
 #, c-format, no-wrap
 msgid "Options controlling conversion problems:\n"
-msgstr "返還の問題を制御するオプション:\n"
+msgstr "変換の問題を制御するオプション:\n"
 
 #: src/iconv.c:146
 #, c-format, no-wrap
