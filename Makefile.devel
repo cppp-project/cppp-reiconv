@@ -83,7 +83,7 @@ GNULIB_MODULES = \
   xalloc \
   libiconv-misc
 
-srclib/Makefile.gnulib :
+srclib/Makefile.gnulib : force
 	if test -n "$$GNULIB_TOOL"; then \
 	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --makefile-name=Makefile.gnulib --no-libtool --local-dir=gnulib-local --no-vc-files \
 	    --import $(GNULIB_MODULES); \
