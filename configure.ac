@@ -133,8 +133,11 @@ AC_SUBST([USE_MBSTATE_T])
 
 AC_CACHE_CHECK([whether <wchar.h> is standalone],
   [gl_cv_header_wchar_h_standalone],
-  [AC_COMPILE_IFELSE([[#include <wchar.h>
-wchar_t w;]],
+  [AC_COMPILE_IFELSE(
+     [AC_LANG_PROGRAM(
+        [[#include <wchar.h>
+          wchar_t w;]],
+        [[]])],
     [gl_cv_header_wchar_h_standalone=yes],
     [gl_cv_header_wchar_h_standalone=no])])
 if test $gl_cv_header_wchar_h_standalone = yes; then
