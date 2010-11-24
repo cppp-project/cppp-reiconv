@@ -2131,7 +2131,7 @@ int main (int argc, char *argv[])
   else if (!strcmp(name,"big5") || !strcmp(name,"cp950ext"))
     do_big5(name);
   else if (!strcmp(name,"hkscs1999") || !strcmp(name,"hkscs2001")
-           || !strcmp(name,"hkscs2004"))
+           || !strcmp(name,"hkscs2004") || !strcmp(name,"hkscs2008"))
     do_hkscs(name);
   else if (!strcmp(name,"johab_hangul"))
     do_johab_hangul(name);

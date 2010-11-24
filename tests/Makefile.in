@@ -142,6 +142,8 @@ check : all table-from table-to ../src/iconv_no_i18n test-shiftseq test-to-wchar
 	$(srcdir)/check-stateful $(srcdir) BIG5-HKSCS:2001
 	$(srcdir)/check-stateless $(srcdir) BIG5-HKSCS:2004
 	$(srcdir)/check-stateful $(srcdir) BIG5-HKSCS:2004
+	$(srcdir)/check-stateless $(srcdir) BIG5-HKSCS:2008
+	$(srcdir)/check-stateful $(srcdir) BIG5-HKSCS:2008
 	$(srcdir)/check-stateless $(srcdir) EUC-KR
 	$(srcdir)/check-stateless $(srcdir) CP949
 	$(srcdir)/check-stateless $(srcdir) JOHAB
