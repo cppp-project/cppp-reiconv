@@ -1,3 +1,12 @@
+2011-01-29  Bruno Haible  <bruno@clisp.org>
+
+	Adjust the meaning of "wchar_t" on native Windows systems.
+	* lib/iconv.c (iconv_canonicalize): On native Windows, map
+	ei_local_wchar_t to ei_utf16le or ei_utf16be, not ei_ucs2internal.
+	* lib/iconv_open1.h: Likewise.
+	Reported by Corinna Vinschen <corinna-cygwin@cygwin.com>
+	in <http://cygwin.com/ml/cygwin/2011-01/msg00410.html>.
+
 2010-11-23  Bruno Haible  <bruno@clisp.org>
 
 	Implement newer release of BIG5-HKSCS.
