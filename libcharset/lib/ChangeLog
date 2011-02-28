@@ -1,3 +1,8 @@
+2011-02-28  Bruno Haible  <bruno@clisp.org>
+
+	* relocatable.h: Update from gnulib.
+	* relocatable.c: Likewise.
+
 2009-12-13  Bruno Haible  <bruno@clisp.org>
 
 	* localcharset.c (locale_charset): Fix comment about use of GetACP.

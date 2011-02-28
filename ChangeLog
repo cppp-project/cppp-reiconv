@@ -1,3 +1,8 @@
+2011-02-28  Bruno Haible  <bruno@clisp.org>
+
+	* lib/relocatable.h: Update from gnulib.
+	* lib/relocatable.c: Likewise.
+
 2011-01-29  Corinna Vinschen  <corinna-cygwin@cygwin.com>
             Bruno Haible  <bruno@clisp.org>
 
