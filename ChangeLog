@@ -1,3 +1,10 @@
+2011-03-27  KO Myung-Hun  <komh@chollian.net>
+
+	Fix installation on OS/2.
+	* src/Makefile.in (all, iconv_no_i18n): Add $(EXEEXT) suffix to
+	iconv_no_i18n. This is the recommended way to use libtool, see
+	<http://lists.gnu.org/archive/html/bug-libtool/2009-04/msg00013.html>.
+
 2011-03-31  Bruno Haible  <bruno@clisp.org>
 
 	gentranslit: Fix buffer overrun.
