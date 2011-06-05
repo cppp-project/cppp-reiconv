@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2005-2006, 2008-2009 Free Software Foundation, Inc.
+ * Copyright (C) 2000-2002, 2005-2006, 2008-2009, 2011 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -25,6 +25,15 @@
  */
 
 #if HAVE_WCRTOMB || HAVE_MBRTOWC
+/* Tru64 with Desktop Toolkit C has a bug: <stdio.h> must be included before
+   <wchar.h>.
+   BSD/OS 4.0.1 has a bug: <stddef.h>, <stdio.h> and <time.h> must be
+   included before <wchar.h>.
+   In some builds of uClibc, <wchar.h> is nonexistent and wchar_t is defined
+   by <stddef.h>.  */
+# include <stddef.h>
+# include <stdio.h>
+# include <time.h>
 # include <wchar.h>
 # define BUF_SIZE 64  /* assume MB_LEN_MAX <= 64 */
   /* Some systems, like BeOS, have multibyte encodings but lack mbstate_t.  */
