@@ -1,3 +1,13 @@
+2011-07-03  Bruno Haible  <bruno@clisp.org>
+
+	Fix interactive behaviour of iconv program.
+	* Makefile.devel (GNULIB_MODULES): Add safe-read.
+	* src/iconv.c: Include safe-read.h.
+	(convert): Take the infile as a file descriptor, not as a FILE stream.
+	Use safe_read() instead of fread().
+	(main): Update.
+	Reported by Xavier Pucel <xpucel@hotmail.com>.
+
 2011-05-02  Bruno Haible  <bruno@clisp.org>
 
 	Update after gnulib changed.

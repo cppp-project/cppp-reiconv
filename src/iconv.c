@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2009 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2009, 2011 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -38,6 +38,7 @@
 #include "binary-io.h"
 #include "progname.h"
 #include "relocatable.h"
+#include "safe-read.h"
 #include "xalloc.h"
 #include "uniwidth.h"
 #include "uniwidth/cjk.h"
@@ -667,23 +668,25 @@ static void conversion_error_other (int errnum, const char* infilename)
 
 /* Convert the input given in infile.  */
 
-static int convert (iconv_t cd, FILE* infile, const char* infilename)
+static int convert (iconv_t cd, int infile, const char* infilename)
 {
   char inbuf[4096+4096];
   size_t inbufrest = 0;
+  int infile_error = 0;
   char initial_outbuf[4096];
   char *outbuf = initial_outbuf;
   size_t outbufsize = sizeof(initial_outbuf);
   int status = 0;
 
 #if O_BINARY
-  SET_BINARY(fileno(infile));
+  SET_BINARY(infile);
 #endif
   line = 1; column = 0;
   iconv(cd,NULL,NULL,NULL,NULL);
   for (;;) {
-    size_t inbufsize = fread(inbuf+4096,1,4096,infile);
-    if (inbufsize == 0) {
+    size_t inbufsize = safe_read(infile,inbuf+4096,4096);
+    if (inbufsize == 0 || inbufsize == SAFE_READ_ERROR) {
+      infile_error = (inbufsize == SAFE_READ_ERROR ? errno : 0);
       if (inbufrest == 0)
         break;
       else {
@@ -809,11 +812,11 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
     } else
       break;
   }
-  if (ferror(infile)) {
+  if (infile_error) {
     fflush(stdout);
     if (column > 0)
       putc('\n',stderr);
-    error(0,0,
+    error(0,infile_error,
           /* TRANSLATORS: An error message.
              The placeholder expands to the input file name.  */
           _("%s: I/O error"),
@@ -1076,7 +1079,7 @@ int main (int argc, char* argv[])
     hooks.data = NULL;
     iconvctl(cd, ICONV_SET_HOOKS, &hooks);
     if (i == argc)
-      status = convert(cd,stdin,
+      status = convert(cd,fileno(stdin),
                        /* TRANSLATORS: A filename substitute denoting standard input.  */
                        _("(stdin)"));
     else {
@@ -1094,7 +1097,7 @@ int main (int argc, char* argv[])
                 infilename);
           status = 1;
         } else {
-          status |= convert(cd,infile,infilename);
+          status |= convert(cd,fileno(infile),infilename);
           fclose(infile);
         }
       }

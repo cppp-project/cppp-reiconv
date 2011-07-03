@@ -73,6 +73,7 @@ GNULIB_MODULES = \
   memmove \
   progname \
   relocatable-prog \
+  safe-read \
   sigpipe \
   stdio \
   stdlib \
