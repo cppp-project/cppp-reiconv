@@ -1,5 +1,11 @@
 2011-07-03  Bruno Haible  <bruno@clisp.org>
 
+	Improve interactive behaviour of iconv program.
+	* src/iconv.c (convert): Flush the output before starting a possibly
+	blocking safe_read call.
+
+2011-07-03  Bruno Haible  <bruno@clisp.org>
+
 	Fix interactive behaviour of iconv program.
 	* Makefile.devel (GNULIB_MODULES): Add safe-read.
 	* src/iconv.c: Include safe-read.h.

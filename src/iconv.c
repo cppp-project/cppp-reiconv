@@ -684,7 +684,11 @@ static int convert (iconv_t cd, int infile, const char* infilename)
   line = 1; column = 0;
   iconv(cd,NULL,NULL,NULL,NULL);
   for (;;) {
-    size_t inbufsize = safe_read(infile,inbuf+4096,4096);
+    size_t inbufsize;
+    /* Transfer the accumulated output to its destination, in case the
+       safe_read() call will block. */
+    fflush(stdout);
+    inbufsize = safe_read(infile,inbuf+4096,4096);
     if (inbufsize == 0 || inbufsize == SAFE_READ_ERROR) {
       infile_error = (inbufsize == SAFE_READ_ERROR ? errno : 0);
       if (inbufrest == 0)
