@@ -67,7 +67,6 @@ config.h.in : configure.ac $(AUTOCONF_FILES)
 GNULIB_MODULES = \
   binary-io \
   error \
-  exit \
   gettext \
   gettext-h \
   mbstate \
@@ -76,6 +75,7 @@ GNULIB_MODULES = \
   relocatable-prog \
   sigpipe \
   stdio \
+  stdlib \
   strerror \
   unistd \
   uniwidth/width \

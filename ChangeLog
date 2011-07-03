@@ -1,3 +1,8 @@
+2011-05-02  Bruno Haible  <bruno@clisp.org>
+
+	Update after gnulib changed.
+	* autogen.sh (GNULIB_MODULES): Remove exit, add stdlib.
+
 2011-06-02  Bruno Haible  <bruno@clisp.org>
 
 	Update after gnulib changed.
