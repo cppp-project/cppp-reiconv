@@ -1,3 +1,12 @@
+2011-08-06  Bruno Haible  <bruno@clisp.org>
+
+	Fix conversion bug in CP1258 converter.
+	* lib/vietcomb.h (viet_comp_table_data): Remove entry for
+	U+00A5 U+0301. Fix entry for U+00A8 U+0301.
+	(viet_decomp_table): Fix entry for U+0385.
+	* tests/CP1258.IRREVERSIBLE.TXT: Update.
+	Reported by Gertjan Halkes <gertjan@ghalkes.nl>.
+
 2011-07-03  Bruno Haible  <bruno@clisp.org>
 
 	Improve interactive behaviour of iconv program.

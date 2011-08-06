@@ -4,6 +4,7 @@
   BIG5-HKSCS:2004. A new converter BIG5-HKSCS:2008 is added. BIG5-HKSCS is now
   an alias for BIG5-HKSCS:2008.
 * Fixed a bug in the conversion to wchar_t.
+* Fixed a small bug in the CP1258 converter.
 
 New in 1.13:
 * The library and the iconv program now understand platform dependent aliases,
