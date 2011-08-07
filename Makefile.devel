@@ -25,7 +25,7 @@ all : configures config.h.in \
       lib/aliases_dos.h \
       lib/aliases_extra.h \
       lib/flags.h lib/translit.h \
-      man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html force
+      man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html man/iconvctl.3.html man/iconv_open_into.3.html force
 	cd libcharset && $(MAKE) -f Makefile.devel all
 	cd preload && $(MAKE) -f Makefile.devel all
 

@@ -1,5 +1,11 @@
 2011-08-07  Bruno Haible  <bruno@clisp.org>
 
+	Ensure all HTML-formatted man pages are up-to-date.
+	* Makefile.devel (all): Depend on man/iconvctl.3.html and
+	man/iconv_open_into.3.html.
+
+2011-08-07  Bruno Haible  <bruno@clisp.org>
+
 	* Version 1.14 released.
 
 2011-08-07  Bruno Haible  <bruno@clisp.org>
