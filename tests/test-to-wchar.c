@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Free Software Foundation, Inc.
+/* Copyright (C) 2009, 2011 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -29,19 +29,24 @@
 int main ()
 {
   iconv_t cd = iconv_open ("wchar_t", "UTF-8");
-  char inbuf[2] = { 0xc2, 0xa0 };
-  wchar_t outbuf[10];
+  if (cd == (iconv_t)(-1)) {
+    /* Skip the test on platforms without wchar_t
+      (Solaris 2.6, HP-UX 11.00).  */
+  } else {
+    char inbuf[2] = { 0xc2, 0xa0 };
+    wchar_t outbuf[10];
 
-  char *inptr = inbuf;
-  size_t inbytesleft = 1;
-  char *outptr = (char *) outbuf;
-  size_t outbytesleft = sizeof (outbuf);
-  size_t r = iconv (cd,
-                    (ICONV_CONST char **) &inptr, &inbytesleft,
-                    &outptr, &outbytesleft);
+    char *inptr = inbuf;
+    size_t inbytesleft = 1;
+    char *outptr = (char *) outbuf;
+    size_t outbytesleft = sizeof (outbuf);
+    size_t r = iconv (cd,
+                      (ICONV_CONST char **) &inptr, &inbytesleft,
+                      &outptr, &outbytesleft);
 
-  if (!(r == (size_t)(-1) && errno == EINVAL))
-    abort ();
+    if (!(r == (size_t)(-1) && errno == EINVAL))
+      abort ();
+  }
 
   return 0;
 }

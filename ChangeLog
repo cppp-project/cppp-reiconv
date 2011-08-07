@@ -1,5 +1,11 @@
 2011-08-07  Bruno Haible  <bruno@clisp.org>
 
+	Avoid a test failure on Solaris 2.6 and HP-UX 11.00.
+	* tests/test-to-wchar.c (main): Skip the test if conversion to wchar_t
+	is not supported.
+
+2011-08-07  Bruno Haible  <bruno@clisp.org>
+
 	* tests/check-subst: Add comments about OSF/1.
 
 2011-08-07  Bruno Haible  <bruno@clisp.org>
