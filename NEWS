@@ -1,5 +1,8 @@
 * The 'iconv' program now produces its output as soon as it can. It no longer
   unnecessarily waits for more input.
+* Updated the GB18030 converter to map 25 characters to code points that have
+  been to Unicode since 2000, rather than to code points in the Private Use
+  Area.
 * Updated the BIG5-HKSCS converter. The old BIG5-HKSCS converter is renamed to
   BIG5-HKSCS:2004. A new converter BIG5-HKSCS:2008 is added. BIG5-HKSCS is now
   an alias for BIG5-HKSCS:2008.

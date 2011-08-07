@@ -1,5 +1,22 @@
 2011-08-06  Bruno Haible  <bruno@clisp.org>
 
+	Upgrade the GB18030 converter to the version from 2005.
+	* lib/gb18030ext.h (gb18030ext_2uni_pagefe): Change element type to
+	'unsigned int'. Change values for 0xFE51..0xFE53, 0xFE59, 0xFE61,
+	0xFE66, 0xFE67, 0xFE6C, 0xFE6D, 0xFE76, 0xFE7E, 0xFE90, 0xFE91, 0xFEA0.
+	(gb18030ext_mbtowc): Change type of wc to 'unsigned int'. Change values
+	for 0xA6D9..0xA6DF, 0xA6EC..0xA6ED, 0xA6F3, 0xA8BC.
+	(gb18030ext_page9f, gb18030ext_pagefe): New constant arrays.
+	(gb18030ext_wctomb): Change values for U+1E3F, U+9FB4..U+9FBB,
+	U+FE10..U+FE19, U+20087, U+20089, U+200CC, U+215D7, U+2298F, U+241FE.
+	* tests/GB18030-BMP.TXT: Change values for 0xA6D9..0xA6DF,
+	0xA6EC..0xA6ED, 0xA6F3, 0xA8BC, 0xFE51..0xFE53, 0xFE59, 0xFE61, 0xFE66,
+	0xFE67, 0xFE6C, 0xFE6D, 0xFE76, 0xFE7E, 0xFE90, 0xFE91, 0xFEA0, to map
+	to now-assigned Unicode codepoints.
+	* tests/GB18030.IRREVERSIBLE.TXT: New file.
+
+2011-08-06  Bruno Haible  <bruno@clisp.org>
+
 	Fix conversion bug in CP1258 converter.
 	* lib/vietcomb.h (viet_comp_table_data): Remove entry for
 	U+00A5 U+0301. Fix entry for U+00A8 U+0301.
