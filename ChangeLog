@@ -1,5 +1,9 @@
 2011-08-07  Bruno Haible  <bruno@clisp.org>
 
+	* tests/check-subst: Add comments about OSF/1.
+
+2011-08-07  Bruno Haible  <bruno@clisp.org>
+
 	* lib/relocatable.c: Update from gnulib.
 
 2011-08-06  Bruno Haible  <bruno@clisp.org>
