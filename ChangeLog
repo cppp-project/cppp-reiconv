@@ -1,3 +1,10 @@
+2011-09-02  Bruno Haible  <bruno@clisp.org>
+
+	Fix "make check" failure when $(srcdir) != $(builddir).
+	* tests/Makefile.in (check): When $(srcdir) != ., temporarily copy
+	GB18030.IRREVERSIBLE.TXT into the build directory.
+	Reported by Christian Weisgerber <naddy@mips.inka.de>.
+
 2011-08-07  Bruno Haible  <bruno@clisp.org>
 
 	Ensure all HTML-formatted man pages are up-to-date.
