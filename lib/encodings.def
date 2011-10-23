@@ -365,6 +365,7 @@ DEFENCODING(( "ISO-8859-13",            /* IANA, glibc */
               "LATIN7",                 /* glibc */
               "L7",                     /* glibc */
               "ISO8859-13",             /* glibc, FreeBSD */
+            /*"CP28603",                   Windows */
             ),
             iso8859_13,
             { iso8859_13_mbtowc, NULL },  { iso8859_13_wctomb, NULL })
@@ -424,6 +425,7 @@ DEFENCODING(( "KOI8-U",                 /* IANA, RFC 2319 */
             { koi8_u_mbtowc, NULL },      { koi8_u_wctomb, NULL })
 
 DEFENCODING(( "KOI8-RU",
+            /*"CP21866",                   Windows */
             ),
             koi8_ru,
             { koi8_ru_mbtowc, NULL },     { koi8_ru_wctomb, NULL })
@@ -922,6 +924,7 @@ DEFENCODING(( "ISO-2022-CN-EXT",        /* IANA, RFC 1922 */
 
 DEFENCODING(( "HZ",                     /* RFC 1843 */
               "HZ-GB-2312",             /* IANA, RFC 1842 */
+            /*"CP52936",                   Windows */
             ),
             hz,
             { hz_mbtowc, NULL },          { hz_wctomb, hz_reset })
@@ -1024,6 +1027,7 @@ DEFALIAS(     "KO_KR.JOHAP92",          /* Solaris */
 DEFENCODING(( "ISO-2022-KR",            /* IANA, RFC 1557 */
               "csISO2022KR",            /* IANA */
             /*"ISO2022KR",                 JDK 1.1 */
+            /*"CP50225",                   Windows */
             ),
             iso2022_kr,
             { iso2022_kr_mbtowc, NULL },  { iso2022_kr_wctomb, iso2022_kr_reset })
