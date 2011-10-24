@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2002 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002, 2011 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software: you can redistribute it and/or modify
@@ -59,6 +59,9 @@
  *   ./8bit_tab_to_h ISO-8859-15 iso8859_15 < 8859-15.TXT
  *   ./8bit_tab_to_h JISX0201.1976-0 jisx0201 < JIS0201.TXT
  *   ./8bit_tab_to_h KOI8-R koi8_r < KOI8-R.TXT
+ *
+ *   ./8bit_tab_to_h 'CP50221 JISX0208 extensions' cp50221_0208_ext < CP50221-0208-EXT.TXT
+ *   ./8bit_tab_to_h 'CP50221 JISX0212 extensions' cp50221_0212_ext < CP50221-0212-EXT.TXT
  */
 
 #include <stdio.h>

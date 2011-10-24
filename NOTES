@@ -200,6 +200,9 @@ A: libiconv, as an internationalization library, supports those character
      * ISO-2022-JP-1
        We implement this because it's in the RFCs, but I don't think it is
        really used.
+     * ISO-2022-JP-MS
+       We implement this because Microsoft Outlook Express / Microsoft MimeOLE
+       sends emails in this encoding.
      * U90, S90
        We DON'T implement this because I have no informations about what it
        is or who uses it.

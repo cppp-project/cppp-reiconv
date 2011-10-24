@@ -1,5 +1,26 @@
 2011-10-23  Bruno Haible  <bruno@clisp.org>
 
+	New encoding ISO-2022-CP-MS.
+	* NOTES: Mention ISO-2022-JP-MS.
+	* tools/CP50221-0208-EXT.TXT: New file.
+	* tools/CP50221-0212-EXT.TXT: New file.
+	* tools/8bit_tab_to_h.c: Add comments about how to generate
+	cp50221_0208_ext.h, cp50221_0212_ext.h.
+	* tools/Makefile: Add rules for generating cp50221_0208_ext.h,
+	cp50221_0212_ext.h.
+	* lib/cp50221_0208_ext.h: New file, mostly generated.
+	* lib/cp50221_0212_ext.h: New file, mostly generated.
+	* lib/iso2022_jpms.h: New file.
+	* lib/converters.h: Include it.
+	* lib/encodings.def: Add ISO-2022-JP-MS.
+	* README, man/iconv_open.3: Add ISO-2022-JP-MS.
+	* tests/ISO-2022-JP-MS-snippet: New file.
+	* tests/ISO-2022-JP-MS-snippet.UTF-8: New file.
+	* tests/Makefile.in (check): Also test ISO-2022-JP-MS.
+	Reported by Jeff Diehl <diehl.jeff@gmail.com>.
+
+2011-10-23  Bruno Haible  <bruno@clisp.org>
+
 	* lib/encodings.def: Add comments about Windows names of encodings.
 
 2011-10-18  Bruno Haible  <bruno@clisp.org>

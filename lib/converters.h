@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002, 2004-2010 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002, 2004-2011 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -228,6 +228,7 @@ typedef struct {
 #include "iso2022_jp.h"
 #include "iso2022_jp1.h"
 #include "iso2022_jp2.h"
+#include "iso2022_jpms.h"
 
 #include "euc_cn.h"
 #include "ces_gbk.h"

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2010 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2011 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -868,6 +868,13 @@ DEFENCODING(( "ISO-2022-JP-2",          /* IANA, RFC 1554 */
             ),
             iso2022_jp2,
             { iso2022_jp2_mbtowc, NULL }, { iso2022_jp2_wctomb, iso2022_jp2_reset })
+
+DEFENCODING(( "ISO-2022-JP-MS",
+              "CP50221",
+            /*"ISO-2022-JP-ESC",           Windows */
+            ),
+            iso2022_jpms,
+            { iso2022_jpms_mbtowc, NULL }, { iso2022_jpms_wctomb, iso2022_jpms_reset })
 
 DEFENCODING(( "EUC-CN",                 /* glibc */
               "EUCCN",                  /* glibc, IRIX */

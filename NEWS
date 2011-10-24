@@ -1,3 +1,6 @@
+New in 1.15:
+* Added ISO-2022-JP-MS converter.
+
 New in 1.14:
 * The 'iconv' program now produces its output as soon as it can. It no longer
   unnecessarily waits for more input.
