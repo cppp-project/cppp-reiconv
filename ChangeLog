@@ -1,3 +1,11 @@
+2011-10-27  Bruno Haible  <bruno@clisp.org>
+
+	Fix bug with error handling in UCS-2, UCS-4, UTF-32 decoders.
+	* lib/ucs2.h (ucs2_mbtowc): Increment count only after validating wc.
+	* lib/ucs4.h (ucs4_mbtowc): Likewise.
+	* lib/utf32.h (utf32_mbtowc): Likewise.
+	Reported at <https://savannah.gnu.org/bugs/?34916>.
+
 2012-06-30  Bruno Haible  <bruno@clisp.org>
 
 	Improve ISO-2022-CP-MS versus CP932.
