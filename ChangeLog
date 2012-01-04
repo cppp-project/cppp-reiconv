@@ -1,3 +1,9 @@
+2012-01-04  Bruno Haible  <bruno@clisp.org>
+
+	Talk about "native Windows API", not "Win32".
+	* lib/relocatable.c: Update comments to mention native Windows.
+	(WINDOWS_NATIVE): Renamed from WIN32_NATIVE.
+
 2011-10-27  Bruno Haible  <bruno@clisp.org>
 
 	Fix bug with error handling in UCS-2, UCS-4, UTF-32 decoders.
