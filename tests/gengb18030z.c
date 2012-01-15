@@ -1,4 +1,4 @@
-/* Copyright (C) 2005 Free Software Foundation, Inc.
+/* Copyright (C) 2005, 2012 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -17,6 +17,8 @@
    Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 /* Creates the beyond-BMP part of the GB18030.TXT reference table. */
+
+#include "config.h"
 
 #include <stdio.h>
 #include <stdlib.h>
