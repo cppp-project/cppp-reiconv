@@ -1,3 +1,34 @@
+2012-01-26  Bruno Haible  <bruno@clisp.org>
+
+	Modernize quoting.
+	* README: Quote 'like this', not `like this', as per the recent change
+	to the GNU coding standards.
+	* NOTES: Likewise.
+	* gnulib-local/lib/xmalloc.c: Likewise.
+	* lib/config.h.in: Likewise.
+	* src/iconv.c (usage): Likewise.
+	* tests/uniq-u.c: Likewise.
+	* tools/cjk_tab_to_h.c (output_uni2charset_sparse, do_jisx0213):
+	Likewise.
+	* lib/big5.h: Update accordingly.
+	* lib/cns11643_inv.h: Likewise.
+	* lib/cp932ext.h: Likewise.
+	* lib/cp950ext.h: Likewise.
+	* lib/gb12345ext.h: Likewise.
+	* lib/gb2312.h: Likewise.
+	* lib/gbkext_inv.h: Likewise.
+	* lib/hkscs1999.h: Likewise.
+	* lib/hkscs2001.h: Likewise.
+	* lib/hkscs2004.h: Likewise.
+	* lib/hkscs2008.h: Likewise.
+	* lib/isoir165ext.h: Likewise.
+	* lib/jisx0208.h: Likewise.
+	* lib/jisx0212.h: Likewise.
+	* lib/jisx0213.h: Likewise.
+	* lib/ksc5601.h: Likewise.
+	* lib/uhc_1.h: Likewise.
+	* lib/uhc_2.h: Likewise.
+
 2012-01-15  Bruno Haible  <bruno@clisp.org>
 
 	Support for MSVC 9.

@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2009, 2011 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2009, 2011-2012 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -107,7 +107,7 @@ static void usage (int exitcode)
          Align it correctly against the first line.  */
       _("or:    iconv -l");
     fprintf(stderr, "%s\n%s\n", helpstring1, helpstring2);
-    fprintf(stderr, _("Try `%s --help' for more information.\n"), program_name);
+    fprintf(stderr, _("Try '%s --help' for more information.\n"), program_name);
   } else {
     /* xgettext: no-wrap */
     /* TRANSLATORS: The first line of the long usage message.

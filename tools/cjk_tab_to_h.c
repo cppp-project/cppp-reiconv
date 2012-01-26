@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2004, 2006-2007, 2010 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2004, 2006-2007, 2010, 2012 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software: you can redistribute it and/or modify
@@ -822,9 +822,9 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
   printf("      if (used & ((unsigned short) 1 << i)) {\n");
   if (monotonic || !is_large)
     printf("        unsigned short c;\n");
-  printf("        /* Keep in `used' only the bits 0..i-1. */\n");
+  printf("        /* Keep in 'used' only the bits 0..i-1. */\n");
   printf("        used &= ((unsigned short) 1 << i) - 1;\n");
-  printf("        /* Add `summary->indx' and the number of bits set in `used'. */\n");
+  printf("        /* Add 'summary->indx' and the number of bits set in 'used'. */\n");
   printf("        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);\n");
   printf("        used = (used & 0x3333) + ((used & 0xcccc) >> 2);\n");
   printf("        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);\n");
@@ -2070,9 +2070,9 @@ static void do_jisx0213 (const char* name)
   printf("      unsigned short used = summary->used;\n");
   printf("      unsigned int i = ucs & 0x0f;\n");
   printf("      if (used & ((unsigned short) 1 << i)) {\n");
-  printf("        /* Keep in `used' only the bits 0..i-1. */\n");
+  printf("        /* Keep in 'used' only the bits 0..i-1. */\n");
   printf("        used &= ((unsigned short) 1 << i) - 1;\n");
-  printf("        /* Add `summary->indx' and the number of bits set in `used'. */\n");
+  printf("        /* Add 'summary->indx' and the number of bits set in 'used'. */\n");
   printf("        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);\n");
   printf("        used = (used & 0x3333) + ((used & 0xcccc) >> 2);\n");
   printf("        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);\n");
