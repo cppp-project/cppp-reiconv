@@ -12,8 +12,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software Foundation,
-   Inc., along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program; if not, see <http://www.gnu.org/licenses/>.  */
 
 /*
  * Generates a CJK character set table from a .TXT table as found on
@@ -91,8 +90,7 @@ static void output_title (const char *charsetname)
   printf(" *\n");
   printf(" * You should have received a copy of the GNU Library General Public\n");
   printf(" * License along with the GNU LIBICONV Library; see the file COPYING.LIB.\n");
-  printf(" * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,\n");
-  printf(" * Fifth Floor, Boston, MA 02110-1301, USA.\n");
+  printf(" * If not, see <http://www.gnu.org/licenses/>.\n");
   printf(" */\n");
   printf("\n");
   printf("/*\n");

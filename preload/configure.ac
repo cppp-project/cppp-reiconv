@@ -13,8 +13,7 @@ dnl Library General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU Library General Public License
 dnl along with the GNU LIBICONV Library; see the file COPYING.LIB.  If not,
-dnl write to the Free Software Foundation, Inc., 51 Franklin Street,
-dnl Fifth Floor, Boston, MA 02110-1301, USA.
+dnl see <http://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.60])
 
