@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2005 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2005, 2012 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -107,7 +107,7 @@ isoir165_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
     if (n >= 2) {
       unsigned char c2 = s[1];
       if (c2 >= 0x21 && c2 < 0x7f) {
-        int ret = iso646_cn_mbtowc(conv,pwc,s+1,1);
+        ret = iso646_cn_mbtowc(conv,pwc,s+1,1);
         if (ret != 1) abort();
         return 2;
       }
