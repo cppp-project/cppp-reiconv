@@ -1,3 +1,15 @@
+2012-05-13  Bruno Haible  <bruno@clisp.org>
+
+	Tweak the GB18030 converter to map 0x8135F437 to U+E7C7.
+	* lib/gb18030.h (gb18030_pua2charset, gb18030_wctomb): Remove mapping
+	from U+E7C7 to 0xA8BC.
+	* lib/gb18030uni.h (gb18030uni_mbtowc): Treat 0x8135F437 as a special
+	case.
+	(gb18030uni_wctomb): Treat U+E7C7 as a special case.
+	* tests/GB18030-BMP.TXT: Map 0x8135F437 to U+E7C7, not U+1E3F.
+	* tests/GB18030.IRREVERSIBLE.TXT: Remove irreversible mappings for
+	0x8135F437 and U+E7C7.
+
 2012-04-28  Bruno Haible  <bruno@clisp.org>
 
 	Switch to autoconf 2.69 and automake 1.12.
