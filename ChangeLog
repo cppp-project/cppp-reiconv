@@ -1,3 +1,12 @@
+2012-06-30  Bruno Haible  <bruno@clisp.org>
+
+	Improve ISO-2022-CP-MS versus CP932.
+	* lib/cp50221_0208_ext.h (cp50221_0208_ext_page30): Map U+301D like
+	U+301E.
+	* lib/iso2022_jpms.h (iso2022_jpms_wctomb): Map U+663B to JISX0208
+	0x7A 0x36, U+FFE2 to 0x7C 0x7B, U+FFE4 to 0x7C 0x7C.
+	Reported by Jeff Diehl <diehl.jeff@gmail.com>.
+
 2011-10-23  Bruno Haible  <bruno@clisp.org>
 
 	New encoding ISO-2022-CP-MS.

@@ -338,6 +338,18 @@ iso2022_jpms_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
         buf[0] = 0x2d;
         buf[1] = i-1 + 0x21;
         ret = 2;
+      } else if (wc == 0x663B) {
+        buf[0] = 0x7a;
+        buf[1] = 0x36;
+        ret = 2;
+      } else if (wc == 0xffe2) {
+        buf[0] = 0x7c;
+        buf[1] = 0x7b;
+        ret = 2;
+      } else if (wc == 0xffe4) {
+        buf[0] = 0x7c;
+        buf[1] = 0x7c;
+        ret = 2;
       }
     }
   }
