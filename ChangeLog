@@ -1,6 +1,19 @@
 2012-06-30  Bruno Haible  <bruno@clisp.org>
 
 	Improve ISO-2022-CP-MS versus CP932.
+	* lib/iso2022_jpms.h (iso2022_jpms_mbtowc): Recognize characters from
+	the rows 0x79..0x7C as rows from CP932.
+	* tests/ISO-2022-JP-MS-snippet.alt: New file, renamed from
+	tests/ISO-2022-JP-MS-snippet.
+	* tests/ISO-2022-JP-MS-snippet.UTF-8: Update the rows that correspond
+	to ESC $ B 0x79..0x7C.
+	* tests/ISO-2022-JP-MS-snippet: Likewise.
+	* tests/check-stateful: Also test the *-snippet.alt file if it exists.
+	* tests/check-stateful.bat: Likewise.
+
+2012-06-30  Bruno Haible  <bruno@clisp.org>
+
+	Improve ISO-2022-CP-MS versus CP932.
 	* lib/cp50221_0208_ext.h (cp50221_0208_ext_page30): Map U+301D like
 	U+301E.
 	* lib/iso2022_jpms.h (iso2022_jpms_wctomb): Map U+663B to JISX0208

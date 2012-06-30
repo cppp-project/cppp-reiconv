@@ -211,9 +211,15 @@ iso2022_jpms_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
           }
         } else {
           /* Extension of JIS X 0208.
-             0x{75..7E}{21..8E} maps to U+E000..U+E3AB.  */
+             0x{75..7E}{21..8E} maps to U+E000..U+E3AB.
+             But some rows maps to characters present in CP932.  */
           if (s[0] <= 0x7e && (s[1] >= 0x21 && s[1] <= 0x7e)) {
-            *pwc = (s[0] - 0x75) * 94 + (s[1] - 0x21) + 0xe000;
+            unsigned short wc = 0xfffd;
+            if (s[0] >= 0x79 && s[0] <= 0x7c)
+              wc = cp932ext_2uni_pageed[(s[0] - 0x79) * 94 + (s[1] - 0x21)];
+            if (wc == 0xfffd)
+              wc = (s[0] - 0x75) * 94 + (s[1] - 0x21) + 0xe000;
+            *pwc = wc;
             ret = 2;
           } else
             ret = RET_ILSEQ;
