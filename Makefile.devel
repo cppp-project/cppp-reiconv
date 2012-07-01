@@ -104,7 +104,7 @@ include/iconv.h.build.in : include/iconv.h.in include/export.h
 
 lib/aliases.h lib/canonical.h lib/canonical_local.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
 	$(CC) $(CFLAGS) lib/genaliases.c -o genaliases
-	./genaliases > lib/aliases.gperf 3> canonical.sh 4> canonical_local.sh
+	./genaliases lib/aliases.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases.gperf > tmp.h
 	$(CP) tmp.h lib/aliases.h
@@ -114,7 +114,7 @@ lib/aliases.h lib/canonical.h lib/canonical_local.h : lib/encodings.def lib/enco
 
 lib/aliases_sysaix.h lib/canonical_sysaix.h lib/canonical_local_sysaix.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
 	$(CC) $(CFLAGS) -DUSE_AIX_ALIASES lib/genaliases.c -o genaliases
-	./genaliases > lib/aliases_sysaix.gperf 3> canonical.sh 4> canonical_local.sh
+	./genaliases lib/aliases_sysaix.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_sysaix.gperf > tmp.h
 	$(CP) tmp.h lib/aliases_sysaix.h
@@ -124,7 +124,7 @@ lib/aliases_sysaix.h lib/canonical_sysaix.h lib/canonical_local_sysaix.h : lib/e
 
 lib/aliases_syshpux.h lib/canonical_syshpux.h lib/canonical_local_syshpux.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
 	$(CC) $(CFLAGS) -DUSE_HPUX_ALIASES lib/genaliases.c -o genaliases
-	./genaliases > lib/aliases_syshpux.gperf 3> canonical.sh 4> canonical_local.sh
+	./genaliases lib/aliases_syshpux.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_syshpux.gperf > tmp.h
 	$(CP) tmp.h lib/aliases_syshpux.h
@@ -134,7 +134,7 @@ lib/aliases_syshpux.h lib/canonical_syshpux.h lib/canonical_local_syshpux.h : li
 
 lib/aliases_sysosf1.h lib/canonical_sysosf1.h lib/canonical_local_sysosf1.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
 	$(CC) $(CFLAGS) -DUSE_OSF1_ALIASES lib/genaliases.c -o genaliases
-	./genaliases > lib/aliases_sysosf1.gperf 3> canonical.sh 4> canonical_local.sh
+	./genaliases lib/aliases_sysosf1.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_sysosf1.gperf > tmp.h
 	$(CP) tmp.h lib/aliases_sysosf1.h
@@ -144,7 +144,7 @@ lib/aliases_sysosf1.h lib/canonical_sysosf1.h lib/canonical_local_sysosf1.h : li
 
 lib/aliases_syssolaris.h lib/canonical_syssolaris.h lib/canonical_local_syssolaris.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
 	$(CC) $(CFLAGS) -DUSE_SOLARIS_ALIASES lib/genaliases.c -o genaliases
-	./genaliases > lib/aliases_syssolaris.gperf 3> canonical.sh 4> canonical_local.sh
+	./genaliases lib/aliases_syssolaris.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_syssolaris.gperf > tmp.h
 	$(CP) tmp.h lib/aliases_syssolaris.h

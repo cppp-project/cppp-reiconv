@@ -1,3 +1,12 @@
+2012-06-30  Bruno Haible  <bruno@clisp.org>
+
+	Make it possible to run 'genaliases' on native Windows.
+	* lib/genaliases.c (main): Expect 3 arguments. Open the output files
+	explicitly. Complain if they don't exist. Improve error checking.
+	* Makefile.devel (lib/aliases*.h): Pass the output filenames as
+	arguments to genaliases.
+	Reported at <http://savannah.gnu.org/bugs/?36748>.
+
 2012-05-13  Bruno Haible  <bruno@clisp.org>
 
 	Tweak the GB18030 converter to map 0x8135F437 to U+E7C7.
