@@ -154,32 +154,32 @@ lib/aliases_syssolaris.h lib/canonical_syssolaris.h lib/canonical_local_syssolar
 
 lib/aliases_aix.h lib/canonical_aix.h : lib/encodings_aix.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_AIX lib/genaliases2.c -o genaliases
-	./genaliases aix > lib/aliases_aix.h 3> lib/canonical_aix.h
+	./genaliases aix lib/aliases_aix.h lib/canonical_aix.h
 	$(RM) genaliases
 
 lib/aliases_aix_sysaix.h lib/canonical_aix_sysaix.h : lib/encodings_aix.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_AIX -DUSE_AIX_ALIASES lib/genaliases2.c -o genaliases
-	./genaliases aix > lib/aliases_aix_sysaix.h 3> lib/canonical_aix_sysaix.h
+	./genaliases aix lib/aliases_aix_sysaix.h lib/canonical_aix_sysaix.h
 	$(RM) genaliases
 
 lib/aliases_osf1.h lib/canonical_osf1.h : lib/encodings_osf1.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_OSF1 lib/genaliases2.c -o genaliases
-	./genaliases osf1 > lib/aliases_osf1.h 3> lib/canonical_osf1.h
+	./genaliases osf1 lib/aliases_osf1.h lib/canonical_osf1.h
 	$(RM) genaliases
 
 lib/aliases_osf1_sysosf1.h lib/canonical_osf1_sysosf1.h : lib/encodings_osf1.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_OSF1 -DUSE_OSF1_ALIASES lib/genaliases2.c -o genaliases
-	./genaliases osf1 > lib/aliases_osf1_sysosf1.h 3> lib/canonical_osf1_sysosf1.h
+	./genaliases osf1 lib/aliases_osf1_sysosf1.h lib/canonical_osf1_sysosf1.h
 	$(RM) genaliases
 
 lib/aliases_dos.h lib/canonical_dos.h : lib/encodings_dos.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_DOS lib/genaliases2.c -o genaliases
-	./genaliases dos > lib/aliases_dos.h 3> lib/canonical_dos.h
+	./genaliases dos lib/aliases_dos.h lib/canonical_dos.h
 	$(RM) genaliases
 
 lib/aliases_extra.h lib/canonical_extra.h : lib/encodings_extra.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_EXTRA lib/genaliases2.c -o genaliases
-	./genaliases extra > lib/aliases_extra.h 3> lib/canonical_extra.h
+	./genaliases extra lib/aliases_extra.h lib/canonical_extra.h
 	$(RM) genaliases
 
 

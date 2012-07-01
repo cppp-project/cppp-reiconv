@@ -1,5 +1,12 @@
 2012-06-30  Bruno Haible  <bruno@clisp.org>
 
+	Make it possible to run 'genaliases2' on native Windows.
+	* lib/genaliases2.c (main): Expect 3 arguments. Open the output files
+	explicitly. Complain if they don't exist.
+	* Makefile.devel (lib/aliases_*.h): Pass the output filenames as
+	arguments to genaliases.
+	Reported at <http://savannah.gnu.org/bugs/?36748>.
+
 	Make it possible to run 'genaliases' on native Windows.
 	* lib/genaliases.c (main): Expect 3 arguments. Open the output files
 	explicitly. Complain if they don't exist. Improve error checking.
