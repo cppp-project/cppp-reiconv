@@ -1,3 +1,8 @@
+2012-12-06  Bruno Haible  <bruno@clisp.org>
+
+	Change copyright holder of man pages.
+	* man/*.[13]: Replace myself with FSF.
+
 2012-06-30  Bruno Haible  <bruno@clisp.org>
 
 	Make it possible to run 'genaliases2' on native Windows.
