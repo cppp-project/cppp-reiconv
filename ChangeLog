@@ -1,3 +1,10 @@
+2015-12-10  Ben Noordhuis  <info@bnoordhuis.nl>  (tiny change)
+
+	Remove unused array from gentranslit.
+	* lib/gentranslit.c (main): Remove unused array.
+	* Makefile.devel (CC): Add -Wall option.
+	Reported in https://savannah.gnu.org/bugs/?46663 .
+
 2016-10-01  Bruno Haible  <bruno@clisp.org>
 
 	Fix bug #41187.
