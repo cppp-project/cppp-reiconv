@@ -70,7 +70,6 @@ GNULIB_MODULES = \
   gettext \
   gettext-h \
   mbstate \
-  memmove \
   progname \
   relocatable-prog \
   safe-read \

@@ -1,5 +1,12 @@
 2016-10-01  Bruno Haible  <bruno@clisp.org>
 
+	Update to current gnulib.
+	* Makefile.devel (GNULIB_MODULES): Remove memmove.
+	* tests/Makefile.in (INCLUDES): Make sure to include the top-level
+	"config.h". Needed for the 'binary-io' module.
+
+2016-10-01  Bruno Haible  <bruno@clisp.org>
+
 	Switch to automake 1.15.
 	* autogen.sh: Update comment.
 	* Makefile.devel (AUTOMAKE, ACLOCAL): Switch to version 1.15.
