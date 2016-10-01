@@ -1,5 +1,11 @@
 2016-10-01  Bruno Haible  <bruno@clisp.org>
 
+	Fix bug #41187.
+	* src/iconv.c (main): Increment i after parsing the --silent option.
+	Reported in https://savannah.gnu.org/bugs/?41187 .
+
+2016-10-01  Bruno Haible  <bruno@clisp.org>
+
 	Update to current gnulib.
 	* Makefile.devel (GNULIB_MODULES): Remove memmove.
 	* tests/Makefile.in (INCLUDES): Make sure to include the top-level

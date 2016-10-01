@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2009, 2011-2012 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2009, 2011-2012, 2016 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -959,6 +959,7 @@ int main (int argc, char* argv[])
     if /* --s ... --silent */
        (len >= 3 && len <= 8 && !strncmp(argv[i],"--silent",len)) {
       silent = 1;
+      i++;
       continue;
     }
     if /* --h ... --help */
