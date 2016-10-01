@@ -6,8 +6,8 @@ SHELL = /bin/sh
 MAKE = make
 AUTOCONF = autoconf-2.69
 AUTOHEADER = autoheader-2.69
-AUTOMAKE = automake-1.12
-ACLOCAL = aclocal-1.12
+AUTOMAKE = automake-1.15
+ACLOCAL = aclocal-1.15
 GPERF = gperf
 CC = gcc
 CFLAGS = -O
@@ -92,8 +92,7 @@ srclib/Makefile.gnulib : force
 
 srclib/Makefile.in : srclib/Makefile.am srclib/Makefile.gnulib
 	touch build-aux/compile \
-	&& $(AUTOMAKE) --gnits srclib/Makefile \
-	&& rm -f build-aux/compile
+	&& $(AUTOMAKE) --gnits --add-missing srclib/Makefile
 
 
 include/iconv.h.build.in : include/iconv.h.in include/export.h
