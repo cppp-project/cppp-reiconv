@@ -1,5 +1,11 @@
 2016-10-01  Bruno Haible  <bruno@clisp.org>
 
+	* Makefile.in.in: Upgrade to gettext-0.19.8.1.
+	* Makevars: Upgrade to gettext-0.19.8.1, keeping modifications.
+	* Rules-quot: Upgrade to gettext-0.19.8.1.
+
+2016-10-01  Bruno Haible  <bruno@clisp.org>
+
 	* es.po: Update from Santiago Vila Doncel <sanvila@unex.es>.
 	* gl.po: Update from Leandro Regueiro <leandro.regueiro@gmail.com>.
 	* hu.po: Update from Balázs Úr <urbalazs@gmail.com>.
