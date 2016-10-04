@@ -1,3 +1,11 @@
+2016-10-04  Bruno Haible  <bruno@clisp.org>
+
+	Extend CP1255 mapping.
+	* lib/cp1255.h (cp1255_2uni, cp1255_page05): Map 0xCA to U+05BA.
+	* tests/CP1255.TXT: Likewise.
+	This matches http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1255.txt
+	and what the native Windows converter does since at least Windows XP.
+
 2016-10-01  Ben Noordhuis  <info@bnoordhuis.nl>  (tiny change)
             Bruno Haible  <bruno@clisp.org>
 
