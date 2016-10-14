@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2002, 2011-2012 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2002, 2011-2012, 2016 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software: you can redistribute it and/or modify
@@ -234,7 +234,7 @@ int main (int argc, char *argv[])
         fprintf(f, "\n");
       }
       final_ret_reached = false;
-      fprintf(f, "static int\n%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", c_charsetname);
+      fprintf(f, "static int\n%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)\n", c_charsetname);
       fprintf(f, "{\n");
       fprintf(f, "  unsigned char c = *s;\n");
       if (some_invalid) {
@@ -440,7 +440,7 @@ int main (int argc, char *argv[])
         j1 = j2;
       }
       fix_0000 = false;
-      fprintf(f, "static int\n%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", c_charsetname);
+      fprintf(f, "static int\n%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)\n", c_charsetname);
       fprintf(f, "{\n");
       if (need_c)
         fprintf(f, "  unsigned char c = 0;\n");

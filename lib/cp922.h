@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -38,7 +38,7 @@ static const unsigned short cp922_2uni_3[16] = {
 };
 
 static int
-cp922_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+cp922_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c = *s;
   if (c < 0xa0)
@@ -77,7 +77,7 @@ static const unsigned char cp922_page01[32] = {
 };
 
 static int
-cp922_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+cp922_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   unsigned char c = 0;
   if (wc < 0x00a8) {

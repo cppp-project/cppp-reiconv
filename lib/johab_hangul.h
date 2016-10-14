@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -101,7 +101,7 @@ static const signed char jamo_final_index[32] = {
 };
 
 static int
-johab_hangul_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+johab_hangul_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c1 = s[0];
   if ((c1 >= 0x84 && c1 <= 0xd3)) {
@@ -194,7 +194,7 @@ static const char jamo_final_index_inverse[28] = {
 };
 
 static int
-johab_hangul_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+johab_hangul_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 2) {
     if (wc >= 0x3131 && wc < 0x3164) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2004 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2004, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -24,7 +24,7 @@
 /* Specification: RFC 3629 */
 
 static int
-utf8_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+utf8_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c = s[0];
 
@@ -96,7 +96,7 @@ utf8_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 }
 
 static int
-utf8_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n) /* n == 0 is acceptable */
+utf8_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n) /* n == 0 is acceptable */
 {
   int count;
   if (wc < 0x80)

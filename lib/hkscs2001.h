@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2006, 2012 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2006, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -56,7 +56,7 @@ static const ucs4_t hkscs2001_2uni_upages[85] = {
 };
 
 static int
-hkscs2001_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+hkscs2001_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c1 = s[0];
   if ((c1 == 0x8c)) {
@@ -550,7 +550,7 @@ static const Summary16 hkscs2001_uni2indx_page2a1[28] = {
 };
 
 static int
-hkscs2001_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+hkscs2001_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 2) {
     const Summary16 *summary = NULL;

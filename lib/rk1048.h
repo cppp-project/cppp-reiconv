@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2007 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2007, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -49,7 +49,7 @@ static const unsigned short rk1048_2uni[128] = {
 };
 
 static int
-rk1048_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+rk1048_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c = *s;
   if (c < 0x80) {
@@ -119,7 +119,7 @@ static const unsigned char rk1048_page21[24] = {
 };
 
 static int
-rk1048_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+rk1048_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   unsigned char c = 0;
   if (wc < 0x0080) {

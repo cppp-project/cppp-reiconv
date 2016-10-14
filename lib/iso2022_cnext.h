@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2008 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2008, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -60,7 +60,7 @@
   state = (state4 << 24) | (state3 << 16) | (state2 << 8) | state1
 
 static int
-iso2022_cn_ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+iso2022_cn_ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   state_t state = conv->istate;
   SPLIT_STATE;
@@ -296,7 +296,7 @@ ilseq:
 }
 
 static int
-iso2022_cn_ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+iso2022_cn_ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   state_t state = conv->ostate;
   SPLIT_STATE;
@@ -554,7 +554,7 @@ iso2022_cn_ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 }
 
 static int
-iso2022_cn_ext_reset (conv_t conv, unsigned char *r, int n)
+iso2022_cn_ext_reset (conv_t conv, unsigned char *r, size_t n)
 {
   state_t state = conv->ostate;
   SPLIT_STATE;

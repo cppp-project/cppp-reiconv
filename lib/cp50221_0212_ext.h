@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2011 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2011, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -46,7 +46,7 @@ static const unsigned short cp50221_0212_ext_2uni[112] = {
 };
 
 static int
-cp50221_0212_ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+cp50221_0212_ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c = *s;
   if (c < 0x70) {
@@ -111,7 +111,7 @@ static const unsigned char cp50221_0212_ext_pageff[8] = {
 };
 
 static int
-cp50221_0212_ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+cp50221_0212_ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   unsigned char c = 0;
   if (wc >= 0x2170 && wc < 0x2180)

@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2004, 2006-2007, 2010, 2012 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2004, 2006-2007, 2010, 2012, 2016 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Tools.
 
    This program is free software: you can redistribute it and/or modify
@@ -75,7 +75,7 @@ typedef struct {
 static void output_title (const char *charsetname)
 {
   printf("/*\n");
-  printf(" * Copyright (C) 1999-2010 Free Software Foundation, Inc.\n");
+  printf(" * Copyright (C) 1999-2016 Free Software Foundation, Inc.\n");
   printf(" * This file is part of the GNU LIBICONV Library.\n");
   printf(" *\n");
   printf(" * The GNU LIBICONV Library is free software; you can redistribute it\n");
@@ -338,7 +338,7 @@ static void output_charset2uni (const char* name, Encoding* enc)
   }
 
   printf("static int\n");
-  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", name);
+  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)\n", name);
   printf("{\n");
   printf("  unsigned char c1 = s[0];\n");
   printf("  if (");
@@ -449,7 +449,7 @@ static void output_charset2uni_noholes_monotonic (const char* name, Encoding* en
   printf("\n");
 
   printf("static int\n");
-  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", name);
+  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)\n", name);
   printf("{\n");
   printf("  unsigned char c1 = s[0];\n");
   printf("  if (");
@@ -614,7 +614,7 @@ static void output_uni2charset_dense (const char* name, Encoding* enc)
     if (p >= 0)
       printf("\n");
   }
-  printf("static int\n%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", name);
+  printf("static int\n%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)\n", name);
   printf("{\n");
   printf("  if (n >= 2) {\n");
   printf("    unsigned short c = 0;\n");
@@ -798,7 +798,7 @@ static void output_uni2charset_sparse (const char* name, Encoding* enc, bool mon
   printf("\n");
 
   printf("static int\n");
-  printf("%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", name);
+  printf("%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)\n", name);
   printf("{\n");
   printf("  if (n >= 2) {\n");
   printf("    const Summary16 *summary = NULL;\n");
@@ -1553,7 +1553,7 @@ static void do_gb18030uni (const char* name)
   printf("\n");
 
   printf("static int\n");
-  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)\n", name);
+  printf("%s_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)\n", name);
   printf("{\n");
   printf("  unsigned char c1 = s[0];\n");
   printf("  if (c1 >= 0x81 && c1 <= 0x84) {\n");
@@ -1607,7 +1607,7 @@ static void do_gb18030uni (const char* name)
   printf("\n");
 
   printf("static int\n");
-  printf("%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)\n", name);
+  printf("%s_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)\n", name);
   printf("{\n");
   printf("  if (n >= 4) {\n");
   printf("    unsigned int i = wc;\n");

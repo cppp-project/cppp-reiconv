@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2012 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -485,7 +485,7 @@ static const unsigned char uhc_2_2uni_pagea1[3126] = {
 };
 
 static int
-uhc_2_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+uhc_2_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c1 = s[0];
   if ((c1 >= 0xa1 && c1 <= 0xc6)) {
@@ -993,7 +993,7 @@ static const Summary16 uhc_2_uni2indx_pagec8[251] = {
 };
 
 static int
-uhc_2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+uhc_2_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 2) {
     if (wc >= 0xc800 && wc < 0xd7b0) {

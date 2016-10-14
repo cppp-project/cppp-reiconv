@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2004, 2008 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2004, 2008, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -41,7 +41,7 @@
  */
 
 static int
-iso2022_jp3_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+iso2022_jp3_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   ucs4_t last_wc = conv->istate >> 3;
   if (last_wc) {
@@ -260,7 +260,7 @@ static const struct { unsigned short base; unsigned short composed; } iso2022_jp
   /* assume lasttwo == 0, then prevstate is ignored */
 
 static int
-iso2022_jp3_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+iso2022_jp3_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   int count = 0;
   unsigned char buf[2];
@@ -494,7 +494,7 @@ iso2022_jp3_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 }
 
 static int
-iso2022_jp3_reset (conv_t conv, unsigned char *r, int n)
+iso2022_jp3_reset (conv_t conv, unsigned char *r, size_t n)
 {
   state_t state = conv->ostate;
   SPLIT_STATE;

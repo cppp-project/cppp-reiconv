@@ -1,3 +1,21 @@
+2016-10-14  Bruno Haible  <bruno@clisp.org>
+
+	Use 'size_t', not 'int', for the length of a string.
+	* lib/iconv.c: Include <limits.h>.
+	* lib/genflags.c: Likewise.
+	* lib/converters.h (struct mbtowc_funcs, struct wctomb_funcs): Change
+	'int n' parameter to 'size_t n'.
+	(RET_COUNT_MAX): New macro.
+	* lib/*.h: Use 'size_t n' instead of 'int n'.
+	* lib/ucs2.h (ucs2_mbtowc): Make sure 'count' does not cause an 'int'
+	overflow.
+	* lib/ucs4.h (ucs4_mbtowc): Likewise.
+	* lib/utf16.h (utf16_mbtowc): Likewise.
+	* lib/utf32.h (utf32_mbtowc): Likewise.
+	* tools/8bit_tab_to_h.c: Generate function signatures with 'size_t n'.
+	* tools/cjk_tab_to_h.c: Likewise.
+	* NEWS: Mention the change.
+
 2016-10-04  Bruno Haible  <bruno@clisp.org>
 
 	Extend CP1255 mapping.

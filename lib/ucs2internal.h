@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -22,7 +22,7 @@
  */
 
 static int
-ucs2internal_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
+ucs2internal_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   if (n >= 2) {
     unsigned short x = *(const unsigned short *)s;
@@ -37,7 +37,7 @@ ucs2internal_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 }
 
 static int
-ucs2internal_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
+ucs2internal_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (wc < 0x10000 && !(wc >= 0xd800 && wc < 0xe000)) {
     if (n >= 2) {
