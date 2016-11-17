@@ -1,3 +1,10 @@
+2016-11-17  Bruno Haible  <bruno@clisp.org>
+
+	UTF-8: Reject surrogates and out-of-range code points.
+	* lib/utf8.h (utf8_mbtowc, utf8_wctomb): Reject code points in the
+	range 0xD800..0xDFFF and >= 0x110000.
+	* tests/genutf8.c (main): Don't emit mappings for 0xD800..0xDFFF.
+
 2016-10-22  Bruno Haible  <bruno@clisp.org>
 
 	Switch to libtool 2.4.6.
