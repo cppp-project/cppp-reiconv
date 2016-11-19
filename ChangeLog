@@ -1,3 +1,10 @@
+2016-11-19  Bruno Haible  <bruno@clisp.org>
+
+	Fix link error when compiling with gcc -O0.
+	* lib/iconv.c (aliases2_lookup): Make static.
+	Reported by Chung-Lin Tang <chunglin.tang@gmail.com>
+	at https://savannah.gnu.org/bugs/?47953 .
+
 2016-11-17  Bruno Haible  <bruno@clisp.org>
 
 	UTF-8: Reject surrogates and out-of-range code points.
