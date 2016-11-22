@@ -1,3 +1,12 @@
+2016-11-22  Bruno Haible  <bruno@clisp.org>
+
+	Update support for building with MSVC.
+	* Makefile.in (install-lib, install): Install the .la file with
+	$(INSTALL), not $(INSTALL_DATA). Otherwise the native Windows DLL gets
+	installed without execution permissions, and programs linked to it fail:
+	in a Cygwin shell with exit code 127, or from a cmd.exe window with a
+	dialog "The application was unable to start correctly (0xc0000022)."
+
 2012-01-06  Bruno Haible  <bruno@clisp.org>
 
 	Talk about "native Windows API", not "Woe32".

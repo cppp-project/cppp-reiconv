@@ -80,7 +80,7 @@ ref-del.sed : $(srcdir)/ref-del.sin
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.
 install-lib : all force
 	$(mkinstalldirs) $(libdir)
-	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libcharset.la $(libdir)/libcharset.la
+	$(LIBTOOL_INSTALL) $(INSTALL) libcharset.la $(libdir)/libcharset.la
 	test -f $(libdir)/charset.alias && orig=$(libdir)/charset.alias \
 	                                || orig=charset.alias; \
 	sed -f ref-add.sed $$orig > $(libdir)/t-charset.alias; \
@@ -108,7 +108,7 @@ install : all force
 	  need_charset_alias=false ; \
 	fi ; \
 	$(mkinstalldirs) $(DESTDIR)$(libdir) ; \
-	$(LIBTOOL_INSTALL) $(INSTALL_DATA) libcharset.la $(DESTDIR)$(libdir)/libcharset.la
+	$(LIBTOOL_INSTALL) $(INSTALL) libcharset.la $(DESTDIR)$(libdir)/libcharset.la
 	if test -f $(DESTDIR)$(libdir)/charset.alias; then \
 	  sed -f ref-add.sed $(DESTDIR)$(libdir)/charset.alias > $(DESTDIR)$(libdir)/t-charset.alias; \
 	  $(INSTALL_DATA) $(DESTDIR)$(libdir)/t-charset.alias $(DESTDIR)$(libdir)/charset.alias; \
