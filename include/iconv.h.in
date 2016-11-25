@@ -20,7 +20,7 @@
 #ifndef _LIBICONV_H
 #define _LIBICONV_H
 
-#define _LIBICONV_VERSION 0x010E    /* version number: (major<<8) + minor */
+#define _LIBICONV_VERSION 0x010F    /* version number: (major<<8) + minor */
 extern @DLL_VARIABLE@ int _libiconv_version; /* Likewise */
 
 /* We would like to #include any system header file which could define

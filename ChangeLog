@@ -1,3 +1,15 @@
+2016-11-25  Bruno Haible  <bruno@clisp.org>
+
+	Prepare for version 1.15.
+	* configure.ac: Bump version number to 1.15.
+	* README: Likewise.
+	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
+	* windows/iconv.rc: Update.
+	* windows/libiconv.rc: Update.
+	* Makefile.devel: Update comments.
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 8:0:6.
+	* src/iconv.c (print_version): Update copyright year.
+
 2016-11-23  Bruno Haible  <bruno@clisp.org>
 
 	Update installation instructions for Windows.
