@@ -16,10 +16,10 @@ dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
 dnl If not, see <http://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.60])
-AC_INIT
+AC_INIT([libiconv], [1.15])
 AC_CONFIG_SRCDIR([lib/iconv.c])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([libiconv], [1.15])
+AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS([config.h lib/config.h])
 AC_PROG_MAKE_SET
 

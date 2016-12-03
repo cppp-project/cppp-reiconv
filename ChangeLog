@@ -1,5 +1,12 @@
 2016-12-03  Bruno Haible  <bruno@clisp.org>
 
+	Modernize configure.ac.
+	* configure.ac: Use 2-argument AC_INIT. Avoid an AM_INIT_AUTOMAKE
+	warning.
+	* preload/configure.ac: Use 2-argument AC_INIT. Use AC_CONFIG_SRCDIR.
+
+2016-12-03  Bruno Haible  <bruno@clisp.org>
+
 	Towards reproducible builds.
 	* Makefile.devel (man/%.html): Remove the CreationDate comment line
 	from the output.
