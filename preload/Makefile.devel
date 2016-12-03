@@ -18,4 +18,7 @@ configures : configure
 configure : configure.ac aclocal.m4
 	$(AUTOCONF)
 
+totally-clean : all
+	rm -f aclocal.m4 configure
+
 force :

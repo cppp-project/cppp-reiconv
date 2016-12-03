@@ -1,5 +1,11 @@
 2016-12-03  Bruno Haible  <bruno@clisp.org>
 
+	Make Makefile.devel more useful for the users of the released tarball.
+	* Makefile.devel (totally-clean): New target.
+	* autogen.sh: Invoke it and 'all'.
+
+2016-12-03  Bruno Haible  <bruno@clisp.org>
+
 	Modernize configure.ac.
 	* configure.ac: Require autoconf >= 2.60. Use 2-argument AC_INIT.
 	Use AC_CONFIG_SRCDIR.

@@ -1,5 +1,17 @@
 2016-12-03  Bruno Haible  <bruno@clisp.org>
 
+	Make Makefile.devel more useful for the users of the released tarball.
+	* Makefile.devel (srclib/Makefile.gnulib): Don't force this target.
+	(gnulib-clean): New target.
+	(totally-clean): New target. Do the removals from autogen.sh. Also,
+	remove lib/aliases*.gperf, lib/canonical*.h, man/iconvctl.3.html,
+	man/iconv_open_into.3.html.
+	* autogen.sh: Invoke target gnulib-clean before srclib/Makefile.gnulib.
+	Invoke target totally-clean before all.
+	* preload/Makefile.devel (totally-clean): New target.
+
+2016-12-03  Bruno Haible  <bruno@clisp.org>
+
 	Modernize configure.ac.
 	* configure.ac: Use 2-argument AC_INIT. Avoid an AM_INIT_AUTOMAKE
 	warning.

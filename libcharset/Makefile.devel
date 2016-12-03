@@ -28,4 +28,7 @@ include/localcharset.h.build.in : include/localcharset.h.in include/export.h
 	    -e '/#define _LOCALCHARSET_H/r include/export.h' \
 	  < $< > $@
 
+totally-clean : force
+	rm -f autoconf/aclocal.m4 configure config.h.in include/localcharset.h.build.in
+
 force :

@@ -80,7 +80,7 @@ GNULIB_MODULES = \
   xalloc \
   libiconv-misc
 
-srclib/Makefile.gnulib : force
+srclib/Makefile.gnulib :
 	if test -n "$$GNULIB_TOOL"; then \
 	  $$GNULIB_TOOL --lib=libicrt --source-base=srclib --m4-base=srcm4 --makefile-name=Makefile.gnulib --no-libtool --local-dir=gnulib-local --no-vc-files \
 	    --import $(GNULIB_MODULES); \
@@ -197,6 +197,37 @@ man/%.html : man/%
 	$(MAN2HTML) $< > $@-t
 	grep -v '<!-- CreationDate' < $@-t > $@
 	$(RM) $@-t
+
+
+gnulib-clean : force
+# Move srclib/Makefile.gnulib away, so that the target 'srclib/Makefile.gnulib' will actually do something.
+	if test -f srclib/Makefile.gnulib; then \
+	  mv srclib/Makefile.gnulib srclib/Makefile.gnulib~; \
+	fi
+# No need to remove the stale files. gnulib-tool does this itself, thank to srclib/gnulib-comp.m4.
+#	find srclib '(' -name '*.h' -o -name '*.c' -o -name '*.valgrind' ')' -exec rm -f '{}' ';'
+#	rm -rf srcm4
+
+totally-clean : force
+	rm -f srclib/Makefile.in
+	rm -f $(CONFIGURES) config.h.in include/iconv.h.build.in
+	rm -f lib/aliases.gperf lib/aliases_sysaix.gperf lib/aliases_syshpux.gperf lib/aliases_sysosf1.gperf lib/aliases_syssolaris.gperf
+	rm -f lib/aliases.h lib/aliases_sysaix.h lib/aliases_syshpux.h lib/aliases_sysosf1.h lib/aliases_syssolaris.h
+	rm -f lib/aliases_aix.h lib/aliases_aix_sysaix.h
+	rm -f lib/aliases_osf1.h lib/aliases_osf1_sysosf1.h
+	rm -f lib/aliases_dos.h
+	rm -f lib/aliases_extra.h
+	rm -f lib/canonical.h lib/canonical_sysaix.h lib/canonical_syshpux.h lib/canonical_sysosf1.h lib/canonical_syssolaris.h
+	rm -f lib/canonical_aix.h lib/canonical_aix_sysaix.h
+	rm -f lib/canonical_osf1.h lib/canonical_osf1_sysosf1.h
+	rm -f lib/canonical_dos.h
+	rm -f lib/canonical_extra.h
+	rm -f lib/canonical_local.h lib/canonical_local_sysaix.h lib/canonical_local_syshpux.h lib/canonical_local_sysosf1.h lib/canonical_local_syssolaris.h
+	rm -f lib/flags.h
+	rm -f lib/translit.h
+	rm -f man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html man/iconvctl.3.html man/iconv_open_into.3.html
+	cd libcharset && $(MAKE) -f Makefile.devel totally-clean
+	cd preload && $(MAKE) -f Makefile.devel totally-clean
 
 
 force :
