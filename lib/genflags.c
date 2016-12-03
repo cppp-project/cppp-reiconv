@@ -22,6 +22,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* Avoid lots of warnings from "gcc -Wall". */
+#if (__GNUC__ == 4 && __GNUC_MINOR__ >= 2) || __GNUC__ > 4
+# pragma GCC diagnostic ignored "-Wunused-function"
+#endif
+
 /* Consider all encodings, including the system dependent ones. */
 #define USE_AIX
 #define USE_OSF1
