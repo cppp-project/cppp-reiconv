@@ -60,7 +60,9 @@ if test $skip_gnulib = false; then
   fi
   # Skip the gnulib-tool step if gnulib-tool was not found.
   if test -n "$GNULIB_TOOL"; then
-    make -f Makefile.devel gnulib-clean srclib/Makefile.gnulib GNULIB_TOOL="$GNULIB_TOOL"
+    make -f Makefile.devel \
+         gnulib-clean srclib/Makefile.gnulib gnulib-imported-files \
+         GNULIB_TOOL="$GNULIB_TOOL"
   fi
 fi
 

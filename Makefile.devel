@@ -93,6 +93,14 @@ srclib/Makefile.in : srclib/Makefile.am srclib/Makefile.gnulib
 	fi
 	$(AUTOMAKE) --gnits --add-missing srclib/Makefile
 
+gnulib-imported-files : force
+	if test -n "$$GNULIB_TOOL"; then \
+	  for file in config.guess config.sub; do \
+	    $$GNULIB_TOOL --copy-file build-aux/$$file || exit $$?; \
+	    chmod a+x build-aux/$$file || exit $$?; \
+	  done; \
+	fi
+
 
 include/iconv.h.build.in : include/iconv.h.in include/export.h
 	sed -e 's/extern \([^"]\)/extern LIBICONV_DLL_EXPORTED \1/' \

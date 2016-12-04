@@ -1,5 +1,13 @@
 2016-12-04  Bruno Haible  <bruno@clisp.org>
 
+	Always use the newest copies of config.guess, config.sub.
+	* Makefile.devel (gnulib-imported-files): New target.
+	* autogen.sh: Invoke it.
+	* build-aux/config.guess: Remove from version control.
+	* build-aux/config.sub: Likewise.
+
+2016-12-04  Bruno Haible  <bruno@clisp.org>
+
 	Always use the newest copy of fcntl-o.m4.
 	* m4/fcntl-o.m4: Remove file. Rely on srcm4/fcntl-o.m4 instead.
 
