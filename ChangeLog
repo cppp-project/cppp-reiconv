@@ -1,5 +1,10 @@
 2016-12-04  Bruno Haible  <bruno@clisp.org>
 
+	Update comments.
+	* Makefile.devel: Update comments about release process.
+
+2016-12-04  Bruno Haible  <bruno@clisp.org>
+
 	Create tarballs through an Automake-like "make dist" command.
 	* Makefile.in (SOURCE_FILES, LIBTOOL_IMPORTED_FILES,
 	AUTOMAKE_OLD_IMPORTED_FILES, AUTOMAKE_IMPORTED_FILES, IMPORTED_FILES,

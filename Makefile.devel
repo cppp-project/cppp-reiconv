@@ -32,12 +32,17 @@ all : configures config.h.in \
 
 # Before making a new release:
 # - check that the encoding lists in README and man/iconv_open.3 are up to date,
+# - check that the files in libcharset/lib/ are in sync with the gnulib modules
+#   'localcharset' and 'relocatable-lib-lgpl',
 # - increment the version number in
 #     configure.ac
 #     include/iconv.h.in
 #     README
 # - update the version info in lib/Makefile.in,
-# - do "make -f Makefile.devel".
+# - $ ./autogen.sh
+# Making a new release:
+# - $ ./configure CPPFLAGS=-Wall; make; make check
+# - $ make dist
 
 
 CONFIGURES = configure
