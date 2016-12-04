@@ -1,5 +1,10 @@
 2016-12-04  Bruno Haible  <bruno@clisp.org>
 
+	Remove duplicates of imported files from version control.
+	* autogen.sh: Copy imported files to libcharset.
+
+2016-12-04  Bruno Haible  <bruno@clisp.org>
+
 	Always use the newest released copies of files brought in from Automake.
 	* Makefile.devel (srclib/Makefile.in): Make sure to get new versions of
 	files brought in by automake.

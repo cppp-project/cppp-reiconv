@@ -1,3 +1,18 @@
+2016-12-04  Bruno Haible  <bruno@clisp.org>
+
+	Remove imported files from version control.
+	* INSTALL.generic: Remove from version control.
+	* build-aux/config.guess: Likewise.
+	* build-aux/config.libpath: Likewise.
+	* build-aux/config.sub: Likewise.
+	* build-aux/install-sh: Likewise.
+	* build-aux/mkinstalldirs: Likewise.
+	* m4/codeset.m4: Likewise.
+	* m4/fcntl-o.m4: Likewise.
+	* m4/glibc21.m4: Likewise.
+	* m4/relocatable-lib.m4: Likewise.
+	* m4/visibility.m4: Likewise.
+
 2016-12-03  Bruno Haible  <bruno@clisp.org>
 
 	Make Makefile.devel more useful for the users of the released tarball.
