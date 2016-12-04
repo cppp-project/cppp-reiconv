@@ -1,5 +1,13 @@
 2016-12-04  Bruno Haible  <bruno@clisp.org>
 
+	Always use the newest released copies of files brought in from Automake.
+	* Makefile.devel (srclib/Makefile.in): Make sure to get new versions of
+	files brought in by automake.
+	* build-aux/install-sh: Remove from version control.
+	* build-aux/missing: Likewise.
+
+2016-12-04  Bruno Haible  <bruno@clisp.org>
+
 	Always use the newest copies of config.guess, config.sub.
 	* Makefile.devel (gnulib-imported-files): New target.
 	* autogen.sh: Invoke it.
