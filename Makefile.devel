@@ -194,7 +194,9 @@ lib/translit.h : lib/translit.def lib/gentranslit.c
 
 
 man/%.html : man/%
-	$(MAN2HTML) $< > $@
+	$(MAN2HTML) $< > $@-t
+	grep -v '<!-- CreationDate' < $@-t > $@
+	$(RM) $@-t
 
 
 force :
