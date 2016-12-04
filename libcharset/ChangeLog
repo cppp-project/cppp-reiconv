@@ -1,3 +1,10 @@
+2016-12-03  Bruno Haible  <bruno@clisp.org>
+
+	Update documentation.
+	* README: Update the libiconv version number.
+	* HACKING: Refer to the Git repository.
+	* INTEGRATE: Mention the Gnulib module.
+
 2016-11-23  Bruno Haible  <bruno@clisp.org>
 
 	Update installation instructions for Windows.

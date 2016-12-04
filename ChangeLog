@@ -1,5 +1,10 @@
 2016-12-03  Bruno Haible  <bruno@clisp.org>
 
+	Update documentation.
+	* HACKING: Refer to the Git repository.
+
+2016-12-03  Bruno Haible  <bruno@clisp.org>
+
 	Avoid compilation warnings in 'genflags' program.
 	* lib/genflags.c: Avoid warnings from GCC's -Wunused-function option.
 
