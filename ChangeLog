@@ -1,5 +1,10 @@
 2016-12-04  Bruno Haible  <bruno@clisp.org>
 
+	Always use the newest copy of fcntl-o.m4.
+	* m4/fcntl-o.m4: Remove file. Rely on srcm4/fcntl-o.m4 instead.
+
+2016-12-04  Bruno Haible  <bruno@clisp.org>
+
 	Remove obsolete documentation.
 	* PORTS: Remove file.
 
