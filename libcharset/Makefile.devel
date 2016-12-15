@@ -12,6 +12,7 @@ RM = rm -f
 all : configures include/localcharset.h.build.in
 
 autoconf/aclocal.m4 : $(wildcard m4/*.m4)
+	test -d autoconf || mkdir autoconf
 	$(ACLOCAL) -I m4 --output=$@
 
 configures : configure config.h.in

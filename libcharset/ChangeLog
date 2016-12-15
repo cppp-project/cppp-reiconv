@@ -1,3 +1,10 @@
+2016-12-14  Bruno Haible  <bruno@clisp.org>
+
+	Avoid error during initial autogen.sh invocation.
+	* Makefile.devel (autoconf/aclocal.m4): Ensure directory 'autoconf'
+	exists.
+	Reported by Daiki Ueno.
+
 2016-12-03  Bruno Haible  <bruno@clisp.org>
 
 	Create tarballs through an Automake-like "make dist" command.
