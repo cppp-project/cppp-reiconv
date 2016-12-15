@@ -130,7 +130,7 @@ clean : force
 	$(RM) -r .libs _libs
 
 distclean : clean
-	$(RM) Makefile config.h libtool
+	$(RM) Makefile config.h
 
 maintainer-clean : distclean
 

@@ -1,3 +1,8 @@
+2016-12-14  Bruno Haible  <bruno@clisp.org>
+
+	Cleanup useless removals.
+	* lib/Makefile.in (distclean): No need to remove 'libtool'.
+
 2016-12-04  Bruno Haible  <bruno@clisp.org>
 
 	Update comments.

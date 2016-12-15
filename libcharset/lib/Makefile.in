@@ -147,7 +147,7 @@ clean : force
 	$(RM) -r .libs _libs
 
 distclean : clean
-	$(RM) config.status config.log config.cache Makefile libtool
+	$(RM) Makefile
 
 maintainer-clean : distclean
 
