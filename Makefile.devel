@@ -219,7 +219,7 @@ gnulib-clean : force
 	if test -f srclib/Makefile.gnulib; then \
 	  mv srclib/Makefile.gnulib srclib/Makefile.gnulib~; \
 	fi
-# No need to remove the stale files. gnulib-tool does this itself, thank to srclib/gnulib-comp.m4.
+# No need to remove the stale files. gnulib-tool does this itself, thanks to srcm4/gnulib-comp.m4.
 #	find srclib '(' -name '*.h' -o -name '*.c' -o -name '*.valgrind' ')' -exec rm -f '{}' ';'
 #	rm -rf srcm4
 
