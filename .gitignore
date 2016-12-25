@@ -99,6 +99,7 @@
 /srclib/uniwidth.in.h
 /srclib/unlocked-io.h
 /srclib/verify.h
+/srclib/xalloc-oversized.h
 /srclib/xalloc.h
 /srclib/xmalloc.c
 /srclib/xreadlink.c
