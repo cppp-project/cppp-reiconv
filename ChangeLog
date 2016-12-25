@@ -1,3 +1,8 @@
+2016-12-25  Bruno Haible  <bruno@clisp.org>
+
+	Reorder Makefile.devel.
+	* Makefile.devel: Reorder: put gnulib targets before autotools targets.
+
 2016-12-14  Bruno Haible  <bruno@clisp.org>
 
 	Cleanup useless removals.
