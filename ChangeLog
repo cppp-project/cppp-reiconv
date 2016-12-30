@@ -1,7 +1,14 @@
+2016-12-29  Bruno Haible  <bruno@clisp.org>
+
+	Make Makefile.devel consistent with .gitignore.
+	* Makefile.devel (srclib/Makefile.in): Depend on aclocal.m4.
+	(totally-clean): Remove also aclocal.m4.
+
 2016-12-25  Bruno Haible  <bruno@clisp.org>
 
 	Tweak autogen.sh.
-	* autogen.sh: Emit a "done" diagnostic when autogen.sh completed successfully.
+	* autogen.sh: Emit a "done" diagnostic when autogen.sh completed
+	successfully.
 
 2016-12-25  Bruno Haible  <bruno@clisp.org>
 
