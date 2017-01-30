@@ -1,3 +1,22 @@
+2017-01-30  Bruno Haible  <bruno@clisp.org>
+
+	* bg.po: Update from Roumen Petrov <transl@roumenpetrov.info>.
+	* cs.po: Update from Petr Pisar <petr.pisar@atlas.cz>.
+	* de.po: Update from Mario Blättermann <mario.blaettermann@gmail.com>.
+	* eo.po: Update from Felipe Castro <fefcas@gmail.com>.
+	* et.po: Update from Toomas Soome <tsoome@me.com>.
+	* fr.po: Update from Stéphane Aulery <lkppo@free.fr>.
+	* ga.po: Update from Kevin Scannell <kscanne@gmail.com>.
+	* it.po: Update from Milo Casagrande <milo@milo.name>.
+	* ja.po: Update from Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>.
+	* nl.po: Update from Benno Schulenberg <benno@vertaalt.nl>.
+	* pl.po: Update from Jakub Bogusz <qboosh@pld-linux.org>.
+	* pt_BR.po: Update from Rafael Fontenelle <rffontenelle@gmail.com>.
+	* sk.po: Update from Marcel Telka <marcel@telka.sk>.
+	* sr.po: Update from Мирослав Николић <miroslavnikolic@rocketmail.com>.
+	* uk.po: Update from Yuri Chornoivan <yurchor@ukr.net>.
+	* vi.po: Update from Trần Ngọc Quân <vnwildman@gmail.com>.
+
 2016-10-01  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.in.in: Upgrade to gettext-0.19.8.1.
