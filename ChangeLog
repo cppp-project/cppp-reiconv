@@ -1,3 +1,10 @@
+2017-01-30  Bruno Haible  <bruno@clisp.org>
+
+	Prepare for version 1.15.
+	* src/iconv.c (print_version): Update copyright year.
+	* windows/iconv.rc: Likewise.
+	* windows/libiconv.rc: Likewise.
+
 2016-12-29  Bruno Haible  <bruno@clisp.org>
 
 	Make Makefile.devel consistent with .gitignore.
