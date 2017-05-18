@@ -1,3 +1,8 @@
+2017-05-18  Bruno Haible  <bruno@clisp.org>
+
+	* lib/relocatable.h: Update from gnulib.
+	* lib/relocatable.c: Update from gnulib.
+
 2017-01-30  Bruno Haible  <bruno@clisp.org>
 
 	Prepare for version 1.15.

@@ -1,3 +1,16 @@
+2017-05-18  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Update from gnulib.
+	2017-05-16  Bruno Haible  <bruno@clisp.org>
+		* localcharset.c (relocate2): Define fallback.
+		(get_charset_aliases): Invoke relocate2 instead of relocate.
+		Free the allocated memory.
+	2017-04-21  Bruno Haible  <bruno@clisp.org>
+		* localcharset.c (WINDOWS_NATIVE): Don't define on Cygwin.
+
+	* relocatable.h: Update from gnulib.
+	* relocatable.c: Update from gnulib.
+
 2016-12-14  Bruno Haible  <bruno@clisp.org>
 
 	Cleanup useless removals.
