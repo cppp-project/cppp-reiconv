@@ -1,5 +1,13 @@
 2017-07-15  Bruno Haible  <bruno@clisp.org>
 
+	Don't attempt to build preloadable_libiconv.so when linking statically.
+	* preload/configure.ac (enable_shared, enable_static): Don't force
+	shared libraries when LDFLAGS indicates static linking.
+	(PLUGLIB): Set to empty when is not configured for building shared
+	libraries.
+
+2017-07-15  Bruno Haible  <bruno@clisp.org>
+
 	Get rid of autom4te.cache directories, as far as possible.
 	* Makefile.devel (srclib/Makefile.in, aclocal.m4, configure,
 	config.h.in): Remove autom4te.cache after invoking aclocal, autoconf,
