@@ -1,3 +1,11 @@
+2017-07-15  Bruno Haible  <bruno@clisp.org>
+
+	Get rid of autom4te.cache directories, as far as possible.
+	* Makefile.devel (srclib/Makefile.in, aclocal.m4, configure,
+	config.h.in): Remove autom4te.cache after invoking aclocal, autoconf,
+	autoheader, automake.
+	* preload/Makefile.devel (aclocal, configure): Likewise.
+
 2017-05-18  Bruno Haible  <bruno@clisp.org>
 
 	* lib/relocatable.h: Update from gnulib.
