@@ -1,5 +1,14 @@
 2017-07-15  Bruno Haible  <bruno@clisp.org>
 
+	Allow building statically linked binaries, through LDFLAGS="-static".
+	Apply patch from
+	<https://lists.gnu.org/archive/html/bug-libtool/2017-07/msg00000.html>.
+	* build-aux/ltmain.sh (func_mode_help, func_mode_link): In the link
+	mode, accept option '-static-uninstalled-libs' in place of '-static',
+	and make '-static' an equivalent of '-all-static'.
+
+2017-07-15  Bruno Haible  <bruno@clisp.org>
+
 	Don't attempt to build preloadable_libiconv.so when linking statically.
 	* preload/configure.ac (enable_shared, enable_static): Don't force
 	shared libraries when LDFLAGS indicates static linking.
