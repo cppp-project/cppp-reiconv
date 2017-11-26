@@ -1,3 +1,11 @@
+2017-11-26  Bruno Haible  <bruno@clisp.org>
+
+	Avoid end-of-lines problem in generated shell scripts on Cygwin.
+	Patch by Feiyun Wang <feiyunw@yahoo.com>.
+	* lib/genaliases.c (main): Create canonical.sh and canonical_local.sh
+	with Unix end-of-line characters, regardless of Cygwin choice of
+	text mode vs. binary mode.
+
 2017-07-15  Bruno Haible  <bruno@clisp.org>
 
 	Allow building statically linked binaries, through LDFLAGS="-static".
