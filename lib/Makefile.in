@@ -30,6 +30,7 @@ LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link
 LIBTOOL_INSTALL = $(LIBTOOL) --mode=install
 LIBTOOL_UNINSTALL = $(LIBTOOL) --mode=uninstall
+AR = @AR@
 # Windows resource compiler (windres). Used via libtool.
 RC = @RC@
 CP = cp
@@ -106,9 +107,9 @@ install : all force
 	$(LIBTOOL_INSTALL) $(INSTALL) libiconv.la $(DESTDIR)$(libdir)/libiconv.la
 	case "@host_os@" in \
 	  aix*) (cd $(DESTDIR)$(libdir) && \
-	         objects=`ar t libiconv.a`" "`ar t /lib/libiconv.a` && \
-	         ar x libiconv.a && ar x /lib/libiconv.a && \
-	         ar q libiconv.new.a $$objects && \
+	         objects=`$(AR) t libiconv.a`" "`$(AR) t /lib/libiconv.a` && \
+	         $(AR) x libiconv.a && $(AR) x /lib/libiconv.a && \
+	         $(AR) q libiconv.new.a $$objects && \
 	         rm -f $$objects && \
 	         mv -f libiconv.new.a libiconv.a) ;; \
 	esac

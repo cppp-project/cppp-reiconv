@@ -1,3 +1,9 @@
+2018-01-03  Bruno Haible  <bruno@clisp.org>
+
+	Fix installation in 64-bit mode on AIX.
+	* lib/Makefile.in (AR): New variable.
+	(install): Use it instead of hardcoding 'ar'.
+
 2017-11-26  Bruno Haible  <bruno@clisp.org>
 
 	Avoid end-of-lines problem in generated shell scripts on Cygwin.
