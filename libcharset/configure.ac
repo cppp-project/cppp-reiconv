@@ -1,4 +1,4 @@
-dnl Copyright (C) 2000-2003, 2005-2009, 2016 Free Software Foundation, Inc.
+dnl Copyright (C) 2000-2003, 2005-2009, 2016, 2018 Free Software Foundation, Inc.
 dnl This file is part of the GNU CHARSET Library.
 dnl
 dnl The GNU CHARSET Library is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@ AC_PREREQ([2.60])
 AC_INIT([libcharset], [1.4])
 AC_CONFIG_SRCDIR([lib/localcharset.c])
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 AC_PROG_MAKE_SET
 
 dnl           checks for basic programs
