@@ -83,7 +83,7 @@ maintainer-clean : force
 
 # List of source files.
 SOURCE_FILES = \
-  README README.windows DEPENDENCIES HACKING INTEGRATE AUTHORS NEWS \
+  README DEPENDENCIES INSTALL.windows HACKING INTEGRATE AUTHORS NEWS \
   ChangeLog Makefile.devel configure.ac Makefile.in \
   include/export.h include/libcharset.h.in include/localcharset.h.in \
   tools/README \
@@ -108,7 +108,7 @@ SOURCE_FILES = \
   tools/solaris-2.4 tools/solaris-2.5.1 tools/solaris-2.6 tools/solaris-2.6-cjk tools/solaris-2.7 \
   tools/sunos-4.1.4 \
   tools/win32 \
-  README.djgpp \
+  INSTALL.djgpp \
   djgpp/config.bat djgpp/config.sed djgpp/config.site \
   djgpp/fnchange.in djgpp/fnchange.lst \
   djgpp/Makefile.maint \

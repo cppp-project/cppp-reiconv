@@ -157,7 +157,7 @@ maintainer-clean : force
 
 # List of source files.
 SOURCE_FILES = \
-  README README.windows DEPENDENCIES HACKING AUTHORS NEWS DESIGN NOTES THANKS \
+  README DEPENDENCIES INSTALL.windows HACKING AUTHORS NEWS DESIGN NOTES THANKS \
   ChangeLog Makefile.devel configure.ac Makefile.in \
   include/export.h include/iconv.h.in \
   gnulib-local/lib/alloca.in.h \
@@ -179,7 +179,7 @@ SOURCE_FILES = \
   windows/iconv.rc windows/libiconv.rc windows/windres-options \
   woe32dll/export.h woe32dll/iconv-exports.c \
   os2/iconv.def \
-  README.djgpp \
+  INSTALL.djgpp \
   djgpp/config.bat djgpp/config.sed djgpp/config.site djgpp/edtest.bat \
   djgpp/fnchange.in djgpp/fnchange.lst djgpp/Makefile.maint djgpp/makefile.sed \
   djgpp/README djgpp/README.in djgpp/sources.sed \
