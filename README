@@ -90,7 +90,7 @@ Installation
 
 As usual for GNU packages:
 
-    $ ./configure --prefix=/usr/local
+    $ ./configure --prefix=[[PREFIX]]     where [[PREFIX]] is e.g. $HOME/local
     $ make
     $ make install
 
@@ -125,8 +125,8 @@ This library can be built and installed in two variants:
       the functions the placeholder @LIBICONV@ (or, if using libtool for
       the link, @LTLIBICONV@). If you use automake, the right place for
       these additions are the *_LDADD variables.
-    Note that 'iconv.m4' is also part of the GNU gettext package, which
-    installs it in /usr/local/share/aclocal/iconv.m4.
+    Note that 'iconv.m4' is also part of GNU gnulib, available through
+    the gnulib module 'iconv'.
 
   - The libc plug/override mode. This works on GNU/Linux, Solaris and OSF/1
     systems only. It is a way to get good iconv support without having
@@ -135,10 +135,10 @@ This library can be built and installed in two variants:
     with LD_PRELOAD, to override the iconv* functions present in the C library.
 
     On GNU/Linux and Solaris:
-        $ export LD_PRELOAD=/usr/local/lib/preloadable_libiconv.so
+        $ export LD_PRELOAD=[[PREFIX]]/lib/preloadable_libiconv.so
 
     On OSF/1:
-        $ export _RLD_LIST=/usr/local/lib/preloadable_libiconv.so:DEFAULT
+        $ export _RLD_LIST=[[PREFIX]]/lib/preloadable_libiconv.so:DEFAULT
 
     A program's source need not be modified, the program need not even be
     recompiled. Just set the LD_PRELOAD environment variable, that's it!

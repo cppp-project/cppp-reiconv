@@ -1,3 +1,13 @@
+2018-03-27  Bruno Haible  <bruno@clisp.org>
+
+	Doc tweaks.
+	* README: Don't recommend to use --prefix=/usr/local, as it produces
+	problems with GCC (since GCC's treatment of /usr/local/include and
+	/usr/local/lib is inconsistent by default). Don't recommend to use
+	the iconv.m4 installed by GNU gettext, because it won't work when
+	GNU automake and GNU gettext are installed with different --prefix
+	options; instead recommend the 'iconv' module from gnulib.
+
 2018-01-27  Bruno Haible  <bruno@clisp.org>
 
 	Rename some files.
