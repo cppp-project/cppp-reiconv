@@ -1,3 +1,11 @@
+2018-05-04  Bruno Haible  <bruno@clisp.org>
+
+	Switch to automake 1.16.
+	* autogen.sh: Update comment.
+	* Makefile.devel (AUTOMAKE, ACLOCAL): Switch to version 1.16.
+	* libcharset/Makefile.devel (ACLOCAL): Likewise.
+	* preload/Makefile.devel (ACLOCAL): Likewise.
+
 2018-03-27  Bruno Haible  <bruno@clisp.org>
 
 	Doc tweaks.
