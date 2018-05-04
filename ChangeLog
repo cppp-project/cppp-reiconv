@@ -1,5 +1,10 @@
 2018-05-04  Bruno Haible  <bruno@clisp.org>
 
+	Drop special instructions for OSF/1.
+	* INSTALL.generic: Remove the recommendation for OSF/1.
+
+2018-05-04  Bruno Haible  <bruno@clisp.org>
+
 	Simplify: Remove the ability to install a preloadable library.
 	* preload/*: Remove directory.
 	* Makefile.devel: Don't recurse into 'preload'.
