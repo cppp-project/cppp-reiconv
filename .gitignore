@@ -24,6 +24,7 @@
 /libcharset/m4/glibc21.m4
 /libcharset/m4/relocatable-lib.m4
 /libcharset/m4/visibility.m4
+/srclib/_Noreturn.h
 /srclib/Makefile.gnulib
 /srclib/alloca.in.h
 /srclib/allocator.c
@@ -45,6 +46,7 @@
 /srclib/error.c
 /srclib/error.h
 /srclib/fcntl.in.h
+/srclib/filename.h
 /srclib/getprogname.c
 /srclib/getprogname.h
 /srclib/gettext.h
@@ -77,6 +79,10 @@
 /srclib/signal.in.h
 /srclib/sigprocmask.c
 /srclib/stat.c
+/srclib/stat-time.c
+/srclib/stat-time.h
+/srclib/stat-w32.c
+/srclib/stat-w32.h
 /srclib/stdbool.in.h
 /srclib/stddef.in.h
 /srclib/stdint.in.h
@@ -125,12 +131,12 @@
 /srcm4/fcntl_h.m4
 /srcm4/getprogname.m4
 /srcm4/gettext.m4
-/srcm4/gettimeofday.m4
 /srcm4/glibc2.m4
 /srcm4/glibc21.m4
 /srcm4/gnulib-common.m4
 /srcm4/gnulib-comp.m4
 /srcm4/gnulib-tool.m4
+/srcm4/host-cpu-c-abi.m4
 /srcm4/iconv.m4
 /srcm4/include_next.m4
 /srcm4/intdiv0.m4
@@ -175,6 +181,7 @@
 /srcm4/sigpipe.m4
 /srcm4/size_max.m4
 /srcm4/ssize_t.m4
+/srcm4/stat-time.m4
 /srcm4/stat.m4
 /srcm4/stdbool.m4
 /srcm4/stddef_h.m4
@@ -186,7 +193,6 @@
 /srcm4/string_h.m4
 /srcm4/sys_socket_h.m4
 /srcm4/sys_stat_h.m4
-/srcm4/sys_time_h.m4
 /srcm4/sys_types_h.m4
 /srcm4/threadlib.m4
 /srcm4/time_h.m4

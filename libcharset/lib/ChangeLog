@@ -1,3 +1,17 @@
+2018-05-04  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Update from gnulib.
+	2018-05-03  Bruno Haible  <bruno@clisp.org>
+		* localcharset.c: Simplify 'defined _WIN32 || defined __WIN32__'
+		to just 'defined _WIN32'.
+	2018-04-21  Benno Schulenberg  <bensberg@telfort.nl>  (tiny change)
+		* localcharset.c (get_charset_aliases): Add a tautological
+		UTF-8 entry to speed up the search for this case.
+	2017-09-14  Bruno Haible  <bruno@clisp.org>
+		all: Replace many more http URLs by https URLs.
+
+	* relocatable.c: Update from gnulib.
+
 2017-05-18  Bruno Haible  <bruno@clisp.org>
 
 	* localcharset.c: Update from gnulib.

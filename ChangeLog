@@ -1,5 +1,9 @@
 2018-05-04  Bruno Haible  <bruno@clisp.org>
 
+	* lib/relocatable.c: Update from gnulib.
+
+2018-05-04  Bruno Haible  <bruno@clisp.org>
+
 	Switch to automake 1.16.
 	* autogen.sh: Update comment.
 	* Makefile.devel (AUTOMAKE, ACLOCAL): Switch to version 1.16.
