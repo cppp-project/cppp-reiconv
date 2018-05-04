@@ -1,5 +1,12 @@
 2018-05-04  Bruno Haible  <bruno@clisp.org>
 
+	Simplify code. Drop support for Borland C++ on Windows.
+	* lib/iconv.c: Simplify 'defined _WIN32 || defined __WIN32__' to just
+	'defined _WIN32'.
+	* lib/iconv_open1.h: Likewise.
+
+2018-05-04  Bruno Haible  <bruno@clisp.org>
+
 	* lib/relocatable.c: Update from gnulib.
 
 2018-05-04  Bruno Haible  <bruno@clisp.org>
