@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2011, 2016 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2011, 2016, 2018 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -198,7 +198,6 @@ AH_BOTTOM([
 ])
 
 AC_CONFIG_SUBDIRS([libcharset])
-AC_CONFIG_SUBDIRS([preload])
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([lib/Makefile])
 AC_CONFIG_FILES([srclib/Makefile])

@@ -28,7 +28,6 @@ all : srclib/Makefile.gnulib srclib/Makefile.in \
       man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html man/iconvctl.3.html man/iconv_open_into.3.html \
       force
 	cd libcharset && $(MAKE) -f Makefile.devel all
-	cd preload && $(MAKE) -f Makefile.devel all
 
 
 # Before making a new release:
@@ -243,7 +242,6 @@ totally-clean : force
 	rm -f lib/translit.h
 	rm -f man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html man/iconvctl.3.html man/iconv_open_into.3.html
 	cd libcharset && $(MAKE) -f Makefile.devel totally-clean
-	cd preload && $(MAKE) -f Makefile.devel totally-clean
 
 
 force :

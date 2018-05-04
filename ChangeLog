@@ -1,5 +1,14 @@
 2018-05-04  Bruno Haible  <bruno@clisp.org>
 
+	Simplify: Remove the ability to install a preloadable library.
+	* preload/*: Remove directory.
+	* Makefile.devel: Don't recurse into 'preload'.
+	* Makefile.in: Likewise.
+	* configure.ac: Don't declare 'preload' as a subdirectory.
+	* README, NEWS: Update.
+
+2018-05-04  Bruno Haible  <bruno@clisp.org>
+
 	Simplify code. Drop support for Borland C++ on Windows.
 	* lib/iconv.c: Simplify 'defined _WIN32 || defined __WIN32__' to just
 	'defined _WIN32'.
