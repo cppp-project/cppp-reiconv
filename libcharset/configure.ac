@@ -13,7 +13,7 @@ dnl Library General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU Library General Public License
 dnl along with the GNU CHARSET Library; see the file COPYING.LIB.  If not,
-dnl see <http://www.gnu.org/licenses/>.
+dnl see <https://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.60])
 AC_INIT([libcharset], [1.4])

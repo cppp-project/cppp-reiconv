@@ -13,7 +13,7 @@
    Library General Public License for more details.
 
    You should have received a copy of the GNU Library General Public License
-   along with this program; if not, see <http://www.gnu.org/licenses/>.  */
+   along with this program; if not, see <https://www.gnu.org/licenses/>.  */
 
 
 /* Tell glibc's <stdio.h> to provide a prototype for getline().

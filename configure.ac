@@ -13,7 +13,7 @@ dnl Library General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU Library General Public
 dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
-dnl If not, see <http://www.gnu.org/licenses/>.
+dnl If not, see <https://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.60])
 AC_INIT([libiconv], [1.15])
