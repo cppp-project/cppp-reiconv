@@ -1,5 +1,10 @@
 2018-09-22  Bruno Haible  <bruno@clisp.org>
 
+	Avoid some warnings in MSVC build.
+	* include/export.h: Handle MSVC compiler as well.
+
+2018-09-22  Bruno Haible  <bruno@clisp.org>
+
 	Update from gnulib. Move mapping tables into the code.
 	* include/localcharset.h.in: Update from gnulib.
 	2018-05-19  Bruno Haible  <bruno@clisp.org>
