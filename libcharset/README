@@ -25,7 +25,7 @@ This library fixes these flaws and provides a function
        const char * locale_charset (void);
 
 It determines the current locale's character encoding, and canonicalizes it
-into one of the canonical names listed in config.charset. The result must
+into one of the canonical names listed in localcharset.h. The result must
 not be freed; it is statically allocated. If the canonical name cannot be
 determined, the result is a non-canonical name.
 

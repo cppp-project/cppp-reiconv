@@ -1,3 +1,11 @@
+2018-09-22  Bruno Haible  <bruno@clisp.org>
+
+	Update from gnulib. Move mapping tables into the code.
+	* autogen.sh: Don't create libcharset/m4/relocatable-lib.m4.
+	* Makefile.in (mostlyclean, clean, distclean, maintainer-clean): Don't
+	remove lib/charset.alias.
+	* tests/check-subst: Don't set CHARSETALIASDIR.
+
 2018-05-04  Bruno Haible  <bruno@clisp.org>
 
 	Drop special instructions for OSF/1.

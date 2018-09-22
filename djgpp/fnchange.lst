@@ -107,10 +107,7 @@ libiconv-1.11/libcharset/m4/ChangeLog                      libiconv-1.11/libchar
 libiconv-1.11/libcharset/m4/codeset.m4                     libiconv-1.11/libcharset/m4/codeset.m4
 libiconv-1.11/libcharset/m4/glibc21.m4                     libiconv-1.11/libcharset/m4/glibc21.m4
 libiconv-1.11/libcharset/m4/libtool.m4                     libiconv-1.11/libcharset/m4/libtool.m4
-libiconv-1.11/libcharset/lib/config.charset                libiconv-1.11/libcharset/lib/config.charset
 libiconv-1.11/libcharset/lib/localcharset.c                libiconv-1.11/libcharset/lib/localcharset.c
-libiconv-1.11/libcharset/lib/ref-add.sin                   libiconv-1.11/libcharset/lib/ref-add.sin
-libiconv-1.11/libcharset/lib/ref-del.sin                   libiconv-1.11/libcharset/lib/ref-del.sin
 libiconv-1.11/libcharset/lib/ChangeLog                     libiconv-1.11/libcharset/lib/ChangeLog
 libiconv-1.11/libcharset/lib/Makefile.in                   libiconv-1.11/libcharset/lib/Makefile.in
 libiconv-1.11/libcharset/lib/Makefile.msvc                 libiconv-1.11/libcharset/lib/Makefile.msvc

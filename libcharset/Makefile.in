@@ -131,7 +131,6 @@ PARENT_IMPORTED_FILES = \
   m4/codeset.m4 \
   m4/fcntl-o.m4 \
   m4/glibc21.m4 \
-  m4/relocatable-lib.m4 \
   m4/visibility.m4
 IMPORTED_FILES = \
   COPYING.LIB \

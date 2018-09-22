@@ -35,10 +35,7 @@ libcharset-1.1/m4/ChangeLog                      libcharset-1.1/m4/ChangeLog
 libcharset-1.1/m4/codeset.m4                     libcharset-1.1/m4/codeset.m4
 libcharset-1.1/m4/glibc21.m4                     libcharset-1.1/m4/glibc21.m4
 libcharset-1.1/m4/libtool.m4                     libcharset-1.1/m4/libtool.m4
-libcharset-1.1/lib/config.charset                libcharset-1.1/lib/config.charset
 libcharset-1.1/lib/localcharset.c                libcharset-1.1/lib/localcharset.c
-libcharset-1.1/lib/ref-add.sin                   libcharset-1.1/lib/ref-add.sin
-libcharset-1.1/lib/ref-del.sin                   libcharset-1.1/lib/ref-del.sin
 libcharset-1.1/lib/ChangeLog                     libcharset-1.1/lib/ChangeLog
 libcharset-1.1/lib/Makefile.in                   libcharset-1.1/lib/Makefile.in
 libcharset-1.1/lib/Makefile.msvc                 libcharset-1.1/lib/Makefile.msvc

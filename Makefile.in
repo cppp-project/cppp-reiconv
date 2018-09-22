@@ -96,7 +96,7 @@ check : all force
 
 mostlyclean : force
 	cd libcharset && $(MAKE) mostlyclean
-	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
+	$(RM) lib/libcharset.* lib/localcharset.h
 	cd lib && $(MAKE) mostlyclean
 	cd srclib && $(MAKE) mostlyclean
 	cd src && $(MAKE) mostlyclean
@@ -107,7 +107,7 @@ mostlyclean : force
 
 clean : force
 	cd libcharset && $(MAKE) clean
-	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
+	$(RM) lib/libcharset.* lib/localcharset.h
 	cd lib && $(MAKE) clean
 	cd srclib && $(MAKE) clean
 	cd src && $(MAKE) clean
@@ -118,7 +118,7 @@ clean : force
 
 distclean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) distclean; fi
-	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
+	$(RM) lib/libcharset.* lib/localcharset.h
 	cd lib && if test -f Makefile; then $(MAKE) distclean; fi
 	cd srclib && if test -f Makefile; then $(MAKE) distclean; fi
 	cd src && if test -f Makefile; then $(MAKE) distclean; fi
@@ -132,7 +132,7 @@ distclean : force
 
 maintainer-clean : force
 	cd libcharset && if test -f Makefile; then $(MAKE) maintainer-clean; fi
-	$(RM) lib/charset.alias lib/libcharset.* lib/localcharset.h
+	$(RM) lib/libcharset.* lib/localcharset.h
 	cd lib && if test -f Makefile; then $(MAKE) maintainer-clean; fi
 	cd srclib && if test -f Makefile; then $(MAKE) maintainer-clean; fi
 	cd src && if test -f Makefile; then $(MAKE) maintainer-clean; fi
