@@ -1,5 +1,13 @@
 2018-10-23  Bruno Haible  <bruno@clisp.org>
 
+	Remove outdated DJGPP build infrastructure.
+	Approved by Juan Manuel Guerrero <juan.guerrero@gmx.de>.
+	* djgpp: Remove directory.
+	* INSTALL.djgpp: Remove file.
+	* Makefile.in (SOURCE_FILES): Remove them.
+
+2018-10-23  Bruno Haible  <bruno@clisp.org>
+
 	Update after gnulib changed.
 	* configure.ac (AC_PREREQ): Bump minimum Autoconf version to 2.63.
 

@@ -107,12 +107,7 @@ SOURCE_FILES = \
   tools/osf1-4.0a tools/osf1-4.0d tools/osf1-5.1 \
   tools/solaris-2.4 tools/solaris-2.5.1 tools/solaris-2.6 tools/solaris-2.6-cjk tools/solaris-2.7 \
   tools/sunos-4.1.4 \
-  tools/win32 \
-  INSTALL.djgpp \
-  djgpp/config.bat djgpp/config.sed djgpp/config.site \
-  djgpp/fnchange.in djgpp/fnchange.lst \
-  djgpp/Makefile.maint \
-  djgpp/README djgpp/README.in
+  tools/win32
 # List of distributed files imported from other packages.
 LIBTOOL_IMPORTED_FILES = \
   build-aux/ltmain.sh \

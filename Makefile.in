@@ -169,11 +169,6 @@ SOURCE_FILES = \
   windows/iconv.rc windows/libiconv.rc windows/windres-options \
   woe32dll/export.h woe32dll/iconv-exports.c \
   os2/iconv.def \
-  INSTALL.djgpp \
-  djgpp/config.bat djgpp/config.sed djgpp/config.site djgpp/edtest.bat \
-  djgpp/fnchange.in djgpp/fnchange.lst djgpp/Makefile.maint djgpp/makefile.sed \
-  djgpp/README djgpp/README.in djgpp/sources.sed \
-  djgpp/stateful-check.sed djgpp/stateless-check.sed djgpp/translit-check.sed \
   extras/ChangeLog extras/iconv_string.h extras/iconv_string.c \
   tools/Makefile \
   tools/8bit_tab_to_h.c tools/cjk_tab_to_h.c tools/cjk_variants.c \
