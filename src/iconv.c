@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2009, 2011-2012, 2016-2018 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2009, 2011-2012, 2016-2019 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -861,6 +861,15 @@ int main (int argc, char* argv[])
   bindtextdomain("libiconv",relocate(LOCALEDIR));
 #endif
   textdomain("libiconv");
+  /* No need to invoke the gnulib function stdopen() here, because
+     (1) the only file descriptor allocations done by this program are
+         fopen(...,"r"),
+     (2) when such fopen() calls occur, stdin is not used,
+     hence
+     - when an fopen() call happens to open fd 0, it is harmless, by (2),
+     - when an fopen() call happens to open fd 1 or 2, writing to
+       stdout or stderr will produce an error, by (1). */
+
   for (i = 1; i < argc;) {
     size_t len = strlen(argv[i]);
     if (!strcmp(argv[i],"--")) {
