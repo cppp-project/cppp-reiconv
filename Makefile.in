@@ -194,11 +194,7 @@ GNULIB_IMPORTED_FILES = \
   build-aux/config.rpath \
   build-aux/config.sub \
   build-aux/install-reloc \
-  build-aux/reloc-ldflags \
-  build-aux/snippet/arg-nonnull.h \
-  build-aux/snippet/c++defs.h \
-  build-aux/snippet/_Noreturn.h \
-  build-aux/snippet/warn-on-use.h
+  build-aux/reloc-ldflags
 IMPORTED_FILES = \
   COPYING COPYING.LIB \
   ABOUT-NLS INSTALL.generic \

@@ -12,10 +12,6 @@
 /build-aux/config.rpath
 /build-aux/install-reloc
 /build-aux/reloc-ldflags
-/build-aux/snippet/_Noreturn.h
-/build-aux/snippet/arg-nonnull.h
-/build-aux/snippet/c++defs.h
-/build-aux/snippet/warn-on-use.h
 /doc/relocatable.texi
 /libcharset/INSTALL.generic
 /libcharset/build-aux/config.libpath
@@ -49,7 +45,6 @@
 /srclib/getprogname.c
 /srclib/getprogname.h
 /srclib/gettext.h
-/srclib/gettimeofday.c
 /srclib/intprops.h
 /srclib/limits.in.h
 /srclib/localcharset.h
@@ -57,7 +52,6 @@
 /srclib/malloc.c
 /srclib/malloca.c
 /srclib/malloca.h
-/srclib/malloca.valgrind
 /srclib/msvc-inval.c
 /srclib/msvc-inval.h
 /srclib/msvc-nothrow.c
@@ -96,7 +90,6 @@
 /srclib/stripslash.c
 /srclib/sys-limits.h
 /srclib/sys_stat.in.h
-/srclib/sys_time.in.h
 /srclib/sys_types.in.h
 /srclib/time.in.h
 /srclib/unistd.c

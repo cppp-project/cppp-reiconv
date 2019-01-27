@@ -1,5 +1,10 @@
 2019-01-27  Bruno Haible  <bruno@clisp.org>
 
+	Update after gnulib changed.
+	* Makefile.in (GNULIB_IMPORTED_FILES): Remove build-aux/snippet/*.
+
+2019-01-27  Bruno Haible  <bruno@clisp.org>
+
 	Update support for building with MSVC. Automake does not install ar-lib.
 	* autogen.sh: Fetch build-aux/ar-lib here.
 	* Makefile.devel (srclib/Makefile.in): Don't fetch build-aux/ar-lib
