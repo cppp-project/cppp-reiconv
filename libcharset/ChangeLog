@@ -1,3 +1,8 @@
+2019-01-27  Bruno Haible  <bruno@clisp.org>
+
+	Fix configure (regression from 2018-09-22).
+	* configure.ac: Don't invoke gl_RELOCATABLE_LIBRARY.
+
 2018-10-23  Bruno Haible  <bruno@clisp.org>
 
 	Remove outdated DJGPP build infrastructure.

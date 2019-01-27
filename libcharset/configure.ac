@@ -1,4 +1,4 @@
-dnl Copyright (C) 2000-2003, 2005-2009, 2016, 2018 Free Software Foundation, Inc.
+dnl Copyright (C) 2000-2003, 2005-2009, 2016, 2018-2019 Free Software Foundation, Inc.
 dnl This file is part of the GNU CHARSET Library.
 dnl
 dnl The GNU CHARSET Library is free software; you can redistribute it and/or
@@ -33,8 +33,6 @@ dnl           check for host type
 AC_CANONICAL_HOST
 
 dnl           checks for installer options
-
-gl_RELOCATABLE_LIBRARY
 
 dnl           checks for programs
 
