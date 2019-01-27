@@ -60,6 +60,8 @@ if test $skip_gnulib = false; then
   fi
   # Skip the gnulib-tool step if gnulib-tool was not found.
   if test -n "$GNULIB_TOOL"; then
+    $GNULIB_TOOL --copy-file build-aux/ar-lib || exit $?
+    chmod a+x build-aux/ar-lib || exit $?
     make -f Makefile.devel \
          gnulib-clean srclib/Makefile.gnulib gnulib-imported-files \
          GNULIB_TOOL="$GNULIB_TOOL"
