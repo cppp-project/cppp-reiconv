@@ -1,5 +1,15 @@
 2019-01-27  Bruno Haible  <bruno@clisp.org>
 
+	Accommodate a shell that is not in /bin/sh.
+	* Makefile.in (SHELL): Use the value found by configure.
+	* lib/Makefile.in (SHELL): Likewise.
+	* man/Makefile.in (SHELL): Likewise.
+	* src/Makefile.in (SHELL): Likewise.
+	* tests/Makefile.in (SHELL): Likewise.
+	(check, check-extra-yes): Use SHELL to run the check-* scripts.
+
+2019-01-27  Bruno Haible  <bruno@clisp.org>
+
 	Update after gnulib changed.
 	* Makefile.in (GNULIB_IMPORTED_FILES): Remove build-aux/snippet/*.
 

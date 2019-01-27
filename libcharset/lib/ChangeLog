@@ -1,3 +1,8 @@
+2019-01-27  Bruno Haible  <bruno@clisp.org>
+
+	Accommodate a shell that is not in /bin/sh.
+	* Makefile.in (SHELL): Use the value found by configure.
+
 2018-09-22  Bruno Haible  <bruno@clisp.org>
 
 	Update from gnulib. Move mapping tables into the code.

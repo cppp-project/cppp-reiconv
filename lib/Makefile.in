@@ -47,7 +47,7 @@ mkinstalldirs = $(SHELL) @top_srcdir@/build-aux/mkinstalldirs
 
 #### End of system configuration section. ####
 
-SHELL = /bin/sh
+SHELL = @SHELL@
 
 # Before making a release, change this according to the libtool documentation,
 # section "Library interface versions".
