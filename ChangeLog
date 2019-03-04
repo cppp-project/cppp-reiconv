@@ -1,5 +1,11 @@
 2019-03-04  Bruno Haible  <bruno@clisp.org>
 
+	Add support for --enable-relocatable to libcharset.
+	* autogen.sh: Copy some more files to libcharset/build-aux/ and
+	libcharset/m4/.
+
+2019-03-04  Bruno Haible  <bruno@clisp.org>
+
 	Update --enable-relocatable support after gnulib changed.
 	* configure.ac: Move the LT_INIT invocation before the gl_RELOCATABLE
 	invocation. Remove unused argument to gl_RELOCATABLE.

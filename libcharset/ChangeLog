@@ -1,3 +1,8 @@
+2019-03-04  Bruno Haible  <bruno@clisp.org>
+
+	Add support for --enable-relocatable.
+	* libcharset/configure.ac: Invoke gl_RELOCATABLE.
+
 2019-01-27  Bruno Haible  <bruno@clisp.org>
 
 	Accommodate a shell that is not in /bin/sh.

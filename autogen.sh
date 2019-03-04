@@ -12,7 +12,7 @@
 # It also requires
 #   - the gperf program.
 
-# Copyright (C) 2003-2012, 2016, 2018 Free Software Foundation, Inc.
+# Copyright (C) 2003-2012, 2016, 2018-2019 Free Software Foundation, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -75,10 +75,10 @@ make -f Makefile.devel totally-clean all || exit $?
 for file in INSTALL.generic; do
   cp -p $file libcharset/$file || exit $?
 done
-for file in config.guess config.libpath config.sub install-sh mkinstalldirs; do
+for file in config.guess config.libpath config.sub install-sh libtool-reloc mkinstalldirs; do
   cp -p build-aux/$file libcharset/build-aux/$file || exit $?
 done
-for file in codeset.m4 fcntl-o.m4 glibc21.m4 visibility.m4; do
+for file in codeset.m4 fcntl-o.m4 glibc21.m4 lib-ld.m4 relocatable.m4 relocatable-lib.m4 visibility.m4; do
   cp -p srcm4/$file libcharset/m4/$file || exit $?
 done
 

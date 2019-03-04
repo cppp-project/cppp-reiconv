@@ -16,9 +16,13 @@
 /doc/relocatable.texi
 /libcharset/INSTALL.generic
 /libcharset/build-aux/config.libpath
+/libcharset/build-aux/libtool-reloc
 /libcharset/m4/codeset.m4
 /libcharset/m4/fcntl-o.m4
 /libcharset/m4/glibc21.m4
+/libcharset/m4/lib-ld.m4
+/libcharset/m4/relocatable-lib.m4
+/libcharset/m4/relocatable.m4
 /libcharset/m4/visibility.m4
 /srclib/_Noreturn.h
 /srclib/Makefile.gnulib

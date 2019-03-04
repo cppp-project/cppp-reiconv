@@ -45,9 +45,10 @@ dnl           checks for compiler output filename suffixes
 AC_OBJEXT
 AC_EXEEXT
 
-dnl           check for build configuration
+dnl           checks for build configuration
 
 LT_INIT([win32-dll])
+gl_RELOCATABLE
 gl_VISIBILITY
 
 dnl           checks for header files and functions
