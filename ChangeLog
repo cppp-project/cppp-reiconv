@@ -1,3 +1,9 @@
+2019-03-04  Bruno Haible  <bruno@clisp.org>
+
+	Update --enable-relocatable support after gnulib changed.
+	* configure.ac: Move the LT_INIT invocation before the gl_RELOCATABLE
+	invocation. Remove unused argument to gl_RELOCATABLE.
+
 2019-01-27  Bruno Haible  <bruno@clisp.org>
 
 	Accommodate a shell that is not in /bin/sh.

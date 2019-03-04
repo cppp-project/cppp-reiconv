@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2011, 2016, 2018 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2011, 2016, 2018-2019 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -50,9 +50,10 @@ dnl           checks for UNIX variants that set DEFS
 
 gl_EARLY
 
-dnl           checks for installer options
+dnl           checks for build configuration
 
-gl_RELOCATABLE([srclib])
+LT_INIT([disable-static win32-dll])
+gl_RELOCATABLE
 
 AC_ARG_ENABLE([extra-encodings],
   [AC_HELP_STRING([--enable-extra-encodings],
@@ -74,9 +75,7 @@ dnl           checks for compiler output filename suffixes
 AC_OBJEXT
 AC_EXEEXT
 
-dnl           check for build configuration
-
-LT_INIT([disable-static win32-dll])
+dnl           checks for build configuration
 
 dnl Prepares the libtool configuration for handling of Windows resources, and
 dnl sets the RC variable to a program that compiles Windows resource files.

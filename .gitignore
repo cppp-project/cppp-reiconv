@@ -11,6 +11,7 @@
 /build-aux/config.libpath
 /build-aux/config.rpath
 /build-aux/install-reloc
+/build-aux/libtool-reloc
 /build-aux/reloc-ldflags
 /doc/relocatable.texi
 /libcharset/INSTALL.generic
@@ -133,6 +134,7 @@
 /srcm4/iconv.m4
 /srcm4/include_next.m4
 /srcm4/intdiv0.m4
+/srcm4/intl-thread-locale.m4
 /srcm4/intl.m4
 /srcm4/intldir.m4
 /srcm4/intlmacosx.m4
