@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002, 2004, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002, 2004, 2016, 2019 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -217,7 +217,7 @@ static int
 tcvn_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   unsigned char c = 0;
-  if (wc < 0x0080 && (wc >= 0x0020 || (0x00fe0076 & (1 << wc)) == 0)) {
+  if (wc < 0x0080 && (wc >= 0x0020 || (0x00fe0076U & (1U << wc)) == 0)) {
     *r = wc;
     return 1;
   }
