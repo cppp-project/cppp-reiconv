@@ -49,8 +49,14 @@ Access to the Git repository is described at
 https://savannah.gnu.org/git/?group=libiconv .
 
 After fetching the sources from the Git repository, peek at the comments in
-autogen.sh, then run "./autogen.sh"; then you can proceed with "./configure"
-as usual.
+autogen.sh, then run
+  ./gitsub.sh pull
+  ./autogen.sh
+Then you can proceed with "./configure" as usual.
+
+Each time you want to update the source, do not only "git pull".  Instead do
+  git pull && ./gitsub.sh pull
+  ./autogen.sh
 
 
 Adding new encodings

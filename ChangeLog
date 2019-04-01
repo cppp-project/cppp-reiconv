@@ -1,3 +1,12 @@
+2019-04-01  Bruno Haible  <bruno@clisp.org>
+
+	build: Separate git operations from build operations.
+	* gitsub.sh: New file, from gnulib.
+	* .gitmodules: New file.
+	* autogen.sh: Remove all git operations. Look at GNULIB_SRCDIR
+	environment variable. Ignore the GNULIB_TOOL environment variable.
+	* HACKING: Explain when to use gitsub.sh.
+
 2019-03-07  Bruno Haible  <bruno@clisp.org>
 
 	Avoid signed integer overflow during shifts.
