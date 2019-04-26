@@ -1,5 +1,10 @@
 2019-04-26  Bruno Haible  <bruno@clisp.org>
 
+	Update POT file.
+	$ cd po; make update-po
+
+2019-04-26  Bruno Haible  <bruno@clisp.org>
+
 	Prepare for version 1.16.
 	* configure.ac: Bump version number to 1.15.
 	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
