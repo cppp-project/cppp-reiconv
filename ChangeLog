@@ -1,5 +1,16 @@
 2019-04-26  Bruno Haible  <bruno@clisp.org>
 
+	Update translations.
+	$ rsync -Lrtvz translationproject.org::tp/latest/libiconv/ po/new
+	$ cd po/new
+	$ for f in *.po; do \
+	    msgmerge --update --lang=${f%.po} --previous $f ../libiconv.pot; \
+	  done
+	$ mv *.po ../
+	$ cd ..; rm -rf new
+
+2019-04-26  Bruno Haible  <bruno@clisp.org>
+
 	Update POT file.
 	$ cd po; make update-po
 
