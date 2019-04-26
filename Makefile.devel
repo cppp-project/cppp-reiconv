@@ -32,8 +32,8 @@ all : srclib/Makefile.gnulib srclib/Makefile.in \
 
 # Before making a new release:
 # - check that the encoding lists in README and man/iconv_open.3 are up to date,
-# - check that the files in libcharset/lib/ are in sync with the gnulib modules
-#   'localcharset' and 'relocatable-lib-lgpl',
+# - check that the files in libcharset/lib/ are in sync with the gnulib module
+#   'localcharset',
 # - increment the version number in
 #     configure.ac
 #     include/iconv.h.in

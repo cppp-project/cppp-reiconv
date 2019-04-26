@@ -1,5 +1,16 @@
 2019-04-26  Bruno Haible  <bruno@clisp.org>
 
+	Prepare for version 1.16.
+	* configure.ac: Bump version number to 1.15.
+	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 8:1:6.
+	* src/iconv.c (print_version): Update copyright year.
+	* windows/iconv.rc: Likewise.
+	* windows/libiconv.rc: Likewise.
+	* README: Update download link.
+
+2019-04-26  Bruno Haible  <bruno@clisp.org>
+
 	Tweak exported symbols when --enable-relocatable is used.
 	* lib/Makefile.in (DEFS): Map 'relocate2' to a different symbol.
 
