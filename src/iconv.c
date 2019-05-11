@@ -178,11 +178,16 @@ Informative output:\n"));
     printf(_("\
   --version                   output version information and exit\n"));
     printf("\n");
-    /* TRANSLATORS: The placeholder indicates the bug-reporting address
-       for this package.  Please add _another line_ saying
+    /* TRANSLATORS: The first placeholder is the web address of the Savannah
+       project of this package.  The second placeholder is the bug-reporting
+       email address for this package.  Please add _another line_ saying
        "Report translation bugs to <...>\n" with the address for translation
        bugs (typically your translation team's web or email address).  */
-    fputs(_("Report bugs to <bug-gnu-libiconv@gnu.org>.\n"),stdout);
+    printf(_("\
+Report bugs in the bug tracker at <%s>\n\
+or by email to <%s>.\n"),
+           "https://savannah.gnu.org/projects/libiconv",
+           "bug-gnu-libiconv@gnu.org");
   }
   exit(exitcode);
 }
@@ -193,11 +198,12 @@ static void print_version (void)
          _libiconv_version >> 8, _libiconv_version & 0xff);
   printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2019");
   /* xgettext: no-wrap */
-  fputs (_("\
-License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>\n\
+  /* TRANSLATORS: The %s placeholder is the web address of the GPL license.  */
+  printf (_("\
+License GPLv3+: GNU GPL version 3 or later <%s>\n\
 This is free software: you are free to change and redistribute it.\n\
-There is NO WARRANTY, to the extent permitted by law.\n\
-"),stdout);
+There is NO WARRANTY, to the extent permitted by law.\n"),
+          "https://gnu.org/licenses/gpl.html");
   /* TRANSLATORS: The %s placeholder expands to an author's name.  */
   printf(_("Written by %s.\n"),"Bruno Haible");
   exit(EXIT_SUCCESS);

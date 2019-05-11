@@ -146,10 +146,12 @@ Homepage
 
     https://www.gnu.org/software/libiconv/
 
-Bug reports to
---------------
+Bug reports
+-----------
 
-    <bug-gnu-libiconv@gnu.org>
+Report bugs
+  - in the bug tracker at <https://savannah.gnu.org/projects/libiconv>
+  - or by email to <bug-gnu-libiconv@gnu.org>.
 
 
 Bruno Haible <bruno@clisp.org>
