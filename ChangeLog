@@ -1,3 +1,9 @@
+2019-05-22  Bruno Haible  <bruno@clisp.org>
+
+	Fix comment.
+	Reported by Paul Hardy <unifoundry@gmail.com>.
+	* lib/jisx0213.h: Fix comment about the underlying standard version.
+
 2019-05-11  Bruno Haible  <bruno@clisp.org>
 
 	Update bug reporting instructions.
