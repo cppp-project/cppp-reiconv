@@ -60,6 +60,8 @@ AC_CHECK_FUNCS([setlocale])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([lib/Makefile])
+AC_CONFIG_FILES([include/libcharset.h:include/libcharset.h.build.in])
+AC_CONFIG_FILES([include/libcharset.h.inst:include/libcharset.h.in])
 AC_CONFIG_FILES([include/localcharset.h:include/localcharset.h.build.in])
 AC_CONFIG_FILES([include/localcharset.h.inst:include/localcharset.h.in])
 AC_OUTPUT

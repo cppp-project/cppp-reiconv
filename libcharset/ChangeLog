@@ -1,3 +1,15 @@
+2019-06-30  Bruno Haible  <bruno@clisp.org>
+
+	Fix build error with MSVC.
+	* libcharset/Makefile.devel (include/libcharset.h.build.in): New target.
+	(all): Depend on it.
+	(totally-clean): Remove include/libcharset.h.build.in.
+	* libcharset/configure.ac: Generate include/libcharset.h and
+	include/libcharset.h.inst.
+	* libcharset/Makefile.in (include/libcharset.h): Remove rule.
+	(install-lib, install): Install libcharset.h.inst, not libcharset.h.
+	(GENERATED_FILES): Add include/libcharset.h.build.in.
+
 2019-03-04  Bruno Haible  <bruno@clisp.org>
 
 	Add support for --enable-relocatable.

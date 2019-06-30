@@ -279,6 +279,7 @@
 /man/iconvctl.3.html
 /man/iconv_open_into.3.html
 # Built by libcharset/Makefile.devel.
+/libcharset/include/libcharset.h.build.in
 /libcharset/include/localcharset.h.build.in
 
 # ---------- "make maintainerclean" gets you here ----------
@@ -321,6 +322,8 @@ autom4te.cache/
 /libcharset/Makefile
 /libcharset/config.h
 /libcharset/libtool
+/libcharset/include/libcharset.h
+/libcharset/include/libcharset.h.inst
 /libcharset/include/localcharset.h
 /libcharset/include/localcharset.h.inst
 # Erased by libcharset/lib/Makefile.
