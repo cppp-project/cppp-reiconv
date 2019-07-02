@@ -1,5 +1,12 @@
 2019-07-02  Bruno Haible  <bruno@clisp.org>
 
+	Update to current gnulib.
+	* Makefile.devel (GNULIB_MODULES): Add lib-symbol-visibility.
+	(srclib/Makefile.gnulib): Copy codeset.m4.
+	* srclib/Makefile.am (AM_CFLAGS): Initialize.
+
+2019-07-02  Bruno Haible  <bruno@clisp.org>
+
 	Drop unused macro gl_GLIBC21.
 	* autogen.sh: Don't copy glibc21.m4.
 
