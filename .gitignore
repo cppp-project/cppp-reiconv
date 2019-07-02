@@ -19,7 +19,6 @@
 /libcharset/build-aux/libtool-reloc
 /libcharset/m4/codeset.m4
 /libcharset/m4/fcntl-o.m4
-/libcharset/m4/glibc21.m4
 /libcharset/m4/lib-ld.m4
 /libcharset/m4/relocatable-lib.m4
 /libcharset/m4/relocatable.m4
@@ -130,7 +129,6 @@
 /srcm4/getprogname.m4
 /srcm4/gettext.m4
 /srcm4/glibc2.m4
-/srcm4/glibc21.m4
 /srcm4/gnulib-common.m4
 /srcm4/gnulib-comp.m4
 /srcm4/gnulib-tool.m4

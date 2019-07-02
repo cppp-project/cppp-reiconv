@@ -1,3 +1,10 @@
+2019-07-02  Bruno Haible  <bruno@clisp.org>
+
+	Drop unused macro gl_GLIBC21.
+	* configure.ac: Don't invoke gl_GLIBC21.
+	* Makefile.in (PARENT_IMPORTED_FILES): Remove m4/glibc21.m4.
+	* INTEGRATE: Update.
+
 2019-06-30  Bruno Haible  <bruno@clisp.org>
 
 	Fix build error with MSVC.
