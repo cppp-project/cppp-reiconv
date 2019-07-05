@@ -1,3 +1,10 @@
+2019-07-05  Bruno Haible  <bruno@clisp.org>
+
+	Don't export the symbol 'aliases_lookup' on non-ELF platforms.
+	* Makefile.devel (lib/aliases.h, lib/aliases_sysaix.h,
+	lib/aliases_syshpux.h, lib/aliases_sysosf1.h, lib/aliases_syssolaris.h):
+	Add a 'static' keyword in front of the declaration of aliases_lookup.
+
 2019-07-02  Bruno Haible  <bruno@clisp.org>
 
 	Update to current gnulib.

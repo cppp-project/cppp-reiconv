@@ -121,7 +121,7 @@ lib/aliases.h lib/canonical.h lib/canonical_local.h : lib/encodings.def lib/enco
 	./genaliases lib/aliases.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases.gperf > tmp.h
-	$(CP) tmp.h lib/aliases.h
+	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases.h
 	sh canonical.sh > lib/canonical.h
 	sh canonical_local.sh > lib/canonical_local.h
 	$(RM) tmp.h canonical.sh canonical_local.sh
@@ -131,7 +131,7 @@ lib/aliases_sysaix.h lib/canonical_sysaix.h lib/canonical_local_sysaix.h : lib/e
 	./genaliases lib/aliases_sysaix.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_sysaix.gperf > tmp.h
-	$(CP) tmp.h lib/aliases_sysaix.h
+	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_sysaix.h
 	sh canonical.sh > lib/canonical_sysaix.h
 	sh canonical_local.sh > lib/canonical_local_sysaix.h
 	$(RM) tmp.h canonical.sh canonical_local.sh
@@ -141,7 +141,7 @@ lib/aliases_syshpux.h lib/canonical_syshpux.h lib/canonical_local_syshpux.h : li
 	./genaliases lib/aliases_syshpux.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_syshpux.gperf > tmp.h
-	$(CP) tmp.h lib/aliases_syshpux.h
+	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_syshpux.h
 	sh canonical.sh > lib/canonical_syshpux.h
 	sh canonical_local.sh > lib/canonical_local_syshpux.h
 	$(RM) tmp.h canonical.sh canonical_local.sh
@@ -151,7 +151,7 @@ lib/aliases_sysosf1.h lib/canonical_sysosf1.h lib/canonical_local_sysosf1.h : li
 	./genaliases lib/aliases_sysosf1.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_sysosf1.gperf > tmp.h
-	$(CP) tmp.h lib/aliases_sysosf1.h
+	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_sysosf1.h
 	sh canonical.sh > lib/canonical_sysosf1.h
 	sh canonical_local.sh > lib/canonical_local_sysosf1.h
 	$(RM) tmp.h canonical.sh canonical_local.sh
@@ -161,7 +161,7 @@ lib/aliases_syssolaris.h lib/canonical_syssolaris.h lib/canonical_local_syssolar
 	./genaliases lib/aliases_syssolaris.gperf canonical.sh canonical_local.sh
 	$(RM) genaliases
 	$(GPERF) -m 10 lib/aliases_syssolaris.gperf > tmp.h
-	$(CP) tmp.h lib/aliases_syssolaris.h
+	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_syssolaris.h
 	sh canonical.sh > lib/canonical_syssolaris.h
 	sh canonical_local.sh > lib/canonical_local_syssolaris.h
 	$(RM) tmp.h canonical.sh canonical_local.sh
