@@ -1,3 +1,11 @@
+2019-08-11  Bruno Haible  <bruno@clisp.org>
+
+	Update from gnulib.
+	2019-08-11  Bruno Haible  <bruno@clisp.org>
+		Based on patch by KO Myung-Hun <komh78@gmail.com> in
+		<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2019-08/msg00004.html>.
+		* localcharset.c (alias_table) [OS2]: Add more aliases.
+
 2019-07-02  Bruno Haible  <bruno@clisp.org>
 
 	Update from gnulib.
