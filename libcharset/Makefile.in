@@ -118,6 +118,7 @@ PARENT_IMPORTED_FILES = \
   build-aux/config.libpath \
   build-aux/config.sub \
   build-aux/install-sh \
+  build-aux/libtool-reloc \
   build-aux/mkinstalldirs \
   m4/codeset.m4 \
   m4/fcntl-o.m4 \
