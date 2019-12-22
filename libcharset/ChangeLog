@@ -1,3 +1,14 @@
+2019-12-22  Bruno Haible  <bruno@clisp.org>
+
+	Update from gnulib.
+	* include/localcharset.h.in: Update from gnulib.
+	2019-12-20  Bruno Haible  <bruno@clisp.org>
+		* localcharset.h: Mention which encodings are used as locale
+		encodings on z/OS.
+	2019-12-17  Bruno Haible  <bruno@clisp.org>
+		* localcharset.h (locale_charset): Clarify when the result
+		becomes invalid.
+
 2019-12-02  Bruno Haible  <bruno@clisp.org>
 
 	build: Fix build error with --enable-relocatable on macOS

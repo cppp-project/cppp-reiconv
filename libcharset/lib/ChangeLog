@@ -1,3 +1,21 @@
+2019-12-22  Bruno Haible  <bruno@clisp.org>
+
+	Update from gnulib.
+	2019-12-22  Bruno Haible  <bruno@clisp.org>
+		localcharset: Update support for OpenBSD.
+		* localcharset.c (alias_table): Map "US-ASCII" to "ASCII".
+	2019-12-17  Bruno Haible  <bruno@clisp.org>
+		localcharset: Fix multithread-safety bug on Windows and OS/2.
+		* localcharset.c (locale_charset): Use a stack-allocated buffer
+		to assemble the result.
+	2019-12-17  Bruno Haible  <bruno@clisp.org>
+		localcharset: Optimize code for native Windows.
+		* localcharset.c (locale_charset): Don't bother calling
+		setlocale (LC_ALL, NULL) since we're not interested in its
+		result.
+	2019-09-23  Paul Eggert  <eggert@cs.ucla.edu>
+		Update URLs and associated text
+
 2019-08-11  Bruno Haible  <bruno@clisp.org>
 
 	Update from gnulib.
