@@ -16,7 +16,7 @@ dnl along with the GNU CHARSET Library; see the file COPYING.LIB.  If not,
 dnl see <https://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.63])
-AC_INIT([libcharset], [1.4])
+AC_INIT([libcharset], [1.5])
 AC_CONFIG_SRCDIR([lib/localcharset.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])

@@ -1,5 +1,11 @@
 2019-12-22  Bruno Haible  <bruno@clisp.org>
 
+	Mark a new version.
+	* configure.ac: Bump version to 1.5.
+	* NEWS: Mention fixes.
+
+2019-12-22  Bruno Haible  <bruno@clisp.org>
+
 	Update from gnulib.
 	* include/localcharset.h.in: Update from gnulib.
 	2019-12-20  Bruno Haible  <bruno@clisp.org>
