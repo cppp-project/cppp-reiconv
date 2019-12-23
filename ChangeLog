@@ -1,3 +1,8 @@
+2019-12-23  Bruno Haible  <bruno@clisp.org>
+
+	Do export the symbol 'locale_charset' (needed by GNU bash).
+	* lib/Makefile.in (DEFS): Define also BUILDING_LIBCHARSET.
+
 2019-09-01  Bruno Haible  <bruno@clisp.org>
 
 	build: Add support for shallow-cloning of subdirectories.

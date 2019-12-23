@@ -20,11 +20,16 @@ LDFLAGS_yes = -Wl,--export-all-symbols
 LDFLAGS_no =
 INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include -I.. -I$(srcdir)/..
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
+# -DBUILDING_LIBCHARSET: Change expansion of LIBCHARSET_DLL_EXPORTED macro in
+# localcharset.h.
 # -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
-DEFS = -DLIBDIR=\"$(libdir)\" -DBUILDING_LIBICONV -DBUILDING_DLL \
--DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(libdir)\" -DNO_XMALLOC \
--Dset_relocation_prefix=libiconv_set_relocation_prefix \
--Drelocate=libiconv_relocate -Drelocate2=libiconv_relocate2 @DEFS@
+DEFS = \
+  -DLIBDIR=\"$(libdir)\" \
+  -DBUILDING_LIBICONV -DBUILDING_LIBCHARSET -DBUILDING_DLL \
+  -DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(libdir)\" -DNO_XMALLOC \
+  -Dset_relocation_prefix=libiconv_set_relocation_prefix \
+  -Drelocate=libiconv_relocate \
+  -Drelocate2=libiconv_relocate2 @DEFS@
 LIBTOOL = @LIBTOOL@
 LIBTOOL_COMPILE = $(LIBTOOL) --mode=compile
 LIBTOOL_LINK = $(LIBTOOL) --mode=link
