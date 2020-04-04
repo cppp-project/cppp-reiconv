@@ -2,16 +2,16 @@ dnl Copyright (C) 2000-2003, 2005-2009, 2016, 2018-2019 Free Software Foundation
 dnl This file is part of the GNU CHARSET Library.
 dnl
 dnl The GNU CHARSET Library is free software; you can redistribute it and/or
-dnl modify it under the terms of the GNU Library General Public License as
+dnl modify it under the terms of the GNU Lesser General Public License as
 dnl published by the Free Software Foundation; either version 2 of the
 dnl License, or (at your option) any later version.
 dnl
 dnl The GNU CHARSET Library is distributed in the hope that it will be useful,
 dnl but WITHOUT ANY WARRANTY; without even the implied warranty of
 dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-dnl Library General Public License for more details.
+dnl Lesser General Public License for more details.
 dnl
-dnl You should have received a copy of the GNU Library General Public License
+dnl You should have received a copy of the GNU Lesser General Public License
 dnl along with the GNU CHARSET Library; see the file COPYING.LIB.  If not,
 dnl see <https://www.gnu.org/licenses/>.
 
