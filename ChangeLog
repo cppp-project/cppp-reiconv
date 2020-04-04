@@ -1,3 +1,8 @@
+2020-04-04  Bruno Haible  <bruno@clisp.org>
+
+	Change the license of the library from LGPL 2.0 to LGPL 2.1.
+	* COPYING.LIB: Upgrade to LGPL 2.1.
+
 2019-12-23  Bruno Haible  <bruno@clisp.org>
 
 	Do export the symbol 'locale_charset' (needed by GNU bash).
