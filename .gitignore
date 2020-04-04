@@ -201,6 +201,7 @@
 /srcm4/wchar_t.m4
 /srcm4/wint_t.m4
 /srcm4/xsize.m4
+/srcm4/zzgnulib.m4
 # Cached parameters of gnulib-tool:
 /srcm4/gnulib-cache.m4
 
