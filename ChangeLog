@@ -1,5 +1,10 @@
 2020-04-04  Bruno Haible  <bruno@clisp.org>
 
+	Don't use LGPLv3.
+	* gnulib-local/modules/mbstate (License): Set to LGPLv2+.
+
+2020-04-04  Bruno Haible  <bruno@clisp.org>
+
 	Change the license of the library from LGPL 2.0 to LGPL 2.1.
 	* COPYING.LIB: Upgrade to LGPL 2.1.
 
