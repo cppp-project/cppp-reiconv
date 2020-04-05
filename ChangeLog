@@ -1,3 +1,13 @@
+2020-04-05  Bruno Haible  <bruno@clisp.org>
+
+	Fix an autogen.sh failure (regression from 2016-12-04).
+	Reported by Petr Ovtchenkov <ptr@void-ptr.info> in
+	<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2020-04/msg00003.html>.
+	* autogen.sh: Invoke also the Makefile target srclib/Makefile.in, so as
+	to get build-aux/install-sh. Finish the "copy files" phase before recursing
+	through the subpackages tree through Makefile.devel.
+	* Makefile.devel: Reorder targets.
+
 2020-04-04  Bruno Haible  <bruno@clisp.org>
 
 	Don't use LGPLv3.

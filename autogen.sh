@@ -11,7 +11,7 @@
 # It also requires
 #   - the gperf program.
 
-# Copyright (C) 2003-2012, 2016, 2018-2019 Free Software Foundation, Inc.
+# Copyright (C) 2003-2012, 2016, 2018-2020 Free Software Foundation, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -36,6 +36,8 @@ while :; do
   esac
 done
 
+# ========== Copy files from gnulib, automake, or the internet. ==========
+
 if test $skip_gnulib = false; then
   if test -n "$GNULIB_SRCDIR"; then
     test -d "$GNULIB_SRCDIR" || {
@@ -58,11 +60,9 @@ if test $skip_gnulib = false; then
   $GNULIB_TOOL --copy-file build-aux/ar-lib || exit $?
   chmod a+x build-aux/ar-lib || exit $?
   make -f Makefile.devel \
-       gnulib-clean srclib/Makefile.gnulib gnulib-imported-files \
+       gnulib-clean srclib/Makefile.gnulib gnulib-imported-files srclib/Makefile.in \
        GNULIB_TOOL="$GNULIB_TOOL"
 fi
-
-make -f Makefile.devel totally-clean all || exit $?
 
 # Copy files into the libcharset subpackage, so that libcharset/autogen.sh
 # does not need to invoke gnulib-tool nor automake.
@@ -75,6 +75,10 @@ done
 for file in codeset.m4 fcntl-o.m4 lib-ld.m4 relocatable.m4 relocatable-lib.m4 visibility.m4; do
   cp -p srcm4/$file libcharset/m4/$file || exit $?
 done
+
+# ========== Generate files. ==========
+
+make -f Makefile.devel totally-clean all || exit $?
 
 (cd libcharset
  ./autogen.sh || exit $?

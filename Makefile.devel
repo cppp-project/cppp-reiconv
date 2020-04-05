@@ -72,14 +72,6 @@ srclib/Makefile.gnulib :
 	    --import $(GNULIB_MODULES); \
 	fi
 
-srclib/Makefile.in : srclib/Makefile.am srclib/Makefile.gnulib aclocal.m4
-	if test -n "$$GNULIB_TOOL"; then \
-	  $$GNULIB_TOOL --copy-file build-aux/compile; \
-	fi
-# Make sure we get new versions of files brought in by automake.
-	(cd build-aux && rm -f compile depcomp install-sh mdate-sh missing test-driver)
-	$(AUTOMAKE) --gnits --add-missing --copy srclib/Makefile && rm -rf autom4te.cache
-
 gnulib-imported-files : force
 	if test -n "$$GNULIB_TOOL"; then \
 	  for file in config.guess config.sub; do \
@@ -87,6 +79,14 @@ gnulib-imported-files : force
 	    chmod a+x build-aux/$$file || exit $$?; \
 	  done; \
 	fi
+
+srclib/Makefile.in : srclib/Makefile.am srclib/Makefile.gnulib aclocal.m4
+	if test -n "$$GNULIB_TOOL"; then \
+	  $$GNULIB_TOOL --copy-file build-aux/compile; \
+	fi
+# Make sure we get new versions of files brought in by automake.
+	(cd build-aux && rm -f compile depcomp install-sh mdate-sh missing test-driver)
+	$(AUTOMAKE) --gnits --add-missing --copy srclib/Makefile && rm -rf autom4te.cache
 
 
 CONFIGURES = configure
