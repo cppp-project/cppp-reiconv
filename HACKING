@@ -11,13 +11,16 @@ You will need reasonably recent versions of the build tools:
     + Homepage:
       https://gcc.gnu.org/
 
-  * GNU automake
+  * GNU automake 1.16.x
     + Homepage:
       https://www.gnu.org/software/automake/
 
-  * GNU autoconf
+  * GNU autoconf 2.69
     + Homepage:
       https://www.gnu.org/software/autoconf/
+    + You also need to create symbolic links
+        autoconf-2.69 -> autoconf
+        autoheader-2.69 -> autoheader
 
   * GNU m4
     + Homepage:
