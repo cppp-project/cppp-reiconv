@@ -1,3 +1,11 @@
+2020-08-06  Bruno Haible  <bruno@clisp.org>
+
+	Avoid a GCC warning with GCC >= 7.
+	Reported by Reini Urban <rurban@cpan.org>
+	in <https://savannah.gnu.org/bugs/?58903>.
+	* lib/gentranslit.c (main): Reset i to 0 each time p gets a new value.
+	Add assertion about i's possible values.
+
 2020-04-05  Bruno Haible  <bruno@clisp.org>
 
 	Fix an autogen.sh failure (regression from 2016-12-04).
