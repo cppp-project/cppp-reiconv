@@ -1,3 +1,8 @@
+2020-08-29  Bruno Haible  <bruno@clisp.org>
+
+	Update after gnulib changed.
+	* configure.ac (AC_PREREQ): Bump minimum Autoconf version to 2.64.
+
 2019-12-23  Bruno Haible  <bruno@clisp.org>
 
 	Allow libiconv to export the symbol 'locale_charset'.
