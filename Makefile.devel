@@ -81,11 +81,8 @@ gnulib-imported-files : force
 	fi
 
 srclib/Makefile.in : srclib/Makefile.am srclib/Makefile.gnulib aclocal.m4
-	if test -n "$$GNULIB_TOOL"; then \
-	  $$GNULIB_TOOL --copy-file build-aux/compile; \
-	fi
 # Make sure we get new versions of files brought in by automake.
-	(cd build-aux && rm -f compile depcomp install-sh mdate-sh missing test-driver)
+	(cd build-aux && rm -f depcomp install-sh mdate-sh missing test-driver)
 	$(AUTOMAKE) --gnits --add-missing --copy srclib/Makefile && rm -rf autom4te.cache
 
 
