@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008, 2011, 2016, 2018 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2008, 2011, 2016, 2018, 2020 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -364,8 +364,8 @@ static int compare_by_index (const void * arg1, const void * arg2)
 
 static int compare_by_name (const void * arg1, const void * arg2)
 {
-  const char * name1 = *(const char **)arg1;
-  const char * name2 = *(const char **)arg2;
+  const char * name1 = *(const char * const *)arg1;
+  const char * name2 = *(const char * const *)arg2;
   /* Compare alphabetically, but put "CS" names at the end. */
   int sign = strcmp(name1,name2);
   if (sign != 0) {
@@ -507,7 +507,7 @@ const char * iconv_canonicalize (const char * name)
   for (code = name;;) {
     /* Search code in the table. */
     for (cp = code, bp = buf, count = MAX_WORD_LENGTH+10+1; ; cp++, bp++) {
-      unsigned char c = * (unsigned char *) cp;
+      unsigned char c = (unsigned char) *cp;
       if (c >= 0x80)
         goto invalid;
       if (c >= 'a' && c <= 'z')

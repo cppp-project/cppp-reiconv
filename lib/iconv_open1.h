@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008, 2011, 2018 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2008, 2011, 2018, 2020 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -46,7 +46,7 @@
   for (to_wchar = 0;;) {
     /* Search tocode in the table. */
     for (cp = tocode, bp = buf, count = MAX_WORD_LENGTH+10+1; ; cp++, bp++) {
-      unsigned char c = * (unsigned char *) cp;
+      unsigned char c = (unsigned char) *cp;
       if (c >= 0x80)
         goto invalid;
       if (c >= 'a' && c <= 'z')
@@ -138,7 +138,7 @@
   for (from_wchar = 0;;) {
     /* Search fromcode in the table. */
     for (cp = fromcode, bp = buf, count = MAX_WORD_LENGTH+10+1; ; cp++, bp++) {
-      unsigned char c = * (unsigned char *) cp;
+      unsigned char c = (unsigned char) *cp;
       if (c >= 0x80)
         goto invalid;
       if (c >= 'a' && c <= 'z')

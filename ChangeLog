@@ -1,3 +1,10 @@
+2020-08-31  Bruno Haible  <bruno@clisp.org>
+
+	Fix some -Wcast-qual warning, reported by clang.
+	* lib/iconv.c (compare_by_name): Add more 'const'.
+	(iconv_canonicalize): Cast value to 'unsigned char', not pointer to 'unsigned char *'.
+	* lib/iconv_open1.h: Likewise.
+
 2020-08-30  Bruno Haible  <bruno@clisp.org>
 
 	Make sure that build-aux/compile is in the tarball.
