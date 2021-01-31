@@ -4,14 +4,14 @@
 # also regenerates all aclocal.m4, config.h.in, Makefile.in, configure files
 # with new versions of autoconf or automake.
 #
-# This script requires autoconf-2.63..2.70 and automake-1.11..1.16 in the PATH.
+# This script requires autoconf-2.63..2.71 and automake-1.11..1.16 in the PATH.
 # If not used from a released tarball, it also requires either
 #   - the GNULIB_SRCDIR environment variable pointing to a gnulib checkout, or
 #   - a preceding invocation of './gitsub.sh pull'.
 # It also requires
 #   - the gperf program.
 
-# Copyright (C) 2003-2012, 2016, 2018-2020 Free Software Foundation, Inc.
+# Copyright (C) 2003-2012, 2016, 2018-2021 Free Software Foundation, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

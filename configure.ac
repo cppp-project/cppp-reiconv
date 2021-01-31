@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2011, 2016, 2018-2020 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2011, 2016, 2018-2021 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -56,7 +56,7 @@ LT_INIT([disable-static win32-dll])
 gl_RELOCATABLE
 
 AC_ARG_ENABLE([extra-encodings],
-  [AC_HELP_STRING([--enable-extra-encodings],
+  [AS_HELP_STRING([--enable-extra-encodings],
                   [add support for a few rarely used encodings])],
   [AC_DEFINE([ENABLE_EXTRA], 1,
              [Define to 1 to enable a few rarely used encodings.])
@@ -152,7 +152,10 @@ gl_FCNTL_O_FLAGS
 
 AC_EILSEQ
 
-CL_WORDS_LITTLEENDIAN
+AC_C_BIGENDIAN([],
+  [AC_DEFINE([WORDS_LITTLEENDIAN], [1],
+     [Define if the machine's byte ordering is little endian.])
+  ])
 
 gl_INIT
 

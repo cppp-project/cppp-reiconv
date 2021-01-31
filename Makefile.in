@@ -162,7 +162,6 @@ SOURCE_FILES = \
   gnulib-local/modules/xalloc \
   m4/cp.m4 \
   m4/eilseq.m4 \
-  m4/endian.m4 \
   m4/general.m4 \
   m4/ln.m4 \
   m4/proto.m4 \
