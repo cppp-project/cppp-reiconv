@@ -1,5 +1,10 @@
 2021-01-31  Bruno Haible  <bruno@clisp.org>
 
+	Update after gnulib changed on 2020-08-26.
+	* configure.ac: Test $iconv_arg1, not $am_cv_proto_iconv_arg1.
+
+2021-01-31  Bruno Haible  <bruno@clisp.org>
+
 	Switch to autoconf 2.71.
 	* autogen.sh: Update comment.
 	* configure.ac: Use AS_HELP_STRING instead of AC_HELP_STRING. Invoke
