@@ -1,3 +1,8 @@
+2021-06-06  Bruno Haible  <bruno@clisp.org>
+
+	gnulib-local: Put real license notice into the source files.
+	* gnulib-local/lib/alloca.in.h: Use an LGPLv2+ notice.
+
 2021-02-28  Bruno Haible  <bruno@clisp.org>
 
 	Update DEPENDENCIES.
