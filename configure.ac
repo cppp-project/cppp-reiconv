@@ -3,7 +3,7 @@ dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
 dnl and/or modify it under the terms of the GNU Lesser General Public
-dnl License as published by the Free Software Foundation; either version 2
+dnl License as published by the Free Software Foundation; either version 2.1
 dnl of the License, or (at your option) any later version.
 dnl
 dnl The GNU LIBICONV Library is distributed in the hope that it will be
