@@ -117,7 +117,8 @@ To use it, simply #include <iconv.h> and use the functions.
 
 To use it in a package that uses GNU autoconf and GNU automake:
   - Use gnulib-tool to import the Gnulib module 'iconv'. It consists
-    of a couple of *.m4 files (iconv.m4 and its dependencies).
+    of a couple of *.m4 files (iconv.m4 and its dependencies) and a
+    file 'build-aux/config.rpath'.
   - Add to the link command line of libraries and executables that use
     the functions the placeholder @LIBICONV@ (or, if using libtool for
     the link, @LTLIBICONV@). In Makefile.am files, the right place for
