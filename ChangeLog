@@ -1,3 +1,9 @@
+2021-06-27  Bruno Haible  <bruno@clisp.org>
+
+	README: Update.
+	Reported at <https://savannah.gnu.org/bugs/?60837>.
+	* README: Overhaul the paragraph that mentions iconv.m4.
+
 2021-06-06  Bruno Haible  <bruno@clisp.org>
 
 	gnulib-local: Put real license notice into the source files.
