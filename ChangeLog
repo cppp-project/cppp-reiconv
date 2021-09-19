@@ -1,3 +1,16 @@
+2021-09-19  Bruno Haible  <bruno@clisp.org>
+
+	tests: Avoid check-subst failures in QEMU user-mode environments.
+	* Makefile.devel (GNULIB_MODULES): Add stdbool.
+	(gnulib-imported-files): Copy also tests/qemu.h.
+	* tests/is-native.c: New file.
+	* tests/Makefile.in (is-native, is-native.@OBJEXT@): New targets.
+	(clean): Remove the 'is-native' program.
+	(SOURCE_FILES): Add is-native.c.
+	(IMPORTED_FILES): Add qemu.h.
+	* tests/check-subst: Invoke 'locale charmap' only in native
+	environments.
+
 2021-06-27  Bruno Haible  <bruno@clisp.org>
 
 	README: Update.

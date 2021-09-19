@@ -233,6 +233,7 @@
 /srcm4/wint_t.m4
 /srcm4/year2038.m4
 /srcm4/zzgnulib.m4
+/tests/qemu.h
 # Cached parameters of gnulib-tool:
 /srcm4/gnulib-cache.m4
 
