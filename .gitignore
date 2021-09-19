@@ -61,6 +61,7 @@
 /srclib/gettext.h
 /srclib/idx.h
 /srclib/intprops.h
+/srclib/inttypes.in.h
 /srclib/libc-config.h
 /srclib/limits.in.h
 /srclib/localcharset.h
@@ -104,6 +105,7 @@
 /srclib/stat-time.h
 /srclib/stat-w32.c
 /srclib/stat-w32.h
+/srclib/stdalign.in.h
 /srclib/stdbool.in.h
 /srclib/stddef.in.h
 /srclib/stdint.in.h
@@ -125,6 +127,7 @@
 /srclib/uniwidth.in.h
 /srclib/unlocked-io.h
 /srclib/verify.h
+/srclib/wchar.in.h
 /srclib/xalloc-oversized.h
 /srclib/xalloc.h
 /srclib/xmalloc.c
@@ -138,6 +141,7 @@
 /srcm4/absolute-header.m4
 /srcm4/alloca.m4
 /srcm4/asm-underscore.m4
+/srcm4/builtin-expect.m4
 /srcm4/canonicalize.m4
 /srcm4/close.m4
 /srcm4/codeset.m4
@@ -165,6 +169,7 @@
 /srcm4/include_next.m4
 /srcm4/intl-thread-locale.m4
 /srcm4/intlmacosx.m4
+/srcm4/inttypes.m4
 /srcm4/largefile.m4
 /srcm4/lib-ld.m4
 /srcm4/lib-link.m4
@@ -207,6 +212,7 @@
 /srcm4/stat-time.m4
 /srcm4/stat.m4
 /srcm4/std-gnu11.m4
+/srcm4/stdalign.m4
 /srcm4/stdbool.m4
 /srcm4/stddef_h.m4
 /srcm4/stdint.m4
@@ -222,8 +228,10 @@
 /srcm4/unlocked-io.m4
 /srcm4/visibility.m4
 /srcm4/warn-on-use.m4
+/srcm4/wchar_h.m4
 /srcm4/wchar_t.m4
 /srcm4/wint_t.m4
+/srcm4/year2038.m4
 /srcm4/zzgnulib.m4
 # Cached parameters of gnulib-tool:
 /srcm4/gnulib-cache.m4
