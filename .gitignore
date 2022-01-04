@@ -121,6 +121,7 @@
 /srclib/sys_stat.in.h
 /srclib/sys_types.in.h
 /srclib/time.in.h
+/srclib/unictype/bitmap.h
 /srclib/unistd.c
 /srclib/unistd.in.h
 /srclib/unitypes.in.h
@@ -136,6 +137,8 @@
 /srclib/xstrdup.c
 /srclib/uniwidth/cjk.h
 /srclib/uniwidth/width.c
+/srclib/uniwidth/width0.h
+/srclib/uniwidth/width2.h
 /srcm4/00gnulib.m4
 /srcm4/__inline.m4
 /srcm4/absolute-header.m4
@@ -226,6 +229,7 @@
 /srcm4/time_h.m4
 /srcm4/unistd_h.m4
 /srcm4/unlocked-io.m4
+/srcm4/vararrays.m4
 /srcm4/visibility.m4
 /srcm4/warn-on-use.m4
 /srcm4/wchar_h.m4
