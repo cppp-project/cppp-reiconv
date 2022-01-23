@@ -23,6 +23,7 @@ all : srclib/Makefile.gnulib srclib/Makefile.in \
       lib/aliases_aix.h lib/aliases_aix_sysaix.h \
       lib/aliases_osf1.h lib/aliases_osf1_sysosf1.h \
       lib/aliases_dos.h \
+      lib/aliases_zos.h \
       lib/aliases_extra.h \
       lib/flags.h lib/translit.h \
       man/iconv.1.html man/iconv.3.html man/iconv_close.3.html man/iconv_open.3.html man/iconvctl.3.html man/iconv_open_into.3.html \
@@ -190,13 +191,18 @@ lib/aliases_dos.h lib/canonical_dos.h : lib/encodings_dos.def lib/genaliases2.c
 	./genaliases dos lib/aliases_dos.h lib/canonical_dos.h
 	$(RM) genaliases
 
+lib/aliases_zos.h lib/canonical_zos.h : lib/encodings_zos.def lib/genaliases2.c
+	$(CC) $(CFLAGS) -DUSE_ZOS lib/genaliases2.c -o genaliases
+	./genaliases zos lib/aliases_zos.h lib/canonical_zos.h
+	$(RM) genaliases
+
 lib/aliases_extra.h lib/canonical_extra.h : lib/encodings_extra.def lib/genaliases2.c
 	$(CC) $(CFLAGS) -DUSE_EXTRA lib/genaliases2.c -o genaliases
 	./genaliases extra lib/aliases_extra.h lib/canonical_extra.h
 	$(RM) genaliases
 
 
-lib/flags.h : lib/encodings.def lib/encodings_aix.def lib/encodings_osf1.def lib/encodings_dos.def lib/encodings_extra.def lib/converters.h lib/genflags.c
+lib/flags.h : lib/encodings.def lib/encodings_aix.def lib/encodings_osf1.def lib/encodings_dos.def lib/encodings_zos.def lib/encodings_extra.def lib/converters.h lib/genflags.c
 	$(CC) $(CFLAGS) lib/genflags.c -o genflags
 	./genflags > lib/flags.h
 	$(RM) genflags
@@ -231,11 +237,13 @@ totally-clean : force
 	rm -f lib/aliases_aix.h lib/aliases_aix_sysaix.h
 	rm -f lib/aliases_osf1.h lib/aliases_osf1_sysosf1.h
 	rm -f lib/aliases_dos.h
+	rm -f lib/aliases_zos.h
 	rm -f lib/aliases_extra.h
 	rm -f lib/canonical.h lib/canonical_sysaix.h lib/canonical_syshpux.h lib/canonical_sysosf1.h lib/canonical_syssolaris.h
 	rm -f lib/canonical_aix.h lib/canonical_aix_sysaix.h
 	rm -f lib/canonical_osf1.h lib/canonical_osf1_sysosf1.h
 	rm -f lib/canonical_dos.h
+	rm -f lib/canonical_zos.h
 	rm -f lib/canonical_extra.h
 	rm -f lib/canonical_local.h lib/canonical_local_sysaix.h lib/canonical_local_syshpux.h lib/canonical_local_sysosf1.h lib/canonical_local_syssolaris.h
 	rm -f lib/flags.h

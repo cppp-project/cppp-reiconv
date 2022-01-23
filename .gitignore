@@ -288,6 +288,7 @@
 /lib/aliases_osf1.h
 /lib/aliases_osf1_sysosf1.h
 /lib/aliases_dos.h
+/lib/aliases_zos.h
 /lib/aliases_extra.h
 /lib/canonical.h
 /lib/canonical_sysaix.h
@@ -299,6 +300,7 @@
 /lib/canonical_osf1.h
 /lib/canonical_osf1_sysosf1.h
 /lib/canonical_dos.h
+/lib/canonical_zos.h
 /lib/canonical_extra.h
 /lib/canonical_local.h
 /lib/canonical_local_sysaix.h

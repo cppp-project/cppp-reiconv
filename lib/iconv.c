@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008, 2011, 2016, 2018, 2020 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2008, 2011, 2016, 2018, 2020, 2022 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -37,6 +37,7 @@
 #define USE_AIX
 #define USE_OSF1
 #define USE_DOS
+#define USE_ZOS
 #define USE_EXTRA
 #else
 /*
@@ -51,6 +52,11 @@
 #endif
 #if defined(__DJGPP__) || (defined(_WIN32) && (defined(_MSC_VER) || defined(__MINGW32__)))
 #define USE_DOS
+#endif
+/* Enable the EBCDIC encodings not only on z/OS but also on Linux/s390, for
+   easier interoperability between z/OS and Linux/s390.  */
+#if defined(__MVS__) || (defined(__linux__) && (defined(__s390__) || defined(__s390x__)))
+#define USE_ZOS
 #endif
 #endif
 
@@ -98,6 +104,9 @@ enum {
 #ifdef USE_DOS
 # include "encodings_dos.def"
 #endif
+#ifdef USE_ZOS
+# include "encodings_zos.def"
+#endif
 #ifdef USE_EXTRA
 # include "encodings_extra.def"
 #endif
@@ -118,6 +127,9 @@ static struct encoding const all_encodings[] = {
 #endif
 #ifdef USE_DOS
 # include "encodings_dos.def"
+#endif
+#ifdef USE_ZOS
+# include "encodings_zos.def"
 #endif
 #ifdef USE_EXTRA
 # include "encodings_extra.def"
@@ -159,7 +171,7 @@ static struct encoding const all_encodings[] = {
  * Defines
  *   const struct alias * aliases2_lookup (const char *str);
  */
-#if defined(USE_AIX) || defined(USE_OSF1) || defined(USE_DOS) || defined(USE_EXTRA) /* || ... */
+#if defined(USE_AIX) || defined(USE_OSF1) || defined(USE_DOS) || defined(USE_ZOS) || defined(USE_EXTRA) /* || ... */
 struct stringpool2_t {
 #define S(tag,name,encoding_index) char stringpool_##tag[sizeof(name)];
 #include "aliases2.h"
@@ -471,6 +483,9 @@ static const unsigned short all_canonical[] = {
 #endif
 #ifdef USE_DOS
 # include "canonical_dos.h"
+#endif
+#ifdef USE_ZOS
+# include "canonical_zos.h"
 #endif
 #ifdef USE_EXTRA
 # include "canonical_extra.h"

@@ -197,6 +197,60 @@ check-extra-yes: all table-from table-to ../src/iconv_no_i18n
 	$(SHELL) $(srcdir)/check-stateless $(srcdir) CP865
 	$(SHELL) $(srcdir)/check-stateless $(srcdir) CP869
 	$(SHELL) $(srcdir)/check-stateless $(srcdir) CP1125
+#	/* z/OS specific encodings, i.e. EBCDIC encodings */
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-037
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-273
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-277
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-278
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-280
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-282
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-284
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-285
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-297
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-423
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-424
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-425
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-500
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-838
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-870
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-871
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-875
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-880
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-905
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-924
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1025
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1026
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1047
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1097
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1112
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1122
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1123
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1130
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1132
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1137
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1140
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1141
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1142
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1143
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1144
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1145
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1146
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1147
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1148
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1149
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1153
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1154
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1155
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1156
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1157
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1158
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1160
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1164
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1165
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-1166
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-4971
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-12712
+	$(SHELL) $(srcdir)/check-stateless $(srcdir) IBM-16804
 #	/* Extra encodings */
 	$(SHELL) $(srcdir)/check-stateless $(srcdir) EUC-JISX0213
 	$(SHELL) $(srcdir)/check-stateless $(srcdir) SHIFT_JISX0213

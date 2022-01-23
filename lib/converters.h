@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002, 2004-2011, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002, 2004-2011, 2016, 2022 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -288,6 +288,62 @@ typedef struct {
 #include "cp865.h"
 #include "cp869.h"
 #include "cp1125.h"
+#endif
+
+#ifdef USE_ZOS
+#include "ebcdic037.h"
+#include "ebcdic273.h"
+#include "ebcdic277.h"
+#include "ebcdic278.h"
+#include "ebcdic280.h"
+#include "ebcdic282.h"
+#include "ebcdic284.h"
+#include "ebcdic285.h"
+#include "ebcdic297.h"
+#include "ebcdic423.h"
+#include "ebcdic424.h"
+#include "ebcdic425.h"
+#include "ebcdic500.h"
+#include "ebcdic838.h"
+#include "ebcdic870.h"
+#include "ebcdic871.h"
+#include "ebcdic875.h"
+#include "ebcdic880.h"
+#include "ebcdic905.h"
+#include "ebcdic924.h"
+#include "ebcdic1025.h"
+#include "ebcdic1026.h"
+#include "ebcdic1047.h"
+#include "ebcdic1097.h"
+#include "ebcdic1112.h"
+#include "ebcdic1122.h"
+#include "ebcdic1123.h"
+#include "ebcdic1130.h"
+#include "ebcdic1132.h"
+#include "ebcdic1137.h"
+#include "ebcdic1140.h"
+#include "ebcdic1141.h"
+#include "ebcdic1142.h"
+#include "ebcdic1143.h"
+#include "ebcdic1144.h"
+#include "ebcdic1145.h"
+#include "ebcdic1146.h"
+#include "ebcdic1147.h"
+#include "ebcdic1148.h"
+#include "ebcdic1149.h"
+#include "ebcdic1153.h"
+#include "ebcdic1154.h"
+#include "ebcdic1155.h"
+#include "ebcdic1156.h"
+#include "ebcdic1157.h"
+#include "ebcdic1158.h"
+#include "ebcdic1160.h"
+#include "ebcdic1164.h"
+#include "ebcdic1165.h"
+#include "ebcdic1166.h"
+#include "ebcdic4971.h"
+#include "ebcdic12712.h"
+#include "ebcdic16804.h"
 #endif
 
 #ifdef USE_EXTRA

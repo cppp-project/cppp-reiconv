@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002, 2005-2006, 2008-2009, 2016 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2002, 2005-2006, 2008-2009, 2016, 2022 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -31,6 +31,7 @@
 #define USE_AIX
 #define USE_OSF1
 #define USE_DOS
+#define USE_ZOS
 #define USE_EXTRA
 
 struct loop_funcs {};
@@ -109,6 +110,7 @@ int main ()
 #include "encodings_aix.def"
 #include "encodings_osf1.def"
 #include "encodings_dos.def"
+#include "encodings_zos.def"
 #include "encodings_extra.def"
 #undef DEFALIAS
 #undef DEFENCODING
