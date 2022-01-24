@@ -291,6 +291,7 @@ typedef struct {
 #endif
 
 #ifdef USE_ZOS
+#define DEDUPLICATE_TABLES 1
 #include "ebcdic037.h"
 #include "ebcdic273.h"
 #include "ebcdic277.h"

@@ -1,5 +1,25 @@
 2022-01-23  Bruno Haible  <bruno@clisp.org>
 
+	Optimize the EBCDIC table sizes.
+	* lib/converters.h (DEDUPLICATE_TABLES): New macro.
+	* lib/ebcdic1025.h: Deduplicate tables with ebcdic880.h.
+	* lib/ebcdic1123.h: Deduplicate tables with ebcdic1025.h.
+	* lib/ebcdic1132.h: Deduplicate tables with ebcdic838.h.
+	* lib/ebcdic1153.h: Deduplicate tables with ebcdic870.h.
+	* lib/ebcdic1154.h: Deduplicate tables with ebcdic880.h.
+	* lib/ebcdic1155.h: Deduplicate tables with ebcdic1026.h.
+	* lib/ebcdic1156.h: Deduplicate tables with ebcdic1112.h.
+	* lib/ebcdic1157.h: Deduplicate tables with ebcdic1122.h.
+	* lib/ebcdic1158.h: Deduplicate tables with ebcdic1154.h, ebcdic1123.h.
+	* lib/ebcdic1160.h: Deduplicate tables with ebcdic838.h.
+	* lib/ebcdic1164.h: Deduplicate tables with ebcdic1130.h.
+	* lib/ebcdic1165.h: Deduplicate tables with ebcdic870.h.
+	* lib/ebcdic1166.h: Deduplicate tables with ebcdic1154.h.
+	* lib/ebcdic4971.h: Deduplicate tables with ebcdic875.h.
+	* lib/ebcdic12712.h: Deduplicate tables with ebcdic424.h.
+
+2022-01-23  Bruno Haible  <bruno@clisp.org>
+
 	New EBCDIC encodings.
 	Reported by Ulrich Schwab and Calvin Buckley via Jack Woehr.
 	* NOTES: Mention how to enable EBCDIC encodings.
