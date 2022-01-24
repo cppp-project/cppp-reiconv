@@ -434,20 +434,22 @@ autom4te.cache/
 /srclib/*.stackdump
 /srclib/alloca.h
 /srclib/alloca.h-t
-/srclib/errno.h
-/srclib/errno.h-t
-/srclib/fcntl.h
-/srclib/fcntl.h-t
-/srclib/limits.h
-/srclib/limits.h-t
-/srclib/signal.h
-/srclib/signal.h-t
 /srclib/arg-nonnull.h
 /srclib/arg-nonnull.h-t
 /srclib/c++defs.h
 /srclib/c++defs.h-t
-/srclib/warn-on-use.h
-/srclib/warn-on-use.h-t
+/srclib/errno.h
+/srclib/errno.h-t
+/srclib/fcntl.h
+/srclib/fcntl.h-t
+/srclib/inttypes.h
+/srclib/inttypes.h-t
+/srclib/limits.h
+/srclib/limits.h-t
+/srclib/malloc/scratch_buffer.gl.h
+/srclib/malloc/scratch_buffer.gl.h-t
+/srclib/signal.h
+/srclib/signal.h-t
 /srclib/stdbool.h
 /srclib/stdbool.h-t
 /srclib/stddef.h
@@ -474,6 +476,10 @@ autom4te.cache/
 /srclib/unitypes.h-t
 /srclib/uniwidth.h
 /srclib/uniwidth.h-t
+/srclib/warn-on-use.h
+/srclib/warn-on-use.h-t
+/srclib/wchar.h
+/srclib/wchar.h-t
 # Erased by src/Makefile.
 /src/*.o
 /src/*.lo
@@ -499,6 +505,8 @@ autom4te.cache/
 # Erased by tests/Makefile.
 /tests/*.o
 /tests/*.lo
+/tests/is-native
+/tests/is-native.exe
 /tests/table-from
 /tests/table-from.exe
 /tests/table-to
