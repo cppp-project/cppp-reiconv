@@ -1,5 +1,10 @@
 2022-01-23  Bruno Haible  <bruno@clisp.org>
 
+	Update NEWS.
+	* NEWS: Mention the EBCDIC encodings.
+
+2022-01-23  Bruno Haible  <bruno@clisp.org>
+
 	Optimize the EBCDIC table sizes.
 	* lib/converters.h (DEDUPLICATE_TABLES): New macro.
 	* lib/ebcdic1025.h: Deduplicate tables with ebcdic880.h.
