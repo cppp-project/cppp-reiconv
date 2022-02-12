@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2011, 2016, 2018-2021 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2011, 2016, 2018-2022 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -16,7 +16,7 @@ dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
 dnl If not, see <https://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.64])
-AC_INIT([libiconv], [1.16])
+AC_INIT([libiconv], [1.17])
 AC_CONFIG_SRCDIR([lib/iconv.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE

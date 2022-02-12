@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2009, 2011-2012, 2016-2019 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2022 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -196,7 +196,7 @@ static void print_version (void)
 {
   printf("iconv (GNU libiconv %d.%d)\n",
          _libiconv_version >> 8, _libiconv_version & 0xff);
-  printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2019");
+  printf("Copyright (C) %s Free Software Foundation, Inc.\n", "2000-2022");
   /* xgettext: no-wrap */
   /* TRANSLATORS: The %s placeholder is the web address of the GPL license.  */
   printf (_("\

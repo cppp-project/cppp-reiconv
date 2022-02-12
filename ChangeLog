@@ -1,5 +1,16 @@
 2022-02-12  Bruno Haible  <bruno@clisp.org>
 
+	Prepare for version 1.17.
+	* configure.ac: Bump version number to 1.17.
+	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 9:0:7.
+	* src/iconv.c (print_version): Update copyright year.
+	* windows/iconv.rc: Likewise.
+	* windows/libiconv.rc: Likewise.
+	* README: Update download link.
+
+2022-02-12  Bruno Haible  <bruno@clisp.org>
+
 	Update source file list (regression 2022-01-23).
 	* lib/Makefile.in (SOURCE_FILES): Add encodings_zos.def, ebcdic*.h.
 	(GENERATED_FILES): Add aliases_zos.h, canonical_zos.h.
@@ -233,7 +244,7 @@
 2019-04-26  Bruno Haible  <bruno@clisp.org>
 
 	Prepare for version 1.16.
-	* configure.ac: Bump version number to 1.15.
+	* configure.ac: Bump version number to 1.16.
 	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
 	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 8:1:6.
 	* src/iconv.c (print_version): Update copyright year.

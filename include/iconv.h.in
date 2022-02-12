@@ -1,4 +1,4 @@
-/* Copyright (C) 1999-2019 Free Software Foundation, Inc.
+/* Copyright (C) 1999-2022 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -20,7 +20,7 @@
 #ifndef _LIBICONV_H
 #define _LIBICONV_H
 
-#define _LIBICONV_VERSION 0x0110    /* version number: (major<<8) + minor */
+#define _LIBICONV_VERSION 0x0111    /* version number: (major<<8) + minor */
 extern @DLL_VARIABLE@ int _libiconv_version; /* Likewise */
 
 /* We would like to #include any system header file which could define
