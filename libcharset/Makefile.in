@@ -70,12 +70,12 @@ clean : force
 
 distclean : force
 	cd lib && if test -f Makefile; then $(MAKE) distclean; fi
-	$(RM) include/libcharset.h include/localcharset.h include/localcharset.h.inst
+	$(RM) include/libcharset.h include/libcharset.h.inst include/localcharset.h include/localcharset.h.inst
 	$(RM) config.status config.log config.cache Makefile config.h libtool
 
 maintainer-clean : force
 	cd lib && if test -f Makefile; then $(MAKE) maintainer-clean; fi
-	$(RM) include/libcharset.h include/localcharset.h include/localcharset.h.inst
+	$(RM) include/libcharset.h include/libcharset.h.inst include/localcharset.h include/localcharset.h.inst
 	$(RM) config.status config.log config.cache Makefile config.h libtool
 
 # List of source files.

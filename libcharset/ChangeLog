@@ -1,3 +1,9 @@
+2022-02-12  Bruno Haible  <bruno@clisp.org>
+
+	build: Remove leftover file (regression 2019-06-30).
+	* Makefile.in (distclean, maintainer-clean): Remove
+	include/libcharset.h.inst.
+
 2021-02-07  Bruno Haible  <bruno@clisp.org>
 
 	Support creating shared libraries on MidnightBSD.
