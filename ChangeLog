@@ -1,5 +1,11 @@
 2022-02-12  Bruno Haible  <bruno@clisp.org>
 
+	Update translations.
+	* po/ro.po: Update Romanian translations.
+	* po/wa.po: Update Walloon translations.
+
+2022-02-12  Bruno Haible  <bruno@clisp.org>
+
 	Prepare for version 1.17.
 	* configure.ac: Bump version number to 1.17.
 	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.

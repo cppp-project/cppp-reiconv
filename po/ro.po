@@ -1,26 +1,39 @@
-# Mesajele în limba românã pentru pachetul libiconv.
+# Mesajele Ã®n limba romÃ¢nÄƒ pentru pachetul libiconv.
 # Copyright (C) 2003 Free Software Foundation, Inc.
+# This file is distributed under the same license as the libiconv package.
+#
 # Eugen Hoanca <eugenh@urban-grafx.ro>, 2003.
-# Acest fiºier este distribuit sub aceeaºi licenşã ca ºi pachetul libiconv
+# Traducere fÄƒcutÄƒ de EH, pentru versiunea libiconv 1.9.1.
+# Acest fiÈ™ier este distribuit sub aceeaÈ™i licenÈ›Äƒ ca È™i pachetul libiconv
+# Actualizare a mesajelor, de la fiÈ™ierul â€libiconv-1.15-pre1.potâ€.
+# Actualizare a codÄƒrii caracteror, la codarea de caractere UTF-8.
+# Actualizare a diacriticelor de la â€cu sedilÄƒâ€ la â€cu virgulÄƒâ€.
+# Actualizare a algoritmului formelor de plural (de la â€douÄƒâ€ la â€treiâ€).
+# NU È™i a mesajelor traduse (acestea au rÄƒmas neschimbate).
+# Eliminare a mesajelor ce-au dispÄƒrut Ã®n ultima versiune.
+# ActualizÄƒri realizate de Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 15.01.2022.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv-1.9.1\n"
+"Project-Id-Version: libiconv-1.15-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2003-05-17 15:15+0300\n"
-"Last-Translator: Eugen Hoanca <eugenh@urban-grafx.ro>\n"
+"PO-Revision-Date: 2022-01-24 00:09+0100\n"
+"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #. TRANSLATORS: The first line of the short usage message.
 #: src/iconv.c:104
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr "Folosire: iconv [-c] [-s] [-f din_cod] [-t în_cod] [fiºier ...]"
+msgstr "Folosire: iconv [-c] [-s] [-f din_cod] [-t Ã®n_cod] [fiÈ™ier ...]"
 
 #. TRANSLATORS: The second line of the short usage message.
 #. Align it correctly against the first line.
@@ -45,7 +58,6 @@ msgstr ""
 #. The %s placeholder expands to the program name.
 #: src/iconv.c:122
 #, fuzzy, c-format, no-wrap
-#| msgid "or:    iconv -l"
 msgid "or:    %s -l\n"
 msgstr "sau:   iconv -l"
 
@@ -219,6 +231,7 @@ msgid_plural ""
 "%s argument: The format string consumes more than one argument: %u arguments."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #. TRANSLATORS: An error message.
 #. The %s placeholder expands to a piece of text, specified through --byte-subst.
@@ -259,7 +272,6 @@ msgstr ""
 #. The placeholders expand to the input file name, a line number, and a column number.
 #: src/iconv.c:644
 #, fuzzy, c-format
-#| msgid "iconv: %s: cannot convert\n"
 msgid "%s:%u:%u: cannot convert"
 msgstr "iconv: %s: nu pot converti\n"
 
@@ -269,9 +281,8 @@ msgstr "iconv: %s: nu pot converti\n"
 #. this concept exists only for "stateful" encodings like ISO-2022-JP.
 #: src/iconv.c:658
 #, fuzzy, c-format
-#| msgid "iconv: %s: incomplete character or shift sequence\n"
 msgid "%s:%u:%u: incomplete character or shift sequence"
-msgstr "iconv: %s: caracter sau secvenşã de shift incomplete\n"
+msgstr "iconv: %s: caracter sau secvenÈ›Äƒ de shift incomplete\n"
 
 #. TRANSLATORS: The first part of an error message.
 #. It is followed by a colon and a detail message.
@@ -285,7 +296,6 @@ msgstr ""
 #. The placeholder expands to the input file name.
 #: src/iconv.c:832
 #, fuzzy, c-format
-#| msgid "iconv: %s: I/O error\n"
 msgid "%s: I/O error"
 msgstr "iconv: %s: erori I/O\n"
 
@@ -293,25 +303,22 @@ msgstr "iconv: %s: erori I/O\n"
 #. The placeholder expands to the encoding name, specified through --from-code.
 #: src/iconv.c:1030
 #, fuzzy, c-format
-#| msgid "iconv: conversion from %s unsupported\n"
 msgid "conversion from %s unsupported"
-msgstr "iconv: conversia din %s nu este suportatã\n"
+msgstr "iconv: conversia din %s nu este suportatÄƒ\n"
 
 #. TRANSLATORS: An error message.
 #. The placeholder expands to the encoding name, specified through --to-code.
 #: src/iconv.c:1036
 #, fuzzy, c-format
-#| msgid "iconv: conversion to %s unsupported\n"
 msgid "conversion to %s unsupported"
-msgstr "iconv: conversia în %s nu este suportatã\n"
+msgstr "iconv: conversia Ã®n %s nu este suportatÄƒ\n"
 
 #. TRANSLATORS: An error message.
 #. The placeholders expand to the encoding names, specified through --from-code and --to-code, respectively.
 #: src/iconv.c:1042
 #, fuzzy, c-format
-#| msgid "iconv: conversion from %s to %s unsupported\n"
 msgid "conversion from %s to %s unsupported"
-msgstr "iconv: conversia din %s în %s nu este suportatã\n"
+msgstr "iconv: conversia din %s Ã®n %s nu este suportatÄƒ\n"
 
 #. TRANSLATORS: Additional advice after an error message.
 #. The %s placeholder expands to the program name.
@@ -336,27 +343,5 @@ msgstr ""
 #. TRANSLATORS: An error message.
 #: src/iconv.c:1130
 #, fuzzy, c-format
-#| msgid "iconv: I/O error\n"
 msgid "I/O error"
 msgstr "iconv: eroare I/O\n"
-
-#~ msgid ""
-#~ "Usage: iconv [--binary] [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-#~ msgstr ""
-#~ "Folosire: iconv [--binary] [-c] [-s] [-f din_cod] [-t în_cod] [fiºier ...]"
-
-#, fuzzy
-#~ msgid ""
-#~ "This is free software; see the source for copying conditions.  There is "
-#~ "NO\n"
-#~ "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR "
-#~ "PURPOSE.\n"
-#~ msgstr ""
-#~ "Acesta este software free; citişi surselepentru condişiile de copiere. "
-#~ "NU\n"
-#~ "existã nici o garanşie; nici mãcarVANDABILITATEA sau MODIFICAREA ÎNTR-UN\n"
-#~ "SCOP PRIVAT.\n"
-
-#, c-format
-#~ msgid "iconv: %s: "
-#~ msgstr "iconv: %s: "
