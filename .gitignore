@@ -109,6 +109,7 @@
 /srclib/stdbool.in.h
 /srclib/stddef.in.h
 /srclib/stdint.in.h
+/srclib/stdio-read.c
 /srclib/stdio-write.c
 /srclib/stdio.in.h
 /srclib/stdlib.in.h
