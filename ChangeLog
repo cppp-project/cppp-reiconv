@@ -1,3 +1,8 @@
+2022-04-13  Bruno Haible  <bruno@clisp.org>
+
+	Fix undefined behaviour.
+	* tests/test-shiftseq.c (main2): Make input array larger.
+
 2022-02-12  Bruno Haible  <bruno@clisp.org>
 
 	Update translations.

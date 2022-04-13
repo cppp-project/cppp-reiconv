@@ -1,4 +1,4 @@
-/* Copyright (C) 2008, 2018 Free Software Foundation, Inc.
+/* Copyright (C) 2008, 2018, 2022 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -64,7 +64,7 @@ void main1 (void)
 
 void main2 (void)
 {
-  static const char input[] = "+2D/YQNhB";
+  static const char input[20] = "+2D/YQNhB";
   iconv_t cd;
   char buf[20];
 
