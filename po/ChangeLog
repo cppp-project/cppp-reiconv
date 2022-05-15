@@ -1,5 +1,13 @@
 2022-05-15  Bruno Haible  <bruno@clisp.org>
 
+	Use the newest gettext release.
+	* Makefile.in.in: Upgrade to gettext-0.21, keeping the change
+		2019-01-27  Bruno Haible  <bruno@clisp.org>
+		Accommodate a shell that is not in /bin/sh.
+		* Makefile.in.in (SHELL): Use the value found by configure.
+
+2022-05-15  Bruno Haible  <bruno@clisp.org>
+
 	Update translations.
 	* *.po: Update from TP, with 'msgmerge --previous'.
 	* LINGUAS: Add ko.
