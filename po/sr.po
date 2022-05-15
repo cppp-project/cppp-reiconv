@@ -2,13 +2,13 @@
 # Copyright © 2017 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
 # Aleksandar Jelenak <jelenak@verizon.net>, 2006.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2017.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012–2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv-1.15-pre1\n"
+"Project-Id-Version: libiconv-1.17-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2017-01-27 06:37+0200\n"
+"PO-Revision-Date: 2022-02-15 20:43+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
@@ -153,20 +153,18 @@ msgid ""
 "Report bugs in the bug tracker at <%s>\n"
 "or by email to <%s>.\n"
 msgstr ""
+"Грешке пријавите на пратиоцу грешака на <%s>\n"
+"или е-поштом на <%s>.\n"
 
 #. TRANSLATORS: The %s placeholder is the web address of the GPL license.
 #: src/iconv.c:202
-#, fuzzy, c-format, no-wrap
-#| msgid ""
-#| "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n"
-#| "This is free software: you are free to change and redistribute it.\n"
-#| "There is NO WARRANTY, to the extent permitted by law.\n"
+#, c-format, no-wrap
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <%s>\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"Лиценца ОЈЛв3+: ГНУ ОЈЛ издање 3 или новије <http://gnu.org/licenses/gpl.html>.\n"
+"Лиценца ОЈЛв3+: ГНУ ОЈЛ издање 3 или новије <%s>.\n"
 "Ово је слободан софтвер: слободни сте да га мењате и расподељујете.\n"
 "Не постоји НИКАКВА ГАРАНЦИЈА, у оквирима дозвољеним законом.\n"
 

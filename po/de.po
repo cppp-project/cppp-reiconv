@@ -2,15 +2,15 @@
 # German messages for GNU libiconv.
 # Copyright (C) 2002, 2006, 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
-# Bruno Haible <bruno@clisp.org>, 2002, 2006, 2008.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2016.
 #
+# Bruno Haible <bruno@clisp.org>, 2002, 2006, 2008.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2016, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU libiconv 1.15-pre1\n"
+"Project-Id-Version: GNU libiconv 1.17-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2016-12-12 16:23+0100\n"
+"PO-Revision-Date: 2022-02-13 13:28+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
 "Language: de\n"
@@ -19,14 +19,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Lokalize 21.12.2\n"
 
 #. TRANSLATORS: The first line of the short usage message.
 #: src/iconv.c:104
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
 msgstr ""
-"Aufruf: iconv [-c] [-s] [-f AUSGANGS-KODIERUNG] [-t ZIEL-KODIERUNG] "
-"[DATEI ...]"
+"Aufruf: iconv [-c] [-s] [-f AUSGANGS-KODIERUNG] [-t ZIEL-KODIERUNG] [DATEI …]"
 
 #. TRANSLATORS: The second line of the short usage message.
 #. Align it correctly against the first line.
@@ -44,7 +43,7 @@ msgstr "»%s --help« gibt weitere Informationen.\n"
 #: src/iconv.c:115
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"
-msgstr "Aufruf: %s [OPTION...] [-f KODIERUNG] [-t KODIERUNG] [EINBABEDATEI...]\n"
+msgstr "Aufruf: %s [OPTION...] [-f KODIERUNG] [-t KODIERUNG] [EINBABEDATEI …]\n"
 
 #. TRANSLATORS: The second line of the long usage message.
 #. Align it correctly against the first line.
@@ -166,20 +165,18 @@ msgid ""
 "Report bugs in the bug tracker at <%s>\n"
 "or by email to <%s>.\n"
 msgstr ""
+"Melden Sie Fehler im Fehlererfassungssystem auf <%s>\n"
+"oder per E-Mail an <%s>.\n"
 
 #. TRANSLATORS: The %s placeholder is the web address of the GPL license.
 #: src/iconv.c:202
-#, fuzzy, c-format, no-wrap
-#| msgid ""
-#| "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n"
-#| "This is free software: you are free to change and redistribute it.\n"
-#| "There is NO WARRANTY, to the extent permitted by law.\n"
+#, c-format, no-wrap
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <%s>\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"Lizenz: GPLv3+, d.h. GNU GPL ab Version 3 <http://gnu.org/licenses/gpl.html>\n"
+"Lizenz: GPLv3+, d.h. GNU GPL ab Version 3 <%s>\n"
 "Dieses Programm ist freie Software: Sie dürfen es ändern und weitergeben.\n"
 "Es gibt KEINERLEI GARANTIE, so weit das Gesetz es erlaubt.\n"
 

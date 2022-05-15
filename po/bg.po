@@ -1,14 +1,14 @@
 # Bulgarian translation of libiconv po-file.
 # Copyright (C) 2008, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
-# Roumen Petrov <transl@roumenpetrov.info>, 2008, 2009, 2016.
+# Roumen Petrov <transl@roumenpetrov.info>, 2008, 2009, 2016, 2022.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.15-pre1\n"
+"Project-Id-Version: libiconv 1.17-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2016-12-12 23:42+0200\n"
+"PO-Revision-Date: 2022-02-13 12:27+0200\n"
 "Last-Translator: Roumen Petrov <transl@roumenpetrov.info>\n"
 "Language-Team: Bulgarian <dict@ludost.net>\n"
 "Language: bg\n"
@@ -159,20 +159,19 @@ msgid ""
 "Report bugs in the bug tracker at <%s>\n"
 "or by email to <%s>.\n"
 msgstr ""
+"Подавайте доклади за грешки на <%s>\n"
+"или с е-поща до <%s>, а за грешки в превода\n"
+"докладвайте с писмо до <dict@ludost.net>.\n"
 
 #. TRANSLATORS: The %s placeholder is the web address of the GPL license.
 #: src/iconv.c:202
-#, fuzzy, c-format, no-wrap
-#| msgid ""
-#| "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n"
-#| "This is free software: you are free to change and redistribute it.\n"
-#| "There is NO WARRANTY, to the extent permitted by law.\n"
+#, c-format, no-wrap
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <%s>\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"Разрешително GPLv3+: Версия 3 на GNU GPL или следваща <http://gnu.org/licenses/gpl.html>\n"
+"Разрешително GPLv3+: Версия 3 на GNU GPL или следваща <%s>\n"
 "Това е свободен програмен продукт: свободни сте да го променяте и разпространя-\n"
 "вате.  Не се дават НИКАКВИ ГАРАНЦИИ до степента позволена от закона.\n"
 

@@ -1,16 +1,16 @@
 # Czech translation for libiconv.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
-# Petr Pisar <petr.pisar@atlas.cz>, 2009, 2016, 2018.
+# Petr Pisar <petr.pisar@atlas.cz>, 2009, 2016, 2018, 2022.
 #
 # Založeno na doméně libc.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.15-pre1\n"
+"Project-Id-Version: libiconv 1.17-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2018-11-01 21:16+01:00\n"
+"PO-Revision-Date: 2022-02-13 22:29+01:00\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -157,20 +157,20 @@ msgid ""
 "Report bugs in the bug tracker at <%s>\n"
 "or by email to <%s>.\n"
 msgstr ""
+"Chyby hlaste anglicky do systému pro sledování chyb na <%s>\n"
+"nebo e-mailem na <%s>.\n"
+"Chyby v překladu hlaste na <translation-team-cs@lists.sourceforge.net> "
+"(česky).\n"
 
 #. TRANSLATORS: The %s placeholder is the web address of the GPL license.
 #: src/iconv.c:202
-#, fuzzy, c-format, no-wrap
-#| msgid ""
-#| "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n"
-#| "This is free software: you are free to change and redistribute it.\n"
-#| "There is NO WARRANTY, to the extent permitted by law.\n"
+#, c-format, no-wrap
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <%s>\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"Licence GPLv3+: GNU GPL verze 3 nebo novější <http://gnu.org/licenses/gpl.html>\n"
+"Licence GPLv3+: GNU GPL verze 3 nebo novější <%s>\n"
 "Toto je svobodné programové vybavení: můžete jej měnit a šířit.\n"
 "Není poskytována ŽÁDNÁ ZÁRUKA, jak jen zákon dovoluje.\n"
 

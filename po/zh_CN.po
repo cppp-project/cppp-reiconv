@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the libiconv package.
 # Wang Jian <lark@linux.net.cn>, 2003
 # Ji ZhengYu <zhengyuji@gmail.com>, 2008
-# Boyuan Yang <073plan@gmail.com>, 2018
+# Boyuan Yang <073plan@gmail.com>, 2018, 2022
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.15-pre1\n"
+"Project-Id-Version: libiconv 1.17-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2018-09-24 17:23-0400\n"
+"PO-Revision-Date: 2022-02-13 11:40-0500\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.4.3\n"
 
 #. TRANSLATORS: The first line of the short usage message.
 #: src/iconv.c:104
@@ -154,22 +154,21 @@ msgid ""
 "Report bugs in the bug tracker at <%s>\n"
 "or by email to <%s>.\n"
 msgstr ""
+"请将软件错误提交至 bug 跟踪系统 <%s>\n"
+"或发送电子邮件到 <%s>。\n"
+"请将翻译错误报告至简体中文邮件列表 <i18n-zh@googlegroups.com>。\n"
 
 #. TRANSLATORS: The %s placeholder is the web address of the GPL license.
 #: src/iconv.c:202
-#, fuzzy, c-format, no-wrap
-#| msgid ""
-#| "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n"
-#| "This is free software: you are free to change and redistribute it.\n"
-#| "There is NO WARRANTY, to the extent permitted by law.\n"
+#, c-format, no-wrap
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <%s>\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"GPLv3+ 许可证：GNU GPL 版本 3 或更高版本 <https://gnu.org/licenses/gpl.html>\n"
-"此软件为自由软件: 您可对其自由修改并重新发布。\n"
-"在法律所允许的范围内，没有任何担保。\n"
+"授权 GPLv3+: GNU GPL 第三版或后续版本 <%s>\n"
+"此软件为自由软件：您可对其自由修改并重新发布。\n"
+"在法律所允许的范围内不做任何担保。\n"
 
 #. TRANSLATORS: The %s placeholder expands to an author's name.
 #: src/iconv.c:208

@@ -1,14 +1,14 @@
 # Slovak translation of the libiconv.
-# Copyright (C) 2002, 2003, 2008, 2016 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2003, 2008, 2016, 2022 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
-# Marcel Telka <marcel@telka.sk>, 2002, 2003, 2008, 2016.
+# Marcel Telka <marcel@telka.sk>, 2002, 2003, 2008, 2016, 2022.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.15-pre1\n"
+"Project-Id-Version: libiconv 1.17-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2016-12-13 00:02+0100\n"
+"PO-Revision-Date: 2022-02-13 21:15+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "Language: sk\n"
@@ -152,20 +152,20 @@ msgid ""
 "Report bugs in the bug tracker at <%s>\n"
 "or by email to <%s>.\n"
 msgstr ""
+"Chyby oznamujte pomocou nástroja na sledovanie chýb na adrese <%s>\n"
+"alebo elektronickou poštou na adresu <%s> (iba anglicky).\n"
+"Komentáre k slovenskému prekladu zasielajte na adresu <sk-i18n@lists.linux."
+"sk>.\n"
 
 #. TRANSLATORS: The %s placeholder is the web address of the GPL license.
 #: src/iconv.c:202
-#, fuzzy, c-format, no-wrap
-#| msgid ""
-#| "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n"
-#| "This is free software: you are free to change and redistribute it.\n"
-#| "There is NO WARRANTY, to the extent permitted by law.\n"
+#, c-format, no-wrap
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <%s>\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
 msgstr ""
-"Licencia GPLv3+: GNU GPL verzia 3 alebo novšia <http://gnu.org/licenses/gpl.html>\n"
+"Licencia GPLv3+: GNU GPL verzia 3 alebo novšia <%s>\n"
 "Toto je slobodný softvér: môžete ho voľne meniť a šíriť ďalej.\n"
 "Neposkytuje sa ŽIADNA ZÁRUKA, v rozsahu povolenom zákonmi.\n"
 
@@ -362,10 +362,3 @@ msgstr "%s"
 #, c-format
 msgid "I/O error"
 msgstr "V/V chyba"
-
-#~ msgid "Report bugs to <bug-gnu-libiconv@gnu.org>.\n"
-#~ msgstr ""
-#~ "Chyby môžete oznamovať na adresu <bug-gnu-libiconv@gnu.org> (iba "
-#~ "anglicky).\n"
-#~ "Komentáre k slovenskému prekladu zasielajte na adresu <sk-i18n@lists."
-#~ "linux.sk>.\n"

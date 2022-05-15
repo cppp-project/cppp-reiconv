@@ -1,20 +1,20 @@
 # Dutch messages for GNU libiconv.
-# Copyright (C) 2016 Free Software Foundation, Inc.
+# Copyright (C) 2022 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libiconv package.
 #
-# "Things change, and they never go back to what they were before."
+# "Boer doe mij 't hekke lös, anders schijt ik dij in de boekweit."
 #
 # Taco Witte <info@tacowitte.nl>, 2003.
 # Elros Cyriatan <cyriatan@fastmail.fm>, 2003.
 # Tim Van Holder <tim.van.holder@telenet.be>, 2007.
-# Benno Schulenberg <benno@vertaalt.nl>, 2017.
+# Benno Schulenberg <benno@vertaalt.nl>, 2017, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: libiconv 1.15-pre1\n"
+"Project-Id-Version: libiconv 1.17-pre1\n"
 "Report-Msgid-Bugs-To: bug-gnu-libiconv@gnu.org\n"
 "POT-Creation-Date: 2022-02-12 13:29+0100\n"
-"PO-Revision-Date: 2017-01-07 15:41+0100\n"
-"Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
+"PO-Revision-Date: 2022-02-13 16:52+0100\n"
+"Last-Translator: Benno Schulenberg <vertaling@coevern.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -22,18 +22,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.0\n"
 
 #. TRANSLATORS: The first line of the short usage message.
 #: src/iconv.c:104
 msgid "Usage: iconv [-c] [-s] [-f fromcode] [-t tocode] [file ...]"
-msgstr "Gebruik: iconv [-c] [-s] [-f VANCODE] [-t NAARCODE] [BESTAND...]"
+msgstr "Gebruik:  iconv [-c] [-s] [-f VANCODE] [-t NAARCODE] [BESTAND...]"
 
 #. TRANSLATORS: The second line of the short usage message.
 #. Align it correctly against the first line.
 #: src/iconv.c:108
 msgid "or:    iconv -l"
-msgstr "of:    iconv -l"
+msgstr "of:       iconv -l"
 
 #: src/iconv.c:110
 #, c-format
@@ -45,7 +44,7 @@ msgstr "Typ '%s --help' voor meer informatie.\n"
 #: src/iconv.c:115
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION...] [-f ENCODING] [-t ENCODING] [INPUTFILE...]\n"
-msgstr "Gebruik: %s [OPTIE...] [-f CODERING] [-t CODERING] [INVOERBESTAND...]\n"
+msgstr "Gebruik:  %s [OPTIE...] [-f CODERING] [-t CODERING] [INVOERBESTAND...]\n"
 
 #. TRANSLATORS: The second line of the long usage message.
 #. Align it correctly against the first line.
@@ -53,7 +52,7 @@ msgstr "Gebruik: %s [OPTIE...] [-f CODERING] [-t CODERING] [INVOERBESTAND...]\n"
 #: src/iconv.c:122
 #, c-format, no-wrap
 msgid "or:    %s -l\n"
-msgstr "of:    %s -l\n"
+msgstr "of:       %s -l\n"
 
 # Weet niet of "codering" herhaald hoeft te worden.
 #. TRANSLATORS: Description of the iconv program.
@@ -140,7 +139,7 @@ msgstr "  -l, --list                  een lijst van ondersteunde coderingen tone
 #: src/iconv.c:175
 #, c-format, no-wrap
 msgid "  --help                      display this help and exit\n"
-msgstr "  --help                      deze hulptekst tonen stoppen\n"
+msgstr "  --help                      deze hulptekst tonen en stoppen\n"
 
 #: src/iconv.c:178
 #, c-format, no-wrap
@@ -158,14 +157,13 @@ msgid ""
 "Report bugs in the bug tracker at <%s>\n"
 "or by email to <%s>.\n"
 msgstr ""
+"Rapporteer gebreken in het programma via <%s>\n"
+"of via een e-mail aan <%s>;\n"
+"meld fouten in de vertaling aan <vertaling@vrijschrift.org>.\n"
 
 #. TRANSLATORS: The %s placeholder is the web address of the GPL license.
 #: src/iconv.c:202
-#, fuzzy, c-format, no-wrap
-#| msgid ""
-#| "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n"
-#| "This is free software: you are free to change and redistribute it.\n"
-#| "There is NO WARRANTY, to the extent permitted by law.\n"
+#, c-format, no-wrap
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <%s>\n"
 "This is free software: you are free to change and redistribute it.\n"
@@ -173,7 +171,7 @@ msgid ""
 msgstr ""
 "Dit is vrije software: u mag het vrijelijk wijzigen en verder verspreiden.\n"
 "De precieze licentie is GPL-3+: GNU General Public License versie 3 of later.\n"
-"Zie http://gnu.org/licenses/gpl.html voor de volledige (Engelse) tekst.\n"
+"Zie <%s> voor de volledige (Engelse) tekst.\n"
 "Deze software kent GEEN GARANTIE, voor zover de wet dit toestaat.\n"
 
 #. TRANSLATORS: The %s placeholder expands to an author's name.
