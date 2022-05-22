@@ -147,7 +147,8 @@ maintainer-clean : force
 
 # List of source files.
 SOURCE_FILES = \
-  README DEPENDENCIES INSTALL.windows HACKING AUTHORS NEWS DESIGN NOTES THANKS \
+  README DEPENDENCIES INSTALL.windows HACKING AUTHORS NEWS JOIN-GNU \
+  DESIGN NOTES THANKS \
   ChangeLog Makefile.devel configure.ac Makefile.in \
   include/export.h include/iconv.h.in \
   gnulib-local/lib/alloca.in.h \
