@@ -16,7 +16,7 @@ CP = cp
 RM = rm -f
 
 
-all : srclib/Makefile.gnulib srclib/Makefile.in \
+all : srclib/Makefile.in \
       configures config.h.in \
       include/iconv.h.build.in \
       lib/aliases.h lib/aliases_sysaix.h lib/aliases_syshpux.h lib/aliases_sysosf1.h lib/aliases_syssolaris.h \

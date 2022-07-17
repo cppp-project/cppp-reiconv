@@ -1,3 +1,10 @@
+2022-07-17  Bruno Haible  <bruno@clisp.org>
+
+	Split autogen.sh into autopull.sh and autogen.sh.
+	* autopull.sh: New file.
+	* autogen.sh: Mention it.
+	* HACKING: Likewise.
+
 2022-05-15  Bruno Haible  <bruno@clisp.org>
 
 	Switch to libtool 2.4.7.

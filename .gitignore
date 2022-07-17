@@ -250,7 +250,7 @@
 /libcharset/build-aux/install-sh
 /libcharset/build-aux/mkinstalldirs
 
-# Other files brought in by autogen.sh:
+# Other files brought in by autopull.sh:
 /build-aux/config.guess
 /build-aux/config.sub
 /libcharset/build-aux/config.guess

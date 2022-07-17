@@ -149,7 +149,7 @@ maintainer-clean : force
 SOURCE_FILES = \
   README DEPENDENCIES INSTALL.windows HACKING AUTHORS NEWS JOIN-GNU \
   DESIGN NOTES THANKS \
-  ChangeLog Makefile.devel configure.ac Makefile.in \
+  ChangeLog autogen.sh Makefile.devel configure.ac Makefile.in \
   include/export.h include/iconv.h.in \
   gnulib-local/lib/alloca.in.h \
   gnulib-local/lib/error.h.diff \

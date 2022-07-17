@@ -5,13 +5,10 @@
 # with new versions of autoconf or automake.
 #
 # This script requires autoconf-2.63..2.71 and automake-1.11..1.16 in the PATH.
-# If not used from a released tarball, it also requires either
-#   - the GNULIB_SRCDIR environment variable pointing to a gnulib checkout, or
-#   - a preceding invocation of './gitsub.sh pull'.
 # It also requires
 #   - the gperf program.
 
-# Copyright (C) 2003-2012, 2016, 2018-2021 Free Software Foundation, Inc.
+# Copyright (C) 2003-2012, 2016, 2018-2022 Free Software Foundation, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,57 +23,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Usage: ./autogen.sh [--skip-gnulib]
-
-skip_gnulib=false
-while :; do
-  case "$1" in
-    --skip-gnulib) skip_gnulib=true; shift;;
-    *) break ;;
-  esac
-done
-
-# ========== Copy files from gnulib, automake, or the internet. ==========
-
-if test $skip_gnulib = false; then
-  if test -n "$GNULIB_SRCDIR"; then
-    test -d "$GNULIB_SRCDIR" || {
-      echo "*** GNULIB_SRCDIR is set but does not point to an existing directory." 1>&2
-      exit 1
-    }
-  else
-    GNULIB_SRCDIR=`pwd`/gnulib
-    test -d "$GNULIB_SRCDIR" || {
-      echo "*** Subdirectory 'gnulib' does not yet exist. Use './gitsub.sh pull' to create it, or set the environment variable GNULIB_SRCDIR." 1>&2
-      exit 1
-    }
-  fi
-  # Now it should contain a gnulib-tool.
-  GNULIB_TOOL="$GNULIB_SRCDIR/gnulib-tool"
-  test -f "$GNULIB_TOOL" || {
-    echo "*** gnulib-tool not found." 1>&2
-    exit 1
-  }
-  for file in build-aux/compile build-aux/ar-lib; do
-    $GNULIB_TOOL --copy-file $file || exit $?
-    chmod a+x $file || exit $?
-  done
-  make -f Makefile.devel \
-       gnulib-clean srclib/Makefile.gnulib gnulib-imported-files srclib/Makefile.in \
-       GNULIB_TOOL="$GNULIB_TOOL"
-fi
-
-# Copy files into the libcharset subpackage, so that libcharset/autogen.sh
-# does not need to invoke gnulib-tool nor automake.
-for file in INSTALL.generic; do
-  cp -p $file libcharset/$file || exit $?
-done
-for file in config.guess config.libpath config.sub install-sh libtool-reloc mkinstalldirs; do
-  cp -p build-aux/$file libcharset/build-aux/$file || exit $?
-done
-for file in codeset.m4 fcntl-o.m4 lib-ld.m4 relocatable.m4 relocatable-lib.m4 visibility.m4; do
-  cp -p srcm4/$file libcharset/m4/$file || exit $?
-done
+# Prerequisite (if not used from a released tarball): ./autopull.sh
+# Usage: ./autogen.sh
 
 # ========== Generate files. ==========
 
