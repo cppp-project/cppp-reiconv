@@ -55,7 +55,7 @@ autogen.sh, then run
 Then you can proceed with "./configure" as usual.
 
 Each time you want to update the source, do not only "git pull".  Instead do
-  git pull && ./gitsub.sh pull
+  git pull && ./autopull.sh
   ./autogen.sh
 
 
