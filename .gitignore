@@ -30,6 +30,7 @@
 /srclib/allocator.h
 /srclib/areadlink.c
 /srclib/areadlink.h
+/srclib/assert.in.h
 /srclib/basename-lgpl.c
 /srclib/basename-lgpl.h
 /srclib/binary-io.c
@@ -47,7 +48,7 @@
 /srclib/eloop-threshold.h
 /srclib/errno.in.h
 /srclib/error.c
-/srclib/error.h
+/srclib/error.in.h
 /srclib/fcntl.in.h
 /srclib/fcntl.c
 /srclib/fd-hook.c
@@ -60,14 +61,13 @@
 /srclib/getprogname.h
 /srclib/gettext.h
 /srclib/idx.h
+/srclib/intprops-internal.h
 /srclib/intprops.h
 /srclib/inttypes.in.h
 /srclib/libc-config.h
 /srclib/limits.in.h
 /srclib/localcharset.h
-/srclib/lstat.c
 /srclib/malloc/scratch_buffer.h
-/srclib/malloc/scratch_buffer_dupfree.c
 /srclib/malloc/scratch_buffer_grow.c
 /srclib/malloc/scratch_buffer_grow_preserve.c
 /srclib/malloc/scratch_buffer_set_array_size.c
@@ -105,8 +105,7 @@
 /srclib/stat-time.h
 /srclib/stat-w32.c
 /srclib/stat-w32.h
-/srclib/stdalign.in.h
-/srclib/stdbool.in.h
+/srclib/stdckdint.in.h
 /srclib/stddef.in.h
 /srclib/stdint.in.h
 /srclib/stdio-read.c
@@ -145,7 +144,9 @@
 /srcm4/absolute-header.m4
 /srcm4/alloca.m4
 /srcm4/asm-underscore.m4
+/srcm4/assert_h.m4
 /srcm4/builtin-expect.m4
+/srcm4/c-bool.m4
 /srcm4/canonicalize.m4
 /srcm4/close.m4
 /srcm4/codeset.m4
@@ -155,6 +156,7 @@
 /srcm4/environ.m4
 /srcm4/errno_h.m4
 /srcm4/error.m4
+/srcm4/error_h.m4
 /srcm4/extensions.m4
 /srcm4/extern-inline.m4
 /srcm4/fcntl.m4
@@ -217,7 +219,6 @@
 /srcm4/stat.m4
 /srcm4/std-gnu11.m4
 /srcm4/stdalign.m4
-/srcm4/stdbool.m4
 /srcm4/stddef_h.m4
 /srcm4/stdint.m4
 /srcm4/stdio_h.m4
@@ -236,7 +237,6 @@
 /srcm4/wchar_h.m4
 /srcm4/wchar_t.m4
 /srcm4/wint_t.m4
-/srcm4/year2038.m4
 /srcm4/zzgnulib.m4
 /tests/qemu.h
 # Cached parameters of gnulib-tool:
@@ -437,10 +437,14 @@ autom4te.cache/
 /srclib/alloca.h-t
 /srclib/arg-nonnull.h
 /srclib/arg-nonnull.h-t
+/srclib/assert.h
+/srclib/assert.h-t
 /srclib/c++defs.h
 /srclib/c++defs.h-t
 /srclib/errno.h
 /srclib/errno.h-t
+/srclib/error.h
+/srclib/error.h-t
 /srclib/fcntl.h
 /srclib/fcntl.h-t
 /srclib/inttypes.h
@@ -453,6 +457,8 @@ autom4te.cache/
 /srclib/signal.h-t
 /srclib/stdbool.h
 /srclib/stdbool.h-t
+/srclib/stdckdint.h
+/srclib/stdckdint.h-t
 /srclib/stddef.h
 /srclib/stddef.h-t
 /srclib/stdint.h
