@@ -1,3 +1,11 @@
+2023-02-13  Bruno Haible  <bruno@clisp.org>
+
+	Fix iconv link command for Cygwin.
+	Inspired by https://www.cygwin.com/git-cygwin-packages/?p=git/cygwin-packages/libiconv.git;a=blob;f=1.16-cross-install.patch;h=7b3c5c0d761497a20abf0e4cc38d74f2755445fb;hb=HEAD .
+	Rationale: libintl may depends on libiconv.
+	* src/Makefile.in (install): On the link command line, mention libintl
+	before libiconv.
+
 2023-01-29  Bruno Haible  <bruno@clisp.org>
 
 	Fix a clang warning "a function declaration without a prototype...".
