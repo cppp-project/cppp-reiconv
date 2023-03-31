@@ -1,5 +1,11 @@
 2023-03-31  Bruno Haible  <bruno@clisp.org>
 
+	Make table of transliterations more maintainable.
+	* tools/gen-translit-def-part.lisp: New file.
+	* Makefile.in (SOURCE_FILES): Add it.
+
+2023-03-31  Bruno Haible  <bruno@clisp.org>
+
 	Fix table of transliterations.
 	* lib/translit.def: Sort according to Unicode code point.
 
