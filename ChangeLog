@@ -1,5 +1,12 @@
 2023-03-31  Bruno Haible  <bruno@clisp.org>
 
+	Upgrade transliterations to Unicode 15.0.0.
+	* tools/gen-translit-def-part.lisp: Update comments.
+	* lib/translit.def: Include differences between the generated files
+	translit-part-4.0.0.def and translit-part-15.0.0.def.
+
+2023-03-31  Bruno Haible  <bruno@clisp.org>
+
 	Make table of transliterations more maintainable.
 	* tools/gen-translit-def-part.lisp: New file.
 	* Makefile.in (SOURCE_FILES): Add it.

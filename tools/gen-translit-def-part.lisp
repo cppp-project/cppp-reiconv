@@ -80,4 +80,4 @@
             ) )
 ) ) ) ) ) )
 
-; (generate-part "/home/bruno/notes/UnicodeData-4.0.0.txt" "translit-part-4.0.0.def")
+; (generate-part "/home/bruno/notes/UnicodeData-15.0.0.txt" "translit-part-15.0.0.def")
