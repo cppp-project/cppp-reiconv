@@ -1,3 +1,8 @@
+2023-03-31  Bruno Haible  <bruno@clisp.org>
+
+	Fix table of transliterations.
+	* lib/translit.def: Sort according to Unicode code point.
+
 2023-02-13  Bruno Haible  <bruno@clisp.org>
 
 	Fix iconv link command for Cygwin.
