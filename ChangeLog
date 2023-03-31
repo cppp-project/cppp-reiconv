@@ -1,5 +1,17 @@
 2023-03-31  Bruno Haible  <bruno@clisp.org>
 
+	Add some transliterations for mathematical symbols.
+	Based on <https://sourceware.org/bugzilla/show_bug.cgi?id=23132>
+	and the translit_neutral change in
+	<https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=513aaa0d782f8fae36732d06ca59d658149f0139>.
+	Reported by Mike Fulton <mikefultonpersonal@gmail.com> in
+	<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2023-03/msg00002.html>.
+	* lib/translit.def: Add a couple of transliterations in the range
+	U+27C0..U+29FF.
+	* NEWS: Mention it.
+
+2023-03-31  Bruno Haible  <bruno@clisp.org>
+
 	Upgrade transliterations to Unicode 15.0.0.
 	* tools/gen-translit-def-part.lisp: Update comments.
 	* lib/translit.def: Include differences between the generated files

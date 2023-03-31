@@ -1,3 +1,6 @@
+New in 1.18:
+* Many more transliterations.
+
 New in 1.17:
 * The libiconv library is now licensed under the LGPL version 2.1, instead of
   the LGPL version 2.0. The iconv program continues to be licensed under GPL
