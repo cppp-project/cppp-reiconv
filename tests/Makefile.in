@@ -160,6 +160,8 @@ check : all table-from table-to ../src/iconv_no_i18n is-native test-shiftseq tes
 	$(SHELL) $(srcdir)/check-translitfailure $(srcdir) TranslitFail1 ISO-8859-1 ASCII
 #	/* substitution */
 	$(SHELL) $(srcdir)/check-subst
+#	/* EBCDIC specific functionality */
+	$(SHELL) $(srcdir)/check-ebcdic
 #	/* shift sequence before invalid multibyte character */
 	./test-shiftseq
 #	/* conversion to wchar_t */
@@ -425,6 +427,7 @@ SOURCE_FILES = \
   TranslitFail1.ISO-8859-1 \
   is-native.c \
   check-subst \
+  check-ebcdic \
   test-shiftseq.c \
   test-to-wchar.c \
   CP856.TXT \

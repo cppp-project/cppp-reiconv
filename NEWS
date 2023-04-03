@@ -1,5 +1,11 @@
 New in 1.18:
 * Many more transliterations.
+* When converting from/to an EBCDIC encoding, a non-standard way of
+  converting newlines can be requested
+    - at the C level, by calling iconvctl with argument ICONV_SET_FROM_SURFACE
+      or ICONV_SET_TO_SURFACE, or
+    - from the iconv program, by setting the environment variable
+      ICONV_EBCDIC_ZOS_UNIX to a non-empty value.
 
 New in 1.17:
 * The libiconv library is now licensed under the LGPL version 2.1, instead of
