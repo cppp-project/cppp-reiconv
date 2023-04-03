@@ -1,5 +1,9 @@
 2023-04-03  Bruno Haible  <bruno@clisp.org>
 
+	Fix genflags compilation error.
+	* lib/genflags.c (ICONV_SURFACE_EBCDIC_ZOS_UNIX): New macro, copied from
+	include/iconv.h.in.
+
 	Allow overriding the newline conversion for EBCDIC encodings.
 	Reported by Mike Fulton <mikefultonpersonal@gmail.com> in
 	<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2023-04/msg00009.html>.
