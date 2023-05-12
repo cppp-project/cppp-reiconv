@@ -6,6 +6,8 @@ New in 1.18:
       or ICONV_SET_TO_SURFACE, or
     - from the iconv program, by setting the environment variable
       ICONV_EBCDIC_ZOS_UNIX to a non-empty value.
+* Special support for z/OS: The iconv program adds a charset metadata tag to
+  its output file. (Contributed by Mike Fulton.)
 
 New in 1.17:
 * The libiconv library is now licensed under the LGPL version 2.1, instead of

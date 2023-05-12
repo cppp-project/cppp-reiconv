@@ -1,3 +1,10 @@
+2023-05-12  Bruno Haible  <bruno@clisp.org>
+
+	Integrate the last change.
+	* src/Makefile.in (SOURCE_FILES): Add zos-tag.h.
+	* tests/Makefile.in (SOURCE_FILES): Add check-tag.
+	* NEWS: Mention the new functionality.
+
 2023-05-12  Mike Fulton  <mikefultonpersonal@gmail.com>
 
 	On z/OS, set a charset tag on iconv's output file.

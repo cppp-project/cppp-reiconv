@@ -430,6 +430,7 @@ SOURCE_FILES = \
   is-native.c \
   check-subst \
   check-ebcdic \
+  check-tag \
   test-shiftseq.c \
   test-to-wchar.c \
   CP856.TXT \
