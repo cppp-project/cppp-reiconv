@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2022 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2023 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -42,6 +42,10 @@
 #include "xalloc.h"
 #include "uniwidth.h"
 #include "uniwidth/cjk.h"
+
+#ifdef __MVS__
+#include "zos-tag.h"
+#endif
 
 /* Ensure that iconv_no_i18n does not depend on libintl.  */
 #ifdef NO_I18N
@@ -674,7 +678,7 @@ static void conversion_error_other (int errnum, const char* infilename)
 
 /* Convert the input given in infile.  */
 
-static int convert (iconv_t cd, int infile, const char* infilename)
+static int convert (iconv_t cd, int infile, const char* infilename, _GL_UNUSED const char* tocode)
 {
   char inbuf[4096+4096];
   size_t inbufrest = 0;
@@ -686,6 +690,11 @@ static int convert (iconv_t cd, int infile, const char* infilename)
 
 #if O_BINARY
   SET_BINARY(infile);
+#endif
+#ifdef __MVS__
+  /* Turn off z/OS auto-conversion.  */
+  struct f_cnvrt req = {SETCVTOFF, 0, 0};
+  fcntl(infile, F_CONTROL_CVT, &req);
 #endif
   line = 1; column = 0;
   iconv(cd,NULL,NULL,NULL,NULL);
@@ -835,6 +844,11 @@ static int convert (iconv_t cd, int infile, const char* infilename)
     goto done;
   }
  done:
+#ifdef __MVS__
+  if (!status) {
+    status = tagfile(fileno(stdout), tocode);
+  }
+#endif
   if (outbuf != initial_outbuf)
     free(outbuf);
   return status;
@@ -1113,7 +1127,8 @@ int main (int argc, char* argv[])
     if (i == argc)
       status = convert(cd,fileno(stdin),
                        /* TRANSLATORS: A filename substitute denoting standard input.  */
-                       _("(stdin)"));
+                       _("(stdin)"),
+                       tocode);
     else {
       status = 0;
       for (; i < argc; i++) {
@@ -1129,7 +1144,7 @@ int main (int argc, char* argv[])
                 infilename);
           status = 1;
         } else {
-          status |= convert(cd,fileno(infile),infilename);
+          status |= convert(cd,fileno(infile),infilename,tocode);
           fclose(infile);
         }
       }

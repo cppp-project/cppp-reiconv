@@ -1,3 +1,18 @@
+2023-05-12  Mike Fulton  <mikefultonpersonal@gmail.com>
+
+	On z/OS, set a charset tag on iconv's output file.
+	For the concept of charset tags as external metadata on z/OS files, see
+	<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2023-04/msg00021.html>.
+	* src/zos-tag.h: New file.
+	* src/iconv.c: Include zos-tag.h.
+	(convert): Add a 'tocode' parameter. On z/OS, turn off auto-conversion
+	and tag the output file.
+	(main): Update callers.
+	* tests/check-ebcdic: On z/OS, make all test files initially untagged.
+	* tests/check-tag: New file.
+	* tests/Makefile.in (check): Pass the host_os to check-ebcdic. Invoke
+	check-tag.
+
 2023-04-03  Bruno Haible  <bruno@clisp.org>
 
 	Fix genflags compilation error.

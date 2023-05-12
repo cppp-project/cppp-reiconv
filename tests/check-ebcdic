@@ -1,13 +1,27 @@
 #!/bin/sh
 # Check of ICONV_EBCDIC_ZOS_UNIX environment variable.
 set -e
+host_os="$1"
 iconv=../src/iconv_no_i18n
 
 # This test is only meaningful when the EBCDIC encodings are included.
 if $iconv -l | grep IBM-1047 > /dev/null; then
 
-  printf 'hello\n' > tmp-ok-lf
-  printf 'hello\302\205' > tmp-ok-nel
+  if test "${host_os}" = 'openedition' ; then
+    # On z/OS, make all the files 'untagged'
+    rm -f tmp-ok-lf tmp-ok-nel tmp-ok-x15 tmp-ok-x25
+    touch tmp-ok-lf
+    touch tmp-ok-nel
+    touch tmp-ok-x15
+    touch tmp-ok-x25
+    chtag -r tmp-ok-lf
+    chtag -r tmp-ok-nel
+    chtag -r tmp-ok-x15
+    chtag -r tmp-ok-x25
+  fi
+
+  printf '\150\145\154\154\157\012' > tmp-ok-lf
+  printf '\150\145\154\154\157\302\205' > tmp-ok-nel
 
   printf '\210\205\223\223\226\025' > tmp-ok-x15
   printf '\210\205\223\223\226\045' > tmp-ok-x25
