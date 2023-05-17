@@ -1,3 +1,11 @@
+2023-05-17  Bruno Haible  <bruno@clisp.org>
+
+	On z/OS, allow charset tagging of temporary shell scripts.
+	Reported by Mike Fulton <mikefultonpersonal@gmail.com> in
+	<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2023-05/msg00002.html>.
+	* lib/genaliases.c (BINARY_MODE): New macro.
+	(main): Use it instead of "b".
+
 2023-05-12  Bruno Haible  <bruno@clisp.org>
 
 	Integrate the last change.
