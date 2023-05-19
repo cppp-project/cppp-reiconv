@@ -8,7 +8,7 @@
 # It also requires
 #   - the gperf program.
 
-# Copyright (C) 2003-2012, 2016, 2018-2022 Free Software Foundation, Inc.
+# Copyright (C) 2003-2012, 2016, 2018-2023 Free Software Foundation, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -47,6 +47,22 @@ done
 
 # ========== Copy files from gnulib, automake, or the internet. ==========
 
+# Find GNU Make.
+if test -n "${MAKE}" && test "`${MAKE} --version 2>/dev/null | sed -e 's/ [0-9].*//' -e 1q`" = 'GNU Make'; then
+  GMAKE="${MAKE}"
+else
+  if test "`make --version 2>/dev/null | sed -e 's/ [0-9].*//' -e 1q`" = 'GNU Make'; then
+    GMAKE=make
+  else
+    if test "`gmake --version 2>/dev/null | sed -e 's/ [0-9].*//' -e 1q`" = 'GNU Make'; then
+      GMAKE=gmake
+    else
+      echo "*** - GNU Make not found" 1>&2
+      exit 1
+    fi
+  fi
+fi
+
 if test $skip_gnulib = false; then
   if test -n "$GNULIB_SRCDIR"; then
     test -d "$GNULIB_SRCDIR" || {
@@ -70,9 +86,9 @@ if test $skip_gnulib = false; then
     $GNULIB_TOOL --copy-file $file || exit $?
     chmod a+x $file || exit $?
   done
-  make -f Makefile.devel \
-       gnulib-clean srclib/Makefile.gnulib gnulib-imported-files srclib/Makefile.in \
-       GNULIB_TOOL="$GNULIB_TOOL"
+  $GMAKE -f Makefile.devel \
+         gnulib-clean srclib/Makefile.gnulib gnulib-imported-files srclib/Makefile.in \
+         GNULIB_TOOL="$GNULIB_TOOL"
 fi
 
 # Copy files into the libcharset subpackage, so that libcharset/autogen.sh
@@ -89,7 +105,7 @@ done
 
 # ========== Generate files. ==========
 
-make -f Makefile.devel totally-clean all || exit $?
+$GMAKE -f Makefile.devel totally-clean all || exit $?
 
 (cd libcharset
  ./autogen.sh || exit $?

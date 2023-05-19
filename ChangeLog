@@ -1,3 +1,14 @@
+2023-05-19  Bruno Haible  <bruno@clisp.org>
+
+	Make the compiler used by Makefile.devel customizable.
+	Reported by Mike Fulton <mikefultonpersonal@gmail.com> in
+	<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2023-05/msg00006.html>.
+	* Makefile.devel: Require GNU make.
+	(CC): Use value from the environment, if set and non-empty.
+	(CFLAGS): Use value from the environment, if set.
+	* autogen.sh (GMAKE): New variable.
+	Use it for executing Makefile.devel.
+
 2023-05-17  Bruno Haible  <bruno@clisp.org>
 
 	On z/OS, allow charset tagging of temporary shell scripts.
