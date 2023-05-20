@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2005, 2012, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2005, 2012, 2016, 2023 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -18,14 +18,14 @@
  */
 
 /*
- * GB18030
+ * GB18030:2005
  */
 
 /*
  * GB18030, as specified in the GB18030 standard, is an extension of GBK.
  *
  * In what follows, page numbers refer to the GB18030 standard (second
- * printing).
+ * printing) from 2005.
  *
  *
  * It consists of the following parts:
@@ -185,7 +185,7 @@
 #include "gb18030uni.h"
 
 static int
-gb18030_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+gb18030_2005_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   int ret;
 
@@ -198,13 +198,13 @@ gb18030_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
   if (ret != RET_ILSEQ)
     return ret;
 
-  ret = gb18030ext_mbtowc(conv,pwc,s,n);
+  ret = gb18030_2005_ext_mbtowc(conv,pwc,s,n);
   if (ret != RET_ILSEQ)
     return ret;
 
   /* Code set 2 (remainder of Unicode U+0000..U+FFFF), including
      User-defined characters, two-byte part of range U+E766..U+E864 */
-  ret = gb18030uni_mbtowc(conv,pwc,s,n);
+  ret = gb18030_2005_uni_mbtowc(conv,pwc,s,n);
   if (ret != RET_ILSEQ)
     return ret;
   /* User-defined characters range U+E000..U+E765 */
@@ -266,7 +266,7 @@ gb18030_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
   }
 }
 
-static const unsigned short gb18030_pua2charset[31*3] = {
+static const unsigned short gb18030_2005_pua2charset[31*3] = {
 /* Unicode range   GB18030 range */
   0xe766, 0xe76b,  0xa2ab, /*.. 0xa2b0, */
   0xe76d, 0xe76d,  0xa2e4,
@@ -302,7 +302,7 @@ static const unsigned short gb18030_pua2charset[31*3] = {
 };
 
 static int
-gb18030_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+gb18030_2005_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   int ret;
 
@@ -316,7 +316,7 @@ gb18030_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
   if (ret != RET_ILUNI)
     return ret;
 
-  ret = gb18030ext_wctomb(conv,r,wc,n);
+  ret = gb18030_2005_ext_wctomb(conv,r,wc,n);
   if (ret != RET_ILUNI)
     return ret;
 
@@ -341,16 +341,16 @@ gb18030_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
         unsigned int k1 = 0;
         unsigned int k2 = 31;
         /* Invariant: We know that if wc occurs in Unicode interval in
-           gb18030_pua2charset, it does so at a k with  k1 <= k < k2. */
+           gb18030_2005_pua2charset, it does so at a k with  k1 <= k < k2. */
         while (k1 < k2) {
           unsigned int k = (k1 + k2) / 2;
-          if (wc < gb18030_pua2charset[k*3+0])
+          if (wc < gb18030_2005_pua2charset[k*3+0])
             k2 = k;
-          else if (wc > gb18030_pua2charset[k*3+1])
+          else if (wc > gb18030_2005_pua2charset[k*3+1])
             k1 = k + 1;
           else {
             unsigned short c =
-              gb18030_pua2charset[k*3+2] + (wc - gb18030_pua2charset[k*3+0]);
+              gb18030_2005_pua2charset[k*3+2] + (wc - gb18030_2005_pua2charset[k*3+0]);
             r[0] = (c >> 8);
             r[1] = (c & 0xff);
             return 2;
@@ -360,7 +360,7 @@ gb18030_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
     } else
       return RET_TOOSMALL;
   }
-  ret = gb18030uni_wctomb(conv,r,wc,n);
+  ret = gb18030_2005_uni_wctomb(conv,r,wc,n);
   if (ret != RET_ILUNI)
     return ret;
 

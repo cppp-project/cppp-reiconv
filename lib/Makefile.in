@@ -279,7 +279,7 @@ SOURCE_FILES = \
       euc_cn.h \
       ces_gbk.h \
       cp936.h \
-      gb18030.h \
+      gb18030_2005.h gb18030_2022.h \
         gb18030ext.h \
         gb18030uni.h \
       iso2022_cn.h \

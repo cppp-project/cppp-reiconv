@@ -1,3 +1,45 @@
+2023-05-20  Bruno Haible  <bruno@clisp.org>
+
+	Implement GB18030 version 2022.
+	* lib/encodings.def (GB18030): Add alias GB18030:2005.
+	(GB18030:2022): New encoding.
+	* lib/gb18030ext.h (gb18030_2005_ext_2uni_pagefe): Renamed from
+	gb18030ext_2uni_pagefe.
+	(gb18030_2022_ext_2uni_pagefe): New array.
+	(gb18030_2005_ext_mbtowc): Renamed from gb18030ext_mbtowc.
+	(gb18030_2022_ext_mbtowc): New function.
+	(gb18030_2005_ext_wctomb): Renamed from gb18030ext_wctomb.
+	(gb18030_2022_ext_wctomb): New function.
+	* lib/gb18030uni.h (gb18030_2022_charset2uni_pua1,
+	gb18030_2022_charset2uni_pua2): New arrays.
+	(gb18030_2005_uni_mbtowc): Renamed from gb18030uni_mbtowc.
+	(gb18030_2022_uni_mbtowc): New function.
+	(gb18030_2022_uni2charset_pua1, gb18030_2022_uni2charset_pua2): New
+	arrays.
+	(gb18030_2005_uni_wctomb): Renamed from gb18030uni_wctomb.
+	(gb18030_2022_uni_wctomb): New function.
+	* lib/gb18030_2005.h: Renamed from lib/gb18030.h. Update comments.
+	(gb18030_2005_mbtowc): Renamed from gb18030_mbtowc.
+	(gb18030_2005_pua2charset): Renamed from gb18030_pua2charset.
+	(gb18030_2005_wctomb): Renamed from gb18030_wctomb.
+	* lib/gb18030_2022.h: New file, based on lib/gb18030_2005.h.
+	* lib/converters.h: Don't include gb18030.h. Include gb18030_2005.h,
+	gb18030_2022.h.
+	* lib/Makefile.in (SOURCE_FILES): Remove gb18030.h. Add gb18030_2005.h,
+	gb18030_2022.h.
+	* tests/GB18030-2005-BMP.TXT: Renamed from tests/GB18030-BMP.TXT.
+	* tests/GB18030-2005.IRREVERSIBLE.TXT: Renamed from
+	tests/GB18030.IRREVERSIBLE.TXT.
+	* tests/GB18030-2022-BMP.TXT: New file.
+	* tests/Makefile.in (check): Test GB18030:2005 instead of GB18030. Also
+	test GB18030:2022.
+	(clean): Don't remove GB18030.TXT. Instead, remove GB18030-2005.TXT and
+	GB18030-2022.TXT.
+	(SOURCE_FILES): Update. Add GB18030-2022-BMP.TXT.
+	* README: Mention the new encoding.
+	* man/iconv_open.3: Likewise.
+	* NEWS: Likewise.
+
 2023-05-19  Bruno Haible  <bruno@clisp.org>
 
 	Make the compiler used by Makefile.devel customizable.
