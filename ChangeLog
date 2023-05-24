@@ -1,3 +1,10 @@
+2023-05-24  Bruno Haible  <bruno@clisp.org>
+
+	man pages: Use man page section title from groff or the distro.
+	Reported by Mike Fulton <mikefultonpersonal@gmail.com> in
+	<https://lists.gnu.org/archive/html/bug-gnu-libiconv/2023-04/msg00027.html>.
+	* man/*.[13]: Remove section title "Linux Programmer's Manual".
+
 2023-05-21  Bruno Haible  <bruno@clisp.org>
 
 	Support creating shared libraries on Hurd/x86_64.
