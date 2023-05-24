@@ -182,6 +182,7 @@
 /srcm4/lib-prefix.m4
 /srcm4/libunistring-base.m4
 /srcm4/limits-h.m4
+/srcm4/locale-fr.m4
 /srcm4/lstat.m4
 /srcm4/malloc.m4
 /srcm4/malloca.m4
@@ -192,6 +193,7 @@
 /srcm4/msvc-inval.m4
 /srcm4/msvc-nothrow.m4
 /srcm4/multiarch.m4
+/srcm4/musl.m4
 /srcm4/nls.m4
 /srcm4/nocrash.m4
 /srcm4/off_t.m4
