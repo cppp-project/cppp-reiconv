@@ -301,13 +301,14 @@ static int
 gb18030_2005_uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 4) {
-    unsigned int i = wc;
-    if (i >= 0x0080 && i <= 0xffff) {
-      if (i == 0xe7c7) {
+    unsigned int i;
+    if (wc >= 0x0080 && wc <= 0xffff) {
+      if (wc == 0xe7c7) {
         i = 7457;
       } else {
         unsigned int k1 = 0;
         unsigned int k2 = 205;
+        i = wc;
         while (k1 < k2) {
           unsigned int k = (k1 + k2) / 2;
           if (i <= gb18030uni_uni2charset_ranges[2*k+1])
@@ -322,13 +323,28 @@ gb18030_2005_uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
           i -= diff;
         }
       }
-      r[3] = (i % 10) + 0x30; i = i / 10;
-      r[2] = (i % 126) + 0x81; i = i / 126;
-      r[1] = (i % 10) + 0x30; i = i / 10;
-      r[0] = i + 0x81;
-      return 4;
-    }
-    return RET_ILUNI;
+    } else if (wc >= 0x20087 && wc <= 0x241fe) {
+      if (wc == 0x20087)
+        i = 0x3e2cf;
+      else if (wc == 0x20089)
+        i = 0x3e2d1;
+      else if (wc == 0x200cc)
+        i = 0x3e314;
+      else if (wc == 0x215d7)
+        i = 0x3f81f;
+      else if (wc == 0x2298f)
+        i = 0x40bd7;
+      else if (wc == 0x241fe)
+        i = 0x42446;
+      else
+        return RET_ILUNI;
+    } else
+      return RET_ILUNI;
+    r[3] = (i % 10) + 0x30; i = i / 10;
+    r[2] = (i % 126) + 0x81; i = i / 126;
+    r[1] = (i % 10) + 0x30; i = i / 10;
+    r[0] = i + 0x81;
+    return 4;
   }
   return RET_TOOSMALL;
 }
@@ -337,17 +353,18 @@ static int
 gb18030_2022_uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 4) {
-    unsigned int i = wc;
-    if (i >= 0x0080 && i <= 0xffff) {
-      if (i == 0xe7c7) {
+    if (wc >= 0x0080 && wc <= 0xffff) {
+      unsigned int i;
+      if (wc == 0xe7c7) {
         i = 7457;
-      } else if (i >= 0xe78d && i <= 0xe796) {
-        i = 39076 + gb18030_2022_uni2charset_pua2[i-0xe78d];
-      } else if (i >= 0xe81e && i <= 0xe864 && gb18030_2022_uni2charset_pua1[i-0xe81e]) {
-        i = 19056 + gb18030_2022_uni2charset_pua1[i-0xe81e];
+      } else if (wc >= 0xe78d && wc <= 0xe796) {
+        i = 39076 + gb18030_2022_uni2charset_pua2[wc-0xe78d];
+      } else if (wc >= 0xe81e && wc <= 0xe864 && gb18030_2022_uni2charset_pua1[wc-0xe81e]) {
+        i = 19056 + gb18030_2022_uni2charset_pua1[wc-0xe81e];
       } else {
         unsigned int k1 = 0;
         unsigned int k2 = 205;
+        i = wc;
         while (k1 < k2) {
           unsigned int k = (k1 + k2) / 2;
           if (i <= gb18030uni_uni2charset_ranges[2*k+1])

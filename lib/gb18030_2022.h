@@ -151,7 +151,7 @@ gb18030_2022_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
   if (ret != RET_ILUNI)
     return ret;
 
-  ret = gb18030_2022_ext_wctomb(conv,r,wc,n);
+  ret = gb18030ext_wctomb(conv,r,wc,n);
   if (ret != RET_ILUNI)
     return ret;
 

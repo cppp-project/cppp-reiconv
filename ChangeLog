@@ -1,3 +1,21 @@
+2023-05-29  Bruno Haible  <bruno@clisp.org>
+
+	GB18030: Help transitioning away from PUA code points.
+	* lib/gb18030ext.h (gb18030_2005_ext_wctomb): Remove function.
+	(gb18030ext_wctomb): Renamed from gb18030_2022_ext_wctomb.
+	* lib/gb18030uni.h (gb18030_2005_uni_wctomb): Map 6 Ext-B code points to
+	4-bytes sequences.
+	(gb18030_2022_uni_wctomb): Small refactoring.
+	* lib/gb18030_2005.h (gb18030_2005_pua2charset): Map 6 PUA code points
+	to 4-bytes sequences instead of 2-bytes sequences.
+	(gb18030_2005_wctomb): Update accordingly. Invoke gb18030ext_wctomb
+	instead of gb18030_2005_ext_wctomb.
+	* lib/gb18030_2022.h (gb18030_2022_wctomb): Invoke gb18030ext_wctomb
+	instead of gb18030_2022_ext_wctomb.
+	* tests/GB18030-2005.IRREVERSIBLE.TXT: Update the inverse mappings of 6
+	Ext-B code points and 6 PUA code points.
+	* NEWS: Mention it.
+
 2023-05-24  Bruno Haible  <bruno@clisp.org>
 
 	man pages: List a fifth condition when iconv(3) may stop.
