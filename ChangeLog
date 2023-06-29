@@ -1,3 +1,8 @@
+2023-06-29  Bruno Haible  <bruno@clisp.org>
+
+	Update the installation instructions for Windows.
+	* INSTALL.windows: Add a note about MSYS2.
+
 2023-05-29  Bruno Haible  <bruno@clisp.org>
 
 	GB18030: Help transitioning away from PUA code points.
