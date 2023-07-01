@@ -23,7 +23,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "config.h"
-#include "localcharset.h"
 
 #ifdef __CYGWIN__
 #include <cygwin/version.h>
@@ -260,7 +259,7 @@ invalid:
 }
 
 size_t iconv (iconv_t icd,
-              ICONV_CONST char* * inbuf, size_t *inbytesleft,
+              char* * inbuf, size_t *inbytesleft,
               char* * outbuf, size_t *outbytesleft)
 {
   conv_t cd = (conv_t) icd;

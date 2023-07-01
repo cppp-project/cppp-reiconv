@@ -6,6 +6,10 @@
 	Redist 'GNU LIBICONV' to 'cppp-reiconv'.
 	Remove 'CHAR' and 'WCHAR_T' encoding.
 	Remove libcharset.
+	Preparing to transition to C++.
+	Remove autoconf buildsystem support.
+	Add CMake support.
+	Move generated file into 'lib/generated'.
 
 2023-06-29  Bruno Haible  <bruno@clisp.org>
 

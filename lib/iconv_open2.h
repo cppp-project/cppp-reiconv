@@ -38,27 +38,24 @@
   cd->ofuncs = all_encodings[to_index].ofuncs;
   cd->oflags = all_encodings[to_index].oflags;
   /* Initialize the loop functions. */
-#if HAVE_MBRTOWC
+
   if (to_wchar) {
-#if HAVE_WCRTOMB
     if (from_wchar) {
       cd->lfuncs.loop_convert = wchar_id_loop_convert;
       cd->lfuncs.loop_reset = wchar_id_loop_reset;
     } else
-#endif
+
     {
       cd->lfuncs.loop_convert = wchar_to_loop_convert;
       cd->lfuncs.loop_reset = wchar_to_loop_reset;
     }
   } else
-#endif
+
   {
-#if HAVE_WCRTOMB
     if (from_wchar) {
       cd->lfuncs.loop_convert = wchar_from_loop_convert;
       cd->lfuncs.loop_reset = wchar_from_loop_reset;
     } else
-#endif
     {
       cd->lfuncs.loop_convert = unicode_loop_convert;
       cd->lfuncs.loop_reset = unicode_loop_reset;
@@ -73,7 +70,6 @@
   /* Initialize the operation flags. */
   cd->transliterate = transliterate;
   cd->discard_ilseq = discard_ilseq;
-  #ifndef LIBICONV_PLUG
   cd->fallbacks.mb_to_uc_fallback = NULL;
   cd->fallbacks.uc_to_mb_fallback = NULL;
   cd->fallbacks.mb_to_wc_fallback = NULL;
@@ -82,12 +78,9 @@
   cd->hooks.uc_hook = NULL;
   cd->hooks.wc_hook = NULL;
   cd->hooks.data = NULL;
-  #endif
   /* Initialize additional fields. */
   if (from_wchar != to_wchar) {
     struct wchar_conv_struct * wcd = (struct wchar_conv_struct *) cd;
-#if HAVE_WCRTOMB || HAVE_MBRTOWC
     memset(&wcd->state,'\0',sizeof(mbstate_t));
-#endif
   }
   /* Done. */

@@ -72,7 +72,7 @@ int iconv_string (const char* tocode, const char* fromcode,
     while (insize > 0) {
       char* outptr = tmpbuf;
       size_t outsize = tmpbufsize;
-      size_t res = iconv(cd,&inptr,&insize,&outptr,&outsize);
+      size_t res = iconv(cd,(char**)&inptr,&insize,&outptr,&outsize);
       if (res == (size_t)(-1) && errno != E2BIG) {
         int saved_errno = (errno == EINVAL ? EILSEQ : errno);
         iconv_close(cd);
@@ -120,7 +120,7 @@ int iconv_string (const char* tocode, const char* fromcode,
     char* outptr = result;
     size_t outsize = length;
     while (insize > 0) {
-      size_t res = iconv(cd,&inptr,&insize,&outptr,&outsize);
+      size_t res = iconv(cd,(char**)&inptr,&insize,&outptr,&outsize);
       if (res == (size_t)(-1)) {
         if (errno == EINVAL)
           break;

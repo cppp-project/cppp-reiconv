@@ -23,7 +23,6 @@
      - from wchar_t to wchar_t.
  */
 
-#if HAVE_WCRTOMB || HAVE_MBRTOWC
 /* Tru64 with Desktop Toolkit C has a bug: <stdio.h> must be included before
    <wchar.h>.
    BSD/OS 4.0.1 has a bug: <stddef.h>, <stdio.h> and <time.h> must be
@@ -35,77 +34,17 @@
 # include <time.h>
 # include <wchar.h>
 # define BUF_SIZE 64  /* assume MB_LEN_MAX <= 64 */
-  /* Some systems, like BeOS, have multibyte encodings but lack mbstate_t.  */
-# ifdef mbstate_t
-#  define mbrtowc(pwc, s, n, ps) (mbrtowc)(pwc, s, n, 0)
-#  define mbsinit(ps) 1
-# endif
-# ifndef mbsinit
-#  if !HAVE_MBSINIT
-#   define mbsinit(ps) 1
-#  endif
-# endif
-#endif
 
 /*
  * The first two conversion loops have an extended conversion descriptor.
  */
 struct wchar_conv_struct {
   struct conv_struct parent;
-#if HAVE_WCRTOMB || HAVE_MBRTOWC
   mbstate_t state;
-#endif
 };
 
-
-#if HAVE_WCRTOMB
 
 /* From wchar_t to anything else. */
-
-#ifndef LIBICONV_PLUG
-
-#if 0
-
-struct wc_to_mb_fallback_locals {
-  struct wchar_conv_struct * l_wcd;
-  char* l_outbuf;
-  size_t l_outbytesleft;
-  int l_errno;
-};
-
-/* A callback that writes a string given in the locale encoding. */
-static void wc_to_mb_write_replacement (const char *buf, size_t buflen,
-                                        void* callback_arg)
-{
-  struct wc_to_mb_fallback_locals * plocals =
-    (struct wc_to_mb_fallback_locals *) callback_arg;
-  /* Do nothing if already encountered an error in a previous call. */
-  if (plocals->l_errno == 0) {
-    /* Attempt to convert the passed buffer to the target encoding.
-       Here we don't support characters split across multiple calls. */
-    const char* bufptr = buf;
-    size_t bufleft = buflen;
-    size_t res = unicode_loop_convert(&plocals->l_wcd->parent,
-                                      &bufptr,&bufleft,
-                                      &plocals->l_outbuf,&plocals->l_outbytesleft);
-    if (res == (size_t)(-1)) {
-      if (errno == EILSEQ || errno == EINVAL)
-        /* Invalid buf contents. */
-        plocals->l_errno = EILSEQ;
-      else if (errno == E2BIG)
-        /* Output buffer too small. */
-        plocals->l_errno = E2BIG;
-      else 
-        abort();
-    } else {
-      /* Successful conversion. */
-      if (bufleft > 0)
-        abort();
-    }
-  }
-}
-
-#else
 
 struct wc_to_mb_fallback_locals {
   char* l_outbuf;
@@ -132,9 +71,8 @@ static void wc_to_mb_write_replacement (const char *buf, size_t buflen,
   }
 }
 
-#endif
 
-#endif /* !LIBICONV_PLUG */
+
 
 static size_t wchar_from_loop_convert (iconv_t icd,
                                        const char* * inbuf, size_t *inbytesleft,
@@ -283,14 +221,8 @@ static size_t wchar_from_loop_reset (iconv_t icd,
   }
 }
 
-#endif
-
-
-#if HAVE_MBRTOWC
 
 /* From anything else to wchar_t. */
-
-#ifndef LIBICONV_PLUG
 
 struct mb_to_wc_fallback_locals {
   char* l_outbuf;
@@ -318,7 +250,6 @@ static void mb_to_wc_write_replacement (const wchar_t *buf, size_t buflen,
   }
 }
 
-#endif /* !LIBICONV_PLUG */
 
 static size_t wchar_to_loop_convert (iconv_t icd,
                                      const char* * inbuf, size_t *inbytesleft,
@@ -433,7 +364,6 @@ static size_t wchar_to_loop_reset (iconv_t icd,
   return 0;
 }
 
-#endif
 
 
 /* From wchar_t to wchar_t. */
