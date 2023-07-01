@@ -1,8 +1,6 @@
 /* Copyright (C) 1999-2001, 2003, 2011 Bruno Haible.
-   This file is not part of the GNU LIBICONV Library.
-   This file is put into the public domain.  */
+   This file is part of the cppp-reiconv library.*/
 
-#include "iconv_string.h"
 #include <iconv.h>
 #include <errno.h>
 #include <stdlib.h>

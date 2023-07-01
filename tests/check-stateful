@@ -9,12 +9,12 @@ set -e
 charsetf=`echo "$charset" | sed -e 's,:,-,g'`
 
 if test -f "${srcdir}"/"$charsetf"-snippet.alt; then
-  ../src/iconv_no_i18n -f "$charset" -t UTF-8 < "${srcdir}"/"$charsetf"-snippet.alt > tmp-snippet
-  cmp "${srcdir}"/"$charsetf"-snippet.UTF-8 tmp-snippet
+  ./reiconv-test -f "$charset" -t UTF-8 "${srcdir}"/"$charsetf"-snippet.alt tmp-snippet
+  ./cmp "${srcdir}"/"$charsetf"-snippet.UTF-8 tmp-snippet
 fi
-../src/iconv_no_i18n -f "$charset" -t UTF-8 < "${srcdir}"/"$charsetf"-snippet > tmp-snippet
-cmp "${srcdir}"/"$charsetf"-snippet.UTF-8 tmp-snippet
-../src/iconv_no_i18n -f UTF-8 -t "$charset" < "${srcdir}"/"$charsetf"-snippet.UTF-8 > tmp-snippet
-cmp "${srcdir}"/"$charsetf"-snippet tmp-snippet
+./reiconv-test -f "$charset" -t UTF-8 "${srcdir}"/"$charsetf"-snippet tmp-snippet
+./cmp "${srcdir}"/"$charsetf"-snippet.UTF-8 tmp-snippet
+./reiconv-test -f UTF-8 -t "$charset" "${srcdir}"/"$charsetf"-snippet.UTF-8 tmp-snippet
+./cmp "${srcdir}"/"$charsetf"-snippet tmp-snippet
 rm -f tmp-snippet
 exit 0

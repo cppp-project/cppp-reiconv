@@ -3,6 +3,7 @@
 	Remove src, srclib, gnulib, po, man, tools.
 	Remove unused things.
 	Change 'COPYING.LIB' to 'COPYING'.
+	Redist 'GNU LIBICONV' to 'cppp-reiconv'.
 
 2023-06-29  Bruno Haible  <bruno@clisp.org>
 

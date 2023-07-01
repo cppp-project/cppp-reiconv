@@ -1,18 +1,18 @@
 /* Copyright (C) 2009, 2011 Free Software Foundation, Inc.
-   This file is part of the GNU LIBICONV Library.
+   This file is part of the cppp-reiconv library.
 
-   The GNU LIBICONV Library is free software; you can redistribute it
+   The cppp-reiconv library is free software; you can redistribute it
    and/or modify it under the terms of the GNU Lesser General Public
    License as published by the Free Software Foundation; either version 2.1
    of the License, or (at your option) any later version.
 
-   The GNU LIBICONV Library is distributed in the hope that it will be
+   The cppp-reiconv library is distributed in the hope that it will be
    useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU LIBICONV Library; see the file COPYING.
+   License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 #include "config.h"
@@ -40,7 +40,7 @@ int main ()
     char *outptr = (char *) outbuf;
     size_t outbytesleft = sizeof (outbuf);
     size_t r = iconv (cd,
-                      (ICONV_CONST char **) &inptr, &inbytesleft,
+                      (char **) &inptr, &inbytesleft,
                       &outptr, &outbytesleft);
 
     if (!(r == (size_t)(-1) && errno == EINVAL))

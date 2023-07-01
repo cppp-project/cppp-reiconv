@@ -1,18 +1,18 @@
 /* Copyright (C) 2000-2002, 2004-2005 Free Software Foundation, Inc.
-   This file is part of the GNU LIBICONV Library.
+   This file is part of the cppp-reiconv library.
 
-   The GNU LIBICONV Library is free software; you can redistribute it
+   The cppp-reiconv library is free software; you can redistribute it
    and/or modify it under the terms of the GNU Lesser General Public
    License as published by the Free Software Foundation; either version 2.1
    of the License, or (at your option) any later version.
 
-   The GNU LIBICONV Library is distributed in the hope that it will be
+   The cppp-reiconv library is distributed in the hope that it will be
    useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU LIBICONV Library; see the file COPYING.
+   License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Create a table from CHARSET to Unicode. */
@@ -52,7 +52,7 @@ static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned i
   size_t outbytesleft = 3*sizeof(unsigned int);
   size_t result;
   iconv(cd,NULL,NULL,NULL,NULL);
-  result = iconv(cd,(ICONV_CONST char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
+  result = iconv(cd,(char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
   if (result != (size_t)(-1))
     result = iconv(cd,NULL,NULL,&outbuf,&outbytesleft);
   if (result == (size_t)(-1)) {

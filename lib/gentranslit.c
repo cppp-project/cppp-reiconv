@@ -1,18 +1,18 @@
 /* Copyright (C) 1999-2003, 2005, 2011-2012, 2016, 2018, 2020 Free Software Foundation, Inc.
-   This file is part of the GNU LIBICONV Library.
+   This file is part of the cppp-reiconv library.
 
-   The GNU LIBICONV Library is free software; you can redistribute it
+   The cppp-reiconv library is free software; you can redistribute it
    and/or modify it under the terms of the GNU Lesser General Public
    License as published by the Free Software Foundation; either version 2.1
    of the License, or (at your option) any later version.
 
-   The GNU LIBICONV Library is distributed in the hope that it will be
+   The cppp-reiconv library is distributed in the hope that it will be
    useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU LIBICONV Library; see the file COPYING.
+   License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 /*
@@ -43,20 +43,20 @@ int main (int argc, char *argv[])
 
   printf("/*\n");
   printf(" * Copyright (C) 1999-2003 Free Software Foundation, Inc.\n");
-  printf(" * This file is part of the GNU LIBICONV Library.\n");
+  printf(" * This file is part of the cppp-reiconv library.\n");
   printf(" *\n");
-  printf(" * The GNU LIBICONV Library is free software; you can redistribute it\n");
+  printf(" * The cppp-reiconv library is free software; you can redistribute it\n");
   printf(" * and/or modify it under the terms of the GNU Lesser General Public\n");
   printf(" * License as published by the Free Software Foundation; either version 2\n");
   printf(" * of the License, or (at your option) any later version.\n");
   printf(" *\n");
-  printf(" * The GNU LIBICONV Library is distributed in the hope that it will be\n");
+  printf(" * The cppp-reiconv library is distributed in the hope that it will be\n");
   printf(" * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of\n");
   printf(" * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU\n");
   printf(" * Lesser General Public License for more details.\n");
   printf(" *\n");
   printf(" * You should have received a copy of the GNU Lesser General Public\n");
-  printf(" * License along with the GNU LIBICONV Library; see the file COPYING.\n");
+  printf(" * License along with the cppp-reiconv library; see the file COPYING.\n");
   printf(" * If not, see <https://www.gnu.org/licenses/>.\n");
   printf(" */\n");
   printf("\n");

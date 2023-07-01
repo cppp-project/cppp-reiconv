@@ -1,18 +1,18 @@
 dnl Copyright (C) 1999-2011, 2016, 2018-2022 Free Software Foundation, Inc.
-dnl This file is part of the GNU LIBICONV Library.
+dnl This file is part of the cppp-reiconv library.
 dnl
-dnl The GNU LIBICONV Library is free software; you can redistribute it
+dnl The cppp-reiconv library is free software; you can redistribute it
 dnl and/or modify it under the terms of the GNU Lesser General Public
 dnl License as published by the Free Software Foundation; either version 2.1
 dnl of the License, or (at your option) any later version.
 dnl
-dnl The GNU LIBICONV Library is distributed in the hope that it will be
+dnl The cppp-reiconv library is distributed in the hope that it will be
 dnl useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 dnl Lesser General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU Lesser General Public
-dnl License along with the GNU LIBICONV Library; see the file COPYING.
+dnl License along with the cppp-reiconv library; see the file COPYING.
 dnl If not, see <https://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.64])

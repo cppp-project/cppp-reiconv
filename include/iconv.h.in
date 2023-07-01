@@ -1,18 +1,18 @@
 /* Copyright (C) 1999-2023 Free Software Foundation, Inc.
-   This file is part of the GNU LIBICONV Library.
+   This file is part of the cppp-reiconv library.
 
-   The GNU LIBICONV Library is free software; you can redistribute it
+   The cppp-reiconv library is free software; you can redistribute it
    and/or modify it under the terms of the GNU Lesser General Public
    License as published by the Free Software Foundation; either version 2.1
    of the License, or (at your option) any later version.
 
-   The GNU LIBICONV Library is distributed in the hope that it will be
+   The cppp-reiconv library is distributed in the hope that it will be
    useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU LIBICONV Library; see the file COPYING.
+   License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 /* When installed, this file is called "iconv.h". */
@@ -250,6 +250,42 @@ extern const char * iconv_canonicalize (const char * name);
    instead of "/").  */
 extern void libiconv_set_relocation_prefix (const char *orig_prefix,
                                             const char *curr_prefix);
+                                       
+
+/*
+ * This C function converts an entire string from one encoding to another,
+ * using iconv. Easier to use than iconv() itself, and supports autodetect
+ * encodings on input.
+ *
+ *   int iconv_string (const char* tocode, const char* fromcode,
+ *                     const char* start, const char* end,
+ *                     char** resultp, size_t* lengthp)
+ *
+ * Converts a memory region given in encoding FROMCODE to a new memory
+ * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
+ * except that FROMCODE may be one of the values
+ *    "autodetect_utf8"          supports ISO-8859-1 and UTF-8
+ *    "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
+ *    "autodetect_kr"            supports EUC-KR and ISO-2022-KR
+ * The input is in the memory region between start (inclusive) and end
+ * (exclusive). If resultp is not NULL, the output string is stored in
+ * *resultp; malloc/realloc is used to allocate the result.
+ *
+ * This function does not treat zero characters specially.
+ *
+ * Return value: 0 if successful, otherwise -1 and errno set. Particular
+ * errno values: EILSEQ and ENOMEM.
+ *
+ * Example:
+ *   const char* s = ...;
+ *   char* result = NULL;
+ *   if (iconv_string("UCS-4-INTERNAL", "autodetect_utf8",
+ *                    s, s+strlen(s)+1, &result, NULL) < 0)
+ *     perror("iconv_string");
+ *
+ */
+extern int iconv_string (const char* tocode, const char* fromcode, const char* start, const char* end, char** resultp, size_t* lengthp);
+
 
 #ifdef __cplusplus
 }
