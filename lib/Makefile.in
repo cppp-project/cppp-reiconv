@@ -18,12 +18,10 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 INCLUDES = -I. -I$(srcdir) -I../include -I$(srcdir)/../include -I.. -I$(srcdir)/..
 # -DBUILDING_LIBICONV: Change expansion of LIBICONV_DLL_EXPORTED macro.
-# -DBUILDING_LIBCHARSET: Change expansion of LIBCHARSET_DLL_EXPORTED macro in
-# localcharset.h.
 # -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
 DEFS = \
   -DLIBDIR=\"$(libdir)\" \
-  -DBUILDING_LIBICONV -DBUILDING_LIBCHARSET -DBUILDING_DLL \
+  -DBUILDING_LIBICONV -DBUILDING_DLL \
   -DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(libdir)\" -DNO_XMALLOC \
 
 LIBTOOL = @LIBTOOL@
@@ -59,9 +57,9 @@ PACKAGE_VERSION = @VERSION@
 # Needed by $(LIBTOOL).
 top_builddir = ..
 
-SOURCES = $(srcdir)/iconv.c $(srcdir)/../libcharset/lib/localcharset.c
+SOURCES = $(srcdir)/iconv.c
 
-OBJECTS = iconv.lo localcharset.lo
+OBJECTS = iconv.lo
 
 all : libiconv.la
 
@@ -69,7 +67,7 @@ libiconv.la : $(OBJECTS)
 	$(LIBTOOL_LINK) $(CC) $(LDFLAGS) $(CFLAGS) -o libiconv.la -rpath $(libdir) -version-info $(LIBICONV_VERSION_INFO) -no-undefined $(OBJECTS)
 
 iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h \
-           $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/encodings_osf1.def $(srcdir)/encodings_dos.def $(srcdir)/encodings_local.def \
+           $(srcdir)/encodings.def $(srcdir)/encodings_aix.def $(srcdir)/encodings_osf1.def $(srcdir)/encodings_dos.def \
            $(srcdir)/aliases.h $(srcdir)/aliases_sysaix.h $(srcdir)/aliases_syshpux.h $(srcdir)/aliases_sysosf1.h $(srcdir)/aliases_syssolaris.h \
            $(srcdir)/aliases_aix.h $(srcdir)/aliases_aix_sysaix.h \
            $(srcdir)/aliases_osf1.h $(srcdir)/aliases_osf1_sysosf1.h \
@@ -77,9 +75,6 @@ iconv.lo : $(srcdir)/iconv.c $(srcdir)/converters.h \
            $(srcdir)/aliases_extra.h \
            $(srcdir)/flags.h $(srcdir)/translit.h
 	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(DEFS) -c $(srcdir)/iconv.c
-
-localcharset.lo : $(srcdir)/../libcharset/lib/localcharset.c
-	$(LIBTOOL_COMPILE) $(CC) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(DEFS) -c $(srcdir)/../libcharset/lib/localcharset.c
 
 # Installs the library and include files only. Typically called with only
 # $(libdir) and $(includedir) - don't use $(prefix) and $(exec_prefix) here.

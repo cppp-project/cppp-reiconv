@@ -122,7 +122,6 @@ int main (int argc, char* argv[])
     fprintf(stderr, "Could not open '%s' for writing\n", canonical_local_sh_file_name);
     exit(1);
   }
-#include "encodings_local.def"
   if (ferror(canonical_sh_file) || fclose(canonical_sh_file))
     exit(1);
 

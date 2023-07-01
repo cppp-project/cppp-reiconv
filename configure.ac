@@ -53,7 +53,6 @@ gl_EARLY
 dnl           checks for build configuration
 
 LT_INIT([disable-static win32-dll])
-gl_RELOCATABLE
 
 AC_ARG_ENABLE([extra-encodings],
   [AS_HELP_STRING([--enable-extra-encodings],
@@ -151,8 +150,6 @@ AC_C_BIGENDIAN([],
   [AC_DEFINE([WORDS_LITTLEENDIAN], [1],
      [Define if the machine's byte ordering is little endian.])
   ])
-
-gl_INIT
 
 dnl           hack
 

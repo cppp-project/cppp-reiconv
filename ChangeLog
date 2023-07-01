@@ -4,6 +4,8 @@
 	Remove unused things.
 	Change 'COPYING.LIB' to 'COPYING'.
 	Redist 'GNU LIBICONV' to 'cppp-reiconv'.
+	Remove 'CHAR' and 'WCHAR_T' encoding.
+	Remove libcharset.
 
 2023-06-29  Bruno Haible  <bruno@clisp.org>
 

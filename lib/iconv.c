@@ -110,7 +110,6 @@ enum {
 #ifdef USE_EXTRA
 # include "encodings_extra.def"
 #endif
-#include "encodings_local.def"
 #undef DEFENCODING
 ei_for_broken_compilers_that_dont_like_trailing_commas
 };
@@ -137,7 +136,6 @@ static struct encoding const all_encodings[] = {
 #undef DEFENCODING
 #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   { xxx_ifuncs1,xxx_ifuncs2, xxx_ofuncs1,xxx_ofuncs2, 0 },
-#include "encodings_local.def"
 #undef DEFENCODING
 };
 #undef DEFALIAS
@@ -439,9 +437,7 @@ void iconvlist (int (*do_one) (unsigned int namescount,
     j = 0;
     for (i = 0; i < aliascount1; i++) {
       const struct alias * p = &aliases[i];
-      if (p->name >= 0
-          && p->encoding_index != ei_local_char
-          && p->encoding_index != ei_local_wchar_t) {
+      if (p->name >= 0) {
         aliasbuf[j].name = stringpool + p->name;
         aliasbuf[j].encoding_index = p->encoding_index;
         j++;
@@ -576,14 +572,6 @@ const char * iconv_canonicalize (const char * name)
       }
       break;
     }
-    if (buf[0] == '\0') {
-      code = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (code[0] == '\0')
-        goto invalid;
-      continue;
-    }
     pool = stringpool;
     ap = aliases_lookup(buf,bp-buf);
     if (ap == NULL) {
@@ -591,46 +579,6 @@ const char * iconv_canonicalize (const char * name)
       ap = aliases2_lookup(buf);
       if (ap == NULL)
         goto invalid;
-    }
-    if (ap->encoding_index == ei_local_char) {
-      code = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (code[0] == '\0')
-        goto invalid;
-      continue;
-    }
-    if (ap->encoding_index == ei_local_wchar_t) {
-      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if (defined _WIN32 && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        index = ei_utf16le;
-# else
-        index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
-      if (sizeof(wchar_t) == 4) {
-        index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-        index = ei_ucs2internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 1) {
-        index = ei_iso8859_1;
-        break;
-      }
-#endif
     }
     index = ap->encoding_index;
     break;

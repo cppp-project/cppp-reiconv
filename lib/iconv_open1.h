@@ -86,65 +86,11 @@
         discard_ilseq = 1;
       break;
     }
-    if (buf[0] == '\0') {
-      tocode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (tocode[0] == '\0')
-        goto invalid;
-      continue;
-    }
     ap = aliases_lookup(buf,bp-buf);
     if (ap == NULL) {
       ap = aliases2_lookup(buf);
       if (ap == NULL)
         goto invalid;
-    }
-    if (ap->encoding_index == ei_local_char) {
-      tocode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (tocode[0] == '\0')
-        goto invalid;
-      continue;
-    }
-    if (ap->encoding_index == ei_local_wchar_t) {
-      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if (defined _WIN32 && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        to_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        to_index = ei_utf16le;
-# else
-        to_index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
-      if (sizeof(wchar_t) == 4) {
-        to_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-        to_index = ei_ucs2internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 1) {
-        to_index = ei_iso8859_1;
-        break;
-      }
-#endif
-#if HAVE_MBRTOWC
-      to_wchar = 1;
-      tocode = locale_charset();
-      continue;
-#endif
-      goto invalid;
     }
     to_index = ap->encoding_index;
     break;
@@ -188,65 +134,11 @@
         discard_ilseq = 1;
       break;
     }
-    if (buf[0] == '\0') {
-      fromcode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (fromcode[0] == '\0')
-        goto invalid;
-      continue;
-    }
     ap = aliases_lookup(buf,bp-buf);
     if (ap == NULL) {
       ap = aliases2_lookup(buf);
       if (ap == NULL)
         goto invalid;
-    }
-    if (ap->encoding_index == ei_local_char) {
-      fromcode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (fromcode[0] == '\0')
-        goto invalid;
-      continue;
-    }
-    if (ap->encoding_index == ei_local_wchar_t) {
-      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if (defined _WIN32 && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        from_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        from_index = ei_utf16le;
-# else
-        from_index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
-      if (sizeof(wchar_t) == 4) {
-        from_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-        from_index = ei_ucs2internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 1) {
-        from_index = ei_iso8859_1;
-        break;
-      }
-#endif
-#if HAVE_WCRTOMB
-      from_wchar = 1;
-      fromcode = locale_charset();
-      continue;
-#endif
-      goto invalid;
     }
     from_index = ap->encoding_index;
     break;
