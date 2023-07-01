@@ -95,8 +95,6 @@ if test $WOE32 = yes; then
 fi
 
 gl_VISIBILITY
-AM_ICONV
-AM_GNU_GETTEXT([external], [need-ngettext])
 
 dnl           checks for typedefs
 
@@ -146,9 +144,6 @@ fi
 AC_SUBST([BROKEN_WCHAR_H])
 
 AC_REPLACE_FUNCS([memmove])
-
-AM_LANGINFO_CODESET
-gl_FCNTL_O_FLAGS
 
 AC_EILSEQ
 
@@ -202,10 +197,6 @@ AH_BOTTOM([
 AC_CONFIG_SUBDIRS([libcharset])
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([lib/Makefile])
-AC_CONFIG_FILES([srclib/Makefile])
-AC_CONFIG_FILES([src/Makefile])
-AC_CONFIG_FILES([po/Makefile.in])
-AC_CONFIG_FILES([man/Makefile])
 if test -d "${srcdir}/tests"; then
   AC_CONFIG_FILES([tests/Makefile])
 fi

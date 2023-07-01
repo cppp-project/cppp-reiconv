@@ -18,7 +18,7 @@ dnl see <https://www.gnu.org/licenses/>.
 AC_PREREQ([2.64])
 AC_INIT([libcharset], [1.5])
 AC_CONFIG_SRCDIR([lib/localcharset.c])
-AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_AUX_DIR([../build-aux])
 AC_CONFIG_HEADERS([config.h])
 AC_PROG_MAKE_SET
 
@@ -48,19 +48,14 @@ AC_EXEEXT
 dnl           checks for build configuration
 
 LT_INIT([win32-dll])
-gl_RELOCATABLE
 gl_VISIBILITY
 
 dnl           checks for header files and functions
 
-AM_LANGINFO_CODESET
-gl_FCNTL_O_FLAGS
 AC_CHECK_FUNCS([setlocale])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([lib/Makefile])
-AC_CONFIG_FILES([include/libcharset.h:include/libcharset.h.build.in])
-AC_CONFIG_FILES([include/libcharset.h.inst:include/libcharset.h.in])
 AC_CONFIG_FILES([include/localcharset.h:include/localcharset.h.build.in])
 AC_CONFIG_FILES([include/localcharset.h.inst:include/localcharset.h.in])
 AC_OUTPUT

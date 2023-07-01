@@ -20,9 +20,6 @@
 /libcharset/m4/codeset.m4
 /libcharset/m4/fcntl-o.m4
 /libcharset/m4/lib-ld.m4
-/libcharset/m4/relocatable-lib.m4
-/libcharset/m4/relocatable.m4
-/libcharset/m4/visibility.m4
 /srclib/_Noreturn.h
 /srclib/Makefile.gnulib
 /srclib/alloca.in.h
@@ -244,14 +241,6 @@
 # Cached parameters of gnulib-tool:
 /srcm4/gnulib-cache.m4
 
-# Files brought in by "automake --add-missing --copy":
-/build-aux/ar-lib
-/build-aux/compile
-/build-aux/install-sh
-/build-aux/missing
-/libcharset/build-aux/install-sh
-/libcharset/build-aux/mkinstalldirs
-
 # Other files brought in by autogen.sh:
 /build-aux/config.guess
 /build-aux/config.sub
@@ -319,6 +308,7 @@
 /man/iconvctl.3.html
 /man/iconv_open_into.3.html
 # Built by libcharset/Makefile.devel.
+/libcharset/aclocal.m4
 /libcharset/include/libcharset.h.build.in
 /libcharset/include/localcharset.h.build.in
 
