@@ -12,7 +12,7 @@ dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 dnl Lesser General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU Lesser General Public License
-dnl along with the GNU CHARSET Library; see the file COPYING.LIB.  If not,
+dnl along with the GNU CHARSET Library; see the file COPYING.  If not,
 dnl see <https://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.64])

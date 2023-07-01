@@ -147,7 +147,7 @@ Copyright
 ---------
 
 The libiconv and libcharset _libraries_ and their header files are under LGPL,
-see file COPYING.LIB.
+see file COPYING.
 
 The iconv _program_ and the documentation are under GPL, see file COPYING.
 

@@ -12,7 +12,7 @@
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU LIBICONV Library; see the file COPYING.LIB.
+   License along with the GNU LIBICONV Library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Creates the UTF-8.TXT reference table. */

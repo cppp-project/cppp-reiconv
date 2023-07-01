@@ -1,3 +1,9 @@
+2023-07-01  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Remove src, srclib, gnulib, po, man, tools.
+	Remove unused things.
+	Change 'COPYING.LIB' to 'COPYING'.
+
 2023-06-29  Bruno Haible  <bruno@clisp.org>
 
 	Update the installation instructions for Windows.

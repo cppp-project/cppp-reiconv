@@ -12,7 +12,7 @@
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU LIBICONV Library; see the file COPYING.LIB.
+   License along with the GNU LIBICONV Library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 /*
@@ -56,7 +56,7 @@ int main (int argc, char *argv[])
   printf(" * Lesser General Public License for more details.\n");
   printf(" *\n");
   printf(" * You should have received a copy of the GNU Lesser General Public\n");
-  printf(" * License along with the GNU LIBICONV Library; see the file COPYING.LIB.\n");
+  printf(" * License along with the GNU LIBICONV Library; see the file COPYING.\n");
   printf(" * If not, see <https://www.gnu.org/licenses/>.\n");
   printf(" */\n");
   printf("\n");
