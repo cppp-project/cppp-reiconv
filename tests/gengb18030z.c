@@ -22,15 +22,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "binary-io.h"
-
 int main ()
 {
   int i1, i2, i3, i4, uc;
-
-#if O_BINARY
-  SET_BINARY(fileno(stdout));
-#endif
 
   uc = 0x10000;
   for (i1 = 0x90; i1 <= 0xe3; i1++)
