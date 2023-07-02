@@ -20,17 +20,14 @@
 #include <cppp/reiconv.hpp>
 
 #include <limits.h>
-#include <stdlib.h>
-#include <string.h>
-
-#ifdef __CYGWIN__
-#include <cygwin/version.h>
-#endif
+#include <iostream>
+#include <cstdlib>
+#include <cstring>
 
 namespace cppp{namespace base{namespace reiconv
 {
 
-  #ifdef ENABLE_EXTRA
+  #if ENABLE_EXTRA
   /*
   * Consider all system dependent encodings, for any system,
   * and the extra encodings.
@@ -592,20 +589,6 @@ namespace cppp{namespace base{namespace reiconv
   /* version number: (major<<8) + minor */
   int reiconv_version = (3 << 8) + 0;
 
-  #if defined __FreeBSD__ && !defined __gnu_freebsd__
-  /* GNU libiconv is the native FreeBSD iconv implementation since 2002.
-    It wants to define the symbols 'iconv_open', 'iconv', 'iconv_close'.  */
-  #define strong_alias(name, aliasname) _strong_alias(name, aliasname)
-  #define _strong_alias(name, aliasname) \
-    extern __typeof (name) aliasname __attribute__ ((alias (#name)));
-  #undef iconv_open
-  #undef iconv
-  #undef iconv_close
-  strong_alias (libiconv_open, iconv_open)
-  strong_alias (libiconv, iconv)
-  strong_alias (libiconv_close, iconv_close)
-  #endif
-
   #endif
 
   #define tmpbufsize 4096
@@ -620,6 +603,8 @@ namespace cppp{namespace base{namespace reiconv
     if (cd == (iconv_t)(-1)) {
       if (errno != EINVAL)
         return -1;
+/* Autodetect feature is a extra feature. */
+#if ENABLE_EXTRA
       /* Unsupported fromcode or tocode. Check whether the caller requested
         autodetection. */
       if (!strcmp(fromcode,"autodetect_utf8")) {
@@ -662,6 +647,7 @@ namespace cppp{namespace base{namespace reiconv
         ret = iconv_string(tocode,"EUC-KR",start,end,resultp,lengthp);
         return ret;
       }
+#endif
       errno = EINVAL;
       return -1;
     }

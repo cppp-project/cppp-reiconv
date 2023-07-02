@@ -10,6 +10,7 @@
 	Remove autoconf buildsystem support.
 	Add CMake support.
 	Move generated file into 'lib/generated'.
+	Move cppp-reiconv to a C++ library.
 
 2023-06-29  Bruno Haible  <bruno@clisp.org>
 

@@ -176,6 +176,7 @@ if (ENABLE_TEST)
               WORKING_DIRECTORY "${output_testsdir}"
               COMMAND "${output_testsdir}/test-shiftseq" )
     
+    if(CMAKE_SYSTEM_NAME STREQUAL "AIX")
     # AIX specific encodings
     test("stateless" "CP856")
     test("stateless" "CP922")
@@ -185,6 +186,7 @@ if (ENABLE_TEST)
     test("stateless" "CP1161")
     test("stateless" "CP1162")
     test("stateless" "CP1163")
+    endif()
     
     # OSF/1 specific encodings
     test("stateless" "DEC-KANJI")
