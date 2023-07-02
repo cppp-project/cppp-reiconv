@@ -12,6 +12,7 @@
 	Move generated file into 'lib/generated'.
 	Move cppp-reiconv to a C++ library.
 	Remove translit support.
+	Remove 'LIBICONV_PLUG'.
 
 2023-06-29  Bruno Haible  <bruno@clisp.org>
 
