@@ -128,10 +128,10 @@ Recall that before building a package for the second time, you need to erase
 the traces of the first build by running "make distclean".
 
 This library installs:
-  - a library 'libiconv.so',
-  - a header file '<iconv.h>'.
+  - a library 'libcppp-reiconv.so',
+  - a header file '<cppp/reiconv.hpp>'.
 
-To use it, simply #include <iconv.h> and use the functions.
+To use it, simply #include <cppp/reiconv.hpp> and use the functions.
 
 To use it in a package that uses GNU autoconf and GNU automake:
   - Use gnulib-tool to import the Gnulib module 'iconv'. It consists

@@ -17,9 +17,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "../include/iconv.h"
-
-//#include <cppp/reiconv.h>
+#include <cppp/reiconv.hpp>
 
 #include <iostream>
 #include <fstream>
@@ -27,6 +25,8 @@
 #include <cstring>
 #include <vector>
 #include <initializer_list>
+
+using namespace cppp::base::reiconv;
 
 #pragma region get_file_size
 

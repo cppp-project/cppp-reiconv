@@ -15,11 +15,11 @@
    License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
-#include "config.h"
-
 #include <stdlib.h>
-#include <iconv.h>
+#include <cppp/reiconv.hpp>
 #include <errno.h>
+
+using namespace cppp::base::reiconv;
 
 /* This test checks that the conversion to wchar_t stops correctly when
    the input is incomplete.  Based on a bug report from
@@ -27,7 +27,16 @@
 
 int main ()
 {
-  iconv_t cd = iconv_open ("wchar_t", "UTF-8");
+  const char* wchar_type;
+  if(sizeof(wchar_t) == 2)
+  {
+    wchar_type = "UTF-16";
+  }
+  else
+  {
+    wchar_type = "UTF-32";
+  }
+  iconv_t cd = iconv_open (wchar_type, "UTF-8");
   if (cd == (iconv_t)(-1)) {
     /* Skip the test on platforms without wchar_t
       (Solaris 2.6, HP-UX 11.00).  */

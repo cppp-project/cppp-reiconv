@@ -138,11 +138,11 @@ freebuffer (struct linebuffer *linebuffer)
    OLDLEN and NEWLEN are their lengths. */
 
 static int
-different (const char *old, const char *new, size_t oldlen, size_t newlen)
+different (const char *old, const char *new_one, size_t oldlen, size_t newlen)
 {
   int order;
 
-  order = memcmp (old, new, min (oldlen, newlen));
+  order = memcmp (old, new_one, min (oldlen, newlen));
 
   if (order == 0)
     return oldlen - newlen;

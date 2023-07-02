@@ -17,16 +17,14 @@
 
 /* Create a table from Unicode to CHARSET. */
 
-#include "config.h"
-
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iconv.h>
+#include <cppp/reiconv.hpp>
 #include <errno.h>
 
-#include "binary-io.h"
+using namespace cppp::base::reiconv;
 
 int main (int argc, char* argv[])
 {

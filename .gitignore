@@ -14,3 +14,5 @@ build/
 # Autopull modules
 /build-aux/
 
+# Temp tests files.
+/tests/data/UTF-8.TXT

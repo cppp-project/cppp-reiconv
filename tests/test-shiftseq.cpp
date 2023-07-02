@@ -15,11 +15,11 @@
    License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
-#include "config.h"
-
 #include <stdlib.h>
-#include <iconv.h>
+#include <cppp/reiconv.hpp>
 #include <errno.h>
+
+using namespace cppp::base::reiconv;
 
 /* This test checks that the behaviour of iconv() in the situation of an
    invalid multibyte character after a shift sequence is consistent whether

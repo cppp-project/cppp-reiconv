@@ -1,4 +1,4 @@
-/* Copyright (C) 2005, 2012 Free Software Foundation, Inc.
+/* Copyright (C) 2000, 2004-2005, 2012, 2016 Free Software Foundation, Inc.
    This file is part of the cppp-reiconv library.
 
    The cppp-reiconv library is free software; you can redistribute it
@@ -15,28 +15,30 @@
    License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
-/* Creates the beyond-BMP part of the GB18030.TXT reference table. */
-
-#include "config.h"
+/* Creates the UTF-8.TXT reference table. */
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int main ()
 {
-  int i1, i2, i3, i4, uc;
+  int i1, i2, i3;
 
-  uc = 0x10000;
-  for (i1 = 0x90; i1 <= 0xe3; i1++)
-    for (i2 = 0x30; i2 <= 0x39; i2++)
-      for (i3 = 0x81; i3 <= 0xfe; i3++)
-        for (i4 = 0x30; i4 <= 0x39; i4++) {
-          printf("0x%02X%02X%02X%02X\t0x%X\n", i1, i2, i3, i4, uc);
-          uc++;
-          if (uc == 0x110000)
-            goto done;
-        }
- done:
+  /* Range 0x0000..0x007f */
+  for (i1 = 0; i1 < 0x80; i1++)
+    printf("0x%02X\t0x%04X\n", i1, i1);
+  /* Range 0x0080..0x07ff */
+  for (i1 = 2; i1 < 32; i1++)
+    for (i2 = 0; i2 < 64; i2++)
+      printf("0x%02X%02X\t0x%04X\n", 0xc0+i1,0x80+i2, (i1<<6)+i2);
+  /* Range 0x0800..0xffff, except 0xd800..0xdfff */
+  for (i1 = 0; i1 < 16; i1++)
+    for (i2 = (i1==0 ? 32 : 0); i2 < 64; i2++)
+      for (i3 = 0; i3 < 64; i3++) {
+        int u = (i1<<12)+(i2<<6)+i3;
+        if (!(u >= 0xd800 && u < 0xe000))
+          printf("0x%02X%02X%02X\t0x%04X\n", 0xe0+i1,0x80+i2,0x80+i3, u);
+      }
 
   if (ferror(stdout) || fclose(stdout))
     exit(1);

@@ -17,16 +17,14 @@
 
 /* Create a table from CHARSET to Unicode. */
 
-#include "config.h"
-
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iconv.h>
+#include <cppp/reiconv.hpp>
 #include <errno.h>
 
-#include "binary-io.h"
+using namespace cppp::base::reiconv;
 
 /* If nonzero, ignore conversions outside Unicode plane 0. */
 static int bmp_only;
@@ -44,7 +42,7 @@ static const char* hexbuf (unsigned char buf[], unsigned int buflen)
   return msg;
 }
 
-static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned int* out)
+static int try_do (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned int* out)
 {
   const char* inbuf = (const char*) buf;
   size_t inbytesleft = buflen;
@@ -129,7 +127,7 @@ int main (int argc, char* argv[])
     int result;
     for (i0 = 0; i0 < 0x100; i0++) {
       buf[0] = i0;
-      result = try(cd,buf,1,out);
+      result = try_do(cd,buf,1,out);
       if (result < 0) {
       } else if (result > 0) {
         const char* unicode = ucs4_decode(out,result);
@@ -138,7 +136,7 @@ int main (int argc, char* argv[])
       } else {
         for (i1 = 0; i1 < 0x100; i1++) {
           buf[1] = i1;
-          result = try(cd,buf,2,out);
+          result = try_do(cd,buf,2,out);
           if (result < 0) {
           } else if (result > 0) {
             const char* unicode = ucs4_decode(out,result);
@@ -147,7 +145,7 @@ int main (int argc, char* argv[])
           } else {
             for (i2 = 0; i2 < 0x100; i2++) {
               buf[2] = i2;
-              result = try(cd,buf,3,out);
+              result = try_do(cd,buf,3,out);
               if (result < 0) {
               } else if (result > 0) {
                 const char* unicode = ucs4_decode(out,result);
@@ -156,7 +154,7 @@ int main (int argc, char* argv[])
               } else if (search_depth > 3) {
                 for (i3 = 0; i3 < 0x100; i3++) {
                   buf[3] = i3;
-                  result = try(cd,buf,4,out);
+                  result = try_do(cd,buf,4,out);
                   if (result < 0) {
                   } else if (result > 0) {
                     const char* unicode = ucs4_decode(out,result);

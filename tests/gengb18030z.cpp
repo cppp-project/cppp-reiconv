@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Free Software Foundation, Inc.
+/* Copyright (C) 2005, 2012 Free Software Foundation, Inc.
    This file is part of the cppp-reiconv library.
 
    The cppp-reiconv library is free software; you can redistribute it
@@ -15,13 +15,28 @@
    License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
-#include "config.h"
-/* Returns 0 (success) in a native environment.
-   Returns 1 (failure) in a cross-executing environment, that is, in an
-   environment where compiled programs use a different libc than the system's
-   libc.  Currently, only QEMU user-mode environments are recognized.  */
+/* Creates the beyond-BMP part of the GB18030.TXT reference table. */
+
+#include <stdio.h>
+#include <stdlib.h>
 
 int main ()
 {
-  return 1;
+  int i1, i2, i3, i4, uc;
+
+  uc = 0x10000;
+  for (i1 = 0x90; i1 <= 0xe3; i1++)
+    for (i2 = 0x30; i2 <= 0x39; i2++)
+      for (i3 = 0x81; i3 <= 0xfe; i3++)
+        for (i4 = 0x30; i4 <= 0x39; i4++) {
+          printf("0x%02X%02X%02X%02X\t0x%X\n", i1, i2, i3, i4, uc);
+          uc++;
+          if (uc == 0x110000)
+            goto done;
+        }
+ done:
+
+  if (ferror(stdout) || fclose(stdout))
+    exit(1);
+  exit(0);
 }
