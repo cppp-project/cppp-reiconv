@@ -24,8 +24,6 @@ configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cpp
 # Generate header file for install
 if(WIN32)
     set(DLL_VARIABLE "__declspec(dllimport)")
-elseif(HAVE_VISIBILITY)
-    set(DLL_VARIABLE "__attribute__((__visibility__(\"default\")))")
 else()
     set(DLL_VARIABLE "")
 endif()

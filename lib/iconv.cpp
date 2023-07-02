@@ -75,12 +75,6 @@ namespace cppp{namespace base{namespace reiconv
   #include "converters.h"
 
   /*
-  * Transliteration tables.
-  */
-  #include "cjk_variants.h"
-  #include "translit.h"
-
-  /*
   * Table of all supported encodings.
   */
   struct encoding {
@@ -236,7 +230,6 @@ namespace cppp{namespace base{namespace reiconv
     unsigned int to_index;
     int to_wchar;
     unsigned int to_surface;
-    int transliterate;
     int discard_ilseq;
 
   #include "iconv_open1.h"
@@ -277,8 +270,6 @@ namespace cppp{namespace base{namespace reiconv
     return 0;
   }
 
-  #ifndef LIBICONV_PLUG
-
   /*
   * Verify that a 'struct conv_struct' and a 'struct wchar_conv_struct' each
   * fit in an iconv_allocation_t.
@@ -300,7 +291,6 @@ namespace cppp{namespace base{namespace reiconv
     unsigned int to_index;
     int to_wchar;
     unsigned int to_surface;
-    int transliterate;
     int discard_ilseq;
 
   #include "iconv_open1.h"
@@ -329,12 +319,6 @@ namespace cppp{namespace base{namespace reiconv
             && cd->isurface == cd->osurface)
           || cd->lfuncs.loop_convert == wchar_id_loop_convert
           ? 1 : 0);
-        return 0;
-      case ICONV_GET_TRANSLITERATE:
-        *(int *)argument = cd->transliterate;
-        return 0;
-      case ICONV_SET_TRANSLITERATE:
-        cd->transliterate = (*(const int *)argument ? 1 : 0);
         return 0;
       case ICONV_GET_DISCARD_ILSEQ:
         *(int *)argument = cd->discard_ilseq;
@@ -558,11 +542,6 @@ namespace cppp{namespace base{namespace reiconv
           goto invalid;
       }
       for (;;) {
-        if (bp-buf >= 10 && memcmp(bp-10,"//TRANSLIT",10)==0) {
-          bp -= 10;
-          *bp = '\0';
-          continue;
-        }
         if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
           bp -= 8;
           *bp = '\0';
@@ -589,7 +568,6 @@ namespace cppp{namespace base{namespace reiconv
   /* version number: (major<<8) + minor */
   int reiconv_version = (3 << 8) + 0;
 
-  #endif
 
   #define tmpbufsize 4096
 

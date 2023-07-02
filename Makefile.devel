@@ -21,7 +21,7 @@ all : lib/generated \
       lib/generated/aliases_dos.h \
       lib/generated/aliases_zos.h \
       lib/generated/aliases_extra.h \
-      lib/generated/flags.h lib/generated/translit.h
+      lib/generated/flags.h
 
 lib/generated :
 	$(MKDIR) lib/generated
@@ -117,12 +117,6 @@ lib/generated/flags.h : lib/encodings.def lib/encodings_aix.def lib/encodings_os
 	./genflags > lib/generated/flags.h
 	$(RM) genflags
 
-
-lib/generated/translit.h : lib/translit.def lib/gentranslit.c
-	$(CC) $(CFLAGS) lib/gentranslit.c -o gentranslit
-	./gentranslit < lib/translit.def > lib/generated/translit.h
-	$(RM) gentranslit
-
 clean :
 	rm -f lib/generated/aliases.gperf lib/generated/aliases_sysaix.gperf lib/generated/aliases_syshpux.gperf lib/generated/aliases_sysosf1.gperf lib/generated/aliases_syssolaris.gperf
 	rm -f lib/generated/aliases.h lib/generated/aliases_sysaix.h lib/generated/aliases_syshpux.h lib/generated/aliases_sysosf1.h lib/generated/aliases_syssolaris.h
@@ -139,4 +133,3 @@ clean :
 	rm -f lib/generated/canonical_extra.h
 	rm -f lib/generated/canonical_local.h lib/generated/canonical_local_sysaix.h lib/generated/canonical_local_syshpux.h lib/generated/canonical_local_sysosf1.h lib/generated/canonical_local_syssolaris.h
 	rm -f lib/generated/flags.h
-	rm -f lib/generated/translit.h

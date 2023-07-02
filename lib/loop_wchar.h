@@ -94,7 +94,6 @@ static size_t wchar_from_loop_convert (iconv_t icd,
         if (wcd->parent.discard_ilseq) {
           count = 0;
         }
-        #ifndef LIBICONV_PLUG
         else if (wcd->parent.fallbacks.wc_to_mb_fallback != NULL) {
           /* Drop the contents of buf[] accumulated so far, and instead
              pass all queued wide characters to the fallback handler. */
@@ -125,7 +124,6 @@ static size_t wchar_from_loop_convert (iconv_t icd,
           result += 1;
           break;
         }
-        #endif
         else {
           errno = EILSEQ;
           return -1;
@@ -291,7 +289,6 @@ static size_t wchar_to_loop_convert (iconv_t icd,
             /* Invalid input. */
             if (wcd->parent.discard_ilseq) {
             }
-            #ifndef LIBICONV_PLUG
             else if (wcd->parent.fallbacks.mb_to_wc_fallback != NULL) {
               /* Drop the contents of buf[] accumulated so far, and instead
                  pass all queued chars to the fallback handler. */
@@ -319,7 +316,6 @@ static size_t wchar_to_loop_convert (iconv_t icd,
               result += 1;
               break;
             }
-            #endif
             else
               return -1;
           } else {
@@ -384,10 +380,8 @@ static size_t wchar_id_loop_convert (iconv_t icd,
     do {
       wchar_t wc = *inptr++;
       *outptr++ = wc;
-      #ifndef LIBICONV_PLUG
       if (cd->hooks.wc_hook)
         (*cd->hooks.wc_hook)(wc, cd->hooks.data);
-      #endif
     } while (--count > 0);
     *inbuf = (const char*) inptr;
     *outbuf = (char*) outptr;

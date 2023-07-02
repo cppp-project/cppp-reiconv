@@ -144,8 +144,6 @@ extern "C++"
 
       /* Requests for iconvctl. */
       #define ICONV_TRIVIALP            0  /* int *argument */
-      #define ICONV_GET_TRANSLITERATE   1  /* int *argument */
-      #define ICONV_SET_TRANSLITERATE   2  /* const int *argument */
       #define ICONV_GET_DISCARD_ILSEQ   3  /* int *argument */
       #define ICONV_SET_DISCARD_ILSEQ   4  /* const int *argument */
       #define ICONV_SET_HOOKS           5  /* const struct iconv_hooks *argument */

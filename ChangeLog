@@ -11,6 +11,7 @@
 	Add CMake support.
 	Move generated file into 'lib/generated'.
 	Move cppp-reiconv to a C++ library.
+	Remove translit support.
 
 2023-06-29  Bruno Haible  <bruno@clisp.org>
 

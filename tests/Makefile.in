@@ -162,10 +162,6 @@ check : all reiconv-test cmp table-from table-to is-native test-shiftseq test-to
 	$(SHELL) $(srcdir)/check-stateful $(srcdir) ISO-2022-KR
 #	/* system dependent and extra encodings */
 	$(MAKE) check-extra
-#	/* transliteration */
-	$(SHELL) $(srcdir)/check-translit $(srcdir) Quotes UTF-8 ISO-8859-1
-	$(SHELL) $(srcdir)/check-translit $(srcdir) Quotes UTF-8 ASCII
-	$(SHELL) $(srcdir)/check-translit $(srcdir) Translit1 ISO-8859-1 ASCII
 #	/* EBCDIC specific functionality */
 	$(SHELL) $(srcdir)/check-ebcdic '@host_os@'
 #	/* test z/OS file tagging */

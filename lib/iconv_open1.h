@@ -26,7 +26,6 @@
      unsigned int to_index;
      int to_wchar;
      unsigned int to_surface;
-     int transliterate;
      int discard_ilseq;
    Jumps to 'invalid' in case of errror.
  */
@@ -39,7 +38,6 @@
 
   from_surface = ICONV_SURFACE_NONE;
   to_surface = ICONV_SURFACE_NONE;
-  transliterate = 0;
   discard_ilseq = 0;
 
   /* Before calling aliases_lookup, convert the input string to upper case,
@@ -63,12 +61,8 @@
     }
     for (;;) {
       char *sp = bp;
-      int parsed_translit = 0;
       int parsed_ignore = 0;
-      if (sp-buf > 9 && memcmp(sp-9,"/TRANSLIT",9)==0) {
-        sp = sp - 9;
-        parsed_translit = 1;
-      } else if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
+      if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
         sp = sp - 7;
         parsed_ignore = 1;
       }
@@ -80,8 +74,6 @@
       } else
         break;
       *bp = '\0';
-      if (parsed_translit)
-        transliterate = 1;
       if (parsed_ignore)
         discard_ilseq = 1;
       break;
@@ -111,12 +103,8 @@
     }
     for (;;) {
       char *sp = bp;
-      int parsed_translit = 0;
       int parsed_ignore = 0;
-      if (sp-buf > 9 && memcmp(sp-9,"/TRANSLIT",9)==0) {
-        sp = sp - 9;
-        parsed_translit = 1;
-      } else if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
+      if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
         sp = sp - 7;
         parsed_ignore = 1;
       }
@@ -128,8 +116,6 @@
       } else
         break;
       *bp = '\0';
-      if (parsed_translit)
-        transliterate = 1;
       if (parsed_ignore)
         discard_ilseq = 1;
       break;

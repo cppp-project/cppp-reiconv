@@ -107,12 +107,9 @@ struct conv_struct {
   unsigned int osurface;
   state_t ostate;
   /* Operation flags */
-  int transliterate;
   int discard_ilseq;
-  #ifndef LIBICONV_PLUG
   struct iconv_fallbacks fallbacks;
   struct iconv_hooks hooks;
-  #endif
 };
 
 /*

@@ -51,12 +51,6 @@ if $iconv -l | grep IBM-1047 > /dev/null; then
   ./cmp tmp-out1 tmp-ok-lf
   ./cmp tmp-out2 tmp-ok-nel
 
-  # Check that the ZOS_UNIX surface can be used with //TRANSLIT and //IGNORE.
-
-  printf '\357\275\210\342\204\257\360\235\232\225\360\235\232\225\342\200\242\n' \
-    | $iconv -f UTF-8 -t IBM-1047/ZOS_UNIX/TRANSLIT > tmp-out1
-  ./cmp tmp-out1 tmp-ok-x15
-
   printf 'hello\342\202\254\n' \
     | $iconv -f UTF-8 -t IBM-1047/ZOS_UNIX/IGNORE > tmp-out1
   ./cmp tmp-out1 tmp-ok-x15

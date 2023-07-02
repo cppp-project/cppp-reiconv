@@ -26,7 +26,6 @@
      unsigned int to_index;
      int to_wchar;
      unsigned int to_surface;
-     int transliterate;
      int discard_ilseq;
    Output: none.
    Side effects: Fills cd.
@@ -68,7 +67,6 @@
   memset(&cd->istate,'\0',sizeof(state_t));
   memset(&cd->ostate,'\0',sizeof(state_t));
   /* Initialize the operation flags. */
-  cd->transliterate = transliterate;
   cd->discard_ilseq = discard_ilseq;
   cd->fallbacks.mb_to_uc_fallback = NULL;
   cd->fallbacks.uc_to_mb_fallback = NULL;
