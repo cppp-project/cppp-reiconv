@@ -21,7 +21,7 @@ if (ENABLE_TEST)
     add_executable(test-shiftseq "${srcdir}/tests/test-shiftseq.cpp")
     add_executable(genutf8       "${srcdir}/tests/genutf8.cpp")
     add_executable(gengb18030z   "${srcdir}/tests/gengb18030z.cpp")
-    add_executable(uniq-u        "${srcdir}/tests/uniq-u.cpp")
+    add_executable(uniq-u        "${srcdir}/tests/uniq-u.c")
 
     target_link_libraries(table-from    libcppp-reiconv.shared)
     target_link_libraries(table-to      libcppp-reiconv.shared)
@@ -52,9 +52,36 @@ if (ENABLE_TEST)
     
     # Init test
 
-    execute_process( COMMAND "${output_testsdir}/genutf8"
-                     OUTPUT_FILE "${srcdir}/tests/data/UTF-8.TXT"
-                     WORKING_DIRECTORY "${output_testsdir}" )
+    add_custom_command(TARGET genutf8 POST_BUILD
+        COMMAND "${output_testsdir}/genutf8" > "${srcdir}/tests/data/UTF-8.TXT"
+        WORKING_DIRECTORY "${output_testsdir}"
+        COMMENT "Generating UTF-8 test data ... "
+    )
+
+    file(COPY "${srcdir}/tests/data/GB18030-2005.IRREVERSIBLE.TXT" DESTINATION "${output_testsdir}")
+    file(COPY_FILE "${srcdir}/tests/data/GB18030-2005-BMP.TXT" "${output_testsdir}/tmp-GB18030-2005.TXT")
+    add_custom_command(TARGET gengb18030z POST_BUILD
+        COMMAND "${output_testsdir}/gengb18030z" >> "${output_testsdir}/tmp-GB18030-2005.TXT"
+        WORKING_DIRECTORY "${output_testsdir}"
+        COMMENT "Generating GB18030:2005 test data ... "
+    )
+    add_custom_command(TARGET gengb18030z POST_BUILD
+        COMMAND "sort" < "${output_testsdir}/tmp-GB18030-2005.TXT" > "${srcdir}/tests/data/GB18030-2005.TXT"
+        WORKING_DIRECTORY "${output_testsdir}"
+        COMMENT "Sorting GB18030:2005 test data ... "
+    )
+
+    file(COPY_FILE "${srcdir}/tests/data/GB18030-2022-BMP.TXT" "${output_testsdir}/tmp-GB18030-2022.TXT")
+    add_custom_command(TARGET gengb18030z POST_BUILD
+        COMMAND "${output_testsdir}/gengb18030z" >> "${output_testsdir}/tmp-GB18030-2022.TXT"
+        WORKING_DIRECTORY "${output_testsdir}"
+        COMMENT "Generating GB18030:2022 test data ... "
+    )
+    add_custom_command(TARGET gengb18030z POST_BUILD
+        COMMAND "sort" < "${output_testsdir}/tmp-GB18030-2022.TXT" > "${srcdir}/tests/data/GB18030-2022.TXT"
+        WORKING_DIRECTORY "${output_testsdir}"
+        COMMENT "Sorting GB18030:2022 test data ... "
+    )
 
     # Start test
 
@@ -151,7 +178,8 @@ if (ENABLE_TEST)
     test("stateless" "EUC-CN")
     test("stateless" "GBK")
     test("stateless" "CP936")
-    # We will not test gb18030 because it's too hard in CMake
+    test("stateless" "GB18030:2005")
+    test("stateless" "GB18030:2022")
     test("stateful"  "ISO-2022-CN")
     test("stateful"  "ISO-2022-CN-EXT")
     test("stateful"  "HZ")
@@ -176,7 +204,7 @@ if (ENABLE_TEST)
               WORKING_DIRECTORY "${output_testsdir}"
               COMMAND "${output_testsdir}/test-shiftseq" )
     
-    if(CMAKE_SYSTEM_NAME STREQUAL "AIX")
+    #if(CMAKE_SYSTEM_NAME STREQUAL "AIX")
     # AIX specific encodings
     test("stateless" "CP856")
     test("stateless" "CP922")
@@ -186,7 +214,7 @@ if (ENABLE_TEST)
     test("stateless" "CP1161")
     test("stateless" "CP1162")
     test("stateless" "CP1163")
-    endif()
+    #endif()
     
     # OSF/1 specific encodings
     test("stateless" "DEC-KANJI")

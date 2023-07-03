@@ -21,6 +21,7 @@ CTestCostData.txt
 *.inst
 Testing
 *.log
+*.dSYM
 
 # Test suite runable
 tests/cmp
@@ -56,6 +57,8 @@ build-aux/
 
 # Temp tests files.
 tests/data/UTF-8.TXT
+tests/data/GB18030-2005.TXT
+tests/data/GB18030-2022.TXT
 
 # Dist directory and temps
 cppp-reiconv-v*
