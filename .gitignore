@@ -1,5 +1,45 @@
 # CMake build files
 build/
+CMakeFiles
+*.so
+*.so.*.*.*
+*.a
+*.dylib
+*.stackdump
+*.lib
+*.pdb
+*.dll
+*.exe
+cmake_install.cmake
+CMakeCache.txt
+CTestTestfile.cmake
+DartConfiguration.tcl
+Makefile
+uninstall.cmake
+reiconv.hpp
+CTestCostData.txt
+*.inst
+Testing
+*.log
+
+# Test suite runable
+tests/cmp
+tests/cmp.exe
+tests/gengb18030z
+tests/gengb18030z.exe
+tests/genutf8
+tests/genutf8.exe
+tests/reiconv-test
+tests/reiconv-test.exe
+tests/table-from
+tests/table-from.exe
+tests/table-to
+tests/table-to.exe
+tests/test-shiftseq
+tests/test-shiftseq.exe
+tests/uniq-u
+tests/uniq-u.exe
+tests/tmp-*.TXT
 
 # Patterns for all subdirectories: all kinds of automatic backup files.
 *.orig
@@ -12,10 +52,10 @@ build/
 .vscode
 
 # Autopull modules
-/build-aux/
+build-aux/
 
 # Temp tests files.
-/tests/data/UTF-8.TXT
+tests/data/UTF-8.TXT
 
 # Dist directory and temps
 cppp-reiconv-v*
