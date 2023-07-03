@@ -281,30 +281,6 @@ namespace cppp{namespace base{namespace reiconv
   typedef int verify_size_1[2 * (sizeof (struct conv_struct) <= sizeof (iconv_allocation_t)) - 1];
   typedef int verify_size_2[2 * (sizeof (struct wchar_conv_struct) <= sizeof (iconv_allocation_t)) - 1];
 
-  int iconv_open_into (const char* tocode, const char* fromcode,
-                      iconv_allocation_t* resultp)
-  {
-    struct conv_struct * cd;
-    unsigned int from_index;
-    int from_wchar;
-    unsigned int from_surface;
-    unsigned int to_index;
-    int to_wchar;
-    unsigned int to_surface;
-    int discard_ilseq;
-
-  #include "iconv_open1.h"
-
-    cd = (struct conv_struct *) resultp;
-
-  #include "iconv_open2.h"
-
-    return 0;
-  invalid:
-    errno = EINVAL;
-    return -1;
-  }
-
   /* Bit mask of all valid surfaces. */
   #define ALL_SURFACES (ICONV_SURFACE_EBCDIC_ZOS_UNIX)
 
@@ -510,61 +486,7 @@ namespace cppp{namespace base{namespace reiconv
   # include "canonical_local.h"
   #endif
   };
-
-  const char * iconv_canonicalize (const char * name)
-  {
-    const char* code;
-    char buf[MAX_WORD_LENGTH+10+1];
-    const char* cp;
-    char* bp;
-    const struct alias * ap;
-    unsigned int count;
-    unsigned int index;
-    const char* pool;
-
-    /* Before calling aliases_lookup, convert the input string to upper case,
-    * and check whether it's entirely ASCII (we call gperf with option "-7"
-    * to achieve a smaller table) and non-empty. If it's not entirely ASCII,
-    * or if it's too long, it is not a valid encoding name.
-    */
-    for (code = name;;) {
-      /* Search code in the table. */
-      for (cp = code, bp = buf, count = MAX_WORD_LENGTH+10+1; ; cp++, bp++) {
-        unsigned char c = (unsigned char) *cp;
-        if (c >= 0x80)
-          goto invalid;
-        if (c >= 'a' && c <= 'z')
-          c -= 'a'-'A';
-        *bp = c;
-        if (c == '\0')
-          break;
-        if (--count == 0)
-          goto invalid;
-      }
-      for (;;) {
-        if (bp-buf >= 8 && memcmp(bp-8,"//IGNORE",8)==0) {
-          bp -= 8;
-          *bp = '\0';
-          continue;
-        }
-        break;
-      }
-      pool = stringpool;
-      ap = aliases_lookup(buf,bp-buf);
-      if (ap == NULL) {
-        pool = stringpool2;
-        ap = aliases2_lookup(buf);
-        if (ap == NULL)
-          goto invalid;
-      }
-      index = ap->encoding_index;
-      break;
-    }
-    return all_canonical[index] + pool;
-  invalid:
-    return name;
-  }
-
+  
   /* version number: (major<<8) + minor */
   int reiconv_version = (3 << 8) + 0;
 

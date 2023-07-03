@@ -33,14 +33,16 @@ extern "C++"
    {
       extern @DLL_VARIABLE@ int reiconv_version; /* Likewise */
 
-      /* Define iconv_t ourselves. */
       #undef iconv_t
+      /* Define iconv_t ourselves. */
       typedef void* iconv_t;
 
+      #undef iconv_open
       /* Allocates descriptor for code conversion from encoding ‘fromcode’ to
          encoding ‘tocode’. */
       extern @DLL_VARIABLE@ iconv_t iconv_open (const char* tocode, const char* fromcode);
 
+      #undef iconv
       /* Converts, using conversion descriptor ‘cd’, at most ‘*inbytesleft’ bytes
          starting at ‘*inbuf’, writing at most ‘*outbytesleft’ bytes starting at
          ‘*outbuf’.
@@ -48,6 +50,7 @@ extern "C++"
          Decrements ‘*outbytesleft’ and increments ‘*outbuf’ by the same amount. */
       extern @DLL_VARIABLE@ size_t iconv (iconv_t cd, char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
 
+      #undef iconv_close
       /* Frees resources allocated for conversion descriptor ‘cd’. */
       extern @DLL_VARIABLE@ int iconv_close (iconv_t cd);
 
@@ -58,12 +61,6 @@ extern "C++"
          void* dummy1[28];
          mbstate_t dummy2;
       } iconv_allocation_t;
-
-      /* Allocates descriptor for code conversion from encoding ‘fromcode’ to
-         encoding ‘tocode’ into preallocated memory. Returns an error indicator
-         (0 or -1 with errno set). */
-      extern @DLL_VARIABLE@ int iconv_open_into (const char* tocode, const char* fromcode,
-                                 iconv_allocation_t* resultp);
 
       /* Control of attributes. */
       extern @DLL_VARIABLE@ int iconvctl (iconv_t cd, int request, void* argument);
@@ -158,10 +155,6 @@ extern "C++"
                                           const char * const * names,
                                           void* data),
                            void* data);
-
-      /* Canonicalize an encoding name.
-         The result is either a canonical encoding name, or name itself. */
-      extern @DLL_VARIABLE@ const char * iconv_canonicalize (const char * name);
 
       /*
       * This C function converts an entire string from one encoding to another,
