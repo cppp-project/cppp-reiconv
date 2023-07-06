@@ -1,3 +1,13 @@
+New in 2.0.0:
+* Redist 'GNU LIBICONV' to 'cppp-reiconv'.
+* Remove iconv program, iconv gettext po, iconv manual.
+* Merge package 'iconv_string' into 'cppp-reiconv'.
+* Remove autoconf buildsystem support.
+* Add CMake buildsystem support.
+* Remove translit support.
+* Remove 'CHAR' and 'WCHAR_T' encoding.
+* Change 'cppp-reiconv' to a C++ library.
+
 New in 1.18:
 * Many more transliterations.
 * GB18030 is now an alias for GB18030:2005. A new converter for GB18030:2022

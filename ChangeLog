@@ -1,3 +1,9 @@
+2023-07-03  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Add 'GB18030' tests.
+	Add C++ Plus dist utils and change version info.
+	Remove function 'iconv_open_into'.
+
 2023-07-02  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Add C++ Plus dist utils.
