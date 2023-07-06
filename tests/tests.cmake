@@ -21,7 +21,7 @@ if (ENABLE_TEST)
     add_executable(test-shiftseq "${srcdir}/tests/test-shiftseq.cpp")
     add_executable(genutf8       "${srcdir}/tests/genutf8.cpp")
     add_executable(gengb18030z   "${srcdir}/tests/gengb18030z.cpp")
-    add_executable(uniq-u        "${srcdir}/tests/uniq-u.c")
+    add_executable(uniq-u        "${srcdir}/tests/uniq-u.cpp")
 
     target_link_libraries(table-from    libcppp-reiconv.shared)
     target_link_libraries(table-to      libcppp-reiconv.shared)
