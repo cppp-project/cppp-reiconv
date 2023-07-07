@@ -62,3 +62,25 @@ cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${srcdir
 
 # Include test suite.
 include("tests/tests.cmake")
+
+# Install
+# Static
+# PERMISSIONS 0644
+install(TARGETS libcppp-reiconv.static
+        DESTINATION "${install_staticdir}"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+
+# Shared
+# PERMISSIONS 0755
+install(TARGETS libcppp-reiconv.shared
+        EXPORT libcppp-reiconv-export
+        DESTINATION "${install_shareddir}"
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE )
+
+# Includes
+# install includes
+# PERMISSIONS 0644
+install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
+        DESTINATION "${install_includedir}"
+        RENAME "cppp/reiconv.hpp"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
