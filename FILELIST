@@ -546,10 +546,10 @@ COPYING
 Makefile.devel
 include/cppp/reiconv.hpp.in
 CMakeLists.txt
-README
+README.md
 FILELIST
 CPPPPKG
 cpppdist.py
 ChangeLog
 windows/libcppp-reiconv.rc
-NEWS
+NEWS.md
