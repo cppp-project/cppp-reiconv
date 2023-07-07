@@ -20,12 +20,12 @@
 #ifndef _CPPP_REICONV_HPP
 #define _CPPP_REICONV_HPP
 
-#include <stddef.h>
-#include <stdio.h>
+#include <iostream>
 #include <time.h>
-#include <stddef.h>
 #include <errno.h>
 #include <wchar.h>
+#include <vector>
+#include <exception>
 
 extern "C++"
 {
@@ -190,6 +190,24 @@ extern "C++"
       */
       extern @DLL_VARIABLE@ int iconv_string (const char* tocode, const char* fromcode, const char* start, const char* end, char** resultp, size_t* lengthp);
       
+      inline std::vector<char> encode (std::string from, std::string to,
+                        const std::vector<char>& data, bool ignore = false)
+      {
+         char* result = NULL;
+         size_t length = 0;
+         std::string ignstr = ignore?"//IGNORE":"";
+         if (iconv_string((to + ignstr).c_str(), from.c_str(),
+                          data.data(), data.data() + data.size() + 1, &result, &length) < 0)
+         {
+            if(!ignore)
+            {
+               /* When conversation error, throw the errno, you can catch the errno for more infomation. */
+               throw (int)(errno);
+            }
+         }
+         return std::vector<char>(result, result + length);
+      }
+
    }}}
 }
 
