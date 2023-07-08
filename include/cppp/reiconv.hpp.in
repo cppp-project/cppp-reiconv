@@ -20,6 +20,11 @@
 #ifndef _CPPP_REICONV_HPP
 #define _CPPP_REICONV_HPP
 
+#ifdef _MSC_VER
+/* Use UTF-8 to decode this file. */
+#pragma execution_character_set("utf-8")
+#endif
+
 #include <iostream>
 #include <time.h>
 #include <errno.h>
@@ -31,10 +36,10 @@ extern "C++"
 {
    namespace cppp{namespace base{namespace reiconv
    {
-      extern @DLL_VARIABLE@ int reiconv_version; /* Likewise */
+      extern @DLL_VARIABLE@ int reiconv_version; /* Version info */
 
       #undef iconv_t
-      /* Define iconv_t ourselves. */
+      /* Identifier for conversion method from one codeset to another.  */
       typedef void* iconv_t;
 
       #undef iconv_open
@@ -167,7 +172,7 @@ extern "C++"
       *
       * Converts a memory region given in encoding FROMCODE to a new memory
       * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
-      * except that FROMCODE may be one of the values
+      * except that FROMCODE may be one of the values when enabled extra features
       *    "autodetect_utf8"          supports ISO-8859-1 and UTF-8
       *    "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
       *    "autodetect_kr"            supports EUC-KR and ISO-2022-KR
@@ -183,7 +188,7 @@ extern "C++"
       * Example:
       *   const char* s = ...;
       *   char* result = NULL;
-      *   if (iconv_string("UCS-4-INTERNAL", "autodetect_utf8",
+      *   if (iconv_string("UCS-4-INTERNAL", "GBK",
       *                    s, s+strlen(s)+1, &result, NULL) < 0)
       *     perror("iconv_string");
       *
