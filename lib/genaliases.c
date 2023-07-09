@@ -1,18 +1,18 @@
 /* Copyright (C) 1999-2001, 2003, 2005, 2008, 2012, 2017, 2023 Free Software Foundation, Inc.
-   This file is part of the GNU LIBICONV Library.
+   This file is part of the cppp-reiconv library.
 
-   The GNU LIBICONV Library is free software; you can redistribute it
+   The cppp-reiconv library is free software; you can redistribute it
    and/or modify it under the terms of the GNU Lesser General Public
    License as published by the Free Software Foundation; either version 2.1
    of the License, or (at your option) any later version.
 
-   The GNU LIBICONV Library is distributed in the hope that it will be
+   The cppp-reiconv library is distributed in the hope that it will be
    useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU LIBICONV Library; see the file COPYING.LIB.
+   License along with the cppp-reiconv library; see the file COPYING.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Creates the aliases.gperf table. */
@@ -122,7 +122,6 @@ int main (int argc, char* argv[])
     fprintf(stderr, "Could not open '%s' for writing\n", canonical_local_sh_file_name);
     exit(1);
   }
-#include "encodings_local.def"
   if (ferror(canonical_sh_file) || fclose(canonical_sh_file))
     exit(1);
 

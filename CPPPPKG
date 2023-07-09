@@ -1,0 +1,23 @@
+{
+    "name" : "cppp-reiconv",
+    "version" : "2.0.0",
+    "list_file_path": "FILELIST",
+    "description": "C++ Plus character set conversion library",
+    "authors": [
+        "The C++ Plus Project",
+        "Bruno Haible",
+        "ChenPi11",
+        "Sam Steingold",
+        "Ben Noordhuis",
+        "Mike Fulton",
+        "Daiki Ueno",
+        "KO Myung-Hun"
+    ],
+    "webpage": "https://github.com/cppp-project/cppp-reiconv",
+    "subpackages": {
+        "build-aux": "build-aux"
+    },
+    "license": [
+        "LGPLv3"
+    ]
+}

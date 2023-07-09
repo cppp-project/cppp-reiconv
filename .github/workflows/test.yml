@@ -1,0 +1,59 @@
+name: Test
+
+on:
+  release:
+    types: [published]
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test-linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    #--------------------------------------------collect--------------------------------------------
+    - uses: actions/checkout@v3
+    
+    - name: Collect dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install gcc cmake -y
+    
+    #--------------------------------------------build--------------------------------------------
+    - name: Build
+      run : |
+        mkdir build
+        cd build
+        cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
+    
+    #--------------------------------------------test--------------------------------------------
+    - name: Test
+      run : |
+        ctest --verbose --output-on-failure
+    
+    
+  test-macos:
+
+    runs-on: macos-latest
+
+    steps:
+    #--------------------------------------------collect--------------------------------------------
+    - uses: actions/checkout@v3
+    
+    - name: Collect dependencies
+      run: |
+        brew install cmake -y
+    
+    #--------------------------------------------build--------------------------------------------
+    - name: Build
+      run : |
+        mkdir build
+        cd build
+        cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
+    
+    #--------------------------------------------test--------------------------------------------
+    - name: Test
+      run : |
+        ctest --verbose --output-on-failure

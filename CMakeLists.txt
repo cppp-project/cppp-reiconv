@@ -1,0 +1,86 @@
+# Copyright (C) 2023 The C++ Plus Project.
+# This file is part of the cppp-reiconv library.
+#
+# The cppp-reiconv library is free software; you can redistribute it
+# and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either version 2.1
+# of the License, or (at your option) any later version.
+#
+# The cppp-reiconv library is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with the cppp-reiconv library; see the file COPYING.
+# If not, see <https://www.gnu.org/licenses/>.
+
+cmake_minimum_required(VERSION 3.12)
+project(cppp-reiconv VERSION 2.0.0)
+
+# Define options
+option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 11)
+
+include("${CMAKE_SOURCE_DIR}/build-aux/cmake/cppp.cmake")
+
+check_have_visibility()
+
+# Generate header file for build
+if(WIN32)
+    set(DLL_VARIABLE "__declspec(dllexport)")
+elseif(HAVE_VISIBILITY)
+    set(DLL_VARIABLE "__attribute__((__visibility__(\"default\")))")
+else()
+    set(DLL_VARIABLE "")
+endif()
+configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
+
+# Generate header file for install
+if(WIN32)
+    set(DLL_VARIABLE "__declspec(dllimport)")
+else()
+    set(DLL_VARIABLE "")
+endif()
+configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
+
+# Add includes
+include_directories("${srcdir}/lib")
+include_directories("${srcdir}/lib/generated")
+include_directories("${output_includedir}")
+
+# Add definitions
+if(ENABLE_EXTRA)
+    message(STATUS "Extra encodings and features enabled.")
+    add_compile_definitions(ENABLE_EXTRA=1)
+endif()
+
+# Add library
+cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${srcdir}/windows/libcppp-reiconv.rc")
+
+# Include test suite.
+include("tests/tests.cmake")
+
+# Install
+# Static
+# PERMISSIONS 0644
+install(TARGETS libcppp-reiconv.static
+        DESTINATION "${install_staticdir}"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+
+# Shared
+# PERMISSIONS 0755
+install(TARGETS libcppp-reiconv.shared
+        EXPORT libcppp-reiconv-export
+        DESTINATION "${install_shareddir}"
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE )
+
+# Includes
+# install includes
+# PERMISSIONS 0644
+install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
+        DESTINATION "${install_includedir}"
+        RENAME "cppp/reiconv.hpp"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )

@@ -1,19 +1,19 @@
 /*
  * Copyright (C) 1999-2008, 2011, 2018, 2020, 2023 Free Software Foundation, Inc.
- * This file is part of the GNU LIBICONV Library.
+ * This file is part of the cppp-reiconv library.
  *
- * The GNU LIBICONV Library is free software; you can redistribute it
+ * The cppp-reiconv library is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either version 2.1
  * of the License, or (at your option) any later version.
  *
- * The GNU LIBICONV Library is distributed in the hope that it will be
+ * The cppp-reiconv library is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
+ * License along with the cppp-reiconv library; see the file COPYING.
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
@@ -26,7 +26,6 @@
      unsigned int to_index;
      int to_wchar;
      unsigned int to_surface;
-     int transliterate;
      int discard_ilseq;
    Jumps to 'invalid' in case of errror.
  */
@@ -39,7 +38,6 @@
 
   from_surface = ICONV_SURFACE_NONE;
   to_surface = ICONV_SURFACE_NONE;
-  transliterate = 0;
   discard_ilseq = 0;
 
   /* Before calling aliases_lookup, convert the input string to upper case,
@@ -63,12 +61,8 @@
     }
     for (;;) {
       char *sp = bp;
-      int parsed_translit = 0;
       int parsed_ignore = 0;
-      if (sp-buf > 9 && memcmp(sp-9,"/TRANSLIT",9)==0) {
-        sp = sp - 9;
-        parsed_translit = 1;
-      } else if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
+      if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
         sp = sp - 7;
         parsed_ignore = 1;
       }
@@ -80,71 +74,15 @@
       } else
         break;
       *bp = '\0';
-      if (parsed_translit)
-        transliterate = 1;
       if (parsed_ignore)
         discard_ilseq = 1;
       break;
-    }
-    if (buf[0] == '\0') {
-      tocode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (tocode[0] == '\0')
-        goto invalid;
-      continue;
     }
     ap = aliases_lookup(buf,bp-buf);
     if (ap == NULL) {
       ap = aliases2_lookup(buf);
       if (ap == NULL)
         goto invalid;
-    }
-    if (ap->encoding_index == ei_local_char) {
-      tocode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (tocode[0] == '\0')
-        goto invalid;
-      continue;
-    }
-    if (ap->encoding_index == ei_local_wchar_t) {
-      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if (defined _WIN32 && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        to_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        to_index = ei_utf16le;
-# else
-        to_index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
-      if (sizeof(wchar_t) == 4) {
-        to_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-        to_index = ei_ucs2internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 1) {
-        to_index = ei_iso8859_1;
-        break;
-      }
-#endif
-#if HAVE_MBRTOWC
-      to_wchar = 1;
-      tocode = locale_charset();
-      continue;
-#endif
-      goto invalid;
     }
     to_index = ap->encoding_index;
     break;
@@ -165,12 +103,8 @@
     }
     for (;;) {
       char *sp = bp;
-      int parsed_translit = 0;
       int parsed_ignore = 0;
-      if (sp-buf > 9 && memcmp(sp-9,"/TRANSLIT",9)==0) {
-        sp = sp - 9;
-        parsed_translit = 1;
-      } else if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
+      if (sp-buf > 7 && memcmp(sp-7,"/IGNORE",7)==0) {
         sp = sp - 7;
         parsed_ignore = 1;
       }
@@ -182,71 +116,15 @@
       } else
         break;
       *bp = '\0';
-      if (parsed_translit)
-        transliterate = 1;
       if (parsed_ignore)
         discard_ilseq = 1;
       break;
-    }
-    if (buf[0] == '\0') {
-      fromcode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (fromcode[0] == '\0')
-        goto invalid;
-      continue;
     }
     ap = aliases_lookup(buf,bp-buf);
     if (ap == NULL) {
       ap = aliases2_lookup(buf);
       if (ap == NULL)
         goto invalid;
-    }
-    if (ap->encoding_index == ei_local_char) {
-      fromcode = locale_charset();
-      /* Avoid an endless loop that could occur when using an older version
-         of localcharset.c. */
-      if (fromcode[0] == '\0')
-        goto invalid;
-      continue;
-    }
-    if (ap->encoding_index == ei_local_wchar_t) {
-      /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if (defined _WIN32 && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        from_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        from_index = ei_utf16le;
-# else
-        from_index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
-      if (sizeof(wchar_t) == 4) {
-        from_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-        from_index = ei_ucs2internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 1) {
-        from_index = ei_iso8859_1;
-        break;
-      }
-#endif
-#if HAVE_WCRTOMB
-      from_wchar = 1;
-      fromcode = locale_charset();
-      continue;
-#endif
-      goto invalid;
     }
     from_index = ap->encoding_index;
     break;
