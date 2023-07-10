@@ -21,18 +21,22 @@ jobs:
         sudo apt-get update
         sudo apt-get install gcc cmake -y
     
+    - name: Setup build-aux
+      run: |
+        ./setup.sh
+    
     #--------------------------------------------build--------------------------------------------
     - name: Build
       run : |
-        mkdir build
+        mkdir -p build
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
+        cmake --build .
     
     #--------------------------------------------test--------------------------------------------
     - name: Test
       run : |
-        ctest --verbose --output-on-failure
-    
+        ctest --verbose
     
   test-macos:
 
@@ -46,7 +50,7 @@ jobs:
       run: |
         brew install cmake -y
     
-    - name: Setup repos
+    - name: Setup build-aux
       run : |
         ./setup.sh
     
@@ -56,8 +60,9 @@ jobs:
         mkdir build
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
+        cmake --build .
     
     #--------------------------------------------test--------------------------------------------
     - name: Test
       run : |
-        ctest --verbose --output-on-failure
+        ctest --verbose
