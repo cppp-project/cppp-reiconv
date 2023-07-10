@@ -46,6 +46,10 @@ jobs:
       run: |
         brew install cmake -y
     
+    - name: Setup repos
+      run : |
+        ./setup.sh
+    
     #--------------------------------------------build--------------------------------------------
     - name: Build
       run : |
