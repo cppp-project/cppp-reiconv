@@ -64,8 +64,11 @@ jobs:
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
         cmake --build .
+        cd ..
     
     #--------------------------------------------test--------------------------------------------
     - name: Test
       run : |
+        cd build
         ctest --verbose
+        cd ..
