@@ -32,11 +32,14 @@ jobs:
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
         cmake --build .
+        cd ..
     
     #--------------------------------------------test--------------------------------------------
     - name: Test
       run : |
+        cd build
         ctest --verbose
+        cd ..
     
   test-macos:
 
@@ -48,7 +51,7 @@ jobs:
     
     - name: Collect dependencies
       run: |
-        brew install cmake -y
+        brew install cmake
     
     - name: Setup build-aux
       run : |
