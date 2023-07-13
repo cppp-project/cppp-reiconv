@@ -1,4 +1,4 @@
-name: Test
+name: ✔️ Test cppp-reiconv library
 
 on:
   release:
@@ -16,17 +16,17 @@ jobs:
     #--------------------------------------------collect--------------------------------------------
     - uses: actions/checkout@v3
     
-    - name: Collect dependencies
+    - name: 📁 Collect dependencies
       run: |
         sudo apt-get update
         sudo apt-get install gcc cmake -y
     
-    - name: Setup build-aux
+    - name: 🧰 Setup build-aux
       run: |
         ./setup.sh
     
     #--------------------------------------------build--------------------------------------------
-    - name: Build
+    - name: 🛠️ Build
       run : |
         mkdir -p build
         cd build
@@ -35,7 +35,7 @@ jobs:
         cd ..
     
     #--------------------------------------------test--------------------------------------------
-    - name: Test
+    - name: ✔️ Test
       run : |
         cd build
         ctest --verbose
@@ -49,16 +49,16 @@ jobs:
     #--------------------------------------------collect--------------------------------------------
     - uses: actions/checkout@v3
     
-    - name: Collect dependencies
+    - name: 📁 Collect dependencies
       run: |
         brew install cmake
     
-    - name: Setup build-aux
+    - name: 🧰 Setup build-aux
       run : |
         ./setup.sh
     
     #--------------------------------------------build--------------------------------------------
-    - name: Build
+    - name: 🛠️ Build
       run : |
         mkdir build
         cd build
@@ -67,7 +67,7 @@ jobs:
         cd ..
     
     #--------------------------------------------test--------------------------------------------
-    - name: Test
+    - name: ✔️ Test
       run : |
         cd build
         ctest --verbose
