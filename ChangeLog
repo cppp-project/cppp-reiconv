@@ -1,3 +1,17 @@
+2023-07-12  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Change `int` to 'unsigned short' in canonical headers.
+	Finish GitHub CI test for Linux and macOS.
+
+2023-07-10  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Update build-aux setup scripts.
+	Fix GitHub test CI's bug.
+
+2023-07-08  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Add GitHub test CI.
+
 2023-07-07  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Perfect the documents.
