@@ -40,6 +40,10 @@ include("${AUX_DIR}/cppp.cmake")
 
 check_have_visibility()
 
+if(MSVC)
+    add_compile_options(/wd4018)
+endif()
+
 # Generate header file for build
 if(WIN32)
     set(DLL_VARIABLE "__declspec(dllexport)")
@@ -49,6 +53,7 @@ else()
     set(DLL_VARIABLE "")
 endif()
 configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
+configure_file("${srcdir}/windows/libcppp-reiconv.rc.in" "${outdir}/windows/libcppp-reiconv.rc")
 
 # Generate header file for install
 if(WIN32)
@@ -70,7 +75,7 @@ if(ENABLE_EXTRA)
 endif()
 
 # Add library
-cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${srcdir}/windows/libcppp-reiconv.rc")
+cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${outdir}/windows/libcppp-reiconv.rc")
 
 # Include test suite.
 include("tests/tests.cmake")
