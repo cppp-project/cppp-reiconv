@@ -1,3 +1,13 @@
+2023-07-16  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Fix encoding bug in Windows Resource '(C)' character.
+	Fix shared library runtime and archive install destination problem.
+
+2023-07-15  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Fix macro bug in MSVC resource build.
+	Add GitHub build CI for Linux and macOS.
+
 2023-07-12  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Change `int` to 'unsigned short' in canonical headers.

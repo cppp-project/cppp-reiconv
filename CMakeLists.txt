@@ -85,14 +85,22 @@ include("tests/tests.cmake")
 # PERMISSIONS 0644
 install(TARGETS libcppp-reiconv.static
         DESTINATION "${install_staticdir}"
-        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+        LIBRARY DESTINATION "${install_shareddir}"
+        ARCHIVE DESTINATION "${install_staticdir}"
+        RUNTIME DESTINATION "${install_bindir}"
+        INCLUDES DESTINATION "${install_includedir}" )
 
 # Shared
 # PERMISSIONS 0755
 install(TARGETS libcppp-reiconv.shared
         EXPORT libcppp-reiconv-export
         DESTINATION "${install_shareddir}"
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE )
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+        LIBRARY DESTINATION "${install_shareddir}"
+        ARCHIVE DESTINATION "${install_staticdir}"
+        RUNTIME DESTINATION "${install_bindir}"
+        INCLUDES DESTINATION "${install_includedir}" )
 
 # Includes
 # install includes
