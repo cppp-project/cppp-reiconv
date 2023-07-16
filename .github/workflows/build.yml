@@ -1,0 +1,306 @@
+name: 🛠️ Build cppp-reiconv
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  build-dist:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    #--------------------------------------------collect--------------------------------------------
+    - uses: actions/checkout@v3
+    
+    - name: 🏷️ Get infomations
+      run: |
+        tag="${GITHUB_REF#refs/tags/}"
+        echo "tag=$tag" >> $GITHUB_ENV
+        echo "pkgname=cppp-reiconv-$tag" >> $GITHUB_ENV
+        echo "srcdir=$(pwd)" >> $GITHUB_ENV
+
+    - name: 📁 Collect dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install p7zip-full zip xz-utils -y
+        sudo apt-get install gperf cmake gcc python3 -y
+        
+    #--------------------------------------------build--------------------------------------------
+    - name: 🧳 Prepare for source distribution building
+      run: |
+        mkdir -p ./dist
+        ./setup.sh
+    
+    - name: 🛠️ Build source distribution
+      run: |
+        ./cpppdist.py
+    
+    - name: 📦 Make packages
+      run: |
+        tar cvf ${{ env.pkgname }}.tar ${{ env.pkgname }}
+        zip -r -9 dist/${{ env.pkgname }}.zip ${{ env.pkgname }}
+        7z a dist/${{ env.pkgname }}.7z ${{ env.pkgname }}
+        xz -c -9 -k ${{ env.pkgname }}.tar > dist/${{ env.pkgname }}.tar.xz
+        gzip -c -9 -k ${{ env.pkgname }}.tar > dist/${{ env.pkgname }}.tar.gz
+
+        cd dist
+        for i in $(ls) ; do md5sum $i > $i.md5 ; done
+        cd ..
+    
+    #--------------------------------------------publish--------------------------------------------
+
+    - name: ⬆️ Create release and upload assets
+      uses: softprops/action-gh-release@v1
+      with:
+          tag_name: ${{ env.tag }}
+          files: ./dist/*
+
+  build-linux:
+  
+    needs: build-dist
+
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [
+            aarch64-linux-gnu,
+            alpha-linux-gnu,
+            arm-linux-gnueabi,
+            arm-linux-gnueabihf,
+            i686-linux-gnu,
+            mips-linux-gnu,
+            mips64-linux-gnuabi64,
+            mips64el-linux-gnuabi64,
+            mipsel-linux-gnu,
+            mipsisa32r6-linux-gnu,
+            mipsisa32r6el-linux-gnu,
+            mipsisa64r6-linux-gnuabi64,
+            mipsisa64r6el-linux-gnuabi64,
+            powerpc-linux-gnu,
+            powerpc64-linux-gnu,
+            powerpc64le-linux-gnu,
+            riscv64-linux-gnu,
+            sh4-linux-gnu,
+            x86_64-linux-gnu
+          ]
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+    #--------------------------------------------collect--------------------------------------------
+    - name: 🏷️ Get infomations
+      run: |
+        tag="${GITHUB_REF#refs/tags/}"
+        echo "tag=$tag" >> $GITHUB_ENV
+        echo "pkgname=cppp-reiconv-$tag" >> $GITHUB_ENV
+        echo "srcdir=$(pwd)" >> $GITHUB_ENV
+
+    - name: 📁 Collect dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install p7zip-full zip xz-utils wget -y
+        sudo apt-get install gperf cmake -y
+        if [ "${{ matrix.arch }}" = "x86_64-linux-gnu" ] ;
+        then
+          sudo apt-get install gcc g++ -y ;
+        else
+          sudo apt-get install gcc-${{ matrix.arch }} g++-${{ matrix.arch }} -y ;
+        fi
+    
+    - name: 📁 Get source distribution tarball
+      run: |
+        wget https://github.com/${{ github.repository }}/releases/download/${{ env.tag }}/${{ env.pkgname }}.tar.gz
+        tar zxvf ${{ env.pkgname }}.tar.gz
+        mv ${{ env.pkgname }}/* .
+    
+    #--------------------------------------------build--------------------------------------------
+    - name: 🧳 Prepare for binary distribution building
+      run: |
+        mkdir -p dist
+    
+    - name: 🛠️ Build binary distribution
+      run: |
+        export C_COMPILER="gcc"
+        export CXX_COMPILER="g++"
+        export LINKER="ld"
+        export CC="/usr/bin/${{ matrix.arch }}-$C_COMPILER"
+        export CXX="/usr/bin/${{ matrix.arch }}-$CXX_COMPILER"
+        export LD="/usr/bin/${{ matrix.arch }}-$LINKER"
+
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }} -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_LINKER=$LD
+        cmake --build . --config=Release
+        cmake --install .
+        cd ..
+    
+    - name: 📦 Make packages
+      run: |
+        tar cvf ${{ env.pkgname }}-${{ matrix.arch }}.tar ${{ env.pkgname }}-${{ matrix.arch }}
+        zip -r -9 dist/${{ env.pkgname }}-${{ matrix.arch }}.zip ${{ env.pkgname }}-${{ matrix.arch }}
+        7z a dist/${{ env.pkgname }}-${{ matrix.arch }}.7z ${{ env.pkgname }}-${{ matrix.arch }}
+        xz -c -9 -k ${{ env.pkgname }}-${{ matrix.arch }}.tar > dist/${{ env.pkgname }}-${{ matrix.arch }}.tar.xz
+        gzip -c -9 -k ${{ env.pkgname }}-${{ matrix.arch }}.tar > dist/${{ env.pkgname }}-${{ matrix.arch }}.tar.gz
+
+        cd dist
+        for i in $(ls) ; do md5sum $i > $i.md5 ; done
+        cd ..
+    
+    #--------------------------------------------publish--------------------------------------------
+
+    - name: ⬆️ Create release and upload assets
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.tag }}
+        files: ./dist/*
+
+  build-macos:
+
+    needs: build-dist
+
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [
+            x86_64,
+            arm64
+          ]
+    
+    runs-on: macos-latest
+    
+    steps:
+    
+    #--------------------------------------------collect--------------------------------------------
+    - name: 🏷️ Get infomations
+      run: |
+        tag="${GITHUB_REF#refs/tags/}"
+        echo "tag=$tag" >> $GITHUB_ENV
+        echo "pkgname=cppp-reiconv-$tag" >> $GITHUB_ENV
+        echo "srcdir=$(pwd)" >> $GITHUB_ENV
+
+    - name: 📁 Collect dependencies
+      run: |
+        brew install p7zip zip xz wget md5sha1sum
+        brew install gperf cmake
+    
+    - name: 📁 Get source distribution tarball
+      run: |
+        wget https://github.com/${{ github.repository }}/releases/download/${{ env.tag }}/${{ env.pkgname }}.tar.gz
+        tar zxvf ${{ env.pkgname }}.tar.gz
+        mv ${{ env.pkgname }}/* .
+    
+    #--------------------------------------------build--------------------------------------------
+    - name: 🧳 Prepare for binary distribution building
+      run: |
+        mkdir -p dist
+    
+    - name: 🛠️ Build binary distribution
+      run: |
+        export CC="clang"
+        export CXX="clang++"
+
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -arch ${{ matrix.arch }}" -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -arch ${{ matrix.arch }}"
+        cmake --build . --config=Release
+        cmake --install .
+        cd ..
+    
+    - name: 📦 Make packages
+      run: |
+        tar cvf ${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple.tar ${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple
+        zip -r -9 dist/${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple.zip ${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple
+        7z a dist/${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple.7z ${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple
+        xz -c -9 -k ${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple.tar > dist/${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple.tar.xz
+        gzip -c -9 -k ${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple.tar > dist/${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple.tar.gz
+
+        cd dist
+        for i in $(ls) ; do md5sum $i > $i.md5 ; done
+        cd ..    
+    #--------------------------------------------publish--------------------------------------------
+
+    - name: ⬆️ Create release and upload assets
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.tag }}
+        files: ./dist/*
+
+  build-msvc:
+
+    needs: build-dist
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { arch: amd64, msvc_arch: x64 }
+          - { arch: i386, msvc_arch: Win32 }
+          - { arch: arm64, msvc_arch: ARM64 }
+          - { arch: arm, msvc_arch: ARM }
+
+    runs-on: windows-latest
+
+    steps:
+
+      #--------------------------------------------collect--------------------------------------------
+      - name: 🧳 Set up MSVC
+        uses: microsoft/setup-msbuild@v1
+
+      - name: 🏷️ Get infomations
+        run: |
+          $tag="$env:GITHUB_REF_NAME"
+          echo "tag=$tag" >> $env:GITHUB_ENV
+          echo "pkgname=cppp-reiconv-$tag" >> $env:GITHUB_ENV
+          echo "srcdir=$($PWD.Path)" >> $env:GITHUB_ENV
+      
+      - name: 📁 Collect dependencies
+        run: |
+          choco install 7zip.commandline zip gzip dos2unix wget mingw -y
+      
+      - name: 📁 Get source distribution tarball
+        run: |
+          wget https://github.com/${{ github.repository }}/releases/download/${{ env.tag }}/${{ env.pkgname }}.tar.gz
+          tar zxvf ${{ env.pkgname }}.tar.gz
+          Move-Item -Path ${{ env.pkgname }}\* -Destination .
+      
+      - name: 🧳 Prepare for binary distribution building
+        run: |
+          mkdir dist
+
+      - name: 🛠️ Build binary distribution
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc -A ${{ matrix.msvc_arch }}
+          cmake --build . --config=Release
+          cmake --install .
+          cd ..
+      
+      - name: 📦 Make packages
+        run: |
+          tar cvf ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc.tar ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc
+          zip -r -9 dist/${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc.zip ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc
+          7z a dist/${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc.7z ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc
+          xz -9 -k ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc.tar
+          gzip -9 -k ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc.tar
+          mv ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc.tar.xz dist
+          mv ${{ env.pkgname }}-${{ matrix.arch }}-windows-msvc.tar.gz dist
+  
+          cd dist
+          Get-ChildItem | ForEach-Object {
+            md5sum $_.Name > ($_.Name + ".md5")
+            dos2unix ($_.Name + ".md5")
+          }
+          cd ..
+      
+      #--------------------------------------------publish--------------------------------------------
+  
+      - name: ⬆️ Create release and upload assets
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.tag }}
+          files: ./dist/*

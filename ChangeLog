@@ -1,5 +1,6 @@
 2023-07-16  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
+	Finish GitHub build CI for Windows.
 	Fix encoding bug in Windows Resource '(C)' character.
 	Fix shared library runtime and archive install destination problem.
 
