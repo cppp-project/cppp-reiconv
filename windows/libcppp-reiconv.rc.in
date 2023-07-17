@@ -2,6 +2,11 @@
 
 #include <winver.h>
 
+#define PROJECT_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define PROJECT_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define PROJECT_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define PROJECT_VERSION "@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@"
+
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION PROJECT_VERSION_MAJOR,PROJECT_VERSION_MINOR,PROJECT_VERSION_PATCH,0
  PRODUCTVERSION PROJECT_VERSION_MAJOR,PROJECT_VERSION_MINOR,PROJECT_VERSION_PATCH,0
@@ -24,7 +29,7 @@ BEGIN
             VALUE "FileDescription", "LGPLed cppp-reiconv for Windows\0"
             VALUE "FileVersion", PROJECT_VERSION "\0"
             VALUE "InternalName", "libcppp-reiconv.dll\0"
-            VALUE "LegalCopyright", "Copyright © 2023\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "libcppp-reiconv.dll\0"
             VALUE "ProductName", "cppp-reiconv: character set conversion library\0"

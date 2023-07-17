@@ -31,7 +31,6 @@ if exist ..\build-aux (
 )
 
 echo Notice: '..\build-aux' for C++ Plus are not exists, cloning it......
-echo Notice: It will be cloned to '.\build-aux' and ignored by '.gitignore', if you 'git clean' this project, The '.\build-aux' may be deleted, and you will need to rerun this script to adapt to your environment at that time.
 git clone https://github.com/cppp-project/build-aux
 if %errorlevel%==0 (
     echo Success: '.\build-aux' cloned successfully, please don't remove it, and you can develop this package normally.

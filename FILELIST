@@ -551,5 +551,5 @@ FILELIST
 CPPPPKG
 cpppdist.py
 ChangeLog
-windows/libcppp-reiconv.rc
+windows/libcppp-reiconv.rc.in
 NEWS.md

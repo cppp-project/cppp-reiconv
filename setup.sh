@@ -48,7 +48,6 @@ then
 fi
 
 text_out 0 "Notice" "'../build-aux' for C++ Plus are not exists, cloning it......"
-text_out 0 "Notice" "It will be cloned to './build-aux' and ignored by '.gitignore', if you 'git clean' this project, The './build-aux' may be deleted, and you will need to rerun this script to adapt to your environment at that time."
 execute "git clone https://github.com/cppp-project/build-aux"
 if [ $? -eq 0 ]
 then

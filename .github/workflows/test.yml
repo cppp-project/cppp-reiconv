@@ -1,4 +1,4 @@
-name: Test
+name: ✔️ Test cppp-reiconv library
 
 on:
   release:
@@ -16,23 +16,30 @@ jobs:
     #--------------------------------------------collect--------------------------------------------
     - uses: actions/checkout@v3
     
-    - name: Collect dependencies
+    - name: 📁 Collect dependencies
       run: |
         sudo apt-get update
         sudo apt-get install gcc cmake -y
     
+    - name: 🧰 Setup build-aux
+      run: |
+        ./setup.sh
+    
     #--------------------------------------------build--------------------------------------------
-    - name: Build
+    - name: 🛠️ Build
       run : |
-        mkdir build
+        mkdir -p build
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
+        cmake --build .
+        cd ..
     
     #--------------------------------------------test--------------------------------------------
-    - name: Test
+    - name: ✔️ Test
       run : |
-        ctest --verbose --output-on-failure
-    
+        cd build
+        ctest --verbose
+        cd ..
     
   test-macos:
 
@@ -42,18 +49,26 @@ jobs:
     #--------------------------------------------collect--------------------------------------------
     - uses: actions/checkout@v3
     
-    - name: Collect dependencies
+    - name: 📁 Collect dependencies
       run: |
-        brew install cmake -y
+        brew install cmake
+    
+    - name: 🧰 Setup build-aux
+      run : |
+        ./setup.sh
     
     #--------------------------------------------build--------------------------------------------
-    - name: Build
+    - name: 🛠️ Build
       run : |
         mkdir build
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
+        cmake --build .
+        cd ..
     
     #--------------------------------------------test--------------------------------------------
-    - name: Test
+    - name: ✔️ Test
       run : |
-        ctest --verbose --output-on-failure
+        cd build
+        ctest --verbose
+        cd ..

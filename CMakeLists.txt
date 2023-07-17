@@ -24,9 +24,25 @@ option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 11)
 
-include("${CMAKE_SOURCE_DIR}/build-aux/cmake/cppp.cmake")
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
+    set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
+    set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
+else()
+    message(FATAL_ERROR "CMake build-aux directory is not exists, try to execute 'setup.cmd' or './setup.sh' to get it.")
+endif()
+set(AUX_DIR "${BUILD_AUX}/cmake")
+
+message(STATUS "Using '${BUILD_AUX}' for C++ Plus build-aux directory.")
+add_subdirectory("${BUILD_AUX}")
+
+include("${AUX_DIR}/cppp.cmake")
 
 check_have_visibility()
+
+if(MSVC)
+    add_compile_options(/wd4018)
+endif()
 
 # Generate header file for build
 if(WIN32)
@@ -37,6 +53,7 @@ else()
     set(DLL_VARIABLE "")
 endif()
 configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
+configure_file("${srcdir}/windows/libcppp-reiconv.rc.in" "${outdir}/windows/libcppp-reiconv.rc")
 
 # Generate header file for install
 if(WIN32)
@@ -58,7 +75,7 @@ if(ENABLE_EXTRA)
 endif()
 
 # Add library
-cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${srcdir}/windows/libcppp-reiconv.rc")
+cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${outdir}/windows/libcppp-reiconv.rc")
 
 # Include test suite.
 include("tests/tests.cmake")
@@ -68,14 +85,22 @@ include("tests/tests.cmake")
 # PERMISSIONS 0644
 install(TARGETS libcppp-reiconv.static
         DESTINATION "${install_staticdir}"
-        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+        LIBRARY DESTINATION "${install_shareddir}"
+        ARCHIVE DESTINATION "${install_staticdir}"
+        RUNTIME DESTINATION "${install_bindir}"
+        INCLUDES DESTINATION "${install_includedir}" )
 
 # Shared
 # PERMISSIONS 0755
 install(TARGETS libcppp-reiconv.shared
         EXPORT libcppp-reiconv-export
         DESTINATION "${install_shareddir}"
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE )
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+        LIBRARY DESTINATION "${install_shareddir}"
+        ARCHIVE DESTINATION "${install_staticdir}"
+        RUNTIME DESTINATION "${install_bindir}"
+        INCLUDES DESTINATION "${install_includedir}" )
 
 # Includes
 # install includes
