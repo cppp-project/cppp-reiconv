@@ -1,3 +1,5 @@
+![cppp-reiconv logo](https://cppp-project.github.io/cppp-res.github.io/images/reiconv-icon.png)
+
 # cppp-reiconv
 A character set conversion library based on GNU LIBICONV.
 
