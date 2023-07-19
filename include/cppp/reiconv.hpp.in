@@ -202,7 +202,7 @@ extern "C++"
          size_t length = 0;
          std::string ignstr = ignore?"//IGNORE":"";
          if (iconv_string((to + ignstr).c_str(), from.c_str(),
-                          data.data(), data.data() + data.size() + 1, &result, &length) < 0)
+                          data.data(), data.data() + data.size(), &result, &length) < 0)
          {
             if(!ignore)
             {

@@ -1,3 +1,7 @@
+2023-07-19  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Fix encode()'s EILSEQ bug.
+
 2023-07-17  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Add social preview in README.md.
