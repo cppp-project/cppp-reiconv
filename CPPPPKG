@@ -15,7 +15,7 @@
     ],
     "webpage": "https://github.com/cppp-project/cppp-reiconv",
     "subpackages": {
-        "build-aux": "build-aux"
+        "build-aux": { "path": "build-aux", "ignore": true }
     },
     "license": [
         "LGPLv3"

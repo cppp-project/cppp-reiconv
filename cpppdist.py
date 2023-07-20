@@ -5,7 +5,7 @@
 #
 # The cppp library is free software; you can redistribute it
 # and/or modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation; either version 2.1
+# License as published by the Free Software Foundation; either version 3
 # of the License, or (at your option) any later version.
 #
 # The cppp library is distributed in the hope that it will be
@@ -23,9 +23,30 @@ import os
 import sys
 import json
 import shutil
+import importlib.util
 
 PACKAGE_INFO = "CPPPPKG"
-PROGNAME = "cpppdist"
+PROGNAME = "cpppdist.py"
+
+def import_file(path):
+    """
+    Import a Python file from it's path
+
+    Args:
+        path (str): Python file's path
+
+    Raises:
+        ModuleNotFoundError: When module invalid, load error or not found.
+
+    Returns:
+        ModuleType: module
+    """
+    spec = importlib.util.spec_from_file_location(os.path.basename(path).replace(".py", ""), path)
+    if(spec == None):
+        raise ModuleNotFoundError("Invalid module or module not found: " + path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 class Package:
     """
@@ -48,10 +69,15 @@ class Package:
                 try:
                     _subpackages = data["subpackages"]
                     for pkgname in _subpackages:
-                        pkgpath = _subpackages[pkgname]
-                        pkgmodule_path = pkgpath.replace("/",".").replace("\\",".").strip() + "." + PROGNAME
-                        pkgmodule = eval(f"__import__(pkgmodule_path).{PROGNAME}")
-                        self.subpackages[pkgpath] = pkgmodule.package
+                        pkgpath = _subpackages[pkgname]["path"]
+                        try:
+                            pkgmodule = import_file(os.path.join(pkgpath, PROGNAME))
+                            self.subpackages[pkgpath] = pkgmodule.package
+                        except Exception as e:
+                            if(not _subpackages[pkgname]["ignore"]):
+                                raise
+                            else:
+                                print(f"DEBUG: Ignore a subpackage '{pkgname}': {e}", file=sys.stderr)
                 except KeyError:
                     pass
                 self.filelist = self.get_file_list()
@@ -80,7 +106,7 @@ class Package:
             os.chdir(fwd)
             if(os.path.exists(dest)):
                 shutil.rmtree(dest)
-            print(f"Copying package '{self.name}' to '{dest}' ... ", file=sys.stderr)
+            print(f"Copy package '{self.name}' to '{dest}' ... ", file=sys.stderr)
             progressbar = ProgressBar(len(self.filelist))
             for file in self.filelist:
                 relpath = os.path.relpath(file, fwd)
