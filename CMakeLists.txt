@@ -62,6 +62,7 @@ else()
     set(DLL_VARIABLE "")
 endif()
 configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
+cppp_nls_autotranslate("${output_includedir}/cppp/reiconv.hpp.inst" "${srcdir}/lang")
 
 # Add includes
 include_directories("${srcdir}/lib")

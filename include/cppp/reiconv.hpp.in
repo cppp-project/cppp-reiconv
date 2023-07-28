@@ -1,3 +1,11 @@
+/**
+ * @file cppp/reiconv.hpp
+ * @author ChenPi11
+ * @brief C++ Plus base definitions
+ * @version 2.0.1
+ * @date 2023-7-28
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ */
 /* Copyright (C) 1999-2023 Free Software Foundation, Inc.
    This file is part of the cppp-reiconv library.
 
@@ -36,29 +44,50 @@ extern "C++"
 {
    namespace cppp{namespace base{namespace reiconv
    {
-      extern @DLL_VARIABLE@ int reiconv_version; /* Version info */
+      /**
+       * @brief Version infomation. (major<<8) + minor
+       */
+      extern @DLL_VARIABLE@ int reiconv_version;
 
       #undef iconv_t
-      /* Identifier for conversion method from one codeset to another.  */
+      /**
+       * @typedef void*
+       * @brief Identifier for conversion method from one codeset to another.
+       */
       typedef void* iconv_t;
 
       #undef iconv_open
-      /* Allocates descriptor for code conversion from encoding ‘fromcode’ to
-         encoding ‘tocode’. */
+      /**
+       * @brief Allocates descriptor for code conversion from encoding 'fromcode' to encoding 'tocode'.
+       * @param tocode Target encoding.
+       * @param fromcode From encoding.
+       * @return Allocated iconv conversation buffer's pointer.
+       */
       extern @DLL_VARIABLE@ iconv_t iconv_open (const char* tocode, const char* fromcode);
 
       #undef iconv
-      /* Converts, using conversion descriptor ‘cd’, at most ‘*inbytesleft’ bytes
-         starting at ‘*inbuf’, writing at most ‘*outbytesleft’ bytes starting at
-         ‘*outbuf’.
-         Decrements ‘*inbytesleft’ and increments ‘*inbuf’ by the same amount.
-         Decrements ‘*outbytesleft’ and increments ‘*outbuf’ by the same amount. */
-      extern @DLL_VARIABLE@ size_t iconv (iconv_t cd, char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
+      /**
+       * @brief Converts, using conversion descriptor 'cd', at most '*inbytesleft' bytes starting at '*inbuf', writing at most '*outbytesleft' bytes starting at '*outbuf'.
+       * @attention Decrements '*inbytesleft' and increments '*inbuf' by the same amount.
+       * @attention Decrements '*outbytesleft' and increments '*outbuf' by the same amount.
+       * @param cd Conversion descriptor.
+       * @param inbuf Input buffer.
+       * @param inbytesleft Input bytes left.
+       * @param outbuf Output buffer.
+       * @param outbytesleft Output bytes left.
+       * @return Number of converted characters (excluding terminators, -1 means error).
+       */
+      extern @DLL_VARIABLE@ size_t iconv (iconv_t cd, char** inbuf, size_t* inbytesleft, char** outbuf, size_t* outbytesleft);
 
       #undef iconv_close
-      /* Frees resources allocated for conversion descriptor ‘cd’. */
+      /**
+       * @brief Frees resources allocated for conversion descriptor 'cd'.
+       * @param cd Conversion descriptor you want to close.
+       * @return Operation status. (-1 means error, 0 means success).
+       */
       extern @DLL_VARIABLE@ int iconv_close (iconv_t cd);
 
+      // We will remove this typedef in the next commit, because function 'iconv_open_into was removed'.
       /* A type that holds all memory needed by a conversion descriptor.
          A pointer to such an object can be used as an iconv_t. */
       typedef struct
@@ -67,14 +96,28 @@ extern "C++"
          mbstate_t dummy2;
       } iconv_allocation_t;
 
-      /* Control of attributes. */
+      /**
+       * @brief Control of attributes.
+       * @param cd Conversion descriptor.
+       * @param request Attribute request id.
+       * @param argument Attribute argument.
+       * @return Operation status (>=0 means success, <0 means error).
+       */
       extern @DLL_VARIABLE@ int iconvctl (iconv_t cd, int request, void* argument);
 
-      /* Hook performed after every successful conversion of a Unicode character. */
+      /**
+       * @typedef void (*) (unsigned int, void*)
+       * @brief Hook performed after every successful conversion of a Unicode character.
+       */
       typedef void (*iconv_unicode_char_hook) (unsigned int uc, void* data);
-      /* Hook performed after every successful conversion of a wide character. */
+      /**
+       * @typedef void (*) (wchar_t, void*)
+       * @brief Hook performed after every successful conversion of a wide character.
+       */
       typedef void (*iconv_wide_char_hook) (wchar_t wc, void* data);
-      /* Set of hooks. */
+      /**
+       * @brief Set of hooks.
+       */
       struct iconv_hooks
       {
          iconv_unicode_char_hook uc_hook;
@@ -82,10 +125,12 @@ extern "C++"
          void* data;
       };
 
-      /* Fallback function.  Invoked when a small number of bytes could not be
-         converted to a Unicode character.  This function should process all
-         bytes from inbuf and may produce replacement Unicode characters by calling
-         the write_replacement callback repeatedly.  */
+      /**
+       * @brief Fallback function.  Invoked when a small number of bytes could not be
+       *        converted to a Unicode character.  This function should process all
+       *        bytes from inbuf and may produce replacement Unicode characters by calling
+       *        the write_replacement callback repeatedly.
+       */
       typedef void (*iconv_unicode_mb_to_uc_fallback)
                   (const char* inbuf, size_t inbufsize,
                   void (*write_replacement) (const unsigned int *buf, size_t buflen,
@@ -93,10 +138,12 @@ extern "C++"
                   void* callback_arg,
                   void* data);
       
-      /* Fallback function.  Invoked when a Unicode character could not be converted
-         to the target encoding.  This function should process the character and
-         may produce replacement bytes (in the target encoding) by calling the
-         write_replacement callback repeatedly.  */
+      /**
+       * @brief Fallback function.  Invoked when a Unicode character could not be converted
+       *        to the target encoding.  This function should process the character and
+       *        may produce replacement bytes (in the target encoding) by calling the
+       *        write_replacement callback repeatedly.
+       */
       typedef void (*iconv_unicode_uc_to_mb_fallback)
                   (unsigned int code,
                   void (*write_replacement) (const char *buf, size_t buflen,
@@ -104,10 +151,12 @@ extern "C++"
                   void* callback_arg,
                   void* data);
 
-      /* Fallback function.  Invoked when a number of bytes could not be converted to
-         a wide character.  This function should process all bytes from inbuf and may
-         produce replacement wide characters by calling the write_replacement
-         callback repeatedly.  */
+      /**
+       * @brief Fallback function.  Invoked when a number of bytes could not be converted to
+       *        a wide character.  This function should process all bytes from inbuf and may
+       *        produce replacement wide characters by calling the write_replacement
+       *        callback repeatedly.
+       */
       typedef void (*iconv_wchar_mb_to_wc_fallback)
                   (const char* inbuf, size_t inbufsize,
                   void (*write_replacement) (const wchar_t *buf, size_t buflen,
@@ -115,10 +164,12 @@ extern "C++"
                   void* callback_arg,
                   void* data);
       
-      /* Fallback function.  Invoked when a wide character could not be converted to
-         the target encoding.  This function should process the character and may
-         produce replacement bytes (in the target encoding) by calling the
-         write_replacement callback repeatedly.  */
+      /**
+       * @brief Fallback function.  Invoked when a wide character could not be converted to
+       *        the target encoding.  This function should process the character and may
+       *        produce replacement bytes (in the target encoding) by calling the
+       *        write_replacement callback repeatedly.
+       */
       typedef void (*iconv_wchar_wc_to_mb_fallback)
                   (wchar_t code,
                   void (*write_replacement) (const char *buf, size_t buflen,
@@ -126,7 +177,9 @@ extern "C++"
                   void* callback_arg,
                   void* data);
 
-      /* Set of fallbacks. */
+      /**
+       * @brief Set of fallbacks.
+       */
       struct iconv_fallbacks
       {
          iconv_unicode_mb_to_uc_fallback mb_to_uc_fallback;
@@ -136,65 +189,106 @@ extern "C++"
          void* data;
       };
 
-      /* Surfaces.
-         The concept of surfaces is described in the 'recode' manual.  */
+      /**
+       * @brief Surfaces. The concept of surfaces is described in the 'recode' manual.
+       */
       constexpr int ICONV_SURFACE_NONE = 0;
-      /* In EBCDIC encodings, 0x15 (which encodes the "newline function", see the
-         Unicode standard, chapter 5) maps to U+000A instead of U+0085.  This is
-         for interoperability with C programs and Unix environments on z/OS.  */
-      constexpr int ICONV_SURFACE_EBCDIC_ZOS_UNIX = 1;////////////
+      /**
+       * @brief In EBCDIC encodings, 0x15 (which encodes the "newline function", see the
+       *        Unicode standard, chapter 5) maps to U+000A instead of U+0085.  This is
+       *        for interoperability with C programs and Unix environments on z/OS.
+       */
+      constexpr int ICONV_SURFACE_EBCDIC_ZOS_UNIX = 1;
 
-      /* Requests for iconvctl. */
-      constexpr int  ICONV_TRIVIALP = 0;  /* int *argument */
-      constexpr int  ICONV_GET_DISCARD_ILSEQ = 3;  /* int *argument */
-      constexpr int  ICONV_SET_DISCARD_ILSEQ = 4;  /* const int *argument */
-      constexpr int  ICONV_SET_HOOKS = 5;  /* const struct iconv_hooks *argument */
-      constexpr int  ICONV_SET_FALLBACKS = 6;  /* const struct iconv_fallbacks *argument */
-      constexpr int  ICONV_GET_FROM_SURFACE = 7;  /* unsigned int *argument */
-      constexpr int  ICONV_SET_FROM_SURFACE = 8;  /* const unsigned int *argument */
-      constexpr int  ICONV_GET_TO_SURFACE = 9;  /* unsigned int *argument */
-      constexpr int  ICONV_SET_TO_SURFACE = 10;  /* const unsigned int *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_TRIVIALP = 0;  /* int *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_GET_DISCARD_ILSEQ = 3;  /* int *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_SET_DISCARD_ILSEQ = 4;  /* const int *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_SET_HOOKS = 5;  /* const struct iconv_hooks *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_SET_FALLBACKS = 6;  /* const struct iconv_fallbacks *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_GET_FROM_SURFACE = 7;  /* unsigned int *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_SET_FROM_SURFACE = 8;  /* const unsigned int *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_GET_TO_SURFACE = 9;  /* unsigned int *argument */
+      /**
+       * @brief Request for iconvctl.
+       */
+      constexpr int ICONV_SET_TO_SURFACE = 10;  /* const unsigned int *argument */
 
-      /* Listing of locale independent encodings. */
+      /**
+       * @brief Listing of locale independent encodings.
+       * @param do_one One encoding fallback function.
+       * @param data Data.
+       */
       extern @DLL_VARIABLE@ void iconvlist (int (*do_one) (unsigned int namescount,
                                           const char * const * names,
                                           void* data),
                            void* data);
 
-      /*
-      * This C function converts an entire string from one encoding to another,
-      * using iconv. Easier to use than iconv() itself, and supports autodetect
-      * encodings on input.
-      *
-      *   int iconv_string (const char* tocode, const char* fromcode,
-      *                     const char* start, const char* end,
-      *                     char** resultp, size_t* lengthp)
-      *
-      * Converts a memory region given in encoding FROMCODE to a new memory
-      * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
-      * except that FROMCODE may be one of the values when enabled extra features
-      *    "autodetect_utf8"          supports ISO-8859-1 and UTF-8
-      *    "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
-      *    "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-      * The input is in the memory region between start (inclusive) and end
-      * (exclusive). If resultp is not NULL, the output string is stored in
-      * *resultp; malloc/realloc is used to allocate the result.
-      *
-      * This function does not treat zero characters specially.
-      *
-      * Return value: 0 if successful, otherwise -1 and errno set. Particular
-      * errno values: EILSEQ and ENOMEM.
-      *
-      * Example:
-      *   const char* s = ...;
-      *   char* result = NULL;
-      *   if (iconv_string("UCS-4-INTERNAL", "GBK",
-      *                    s, s+strlen(s)+1, &result, NULL) < 0)
-      *     perror("iconv_string");
-      *
-      */
+      /**
+       * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself, and supports autodetect encodings on input when extra features enabled.
+       *
+       * @note Converts a memory region given in encoding FROMCODE to a new memory
+       * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
+       * except that FROMCODE may be one of the values when enabled extra features.
+       * 
+       * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
+       * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
+       * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
+       * @note The input is in the memory region between start (inclusive) and end
+       * (exclusive). If resultp is not NULL, the output string is stored in
+       * *resultp; malloc/realloc is used to allocate the result.
+       *
+       * @note This function does not treat zero characters specially.
+       *
+       * @param tocode Target encoding.
+       * @param fromcode From encoding.
+       * @param start Source string start pointer.
+       * @param end Source string end pointer.
+       * @param resultp Result memory pointer.
+       * @param lengthp Pointer to a variable that stores the length of the result.
+       * @return Return 0 if successful, otherwise -1 and errno set. Particular errno values: EILSEQ and ENOMEM.
+       *
+       * @example
+       *   const char* s = ...;
+       *   char* result = NULL;
+       *   if (iconv_string("UCS-4-INTERNAL", "GBK",
+       *                    s, s+strlen(s)+1, &result, NULL) < 0)
+       *     perror("iconv_string");
+       *
+       */
       extern @DLL_VARIABLE@ int iconv_string (const char* tocode, const char* fromcode, const char* start, const char* end, char** resultp, size_t* lengthp);
       
+      /**
+       * @brief Encode source string to another encoding.
+       * @param from From encoding.
+       * @param to Target encoding.
+       * @param data Input string data.
+       * @param ignore Ignore invalid characters.
+       * @throw int: when conversation error, throw the 'errno', you can catch the errno for more infomation.
+       */
       inline std::vector<char> encode (std::string from, std::string to,
                         const std::vector<char>& data, bool ignore = false)
       {

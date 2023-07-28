@@ -1,3 +1,8 @@
+2023-07-28  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Finish NLS Translate language maps (en_US, zh_CN).
+	Add Doxygen notes for 'cppp/reiconv.hpp'.
+
 2023-07-19  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Fix encode()'s EILSEQ bug.
