@@ -1,3 +1,5 @@
+lang/en_US.langmap
+lang/zh_CN.langmap
 lib/utf32.h
 lib/iso8859_16.h
 lib/iso8859_6.h
