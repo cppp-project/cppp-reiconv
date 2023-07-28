@@ -488,7 +488,7 @@ namespace cppp{namespace base{namespace reiconv
   };
   
   /* version number: (major<<8) + minor */
-  int reiconv_version = (3 << 8) + 0;
+  int reiconv_version = (2 << 8) + 0;
 
 
   #define tmpbufsize 4096
