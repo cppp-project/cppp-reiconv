@@ -87,15 +87,6 @@ extern "C++"
        */
       extern @DLL_VARIABLE@ int iconv_close (iconv_t cd);
 
-      // We will remove this typedef in the next commit, because function 'iconv_open_into was removed'.
-      /* A type that holds all memory needed by a conversion descriptor.
-         A pointer to such an object can be used as an iconv_t. */
-      typedef struct
-      {
-         void* dummy1[28];
-         mbstate_t dummy2;
-      } iconv_allocation_t;
-
       /**
        * @brief Control of attributes.
        * @param cd Conversion descriptor.

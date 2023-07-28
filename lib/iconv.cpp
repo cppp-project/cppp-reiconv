@@ -270,17 +270,6 @@ namespace cppp{namespace base{namespace reiconv
     return 0;
   }
 
-  /*
-  * Verify that a 'struct conv_struct' and a 'struct wchar_conv_struct' each
-  * fit in an iconv_allocation_t.
-  * If this verification fails, iconv_allocation_t must be made larger and
-  * the major version in LIBICONV_VERSION_INFO must be bumped.
-  * Currently 'struct conv_struct' has 23 integer/pointer fields, and
-  * 'struct wchar_conv_struct' additionally has an 'mbstate_t' field.
-  */
-  typedef int verify_size_1[2 * (sizeof (struct conv_struct) <= sizeof (iconv_allocation_t)) - 1];
-  typedef int verify_size_2[2 * (sizeof (struct wchar_conv_struct) <= sizeof (iconv_allocation_t)) - 1];
-
   /* Bit mask of all valid surfaces. */
   #define ALL_SURFACES (ICONV_SURFACE_EBCDIC_ZOS_UNIX)
 
