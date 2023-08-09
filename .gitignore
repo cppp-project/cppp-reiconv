@@ -51,6 +51,7 @@ tests/tmp-*.TXT
 .#*
 \#*#
 .vscode
+.cache
 
 # Autopull modules
 build-aux/
