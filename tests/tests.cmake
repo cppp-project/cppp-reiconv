@@ -14,74 +14,74 @@ if (ENABLE_TEST)
     include_directories("${output_includedir}")
 
     # Test executables
-    add_executable(cmp           "${srcdir}/tests/cmp.cpp")
-    add_executable(table-from    "${srcdir}/tests/table-from.cpp")
-    add_executable(table-to      "${srcdir}/tests/table-to.cpp")
-    add_executable(reiconv-test  "${srcdir}/tests/reiconv-test.cpp")
-    add_executable(test-shiftseq "${srcdir}/tests/test-shiftseq.cpp")
-    add_executable(genutf8       "${srcdir}/tests/genutf8.cpp")
-    add_executable(gengb18030z   "${srcdir}/tests/gengb18030z.cpp")
-    add_executable(uniq-u        "${srcdir}/tests/uniq-u.cpp")
+    add_executable(data-generator  "${srcdir}/tests/data-generator.cpp")
+    add_executable(check-stateful  "${srcdir}/tests/check-stateful.cpp")
+    add_executable(check-stateless "${srcdir}/tests/check-stateless.cpp")
+    add_executable(test-shiftseq   "${srcdir}/tests/test-shiftseq.cpp")
+    add_executable(test-to-wchar   "${srcdir}/tests/test-to-wchar.cpp")
+    add_executable(sort            "${srcdir}/tests/sort.cpp")
 
-    target_link_libraries(table-from    libcppp-reiconv.shared)
-    target_link_libraries(table-to      libcppp-reiconv.shared)
-    target_link_libraries(reiconv-test  libcppp-reiconv.shared)
-    target_link_libraries(test-shiftseq libcppp-reiconv.shared)
+    target_link_libraries(check-stateful libcppp-reiconv.static)
+    target_link_libraries(check-stateless libcppp-reiconv.static)
+    target_link_libraries(test-shiftseq libcppp-reiconv.static)
+    target_link_libraries(test-to-wchar libcppp-reiconv.static)
 
-    set_target_properties(cmp           PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(table-from    PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(table-to      PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(reiconv-test  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(test-shiftseq PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(genutf8       PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(gengb18030z   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(uniq-u        PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-
-    if(WIN32)
-        set(BATEXT ".bat")
-    else()
-        set(BATEXT "")
-    endif()
+    set_target_properties(data-generator  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(check-stateful  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(check-stateless PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(test-shiftseq   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(test-to-wchar   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(sort            PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 
     # Test macro
     macro(test state encoding)
         add_test( NAME "check-${state}-${encoding}"
                   WORKING_DIRECTORY "${output_testsdir}"
-                  COMMAND "${srcdir}/tests/check-${state}${BATEXT}" "${srcdir}/tests/data" "${encoding}" )
+                  COMMAND "$<TARGET_FILE:check-${state}>" "${srcdir}/tests/data" "${encoding}" )
     endmacro(test)
     
     # Init test
 
-    add_custom_command(TARGET genutf8 POST_BUILD
-        COMMAND "${output_testsdir}/genutf8" > "${srcdir}/tests/data/UTF-8.TXT"
+    add_custom_command(TARGET data-generator POST_BUILD
+        COMMAND "$<TARGET_FILE:data-generator>" "utf-8" > "${srcdir}/tests/data/UTF-8.TXT"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Generating UTF-8 test data ... "
     )
-
-    file(COPY "${srcdir}/tests/data/GB18030-2005.IRREVERSIBLE.TXT" DESTINATION "${output_testsdir}")
-    file(COPY_FILE "${srcdir}/tests/data/GB18030-2005-BMP.TXT" "${output_testsdir}/tmp-GB18030-2005.TXT")
-    add_custom_command(TARGET gengb18030z POST_BUILD
-        COMMAND "${output_testsdir}/gengb18030z" >> "${output_testsdir}/tmp-GB18030-2005.TXT"
+    #{ cat $(srcdir)/GB18030-2005-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2005.TXT
+#{ test $(srcdir) = . || cp $(srcdir)/GB18030-2005.IRREVERSIBLE.TXT GB18030-2005.IRREVERSIBLE.TXT; }
+#$(SHELL) $(srcdir)/check-stateless . GB18030:2005
+#{ cat $(srcdir)/GB18030-2022-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2022.TXT
+#$(SHELL) $(srcdir)/check-stateless . GB18030:2022
+    file(COPY_FILE "${srcdir}/tests/data/GB18030-2005-BMP.TXT" "${srcdir}/tests/data/GB18030-2005.TXT")
+    add_custom_command(TARGET data-generator POST_BUILD
+        COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${srcdir}/tests/data/GB18030-2005.TXT"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Generating GB18030:2005 test data ... "
     )
-    add_custom_command(TARGET gengb18030z POST_BUILD
-        COMMAND "sort" < "${output_testsdir}/tmp-GB18030-2005.TXT" > "${srcdir}/tests/data/GB18030-2005.TXT"
+    add_custom_command(TARGET data-generator POST_BUILD
+        COMMAND "$<TARGET_FILE:sort>" "${srcdir}/tests/data/GB18030-2005.TXT" "${srcdir}/tests/data/GB18030-2005.TXT.tmp"
+        COMMAND "${CMAKE_COMMAND}" -E copy "${srcdir}/tests/data/GB18030-2005.TXT.tmp" "${srcdir}/tests/data/GB18030-2005.TXT"
+        COMMAND "${CMAKE_COMMAND}" -E remove "${srcdir}/tests/data/GB18030-2005.TXT.tmp"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Sorting GB18030:2005 test data ... "
     )
 
-    file(COPY_FILE "${srcdir}/tests/data/GB18030-2022-BMP.TXT" "${output_testsdir}/tmp-GB18030-2022.TXT")
-    add_custom_command(TARGET gengb18030z POST_BUILD
-        COMMAND "${output_testsdir}/gengb18030z" >> "${output_testsdir}/tmp-GB18030-2022.TXT"
+    file(COPY_FILE "${srcdir}/tests/data/GB18030-2022-BMP.TXT" "${srcdir}/tests/data/GB18030-2022.TXT")
+    add_custom_command(TARGET data-generator POST_BUILD
+        COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${srcdir}/tests/data/GB18030-2022.TXT"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Generating GB18030:2022 test data ... "
     )
-    add_custom_command(TARGET gengb18030z POST_BUILD
-        COMMAND "sort" < "${output_testsdir}/tmp-GB18030-2022.TXT" > "${srcdir}/tests/data/GB18030-2022.TXT"
+    add_custom_command(TARGET data-generator POST_BUILD
+        COMMAND "$<TARGET_FILE:sort>" "${srcdir}/tests/data/GB18030-2022.TXT" "${srcdir}/tests/data/GB18030-2022.TXT.tmp"
+        COMMAND "${CMAKE_COMMAND}" -E copy "${srcdir}/tests/data/GB18030-2022.TXT.tmp" "${srcdir}/tests/data/GB18030-2022.TXT"
+        COMMAND "${CMAKE_COMMAND}" -E remove "${srcdir}/tests/data/GB18030-2022.TXT.tmp"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Sorting GB18030:2022 test data ... "
     )
+
+
+    
 
     # Start test
 
@@ -202,7 +202,7 @@ if (ENABLE_TEST)
     # Shift sequence before invalid multibyte character
     add_test( NAME test-shiftseq
               WORKING_DIRECTORY "${output_testsdir}"
-              COMMAND "${output_testsdir}/test-shiftseq" )
+              COMMAND "$<TARGET_FILE:test-shiftseq>" )
     
     #if(CMAKE_SYSTEM_NAME STREQUAL "AIX")
     # AIX specific encodings
@@ -245,5 +245,10 @@ if (ENABLE_TEST)
     test("stateless" "TDS565")
     test("stateless" "ATARIST")
     test("stateless" "RISCOS-LATIN1")
+
+    # Test to wchar
+    add_test( NAME test-to-wchar
+              WORKING_DIRECTORY "${output_testsdir}"
+              COMMAND "$<TARGET_FILE:test-to-wchar>" )
 
 endif()
