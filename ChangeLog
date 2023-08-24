@@ -1,6 +1,7 @@
 2023-08-24  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Fix subdirectory import bug.
+	Optimize the way to import build-aux.
 
 2023-08-23  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 

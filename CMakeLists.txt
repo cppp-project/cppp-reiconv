@@ -24,19 +24,20 @@ option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 11)
 
+# ----------------------------------------------------------------------------------
+# Import build-aux subdirectory.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
     set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
+    add_subdirectory("${BUILD_AUX}")
+    message(STATUS "Using '${BUILD_AUX}' for C++ Plus build-aux directory.")
 elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
     set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
 else()
     message(FATAL_ERROR "CMake build-aux directory is not exists, try to execute 'setup.cmd' or './setup.sh' to get it.")
 endif()
-set(AUX_DIR "${BUILD_AUX}/cmake")
-
-message(STATUS "Using '${BUILD_AUX}' for C++ Plus build-aux directory.")
-add_subdirectory("${BUILD_AUX}" "${CMAKE_CURRENT_SOURCE_DIR}")
-
-include("${AUX_DIR}/cppp.cmake")
+get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
+include("${BUILD_AUX}/cmake/cppp.cmake")
+# ----------------------------------------------------------------------------------
 
 check_have_visibility()
 
