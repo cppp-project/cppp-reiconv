@@ -34,7 +34,7 @@ endif()
 set(AUX_DIR "${BUILD_AUX}/cmake")
 
 message(STATUS "Using '${BUILD_AUX}' for C++ Plus build-aux directory.")
-add_subdirectory("${BUILD_AUX}")
+add_subdirectory("${BUILD_AUX}" "${CMAKE_CURRENT_SOURCE_DIR}")
 
 include("${AUX_DIR}/cppp.cmake")
 
