@@ -37,8 +37,10 @@ else()
 endif()
 get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
 include("${BUILD_AUX}/cmake/cppp.cmake")
-# ----------------------------------------------------------------------------------
 
+cppp_init_nls_util()
+
+# ----------------------------------------------------------------------------------
 check_have_visibility()
 
 if(MSVC)
@@ -53,8 +55,8 @@ elseif(HAVE_VISIBILITY)
 else()
     set(DLL_VARIABLE "")
 endif()
-configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
-configure_file("${srcdir}/windows/libcppp-reiconv.rc.in" "${outdir}/windows/libcppp-reiconv.rc")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/libcppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
 
 # Generate header file for install
 if(WIN32)
@@ -62,12 +64,12 @@ if(WIN32)
 else()
     set(DLL_VARIABLE "")
 endif()
-configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
-cppp_nls_autotranslate("${output_includedir}/cppp/reiconv.hpp.inst" "${srcdir}/lang")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
+cppp_nls_autotranslate("${output_includedir}/cppp/reiconv.hpp.inst" "${CMAKE_CURRENT_SOURCE_DIR}/lang")
 
 # Add includes
-include_directories("${srcdir}/lib")
-include_directories("${srcdir}/lib/generated")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib/generated")
 include_directories("${output_includedir}")
 
 # Add definitions
@@ -77,7 +79,7 @@ if(ENABLE_EXTRA)
 endif()
 
 # Add library
-cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${outdir}/windows/libcppp-reiconv.rc")
+cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
 
 # Include test suite.
 include("tests/tests.cmake")

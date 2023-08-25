@@ -10,16 +10,16 @@ if (ENABLE_TEST)
     message(STATUS "Test suite for 'cppp-reiconv' enabled.")
 
     # Includes
-    include_directories("${srcdir}/tests")
+    include_directories("${CMAKE_CURRENT_SOURCE_DIR}/tests")
     include_directories("${output_includedir}")
 
     # Test executables
-    add_executable(data-generator  "${srcdir}/tests/data-generator.cpp")
-    add_executable(check-stateful  "${srcdir}/tests/check-stateful.cpp")
-    add_executable(check-stateless "${srcdir}/tests/check-stateless.cpp")
-    add_executable(test-shiftseq   "${srcdir}/tests/test-shiftseq.cpp")
-    add_executable(test-to-wchar   "${srcdir}/tests/test-to-wchar.cpp")
-    add_executable(sort            "${srcdir}/tests/sort.cpp")
+    add_executable(data-generator  "${CMAKE_CURRENT_SOURCE_DIR}/tests/data-generator.cpp")
+    add_executable(check-stateful  "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateful.cpp")
+    add_executable(check-stateless "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateless.cpp")
+    add_executable(test-shiftseq   "${CMAKE_CURRENT_SOURCE_DIR}/tests/test-shiftseq.cpp")
+    add_executable(test-to-wchar   "${CMAKE_CURRENT_SOURCE_DIR}/tests/test-to-wchar.cpp")
+    add_executable(sort            "${CMAKE_CURRENT_SOURCE_DIR}/tests/sort.cpp")
 
     target_link_libraries(check-stateful libcppp-reiconv.static)
     target_link_libraries(check-stateless libcppp-reiconv.static)
@@ -37,45 +37,45 @@ if (ENABLE_TEST)
     macro(test state encoding)
         add_test( NAME "check-${state}-${encoding}"
                   WORKING_DIRECTORY "${output_testsdir}"
-                  COMMAND "$<TARGET_FILE:check-${state}>" "${srcdir}/tests/data" "${encoding}" )
+                  COMMAND "$<TARGET_FILE:check-${state}>" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data" "${encoding}" )
     endmacro(test)
     
     # Init test
 
     add_custom_command(TARGET data-generator POST_BUILD
-        COMMAND "$<TARGET_FILE:data-generator>" "utf-8" > "${srcdir}/tests/data/UTF-8.TXT"
+        COMMAND "$<TARGET_FILE:data-generator>" "utf-8" > "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/UTF-8.TXT"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Generating UTF-8 test data ... "
     )
-    #{ cat $(srcdir)/GB18030-2005-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2005.TXT
-#{ test $(srcdir) = . || cp $(srcdir)/GB18030-2005.IRREVERSIBLE.TXT GB18030-2005.IRREVERSIBLE.TXT; }
-#$(SHELL) $(srcdir)/check-stateless . GB18030:2005
-#{ cat $(srcdir)/GB18030-2022-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2022.TXT
-#$(SHELL) $(srcdir)/check-stateless . GB18030:2022
-    file(COPY_FILE "${srcdir}/tests/data/GB18030-2005-BMP.TXT" "${srcdir}/tests/data/GB18030-2005.TXT")
+    #{ cat $(CMAKE_CURRENT_SOURCE_DIR)/GB18030-2005-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2005.TXT
+#{ test $(CMAKE_CURRENT_SOURCE_DIR) = . || cp $(CMAKE_CURRENT_SOURCE_DIR)/GB18030-2005.IRREVERSIBLE.TXT GB18030-2005.IRREVERSIBLE.TXT; }
+#$(SHELL) $(CMAKE_CURRENT_SOURCE_DIR)/check-stateless . GB18030:2005
+#{ cat $(CMAKE_CURRENT_SOURCE_DIR)/GB18030-2022-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2022.TXT
+#$(SHELL) $(CMAKE_CURRENT_SOURCE_DIR)/check-stateless . GB18030:2022
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005-BMP.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT")
     add_custom_command(TARGET data-generator POST_BUILD
-        COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${srcdir}/tests/data/GB18030-2005.TXT"
+        COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Generating GB18030:2005 test data ... "
     )
     add_custom_command(TARGET data-generator POST_BUILD
-        COMMAND "$<TARGET_FILE:sort>" "${srcdir}/tests/data/GB18030-2005.TXT" "${srcdir}/tests/data/GB18030-2005.TXT.tmp"
-        COMMAND "${CMAKE_COMMAND}" -E copy "${srcdir}/tests/data/GB18030-2005.TXT.tmp" "${srcdir}/tests/data/GB18030-2005.TXT"
-        COMMAND "${CMAKE_COMMAND}" -E remove "${srcdir}/tests/data/GB18030-2005.TXT.tmp"
+        COMMAND "$<TARGET_FILE:sort>" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT.tmp"
+        COMMAND "${CMAKE_COMMAND}" -E copy "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT.tmp" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT"
+        COMMAND "${CMAKE_COMMAND}" -E remove "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT.tmp"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Sorting GB18030:2005 test data ... "
     )
 
-    file(COPY_FILE "${srcdir}/tests/data/GB18030-2022-BMP.TXT" "${srcdir}/tests/data/GB18030-2022.TXT")
+    file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022-BMP.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT")
     add_custom_command(TARGET data-generator POST_BUILD
-        COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${srcdir}/tests/data/GB18030-2022.TXT"
+        COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Generating GB18030:2022 test data ... "
     )
     add_custom_command(TARGET data-generator POST_BUILD
-        COMMAND "$<TARGET_FILE:sort>" "${srcdir}/tests/data/GB18030-2022.TXT" "${srcdir}/tests/data/GB18030-2022.TXT.tmp"
-        COMMAND "${CMAKE_COMMAND}" -E copy "${srcdir}/tests/data/GB18030-2022.TXT.tmp" "${srcdir}/tests/data/GB18030-2022.TXT"
-        COMMAND "${CMAKE_COMMAND}" -E remove "${srcdir}/tests/data/GB18030-2022.TXT.tmp"
+        COMMAND "$<TARGET_FILE:sort>" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT.tmp"
+        COMMAND "${CMAKE_COMMAND}" -E copy "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT.tmp" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT"
+        COMMAND "${CMAKE_COMMAND}" -E remove "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT.tmp"
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Sorting GB18030:2022 test data ... "
     )
