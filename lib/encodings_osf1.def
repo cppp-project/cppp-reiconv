@@ -19,6 +19,7 @@
 
 DEFENCODING(( "DEC-KANJI",
             ),
+            -1,
             dec_kanji,
             { dec_kanji_mbtowc, NULL },   { dec_kanji_wctomb, NULL })
 #ifdef USE_OSF1_ALIASES
@@ -28,6 +29,7 @@ DEFALIAS(     "DECKANJI",               /* OSF/1 */
 
 DEFENCODING(( "DEC-HANYU",
             ),
+            -1,
             dec_hanyu,
             { dec_hanyu_mbtowc, NULL },   { dec_hanyu_wctomb, NULL })
 #ifdef USE_OSF1_ALIASES

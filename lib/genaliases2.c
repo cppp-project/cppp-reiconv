@@ -77,7 +77,7 @@ int main (int argc, char* argv[])
     exit(1);
   }
 
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
+#define DEFENCODING(xxx_names,codepage,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                           \
     static const char* const names[] = BRACIFY xxx_names;     \
     emit_encoding(aliases_file,canonical_file,tag,names,sizeof(names)/sizeof(names[0]),#xxx); \

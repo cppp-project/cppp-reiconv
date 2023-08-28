@@ -84,7 +84,7 @@ namespace cppp{namespace base{namespace reiconv
   };
   #define DEFALIAS(xxx_alias,xxx) /* nothing */
   enum {
-  #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
+  #define DEFENCODING(xxx_names,codepage,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
     ei_##xxx ,
   #include "encodings.def"
   #ifdef USE_AIX
@@ -107,7 +107,7 @@ namespace cppp{namespace base{namespace reiconv
   };
   #include "flags.h"
   static struct encoding const all_encodings[] = {
-  #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
+  #define DEFENCODING(xxx_names,codepage,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
     { xxx_ifuncs1,xxx_ifuncs2, xxx_ofuncs1,xxx_ofuncs2, ei_##xxx##_oflags },
   #include "encodings.def"
   #ifdef USE_AIX
@@ -126,7 +126,7 @@ namespace cppp{namespace base{namespace reiconv
   # include "encodings_extra.def"
   #endif
   #undef DEFENCODING
-  #define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
+  #define DEFENCODING(xxx_names,codepage,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
     { xxx_ifuncs1,xxx_ifuncs2, xxx_ofuncs1,xxx_ofuncs2, 0 },
   #undef DEFENCODING
   };

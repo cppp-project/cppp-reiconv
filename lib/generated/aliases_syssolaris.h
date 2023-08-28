@@ -882,7 +882,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str47, ei_hp_roman8},
 #line 121 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str48, ei_iso8859_8},
-#line 322 "lib/generated/aliases_syssolaris.gperf"
+#line 321 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str49, ei_iso2022_jpms},
 #line 71 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str50, ei_iso8859_2},
@@ -925,7 +925,7 @@ static const struct alias aliases[] =
 #line 254 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str74, ei_tis620},
     {-1},
-#line 297 "lib/generated/aliases_syssolaris.gperf"
+#line 296 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str76, ei_isoir165},
 #line 350 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str77, ei_cp950},
@@ -954,7 +954,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str92, ei_iso2022_cn},
 #line 329 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str93, ei_cp936},
-#line 324 "lib/generated/aliases_syssolaris.gperf"
+#line 323 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str94, ei_euc_cn},
 #line 286 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str95, ei_jisx0212},
@@ -967,14 +967,14 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str99, ei_iso8859_10},
 #line 67 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str100, ei_iso8859_2},
-#line 315 "lib/generated/aliases_syssolaris.gperf"
+#line 314 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str101, ei_cp932},
 #line 238 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str102, ei_pt154},
     {-1},
 #line 150 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str104, ei_iso8859_14},
-#line 323 "lib/generated/aliases_syssolaris.gperf"
+#line 322 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str105, ei_euc_cn},
 #line 204 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str106, ei_cp862},
@@ -1032,7 +1032,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str138, ei_iso8859_10},
 #line 127 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str139, ei_iso8859_9},
-#line 302 "lib/generated/aliases_syssolaris.gperf"
+#line 301 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str140, ei_ksc5601},
 #line 152 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str141, ei_iso8859_14},
@@ -1104,7 +1104,7 @@ static const struct alias aliases[] =
 #line 85 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str184, ei_iso8859_4},
     {-1},
-#line 325 "lib/generated/aliases_syssolaris.gperf"
+#line 324 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str186, ei_euc_cn},
     {-1},
 #line 79 "lib/generated/aliases_syssolaris.gperf"
@@ -1157,13 +1157,13 @@ static const struct alias aliases[] =
 #line 165 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str216, ei_iso8859_16},
     {-1}, {-1},
-#line 299 "lib/generated/aliases_syssolaris.gperf"
+#line 298 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str219, ei_ksc5601},
     {-1},
 #line 278 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str221, ei_jisx0208},
     {-1}, {-1}, {-1}, {-1},
-#line 311 "lib/generated/aliases_syssolaris.gperf"
+#line 310 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str226, ei_sjis},
 #line 12 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str227, ei_ascii},
@@ -1270,10 +1270,10 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str300, ei_iso8859_6},
 #line 128 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str301, ei_iso8859_9},
-#line 304 "lib/generated/aliases_syssolaris.gperf"
+#line 303 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str302, ei_ksc5601},
-#line 296 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str303, ei_gb2312},
+#line 327 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str303, ei_euc_cn},
     {-1},
 #line 76 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str305, ei_iso8859_3},
@@ -1295,7 +1295,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str314, ei_cp1257},
 #line 252 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str315, ei_tis620},
-#line 301 "lib/generated/aliases_syssolaris.gperf"
+#line 300 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str316, ei_ksc5601},
     {-1},
 #line 171 "lib/generated/aliases_syssolaris.gperf"
@@ -1344,12 +1344,12 @@ static const struct alias aliases[] =
 #line 255 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str358, ei_tis620},
     {-1}, {-1},
-#line 327 "lib/generated/aliases_syssolaris.gperf"
+#line 326 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str361, ei_euc_cn},
     {-1},
 #line 102 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str363, ei_iso8859_6},
-#line 314 "lib/generated/aliases_syssolaris.gperf"
+#line 313 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str364, ei_sjis},
 #line 242 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str365, ei_rk1048},
@@ -1379,7 +1379,7 @@ static const struct alias aliases[] =
 #line 233 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str385, ei_georgian_academy},
     {-1}, {-1}, {-1}, {-1},
-#line 303 "lib/generated/aliases_syssolaris.gperf"
+#line 302 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str390, ei_ksc5601},
 #line 86 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str391, ei_iso8859_4},
@@ -1416,7 +1416,7 @@ static const struct alias aliases[] =
 #line 230 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str412, ei_hp_roman8},
     {-1}, {-1},
-#line 298 "lib/generated/aliases_syssolaris.gperf"
+#line 297 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str415, ei_isoir165},
 #line 287 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str416, ei_jisx0212},
@@ -1436,13 +1436,13 @@ static const struct alias aliases[] =
 #line 173 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str425, ei_cp1250},
     {-1},
-#line 318 "lib/generated/aliases_syssolaris.gperf"
+#line 317 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str427, ei_iso2022_jp1},
     {-1}, {-1},
 #line 225 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str430, ei_mac_arabic},
     {-1},
-#line 319 "lib/generated/aliases_syssolaris.gperf"
+#line 318 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str432, ei_iso2022_jp2},
     {-1}, {-1}, {-1},
 #line 339 "lib/generated/aliases_syssolaris.gperf"
@@ -1466,12 +1466,12 @@ static const struct alias aliases[] =
     {-1}, {-1},
 #line 48 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str450, ei_ucs2internal},
-#line 326 "lib/generated/aliases_syssolaris.gperf"
+#line 325 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str451, ei_euc_cn},
     {-1}, {-1},
 #line 112 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str454, ei_iso8859_7},
-#line 300 "lib/generated/aliases_syssolaris.gperf"
+#line 299 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str455, ei_ksc5601},
     {-1},
 #line 144 "lib/generated/aliases_syssolaris.gperf"
@@ -1505,7 +1505,7 @@ static const struct alias aliases[] =
 #line 28 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str484, ei_ucs2be},
     {-1},
-#line 320 "lib/generated/aliases_syssolaris.gperf"
+#line 319 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str486, ei_iso2022_jp2},
     {-1}, {-1},
 #line 38 "lib/generated/aliases_syssolaris.gperf"
@@ -1520,9 +1520,9 @@ static const struct alias aliases[] =
 #line 113 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str500, ei_iso8859_7},
     {-1},
-#line 321 "lib/generated/aliases_syssolaris.gperf"
+#line 320 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str502, ei_iso2022_jpms},
-#line 307 "lib/generated/aliases_syssolaris.gperf"
+#line 306 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str503, ei_euc_jp},
     {-1},
 #line 245 "lib/generated/aliases_syssolaris.gperf"
@@ -1560,7 +1560,7 @@ static const struct alias aliases[] =
 #line 66 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str542, ei_iso8859_2},
     {-1},
-#line 312 "lib/generated/aliases_syssolaris.gperf"
+#line 311 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str544, ei_sjis},
     {-1},
 #line 195 "lib/generated/aliases_syssolaris.gperf"
@@ -1583,11 +1583,11 @@ static const struct alias aliases[] =
 #line 216 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str568, ei_mac_centraleurope},
     {-1},
-#line 316 "lib/generated/aliases_syssolaris.gperf"
+#line 315 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str570, ei_iso2022_jp},
 #line 40 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str571, ei_utf16be},
-#line 306 "lib/generated/aliases_syssolaris.gperf"
+#line 305 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str572, ei_euc_jp},
     {-1}, {-1},
 #line 333 "lib/generated/aliases_syssolaris.gperf"
@@ -1595,7 +1595,7 @@ static const struct alias aliases[] =
 #line 282 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str576, ei_jisx0212},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 305 "lib/generated/aliases_syssolaris.gperf"
+#line 304 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str583, ei_euc_jp},
 #line 222 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str584, ei_mac_greek},
@@ -1625,10 +1625,10 @@ static const struct alias aliases[] =
 #line 284 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str615, ei_jisx0212},
     {-1}, {-1},
-#line 310 "lib/generated/aliases_syssolaris.gperf"
+#line 309 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str618, ei_sjis},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 317 "lib/generated/aliases_syssolaris.gperf"
+#line 316 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str625, ei_iso2022_jp},
 #line 119 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str626, ei_iso8859_8},
@@ -1651,7 +1651,7 @@ static const struct alias aliases[] =
 #line 355 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str659, ei_big5hkscs2008},
     {-1}, {-1}, {-1}, {-1},
-#line 313 "lib/generated/aliases_syssolaris.gperf"
+#line 312 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str664, ei_sjis},
     {-1}, {-1}, {-1},
 #line 363 "lib/generated/aliases_syssolaris.gperf"
@@ -1660,7 +1660,7 @@ static const struct alias aliases[] =
 #line 354 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str670, ei_big5hkscs2008},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 309 "lib/generated/aliases_syssolaris.gperf"
+#line 308 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str678, ei_sjis},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
 #line 106 "lib/generated/aliases_syssolaris.gperf"
@@ -1682,7 +1682,7 @@ static const struct alias aliases[] =
 #line 196 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str745, ei_cp1257},
     {-1}, {-1}, {-1}, {-1},
-#line 308 "lib/generated/aliases_syssolaris.gperf"
+#line 307 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str750, ei_euc_jp},
     {-1}, {-1}, {-1},
 #line 49 "lib/generated/aliases_syssolaris.gperf"

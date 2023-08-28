@@ -65,6 +65,14 @@ extern "C++"
        */
       extern @DLL_VARIABLE@ iconv_t iconv_open (const char* tocode, const char* fromcode);
 
+      /**
+       * @brief Allocates descriptor for code conversion from encoding 'fromcode' to encoding 'tocode'.
+       * @param tocodepage Target codepage.
+       * @param fromcodepage From codepage.
+       * @return Allocated iconv conversation buffer's pointer.
+       */
+      extern @DLL_VARIABLE@ iconv_t iconv_open (int tocodepage, int fromcodepage);
+
       #undef iconv
       /**
        * @brief Converts, using conversion descriptor 'cd', at most '*inbytesleft' bytes starting at '*inbuf', writing at most '*outbytesleft' bytes starting at '*outbuf'.
