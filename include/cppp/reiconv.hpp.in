@@ -67,11 +67,11 @@ extern "C++"
 
       /**
        * @brief Allocates descriptor for code conversion from encoding 'fromcode' to encoding 'tocode'.
-       * @param tocodepage Target codepage.
-       * @param fromcodepage From codepage.
+       * @param tocode_cp Target codepage.
+       * @param fromcode_cp From codepage.
        * @return Allocated iconv conversation buffer's pointer.
        */
-      extern @DLL_VARIABLE@ iconv_t iconv_open (int tocodepage, int fromcodepage);
+      extern @DLL_VARIABLE@ iconv_t iconv_open (int tocode_cp, int fromcode_cp, bool strict=true);
 
       #undef iconv
       /**
@@ -109,18 +109,13 @@ extern "C++"
        * @brief Hook performed after every successful conversion of a Unicode character.
        */
       typedef void (*iconv_unicode_char_hook) (unsigned int uc, void* data);
-      /**
-       * @typedef void (*) (wchar_t, void*)
-       * @brief Hook performed after every successful conversion of a wide character.
-       */
-      typedef void (*iconv_wide_char_hook) (wchar_t wc, void* data);
+   
       /**
        * @brief Set of hooks.
        */
       struct iconv_hooks
       {
          iconv_unicode_char_hook uc_hook;
-         iconv_wide_char_hook wc_hook;
          void* data;
       };
 
@@ -151,40 +146,12 @@ extern "C++"
                   void* data);
 
       /**
-       * @brief Fallback function.  Invoked when a number of bytes could not be converted to
-       *        a wide character.  This function should process all bytes from inbuf and may
-       *        produce replacement wide characters by calling the write_replacement
-       *        callback repeatedly.
-       */
-      typedef void (*iconv_wchar_mb_to_wc_fallback)
-                  (const char* inbuf, size_t inbufsize,
-                  void (*write_replacement) (const wchar_t *buf, size_t buflen,
-                                             void* callback_arg),
-                  void* callback_arg,
-                  void* data);
-      
-      /**
-       * @brief Fallback function.  Invoked when a wide character could not be converted to
-       *        the target encoding.  This function should process the character and may
-       *        produce replacement bytes (in the target encoding) by calling the
-       *        write_replacement callback repeatedly.
-       */
-      typedef void (*iconv_wchar_wc_to_mb_fallback)
-                  (wchar_t code,
-                  void (*write_replacement) (const char *buf, size_t buflen,
-                                             void* callback_arg),
-                  void* callback_arg,
-                  void* data);
-
-      /**
        * @brief Set of fallbacks.
        */
       struct iconv_fallbacks
       {
          iconv_unicode_mb_to_uc_fallback mb_to_uc_fallback;
          iconv_unicode_uc_to_mb_fallback uc_to_mb_fallback;
-         iconv_wchar_mb_to_wc_fallback mb_to_wc_fallback;
-         iconv_wchar_wc_to_mb_fallback wc_to_mb_fallback;
          void* data;
       };
 

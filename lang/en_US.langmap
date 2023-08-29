@@ -159,18 +159,6 @@
 
 '''
       /**
-       * @typedef void (*) (wchar_t, void*)
-       * @brief Hook performed after every successful conversion of a wide character.
-       */
-'''
-      /**
-       * @typedef void (*) (wchar_t, void*)
-       * @brief Hook performed after every successful conversion of a wide character.
-       */
-'''
-
-'''
-      /**
        * @brief Set of hooks.
        */
 '''
@@ -207,38 +195,6 @@
        * @brief Fallback function.  Invoked when a Unicode character could not be converted
        *        to the target encoding.  This function should process the character and
        *        may produce replacement bytes (in the target encoding) by calling the
-       *        write_replacement callback repeatedly.
-       */
-'''
-
-'''
-      /**
-       * @brief Fallback function.  Invoked when a number of bytes could not be converted to
-       *        a wide character.  This function should process all bytes from inbuf and may
-       *        produce replacement wide characters by calling the write_replacement
-       *        callback repeatedly.
-       */
-'''
-      /**
-       * @brief Fallback function.  Invoked when a number of bytes could not be converted to
-       *        a wide character.  This function should process all bytes from inbuf and may
-       *        produce replacement wide characters by calling the write_replacement
-       *        callback repeatedly.
-       */
-'''
-
-'''
-      /**
-       * @brief Fallback function.  Invoked when a wide character could not be converted to
-       *        the target encoding.  This function should process the character and may
-       *        produce replacement bytes (in the target encoding) by calling the
-       *        write_replacement callback repeatedly.
-       */
-'''
-      /**
-       * @brief Fallback function.  Invoked when a wide character could not be converted to
-       *        the target encoding.  This function should process the character and may
-       *        produce replacement bytes (in the target encoding) by calling the
        *        write_replacement callback repeatedly.
        */
 '''
