@@ -135,16 +135,11 @@ static struct encoding const all_encodings[] = {
 
 int lookup_by_codepage(int codepage)
 {
-    size_t i1, i2;
-    for(i1 = 0, i2 = sizeof(all_encodings) / sizeof(all_encodings[0]); i1 < i2; i1++, i2--)
+    for(size_t i = 0; i < sizeof(all_encodings) / sizeof(all_encodings[0]); i++)
     {
-        if(all_encodings[i1].codepage == codepage)
+        if(all_encodings[i].codepage == codepage)
         {
-            return i1;
-        }
-        if(all_encodings[i2].codepage == codepage)
-        {
-            return i2;
+            return i;
         }
     }
     return -1;
@@ -281,7 +276,7 @@ iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
     to_index = lookup_by_codepage(tocode_cp);
     from_index = lookup_by_codepage(fromcode_cp);
 
-    if(to_index == -1 || from_index == -1)
+    if(to_index == -1 || from_index == -1 || tocode_cp == -1 || fromcode_cp == -1)
     {
         errno = EINVAL;
         return (iconv_t)(-1);

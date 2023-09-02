@@ -1,3 +1,7 @@
+2023-09-2  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Optimize 'iconv_open(int, int)'.
+
 2023-08-29  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Fix type-conflict warning when in clang.
