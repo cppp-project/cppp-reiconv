@@ -1,3 +1,12 @@
+New in 2.1.0:
+* Add a new function `iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict = true);` and codepage definitions.
+* Add CTest on Windows support.
+* Remove 'iconv_allocation_t';
+* Fully remove wchar support.
+* Fix some bugs.
+* Add header comments NLS support.
+* Add Doxygen comments for 'cppp/reiconv.hpp'.
+
 New in 2.0.0:
 * Redist 'GNU LIBICONV' to 'cppp-reiconv'.
 * Remove iconv program, iconv gettext po, iconv manual.

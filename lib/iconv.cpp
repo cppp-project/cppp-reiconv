@@ -530,7 +530,7 @@ static const unsigned short all_canonical[] = {
 };
 
 /* version number: (major<<8) + minor */
-int reiconv_version = (2 << 8) + 0;
+int reiconv_version = (2 << 8) + 1;
 
 #define tmpbufsize 4096
 

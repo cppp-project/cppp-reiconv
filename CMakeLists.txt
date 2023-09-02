@@ -16,7 +16,7 @@
 # If not, see <https://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.12)
-project(cppp-reiconv VERSION 2.0.0)
+project(cppp-reiconv VERSION 2.1.0)
 
 # Define options
 option(ENABLE_EXTRA "Enable extra encodings and features." OFF)

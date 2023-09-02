@@ -287,7 +287,6 @@ lib/encodings.def
 lib/tds565.h
 lib/cp932ext.h
 lib/gb12345ext.h
-lib/loop_wchar.h
 tests/check-stateless.cpp
 tests/table-from.hpp
 tests/tests.cmake
