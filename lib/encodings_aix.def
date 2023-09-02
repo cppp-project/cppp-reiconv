@@ -3,7 +3,7 @@
 
    The cppp-reiconv library is free software; you can redistribute it
    and/or modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either version 2.1
+   License as published by the Free Software Foundation; either version 3
    of the License, or (at your option) any later version.
 
    The cppp-reiconv library is distributed in the hope that it will be
@@ -19,6 +19,7 @@
 
 DEFENCODING(( "CP856",
             ),
+            856,
             cp856,
             { cp856_mbtowc, NULL },       { cp856_wctomb, NULL })
 #ifdef USE_AIX_ALIASES
@@ -28,6 +29,7 @@ DEFALIAS(     "IBM-856",                /* AIX */
 
 DEFENCODING(( "CP922",
             ),
+            922,
             cp922,
             { cp922_mbtowc, NULL },       { cp922_wctomb, NULL })
 #ifdef USE_AIX_ALIASES
@@ -37,6 +39,7 @@ DEFALIAS(     "IBM-922",                /* AIX */
 
 DEFENCODING(( "CP943",
             ),
+            943,
             cp943,
             { cp943_mbtowc, NULL },       { cp943_wctomb, NULL })
 #ifdef USE_AIX_ALIASES
@@ -46,6 +49,7 @@ DEFALIAS(     "IBM-943",                /* AIX */
 
 DEFENCODING(( "CP1046",
             ),
+            1046,
             cp1046,
             { cp1046_mbtowc, NULL },      { cp1046_wctomb, NULL })
 #ifdef USE_AIX_ALIASES
@@ -55,6 +59,7 @@ DEFALIAS(     "IBM-1046",               /* AIX */
 
 DEFENCODING(( "CP1124",
             ),
+            1124,
             cp1124,
             { cp1124_mbtowc, NULL },      { cp1124_wctomb, NULL })
 #ifdef USE_AIX_ALIASES
@@ -64,6 +69,7 @@ DEFALIAS(     "IBM-1124",               /* AIX */
 
 DEFENCODING(( "CP1129",
             ),
+            1129,
             cp1129,
             { cp1129_mbtowc, NULL },      { cp1129_wctomb, NULL })
 #ifdef USE_AIX_ALIASES
@@ -76,6 +82,7 @@ DEFENCODING(( "CP1161",
               "IBM-1161",               /* glibc */
               "csIBM1161",              /* glibc */
             ),
+            1161,
             cp1161,
             { cp1161_mbtowc, NULL },      { cp1161_wctomb, NULL })
 
@@ -84,6 +91,7 @@ DEFENCODING(( "CP1162",
               "IBM-1162",               /* glibc */
               "csIBM1162",              /* glibc */
             ),
+            1162,
             cp1162,
             { cp1162_mbtowc, NULL },      { cp1162_wctomb, NULL })
 
@@ -92,5 +100,6 @@ DEFENCODING(( "CP1163",
               "IBM-1163",               /* glibc */
               "csIBM1163",              /* glibc */
             ),
+            1163,
             cp1163,
             { cp1163_mbtowc, NULL },      { cp1163_wctomb, NULL })

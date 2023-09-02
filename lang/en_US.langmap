@@ -1,0 +1,346 @@
+# C++ Plus NLS Util language map for cppp-reiconv.
+# en_US
+
+'''
+/* Copyright (C) 1999-2023 Free Software Foundation, Inc.
+   This file is part of the cppp-reiconv library.
+
+   The cppp-reiconv library is free software; you can redistribute it
+   and/or modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either version 3
+   of the License, or (at your option) any later version.
+
+   The cppp-reiconv library is distributed in the hope that it will be
+   useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the cppp-reiconv library; see the file COPYING.
+   If not, see <https://www.gnu.org/licenses/>.  */
+'''
+/* Copyright (C) 1999-2023 Free Software Foundation, Inc.
+   This file is part of the cppp-reiconv library.
+
+   The cppp-reiconv library is free software; you can redistribute it
+   and/or modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either version 3
+   of the License, or (at your option) any later version.
+
+   The cppp-reiconv library is distributed in the hope that it will be
+   useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the cppp-reiconv library; see the file COPYING.
+   If not, see <https://www.gnu.org/licenses/>.  */
+'''
+
+'''
+/* When installed, this file is called "cppp/reiconv.hpp". */
+'''
+/* When installed, this file is called "cppp/reiconv.hpp". */
+'''
+
+'''
+/* Use UTF-8 to decode this file. */
+'''
+/* Use UTF-8 to decode this file. */
+'''
+
+'''
+      /**
+       * @brief Version infomation. (major<<8) + minor
+       */
+'''
+      /**
+       * @brief Version infomation. (major<<8) + minor
+       */
+'''
+
+'''
+      /**
+       * @typedef void*
+       * @brief Identifier for conversion method from one codeset to another.
+       */
+'''
+      /**
+       * @typedef void*
+       * @brief Identifier for conversion method from one codeset to another.
+       */
+'''
+
+'''
+      /**
+       * @brief Allocates descriptor for code conversion from encoding 'fromcode' to encoding 'tocode'.
+       * @param tocode Target encoding.
+       * @param fromcode From encoding.
+       * @return Allocated iconv conversation buffer's pointer.
+       */
+'''
+      /**
+       * @brief Allocates descriptor for code conversion from encoding 'fromcode' to encoding 'tocode'.
+       * @param tocode Target encoding.
+       * @param fromcode From encoding.
+       * @return Allocated iconv conversation buffer's pointer.
+       */
+'''
+
+'''
+      /**
+       * @brief Converts, using conversion descriptor 'cd', at most '*inbytesleft' bytes starting at '*inbuf', writing at most '*outbytesleft' bytes starting at '*outbuf'.
+       * @attention Decrements '*inbytesleft' and increments '*inbuf' by the same amount.
+       * @attention Decrements '*outbytesleft' and increments '*outbuf' by the same amount.
+       * @param cd Conversion descriptor.
+       * @param inbuf Input buffer.
+       * @param inbytesleft Input bytes left.
+       * @param outbuf Output buffer.
+       * @param outbytesleft Output bytes left.
+       * @return Number of converted characters (excluding terminators, -1 means error).
+       */
+'''
+      /**
+       * @brief Converts, using conversion descriptor 'cd', at most '*inbytesleft' bytes starting at '*inbuf', writing at most '*outbytesleft' bytes starting at '*outbuf'.
+       * @attention Decrements '*inbytesleft' and increments '*inbuf' by the same amount.
+       * @attention Decrements '*outbytesleft' and increments '*outbuf' by the same amount.
+       * @param cd Conversion descriptor.
+       * @param inbuf Input buffer.
+       * @param inbytesleft Input bytes left.
+       * @param outbuf Output buffer.
+       * @param outbytesleft Output bytes left.
+       * @return Number of converted characters (excluding terminators, -1 means error).
+       */
+'''
+
+'''
+      /**
+       * @brief Frees resources allocated for conversion descriptor 'cd'.
+       * @param cd Conversion descriptor you want to close.
+       * @return Operation status. (-1 means error, 0 means success).
+       */
+'''
+      /**
+       * @brief Frees resources allocated for conversion descriptor 'cd'.
+       * @param cd Conversion descriptor you want to close.
+       * @return Operation status. (-1 means error, 0 means success).
+       */
+'''
+
+'''
+      /**
+       * @brief Control of attributes.
+       * @param cd Conversion descriptor.
+       * @param request Attribute request id.
+       * @param argument Attribute argument.
+       * @return Operation status (>=0 means success, <0 means error).
+       */
+'''
+      /**
+       * @brief Control of attributes.
+       * @param cd Conversion descriptor.
+       * @param request Attribute request id.
+       * @param argument Attribute argument.
+       * @return Operation status (>=0 means success, <0 means error).
+       */
+'''
+
+'''
+      /**
+       * @typedef void (*) (unsigned int, void*)
+       * @brief Hook performed after every successful conversion of a Unicode character.
+       */
+'''
+      /**
+       * @typedef void (*) (unsigned int, void*)
+       * @brief Hook performed after every successful conversion of a Unicode character.
+       */
+'''
+
+'''
+      /**
+       * @brief Set of hooks.
+       */
+'''
+      /**
+       * @brief Set of hooks.
+       */
+'''
+
+'''
+      /**
+       * @brief Fallback function.  Invoked when a small number of bytes could not be
+       *        converted to a Unicode character.  This function should process all
+       *        bytes from inbuf and may produce replacement Unicode characters by calling
+       *        the write_replacement callback repeatedly.
+       */
+'''
+      /**
+       * @brief Fallback function.  Invoked when a small number of bytes could not be
+       *        converted to a Unicode character.  This function should process all
+       *        bytes from inbuf and may produce replacement Unicode characters by calling
+       *        the write_replacement callback repeatedly.
+       */
+'''
+
+'''
+      /**
+       * @brief Fallback function.  Invoked when a Unicode character could not be converted
+       *        to the target encoding.  This function should process the character and
+       *        may produce replacement bytes (in the target encoding) by calling the
+       *        write_replacement callback repeatedly.
+       */
+'''
+      /**
+       * @brief Fallback function.  Invoked when a Unicode character could not be converted
+       *        to the target encoding.  This function should process the character and
+       *        may produce replacement bytes (in the target encoding) by calling the
+       *        write_replacement callback repeatedly.
+       */
+'''
+
+'''
+      /**
+       * @brief Set of fallbacks.
+       */
+'''
+      /**
+       * @brief Set of fallbacks.
+       */
+'''
+
+'''
+      /**
+       * @brief Surfaces. The concept of surfaces is described in the 'recode' manual.
+       */
+'''
+      /**
+       * @brief Surfaces. The concept of surfaces is described in the 'recode' manual.
+       */
+'''
+
+'''
+      /**
+       * @brief In EBCDIC encodings, 0x15 (which encodes the "newline function", see the
+       *        Unicode standard, chapter 5) maps to U+000A instead of U+0085.  This is
+       *        for interoperability with C programs and Unix environments on z/OS.
+       */
+'''
+      /**
+       * @brief In EBCDIC encodings, 0x15 (which encodes the "newline function", see the
+       *        Unicode standard, chapter 5) maps to U+000A instead of U+0085.  This is
+       *        for interoperability with C programs and Unix environments on z/OS.
+       */
+'''
+
+'''
+      /**
+       * @brief Request for iconvctl.
+       */
+'''
+      /**
+       * @brief Request for iconvctl.
+       */
+'''
+
+'''
+      /**
+       * @brief Listing of locale independent encodings.
+       * @param do_one One encoding fallback function.
+       * @param data Data.
+       */
+'''
+      /**
+       * @brief Listing of locale independent encodings.
+       * @param do_one One encoding fallback function.
+       * @param data Data.
+       */
+'''
+
+'''
+      /**
+       * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself, and supports autodetect encodings on input when extra features enabled.
+       *
+       * @note Converts a memory region given in encoding FROMCODE to a new memory
+       * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
+       * except that FROMCODE may be one of the values **when enabled extra features**.
+       * 
+       * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
+       * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
+       * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
+       * @note The input is in the memory region between start (inclusive) and end
+       * (exclusive). If resultp is not NULL, the output string is stored in
+       * *resultp; malloc/realloc is used to allocate the result.
+       *
+       * @note This function does not treat zero characters specially.
+       *
+       * @param tocode Target encoding.
+       * @param fromcode From encoding.
+       * @param start Source string start pointer.
+       * @param end Source string end pointer.
+       * @param resultp Result memory pointer.
+       * @param lengthp Pointer to a variable that stores the length of the result.
+       * @return Return 0 if successful, otherwise -1 and errno set. Particular errno values: EILSEQ and ENOMEM.
+       *
+       * @example
+       *   const char* s = ...;
+       *   char* result = NULL;
+       *   if (iconv_string("UCS-4-INTERNAL", "GBK",
+       *                    s, s+strlen(s)+1, &result, NULL) < 0)
+       *     perror("iconv_string");
+       *
+       */
+'''
+      /**
+       * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself, and supports autodetect encodings on input when extra features enabled.
+       *
+       * @note Converts a memory region given in encoding FROMCODE to a new memory
+       * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
+       * except that FROMCODE may be one of the values when enabled extra features.
+       * 
+       * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
+       * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
+       * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
+       * @note The input is in the memory region between start (inclusive) and end
+       * (exclusive). If resultp is not NULL, the output string is stored in
+       * *resultp; malloc/realloc is used to allocate the result.
+       *
+       * @note This function does not treat zero characters specially.
+       *
+       * @param tocode Target encoding.
+       * @param fromcode From encoding.
+       * @param start Source string start pointer.
+       * @param end Source string end pointer.
+       * @param resultp Result memory pointer.
+       * @param lengthp Pointer to a variable that stores the length of the result.
+       * @return Return 0 if successful, otherwise -1 and errno set. Particular errno values: EILSEQ and ENOMEM.
+       *
+       * @example
+       *   const char* s = ...;
+       *   char* result = NULL;
+       *   if (iconv_string("UCS-4-INTERNAL", "GBK",
+       *                    s, s+strlen(s)+1, &result, NULL) < 0)
+       *     perror("iconv_string");
+       *
+       */
+'''
+
+'''
+      /**
+       * @brief Encode source string to another encoding.
+       * @param from From encoding.
+       * @param to Target encoding.
+       * @param data Input string data.
+       * @param ignore Ignore invalid characters.
+       * @throw int: when conversation error, throw the 'errno', you can catch the errno for more infomation.
+       */
+'''
+      /**
+       * @brief Encode source string to another encoding.
+       * @param from From encoding.
+       * @param to Target encoding.
+       * @param data Input string data.
+       * @param ignore Ignore invalid characters.
+       * @throw int: when conversation error, throw the 'errno', you can catch the errno for more infomation.
+       */
+'''

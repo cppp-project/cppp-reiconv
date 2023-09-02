@@ -3,7 +3,7 @@
 #
 # The cppp-reiconv library is free software; you can redistribute it
 # and/or modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation; either version 2.1
+# License as published by the Free Software Foundation; either version 3
 # of the License, or (at your option) any later version.
 #
 # The cppp-reiconv library is distributed in the hope that it will be
@@ -16,7 +16,7 @@
 # If not, see <https://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.12)
-project(cppp-reiconv VERSION 2.0.0)
+project(cppp-reiconv VERSION 2.1.0)
 
 # Define options
 option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
@@ -24,20 +24,23 @@ option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 11)
 
+# ----------------------------------------------------------------------------------
+# Import build-aux subdirectory.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
     set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
+    add_subdirectory("${BUILD_AUX}")
+    message(STATUS "Using '${BUILD_AUX}' for C++ Plus build-aux directory.")
 elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
     set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
 else()
     message(FATAL_ERROR "CMake build-aux directory is not exists, try to execute 'setup.cmd' or './setup.sh' to get it.")
 endif()
-set(AUX_DIR "${BUILD_AUX}/cmake")
+get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
+include("${BUILD_AUX}/cmake/cppp.cmake")
 
-message(STATUS "Using '${BUILD_AUX}' for C++ Plus build-aux directory.")
-add_subdirectory("${BUILD_AUX}")
+cppp_init_nls_util()
 
-include("${AUX_DIR}/cppp.cmake")
-
+# ----------------------------------------------------------------------------------
 check_have_visibility()
 
 if(MSVC)
@@ -52,8 +55,8 @@ elseif(HAVE_VISIBILITY)
 else()
     set(DLL_VARIABLE "")
 endif()
-configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
-configure_file("${srcdir}/windows/libcppp-reiconv.rc.in" "${outdir}/windows/libcppp-reiconv.rc")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/libcppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
 
 # Generate header file for install
 if(WIN32)
@@ -61,11 +64,12 @@ if(WIN32)
 else()
     set(DLL_VARIABLE "")
 endif()
-configure_file("${srcdir}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
+cppp_nls_autotranslate("${output_includedir}/cppp/reiconv.hpp.inst" "${CMAKE_CURRENT_SOURCE_DIR}/lang")
 
 # Add includes
-include_directories("${srcdir}/lib")
-include_directories("${srcdir}/lib/generated")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib/generated")
 include_directories("${output_includedir}")
 
 # Add definitions
@@ -75,7 +79,7 @@ if(ENABLE_EXTRA)
 endif()
 
 # Add library
-cppp_build_library(${PROJECT_NAME} "${srcdir}/lib/iconv.cpp" TRUE TRUE "${outdir}/windows/libcppp-reiconv.rc")
+cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
 
 # Include test suite.
 include("tests/tests.cmake")

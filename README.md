@@ -131,8 +131,8 @@ cmake --install .
 
 # Install
 This library installs:
-  - a shared library 'libcppp-reiconv.so' or '~.dll' or '~.dylib' ...
-  - a static library 'libcppp-reiconv.a' or '~.lib' ...
+  - a shared library 'libcppp-reiconv'.
+  - a static library 'libcppp-reiconv.static'.
   - a header file '<cppp/reiconv.hpp>'.
 
 To use it, simply #include <cppp/reiconv.hpp> and import the lib to use the functions.

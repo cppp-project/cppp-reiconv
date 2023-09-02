@@ -1,3 +1,38 @@
+2023-09-02  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Optimize 'iconv_open(int, int)'.
+	Change version to '2.1.0'.
+	Update NEWS.md.
+	Remove some authors because they are only contributors.
+	Prepare for release version 2.1.0.
+
+2023-08-29  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Fix type-conflict warning when in clang.
+	Fully remove wchar support.
+	Add function 'extern iconv_t iconv_open (int tocode_cp, int fromcode_cp, bool strict=true)'.
+	Update language map.
+
+2023-08-27  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Add codepage definitions.
+
+2023-08-24  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Fix subdirectory import bug.
+	Optimize the way to import build-aux.
+
+2023-08-23  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Add CTest on Windows support.
+
+2023-07-28  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Finish NLS Translate language maps (en_US, zh_CN).
+	Add Doxygen notes for 'cppp/reiconv.hpp'.
+	Fix 'reiconv_version' bug (changed it to 2.0).
+	Remove 'iconv_allocation_t';
+
 2023-07-19  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Fix encode()'s EILSEQ bug.

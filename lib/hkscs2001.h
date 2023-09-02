@@ -4,7 +4,7 @@
  *
  * The cppp-reiconv library is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either version 2.1
+ * License as published by the Free Software Foundation; either version 3
  * of the License, or (at your option) any later version.
  *
  * The cppp-reiconv library is distributed in the hope that it will be
@@ -59,7 +59,7 @@ static int
 hkscs2001_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c1 = s[0];
-  if ((c1 == 0x8c)) {
+  if ((c1 == (unsigned char)0x8c)) {
     if (n >= 2) {
       unsigned char c2 = s[1];
       if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff)) {

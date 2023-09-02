@@ -3,7 +3,7 @@
 
    The cppp-reiconv library is free software; you can redistribute it
    and/or modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either version 2.1
+   License as published by the Free Software Foundation; either version 3
    of the License, or (at your option) any later version.
 
    The cppp-reiconv library is distributed in the hope that it will be
@@ -77,7 +77,7 @@ int main (int argc, char* argv[])
     exit(1);
   }
 
-#define DEFENCODING(xxx_names,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
+#define DEFENCODING(xxx_names,codepage,xxx,xxx_ifuncs1,xxx_ifuncs2,xxx_ofuncs1,xxx_ofuncs2) \
   {                                                           \
     static const char* const names[] = BRACIFY xxx_names;     \
     emit_encoding(aliases_file,canonical_file,tag,names,sizeof(names)/sizeof(names[0]),#xxx); \

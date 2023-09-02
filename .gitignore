@@ -41,6 +41,7 @@ tests/test-shiftseq.exe
 tests/uniq-u
 tests/uniq-u.exe
 tests/tmp-*.TXT
+a.out
 
 # Patterns for all subdirectories: all kinds of automatic backup files.
 *.orig
@@ -51,6 +52,7 @@ tests/tmp-*.TXT
 .#*
 \#*#
 .vscode
+.cache
 
 # Autopull modules
 build-aux/
@@ -59,6 +61,7 @@ build-aux/
 tests/data/UTF-8.TXT
 tests/data/GB18030-2005.TXT
 tests/data/GB18030-2022.TXT
+*.tmp
 
 # Dist directory and temps
 cppp-reiconv-v*
