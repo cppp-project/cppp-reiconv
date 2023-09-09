@@ -230,11 +230,11 @@ extern "C++"
     
     /**
      * @brief Converts an entire string from one encoding to another,
-     * and supports autodetect encodings on input when extra features enabled.
+     * and supports autodetect encodings on input.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
      * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
-     * except that FROMCODE may be one of the values when enabled extra features.
+     * except that FROMCODE may be one of the values.
      *
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
