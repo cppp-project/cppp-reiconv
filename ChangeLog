@@ -1,3 +1,13 @@
+2023-09-09  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Version 2.1.0 compile failed (release failed).
+	Update doccomments in reiconv.hpp.in.
+	Add function 'int iconv_string(const iconv_t& cd, const char *start, const char *end, char **resultp, size_t *lengthp)'
+	Add function 'int iconv_string(int tocode_cp, int fromcode_cp, const char* start, const char* end, char** resultp, size_t* lengthp, bool strict=true)'
+	Update function 'encode' definion.
+	Fix some warnings in Clang.
+	Change the 'autodetect' feature of 'iconv_string' to a non extra feature.
+
 2023-09-02  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Optimize 'iconv_open(int, int)'.

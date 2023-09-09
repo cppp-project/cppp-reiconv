@@ -117,8 +117,7 @@ cmake --build . --config=Release
 cmake --install .
 ```
 
-When use full build, extra encodings and features will be enabled.
-iconv string will suport autodetect input encoding.
+When use full build, extra encodings will be enabled.
 
 + Build with test suite
 ```shell

@@ -1,11 +1,15 @@
 New in 2.1.0:
 * Add a new function `iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict = true);` and codepage definitions.
+* Add new function `int iconv_string(const iconv_t& cd, const char *start, const char *end, char **resultp, size_t *lengthp)`
+* Add new function `int iconv_string(int tocode_cp, int fromcode_cp, const char* start, const char* end, char** resultp, size_t* lengthp, bool strict=true)`
+* Update function 'encode' definion.
 * Add CTest on Windows support.
 * Remove 'iconv_allocation_t';
 * Fully remove wchar support.
 * Fix some bugs.
 * Add header comments NLS support.
 * Add Doxygen comments for 'cppp/reiconv.hpp'.
+* Change the 'autodetect' feature of 'iconv_string' to a non extra feature.
 
 New in 2.0.0:
 * Redist 'GNU LIBICONV' to 'cppp-reiconv'.

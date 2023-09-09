@@ -532,20 +532,110 @@ static const unsigned short all_canonical[] = {
 /* version number: (major<<8) + minor */
 int reiconv_version = (2 << 8) + 1;
 
-#define tmpbufsize 4096
+constexpr size_t tmpbufsize = 4096;
 
-int iconv_string(const char *tocode, const char *fromcode, const char *start, const char *end, char **resultp,
+int iconv_string(const iconv_t& cd, const char *start, const char *end, char **resultp,
                  size_t *lengthp)
 {
-    iconv_t cd = iconv_open(tocode, fromcode);
     size_t length;
-    char *result;
+    char* result;
+    /* Determine the length we need. */
+    {
+        size_t count = 0;
+        char tmpbuf[tmpbufsize];
+        char* inptr = (char*)start;
+        size_t insize = end - start;
+        while (insize > 0)
+        {
+            char *outptr = tmpbuf;
+            size_t outsize = tmpbufsize;
+            size_t res = iconv(cd, &inptr, &insize, &outptr, &outsize);
+            if (res == (size_t)(-1) && errno != E2BIG)
+            {
+                return (errno == EINVAL ? EILSEQ : errno);
+            }
+            count += outptr - tmpbuf;
+        }
+        {
+            char *outptr = tmpbuf;
+            size_t outsize = tmpbufsize;
+            size_t res = iconv(cd, NULL, NULL, &outptr, &outsize);
+            if (res == (size_t)(-1))
+            {
+                return errno;
+            }
+            count += outptr - tmpbuf;
+        }
+        length = count;
+    }
+    if (lengthp != NULL)
+    {
+        *lengthp = length;
+    }
+    if (resultp == NULL)
+    {
+        /* If resultp is nullptr, we can't save results.  */
+        return 0;
+    }
+    result = (*resultp == NULL ? (char*)malloc(length) : (char*)realloc(*resultp, length));
+    *resultp = result;
+    if (length == 0)
+    {
+        return 0;
+    }
+    if (result == NULL)
+    {
+        return (errno = ENOMEM);
+    }
+    iconv(cd, NULL, NULL, NULL, NULL); /* return to the initial state */
+    /* Do the conversion for real. */
+    {
+        char* inptr = (char*)start;
+        size_t insize = end - start;
+        char* outptr = result;
+        size_t outsize = length;
+        while (insize > 0)
+        {
+            size_t res = iconv(cd, &inptr, &insize, &outptr, &outsize);
+            if (res == (size_t)(-1))
+            {
+                if (errno == EINVAL)
+                {
+                    break;
+                }
+                else
+                {
+                    return errno;
+                }
+            }
+        }
+        {
+            size_t res = iconv(cd, NULL, NULL, &outptr, &outsize);
+            if (res == (size_t)(-1))
+            {
+                return errno;
+            }
+        }
+        if (outsize != 0)
+        {
+            abort();
+        }
+    }
+    return 0;
+}
+
+int iconv_string(const char* tocode, const char* fromcode, const char* start,
+                   const char* end, char** resultp, size_t* lengthp)
+{
+    iconv_t cd = iconv_open(tocode, fromcode);
     if (cd == (iconv_t)(-1))
     {
         if (errno != EINVAL)
+        {
             return -1;
-/* Autodetect feature is a extra feature. */
-#if ENABLE_EXTRA
+        }
+
+#pragma region autodetect
         /* Unsupported fromcode or tocode. Check whether the caller requested
           autodetection. */
         if (!strcmp(fromcode, "autodetect_utf8"))
@@ -591,104 +681,31 @@ int iconv_string(const char *tocode, const char *fromcode, const char *start, co
             ret = iconv_string(tocode, "EUC-KR", start, end, resultp, lengthp);
             return ret;
         }
-#endif
+#pragma endregion
+
         errno = EINVAL;
         return -1;
     }
-    /* Determine the length we need. */
-    {
-        size_t count = 0;
-        char tmpbuf[tmpbufsize];
-        const char *inptr = start;
-        size_t insize = end - start;
-        while (insize > 0)
-        {
-            char *outptr = tmpbuf;
-            size_t outsize = tmpbufsize;
-            size_t res = iconv(cd, (char **)&inptr, &insize, &outptr, &outsize);
-            if (res == (size_t)(-1) && errno != E2BIG)
-            {
-                int saved_errno = (errno == EINVAL ? EILSEQ : errno);
-                iconv_close(cd);
-                errno = saved_errno;
-                return -1;
-            }
-            count += outptr - tmpbuf;
-        }
-        {
-            char *outptr = tmpbuf;
-            size_t outsize = tmpbufsize;
-            size_t res = iconv(cd, NULL, NULL, &outptr, &outsize);
-            if (res == (size_t)(-1))
-            {
-                int saved_errno = errno;
-                iconv_close(cd);
-                errno = saved_errno;
-                return -1;
-            }
-            count += outptr - tmpbuf;
-        }
-        length = count;
-    }
-    if (lengthp != NULL)
-        *lengthp = length;
-    if (resultp == NULL)
-    {
-        iconv_close(cd);
-        return 0;
-    }
-    result = (*resultp == NULL ? (char *)malloc(length) : (char *)realloc(*resultp, length));
-    *resultp = result;
-    if (length == 0)
-    {
-        iconv_close(cd);
-        return 0;
-    }
-    if (result == NULL)
-    {
-        iconv_close(cd);
-        errno = ENOMEM;
-        return -1;
-    }
-    iconv(cd, NULL, NULL, NULL, NULL); /* return to the initial state */
-    /* Do the conversion for real. */
-    {
-        const char *inptr = start;
-        size_t insize = end - start;
-        char *outptr = result;
-        size_t outsize = length;
-        while (insize > 0)
-        {
-            size_t res = iconv(cd, (char **)&inptr, &insize, &outptr, &outsize);
-            if (res == (size_t)(-1))
-            {
-                if (errno == EINVAL)
-                    break;
-                else
-                {
-                    int saved_errno = errno;
-                    iconv_close(cd);
-                    errno = saved_errno;
-                    return -1;
-                }
-            }
-        }
-        {
-            size_t res = iconv(cd, NULL, NULL, &outptr, &outsize);
-            if (res == (size_t)(-1))
-            {
-                int saved_errno = errno;
-                iconv_close(cd);
-                errno = saved_errno;
-                return -1;
-            }
-        }
-        if (outsize != 0)
-            abort();
-    }
+
+    int ret = iconv_string(cd, start, end, resultp, lengthp);
     iconv_close(cd);
-    return 0;
+    return ret;
 }
+
+int iconv_string(int tocode_cp, int fromcode_cp, const char* start,
+                   const char* end, char** resultp, size_t* lengthp, bool strict)
+{
+    iconv_t cd = iconv_open(tocode_cp, fromcode_cp, strict);
+    if (cd == (iconv_t)(-1))
+    {
+        return errno;
+    }
+
+    int ret = iconv_string(cd, start, end, resultp, lengthp);
+    iconv_close(cd);
+    return ret;
+}
+
 } // namespace reiconv
 } // namespace base
 } // namespace cppp
