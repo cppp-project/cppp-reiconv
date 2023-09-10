@@ -8,6 +8,7 @@
 	Fix some warnings in Clang.
 	Change the 'autodetect' feature of 'iconv_string' to a non extra feature.
 	Update language maps.
+	Fix compile error in MinGW GNU GCC.
 
 2023-09-02  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 

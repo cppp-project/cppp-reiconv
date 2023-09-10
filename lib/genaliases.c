@@ -60,7 +60,7 @@ static void emit_encoding (FILE* out1, FILE* out2, const char* const* names, siz
       putc(c, out2);
     }
   }
-  fprintf(out2,"\")' tmp.h | sed -e 's|^.*\\(stringpool_str[0-9]*\\).*$|  (unsigned short)(long)\\&((struct stringpool_t *)0)->\\1,|'\n");
+  fprintf(out2,"\")' tmp.h | sed -e 's|^.*\\(stringpool_str[0-9]*\\).*$|  (unsigned short)(size_t)(void*)\\&((struct stringpool_t *)0)->\\1,|'\n");
   for (; n > 0; names++, n--)
     emit_alias(out1, *names, c_name);
 }
