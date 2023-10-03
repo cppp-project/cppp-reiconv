@@ -4,6 +4,7 @@
 	Remove unused canonical files and codes.
 	Move 'lib/gen*.c' to 'tools/gen*.cpp'.
 	Optimize 'Makefile.devel'.
+	Move generated files to C++ to avoid 'register' warnings.
 
 2023-09-09  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 

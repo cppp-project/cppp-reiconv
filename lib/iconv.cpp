@@ -154,7 +154,7 @@ int lookup_by_codepage(int codepage)
  * Alias lookup function.
  * Defines
  *   struct alias { int name; unsigned int encoding_index; };
- *   const struct alias * aliases_lookup (const char *str, unsigned int len);
+ *   const struct alias * HashPool::aliases_lookup (const char *str, unsigned int len);
  *   #define MAX_WORD_LENGTH ...
  */
 #if defined _AIX
@@ -200,7 +200,7 @@ inline
 #endif
 #endif
     static const struct alias *
-    aliases2_lookup(register const char *str)
+    aliases2_lookup(const char *str)
 {
     const struct alias *ptr;
     unsigned int count;

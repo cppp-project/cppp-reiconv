@@ -38,7 +38,7 @@
     to_surface = ICONV_SURFACE_NONE;
     discard_ilseq = 0;
 
-    /* Before calling aliases_lookup, convert the input string to upper case,
+    /* Before calling HashPool::aliases_lookup, convert the input string to upper case,
      * and check whether it's entirely ASCII (we call gperf with option "-7"
      * to achieve a smaller table) and non-empty. If it's not entirely ASCII,
      * or if it's too long, it is not a valid encoding name.
@@ -83,7 +83,7 @@
             discard_ilseq = 1;
         break;
     }
-    ap = aliases_lookup(buf, bp - buf);
+    ap = HashPool::aliases_lookup(buf, bp - buf);
     if (ap == NULL)
     {
         ap = aliases2_lookup(buf);
@@ -131,7 +131,7 @@
             discard_ilseq = 1;
         break;
     }
-    ap = aliases_lookup(buf, bp - buf);
+    ap = HashPool::aliases_lookup(buf, bp - buf);
     if (ap == NULL)
     {
         ap = aliases2_lookup(buf);

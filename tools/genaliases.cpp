@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 
     fprintf(aliases_file, "struct alias { int name; unsigned int encoding_index; };\n");
     fprintf(aliases_file, "%%struct-type\n");
-    fprintf(aliases_file, "%%language=ANSI-C\n");
+    fprintf(aliases_file, "%%language=C++\n");
     fprintf(aliases_file, "%%define hash-function-name aliases_hash\n");
     fprintf(aliases_file, "%%define lookup-function-name aliases_lookup\n");
     fprintf(aliases_file, "%%7bit\n");

@@ -35,7 +35,7 @@ lib/generated/aliases.gperf : lib/generated/genaliases
 	./lib/generated/genaliases $@
 
 lib/generated/aliases.h : lib/generated/aliases.gperf
-	$(GPERF) -m 10 $< > $@
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
 
 
 lib/generated/genaliases_sysaix : tools/genaliases.cpp
@@ -45,7 +45,7 @@ lib/generated/aliases_sysaix.gperf : lib/generated/genaliases_sysaix
 	./lib/generated/genaliases_sysaix $@
 
 lib/generated/aliases_sysaix.h : lib/generated/aliases_sysaix.gperf
-	$(GPERF) -m 10 $< > $@
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
 
 
 lib/generated/genaliases_syshpux : tools/genaliases.cpp
@@ -55,7 +55,7 @@ lib/generated/aliases_syshpux.gperf : lib/generated/genaliases_syshpux
 	./lib/generated/genaliases_syshpux $@
 
 lib/generated/aliases_syshpux.h : lib/generated/aliases_syshpux.gperf
-	$(GPERF) -m 10 $< > $@
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
 
 
 lib/generated/genaliases_sysosf1 : tools/genaliases.cpp
@@ -65,7 +65,7 @@ lib/generated/aliases_sysosf1.gperf : lib/generated/genaliases_sysosf1
 	./lib/generated/genaliases_sysosf1 $@
 
 lib/generated/aliases_sysosf1.h : lib/generated/aliases_sysosf1.gperf
-	$(GPERF) -m 10 $< > $@
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
 
 
 lib/generated/genaliases_syssolaris : tools/genaliases.cpp
@@ -75,7 +75,7 @@ lib/generated/aliases_syssolaris.gperf : lib/generated/genaliases_syssolaris
 	./lib/generated/genaliases_syssolaris $@
 
 lib/generated/aliases_syssolaris.h : lib/generated/aliases_syssolaris.gperf
-	$(GPERF) -m 10 $< > $@
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
 
 
 lib/generated/genaliases2_aix : tools/genaliases2.cpp
