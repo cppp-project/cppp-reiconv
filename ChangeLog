@@ -7,6 +7,8 @@
 	Move generated files to C++ to avoid 'register' warnings.
 	Add test and clean target in 'Makefile.devel'.
 	Update 'FILELIST'.
+	Update GitHub Action for build and test.
+	Prepare for release version 2.1.0.
 
 2023-09-09  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 

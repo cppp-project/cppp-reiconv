@@ -15,6 +15,9 @@ jobs:
     steps:
     #--------------------------------------------collect--------------------------------------------
     - uses: actions/checkout@v3
+
+    - name: 🧰 Setup Python
+      uses: actions/setup-python@v4
     
     - name: 📁 Collect dependencies
       run: |
@@ -31,16 +34,16 @@ jobs:
         mkdir -p build
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
-        cmake --build .
+        cmake --build . --config=Release
         cd ..
     
     #--------------------------------------------test--------------------------------------------
     - name: ✔️ Test
       run : |
         cd build
-        ctest --verbose
+        ctest --verbose -C Release
         cd ..
-    
+  
   test-macos:
 
     runs-on: macos-latest
@@ -63,12 +66,12 @@ jobs:
         mkdir build
         cd build
         cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
-        cmake --build .
+        cmake --build . --config=Release
         cd ..
     
     #--------------------------------------------test--------------------------------------------
     - name: ✔️ Test
       run : |
         cd build
-        ctest --verbose
+        ctest --verbose -C Release
         cd ..
