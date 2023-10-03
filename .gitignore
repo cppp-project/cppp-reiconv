@@ -23,6 +23,11 @@ Testing
 *.log
 *.dSYM
 
+# Makefile.devel temp files
+genaliases
+genflags
+tmp.h
+
 # Test suite runable
 tests/cmp
 tests/cmp.exe

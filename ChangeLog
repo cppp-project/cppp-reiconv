@@ -2,6 +2,7 @@
 
 	Update C++ standard of the project.
 	Remove unused canonical files and codes.
+	Move 'lib/gen*.c' to 'tools/gen*.cpp'.
 
 2023-09-09  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
