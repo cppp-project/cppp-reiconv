@@ -477,58 +477,6 @@ void iconvlist(int (*do_one)(unsigned int namescount, const char *const *names, 
 #undef aliascount1
 }
 
-/*
- * Table of canonical names of encodings.
- * Instead of strings, it contains offsets into stringpool and stringpool2.
- */
-static const unsigned short all_canonical[] = {
-#if defined _AIX
-#include "canonical_sysaix.h"
-#elif defined hpux || defined __hpux
-#include "canonical_syshpux.h"
-#elif defined __osf__
-#include "canonical_sysosf1.h"
-#elif defined __sun
-#include "canonical_syssolaris.h"
-#else
-#include "canonical.h"
-#endif
-#ifdef USE_AIX
-#if defined _AIX
-#include "canonical_aix_sysaix.h"
-#else
-#include "canonical_aix.h"
-#endif
-#endif
-#ifdef USE_OSF1
-#if defined __osf__
-#include "canonical_osf1_sysosf1.h"
-#else
-#include "canonical_osf1.h"
-#endif
-#endif
-#ifdef USE_DOS
-#include "canonical_dos.h"
-#endif
-#ifdef USE_ZOS
-#include "canonical_zos.h"
-#endif
-#ifdef USE_EXTRA
-#include "canonical_extra.h"
-#endif
-#if defined _AIX
-#include "canonical_local_sysaix.h"
-#elif defined hpux || defined __hpux
-#include "canonical_local_syshpux.h"
-#elif defined __osf__
-#include "canonical_local_sysosf1.h"
-#elif defined __sun
-#include "canonical_local_syssolaris.h"
-#else
-#include "canonical_local.h"
-#endif
-};
-
 /* version number: (major<<8) + minor */
 int reiconv_version = (2 << 8) + 1;
 
