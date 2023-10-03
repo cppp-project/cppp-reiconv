@@ -1767,7 +1767,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1164, ei_euc_jp}
   };
 
-static const struct alias *
+const struct alias *
 aliases_lookup (register const char *str, register size_t len)
 {
   if (len <= MAX_WORD_LENGTH && len >= MIN_WORD_LENGTH)
