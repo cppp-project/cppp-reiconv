@@ -90,7 +90,6 @@ lib/tcvn.h
 lib/ebcdic1123.h
 lib/ebcdic1158.h
 lib/ucs2be.h
-lib/genaliases2.c
 lib/ebcdic425.h
 lib/cp1253.h
 lib/iconv_open1.h
@@ -98,7 +97,6 @@ lib/ces_big5.h
 lib/cp857.h
 lib/cp949.h
 lib/ebcdic1137.h
-lib/genflags.c
 lib/iso8859_10.h
 lib/gb2312.h
 lib/cp936.h
@@ -163,7 +161,6 @@ lib/ebcdic1122.h
 lib/isoir165.h
 lib/cp864.h
 lib/iso8859_15.h
-lib/genaliases.c
 lib/mac_turkish.h
 lib/ebcdic424.h
 lib/uhc_1.h
@@ -528,6 +525,9 @@ tests/throw_error.hpp
 tests/file_utils.hpp
 tests/sort.cpp
 tests/sort.hpp
+tools/genaliases.cpp
+tools/genaliases2.cpp
+tools/genflags.cpp
 COPYING
 Makefile.devel
 include/cppp/reiconv.hpp.in
