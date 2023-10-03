@@ -1,14 +1,19 @@
 New in 2.1.0:
-* Add a new function `iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict = true);` and codepage definitions.
-* Add new function `int iconv_string(const iconv_t& cd, const char *start, const char *end, char **resultp, size_t *lengthp)`
-* Add new function `int iconv_string(int tocode_cp, int fromcode_cp, const char* start, const char* end, char** resultp, size_t* lengthp, bool strict=true)`
-* Update function 'encode' definion.
-* Add CTest on Windows support.
-* Remove 'iconv_allocation_t';
-* Fully remove wchar support.
-* Fix some bugs.
-* Add header comments NLS support.
+* Add NLS support for the include file, only support en_US and zh_CN.
+* Add CTest support for Windows.
 * Add Doxygen comments for 'cppp/reiconv.hpp'.
+* New feature: Convert by codepage.
+* New function: `iconv_t iconv_open (int tocode_cp, int fromcode_cp, bool strict=true);`.
+* New function: `int iconv_string(int tocode_cp, int fromcode_cp, const char* start, const char* end, char** resultp, size_t* lengthp, bool strict=true);`.
+* Update definion of the function `encode`.
+* Update C++ standard of the project to C++17.
+* Change the 'autodetect' feature of 'iconv_string' to a non extra feature.
+* Remove `iconv_allocation_t`, fully remove wchar support.
+* Modify the LGPL version in the copyright statement in the file to 3.
+* Move `lib/gen*.c` to `tools/gen*.cpp`.
+* Optimize `Makefile.devel`.
+* Fix bugs, warnings, typos.
+
 * Change the 'autodetect' feature of 'iconv_string' to a non extra feature.
 
 New in 2.0.0:
