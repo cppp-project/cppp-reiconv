@@ -127,13 +127,13 @@ jobs:
         export C_COMPILER="gcc"
         export CXX_COMPILER="g++"
         export LINKER="ld"
-        export CC="/usr/bin/${{ matrix.arch }}-$C_COMPILER"
-        export CXX="/usr/bin/${{ matrix.arch }}-$CXX_COMPILER"
+        export CC_CROSS="/usr/bin/${{ matrix.arch }}-$C_COMPILER"
+        export CXX_CROSS="/usr/bin/${{ matrix.arch }}-$CXX_COMPILER"
         export LD="/usr/bin/${{ matrix.arch }}-$LINKER"
 
         mkdir build
         cd build
-        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }} -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_LINKER=$LD
+        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }} -DCMAKE_C_COMPILER=$CC_CROSS -DCMAKE_CXX_COMPILER=$CXX_CROSS -DCMAKE_LINKER=$LD
         cmake --build . --config=Release
         cmake --install .
         cd ..
@@ -175,6 +175,10 @@ jobs:
     steps:
     
     #--------------------------------------------collect--------------------------------------------
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
     - name: 🏷️ Get infomations
       run: |
         tag="${GITHUB_REF#refs/tags/}"
@@ -200,12 +204,12 @@ jobs:
     
     - name: 🛠️ Build binary distribution
       run: |
-        export CC="clang"
-        export CXX="clang++"
+        export CC_CROSS="clang"
+        export CXX_CROSS="clang++"
 
         mkdir build
         cd build
-        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -arch ${{ matrix.arch }}" -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -arch ${{ matrix.arch }}"
+        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }}-darwin-apple -DCMAKE_C_COMPILER=$CC_CROSS -DCMAKE_CXX_COMPILER=$CXX_CROSS -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -arch ${{ matrix.arch }}" -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -arch ${{ matrix.arch }}"
         cmake --build . --config=Release
         cmake --install .
         cd ..

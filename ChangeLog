@@ -1,3 +1,27 @@
+2023-10-03  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Update C++ standard of the project.
+	Remove unused canonical files and codes.
+	Move 'lib/gen*.c' to 'tools/gen*.cpp'.
+	Optimize 'Makefile.devel'.
+	Move generated files to C++ to avoid 'register' warnings.
+	Add test and clean target in 'Makefile.devel'.
+	Update 'FILELIST'.
+	Update GitHub Action for build and test.
+	Prepare for release version 2.1.0.
+
+2023-09-09  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Version 2.1.0 compile failed (release failed).
+	Update doccomments in reiconv.hpp.in.
+	Add function 'int iconv_string(const iconv_t& cd, const char *start, const char *end, char **resultp, size_t *lengthp)'
+	Add function 'int iconv_string(int tocode_cp, int fromcode_cp, const char* start, const char* end, char** resultp, size_t* lengthp, bool strict=true)'
+	Update function 'encode' definion.
+	Fix some warnings in Clang.
+	Change the 'autodetect' feature of 'iconv_string' to a non extra feature.
+	Update language maps.
+	Fix compile error in MinGW GNU GCC.
+
 2023-09-02  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Optimize 'iconv_open(int, int)'.

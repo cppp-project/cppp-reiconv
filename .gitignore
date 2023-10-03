@@ -23,6 +23,23 @@ Testing
 *.log
 *.dSYM
 
+# Makefile.devel temp files
+lib/generated/genaliases
+lib/generated/genaliases_sysaix
+lib/generated/genaliases_syshpux
+lib/generated/genaliases_sysosf1
+lib/generated/genaliases_syssolaris
+lib/generated/genaliases2_aix
+lib/generated/genaliases2_aix_sysaix
+lib/generated/genaliases2_dos
+lib/generated/genaliases2_extra
+lib/generated/genaliases2_osf1
+lib/generated/genaliases2_osf1_sysosf1
+lib/generated/genaliases2_zos
+lib/generated/genflags
+/*/**/*.gperf
+
+
 # Test suite runable
 tests/cmp
 tests/cmp.exe

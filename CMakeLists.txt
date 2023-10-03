@@ -22,7 +22,7 @@ project(cppp-reiconv VERSION 2.1.0)
 option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 # ----------------------------------------------------------------------------------
 # Import build-aux subdirectory.

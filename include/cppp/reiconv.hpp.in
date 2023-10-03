@@ -1,7 +1,7 @@
 /**
  * @file cppp/reiconv.hpp
  * @author ChenPi11
- * @brief C++ Plus base definitions
+ * @brief C++ Plus cppp-reiconv package.
  * @version 2.1.0
  * @date 2023-7-28
  * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
@@ -28,14 +28,14 @@
 #ifndef _CPPP_REICONV_HPP
 #define _CPPP_REICONV_HPP
 
-#ifdef _MSC_VER
+#if _MSC_VER >= 1600 
 /* Use UTF-8 to decode this file. */
 #pragma execution_character_set("utf-8")
 #endif
 
-#include <errno.h>
 #include <exception>
 #include <iostream>
+#include <errno.h>
 #include <time.h>
 #include <vector>
 #include <wchar.h>
@@ -216,12 +216,25 @@ extern "C++"
                                           void *data);
 
     /**
-     * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself,
-     * and supports autodetect encodings on input when extra features enabled.
+     * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself.
+     * @note This function does not treat zero characters specially.
+     * @param cd Conversion descriptor.
+     * @param start Source string start pointer.
+     * @param end Source string end pointer.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values are EILSEQ and ENOMEM.
+     */
+    extern @DLL_VARIABLE@ int iconv_string(const iconv_t& cd, const char *start,
+                                            const char *end, char **resultp, size_t *lengthp);
+    
+    /**
+     * @brief Converts an entire string from one encoding to another,
+     * and supports autodetect encodings on input.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
      * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
-     * except that FROMCODE may be one of the values when enabled extra features.
+     * except that FROMCODE may be one of the values.
      *
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
@@ -231,25 +244,47 @@ extern "C++"
      * *resultp; malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.
-     *
      * @param tocode Target encoding.
      * @param fromcode From encoding.
      * @param start Source string start pointer.
      * @param end Source string end pointer.
      * @param resultp Result memory pointer.
      * @param lengthp Pointer to a variable that stores the length of the result.
-     * @return Return 0 if successful, otherwise -1 and errno set. Particular errno values: EILSEQ and ENOMEM.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      *
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
      *   if (iconv_string("UCS-4-INTERNAL", "GBK",
-     *                    s, s+strlen(s)+1, &result, NULL) < 0)
+     *                    s, s+strlen(s)+1, &result, NULL) != 0)
      *   perror("iconv_string");
      *
      */
-    extern @DLL_VARIABLE@ int iconv_string(const char *tocode, const char *fromcode, const char *start,
-                                            const char *end, char **resultp, size_t *lengthp);
+    extern @DLL_VARIABLE@ int iconv_string(const char* tocode, const char* fromcode, const char* start,
+                                            const char* end, char** resultp, size_t* lengthp);
+
+    /**
+     * @brief Converts an entire string from one encoding to another.
+     * @note This function does not treat zero characters specially.
+     * @param tocode_cp Target encoding codepage.
+     * @param fromcode_cp From encoding codepage.
+     * @param start Source string start pointer.
+     * @param end Source string end pointer.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @param strict Strict mode, if false, will ignore the invalid characters.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
+     *
+     * @example
+     *   const char* s = ...;
+     *   char* result = NULL;
+     *   if (iconv_string(65001, 936,
+     *                    s, s+strlen(s)+1, &result, NULL) != 0)
+     *   perror("iconv_string");
+     *
+     */
+    extern @DLL_VARIABLE@ int iconv_string(int tocode_cp, int fromcode_cp, const char* start,
+                                            const char* end, char** resultp, size_t* lengthp, bool strict=true);
 
     /**
      * @brief Encode source string to another encoding.
@@ -259,7 +294,7 @@ extern "C++"
      * @param ignore Ignore invalid characters.
      * @throw int: when conversation error, throw the 'errno', you can catch the errno for more infomation.
      */
-    inline std::vector<char> encode(std::string from, std::string to, const std::vector<char> &data,
+    inline std::vector<char> encode(const std::string& from, const std::string& to, const std::vector<char>& data,
                                     bool ignore = false)
     {
         char *result = NULL;

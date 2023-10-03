@@ -272,12 +272,36 @@
 
 '''
     /**
-     * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself,
-     * and supports autodetect encodings on input when extra features enabled.
+     * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself.
+     * @note This function does not treat zero characters specially.
+     * @param cd Conversion descriptor.
+     * @param start Source string start pointer.
+     * @param end Source string end pointer.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values are EILSEQ and ENOMEM.
+     */
+'''
+    /**
+     * @brief 使用 iconv 将整个字符串从一种编码转换为另一种编码。比直接使用 iconv() 函数更简单。
+     * @note 该函数不特殊处理 '\0' 字符。
+     * @param cd 转换描述符。
+     * @param start 源字符串起始指针。
+     * @param end 源字符串结束指针。
+     * @param resultp 结果内存指针。
+     * @param lengthp 指向存储结果长度的变量的指针。
+     * @return 如果成功，返回 0 ，否则返回 errno 并设置 errno 。特定的 errno 值包括 EILSEQ 和 ENOMEM 。
+     */
+'''
+
+'''
+    /**
+     * @brief Converts an entire string from one encoding to another,
+     * and supports autodetect encodings on input.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
      * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
-     * except that FROMCODE may be one of the values when enabled extra features.
+     * except that FROMCODE may be one of the values.
      *
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
@@ -287,51 +311,91 @@
      * *resultp; malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.
-     *
      * @param tocode Target encoding.
      * @param fromcode From encoding.
      * @param start Source string start pointer.
      * @param end Source string end pointer.
      * @param resultp Result memory pointer.
      * @param lengthp Pointer to a variable that stores the length of the result.
-     * @return Return 0 if successful, otherwise -1 and errno set. Particular errno values: EILSEQ and ENOMEM.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      *
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
      *   if (iconv_string("UCS-4-INTERNAL", "GBK",
-     *                    s, s+strlen(s)+1, &result, NULL) < 0)
+     *                    s, s+strlen(s)+1, &result, NULL) != 0)
      *   perror("iconv_string");
      *
      */
 '''
     /**
-     * @brief 使用 iconv 将整个字符串从一种编码方式转换为另一种编码方式。比使用 “iconv()” 本身更易于使用，并在启用额外功能时支持输入的自动检测编码。
+     * @brief 将整个字符串从一种编码转换为另一种编码，并支持自动检测输入编码。
      *
-     * @note 将以编码 “FROMCODE” 给出的内存区域转换为以编码 “TOCODE” 给出的新内存区域。 “FROMCODE” 和 “TOCODE” 与 “iconv_open(3)” 中的一样，但 “FROMCODE”
-     *     可能是值在启用额外功能时。
-     * 
-     * @note "autodetect_utf8"        支持 ISO-8859-1 和 UTF-8
-     * @note "autodetect_jp"          支持 EUC-JP、ISO-2022-JP-2 和 SHIFT_JIS
-     * @note "autodetect_kr"          支持 EUC-KR 和 ISO-2022-KR
-     * 
-     * @note 输入位于 start （包含）和 end （不包含）之间的内存区域。如果 “resultp” 不为 NULL ，则输出字符串存储在 “*resultp” 中；使用 “malloc/realloc” 来分配结果。
+     * @note 将以编码 FROMCODE 给出的内存区域转换为以编码 TOCODE 给出的新内存区域。 FROMCODE 和 TOCODE 与 iconv_open(3) 中的参数相同，但 FROMCODE 可能是以下值之一。
      *
-     * @note 此函数不特殊处理零字符。
+     * @note "autodetect_utf8" 支持 ISO-8859-1 和 UTF-8
+     * @note "autodetect_jp" 支持 EUC-JP 、 ISO-2022-JP-2和 SHIFT_JIS
+     * @note "autodetect_kr" 支持 EUC-KR 和 ISO-2022-KR
+     * @note 输入位于 start （包含）和 end （不包含）之间的内存区域。如果 resultp 不为 NULL ，则输出字符串存储在 *resultp 中； malloc/realloc 用于分配结果。
      *
+     * @note 该函数不特殊处理零字符。
      * @param tocode 目标编码。
      * @param fromcode 源编码。
      * @param start 源字符串起始指针。
      * @param end 源字符串结束指针。
      * @param resultp 结果内存指针。
-     * @param lengthp 存储结果长度的变量的指针。
-     * @return 如果成功返回 0 ，否则返回 -1 并设置 errno 。特定的 errno 值：EILSEQ 和 ENOMEM。
+     * @param lengthp 指向存储结果长度的变量的指针。
+     * @return 如果成功，返回0；否则返回 errno 并设置 errno 。特定的 errno 值包括 EILSEQ 和 ENOMEM 。
      *
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
      *   if (iconv_string("UCS-4-INTERNAL", "GBK",
-     *                    s, s+strlen(s)+1, &result, NULL) < 0)
+     *                    s, s+strlen(s)+1, &result, NULL) != 0)
+     *   perror("iconv_string");
+     *
+     */
+'''
+
+'''
+    /**
+     * @brief Converts an entire string from one encoding to another.
+     * @note This function does not treat zero characters specially.
+     * @param tocode_cp Target encoding codepage.
+     * @param fromcode_cp From encoding codepage.
+     * @param start Source string start pointer.
+     * @param end Source string end pointer.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @param strict Strict mode, if false, will ignore the invalid characters.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
+     *
+     * @example
+     *   const char* s = ...;
+     *   char* result = NULL;
+     *   if (iconv_string(65001, 936,
+     *                    s, s+strlen(s)+1, &result, NULL) != 0)
+     *   perror("iconv_string");
+     *
+     */
+'''
+    /**
+     * @brief 将整个字符串从一种编码转换为另一种编码。
+     * @note 该函数不特殊处理零字符。
+     * @param tocode_cp 目标编码页。
+     * @param fromcode_cp 源编码页。
+     * @param start 源字符串起始指针。
+     * @param end 源字符串结束指针。
+     * @param resultp 结果内存指针。
+     * @param lengthp 指向存储结果长度的变量的指针。
+     * @param strict 严格模式，如果为 false ，将忽略无效字符。
+     * @return 如果成功，返回 0 ；否则返回 errno 并设置 errno 。特定的 errno 值包括 EILSEQ 和 ENOMEM 。
+     *
+     * @example
+     *   const char* s = ...;
+     *   char* result = NULL;
+     *   if (iconv_string(65001, 936,
+     *                    s, s+strlen(s)+1, &result, NULL) != 0)
      *   perror("iconv_string");
      *
      */

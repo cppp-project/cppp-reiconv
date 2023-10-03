@@ -1,18 +1,17 @@
 # -*- makefile -*-
-# This is the developer's makefile, not the user's makefile.
-# Don't use it unless you know exactly what you do!
-# It requires GNU make.
-# It obeys the environment variables GNULIB_TOOL, CC, CFLAGS
-# if you have set them.
+# This is the developer's makefile.
+# It obeys the environment variables CXX, CFLAGS if you have set them.
 
-ifneq (,)
-This makefile requires GNU Make.
-endif
 
-SHELL = /bin/sh
 GPERF = gperf
+CMAKE = cmake
+CTEST = ctest
 MKDIR = mkdir -p
 RM = rm -f
+
+CXX ?= g++ -Wall
+
+CXXFLAGS := $(CXXFLAGS) -Ilib
 
 all : lib/generated \
       lib/generated/aliases.h lib/generated/aliases_sysaix.h lib/generated/aliases_syshpux.h lib/generated/aliases_sysosf1.h lib/generated/aliases_syssolaris.h \
@@ -26,110 +25,143 @@ all : lib/generated \
 lib/generated :
 	$(MKDIR) lib/generated
 
-lib/generated/aliases.h lib/generated/canonical.h lib/generated/canonical_local.h : lib/encodings.def lib/genaliases.c
-	$(CC) $(CFLAGS) lib/genaliases.c -o genaliases
-	./genaliases lib/generated/aliases.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
-	$(GPERF) -m 10 lib/generated/aliases.gperf > tmp.h
-	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/generated/aliases.h
-	sh canonical.sh > lib/generated/canonical.h
-	sh canonical_local.sh > lib/generated/canonical_local.h
-	$(RM) tmp.h canonical.sh canonical_local.sh
+lib/generated/genaliases : tools/genaliases.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@
 
-lib/generated/aliases_sysaix.h lib/generated/canonical_sysaix.h lib/generated/canonical_local_sysaix.h : lib/encodings.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_AIX_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/generated/aliases_sysaix.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
-	$(GPERF) -m 10 lib/generated/aliases_sysaix.gperf > tmp.h
-	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/generated/aliases_sysaix.h
-	sh canonical.sh > lib/generated/canonical_sysaix.h
-	sh canonical_local.sh > lib/generated/canonical_local_sysaix.h
-	$(RM) tmp.h canonical.sh canonical_local.sh
+lib/generated/aliases.gperf : lib/generated/genaliases
+	./lib/generated/genaliases $@
 
-lib/generated/aliases_syshpux.h lib/generated/canonical_syshpux.h lib/generated/canonical_local_syshpux.h : lib/encodings.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_HPUX_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/generated/aliases_syshpux.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
-	$(GPERF) -m 10 lib/generated/aliases_syshpux.gperf > tmp.h
-	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/generated/aliases_syshpux.h
-	sh canonical.sh > lib/generated/canonical_syshpux.h
-	sh canonical_local.sh > lib/generated/canonical_local_syshpux.h
-	$(RM) tmp.h canonical.sh canonical_local.sh
-
-lib/generated/aliases_sysosf1.h lib/generated/canonical_sysosf1.h lib/generated/canonical_local_sysosf1.h : lib/encodings.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_OSF1_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/generated/aliases_sysosf1.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
-	$(GPERF) -m 10 lib/generated/aliases_sysosf1.gperf > tmp.h
-	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/generated/aliases_sysosf1.h
-	sh canonical.sh > lib/generated/canonical_sysosf1.h
-	sh canonical_local.sh > lib/generated/canonical_local_sysosf1.h
-	$(RM) tmp.h canonical.sh canonical_local.sh
-
-lib/generated/aliases_syssolaris.h lib/generated/canonical_syssolaris.h lib/generated/canonical_local_syssolaris.h : lib/encodings.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_SOLARIS_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/generated/aliases_syssolaris.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
-	$(GPERF) -m 10 lib/generated/aliases_syssolaris.gperf > tmp.h
-	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/generated/aliases_syssolaris.h
-	sh canonical.sh > lib/generated/canonical_syssolaris.h
-	sh canonical_local.sh > lib/generated/canonical_local_syssolaris.h
-	$(RM) tmp.h canonical.sh canonical_local.sh
-
-lib/generated/aliases_aix.h lib/generated/canonical_aix.h : lib/encodings_aix.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_AIX lib/genaliases2.c -o genaliases
-	./genaliases aix lib/generated/aliases_aix.h lib/generated/canonical_aix.h
-	$(RM) genaliases
-
-lib/generated/aliases_aix_sysaix.h lib/generated/canonical_aix_sysaix.h : lib/encodings_aix.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_AIX -DUSE_AIX_ALIASES lib/genaliases2.c -o genaliases
-	./genaliases aix lib/generated/aliases_aix_sysaix.h lib/generated/canonical_aix_sysaix.h
-	$(RM) genaliases
-
-lib/generated/aliases_osf1.h lib/generated/canonical_osf1.h : lib/encodings_osf1.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_OSF1 lib/genaliases2.c -o genaliases
-	./genaliases osf1 lib/generated/aliases_osf1.h lib/generated/canonical_osf1.h
-	$(RM) genaliases
-
-lib/generated/aliases_osf1_sysosf1.h lib/generated/canonical_osf1_sysosf1.h : lib/encodings_osf1.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_OSF1 -DUSE_OSF1_ALIASES lib/genaliases2.c -o genaliases
-	./genaliases osf1 lib/generated/aliases_osf1_sysosf1.h lib/generated/canonical_osf1_sysosf1.h
-	$(RM) genaliases
-
-lib/generated/aliases_dos.h lib/generated/canonical_dos.h : lib/encodings_dos.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_DOS lib/genaliases2.c -o genaliases
-	./genaliases dos lib/generated/aliases_dos.h lib/generated/canonical_dos.h
-	$(RM) genaliases
-
-lib/generated/aliases_zos.h lib/generated/canonical_zos.h : lib/encodings_zos.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_ZOS lib/genaliases2.c -o genaliases
-	./genaliases zos lib/generated/aliases_zos.h lib/generated/canonical_zos.h
-	$(RM) genaliases
-
-lib/generated/aliases_extra.h lib/generated/canonical_extra.h : lib/encodings_extra.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_EXTRA lib/genaliases2.c -o genaliases
-	./genaliases extra lib/generated/aliases_extra.h lib/generated/canonical_extra.h
-	$(RM) genaliases
+lib/generated/aliases.h : lib/generated/aliases.gperf
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
 
 
-lib/generated/flags.h : lib/encodings.def lib/encodings_aix.def lib/encodings_osf1.def lib/encodings_dos.def lib/encodings_zos.def lib/encodings_extra.def lib/converters.h lib/genflags.c
-	$(CC) $(CFLAGS) lib/genflags.c -o genflags
-	./genflags > lib/generated/flags.h
-	$(RM) genflags
+lib/generated/genaliases_sysaix : tools/genaliases.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_AIX_ALIASES $< -o $@
+
+lib/generated/aliases_sysaix.gperf : lib/generated/genaliases_sysaix
+	./lib/generated/genaliases_sysaix $@
+
+lib/generated/aliases_sysaix.h : lib/generated/aliases_sysaix.gperf
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
+
+
+lib/generated/genaliases_syshpux : tools/genaliases.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_HPUX_ALIASES $< -o $@
+
+lib/generated/aliases_syshpux.gperf : lib/generated/genaliases_syshpux
+	./lib/generated/genaliases_syshpux $@
+
+lib/generated/aliases_syshpux.h : lib/generated/aliases_syshpux.gperf
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
+
+
+lib/generated/genaliases_sysosf1 : tools/genaliases.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_OSF1_ALIASES $< -o $@
+
+lib/generated/aliases_sysosf1.gperf : lib/generated/genaliases_sysosf1
+	./lib/generated/genaliases_sysosf1 $@
+
+lib/generated/aliases_sysosf1.h : lib/generated/aliases_sysosf1.gperf
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
+
+
+lib/generated/genaliases_syssolaris : tools/genaliases.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_SOLARIS_ALIASES $< -o $@
+
+lib/generated/aliases_syssolaris.gperf : lib/generated/genaliases_syssolaris
+	./lib/generated/genaliases_syssolaris $@
+
+lib/generated/aliases_syssolaris.h : lib/generated/aliases_syssolaris.gperf
+	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
+
+
+lib/generated/genaliases2_aix : tools/genaliases2.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_AIX $< -o $@
+
+lib/generated/aliases_aix.h : lib/generated/genaliases2_aix
+	./lib/generated/genaliases2_aix aix $@
+
+
+lib/generated/genaliases2_aix_sysaix : tools/genaliases2.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_AIX -DUSE_AIX_ALIASES $< -o $@
+
+lib/generated/aliases_aix_sysaix.h : lib/generated/genaliases2_aix_sysaix
+	./lib/generated/genaliases2_aix_sysaix aix $@
+
+
+lib/generated/genaliases2_osf1 : tools/genaliases2.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_OSF1 $< -o $@
+
+lib/generated/aliases_osf1.h : lib/generated/genaliases2_osf1
+	./lib/generated/genaliases2_osf1 osf1 $@
+
+
+lib/generated/genaliases2_osf1_sysosf1 : tools/genaliases2.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_OSF1 -DUSE_OSF1_ALIASES $< -o $@
+
+lib/generated/aliases_osf1_sysosf1.h : lib/generated/genaliases2_osf1_sysosf1
+	./lib/generated/genaliases2_osf1_sysosf1 osf1 $@
+
+
+lib/generated/genaliases2_dos : tools/genaliases2.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_DOS $< -o $@
+
+lib/generated/aliases_dos.h : lib/generated/genaliases2_dos
+	./lib/generated/genaliases2_dos dos $@
+
+
+lib/generated/genaliases2_zos : tools/genaliases2.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_ZOS $< -o $@
+
+lib/generated/aliases_zos.h : lib/generated/genaliases2_zos
+	./lib/generated/genaliases2_zos zos $@
+
+
+lib/generated/genaliases2_extra : tools/genaliases2.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_EXTRA $< -o $@
+
+lib/generated/aliases_extra.h : lib/generated/genaliases2_extra
+	./lib/generated/genaliases2_extra extra $@
+
+lib/generated/genflags : tools/genflags.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@
+
+lib/generated/flags.h : lib/generated/genflags
+	./lib/generated/genflags > $@
+
+test : all
+	$(RM) -r -f build
+	$(MKDIR) build
+	cd build && $(CMAKE) .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=test_install
+	cd build && $(CMAKE) --build . --config=Release --verbose
+	cd build && $(CTEST) -C Release --verbose
+	$(CMAKE) --install build --verbose
+	./cpppdist.py
+	{ diff cppp-reiconv-* . --recursive || echo ; }
+
+# Alias to test
+check : test
 
 clean :
-	rm -f lib/generated/aliases.gperf lib/generated/aliases_sysaix.gperf lib/generated/aliases_syshpux.gperf lib/generated/aliases_sysosf1.gperf lib/generated/aliases_syssolaris.gperf
-	rm -f lib/generated/aliases.h lib/generated/aliases_sysaix.h lib/generated/aliases_syshpux.h lib/generated/aliases_sysosf1.h lib/generated/aliases_syssolaris.h
-	rm -f lib/generated/aliases_aix.h lib/generated/aliases_aix_sysaix.h
-	rm -f lib/generated/aliases_osf1.h lib/generated/aliases_osf1_sysosf1.h
-	rm -f lib/generated/aliases_dos.h
-	rm -f lib/generated/aliases_zos.h
-	rm -f lib/generated/aliases_extra.h
-	rm -f lib/generated/canonical.h lib/generated/canonical_sysaix.h lib/generated/canonical_syshpux.h lib/generated/canonical_sysosf1.h lib/generated/canonical_syssolaris.h
-	rm -f lib/generated/canonical_aix.h lib/generated/canonical_aix_sysaix.h
-	rm -f lib/generated/canonical_osf1.h lib/generated/canonical_osf1_sysosf1.h
-	rm -f lib/generated/canonical_dos.h
-	rm -f lib/generated/canonical_zos.h
-	rm -f lib/generated/canonical_extra.h
-	rm -f lib/generated/canonical_local.h lib/generated/canonical_local_sysaix.h lib/generated/canonical_local_syshpux.h lib/generated/canonical_local_sysosf1.h lib/generated/canonical_local_syssolaris.h
-	rm -f lib/generated/flags.h
+	$(RM) -r build
+	$(RM) lib/generated/aliases.gperf
+	$(RM) lib/generated/aliases_sysaix.gperf
+	$(RM) lib/generated/aliases_syshpux.gperf
+	$(RM) lib/generated/aliases_sysosf1.gperf
+	$(RM) lib/generated/aliases_syssolaris.gperf
+	$(RM) lib/generated/genaliases
+	$(RM) lib/generated/genaliases2_aix
+	$(RM) lib/generated/genaliases2_aix_sysaix
+	$(RM) lib/generated/genaliases2_dos
+	$(RM) lib/generated/genaliases2_extra
+	$(RM) lib/generated/genaliases2_osf1
+	$(RM) lib/generated/genaliases2_osf1_sysosf1
+	$(RM) lib/generated/genaliases2_zos
+	$(RM) lib/generated/genaliases_sysaix
+	$(RM) lib/generated/genaliases_syshpux
+	$(RM) lib/generated/genaliases_sysosf1
+	$(RM) lib/generated/genaliases_syssolaris
+	$(RM) lib/generated/genflags
+	$(RM) tests/data/GB18030-2005.TXT
+	$(RM) tests/data/GB18030-2022.TXT
+	$(RM) tests/data/UTF-8.TXT

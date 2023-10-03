@@ -1,5 +1,5 @@
-/* ANSI-C code produced by gperf version 3.1 */
-/* Command-line: gperf -m 10 lib/generated/aliases_sysosf1.gperf  */
+/* C++ code produced by gperf version 3.1 */
+/* Command-line: gperf -L C++ -Z HashPool -m 10 lib/generated/aliases_sysosf1.gperf  */
 /* Computed positions: -k'1,3-11,$' */
 
 #if !((' ' == 32) && ('!' == 33) && ('"' == 34) && ('#' == 35) \
@@ -39,15 +39,16 @@ struct alias { int name; unsigned int encoding_index; };
 #define MAX_HASH_VALUE 999
 /* maximum key range = 995, duplicates = 0 */
 
-#ifdef __GNUC__
-__inline
-#else
-#ifdef __cplusplus
-inline
-#endif
-#endif
-static unsigned int
-aliases_hash (register const char *str, register size_t len)
+class HashPool
+{
+private:
+  static inline unsigned int aliases_hash (const char *str, size_t len);
+public:
+  static const struct alias *aliases_lookup (const char *str, size_t len);
+};
+
+inline unsigned int
+HashPool::aliases_hash (const char *str, size_t len)
 {
   static const unsigned short asso_values[] =
     {
@@ -65,43 +66,43 @@ aliases_hash (register const char *str, register size_t len)
      1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,
      1000,1000,1000,1000,1000,1000,1000,1000
     };
-  register unsigned int hval = len;
+  unsigned int hval = len;
 
   switch (hval)
     {
       default:
-        hval += asso_values[(unsigned char)str[10]];
+        hval += asso_values[static_cast<unsigned char>(str[10])];
       /*FALLTHROUGH*/
       case 10:
-        hval += asso_values[(unsigned char)str[9]];
+        hval += asso_values[static_cast<unsigned char>(str[9])];
       /*FALLTHROUGH*/
       case 9:
-        hval += asso_values[(unsigned char)str[8]];
+        hval += asso_values[static_cast<unsigned char>(str[8])];
       /*FALLTHROUGH*/
       case 8:
-        hval += asso_values[(unsigned char)str[7]];
+        hval += asso_values[static_cast<unsigned char>(str[7])];
       /*FALLTHROUGH*/
       case 7:
-        hval += asso_values[(unsigned char)str[6]];
+        hval += asso_values[static_cast<unsigned char>(str[6])];
       /*FALLTHROUGH*/
       case 6:
-        hval += asso_values[(unsigned char)str[5]];
+        hval += asso_values[static_cast<unsigned char>(str[5])];
       /*FALLTHROUGH*/
       case 5:
-        hval += asso_values[(unsigned char)str[4]];
+        hval += asso_values[static_cast<unsigned char>(str[4])];
       /*FALLTHROUGH*/
       case 4:
-        hval += asso_values[(unsigned char)str[3]];
+        hval += asso_values[static_cast<unsigned char>(str[3])];
       /*FALLTHROUGH*/
       case 3:
-        hval += asso_values[(unsigned char)str[2]];
+        hval += asso_values[static_cast<unsigned char>(str[2])];
       /*FALLTHROUGH*/
       case 2:
       case 1:
-        hval += asso_values[(unsigned char)str[0]];
+        hval += asso_values[static_cast<unsigned char>(str[0])];
         break;
     }
-  return hval + asso_values[(unsigned char)str[len - 1]];
+  return hval + asso_values[static_cast<unsigned char>(str[len - 1])];
 }
 
 struct stringpool_t
@@ -1725,19 +1726,19 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str999, ei_jisx0208}
   };
 
-static const struct alias *
-aliases_lookup (register const char *str, register size_t len)
+const struct alias *
+HashPool::aliases_lookup (const char *str, size_t len)
 {
   if (len <= MAX_WORD_LENGTH && len >= MIN_WORD_LENGTH)
     {
-      register unsigned int key = aliases_hash (str, len);
+      unsigned int key = aliases_hash (str, len);
 
       if (key <= MAX_HASH_VALUE)
         {
-          register int o = aliases[key].name;
+          int o = aliases[key].name;
           if (o >= 0)
             {
-              register const char *s = o + stringpool;
+              const char *s = o + stringpool;
 
               if (*str == *s && !strcmp (str + 1, s + 1))
                 return &aliases[key];
