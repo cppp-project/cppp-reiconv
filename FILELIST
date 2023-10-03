@@ -124,15 +124,10 @@ lib/generated/aliases_sysosf1.h
 lib/generated/aliases_osf1_sysosf1.h
 lib/generated/aliases_aix_sysaix.h
 lib/generated/aliases.h
-lib/generated/aliases.gperf
 lib/generated/aliases_syssolaris.h
-lib/generated/aliases_sysosf1.gperf
-lib/generated/aliases_syssolaris.gperf
-lib/generated/aliases_syshpux.gperf
 lib/generated/aliases_extra.h
 lib/generated/aliases_aix.h
 lib/generated/aliases_sysaix.h
-lib/generated/aliases_sysaix.gperf
 lib/generated/aliases_syshpux.h
 lib/generated/aliases_zos.h
 lib/generated/aliases_dos.h

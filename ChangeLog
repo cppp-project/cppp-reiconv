@@ -6,6 +6,7 @@
 	Optimize 'Makefile.devel'.
 	Move generated files to C++ to avoid 'register' warnings.
 	Add test and clean target in 'Makefile.devel'.
+	Update 'FILELIST'.
 
 2023-09-09  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
