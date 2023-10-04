@@ -105,34 +105,6 @@
 
 '''
     /**
-     * @brief Converts, using conversion descriptor 'cd', at most '*inbytesleft' bytes starting at '*inbuf', writing at
-     * most '*outbytesleft' bytes starting at '*outbuf'.
-     * @attention Decrements '*inbytesleft' and increments '*inbuf' by the same amount.
-     * @attention Decrements '*outbytesleft' and increments '*outbuf' by the same amount.
-     * @param cd Conversion descriptor.
-     * @param inbuf Input buffer.
-     * @param inbytesleft Input bytes left.
-     * @param outbuf Output buffer.
-     * @param outbytesleft Output bytes left.
-     * @return Number of converted characters (excluding terminators, -1 means error).
-     */
-'''
-    /**
-     * @brief 使用转换描述符 “cd”，将最多 “*inbytesleft” 字节从 “*inbuf” 开始转换，并将最多 “*outbytesleft” 字节写入 
-     * “*outbuf” 。
-     * @attention 将 “*inbytesleft” 减少相同的数量，并将 “*inbuf” 增加相同的数量。
-     * @attention 将 “*outbytesleft” 减少相同的数量，并将 “*outbuf” 增加相同的数量。
-     * @param cd 转换描述符。
-     * @param inbuf 输入缓冲区。
-     * @param inbytesleft 剩余输入字节。
-     * @param outbuf 输出缓冲区。
-     * @param outbytesleft 剩余输出字节。
-     * @return 转换的字符数量（不包括终止符，-1 表示错误）。
-     */
-'''
-
-'''
-    /**
      * @brief Frees resources allocated for conversion descriptor 'cd'.
      * @param cd Conversion descriptor you want to close.
      * @return Operation status. (-1 means error, 0 means success).
@@ -253,20 +225,6 @@
 '''
     /**
      * @brief “iconvctl” 的 “request”.
-     */
-'''
-
-'''
-    /**
-     * @brief Listing of locale independent encodings.
-     * @param do_one One encoding fallback function.
-     * @param data Data.
-     */
-'''
-    /**
-     * @brief 列出与区域设置无关的编码方式。
-     * @param do_one 一个编码回退函数。
-     * @param data 数据。
      */
 '''
 
@@ -398,25 +356,5 @@
      *                    s, s+strlen(s)+1, &result, NULL) != 0)
      *   perror("iconv_string");
      *
-     */
-'''
-
-'''
-    /**
-     * @brief Encode source string to another encoding.
-     * @param from From encoding.
-     * @param to Target encoding.
-     * @param data Input string data.
-     * @param ignore Ignore invalid characters.
-     * @throw int: when conversation error, throw the 'errno', you can catch the errno for more infomation.
-     */
-'''
-    /**
-     * @brief 将源字符串编码为另一种编码方式。
-     * @param from 源编码。
-     * @param to 目标编码。
-     * @param data 输入字符串数据。
-     * @param ignore 忽略无效字符。
-     * @throw int：当转换错误时，抛出 “errno” ，您可以捕获 errno 以获取更多信息。
      */
 '''

@@ -33,13 +33,6 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-#include <exception>
-#include <iostream>
-#include <errno.h>
-#include <time.h>
-#include <vector>
-#include <wchar.h>
-
 extern "C++"
 {
     namespace cppp
@@ -78,22 +71,6 @@ extern "C++"
      * @return Allocated iconv conversation buffer's pointer.
      */
     extern @DLL_VARIABLE@ iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict = true);
-
-#undef iconv
-    /**
-     * @brief Converts, using conversion descriptor 'cd', at most '*inbytesleft' bytes starting at '*inbuf', writing at
-     * most '*outbytesleft' bytes starting at '*outbuf'.
-     * @attention Decrements '*inbytesleft' and increments '*inbuf' by the same amount.
-     * @attention Decrements '*outbytesleft' and increments '*outbuf' by the same amount.
-     * @param cd Conversion descriptor.
-     * @param inbuf Input buffer.
-     * @param inbytesleft Input bytes left.
-     * @param outbuf Output buffer.
-     * @param outbytesleft Output bytes left.
-     * @return Number of converted characters (excluding terminators, -1 means error).
-     */
-    extern @DLL_VARIABLE@ size_t iconv(iconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf,
-                                       size_t *outbytesleft);
 
 #undef iconv_close
     /**
@@ -208,14 +185,6 @@ extern "C++"
     constexpr int ICONV_SET_TO_SURFACE = 10; /* const unsigned int *argument */
 
     /**
-     * @brief Listing of locale independent encodings.
-     * @param do_one One encoding fallback function.
-     * @param data Data.
-     */
-    extern @DLL_VARIABLE@ void iconvlist(int (*do_one)(unsigned int namescount, const char *const *names, void *data),
-                                          void *data);
-
-    /**
      * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself.
      * @note This function does not treat zero characters specially.
      * @param cd Conversion descriptor.
@@ -285,32 +254,6 @@ extern "C++"
      */
     extern @DLL_VARIABLE@ int iconv_string(int tocode_cp, int fromcode_cp, const char* start,
                                             const char* end, char** resultp, size_t* lengthp, bool strict=true);
-
-    /**
-     * @brief Encode source string to another encoding.
-     * @param from From encoding.
-     * @param to Target encoding.
-     * @param data Input string data.
-     * @param ignore Ignore invalid characters.
-     * @throw int: when conversation error, throw the 'errno', you can catch the errno for more infomation.
-     */
-    inline std::vector<char> encode(const std::string& from, const std::string& to, const std::vector<char>& data,
-                                    bool ignore = false)
-    {
-        char *result = NULL;
-        size_t length = 0;
-        std::string ignstr = ignore ? "//IGNORE" : "";
-        if (iconv_string((to + ignstr).c_str(), from.c_str(), data.data(), data.data() + data.size(), &result,
-                         &length) < 0)
-        {
-            if (!ignore)
-            {
-                /* When conversation error, throw the errno, you can catch the errno for more infomation. */
-                throw(int)(errno);
-            }
-        }
-        return std::vector<char>(result, result + length);
-    }
 
     } // namespace reiconv
     } // namespace base

@@ -133,7 +133,7 @@ static struct encoding const all_encodings[] = {
 };
 #undef DEFALIAS
 
-int lookup_by_codepage(int codepage)
+static inline int lookup_by_codepage(int codepage)
 {
     for(size_t i = 0; i < sizeof(all_encodings) / sizeof(all_encodings[0]); i++)
     {
@@ -172,7 +172,7 @@ int lookup_by_codepage(int codepage)
 /*
  * System dependent alias lookup function.
  * Defines
- *   const struct alias * aliases2_lookup (const char *str);
+ *   inline static const struct alias* aliases2_lookup (const char *str);
  */
 #if defined(USE_AIX) || defined(USE_OSF1) || defined(USE_DOS) || defined(USE_ZOS) || defined(USE_EXTRA) /* || ... */
 struct stringpool2_t
@@ -192,15 +192,7 @@ static const struct alias sysdep_aliases[] = {
 #include "aliases2.h"
 #undef S
 };
-#ifdef __GNUC__
-__inline
-#else
-#ifdef __cplusplus
-inline
-#endif
-#endif
-    static const struct alias *
-    aliases2_lookup(const char *str)
+inline static const struct alias* aliases2_lookup(const char* str)
 {
     const struct alias *ptr;
     unsigned int count;
@@ -214,30 +206,9 @@ inline
 #define stringpool2 NULL
 #endif
 
-#if 0
-  /* Like !strcasecmp, except that the both strings can be assumed to be ASCII
-    and the first string can be assumed to be in uppercase. */
-  static int strequal (const char* str1, const char* str2)
-  {
-    unsigned char c1;
-    unsigned char c2;
-    for (;;) {
-      c1 = * (unsigned char *) str1++;
-      c2 = * (unsigned char *) str2++;
-      if (c1 == 0)
-        break;
-      if (c2 >= 'a' && c2 <= 'z')
-        c2 -= 'a'-'A';
-      if (c1 != c2)
-        break;
-    }
-    return (c1 == c2);
-  }
-#endif
-
-iconv_t iconv_open(const char *tocode, const char *fromcode)
+iconv_t iconv_open(const char* tocode, const char* fromcode)
 {
-    struct conv_struct *cd;
+    struct conv_struct* cd;
     unsigned int from_index;
     unsigned int from_surface;
     unsigned int to_index;
@@ -246,7 +217,7 @@ iconv_t iconv_open(const char *tocode, const char *fromcode)
 
 #include "iconv_open1.h"
 
-    cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
+    cd = (struct conv_struct*)malloc(sizeof(struct conv_struct));
     if (cd == NULL)
     {
         errno = ENOMEM;
@@ -294,7 +265,7 @@ iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
     return (iconv_t)cd;
 }
 
-size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
+static inline size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
 {
     conv_t cd = (conv_t)icd;
     if (inbuf == NULL || *inbuf == NULL)
@@ -385,96 +356,6 @@ int iconvctl(iconv_t icd, int request, void *argument)
         errno = EINVAL;
         return -1;
     }
-}
-
-/* An alias after its name has been converted from 'int' to 'const char*'. */
-struct nalias
-{
-    const char *name;
-    unsigned int encoding_index;
-};
-
-static int compare_by_index(const void *arg1, const void *arg2)
-{
-    const struct nalias *alias1 = (const struct nalias *)arg1;
-    const struct nalias *alias2 = (const struct nalias *)arg2;
-    return (int)alias1->encoding_index - (int)alias2->encoding_index;
-}
-
-static int compare_by_name(const void *arg1, const void *arg2)
-{
-    const char *name1 = *(const char *const *)arg1;
-    const char *name2 = *(const char *const *)arg2;
-    /* Compare alphabetically, but put "CS" names at the end. */
-    int sign = strcmp(name1, name2);
-    if (sign != 0)
-    {
-        sign = ((name1[0] == 'C' && name1[1] == 'S') - (name2[0] == 'C' && name2[1] == 'S')) * 4 + (sign >= 0 ? 1 : -1);
-    }
-    return sign;
-}
-
-void iconvlist(int (*do_one)(unsigned int namescount, const char *const *names, void *data), void *data)
-{
-#define aliascount1 sizeof(aliases) / sizeof(aliases[0])
-#ifndef aliases2_lookup
-#define aliascount2 sizeof(sysdep_aliases) / sizeof(sysdep_aliases[0])
-#else
-#define aliascount2 0
-#endif
-#define aliascount (aliascount1 + aliascount2)
-    struct nalias aliasbuf[aliascount];
-    const char *namesbuf[aliascount];
-    size_t num_aliases;
-    {
-        /* Put all existing aliases into a buffer. */
-        size_t i;
-        size_t j;
-        j = 0;
-        for (i = 0; i < aliascount1; i++)
-        {
-            const struct alias *p = &aliases[i];
-            if (p->name >= 0)
-            {
-                aliasbuf[j].name = stringpool + p->name;
-                aliasbuf[j].encoding_index = p->encoding_index;
-                j++;
-            }
-        }
-#ifndef aliases2_lookup
-        for (i = 0; i < aliascount2; i++)
-        {
-            aliasbuf[j].name = stringpool2 + sysdep_aliases[i].name;
-            aliasbuf[j].encoding_index = sysdep_aliases[i].encoding_index;
-            j++;
-        }
-#endif
-        num_aliases = j;
-    }
-    /* Sort by encoding_index. */
-    if (num_aliases > 1)
-        qsort(aliasbuf, num_aliases, sizeof(struct nalias), compare_by_index);
-    {
-        /* Process all aliases with the same encoding_index together. */
-        size_t j;
-        j = 0;
-        while (j < num_aliases)
-        {
-            unsigned int ei = aliasbuf[j].encoding_index;
-            size_t i = 0;
-            do
-                namesbuf[i++] = aliasbuf[j++].name;
-            while (j < num_aliases && aliasbuf[j].encoding_index == ei);
-            if (i > 1)
-                qsort(namesbuf, i, sizeof(const char *), compare_by_name);
-            /* Call the callback. */
-            if (do_one(i, namesbuf, data))
-                break;
-        }
-    }
-#undef aliascount
-#undef aliascount2
-#undef aliascount1
 }
 
 /* version number: (major<<8) + minor */
