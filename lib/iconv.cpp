@@ -478,7 +478,7 @@ void iconvlist(int (*do_one)(unsigned int namescount, const char *const *names, 
 }
 
 /* version number: (major<<8) + minor */
-int reiconv_version = (2 << 8) + 1;
+int reiconv_version = (3 << 8) + 0;
 
 constexpr size_t tmpbufsize = 4096;
 
