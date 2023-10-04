@@ -98,13 +98,11 @@ struct conv_struct {
   /* Input (conversion multibyte -> unicode) */
   int iindex;
   struct mbtowc_funcs ifuncs;
-  unsigned int isurface;
   state_t istate;
   /* Output (conversion unicode -> multibyte) */
   int oindex;
   struct wctomb_funcs ofuncs;
   int oflags;
-  unsigned int osurface;
   state_t ostate;
   /* Operation flags */
   int discard_ilseq;
@@ -293,33 +291,6 @@ typedef struct {
 #ifdef USE_ZOS
 
 #define DEDUPLICATE_TABLES 1
-
-/* Swaps the values 0x15 and 0x25.
-   Both gcc and clang compile this expression to something that involves as few
-   conditional branching instructions as possible. */
-#define swap_x15_x25_a(x) ((x) == 0x15 ? 0x25 : (x) == 0x25 ? 0x15 : (x))
-#define swap_x15_x25_b(x) ((x) ^ ((x) == 0x15 || (x) == 0x25 ? 0x30 : 0))
-#define swap_x15_x25_c(x) ((x) ^ ((((x) - 0x15) & ~0x10) == 0 ? 0x30 : 0))
-/* Number of conditional branches (with "gcc -O2", as of 2023):
-                   a    b    c
-                 ---------------
-   aarch64         1    0    0
-   alpha           0    0    0
-   arm             1    0    0
-   hppa            1    1    1
-   i686            1    0    0
-   m68k            2    1    1
-   mips            2    1    0
-   mips64          2    1    0
-   powerpc         2    1    1
-   powerpc64       2    1    1
-   powerpc64le     2    1    1
-   riscv64         2    1    1
-   s390x           1    1    1
-   sh4             2    1    1
-   x86_64          1    0    0
-*/
-#define swap_x15_x25 swap_x15_x25_c
 
 #include "ebcdic037.h"
 #include "ebcdic273.h"

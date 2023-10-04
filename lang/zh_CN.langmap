@@ -197,29 +197,6 @@
 
 '''
     /**
-     * @brief Surfaces. The concept of surfaces is described in the 'recode' manual.
-     */
-'''
-    /**
-     * @brief Surfaces. “Surfaces” 是在 “recode” 手册中描述的概念。
-     */
-'''
-
-'''
-    /**
-     * @brief In EBCDIC encodings, 0x15 (which encodes the "newline function", see the
-     *        Unicode standard, chapter 5) maps to U+000A instead of U+0085.  This is
-     *        for interoperability with C programs and Unix environments on z/OS.
-     */
-'''
-    /**
-     * @brief 在 EBCDIC 编码中，0x15（用于编码“换行符功能”，参见 Unicode 标准第 5 章）将映射为 U+000A 而不是 U+0085 。
-     *        这是为了在 z/OS 上与 C 程序和 Unix 环境实现互操作性。
-     */
-'''
-
-'''
-    /**
      * @brief Request for iconvctl.
      */
 '''

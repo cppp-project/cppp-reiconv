@@ -210,9 +210,7 @@ iconv_t iconv_open(const char* tocode, const char* fromcode)
 {
     struct conv_struct* cd;
     unsigned int from_index;
-    unsigned int from_surface;
     unsigned int to_index;
-    unsigned int to_surface;
     int discard_ilseq;
 
 #include "iconv_open1.h"
@@ -236,13 +234,8 @@ iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
 {
     struct conv_struct *cd;
     unsigned int from_index;
-    unsigned int from_surface;
     unsigned int to_index;
-    unsigned int to_surface;
     int discard_ilseq = (int)!strict;
-
-    from_surface = ICONV_SURFACE_NONE;
-    to_surface = ICONV_SURFACE_NONE;
 
     to_index = lookup_by_codepage(tocode_cp);
     from_index = lookup_by_codepage(fromcode_cp);
@@ -281,17 +274,13 @@ int iconv_close(iconv_t icd)
     return 0;
 }
 
-/* Bit mask of all valid surfaces. */
-#define ALL_SURFACES (ICONV_SURFACE_EBCDIC_ZOS_UNIX)
-
 int iconvctl(iconv_t icd, int request, void *argument)
 {
     conv_t cd = (conv_t)icd;
     switch (request)
     {
     case ICONV_TRIVIALP:
-        *(int *)argument = ((cd->lfuncs.loop_convert == unicode_loop_convert && cd->iindex == cd->oindex &&
-                             cd->isurface == cd->osurface)
+        *(int *)argument = ((cd->lfuncs.loop_convert == unicode_loop_convert && cd->iindex == cd->oindex)
                                 ? 1
                                 : 0);
         return 0;
@@ -324,34 +313,6 @@ int iconvctl(iconv_t icd, int request, void *argument)
             cd->fallbacks.data = NULL;
         }
         return 0;
-    case ICONV_GET_FROM_SURFACE:
-        *(unsigned int *)argument = cd->isurface;
-        return 0;
-    case ICONV_SET_FROM_SURFACE:
-        if ((*(const unsigned int *)argument & ~ALL_SURFACES) == 0)
-        {
-            cd->isurface = *(const unsigned int *)argument;
-            return 0;
-        }
-        else
-        {
-            errno = EINVAL;
-            return -1;
-        }
-    case ICONV_GET_TO_SURFACE:
-        *(unsigned int *)argument = cd->osurface;
-        return 0;
-    case ICONV_SET_TO_SURFACE:
-        if ((*(const unsigned int *)argument & ~ALL_SURFACES) == 0)
-        {
-            cd->osurface = *(const unsigned int *)argument;
-            return 0;
-        }
-        else
-        {
-            errno = EINVAL;
-            return -1;
-        }
     default:
         errno = EINVAL;
         return -1;

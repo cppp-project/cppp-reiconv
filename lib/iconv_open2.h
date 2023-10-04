@@ -21,9 +21,7 @@
    Input:
      struct conv_struct * cd;
      unsigned int from_index;
-     unsigned int from_surface;
      unsigned int to_index;
-     unsigned int to_surface;
      int discard_ilseq;
    Output: none.
    Side effects: Fills cd.
@@ -37,9 +35,6 @@ cd->oflags = all_encodings[to_index].oflags;
 /* Initialize the loop functions. */
 cd->lfuncs.loop_convert = unicode_loop_convert;
 cd->lfuncs.loop_reset = unicode_loop_reset;
-/* Initialize the surfaces. */
-cd->isurface = from_surface;
-cd->osurface = to_surface;
 /* Initialize the states. */
 memset(&cd->istate, '\0', sizeof(state_t));
 memset(&cd->ostate, '\0', sizeof(state_t));

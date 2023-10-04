@@ -21,9 +21,7 @@
    Input: const char* tocode, const char* fromcode.
    Output:
      unsigned int from_index;
-     unsigned int from_surface;
      unsigned int to_index;
-     unsigned int to_surface;
      int discard_ilseq;
    Jumps to 'invalid' in case of errror.
  */
@@ -33,9 +31,6 @@
     char *bp;
     const struct alias *ap;
     unsigned int count;
-
-    from_surface = ICONV_SURFACE_NONE;
-    to_surface = ICONV_SURFACE_NONE;
     discard_ilseq = 0;
 
     /* Before calling HashPool::aliases_lookup, convert the input string to upper case,
@@ -70,11 +65,6 @@
         if (sp > buf && memcmp(sp - 1, "/", 1) == 0)
         {
             bp = sp - 1;
-        }
-        else if (sp - buf >= 9 && memcmp(sp - 9, "/ZOS_UNIX", 9) == 0)
-        {
-            bp = sp - 9;
-            to_surface = ICONV_SURFACE_EBCDIC_ZOS_UNIX;
         }
         else
             break;
@@ -118,11 +108,6 @@
         if (sp > buf && memcmp(sp - 1, "/", 1) == 0)
         {
             bp = sp - 1;
-        }
-        else if (sp - buf >= 9 && memcmp(sp - 9, "/ZOS_UNIX", 9) == 0)
-        {
-            bp = sp - 9;
-            from_surface = ICONV_SURFACE_EBCDIC_ZOS_UNIX;
         }
         else
             break;

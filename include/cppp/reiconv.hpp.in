@@ -28,6 +28,8 @@
 #ifndef _CPPP_REICONV_HPP
 #define _CPPP_REICONV_HPP
 
+#include <stddef.h>
+
 #if _MSC_VER >= 1600 
 /* Use UTF-8 to decode this file. */
 #pragma execution_character_set("utf-8")
@@ -51,7 +53,7 @@ extern "C++"
      * @typedef void*
      * @brief Identifier for conversion method from one codeset to another.
      */
-    typedef void *iconv_t;
+    typedef void* iconv_t;
 
 #undef iconv_open
     /**
@@ -60,7 +62,7 @@ extern "C++"
      * @param fromcode From encoding.
      * @return Allocated iconv conversation buffer's pointer.
      */
-    extern @DLL_VARIABLE@ iconv_t iconv_open(const char *tocode, const char *fromcode);
+    extern @DLL_VARIABLE@ iconv_t iconv_open(const char* tocode, const char* fromcode);
 
     /**
      * @brief Allocates descriptor for code conversion from codepage 'tocode_cp' to codepage 'fromcode_cp'.
@@ -70,7 +72,7 @@ extern "C++"
      * @note Some encoding may don't have codepage.
      * @return Allocated iconv conversation buffer's pointer.
      */
-    extern @DLL_VARIABLE@ iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict = true);
+    extern @DLL_VARIABLE@ iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict=true);
 
 #undef iconv_close
     /**
@@ -87,13 +89,13 @@ extern "C++"
      * @param argument Attribute argument.
      * @return Operation status (>=0 means success, <0 means error).
      */
-    extern @DLL_VARIABLE@ int iconvctl(iconv_t cd, int request, void *argument);
+    extern @DLL_VARIABLE@ int iconvctl(iconv_t cd, int request, void* argument);
 
     /**
      * @typedef void (*) (unsigned int, void*)
      * @brief Hook performed after every successful conversion of a Unicode character.
      */
-    typedef void (*iconv_unicode_char_hook)(unsigned int uc, void *data);
+    typedef void (*iconv_unicode_char_hook)(unsigned int uc, void* data);
 
     /**
      * @brief Set of hooks.
@@ -101,7 +103,7 @@ extern "C++"
     struct iconv_hooks
     {
         iconv_unicode_char_hook uc_hook;
-        void *data;
+        void* data;
     };
 
     /**
@@ -137,17 +139,6 @@ extern "C++"
     };
 
     /**
-     * @brief Surfaces. The concept of surfaces is described in the 'recode' manual.
-     */
-    constexpr int ICONV_SURFACE_NONE = 0;
-    /**
-     * @brief In EBCDIC encodings, 0x15 (which encodes the "newline function", see the
-     *        Unicode standard, chapter 5) maps to U+000A instead of U+0085.  This is
-     *        for interoperability with C programs and Unix environments on z/OS.
-     */
-    constexpr int ICONV_SURFACE_EBCDIC_ZOS_UNIX = 1;
-
-    /**
      * @brief Request for iconvctl.
      */
     constexpr int ICONV_TRIVIALP = 0; /* int *argument */
@@ -167,22 +158,6 @@ extern "C++"
      * @brief Request for iconvctl.
      */
     constexpr int ICONV_SET_FALLBACKS = 6; /* const struct iconv_fallbacks *argument */
-    /**
-     * @brief Request for iconvctl.
-     */
-    constexpr int ICONV_GET_FROM_SURFACE = 7; /* unsigned int *argument */
-    /**
-     * @brief Request for iconvctl.
-     */
-    constexpr int ICONV_SET_FROM_SURFACE = 8; /* const unsigned int *argument */
-    /**
-     * @brief Request for iconvctl.
-     */
-    constexpr int ICONV_GET_TO_SURFACE = 9; /* unsigned int *argument */
-    /**
-     * @brief Request for iconvctl.
-     */
-    constexpr int ICONV_SET_TO_SURFACE = 10; /* const unsigned int *argument */
 
     /**
      * @brief Converts an entire string from one encoding to another, using iconv. Easier to use than iconv() itself.

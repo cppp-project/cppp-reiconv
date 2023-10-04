@@ -76,8 +76,6 @@ static int
 ebcdic838_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
   unsigned char c = *s;
-  if (conv->isurface & ICONV_SURFACE_EBCDIC_ZOS_UNIX)
-    c = swap_x15_x25 (c);
   *pwc = (ucs4_t) ebcdic838_2uni[c];
   return 1;
 }
@@ -130,8 +128,6 @@ ebcdic838_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
   else if (wc >= 0x0e00 && wc < 0x0e60)
     c = ebcdic838_page0e[wc-0x0e00];
   if (c != 0 || wc == 0) {
-    if (conv->osurface & ICONV_SURFACE_EBCDIC_ZOS_UNIX)
-      c = swap_x15_x25 (c);
     *r = c;
     return 1;
   }
