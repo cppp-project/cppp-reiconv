@@ -36,9 +36,6 @@ struct loop_funcs
 struct iconv_hooks
 {
 };
-struct iconv_fallbacks
-{
-};
 #define ICONV_SURFACE_EBCDIC_ZOS_UNIX 1
 #include "converters.h"
 

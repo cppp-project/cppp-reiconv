@@ -515,7 +515,6 @@ tests/data/GB18030-2022-BMP.TXT
 tests/data/IBM-1158.TXT
 tests/data/BIG5-2003.IRREVERSIBLE.TXT
 tests/test-shiftseq.cpp
-tests/test-to-wchar.cpp
 tests/throw_error.hpp
 tests/file_utils.hpp
 tests/sort.cpp

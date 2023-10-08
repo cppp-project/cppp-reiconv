@@ -1,3 +1,9 @@
+2023-10-06  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Remove wchar test.
+	Remove iconv_fallbacks.
+	Use '#pragma once' for header.
+
 2023-10-04  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	v2.1.0 released.

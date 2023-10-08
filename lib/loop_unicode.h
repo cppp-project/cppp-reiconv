@@ -19,106 +19,6 @@
 
 /* This file defines the conversion loop via Unicode as a pivot encoding. */
 
-
-struct uc_to_mb_fallback_locals {
-  unsigned char* l_outbuf;
-  size_t l_outbytesleft;
-  int l_errno;
-};
-
-static void uc_to_mb_write_replacement (const char *buf, size_t buflen,
-                                        void* callback_arg)
-{
-  struct uc_to_mb_fallback_locals * plocals =
-    (struct uc_to_mb_fallback_locals *) callback_arg;
-  /* Do nothing if already encountered an error in a previous call. */
-  if (plocals->l_errno == 0) {
-    /* Attempt to copy the passed buffer to the output buffer. */
-    if (plocals->l_outbytesleft < buflen)
-      plocals->l_errno = E2BIG;
-    else {
-      memcpy(plocals->l_outbuf, buf, buflen);
-      plocals->l_outbuf += buflen;
-      plocals->l_outbytesleft -= buflen;
-    }
-  }
-}
-
-struct mb_to_uc_fallback_locals {
-  conv_t l_cd;
-  unsigned char* l_outbuf;
-  size_t l_outbytesleft;
-  int l_errno;
-};
-
-static void mb_to_uc_write_replacement (const unsigned int *buf, size_t buflen,
-                                        void* callback_arg)
-{
-  struct mb_to_uc_fallback_locals * plocals =
-    (struct mb_to_uc_fallback_locals *) callback_arg;
-  /* Do nothing if already encountered an error in a previous call. */
-  if (plocals->l_errno == 0) {
-    /* Attempt to convert the passed buffer to the target encoding. */
-    conv_t cd = plocals->l_cd;
-    unsigned char* outptr = plocals->l_outbuf;
-    size_t outleft = plocals->l_outbytesleft;
-    for (; buflen > 0; buf++, buflen--) {
-      ucs4_t wc = *buf;
-      int outcount;
-      if (outleft == 0) {
-        plocals->l_errno = E2BIG;
-        break;
-      }
-      outcount = cd->ofuncs.xxx_wctomb(cd,outptr,wc,outleft);
-      if (outcount != RET_ILUNI)
-        goto outcount_ok;
-      /* Handle Unicode tag characters (range U+E0000..U+E007F). */
-      if ((wc >> 7) == (0xe0000 >> 7))
-        goto outcount_zero;
-      if (cd->discard_ilseq) {
-        outcount = 0;
-        goto outcount_ok;
-      }
-      else if (cd->fallbacks.uc_to_mb_fallback != NULL) {
-        struct uc_to_mb_fallback_locals locals;
-        locals.l_outbuf = outptr;
-        locals.l_outbytesleft = outleft;
-        locals.l_errno = 0;
-        cd->fallbacks.uc_to_mb_fallback(wc,
-                                        uc_to_mb_write_replacement,
-                                        &locals,
-                                        cd->fallbacks.data);
-        if (locals.l_errno != 0) {
-          plocals->l_errno = locals.l_errno;
-          break;
-        }
-        outptr = locals.l_outbuf;
-        outleft = locals.l_outbytesleft;
-        outcount = 0;
-        goto outcount_ok;
-      }
-      outcount = cd->ofuncs.xxx_wctomb(cd,outptr,0xFFFD,outleft);
-      if (outcount != RET_ILUNI)
-        goto outcount_ok;
-      plocals->l_errno = EILSEQ;
-      break;
-    outcount_ok:
-      if (outcount < 0) {
-        plocals->l_errno = E2BIG;
-        break;
-      }
-      if (cd->hooks.uc_hook)
-        (*cd->hooks.uc_hook)(wc, cd->hooks.data);
-      if (!(outcount <= outleft)) abort();
-      outptr += outcount; outleft -= outcount;
-    outcount_zero: ;
-    }
-    plocals->l_outbuf = outptr;
-    plocals->l_outbytesleft = outleft;
-  }
-}
-
-
 static size_t unicode_loop_convert (iconv_t icd,
                                     const char* * inbuf, size_t *inbytesleft,
                                     char* * outbuf, size_t *outbytesleft)
@@ -154,41 +54,6 @@ static size_t unicode_loop_convert (iconv_t icd,
           }
           goto outcount_zero;
         }
-        else if (cd->fallbacks.mb_to_uc_fallback != NULL) {
-          unsigned int incount2;
-          struct mb_to_uc_fallback_locals locals;
-          switch (cd->iindex) {
-            case ei_ucs4: case ei_ucs4be: case ei_ucs4le:
-            case ei_utf32: case ei_utf32be: case ei_utf32le:
-            case ei_ucs4internal: case ei_ucs4swapped:
-              incount2 = 4; break;
-            case ei_ucs2: case ei_ucs2be: case ei_ucs2le:
-            case ei_utf16: case ei_utf16be: case ei_utf16le:
-            case ei_ucs2internal: case ei_ucs2swapped:
-              incount2 = 2; break;
-            default:
-              incount2 = 1; break;
-          }
-          locals.l_cd = cd;
-          locals.l_outbuf = outptr;
-          locals.l_outbytesleft = outleft;
-          locals.l_errno = 0;
-          cd->fallbacks.mb_to_uc_fallback((const char*)inptr+incount, incount2,
-                                          mb_to_uc_write_replacement,
-                                          &locals,
-                                          cd->fallbacks.data);
-          if (locals.l_errno != 0) {
-            inptr += incount; inleft -= incount;
-            errno = locals.l_errno;
-            result = -1;
-            break;
-          }
-          incount += incount2;
-          outptr = locals.l_outbuf;
-          outleft = locals.l_outbytesleft;
-          result += 1;
-          goto outcount_zero;
-        }
         inptr += incount; inleft -= incount;
         errno = EILSEQ;
         result = -1;
@@ -218,25 +83,6 @@ static size_t unicode_loop_convert (iconv_t icd,
         goto outcount_zero;
       result++;
       if (cd->discard_ilseq) {
-        outcount = 0;
-        goto outcount_ok;
-      }
-      else if (cd->fallbacks.uc_to_mb_fallback != NULL) {
-        struct uc_to_mb_fallback_locals locals;
-        locals.l_outbuf = outptr;
-        locals.l_outbytesleft = outleft;
-        locals.l_errno = 0;
-        cd->fallbacks.uc_to_mb_fallback(wc,
-                                        uc_to_mb_write_replacement,
-                                        &locals,
-                                        cd->fallbacks.data);
-        if (locals.l_errno != 0) {
-          cd->istate = last_istate;
-          errno = locals.l_errno;
-          return -1;
-        }
-        outptr = locals.l_outbuf;
-        outleft = locals.l_outbytesleft;
         outcount = 0;
         goto outcount_ok;
       }
@@ -295,25 +141,6 @@ static size_t unicode_loop_reset (iconv_t icd,
           goto outcount_zero;
         result++;
         if (cd->discard_ilseq) {
-          outcount = 0;
-          goto outcount_ok;
-        }
-        else if (cd->fallbacks.uc_to_mb_fallback != NULL) {
-          struct uc_to_mb_fallback_locals locals;
-          locals.l_outbuf = outptr;
-          locals.l_outbytesleft = outleft;
-          locals.l_errno = 0;
-          cd->fallbacks.uc_to_mb_fallback(wc,
-                                          uc_to_mb_write_replacement,
-                                          &locals,
-                                          cd->fallbacks.data);
-          if (locals.l_errno != 0) {
-            cd->istate = last_istate;
-            errno = locals.l_errno;
-            return -1;
-          }
-          outptr = locals.l_outbuf;
-          outleft = locals.l_outbytesleft;
           outcount = 0;
           goto outcount_ok;
         }

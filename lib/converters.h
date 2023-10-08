@@ -106,7 +106,6 @@ struct conv_struct {
   state_t ostate;
   /* Operation flags */
   int discard_ilseq;
-  struct iconv_fallbacks fallbacks;
   struct iconv_hooks hooks;
 };
 

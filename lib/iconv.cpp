@@ -301,18 +301,6 @@ int iconvctl(iconv_t icd, int request, void *argument)
             cd->hooks.data = NULL;
         }
         return 0;
-    case ICONV_SET_FALLBACKS:
-        if (argument != NULL)
-        {
-            cd->fallbacks = *(const struct iconv_fallbacks *)argument;
-        }
-        else
-        {
-            cd->fallbacks.mb_to_uc_fallback = NULL;
-            cd->fallbacks.uc_to_mb_fallback = NULL;
-            cd->fallbacks.data = NULL;
-        }
-        return 0;
     default:
         errno = EINVAL;
         return -1;
