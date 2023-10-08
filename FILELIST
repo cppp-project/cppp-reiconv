@@ -516,7 +516,7 @@ tests/data/IBM-1158.TXT
 tests/data/BIG5-2003.IRREVERSIBLE.TXT
 tests/test-shiftseq.cpp
 tests/throw_error.hpp
-tests/file_utils.hpp
+tests/utils.hpp
 tests/sort.cpp
 tests/sort.hpp
 tools/genaliases.cpp

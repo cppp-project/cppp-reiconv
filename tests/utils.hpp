@@ -18,7 +18,7 @@
  */
 
 /*
-  File operations utils for tests.
+  Utils for tests.
 */
 
 #ifndef _FILE_UTILS_HPP
