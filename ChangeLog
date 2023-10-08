@@ -1,6 +1,7 @@
 2023-10-08  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Rename 'tests/file_utils.hpp' to 'tests/utils.hpp'.
+	Use '#pragma once' for tests header.
 
 2023-10-06  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 

@@ -21,8 +21,7 @@
   Sort file lines.
 */
 
-#ifndef _SORT_HPP
-#define _SORT_HPP
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -62,5 +61,3 @@ void sort_file(const std::string& file_name, const std::string& output_file_name
         output_file << line << std::endl;
     }
 }
-
-#endif

@@ -21,8 +21,7 @@
   Throw error for reiconv-test.
 */
 
-#ifndef _THROW_ERROR_HPP
-#define _THROW_ERROR_HPP
+#pragma once
 
 #include <iostream>
 #ifdef _MSC_VER
@@ -81,5 +80,3 @@ void success(const std::string& op, const std::string& msg)
         std::cerr << "\033[0m";
     }
 }
-
-#endif

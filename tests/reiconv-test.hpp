@@ -17,8 +17,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _REICONV_TEST_HPP
-#define _REICONV_TEST_HPP
+#pragma once
 
 #include <cppp/reiconv.hpp>
 
@@ -59,5 +58,3 @@ namespace test
         }
     }
 }
-
-#endif

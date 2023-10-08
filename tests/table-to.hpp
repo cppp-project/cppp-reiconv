@@ -17,8 +17,7 @@
 
 /* Create a table from Unicode to CHARSET. */
 
-#ifndef _TABLE_TO_HPP
-#define _TABLE_TO_HPP
+#pragma once
 
 #include <cppp/reiconv.hpp>
 
@@ -124,5 +123,3 @@ namespace test
         }
     }   
 }
-
-#endif

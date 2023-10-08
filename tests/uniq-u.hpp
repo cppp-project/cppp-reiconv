@@ -17,9 +17,8 @@
 /* Written by Richard Stallman and David MacKenzie. */
 /* 2000-03-22  Trimmed down to the case of "uniq -u" by Bruno Haible. */
 /* 2023-08-22  Change it to a C++ header for reiconv-test by ChenPi11. */
-
-#ifndef _UNIQ_U_HPP
-#define _UNIQ_U_HPP
+/* 2023-10-08  Use '#pragma once' for header. */
+#pragma once
 
 #include <iostream>
 #include <cstdlib>
@@ -267,5 +266,3 @@ void uniq_u(const std::string& in_file, const std::string& out_file)
     
     check_file(in_file.c_str(), out_file.c_str());
 }
-
-#endif

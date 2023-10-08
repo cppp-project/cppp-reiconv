@@ -21,8 +21,7 @@
   Utils for tests.
 */
 
-#ifndef _FILE_UTILS_HPP
-#define _FILE_UTILS_HPP
+#pragma once
 
 #include <cstring>
 #include <iostream>
@@ -38,8 +37,6 @@
 #endif
 
 #include "throw_error.hpp"
-
-
 
 // Compare 2 files difference but ignore CR.
 void assert_compare_file(const std::string& path1, const std::string& path2)
@@ -76,15 +73,11 @@ void assert_compare_file(const std::string& path1, const std::string& path2)
             errno = 0;
             error("assert_compare_file", "Files are not equal at " + std::to_string(read_seek) + " byte.");
         }
-
         if(file1_c == EOF && file2_c == EOF) { break; }
-
     }
-
     success("assert_compare_file", "Files are equal.");
     
 }
-
 
 // Get file size.
 long long get_file_size(const std::string& file_name)
@@ -215,5 +208,3 @@ void mv(const std::string& from, const std::string& to)
         error(from + " " + to, "Unable to move file.");
     }
 }
-
-#endif
