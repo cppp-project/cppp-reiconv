@@ -35,7 +35,7 @@ namespace test
     namespace _table_from
     {
         /* If nonzero, ignore conversions outside Unicode plane 0. */
-        static int bmp_only;
+        static bool bmp_only;
 
         FILE* save_file;
 
@@ -78,7 +78,7 @@ namespace test
                 }
                 else
                 {
-                    fprintf(stderr, "%s: iconv error.", hexbuf(buf, buflen));
+                    fprintf(stderr, "%s: Iconv error.", hexbuf(buf, buflen));
                     error("table-from", "Iconv error.");
                 }
             }

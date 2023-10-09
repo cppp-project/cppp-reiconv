@@ -31,20 +31,6 @@
 #include "sort.hpp"
 #include "uniq-u.hpp"
 
-std::string replace(const std::string& src, const std::string& from, const std::string& to)
-{
-    std::string result = src;
-    size_t pos = 0;
-
-    while ((pos = result.find(from, pos)) != std::string::npos)
-    {
-        result.replace(pos, from.length(), to);
-        pos += to.length();
-    }
-
-    return result;
-}
-
 std::string srcdir, charset;
 
 void check2_pre_process(const std::string& input_file_path, const std::string& output_file_path)
@@ -79,7 +65,7 @@ int main(int argc, char* argv[])
 {
     if(argc < 3)
     {
-        std::cerr << "Usage: check-stateful SRCDIR CHARSET\n";
+        std::cerr << "Usage: check-stateless SRCDIR CHARSET\n";
         return 1;
     }
     srcdir = argv[1];

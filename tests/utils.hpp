@@ -208,3 +208,18 @@ void mv(const std::string& from, const std::string& to)
         error(from + " " + to, "Unable to move file.");
     }
 }
+
+// Replace A to B in string src.
+std::string replace(const std::string& src, const std::string& from, const std::string& to)
+{
+    std::string result = src;
+    size_t pos = 0;
+
+    while ((pos = result.find(from, pos)) != std::string::npos)
+    {
+        result.replace(pos, from.length(), to);
+        pos += to.length();
+    }
+
+    return result;
+}
