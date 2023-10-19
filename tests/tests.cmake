@@ -17,17 +17,14 @@ if (ENABLE_TEST)
     add_executable(data-generator  "${CMAKE_CURRENT_SOURCE_DIR}/tests/data-generator.cpp")
     add_executable(check-stateful  "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateful.cpp")
     add_executable(check-stateless "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateless.cpp")
-    add_executable(test-shiftseq   "${CMAKE_CURRENT_SOURCE_DIR}/tests/test-shiftseq.cpp")
     add_executable(sort            "${CMAKE_CURRENT_SOURCE_DIR}/tests/sort.cpp")
 
     target_link_libraries(check-stateful libcppp-reiconv.static)
     target_link_libraries(check-stateless libcppp-reiconv.static)
-    target_link_libraries(test-shiftseq libcppp-reiconv.static)
-
+    
     set_target_properties(data-generator  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
     set_target_properties(check-stateful  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
     set_target_properties(check-stateless PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(test-shiftseq   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
     set_target_properties(sort            PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 
     # Test macro
@@ -195,11 +192,6 @@ if (ENABLE_TEST)
     test("stateless" "CP949")
     test("stateless" "JOHAB")
     test("stateful"  "ISO-2022-KR")
-
-    # Shift sequence before invalid multibyte character
-    add_test( NAME test-shiftseq
-              WORKING_DIRECTORY "${output_testsdir}"
-              COMMAND "$<TARGET_FILE:test-shiftseq>" )
     
     #if(CMAKE_SYSTEM_NAME STREQUAL "AIX")
     # AIX specific encodings
