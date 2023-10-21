@@ -74,12 +74,12 @@ extern "C++"
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
-     *   if (iconv_string("UCS-4-INTERNAL", "GBK",
+     *   if (convert("UCS-4-INTERNAL", "GBK",
      *                    s, s+strlen(s)+1, &result, NULL) != 0)
-     *   perror("iconv_string");
+     *   perror("convert");
      *
      */
-    extern @DLL_VARIABLE@ int iconv_string(const char* tocode, const char* fromcode, const char* start,
+    extern @DLL_VARIABLE@ int convert(const char* tocode, const char* fromcode, const char* start,
                                             const char* end, char** resultp, size_t* lengthp);
 
     /**
@@ -97,12 +97,12 @@ extern "C++"
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
-     *   if (iconv_string(65001, 936,
+     *   if (convert(65001, 936,
      *                    s, s+strlen(s)+1, &result, NULL) != 0)
-     *   perror("iconv_string");
+     *   perror("convert");
      *
      */
-    extern @DLL_VARIABLE@ int iconv_string(int tocode_cp, int fromcode_cp, const char* start,
+    extern @DLL_VARIABLE@ int convert(int tocode_cp, int fromcode_cp, const char* start,
                                             const char* end, char** resultp, size_t* lengthp, bool strict=true);
 
     } // namespace reiconv

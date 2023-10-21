@@ -83,9 +83,9 @@
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
-     *   if (iconv_string("UCS-4-INTERNAL", "GBK",
+     *   if (convert("UCS-4-INTERNAL", "GBK",
      *                    s, s+strlen(s)+1, &result, NULL) != 0)
-     *   perror("iconv_string");
+     *   perror("convert");
      *
      */
 '''
@@ -111,9 +111,9 @@
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
-     *   if (iconv_string("UCS-4-INTERNAL", "GBK",
+     *   if (convert("UCS-4-INTERNAL", "GBK",
      *                    s, s+strlen(s)+1, &result, NULL) != 0)
-     *   perror("iconv_string");
+     *   perror("convert");
      *
      */
 '''
@@ -134,9 +134,9 @@
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
-     *   if (iconv_string(65001, 936,
+     *   if (convert(65001, 936,
      *                    s, s+strlen(s)+1, &result, NULL) != 0)
-     *   perror("iconv_string");
+     *   perror("convert");
      *
      */
 '''
@@ -155,9 +155,9 @@
      * @example
      *   const char* s = ...;
      *   char* result = NULL;
-     *   if (iconv_string(65001, 936,
+     *   if (convert(65001, 936,
      *                    s, s+strlen(s)+1, &result, NULL) != 0)
-     *   perror("iconv_string");
+     *   perror("convert");
      *
      */
 '''
