@@ -1,7 +1,7 @@
 2023-10-22  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Update test suite.
-	Remove 'iconv_t', 'iconv_open', 'iconv', 'iconv_close', 'iconvctl', 'iconv_unicode_char_hook', 'iconv_hooks', iconvctl requests, and 'int iconv_string(const iconv_t& cd, const char *start, const char *end, char **resultp, size_t *lengthp);'
+	Remove 'iconv_t', 'iconv_open', 'iconv', 'iconv_close', 'iconvctl', 'iconv_unicode_char_hook', 'iconv_hooks', iconvctl requests, and 'int iconv_string(const iconv_t& cd, const char *start, const char *end, char **resultp, size_t *lengthp);'.
 	Hide 'iconv_open', 'iconv_close', 'iconv' symbols. You can still call it, see 'tests/_iconv.hpp'.
 
 2023-10-19  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
