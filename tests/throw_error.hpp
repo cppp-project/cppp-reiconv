@@ -18,32 +18,17 @@
  */
 
 /*
-  Throw error for reiconv-test.
+  Throw error for test.
 */
 
 #pragma once
 
 #include <iostream>
-#ifdef _MSC_VER
-#include <io.h>
-#else
-#include <unistd.h>
-#endif
 
-#ifdef _MSC_VER
-#define isatty _isatty
-#define fileno _fileno
-#endif
-
-const bool stderr_is_tty = isatty(fileno(stderr));
-
-void error(const std::string& op, const std::string& msg)
+void error_(const std::string& op, const std::string& msg, const std::string& file, size_t line)
 {
     int saved_errno = errno;
-    if(stderr_is_tty)
-    {
-        std::cerr << "\033[31m";
-    }
+    std::cerr << "\033[31m";
     if(saved_errno)
     {
         perror(op.c_str());
@@ -53,10 +38,8 @@ void error(const std::string& op, const std::string& msg)
         std::cerr << op << ": ";
     }
     std::cerr << msg << std::endl;
-    if(stderr_is_tty)
-    {
-        std::cerr << "\033[0m";
-    }
+    std::cerr << file << ":" << line << std::endl;
+    std::cerr << "\033[0m";
     if(saved_errno)
     {
         exit(saved_errno);
@@ -67,16 +50,12 @@ void error(const std::string& op, const std::string& msg)
     }
 }
 
+#define error(op, msg) error_(op, msg, __FILE__, __LINE__)
+
 void success(const std::string& op, const std::string& msg)
 {
-    if(stderr_is_tty)
-    {
-        std::cerr << "\033[32m";
-    }
+    std::cerr << "\033[32m";
     std::cerr << op << ": ";
     std::cerr << msg << std::endl;
-    if(stderr_is_tty)
-    {
-        std::cerr << "\033[0m";
-    }
+    std::cerr << "\033[0m";
 }

@@ -47,7 +47,6 @@ namespace test
             size_t srclen = get_file_size(input_file_path.c_str());
             char* s = (char*)malloc(srclen);
             fread(s, 1, srclen, src);
-            std::cout << "SRCLEN:" << srclen << "\n";
             fclose(src);
             cppp::base::reiconv::iconv_string(to.c_str(), from.c_str(), s, s+srclen, &res, &len);
 

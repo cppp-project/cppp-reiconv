@@ -24,6 +24,10 @@
 #include <iostream>
 #include <limits.h>
 
+#ifndef DLL_VARIABLE
+#error Macro "DLL_VARIABLE" is not defined, you should define it for export symbols.
+#endif
+
 namespace cppp
 {
 namespace base
@@ -206,72 +210,75 @@ inline static const struct alias* aliases2_lookup(const char* str)
 #define stringpool2 NULL
 #endif
 
-iconv_t iconv_open(const char* tocode, const char* fromcode)
+extern "C++"
 {
-    struct conv_struct* cd;
-    unsigned int from_index;
-    unsigned int to_index;
-    int discard_ilseq;
-
-#include "iconv_open1.h"
-
-    cd = (struct conv_struct*)malloc(sizeof(struct conv_struct));
-    if (cd == NULL)
+    DLL_VARIABLE iconv_t iconv_open(const char* tocode, const char* fromcode)
     {
-        errno = ENOMEM;
-        return (iconv_t)(-1);
-    }
+        struct conv_struct* cd;
+        unsigned int from_index;
+        unsigned int to_index;
+        int discard_ilseq;
 
-#include "iconv_open2.h"
+    #include "iconv_open1.h"
 
-    return (iconv_t)cd;
-invalid:
-    errno = EINVAL;
-    return (iconv_t)(-1);
-}
+        cd = (struct conv_struct*)malloc(sizeof(struct conv_struct));
+        if (cd == NULL)
+        {
+            errno = ENOMEM;
+            return (iconv_t)(-1);
+        }
 
-iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
-{
-    struct conv_struct *cd;
-    unsigned int from_index;
-    unsigned int to_index;
-    int discard_ilseq = (int)!strict;
+    #include "iconv_open2.h"
 
-    to_index = lookup_by_codepage(tocode_cp);
-    from_index = lookup_by_codepage(fromcode_cp);
-
-    if(to_index == -1 || from_index == -1 || tocode_cp == -1 || fromcode_cp == -1)
-    {
+        return (iconv_t)cd;
+    invalid:
         errno = EINVAL;
         return (iconv_t)(-1);
     }
 
-    cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
-    if (cd == NULL)
+    DLL_VARIABLE iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
     {
-        errno = ENOMEM;
-        return (iconv_t)(-1);
+        struct conv_struct *cd;
+        unsigned int from_index;
+        unsigned int to_index;
+        int discard_ilseq = (int)!strict;
+
+        to_index = lookup_by_codepage(tocode_cp);
+        from_index = lookup_by_codepage(fromcode_cp);
+
+        if(to_index == -1 || from_index == -1 || tocode_cp == -1 || fromcode_cp == -1)
+        {
+            errno = EINVAL;
+            return (iconv_t)(-1);
+        }
+
+        cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
+        if (cd == NULL)
+        {
+            errno = ENOMEM;
+            return (iconv_t)(-1);
+        }
+
+        #include "iconv_open2.h"
+
+        return (iconv_t)cd;
     }
 
-    #include "iconv_open2.h"
+    DLL_VARIABLE size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
+    {
+        conv_t cd = (conv_t)icd;
+        if (inbuf == NULL || *inbuf == NULL)
+            return cd->lfuncs.loop_reset(icd, outbuf, outbytesleft);
+        else
+            return cd->lfuncs.loop_convert(icd, (const char **)inbuf, inbytesleft, outbuf, outbytesleft);
+    }
 
-    return (iconv_t)cd;
-}
-
-static inline size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
-{
-    conv_t cd = (conv_t)icd;
-    if (inbuf == NULL || *inbuf == NULL)
-        return cd->lfuncs.loop_reset(icd, outbuf, outbytesleft);
-    else
-        return cd->lfuncs.loop_convert(icd, (const char **)inbuf, inbytesleft, outbuf, outbytesleft);
-}
-
-int iconv_close(iconv_t icd)
-{
-    conv_t cd = (conv_t)icd;
-    free(cd);
-    return 0;
+    DLL_VARIABLE int iconv_close(iconv_t icd)
+    {
+        conv_t cd = (conv_t)icd;
+        free(cd);
+        return 0;
+    }
 }
 
 int iconvctl(iconv_t icd, int request, void *argument)

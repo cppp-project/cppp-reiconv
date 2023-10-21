@@ -55,6 +55,8 @@ elseif(HAVE_VISIBILITY)
 else()
     set(DLL_VARIABLE "")
 endif()
+add_compile_definitions("DLL_VARIABLE=${DLL_VARIABLE}")
+
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/libcppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
 
