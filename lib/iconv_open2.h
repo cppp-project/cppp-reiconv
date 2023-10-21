@@ -40,6 +40,4 @@ memset(&cd->istate, '\0', sizeof(state_t));
 memset(&cd->ostate, '\0', sizeof(state_t));
 /* Initialize the operation flags. */
 cd->discard_ilseq = discard_ilseq;
-cd->hooks.uc_hook = NULL;
-cd->hooks.data = NULL;
 /* Done. */

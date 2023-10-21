@@ -35,6 +35,9 @@ namespace base
 namespace reiconv
 {
 
+    /* Iconv handle. */
+    typedef void* iconv_t;
+
 #if ENABLE_EXTRA
 /*
  * Consider all system dependent encodings, for any system,
@@ -278,39 +281,6 @@ extern "C++"
         conv_t cd = (conv_t)icd;
         free(cd);
         return 0;
-    }
-}
-
-int iconvctl(iconv_t icd, int request, void *argument)
-{
-    conv_t cd = (conv_t)icd;
-    switch (request)
-    {
-    case ICONV_TRIVIALP:
-        *(int *)argument = ((cd->lfuncs.loop_convert == unicode_loop_convert && cd->iindex == cd->oindex)
-                                ? 1
-                                : 0);
-        return 0;
-    case ICONV_GET_DISCARD_ILSEQ:
-        *(int *)argument = cd->discard_ilseq;
-        return 0;
-    case ICONV_SET_DISCARD_ILSEQ:
-        cd->discard_ilseq = (*(const int *)argument ? 1 : 0);
-        return 0;
-    case ICONV_SET_HOOKS:
-        if (argument != NULL)
-        {
-            cd->hooks = *(const struct iconv_hooks *)argument;
-        }
-        else
-        {
-            cd->hooks.uc_hook = NULL;
-            cd->hooks.data = NULL;
-        }
-        return 0;
-    default:
-        errno = EINVAL;
-        return -1;
     }
 }
 

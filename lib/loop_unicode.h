@@ -100,8 +100,6 @@ static size_t unicode_loop_convert (iconv_t icd,
         result = -1;
         break;
       }
-      if (cd->hooks.uc_hook)
-        (*cd->hooks.uc_hook)(wc, cd->hooks.data);
       if (!(outcount <= outleft)) abort();
       outptr += outcount; outleft -= outcount;
     }
@@ -156,8 +154,6 @@ static size_t unicode_loop_reset (iconv_t icd,
           errno = E2BIG;
           return -1;
         }
-        if (cd->hooks.uc_hook)
-          (*cd->hooks.uc_hook)(wc, cd->hooks.data);
         if (!(outcount <= outleft)) abort();
         outptr += outcount;
         outleft -= outcount;
