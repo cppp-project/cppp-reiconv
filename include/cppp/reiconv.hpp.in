@@ -75,12 +75,12 @@ extern "C++"
      *   const char* s = ...;
      *   char* result = NULL;
      *   if (convert("UCS-4-INTERNAL", "GBK",
-     *                    s, s+strlen(s)+1, &result, NULL) != 0)
+     *                    s, strlen(s)+1, &result, NULL) != 0)
      *   perror("convert");
      *
      */
     extern @DLL_VARIABLE@ int convert(const char* tocode, const char* fromcode, const char* start,
-                                            const char* end, char** resultp, size_t* lengthp);
+                                            size_t inlength, char** resultp, size_t* lengthp);
 
     /**
      * @brief Converts an entire string from one encoding to another.
@@ -98,12 +98,12 @@ extern "C++"
      *   const char* s = ...;
      *   char* result = NULL;
      *   if (convert(65001, 936,
-     *                    s, s+strlen(s)+1, &result, NULL) != 0)
+     *                    s, strlen(s)+1, &result, NULL) != 0)
      *   perror("convert");
      *
      */
     extern @DLL_VARIABLE@ int convert(int tocode_cp, int fromcode_cp, const char* start,
-                                            const char* end, char** resultp, size_t* lengthp, bool strict=true);
+                                            size_t inlength, char** resultp, size_t* lengthp, bool strict=true);
 
     } // namespace reiconv
     } // namespace base

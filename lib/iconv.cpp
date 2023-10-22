@@ -289,7 +289,7 @@ int reiconv_version = (3 << 8) + 0;
 
 constexpr size_t tmpbufsize = 4096;
 
-int convert(const iconv_t& cd, const char *start, const char *end, char **resultp,
+int convert(const iconv_t& cd, const char *start, size_t inlength, char **resultp,
                  size_t *lengthp)
 {
     size_t length;
@@ -299,7 +299,7 @@ int convert(const iconv_t& cd, const char *start, const char *end, char **result
         size_t count = 0;
         char tmpbuf[tmpbufsize];
         char* inptr = (char*)start;
-        size_t insize = end - start;
+        size_t insize = inlength;
         while (insize > 0)
         {
             char *outptr = tmpbuf;
@@ -346,7 +346,7 @@ int convert(const iconv_t& cd, const char *start, const char *end, char **result
     /* Do the conversion for real. */
     {
         char* inptr = (char*)start;
-        size_t insize = end - start;
+        size_t insize = inlength;
         char* outptr = result;
         size_t outsize = length;
         while (insize > 0)
@@ -380,7 +380,7 @@ int convert(const iconv_t& cd, const char *start, const char *end, char **result
 }
 
 int convert(const char* tocode, const char* fromcode, const char* start,
-                   const char* end, char** resultp, size_t* lengthp)
+                   size_t inlength, char** resultp, size_t* lengthp)
 {
     iconv_t cd = iconv_open(tocode, fromcode);
     if (cd == (iconv_t)(-1))
@@ -398,10 +398,10 @@ int convert(const char* tocode, const char* fromcode, const char* start,
             int ret;
             /* Try UTF-8 first. There are very few ISO-8859-1 inputs that would
               be valid UTF-8, but many UTF-8 inputs are valid ISO-8859-1. */
-            ret = convert(tocode, "UTF-8", start, end, resultp, lengthp);
+            ret = convert(tocode, "UTF-8", start, inlength, resultp, lengthp);
             if (!(ret < 0 && errno == EILSEQ))
                 return ret;
-            ret = convert(tocode, "ISO-8859-1", start, end, resultp, lengthp);
+            ret = convert(tocode, "ISO-8859-1", start, inlength, resultp, lengthp);
             return ret;
         }
         if (!strcmp(fromcode, "autodetect_jp"))
@@ -409,7 +409,7 @@ int convert(const char* tocode, const char* fromcode, const char* start,
             int ret;
             /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
               it will fail. */
-            ret = convert(tocode, "ISO-2022-JP-2", start, end, resultp, lengthp);
+            ret = convert(tocode, "ISO-2022-JP-2", start, inlength, resultp, lengthp);
             if (!(ret < 0 && errno == EILSEQ))
                 return ret;
             /* Try EUC-JP next. Short SHIFT_JIS inputs may come out wrong. This
@@ -417,11 +417,11 @@ int convert(const char* tocode, const char* fromcode, const char* start,
               If we tried SHIFT_JIS first, then some short EUC-JP inputs would
               come out wrong, and people would condemn EUC-JP and Unix, which
               would not be good. */
-            ret = convert(tocode, "EUC-JP", start, end, resultp, lengthp);
+            ret = convert(tocode, "EUC-JP", start, inlength, resultp, lengthp);
             if (!(ret < 0 && errno == EILSEQ))
                 return ret;
             /* Finally try SHIFT_JIS. */
-            ret = convert(tocode, "SHIFT_JIS", start, end, resultp, lengthp);
+            ret = convert(tocode, "SHIFT_JIS", start, inlength, resultp, lengthp);
             return ret;
         }
         if (!strcmp(fromcode, "autodetect_kr"))
@@ -429,11 +429,11 @@ int convert(const char* tocode, const char* fromcode, const char* start,
             int ret;
             /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
               it will fail. */
-            ret = convert(tocode, "ISO-2022-KR", start, end, resultp, lengthp);
+            ret = convert(tocode, "ISO-2022-KR", start, inlength, resultp, lengthp);
             if (!(ret < 0 && errno == EILSEQ))
                 return ret;
             /* Finally try EUC-KR. */
-            ret = convert(tocode, "EUC-KR", start, end, resultp, lengthp);
+            ret = convert(tocode, "EUC-KR", start, inlength, resultp, lengthp);
             return ret;
         }
 #pragma endregion
@@ -442,13 +442,13 @@ int convert(const char* tocode, const char* fromcode, const char* start,
         return -1;
     }
 
-    int ret = convert(cd, start, end, resultp, lengthp);
+    int ret = convert(cd, start, inlength, resultp, lengthp);
     iconv_close(cd);
     return ret;
 }
 
 int convert(int tocode_cp, int fromcode_cp, const char* start,
-                   const char* end, char** resultp, size_t* lengthp, bool strict)
+                   size_t inlength, char** resultp, size_t* lengthp, bool strict)
 {
     iconv_t cd = iconv_open(tocode_cp, fromcode_cp, strict);
     if (cd == (iconv_t)(-1))
@@ -456,7 +456,7 @@ int convert(int tocode_cp, int fromcode_cp, const char* start,
         return errno;
     }
 
-    int ret = convert(cd, start, end, resultp, lengthp);
+    int ret = convert(cd, start, inlength, resultp, lengthp);
     iconv_close(cd);
     return ret;
 }
