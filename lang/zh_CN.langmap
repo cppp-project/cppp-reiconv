@@ -135,7 +135,7 @@
      *   const char* s = ...;
      *   char* result = NULL;
      *   if (convert(65001, 936,
-     *                    s, s+strlen(s)+1, &result, NULL) != 0)
+     *                    s, strlen(s)+1, &result, NULL) != 0)
      *   perror("convert");
      *
      */
@@ -156,7 +156,7 @@
      *   const char* s = ...;
      *   char* result = NULL;
      *   if (convert(65001, 936,
-     *                    s, s+strlen(s)+1, &result, NULL) != 0)
+     *                    s, strlen(s)+1, &result, NULL) != 0)
      *   perror("convert");
      *
      */
