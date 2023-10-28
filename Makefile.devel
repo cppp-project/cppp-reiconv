@@ -9,8 +9,9 @@ CTEST = ctest
 MKDIR = mkdir -p
 RM = rm -f
 
-CXX ?= g++ -Wall
+CXX ?= g++
 
+CFLAGS := $(CFLAGS)
 CXXFLAGS := $(CXXFLAGS) -Ilib
 
 all : lib/generated \

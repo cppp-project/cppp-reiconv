@@ -21,6 +21,27 @@ project(cppp-reiconv VERSION 3.0.0)
 # Define options
 option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
 
+# Ignore warnings
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    add_compile_options(-Wno-unused-parameter)
+    add_compile_options(-Wno-missing-field-initializers)
+    add_compile_options(-Wno-implicit-fallthrough)
+    add_compile_options(-Wno-unused-function)
+    add_compile_options(-Wno-sign-compare)
+    add_compile_options(-Wno-type-limits)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    add_compile_options(-Wno-unused-parameter)
+    add_compile_options(-Wno-missing-field-initializers)
+    add_compile_options(-Wno-implicit-fallthrough)
+    add_compile_options(-Wno-unused-function)
+    add_compile_options(-Wno-sign-compare)
+    add_compile_options(-Wno-type-limits)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    add_compile_options(/wd4996)
+    add_compile_options(/wd4267)
+    add_compile_options(/wd4244)
+endif ()
+
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 
