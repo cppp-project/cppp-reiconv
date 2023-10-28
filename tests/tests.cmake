@@ -14,18 +14,22 @@ if (ENABLE_TEST)
     include_directories("${output_includedir}")
 
     # Test executables
-    add_executable(data-generator  "${CMAKE_CURRENT_SOURCE_DIR}/tests/data-generator.cpp")
-    add_executable(check-stateful  "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateful.cpp")
-    add_executable(check-stateless "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateless.cpp")
-    add_executable(sort            "${CMAKE_CURRENT_SOURCE_DIR}/tests/sort.cpp")
+    add_executable(data-generator         "${CMAKE_CURRENT_SOURCE_DIR}/tests/data-generator.cpp")
+    add_executable(check-ascii-converters "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-ascii-converters.cpp")
+    add_executable(check-stateful         "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateful.cpp")
+    add_executable(check-stateless        "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateless.cpp")
+    add_executable(sort                   "${CMAKE_CURRENT_SOURCE_DIR}/tests/sort.cpp")
 
-    target_link_libraries(check-stateful libcppp-reiconv.static)
-    target_link_libraries(check-stateless libcppp-reiconv.static)
+    target_link_libraries(check-ascii-converters libcppp-reiconv.static)
+    target_link_libraries(check-stateful         libcppp-reiconv.static)
+    target_link_libraries(check-stateless        libcppp-reiconv.static)
     
-    set_target_properties(data-generator  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(check-stateful  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(check-stateless PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-    set_target_properties(sort            PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(data-generator         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(check-ascii-converters PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(check-stateful         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(check-stateless        PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+    set_target_properties(sort                   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+
 
     # Test macro
     macro(test state encoding)
@@ -41,11 +45,7 @@ if (ENABLE_TEST)
         WORKING_DIRECTORY "${output_testsdir}"
         COMMENT "Generating UTF-8 test data ... "
     )
-    #{ cat $(CMAKE_CURRENT_SOURCE_DIR)/GB18030-2005-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2005.TXT
-#{ test $(CMAKE_CURRENT_SOURCE_DIR) = . || cp $(CMAKE_CURRENT_SOURCE_DIR)/GB18030-2005.IRREVERSIBLE.TXT GB18030-2005.IRREVERSIBLE.TXT; }
-#$(SHELL) $(CMAKE_CURRENT_SOURCE_DIR)/check-stateless . GB18030:2005
-#{ cat $(CMAKE_CURRENT_SOURCE_DIR)/GB18030-2022-BMP.TXT ; "$<TARGET_FILE:data-generator>" "gengb18030z" ; } | sort > GB18030-2022.TXT
-#$(SHELL) $(CMAKE_CURRENT_SOURCE_DIR)/check-stateless . GB18030:2022
+
     file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005-BMP.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT")
     add_custom_command(TARGET data-generator POST_BUILD
         COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT"
@@ -74,10 +74,12 @@ if (ENABLE_TEST)
         COMMENT "Sorting GB18030:2022 test data ... "
     )
 
-
-    
-
     # Start test
+
+    # Test ascii converters
+    add_test( NAME "check-ascii-converters"
+              WORKING_DIRECTORY "${output_testsdir}"
+              COMMAND "$<TARGET_FILE:check-ascii-converters>" )
 
     # General multi-byte encodings
     test("stateless" "UTF-8")

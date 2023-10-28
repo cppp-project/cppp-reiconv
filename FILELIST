@@ -269,6 +269,7 @@ tests/uniq-u.hpp
 tests/reiconv-test.hpp
 tests/table-to.hpp
 tests/check-stateful.cpp
+tests/check-ascii-converters.cpp
 tests/data-generator.cpp
 tests/data/IBM-284.TXT
 tests/data/IBM-1112.TXT

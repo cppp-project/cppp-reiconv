@@ -3,7 +3,7 @@
  * @author ChenPi11
  * @brief C++ Plus cppp-reiconv package.
  * @version 3.0.0
- * @date 2023-10-04
+ * @date 2023-10-28
  * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
  */
 /* Copyright (C) 1999-2023 Free Software Foundation, Inc.
@@ -48,38 +48,103 @@ extern "C++"
     extern @DLL_VARIABLE@ int reiconv_version;
     
     /**
+     * @brief Convert a ascii-only string to UTF-16.
+     * @param str Source string.
+     * @param length Source string length.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @warning Don't forget to free the result memory!
+     * @return Return true if successful, otherwise return false.
+     */
+    extern @DLL_VARIABLE@ bool ascii_mbtou16(const char* str, size_t length, char16_t** resultp, size_t* lengthp);
+
+    /**
+     * @brief Convert a ascii-only string to UTF-32.
+     * @param str Source string.
+     * @param length Source string length.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @warning Don't forget to free the result memory!
+     * @return Return true if successful, otherwise return false.
+     */
+    extern @DLL_VARIABLE@ bool ascii_mbtou32(const char* str, size_t length, char32_t** resultp, size_t* lengthp);
+
+    /**
      * @brief Converts an entire string from one encoding to another,
      * and supports autodetect encodings on input.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
-     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3),
+     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and '//TRANSLIT'.
      * except that FROMCODE may be one of the values.
      *
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
      * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note The input is in the memory region between start (inclusive) and end
-     * (exclusive). If resultp is not NULL, the output string is stored in
+     * @note If resultp is not NULL, the output string is stored in
      * *resultp; malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.
      * @param tocode Target encoding.
      * @param fromcode From encoding.
-     * @param start Source string start pointer.
-     * @param end Source string end pointer.
+     * @param start Source string.
+     * @param inlength Source string length.
      * @param resultp Result memory pointer.
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
-     *
-     * @example
-     *   const char* s = ...;
-     *   char* result = NULL;
-     *   if (convert("UCS-4-INTERNAL", "GBK",
-     *                    s, strlen(s)+1, &result, NULL) != 0)
-     *   perror("convert");
-     *
      */
     extern @DLL_VARIABLE@ int convert(const char* tocode, const char* fromcode, const char* start,
+                                            size_t inlength, char** resultp, size_t* lengthp);
+    
+    /**
+     * @brief Converts an entire string from one encoding to another,
+     * and supports autodetect encodings on input.
+     *
+     * @note Converts a memory region given in encoding FROMCODE to a new memory
+     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and '//TRANSLIT'.
+     * except that FROMCODE may be one of the values.
+     *
+     * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
+     * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
+     * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
+     * @note If resultp is not NULL, the output string is stored in
+     * *resultp; malloc/realloc is used to allocate the result.
+     *
+     * @note This function does not treat zero characters specially.
+     * @param tocode Target encoding.
+     * @param fromcode From encoding.
+     * @param start Source string.
+     * @param inlength Source string length.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
+     */
+    extern @DLL_VARIABLE@ int convert(const char16_t* tocode, const char16_t* fromcode, const char* start,
+                                            size_t inlength, char** resultp, size_t* lengthp);
+    
+    /**
+     * @brief Converts an entire string from one encoding to another,
+     * and supports autodetect encodings on input.
+     *
+     * @note Converts a memory region given in encoding FROMCODE to a new memory
+     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and '//TRANSLIT'.
+     * except that FROMCODE may be one of the values.
+     *
+     * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
+     * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
+     * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
+     * @note If resultp is not NULL, the output string is stored in
+     * *resultp; malloc/realloc is used to allocate the result.
+     *
+     * @note This function does not treat zero characters specially.
+     * @param tocode Target encoding.
+     * @param fromcode From encoding.
+     * @param start Source string.
+     * @param inlength Source string length.
+     * @param resultp Result memory pointer.
+     * @param lengthp Pointer to a variable that stores the length of the result.
+     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
+     */
+    extern @DLL_VARIABLE@ int convert(const char32_t* tocode, const char32_t* fromcode, const char* start,
                                             size_t inlength, char** resultp, size_t* lengthp);
 
     /**
@@ -87,23 +152,17 @@ extern "C++"
      * @note This function does not treat zero characters specially.
      * @param tocode_cp Target encoding codepage.
      * @param fromcode_cp From encoding codepage.
-     * @param start Source string start pointer.
-     * @param end Source string end pointer.
+     * @param start Source string.
+     * @param inlength Source string length.
      * @param resultp Result memory pointer.
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @param strict Strict mode, if false, will ignore the invalid characters.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
-     *
-     * @example
-     *   const char* s = ...;
-     *   char* result = NULL;
-     *   if (convert(65001, 936,
-     *                    s, strlen(s)+1, &result, NULL) != 0)
-     *   perror("convert");
-     *
      */
     extern @DLL_VARIABLE@ int convert(int tocode_cp, int fromcode_cp, const char* start,
                                             size_t inlength, char** resultp, size_t* lengthp, bool strict=true);
+
+
 
     } // namespace reiconv
     } // namespace base
