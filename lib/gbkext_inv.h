@@ -2302,7 +2302,7 @@ static int
 gbkext_inv_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 2) {
-    const Summary16 *summary = NULL;
+    const Summary16 *summary = nullptr;
     if (wc >= 0x0200 && wc < 0x02e0)
       summary = &gbkext_inv_uni2indx_page02[(wc>>4)-0x020];
     else if (wc >= 0x2000 && wc < 0x22c0)

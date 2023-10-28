@@ -189,7 +189,7 @@ void cat(const std::string& input_file_path, FILE* dstfile)
     char buffer[1024];
     size_t len = 0;
     srcfile = fopen(input_file_path.c_str(), "r");
-    if (srcfile == NULL)
+    if (srcfile == nullptr)
     {
         error(input_file_path, "Error opening source file");
     }

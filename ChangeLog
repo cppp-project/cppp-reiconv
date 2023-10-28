@@ -1,6 +1,7 @@
 2023-10-28  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Add new function 'ascii_mbtou16', 'ascii_mbtou32'.
+	Use 'nullptr' instead of 'NULL'.
 
 2023-10-22  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 

@@ -47,7 +47,7 @@ namespace _uniq_u
 
     /* Change the size of an allocated block of memory P to N bytes,
     with error checking.
-    If P is NULL, run xmalloc.  */
+    If P is nullptr, run xmalloc.  */
 
     void* xrealloc(void* p, size_t n)
     {
@@ -183,14 +183,14 @@ namespace _uniq_u
         int match_count = 0;
 
         istream = fopen(infile, "r");
-        if (istream == NULL)
+        if (istream == nullptr)
         {
             fprintf(stderr, "uniq-u: error opening %s\n", infile);
             error("fopen", "File open error.");
         }
 
         ostream = fopen (outfile, "w");
-        if (ostream == NULL)
+        if (ostream == nullptr)
         {
             fprintf(stderr, "uniq-u: error opening %s\n", outfile);
             error("fopen", "File open error.");

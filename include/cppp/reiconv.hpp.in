@@ -80,7 +80,7 @@ extern "C++"
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
      * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note If resultp is not NULL, the output string is stored in
+     * @note If resultp is not nullptr, the output string is stored in
      * *resultp; malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.
@@ -106,7 +106,7 @@ extern "C++"
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
      * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note If resultp is not NULL, the output string is stored in
+     * @note If resultp is not nullptr, the output string is stored in
      * *resultp; malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.
@@ -132,7 +132,7 @@ extern "C++"
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
      * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note If resultp is not NULL, the output string is stored in
+     * @note If resultp is not nullptr, the output string is stored in
      * *resultp; malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.

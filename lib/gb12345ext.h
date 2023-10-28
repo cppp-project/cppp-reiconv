@@ -1761,7 +1761,7 @@ static int
 gb12345ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 2) {
-    const Summary16 *summary = NULL;
+    const Summary16 *summary = nullptr;
     if (wc >= 0x0100 && wc < 0x0270)
       summary = &gb12345ext_uni2indx_page01[(wc>>4)-0x010];
     else if (wc >= 0x1e00 && wc < 0x1e40)

@@ -21,7 +21,7 @@ DEFENCODING(( "CP856",
             ),
             856,
             cp856,
-            { cp856_mbtowc, NULL },       { cp856_wctomb, NULL })
+            { cp856_mbtowc, nullptr },       { cp856_wctomb, nullptr })
 #ifdef USE_AIX_ALIASES
 DEFALIAS(     "IBM-856",                /* AIX */
             cp856)
@@ -31,7 +31,7 @@ DEFENCODING(( "CP922",
             ),
             922,
             cp922,
-            { cp922_mbtowc, NULL },       { cp922_wctomb, NULL })
+            { cp922_mbtowc, nullptr },       { cp922_wctomb, nullptr })
 #ifdef USE_AIX_ALIASES
 DEFALIAS(     "IBM-922",                /* AIX */
             cp922)
@@ -41,7 +41,7 @@ DEFENCODING(( "CP943",
             ),
             943,
             cp943,
-            { cp943_mbtowc, NULL },       { cp943_wctomb, NULL })
+            { cp943_mbtowc, nullptr },       { cp943_wctomb, nullptr })
 #ifdef USE_AIX_ALIASES
 DEFALIAS(     "IBM-943",                /* AIX */
             cp943)
@@ -51,7 +51,7 @@ DEFENCODING(( "CP1046",
             ),
             1046,
             cp1046,
-            { cp1046_mbtowc, NULL },      { cp1046_wctomb, NULL })
+            { cp1046_mbtowc, nullptr },      { cp1046_wctomb, nullptr })
 #ifdef USE_AIX_ALIASES
 DEFALIAS(     "IBM-1046",               /* AIX */
             cp1046)
@@ -61,7 +61,7 @@ DEFENCODING(( "CP1124",
             ),
             1124,
             cp1124,
-            { cp1124_mbtowc, NULL },      { cp1124_wctomb, NULL })
+            { cp1124_mbtowc, nullptr },      { cp1124_wctomb, nullptr })
 #ifdef USE_AIX_ALIASES
 DEFALIAS(     "IBM-1124",               /* AIX */
             cp1124)
@@ -71,7 +71,7 @@ DEFENCODING(( "CP1129",
             ),
             1129,
             cp1129,
-            { cp1129_mbtowc, NULL },      { cp1129_wctomb, NULL })
+            { cp1129_mbtowc, nullptr },      { cp1129_wctomb, nullptr })
 #ifdef USE_AIX_ALIASES
 DEFALIAS(     "IBM-1129",               /* AIX */
             cp1129)
@@ -84,7 +84,7 @@ DEFENCODING(( "CP1161",
             ),
             1161,
             cp1161,
-            { cp1161_mbtowc, NULL },      { cp1161_wctomb, NULL })
+            { cp1161_mbtowc, nullptr },      { cp1161_wctomb, nullptr })
 
 DEFENCODING(( "CP1162",
               "IBM1162",                /* glibc */
@@ -93,7 +93,7 @@ DEFENCODING(( "CP1162",
             ),
             1162,
             cp1162,
-            { cp1162_mbtowc, NULL },      { cp1162_wctomb, NULL })
+            { cp1162_mbtowc, nullptr },      { cp1162_wctomb, nullptr })
 
 DEFENCODING(( "CP1163",
               "IBM1163",                /* glibc */
@@ -102,4 +102,4 @@ DEFENCODING(( "CP1163",
             ),
             1163,
             cp1163,
-            { cp1163_mbtowc, NULL },      { cp1163_wctomb, NULL })
+            { cp1163_mbtowc, nullptr },      { cp1163_wctomb, nullptr })

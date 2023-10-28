@@ -111,7 +111,7 @@
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
      * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note If resultp is not NULL, the output string is stored in
+     * @note If resultp is not nullptr, the output string is stored in
      * *resultp; malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.
@@ -131,7 +131,7 @@
      * @note "autodetect_utf8" 支持ISO-8859-1和UTF-8
      * @note "autodetect_jp" 支持EUC-JP, ISO-2022-JP-2和SHIFT_JIS
      * @note "autodetect_kr" 支持EUC-KR和ISO-2022-KR
-     * @note 如果resultp不为NULL，则输出字符串存储在*resultp中；使用malloc/realloc来分配结果。
+     * @note 如果resultp不为nullptr，则输出字符串存储在*resultp中；使用malloc/realloc来分配结果。
      *
      * @note 此函数不会特殊处理零字符。
      * @param tocode 目标编码。

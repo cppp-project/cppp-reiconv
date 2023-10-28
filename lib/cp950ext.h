@@ -120,7 +120,7 @@ static int
 cp950ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
   if (n >= 2) {
-    const Summary16 *summary = NULL;
+    const Summary16 *summary = nullptr;
     if (wc >= 0x2500 && wc < 0x25a0)
       summary = &cp950ext_uni2indx_page25[(wc>>4)-0x250];
     else if (wc >= 0x5800 && wc < 0x58c0)

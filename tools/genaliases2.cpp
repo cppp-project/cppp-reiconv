@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     aliases_file_name = argv[2];
 
     aliases_file = fopen(aliases_file_name, "w");
-    if (aliases_file == NULL)
+    if (aliases_file == nullptr)
     {
         fprintf(stderr, "Could not open '%s' for writing\n", aliases_file_name);
         return 1;

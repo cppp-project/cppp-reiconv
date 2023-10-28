@@ -42,7 +42,7 @@ namespace test
         using namespace _table_to;
 
         save_file = fopen(save_file_path.c_str(), "w");
-        if (save_file == NULL)
+        if (save_file == nullptr)
         {
             error("table-to", "Cannot open save file.");
         }
@@ -72,11 +72,11 @@ namespace test
                 size_t outbytesleft = sizeof(buf);
                 size_t result;
                 size_t result2 = 0;
-                iconv(cd, NULL, NULL, NULL, NULL);
+                iconv(cd, nullptr, nullptr, nullptr, nullptr);
                 result = iconv(cd, (char**)&inbuf, &inbytesleft, &outbuf, &outbytesleft);
                 if (result != (size_t)(-1))
                 {
-                    result2 = iconv(cd, NULL, NULL, &outbuf, &outbytesleft);
+                    result2 = iconv(cd, nullptr, nullptr, &outbuf, &outbytesleft);
                 }
                 if (result == (size_t)(-1) || result2 == (size_t)(-1))
                 {

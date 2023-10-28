@@ -60,11 +60,11 @@ namespace test
             char* outbuf = (char*) out;
             size_t outbytesleft = 3 * sizeof(unsigned int);
             size_t result;
-            iconv(cd, NULL, NULL, NULL, NULL);
+            iconv(cd, nullptr, nullptr, nullptr, nullptr);
             result = iconv(cd, (char**)&inbuf, &inbytesleft, &outbuf, &outbytesleft);
             if (result != (size_t)(-1))
             {
-                result = iconv(cd, NULL, NULL, &outbuf, &outbytesleft);
+                result = iconv(cd, nullptr, nullptr, &outbuf, &outbytesleft);
             }
             if (result == (size_t)(-1))
             {
@@ -110,7 +110,7 @@ namespace test
                 sprintf (p, "0x%04X", out[0]);
                 out += 1; outlen -= 1;
                 if (bmp_only && strlen(p) > 6)
-                return NULL;
+                return nullptr;
                 p += strlen(p);
             }
             return hexbuf;
@@ -123,7 +123,7 @@ namespace test
         using namespace _table_from;
 
         save_file = fopen(save_file_path.c_str(), "w");
-        if (save_file == NULL)
+        if (save_file == nullptr)
         {
             error("table-from", "Can't open save file.");
         }
@@ -158,7 +158,7 @@ namespace test
                 else if (result > 0)
                 {
                     const char* unicode = ucs4_decode(out, result);
-                    if (unicode != NULL)
+                    if (unicode != nullptr)
                     {
                         fprintf(save_file, "0x%02X\t%s\n", i0, unicode);
                     }
@@ -176,7 +176,7 @@ namespace test
                         else if (result > 0)
                         {
                             const char* unicode = ucs4_decode(out,result);
-                            if (unicode != NULL)
+                            if (unicode != nullptr)
                             {
                                 fprintf(save_file, "0x%02X%02X\t%s\n", i0, i1, unicode);
                             }
@@ -194,7 +194,7 @@ namespace test
                                 else if (result > 0)
                                 {
                                     const char* unicode = ucs4_decode(out, result);
-                                    if (unicode != NULL)
+                                    if (unicode != nullptr)
                                     {
                                         fprintf(save_file, "0x%02X%02X%02X\t%s\n", i0, i1, i2, unicode);
                                     }
@@ -212,7 +212,7 @@ namespace test
                                         else if (result > 0)
                                         {
                                             const char* unicode = ucs4_decode(out, result);
-                                            if (unicode != NULL)
+                                            if (unicode != nullptr)
                                             {
                                                 fprintf(save_file, "0x%02X%02X%02X%02X\t%s\n", i0, i1, i2, i3, unicode);
                                             }

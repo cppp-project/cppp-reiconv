@@ -40,7 +40,7 @@ namespace test
     {
         void main(const std::string& from, const std::string& to,  const std::string& input_file_path, const std::string& output_file_path)
         {
-            char* res = NULL;
+            char* res = nullptr;
             size_t len = 0;
 
             FILE* src = fopen(input_file_path.c_str(), "rb");

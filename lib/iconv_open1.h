@@ -74,10 +74,10 @@
         break;
     }
     ap = HashPool::aliases_lookup(buf, bp - buf);
-    if (ap == NULL)
+    if (ap == nullptr)
     {
         ap = aliases2_lookup(buf);
-        if (ap == NULL)
+        if (ap == nullptr)
             goto invalid;
     }
     to_index = ap->encoding_index;
@@ -117,10 +117,10 @@
         break;
     }
     ap = HashPool::aliases_lookup(buf, bp - buf);
-    if (ap == NULL)
+    if (ap == nullptr)
     {
         ap = aliases2_lookup(buf);
-        if (ap == NULL)
+        if (ap == nullptr)
             goto invalid;
     }
     from_index = ap->encoding_index;

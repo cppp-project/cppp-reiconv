@@ -28,7 +28,7 @@ DEFENCODING(( "IBM-037",
             ),
             037,
             ebcdic037,
-            { ebcdic037_mbtowc, NULL },   { ebcdic037_wctomb, NULL })
+            { ebcdic037_mbtowc, nullptr },   { ebcdic037_wctomb, nullptr })
 
 DEFENCODING(( "IBM-273",
               "IBM273",                 /* IANA */
@@ -37,7 +37,7 @@ DEFENCODING(( "IBM-273",
             ),
             273,
             ebcdic273,
-            { ebcdic273_mbtowc, NULL },   { ebcdic273_wctomb, NULL })
+            { ebcdic273_mbtowc, nullptr },   { ebcdic273_wctomb, nullptr })
 
 DEFENCODING(( "IBM-277",
               "IBM277",                 /* IANA */
@@ -47,7 +47,7 @@ DEFENCODING(( "IBM-277",
             ),
             277,
             ebcdic277,
-            { ebcdic277_mbtowc, NULL },   { ebcdic277_wctomb, NULL })
+            { ebcdic277_mbtowc, nullptr },   { ebcdic277_wctomb, nullptr })
 
 DEFENCODING(( "IBM-278",
               "IBM278",                 /* IANA */
@@ -58,7 +58,7 @@ DEFENCODING(( "IBM-278",
             ),
             278,
             ebcdic278,
-            { ebcdic278_mbtowc, NULL },   { ebcdic278_wctomb, NULL })
+            { ebcdic278_mbtowc, nullptr },   { ebcdic278_wctomb, nullptr })
 
 DEFENCODING(( "IBM-280",
               "IBM280",                 /* IANA */
@@ -68,14 +68,14 @@ DEFENCODING(( "IBM-280",
             ),
             280,
             ebcdic280,
-            { ebcdic280_mbtowc, NULL },   { ebcdic280_wctomb, NULL })
+            { ebcdic280_mbtowc, nullptr },   { ebcdic280_wctomb, nullptr })
 
 DEFENCODING(( "IBM-282",
               "IBM282",
             ),
             282,
             ebcdic282,
-            { ebcdic282_mbtowc, NULL },   { ebcdic282_wctomb, NULL })
+            { ebcdic282_mbtowc, nullptr },   { ebcdic282_wctomb, nullptr })
 
 DEFENCODING(( "IBM-284",
               "IBM284",                 /* IANA */
@@ -85,7 +85,7 @@ DEFENCODING(( "IBM-284",
             ),
             284,
             ebcdic284,
-            { ebcdic284_mbtowc, NULL },   { ebcdic284_wctomb, NULL })
+            { ebcdic284_mbtowc, nullptr },   { ebcdic284_wctomb, nullptr })
 
 DEFENCODING(( "IBM-285",
               "IBM285",                 /* IANA */
@@ -95,7 +95,7 @@ DEFENCODING(( "IBM-285",
             ),
             285,
             ebcdic285,
-            { ebcdic285_mbtowc, NULL },   { ebcdic285_wctomb, NULL })
+            { ebcdic285_mbtowc, nullptr },   { ebcdic285_wctomb, nullptr })
 
 DEFENCODING(( "IBM-297",
               "IBM297",                 /* IANA */
@@ -105,7 +105,7 @@ DEFENCODING(( "IBM-297",
             ),
             297,
             ebcdic297,
-            { ebcdic297_mbtowc, NULL },   { ebcdic297_wctomb, NULL })
+            { ebcdic297_mbtowc, nullptr },   { ebcdic297_wctomb, nullptr })
 
 DEFENCODING(( "IBM-423",
               "IBM423",                 /* IANA */
@@ -115,7 +115,7 @@ DEFENCODING(( "IBM-423",
             ),
             423,
             ebcdic423,
-            { ebcdic423_mbtowc, NULL },   { ebcdic423_wctomb, NULL })
+            { ebcdic423_mbtowc, nullptr },   { ebcdic423_wctomb, nullptr })
 
 DEFENCODING(( "IBM-424",
               "IBM424",                 /* IANA */
@@ -125,14 +125,14 @@ DEFENCODING(( "IBM-424",
             ),
             424,
             ebcdic424,
-            { ebcdic424_mbtowc, NULL },   { ebcdic424_wctomb, NULL })
+            { ebcdic424_mbtowc, nullptr },   { ebcdic424_wctomb, nullptr })
 
 DEFENCODING(( "IBM-425",
               "IBM425",
             ),
             425,
             ebcdic425,
-            { ebcdic425_mbtowc, NULL },   { ebcdic425_wctomb, NULL })
+            { ebcdic425_mbtowc, nullptr },   { ebcdic425_wctomb, nullptr })
 
 DEFENCODING(( "IBM-500",
               "IBM500",                 /* IANA */
@@ -143,7 +143,7 @@ DEFENCODING(( "IBM-500",
             ),
             500,
             ebcdic500,
-            { ebcdic500_mbtowc, NULL },   { ebcdic500_wctomb, NULL })
+            { ebcdic500_mbtowc, nullptr },   { ebcdic500_wctomb, nullptr })
 
 DEFENCODING(( "IBM-838",
               "IBM838",
@@ -152,7 +152,7 @@ DEFENCODING(( "IBM-838",
             ),
             838,
             ebcdic838,
-            { ebcdic838_mbtowc, NULL },   { ebcdic838_wctomb, NULL })
+            { ebcdic838_mbtowc, nullptr },   { ebcdic838_wctomb, nullptr })
 
 DEFENCODING(( "IBM-870",
               "IBM870",                 /* IANA */
@@ -163,7 +163,7 @@ DEFENCODING(( "IBM-870",
             ),
             870,
             ebcdic870,
-            { ebcdic870_mbtowc, NULL },   { ebcdic870_wctomb, NULL })
+            { ebcdic870_mbtowc, nullptr },   { ebcdic870_wctomb, nullptr })
 
 DEFENCODING(( "IBM-871",
               "IBM871",                 /* IANA */
@@ -173,7 +173,7 @@ DEFENCODING(( "IBM-871",
             ),
             871,
             ebcdic871,
-            { ebcdic871_mbtowc, NULL },   { ebcdic871_wctomb, NULL })
+            { ebcdic871_mbtowc, nullptr },   { ebcdic871_wctomb, nullptr })
 
 DEFENCODING(( "IBM-875",
               "IBM875",                 /* glibc */
@@ -182,7 +182,7 @@ DEFENCODING(( "IBM-875",
             ),
             875,
             ebcdic875,
-            { ebcdic875_mbtowc, NULL },   { ebcdic875_wctomb, NULL })
+            { ebcdic875_mbtowc, nullptr },   { ebcdic875_wctomb, nullptr })
 
 DEFENCODING(( "IBM-880",
               "IBM880",                 /* IANA */
@@ -192,7 +192,7 @@ DEFENCODING(( "IBM-880",
             ),
             880,
             ebcdic880,
-            { ebcdic880_mbtowc, NULL },   { ebcdic880_wctomb, NULL })
+            { ebcdic880_mbtowc, nullptr },   { ebcdic880_wctomb, nullptr })
 
 DEFENCODING(( "IBM-905",
               "IBM905",                 /* IANA */
@@ -202,7 +202,7 @@ DEFENCODING(( "IBM-905",
             ),
             905,
             ebcdic905,
-            { ebcdic905_mbtowc, NULL },   { ebcdic905_wctomb, NULL })
+            { ebcdic905_mbtowc, nullptr },   { ebcdic905_wctomb, nullptr })
 
 DEFENCODING(( "IBM-924",
               "IBM924",
@@ -214,7 +214,7 @@ DEFENCODING(( "IBM-924",
             ),
             924,
             ebcdic924,
-            { ebcdic924_mbtowc, NULL },   { ebcdic924_wctomb, NULL })
+            { ebcdic924_mbtowc, nullptr },   { ebcdic924_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1025",
               "IBM1025",                /* glibc */
@@ -222,7 +222,7 @@ DEFENCODING(( "IBM-1025",
             ),
             1025,
             ebcdic1025,
-            { ebcdic1025_mbtowc, NULL },  { ebcdic1025_wctomb, NULL })
+            { ebcdic1025_mbtowc, nullptr },  { ebcdic1025_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1026",
               "IBM1026",                /* IANA */
@@ -231,7 +231,7 @@ DEFENCODING(( "IBM-1026",
             ),
             1026,
             ebcdic1026,
-            { ebcdic1026_mbtowc, NULL },  { ebcdic1026_wctomb, NULL })
+            { ebcdic1026_mbtowc, nullptr },  { ebcdic1026_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1047",               /* IANA */
               "IBM1047",                /* IANA */
@@ -240,7 +240,7 @@ DEFENCODING(( "IBM-1047",               /* IANA */
             ),
             1047,
             ebcdic1047,
-            { ebcdic1047_mbtowc, NULL },  { ebcdic1047_wctomb, NULL })
+            { ebcdic1047_mbtowc, nullptr },  { ebcdic1047_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1097",
               "IBM1097",                /* glibc */
@@ -248,7 +248,7 @@ DEFENCODING(( "IBM-1097",
             ),
             1097,
             ebcdic1097,
-            { ebcdic1097_mbtowc, NULL },  { ebcdic1097_wctomb, NULL })
+            { ebcdic1097_mbtowc, nullptr },  { ebcdic1097_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1112",
               "IBM1112",                /* glibc */
@@ -256,7 +256,7 @@ DEFENCODING(( "IBM-1112",
             ),
             1112,
             ebcdic1112,
-            { ebcdic1112_mbtowc, NULL },  { ebcdic1112_wctomb, NULL })
+            { ebcdic1112_mbtowc, nullptr },  { ebcdic1112_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1122",
               "IBM1122",                /* glibc */
@@ -264,7 +264,7 @@ DEFENCODING(( "IBM-1122",
             ),
             1122,
             ebcdic1122,
-            { ebcdic1122_mbtowc, NULL },  { ebcdic1122_wctomb, NULL })
+            { ebcdic1122_mbtowc, nullptr },  { ebcdic1122_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1123",
               "IBM1123",                /* glibc */
@@ -272,7 +272,7 @@ DEFENCODING(( "IBM-1123",
             ),
             1123,
             ebcdic1123,
-            { ebcdic1123_mbtowc, NULL },  { ebcdic1123_wctomb, NULL })
+            { ebcdic1123_mbtowc, nullptr },  { ebcdic1123_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1130",
               "IBM1130",                /* glibc */
@@ -280,7 +280,7 @@ DEFENCODING(( "IBM-1130",
             ),
             1130,
             ebcdic1130,
-            { ebcdic1130_mbtowc, NULL },  { ebcdic1130_wctomb, NULL })
+            { ebcdic1130_mbtowc, nullptr },  { ebcdic1130_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1132",
               "IBM1132",                /* glibc */
@@ -288,7 +288,7 @@ DEFENCODING(( "IBM-1132",
             ),
             1132,
             ebcdic1132,
-            { ebcdic1132_mbtowc, NULL },  { ebcdic1132_wctomb, NULL })
+            { ebcdic1132_mbtowc, nullptr },  { ebcdic1132_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1137",
               "IBM1137",                /* glibc */
@@ -296,7 +296,7 @@ DEFENCODING(( "IBM-1137",
             ),
             1137,
             ebcdic1137,
-            { ebcdic1137_mbtowc, NULL },  { ebcdic1137_wctomb, NULL })
+            { ebcdic1137_mbtowc, nullptr },  { ebcdic1137_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1140",
               "IBM1140",
@@ -308,7 +308,7 @@ DEFENCODING(( "IBM-1140",
             ),
             1140,
             ebcdic1140,
-            { ebcdic1140_mbtowc, NULL },  { ebcdic1140_wctomb, NULL })
+            { ebcdic1140_mbtowc, nullptr },  { ebcdic1140_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1141",
               "IBM1141",
@@ -320,7 +320,7 @@ DEFENCODING(( "IBM-1141",
             ),
             1141,
             ebcdic1141,
-            { ebcdic1141_mbtowc, NULL },  { ebcdic1141_wctomb, NULL })
+            { ebcdic1141_mbtowc, nullptr },  { ebcdic1141_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1142",
               "IBM1142",
@@ -333,7 +333,7 @@ DEFENCODING(( "IBM-1142",
             ),
             1142,
             ebcdic1142,
-            { ebcdic1142_mbtowc, NULL },  { ebcdic1142_wctomb, NULL })
+            { ebcdic1142_mbtowc, nullptr },  { ebcdic1142_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1143",
               "IBM1143",
@@ -346,7 +346,7 @@ DEFENCODING(( "IBM-1143",
             ),
             1143,
             ebcdic1143,
-            { ebcdic1143_mbtowc, NULL },  { ebcdic1143_wctomb, NULL })
+            { ebcdic1143_mbtowc, nullptr },  { ebcdic1143_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1144",
               "IBM1144",
@@ -358,7 +358,7 @@ DEFENCODING(( "IBM-1144",
             ),
             1144,
             ebcdic1144,
-            { ebcdic1144_mbtowc, NULL },  { ebcdic1144_wctomb, NULL })
+            { ebcdic1144_mbtowc, nullptr },  { ebcdic1144_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1145",
               "IBM1145",
@@ -370,7 +370,7 @@ DEFENCODING(( "IBM-1145",
             ),
             1145,
             ebcdic1145,
-            { ebcdic1145_mbtowc, NULL },  { ebcdic1145_wctomb, NULL })
+            { ebcdic1145_mbtowc, nullptr },  { ebcdic1145_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1146",
               "IBM1146",
@@ -382,7 +382,7 @@ DEFENCODING(( "IBM-1146",
             ),
             1146,
             ebcdic1146,
-            { ebcdic1146_mbtowc, NULL },  { ebcdic1146_wctomb, NULL })
+            { ebcdic1146_mbtowc, nullptr },  { ebcdic1146_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1147",
               "IBM1147",
@@ -394,7 +394,7 @@ DEFENCODING(( "IBM-1147",
             ),
             1147,
             ebcdic1147,
-            { ebcdic1147_mbtowc, NULL },  { ebcdic1147_wctomb, NULL })
+            { ebcdic1147_mbtowc, nullptr },  { ebcdic1147_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1148",
               "IBM1148",
@@ -406,7 +406,7 @@ DEFENCODING(( "IBM-1148",
             ),
             1148,
             ebcdic1148,
-            { ebcdic1148_mbtowc, NULL },  { ebcdic1148_wctomb, NULL })
+            { ebcdic1148_mbtowc, nullptr },  { ebcdic1148_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1149",
               "IBM1149",
@@ -418,7 +418,7 @@ DEFENCODING(( "IBM-1149",
             ),
             1149,
             ebcdic1149,
-            { ebcdic1149_mbtowc, NULL },  { ebcdic1149_wctomb, NULL })
+            { ebcdic1149_mbtowc, nullptr },  { ebcdic1149_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1153",
               "IBM1153",                /* glibc */
@@ -426,7 +426,7 @@ DEFENCODING(( "IBM-1153",
             ),
             1153,
             ebcdic1153,
-            { ebcdic1153_mbtowc, NULL },  { ebcdic1153_wctomb, NULL })
+            { ebcdic1153_mbtowc, nullptr },  { ebcdic1153_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1154",
               "IBM1154",                /* glibc */
@@ -434,7 +434,7 @@ DEFENCODING(( "IBM-1154",
             ),
             1154,
             ebcdic1154,
-            { ebcdic1154_mbtowc, NULL },  { ebcdic1154_wctomb, NULL })
+            { ebcdic1154_mbtowc, nullptr },  { ebcdic1154_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1155",
               "IBM1155",                /* glibc */
@@ -442,7 +442,7 @@ DEFENCODING(( "IBM-1155",
             ),
             1155,
             ebcdic1155,
-            { ebcdic1155_mbtowc, NULL },  { ebcdic1155_wctomb, NULL })
+            { ebcdic1155_mbtowc, nullptr },  { ebcdic1155_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1156",
               "IBM1156",                /* glibc */
@@ -450,7 +450,7 @@ DEFENCODING(( "IBM-1156",
             ),
             1156,
             ebcdic1156,
-            { ebcdic1156_mbtowc, NULL },  { ebcdic1156_wctomb, NULL })
+            { ebcdic1156_mbtowc, nullptr },  { ebcdic1156_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1157",
               "IBM1157",                /* glibc */
@@ -458,7 +458,7 @@ DEFENCODING(( "IBM-1157",
             ),
             1157,
             ebcdic1157,
-            { ebcdic1157_mbtowc, NULL },  { ebcdic1157_wctomb, NULL })
+            { ebcdic1157_mbtowc, nullptr },  { ebcdic1157_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1158",
               "IBM1158",                /* glibc */
@@ -466,7 +466,7 @@ DEFENCODING(( "IBM-1158",
             ),
             1158,
             ebcdic1158,
-            { ebcdic1158_mbtowc, NULL },  { ebcdic1158_wctomb, NULL })
+            { ebcdic1158_mbtowc, nullptr },  { ebcdic1158_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1160",
               "IBM1160",                /* glibc */
@@ -474,7 +474,7 @@ DEFENCODING(( "IBM-1160",
             ),
             1160,
             ebcdic1160,
-            { ebcdic1160_mbtowc, NULL },  { ebcdic1160_wctomb, NULL })
+            { ebcdic1160_mbtowc, nullptr },  { ebcdic1160_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1164",
               "IBM1164",                /* glibc */
@@ -482,14 +482,14 @@ DEFENCODING(( "IBM-1164",
             ),
             1164,
             ebcdic1164,
-            { ebcdic1164_mbtowc, NULL },  { ebcdic1164_wctomb, NULL })
+            { ebcdic1164_mbtowc, nullptr },  { ebcdic1164_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1165",
               "IBM1165",
             ),
             1165,
             ebcdic1165,
-            { ebcdic1165_mbtowc, NULL },  { ebcdic1165_wctomb, NULL })
+            { ebcdic1165_mbtowc, nullptr },  { ebcdic1165_wctomb, nullptr })
 
 DEFENCODING(( "IBM-1166",
               "IBM1166",                /* glibc */
@@ -497,7 +497,7 @@ DEFENCODING(( "IBM-1166",
             ),
             1166,
             ebcdic1166,
-            { ebcdic1166_mbtowc, NULL },  { ebcdic1166_wctomb, NULL })
+            { ebcdic1166_mbtowc, nullptr },  { ebcdic1166_wctomb, nullptr })
 
 DEFENCODING(( "IBM-4971",
               "IBM4971",                /* glibc */
@@ -505,7 +505,7 @@ DEFENCODING(( "IBM-4971",
             ),
             4971,
             ebcdic4971,
-            { ebcdic4971_mbtowc, NULL },  { ebcdic4971_wctomb, NULL })
+            { ebcdic4971_mbtowc, nullptr },  { ebcdic4971_wctomb, nullptr })
 
 DEFENCODING(( "IBM-12712",
               "IBM12712",               /* glibc */
@@ -513,7 +513,7 @@ DEFENCODING(( "IBM-12712",
             ),
             12712,
             ebcdic12712,
-            { ebcdic12712_mbtowc, NULL }, { ebcdic12712_wctomb, NULL })
+            { ebcdic12712_mbtowc, nullptr }, { ebcdic12712_wctomb, nullptr })
 
 DEFENCODING(( "IBM-16804",
               "IBM16804",               /* glibc */
@@ -521,4 +521,4 @@ DEFENCODING(( "IBM-16804",
             ),
             16804,
             ebcdic16804,
-            { ebcdic16804_mbtowc, NULL }, { ebcdic16804_wctomb, NULL })
+            { ebcdic16804_mbtowc, nullptr }, { ebcdic16804_wctomb, nullptr })

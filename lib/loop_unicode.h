@@ -118,7 +118,7 @@ static size_t unicode_loop_reset (iconv_t icd,
                                   char* * outbuf, size_t *outbytesleft)
 {
   conv_t cd = (conv_t) icd;
-  if (outbuf == NULL || *outbuf == NULL) {
+  if (outbuf == nullptr || *outbuf == nullptr) {
     /* Reset the states. */
     memset(&cd->istate,'\0',sizeof(state_t));
     memset(&cd->ostate,'\0',sizeof(state_t));

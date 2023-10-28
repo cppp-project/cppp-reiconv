@@ -40,24 +40,24 @@ DEFENCODING(( "BIG5-2003",
             ),
             -1,
             big5_2003,
-            { big5_2003_mbtowc, NULL },   { big5_2003_wctomb, NULL })
+            { big5_2003_mbtowc, nullptr },   { big5_2003_wctomb, nullptr })
 
 DEFENCODING(( "TDS565",
               "ISO-IR-230",
             ),
             -1,
             tds565,
-            { tds565_mbtowc, NULL },      { tds565_wctomb, NULL })
+            { tds565_mbtowc, nullptr },      { tds565_wctomb, nullptr })
 
 DEFENCODING(( "ATARIST",
               "ATARI",
             ),
             -1,
             atarist,
-            { atarist_mbtowc, NULL },     { atarist_wctomb, NULL })
+            { atarist_mbtowc, nullptr },     { atarist_wctomb, nullptr })
 
 DEFENCODING(( "RISCOS-LATIN1",
             ),
             -1,
             riscos1,
-            { riscos1_mbtowc, NULL },     { riscos1_wctomb, NULL })
+            { riscos1_mbtowc, nullptr },     { riscos1_wctomb, nullptr })
