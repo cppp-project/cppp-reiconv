@@ -19,7 +19,7 @@ cmake_minimum_required(VERSION 3.12)
 project(cppp-reiconv VERSION 3.0.0)
 
 # Define options
-option(ENABLE_EXTRA "Enable extra encodings and features." OFF)
+option(LESS_BUILD "Disable extra encodings." OFF)
 
 # Ignore warnings
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -96,8 +96,10 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib/generated")
 include_directories("${output_includedir}")
 
 # Add definitions
-if(ENABLE_EXTRA)
-    message(STATUS "Extra encodings and features enabled.")
+
+if(LESS_BUILD)
+    message(STATUS "Extra encoding disabled.")
+else()
     add_compile_definitions(ENABLE_EXTRA=1)
 endif()
 
@@ -105,7 +107,9 @@ endif()
 cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
 
 # Include test suite.
-include("tests/tests.cmake")
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+    include("tests/tests.cmake")
+endif()
 
 # Install
 # Static

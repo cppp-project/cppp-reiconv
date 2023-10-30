@@ -133,7 +133,7 @@ lib/generated/flags.h : lib/generated/genflags
 test : all
 	$(RM) -r -f build
 	$(MKDIR) build
-	cd build && $(CMAKE) .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=test_install
+	cd build && $(CMAKE) .. -DTEST=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=test_install
 	cd build && $(CMAKE) --build . --config=Release --verbose
 	cd build && $(CTEST) -C Release --verbose
 	$(CMAKE) --install build --verbose

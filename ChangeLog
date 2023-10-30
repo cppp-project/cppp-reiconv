@@ -1,3 +1,8 @@
+2023-10-30  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Update compile options' name.
+	Use extra encodings always except less build.
+
 2023-10-28  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Add new function 'ascii_mbtou16', 'ascii_mbtou32'.

@@ -1,13 +1,13 @@
 # CMake script for cppp-reiconv/tests
 
 
-option(ENABLE_TEST "Enable cppp-reiconv test suites build." OFF)
+option(TEST "Enable test suites build." OFF)
 
-if (ENABLE_TEST)
+if (TEST)
     # Init CTest
     enable_testing()
     include(CTest)
-    message(STATUS "Test suite for 'cppp-reiconv' enabled.")
+    message(STATUS "Test suite for '${PROJECT_NAME}' enabled.")
 
     # Includes
     include_directories("${CMAKE_CURRENT_SOURCE_DIR}/tests")
