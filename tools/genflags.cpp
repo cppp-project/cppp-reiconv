@@ -25,7 +25,6 @@
 
 /* Consider all encodings, including the system dependent ones. */
 #define USE_AIX
-#define USE_OSF1
 #define USE_DOS
 #define USE_ZOS
 #define USE_EXTRA
@@ -116,7 +115,6 @@ int main()
 #include "encodings_aix.def"
 #include "encodings_dos.def"
 #include "encodings_extra.def"
-#include "encodings_osf1.def"
 #include "encodings_zos.def"
 #undef DEFALIAS
 #undef DEFENCODING

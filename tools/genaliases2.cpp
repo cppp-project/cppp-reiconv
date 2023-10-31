@@ -84,9 +84,6 @@ int main(int argc, char* argv[])
 #ifdef USE_AIX
 #include "encodings_aix.def"
 #endif
-#ifdef USE_OSF1
-#include "encodings_osf1.def"
-#endif
 #ifdef USE_DOS
 #include "encodings_dos.def"
 #endif

@@ -32,12 +32,12 @@
 #line 1 "lib/generated/aliases_syssolaris.gperf"
 struct alias { int name; unsigned int encoding_index; };
 
-#define TOTAL_KEYWORDS 356
+#define TOTAL_KEYWORDS 360
 #define MIN_WORD_LENGTH 2
 #define MAX_WORD_LENGTH 45
 #define MIN_HASH_VALUE 6
-#define MAX_HASH_VALUE 919
-/* maximum key range = 914, duplicates = 0 */
+#define MAX_HASH_VALUE 942
+/* maximum key range = 937, duplicates = 0 */
 
 class HashPool
 {
@@ -52,19 +52,19 @@ HashPool::aliases_hash (const char *str, size_t len)
 {
   static const unsigned short asso_values[] =
     {
-      920, 920, 920, 920, 920, 920, 920, 920, 920, 920,
-      920, 920, 920, 920, 920, 920, 920, 920, 920, 920,
-      920, 920, 920, 920, 920, 920, 920, 920, 920, 920,
-      920, 920, 920, 920, 920, 920, 920, 920, 920, 920,
-      920, 920, 920, 920, 920,  10,   1, 920,  29,   0,
-        5,  74,  47,   2,   1, 150,   4,  11, 271, 920,
-      920, 920, 920, 920, 920,  60, 172,   1,   3,  71,
-      164,  91,  54,   0, 205, 108, 135,  85,   8,   0,
-      145, 920,  41,  74,   8,  74, 227, 141, 174,   7,
-        2, 920, 920, 920, 920,  70, 920, 920, 920, 920,
-      920, 920, 920, 920, 920, 920, 920, 920, 920, 920,
-      920, 920, 920, 920, 920, 920, 920, 920, 920, 920,
-      920, 920, 920, 920, 920, 920, 920, 920
+      943, 943, 943, 943, 943, 943, 943, 943, 943, 943,
+      943, 943, 943, 943, 943, 943, 943, 943, 943, 943,
+      943, 943, 943, 943, 943, 943, 943, 943, 943, 943,
+      943, 943, 943, 943, 943, 943, 943, 943, 943, 943,
+      943, 943, 943, 943, 943,  10, 139, 943,  29,   0,
+        5,  74,  47,   2,   1, 150,   4,  11, 193, 943,
+      943, 943, 943, 943, 943,  60, 226,   1,   3,  71,
+      106, 122,  70,   0, 216, 108, 135,  85,   8,   0,
+       55, 943,  41,  74,   8,  74, 205, 160, 174,  66,
+        3, 943, 943, 943, 943,  70, 943, 943, 943, 943,
+      943, 943, 943, 943, 943, 943, 943, 943, 943, 943,
+      943, 943, 943, 943, 943, 943, 943, 943, 943, 943,
+      943, 943, 943, 943, 943, 943, 943, 943
     };
   unsigned int hval = len;
 
@@ -137,7 +137,6 @@ struct stringpool_t
     char stringpool_str54[sizeof("ISO-8859-16")];
     char stringpool_str55[sizeof("ISO-8859-5")];
     char stringpool_str56[sizeof("ISO-8859-15")];
-    char stringpool_str58[sizeof("HZ")];
     char stringpool_str59[sizeof("ISO-8859-8")];
     char stringpool_str61[sizeof("ISO-8859-2")];
     char stringpool_str62[sizeof("ISO8859-9")];
@@ -148,6 +147,7 @@ struct stringpool_t
     char stringpool_str72[sizeof("CP1250")];
     char stringpool_str73[sizeof("ISO-8859-9")];
     char stringpool_str74[sizeof("ISO-IR-166")];
+    char stringpool_str75[sizeof("HZ")];
     char stringpool_str76[sizeof("ISO-IR-165")];
     char stringpool_str77[sizeof("CP950")];
     char stringpool_str78[sizeof("ISO-IR-126")];
@@ -207,8 +207,8 @@ struct stringpool_t
     char stringpool_str151[sizeof("ISO_8859-10:1992")];
     char stringpool_str152[sizeof("TIS620")];
     char stringpool_str153[sizeof("ISO-IR-138")];
-    char stringpool_str154[sizeof("TIS620.2529-1")];
     char stringpool_str155[sizeof("IBM850")];
+    char stringpool_str156[sizeof("PT154")];
     char stringpool_str157[sizeof("LATIN1")];
     char stringpool_str158[sizeof("ISO-IR-100")];
     char stringpool_str159[sizeof("LATIN6")];
@@ -227,7 +227,6 @@ struct stringpool_t
     char stringpool_str180[sizeof("UNICODE-1-1")];
     char stringpool_str181[sizeof("ELOT_928")];
     char stringpool_str184[sizeof("L4")];
-    char stringpool_str186[sizeof("GB2312")];
     char stringpool_str188[sizeof("ISO8859-3")];
     char stringpool_str189[sizeof("ISO8859-13")];
     char stringpool_str190[sizeof("LATIN-9")];
@@ -235,10 +234,12 @@ struct stringpool_t
     char stringpool_str193[sizeof("TIS620-0")];
     char stringpool_str194[sizeof("X0212")];
     char stringpool_str196[sizeof("L10")];
+    char stringpool_str198[sizeof("UTF-16")];
     char stringpool_str199[sizeof("ISO-8859-3")];
     char stringpool_str200[sizeof("ISO-8859-13")];
     char stringpool_str202[sizeof("CSKOI8R")];
-    char stringpool_str203[sizeof("CSKZ1048")];
+    char stringpool_str203[sizeof("UTF-8")];
+    char stringpool_str204[sizeof("CSKZ1048")];
     char stringpool_str205[sizeof("ISO_8859-4")];
     char stringpool_str206[sizeof("ISO_8859-14")];
     char stringpool_str208[sizeof("ROMAN8")];
@@ -247,222 +248,225 @@ struct stringpool_t
     char stringpool_str211[sizeof("L3")];
     char stringpool_str212[sizeof("ISO-IR-144")];
     char stringpool_str213[sizeof("X0201")];
-    char stringpool_str215[sizeof("MACTHAI")];
+    char stringpool_str214[sizeof("PTCP154")];
     char stringpool_str216[sizeof("LATIN10")];
+    char stringpool_str217[sizeof("GB2312")];
     char stringpool_str219[sizeof("KSC_5601")];
     char stringpool_str221[sizeof("X0208")];
+    char stringpool_str225[sizeof("CSPTCP154")];
     char stringpool_str226[sizeof("SJIS")];
     char stringpool_str227[sizeof("US-ASCII")];
     char stringpool_str229[sizeof("CP1133")];
+    char stringpool_str231[sizeof("MACTHAI")];
+    char stringpool_str233[sizeof("TCVN")];
     char stringpool_str234[sizeof("ISO-10646-UCS-4")];
     char stringpool_str237[sizeof("ISO-CELTIC")];
     char stringpool_str238[sizeof("CSUNICODE")];
     char stringpool_str242[sizeof("ECMA-118")];
     char stringpool_str243[sizeof("ISO-IR-179")];
     char stringpool_str244[sizeof("MS-ANSI")];
-    char stringpool_str246[sizeof("PT154")];
     char stringpool_str247[sizeof("ARMSCII-8")];
     char stringpool_str250[sizeof("CSUCS4")];
     char stringpool_str251[sizeof("LATIN4")];
     char stringpool_str253[sizeof("ISO-IR-203")];
     char stringpool_str254[sizeof("CP874")];
-    char stringpool_str255[sizeof("TCVN")];
-    char stringpool_str256[sizeof("UTF-16")];
     char stringpool_str257[sizeof("UCS-4")];
     char stringpool_str259[sizeof("ISO_8859-3")];
     char stringpool_str260[sizeof("ISO_8859-13")];
-    char stringpool_str261[sizeof("UTF-8")];
-    char stringpool_str262[sizeof("GB_1988-80")];
-    char stringpool_str263[sizeof("GB18030")];
     char stringpool_str265[sizeof("ISO-2022-KR")];
     char stringpool_str267[sizeof("EUCKR")];
-    char stringpool_str271[sizeof("BIG5")];
-    char stringpool_str273[sizeof("CSIBM866")];
-    char stringpool_str274[sizeof("CSBIG5")];
-    char stringpool_str275[sizeof("HP-ROMAN8")];
+    char stringpool_str273[sizeof("JP")];
+    char stringpool_str274[sizeof("PCK")];
     char stringpool_str276[sizeof("KOI8-U")];
     char stringpool_str278[sizeof("EUC-KR")];
     char stringpool_str279[sizeof("CNS11643")];
-    char stringpool_str282[sizeof("BIG-5")];
+    char stringpool_str280[sizeof("UTF-32")];
     char stringpool_str283[sizeof("MACCROATIAN")];
-    char stringpool_str285[sizeof("CN-BIG5")];
-    char stringpool_str286[sizeof("TIS620.2533-1")];
+    char stringpool_str286[sizeof("VISCII")];
     char stringpool_str287[sizeof("L7")];
+    char stringpool_str289[sizeof("CSVISCII")];
     char stringpool_str290[sizeof("ISO646-US")];
-    char stringpool_str293[sizeof("MACINTOSH")];
+    char stringpool_str291[sizeof("HP-ROMAN8")];
+    char stringpool_str292[sizeof("TIS620.2529-1")];
+    char stringpool_str293[sizeof("GB_1988-80")];
+    char stringpool_str294[sizeof("GB18030")];
     char stringpool_str296[sizeof("MACROMAN")];
     char stringpool_str297[sizeof("CSISOLATIN1")];
     char stringpool_str299[sizeof("CSISOLATIN6")];
-    char stringpool_str300[sizeof("ARABIC")];
     char stringpool_str301[sizeof("CSISOLATIN5")];
     char stringpool_str302[sizeof("KOREAN")];
     char stringpool_str303[sizeof("CHINESE")];
     char stringpool_str305[sizeof("LATIN3")];
     char stringpool_str306[sizeof("CSISOLATINCYRILLIC")];
     char stringpool_str307[sizeof("CSISOLATIN2")];
-    char stringpool_str308[sizeof("VISCII")];
-    char stringpool_str310[sizeof("GBK")];
-    char stringpool_str311[sizeof("CSVISCII")];
     char stringpool_str313[sizeof("MS-EE")];
     char stringpool_str314[sizeof("CP1257")];
-    char stringpool_str315[sizeof("TIS620.2533-0")];
+    char stringpool_str315[sizeof("ISO_8859-5:1988")];
     char stringpool_str316[sizeof("KS_C_5601-1989")];
+    char stringpool_str317[sizeof("ISO_8859-8:1988")];
     char stringpool_str318[sizeof("KOI8-RU")];
     char stringpool_str320[sizeof("CSISO2022KR")];
     char stringpool_str322[sizeof("CYRILLIC")];
     char stringpool_str323[sizeof("CSUNICODE11UTF7")];
-    char stringpool_str324[sizeof("VISCII1.1-1")];
-    char stringpool_str327[sizeof("GB_2312-80")];
+    char stringpool_str325[sizeof("MACINTOSH")];
+    char stringpool_str327[sizeof("CSIBM866")];
     char stringpool_str328[sizeof("ECMA-114")];
+    char stringpool_str331[sizeof("ISO_8859-9:1989")];
     char stringpool_str336[sizeof("UNICODE-1-1-UTF-7")];
-    char stringpool_str338[sizeof("UTF-32")];
+    char stringpool_str338[sizeof("CSHPROMAN8")];
     char stringpool_str340[sizeof("ISO8859-7")];
+    char stringpool_str341[sizeof("GBK")];
     char stringpool_str344[sizeof("CSEUCKR")];
+    char stringpool_str348[sizeof("ISO-2022-JP-1")];
     char stringpool_str350[sizeof("ASMO-708")];
     char stringpool_str351[sizeof("ISO-8859-7")];
-    char stringpool_str352[sizeof("JP")];
-    char stringpool_str355[sizeof("GREEK8")];
-    char stringpool_str356[sizeof("CSMACINTOSH")];
-    char stringpool_str357[sizeof("JIS0208")];
-    char stringpool_str358[sizeof("TIS620.2533")];
-    char stringpool_str361[sizeof("CSGB2312")];
+    char stringpool_str353[sizeof("ISO-2022-JP-2")];
+    char stringpool_str354[sizeof("ARABIC")];
+    char stringpool_str356[sizeof("BIG5")];
+    char stringpool_str358[sizeof("GB_2312-80")];
+    char stringpool_str359[sizeof("CSBIG5")];
+    char stringpool_str360[sizeof("ISO_8859-4:1988")];
     char stringpool_str363[sizeof("CSISOLATINARABIC")];
-    char stringpool_str364[sizeof("PCK")];
+    char stringpool_str364[sizeof("DECHANYU")];
     char stringpool_str365[sizeof("STRK1048-2002")];
-    char stringpool_str367[sizeof("EUCTW")];
+    char stringpool_str367[sizeof("BIG-5")];
+    char stringpool_str368[sizeof("JIS0208")];
+    char stringpool_str370[sizeof("CN-BIG5")];
     char stringpool_str372[sizeof("ISO-IR-57")];
     char stringpool_str373[sizeof("ISO-IR-157")];
     char stringpool_str374[sizeof("ISO-IR-87")];
+    char stringpool_str375[sizeof("DEC-HANYU")];
     char stringpool_str376[sizeof("ISO-IR-127")];
     char stringpool_str377[sizeof("MACICELAND")];
-    char stringpool_str378[sizeof("EUC-TW")];
     char stringpool_str381[sizeof("CP367")];
+    char stringpool_str383[sizeof("IBM-CP1133")];
     char stringpool_str384[sizeof("UNICODELITTLE")];
-    char stringpool_str385[sizeof("GEORGIAN-ACADEMY")];
+    char stringpool_str386[sizeof("GREEK8")];
+    char stringpool_str387[sizeof("ISO_8859-3:1988")];
+    char stringpool_str388[sizeof("CSMACINTOSH")];
     char stringpool_str390[sizeof("CSKSC56011987")];
     char stringpool_str391[sizeof("CSISOLATIN4")];
-    char stringpool_str393[sizeof("ISO_8859-5:1988")];
-    char stringpool_str394[sizeof("PTCP154")];
-    char stringpool_str395[sizeof("ISO_8859-8:1988")];
-    char stringpool_str396[sizeof("WINDOWS-1251")];
-    char stringpool_str397[sizeof("WINDOWS-1256")];
-    char stringpool_str398[sizeof("WINDOWS-1255")];
-    char stringpool_str400[sizeof("WINDOWS-1258")];
-    char stringpool_str401[sizeof("WINDOWS-1252")];
-    char stringpool_str404[sizeof("ISO_646.IRV:1991")];
-    char stringpool_str405[sizeof("CSPTCP154")];
-    char stringpool_str409[sizeof("ISO_8859-9:1989")];
+    char stringpool_str394[sizeof("ISO646-JP")];
+    char stringpool_str398[sizeof("TCVN5712-1")];
+    char stringpool_str401[sizeof("ISO-2022-JP")];
+    char stringpool_str402[sizeof("TCVN-5712")];
+    char stringpool_str403[sizeof("EUCJP")];
+    char stringpool_str404[sizeof("DECKANJI")];
+    char stringpool_str405[sizeof("EUCTW")];
+    char stringpool_str407[sizeof("CSISO2022JP2")];
     char stringpool_str410[sizeof("MACROMANIA")];
     char stringpool_str411[sizeof("ISO_8859-7")];
-    char stringpool_str412[sizeof("CSHPROMAN8")];
-    char stringpool_str415[sizeof("CN-GB-ISOIR165")];
-    char stringpool_str416[sizeof("CSISO159JISX02121990")];
-    char stringpool_str417[sizeof("JIS_C6220-1969-RO")];
-    char stringpool_str418[sizeof("MACCYRILLIC")];
-    char stringpool_str419[sizeof("CSISO14JISC6220RO")];
-    char stringpool_str420[sizeof("TCVN5712-1")];
-    char stringpool_str421[sizeof("MS-CYRL")];
-    char stringpool_str424[sizeof("TCVN-5712")];
-    char stringpool_str425[sizeof("WINDOWS-1250")];
-    char stringpool_str427[sizeof("ISO-2022-JP-1")];
-    char stringpool_str430[sizeof("MACARABIC")];
-    char stringpool_str432[sizeof("ISO-2022-JP-2")];
-    char stringpool_str436[sizeof("HZ-GB-2312")];
-    char stringpool_str438[sizeof("ISO_8859-4:1988")];
+    char stringpool_str414[sizeof("EUC-JP")];
+    char stringpool_str415[sizeof("DEC-KANJI")];
+    char stringpool_str416[sizeof("EUC-TW")];
+    char stringpool_str423[sizeof("ISO-2022-JP-MS")];
+    char stringpool_str424[sizeof("TIS620.2533-1")];
+    char stringpool_str427[sizeof("CSISO159JISX02121990")];
+    char stringpool_str428[sizeof("JIS_C6220-1969-RO")];
+    char stringpool_str430[sizeof("CSISO14JISC6220RO")];
+    char stringpool_str434[sizeof("WINDOWS-1251")];
+    char stringpool_str435[sizeof("WINDOWS-1256")];
+    char stringpool_str436[sizeof("WINDOWS-1255")];
+    char stringpool_str438[sizeof("WINDOWS-1258")];
+    char stringpool_str439[sizeof("WINDOWS-1252")];
+    char stringpool_str440[sizeof("VISCII1.1-1")];
     char stringpool_str441[sizeof("MS-TURK")];
-    char stringpool_str443[sizeof("WINDOWS-1254")];
-    char stringpool_str444[sizeof("CSEUCTW")];
     char stringpool_str445[sizeof("CSISOLATIN3")];
+    char stringpool_str446[sizeof("CSGB2312")];
     char stringpool_str447[sizeof("UCS-2LE")];
+    char stringpool_str448[sizeof("CSPC862LATINHEBREW")];
     char stringpool_str450[sizeof("UCS-2-INTERNAL")];
-    char stringpool_str451[sizeof("CN-GB")];
-    char stringpool_str454[sizeof("GREEK")];
+    char stringpool_str453[sizeof("TIS620.2533-0")];
     char stringpool_str455[sizeof("KS_C_5601-1987")];
+    char stringpool_str456[sizeof("CSISO2022JP")];
     char stringpool_str457[sizeof("LATIN7")];
-    char stringpool_str460[sizeof("JIS_C6226-1983")];
-    char stringpool_str465[sizeof("ISO_8859-3:1988")];
+    char stringpool_str459[sizeof("ISO_8859-1:1987")];
+    char stringpool_str460[sizeof("ISO_8859-6:1987")];
+    char stringpool_str461[sizeof("NEXTSTEP")];
+    char stringpool_str463[sizeof("WINDOWS-1250")];
+    char stringpool_str464[sizeof("ISO_8859-2:1987")];
     char stringpool_str466[sizeof("IBM367")];
-    char stringpool_str467[sizeof("CSISO58GB231280")];
-    char stringpool_str470[sizeof("WINDOWS-1253")];
-    char stringpool_str473[sizeof("IBM-CP1133")];
-    char stringpool_str475[sizeof("WINDOWS-936")];
+    char stringpool_str471[sizeof("JIS_C6226-1983")];
+    char stringpool_str476[sizeof("UTF-16LE")];
+    char stringpool_str477[sizeof("MACCYRILLIC")];
     char stringpool_str479[sizeof("CYRILLIC-ASIAN")];
-    char stringpool_str481[sizeof("MS-HEBR")];
-    char stringpool_str484[sizeof("UCS-2BE")];
-    char stringpool_str486[sizeof("CSISO2022JP2")];
+    char stringpool_str480[sizeof("MS-CYRL")];
+    char stringpool_str481[sizeof("WINDOWS-1254")];
+    char stringpool_str482[sizeof("CSEUCTW")];
+    char stringpool_str484[sizeof("MACARABIC")];
+    char stringpool_str485[sizeof("GREEK")];
     char stringpool_str489[sizeof("UCS-4LE")];
     char stringpool_str492[sizeof("UCS-4-INTERNAL")];
-    char stringpool_str497[sizeof("CSISOLATINHEBREW")];
-    char stringpool_str500[sizeof("CSISOLATINGREEK")];
-    char stringpool_str502[sizeof("ISO-2022-JP-MS")];
+    char stringpool_str495[sizeof("UTF-7")];
+    char stringpool_str496[sizeof("TIS620.2533")];
+    char stringpool_str500[sizeof("CN-GB-ISOIR165")];
     char stringpool_str503[sizeof("EXTENDED_UNIX_CODE_PACKED_FORMAT_FOR_JAPANESE")];
     char stringpool_str505[sizeof("MULELAO-1")];
-    char stringpool_str509[sizeof("MACTURKISH")];
-    char stringpool_str513[sizeof("UNICODEBIG")];
-    char stringpool_str518[sizeof("CSISO57GB1988")];
-    char stringpool_str519[sizeof("CSPC862LATINHEBREW")];
-    char stringpool_str525[sizeof("ANSI_X3.4-1986")];
-    char stringpool_str526[sizeof("UCS-4BE")];
-    char stringpool_str528[sizeof("ANSI_X3.4-1968")];
+    char stringpool_str506[sizeof("GEORGIAN-ACADEMY")];
+    char stringpool_str507[sizeof("GB18030:2022")];
+    char stringpool_str508[sizeof("WINDOWS-1253")];
+    char stringpool_str513[sizeof("WINDOWS-936")];
+    char stringpool_str520[sizeof("ISO_646.IRV:1991")];
+    char stringpool_str528[sizeof("GB18030:2005")];
     char stringpool_str529[sizeof("MACUKRAINE")];
-    char stringpool_str534[sizeof("UTF-16LE")];
-    char stringpool_str537[sizeof("ISO_8859-1:1987")];
-    char stringpool_str538[sizeof("ISO_8859-6:1987")];
-    char stringpool_str542[sizeof("ISO_8859-2:1987")];
-    char stringpool_str544[sizeof("MS_KANJI")];
-    char stringpool_str546[sizeof("WINDOWS-1257")];
-    char stringpool_str551[sizeof("JISX0201-1976")];
-    char stringpool_str553[sizeof("UTF-7")];
-    char stringpool_str554[sizeof("GB18030:2022")];
-    char stringpool_str556[sizeof("JAVA")];
-    char stringpool_str563[sizeof("ISO646-JP")];
+    char stringpool_str531[sizeof("CSISOLATINGREEK")];
+    char stringpool_str532[sizeof("CSISOLATINHEBREW")];
+    char stringpool_str533[sizeof("ISO_8859-7:2003")];
+    char stringpool_str537[sizeof("HZ-GB-2312")];
+    char stringpool_str538[sizeof("UCS-2BE")];
+    char stringpool_str541[sizeof("MACTURKISH")];
+    char stringpool_str545[sizeof("JAVA")];
+    char stringpool_str548[sizeof("CSPC850MULTILINGUAL")];
+    char stringpool_str551[sizeof("MS-HEBR")];
+    char stringpool_str552[sizeof("CSISO58GB231280")];
+    char stringpool_str554[sizeof("UTF-32LE")];
+    char stringpool_str555[sizeof("MS_KANJI")];
+    char stringpool_str562[sizeof("JISX0201-1976")];
+    char stringpool_str567[sizeof("UTF-16BE")];
     char stringpool_str568[sizeof("MACCENTRALEUROPE")];
-    char stringpool_str570[sizeof("ISO-2022-JP")];
-    char stringpool_str571[sizeof("UTF-16BE")];
-    char stringpool_str572[sizeof("EUCJP")];
-    char stringpool_str575[sizeof("GB18030:2005")];
-    char stringpool_str576[sizeof("JIS_X0212")];
-    char stringpool_str583[sizeof("EUC-JP")];
-    char stringpool_str584[sizeof("MACGREEK")];
-    char stringpool_str593[sizeof("MS-GREEK")];
-    char stringpool_str595[sizeof("JIS_X0201")];
-    char stringpool_str603[sizeof("JIS_X0208")];
-    char stringpool_str605[sizeof("GEORGIAN-PS")];
-    char stringpool_str607[sizeof("MS-ARAB")];
-    char stringpool_str608[sizeof("JIS_X0212.1990-0")];
-    char stringpool_str611[sizeof("ISO_8859-7:2003")];
-    char stringpool_str612[sizeof("UTF-32LE")];
-    char stringpool_str615[sizeof("JIS_X0212-1990")];
-    char stringpool_str618[sizeof("SHIFT-JIS")];
-    char stringpool_str625[sizeof("CSISO2022JP")];
-    char stringpool_str626[sizeof("HEBREW")];
-    char stringpool_str636[sizeof("WINDOWS-874")];
-    char stringpool_str638[sizeof("CSPC850MULTILINGUAL")];
-    char stringpool_str641[sizeof("NEXTSTEP")];
-    char stringpool_str643[sizeof("JIS_X0208-1990")];
-    char stringpool_str649[sizeof("UTF-32BE")];
-    char stringpool_str659[sizeof("BIG5HKSCS")];
-    char stringpool_str664[sizeof("CSSHIFTJIS")];
-    char stringpool_str668[sizeof("JOHAB")];
-    char stringpool_str670[sizeof("BIG5-HKSCS")];
-    char stringpool_str678[sizeof("SHIFT_JIS")];
-    char stringpool_str687[sizeof("ISO_8859-7:1987")];
-    char stringpool_str688[sizeof("JIS_X0208-1983")];
-    char stringpool_str699[sizeof("CSHALFWIDTHKATAKANA")];
-    char stringpool_str701[sizeof("CSISO87JISX0208")];
-    char stringpool_str745[sizeof("WINBALTRIM")];
-    char stringpool_str750[sizeof("CSEUCPKDFMTJAPANESE")];
-    char stringpool_str754[sizeof("UCS-2-SWAPPED")];
-    char stringpool_str770[sizeof("TCVN5712-1:1993")];
-    char stringpool_str786[sizeof("MACHEBREW")];
-    char stringpool_str796[sizeof("UCS-4-SWAPPED")];
-    char stringpool_str803[sizeof("BIGFIVE")];
-    char stringpool_str810[sizeof("KO_KR.JOHAP92")];
-    char stringpool_str814[sizeof("BIG-FIVE")];
-    char stringpool_str872[sizeof("BIG5-HKSCS:2001")];
-    char stringpool_str876[sizeof("BIG5-HKSCS:2008")];
-    char stringpool_str883[sizeof("BIG5-HKSCS:1999")];
-    char stringpool_str919[sizeof("BIG5-HKSCS:2004")];
+    char stringpool_str571[sizeof("SHIFT-JIS")];
+    char stringpool_str577[sizeof("GEORGIAN-PS")];
+    char stringpool_str580[sizeof("UCS-4BE")];
+    char stringpool_str584[sizeof("WINDOWS-1257")];
+    char stringpool_str587[sizeof("JIS_X0212")];
+    char stringpool_str590[sizeof("CN-GB")];
+    char stringpool_str593[sizeof("UCS-2-SWAPPED")];
+    char stringpool_str602[sizeof("CSEUCPKDFMTJAPANESE")];
+    char stringpool_str603[sizeof("CSISO57GB1988")];
+    char stringpool_str606[sizeof("JIS_X0201")];
+    char stringpool_str609[sizeof("ISO_8859-7:1987")];
+    char stringpool_str614[sizeof("JIS_X0208")];
+    char stringpool_str615[sizeof("MACGREEK")];
+    char stringpool_str624[sizeof("MS-GREEK")];
+    char stringpool_str626[sizeof("JIS_X0212-1990")];
+    char stringpool_str629[sizeof("UNICODEBIG")];
+    char stringpool_str631[sizeof("SHIFT_JIS")];
+    char stringpool_str633[sizeof("CSSHIFTJIS")];
+    char stringpool_str635[sizeof("UCS-4-SWAPPED")];
+    char stringpool_str645[sizeof("UTF-32BE")];
+    char stringpool_str654[sizeof("JIS_X0208-1990")];
+    char stringpool_str663[sizeof("ANSI_X3.4-1986")];
+    char stringpool_str666[sizeof("ANSI_X3.4-1968")];
+    char stringpool_str670[sizeof("TCVN5712-1:1993")];
+    char stringpool_str674[sizeof("WINDOWS-874")];
+    char stringpool_str692[sizeof("CSHALFWIDTHKATAKANA")];
+    char stringpool_str699[sizeof("JIS_X0208-1983")];
+    char stringpool_str712[sizeof("CSISO87JISX0208")];
+    char stringpool_str715[sizeof("MS-ARAB")];
+    char stringpool_str734[sizeof("HEBREW")];
+    char stringpool_str757[sizeof("JIS_X0212.1990-0")];
+    char stringpool_str760[sizeof("BIG5HKSCS")];
+    char stringpool_str771[sizeof("BIG5-HKSCS")];
+    char stringpool_str803[sizeof("JOHAB")];
+    char stringpool_str808[sizeof("BIGFIVE")];
+    char stringpool_str818[sizeof("WINBALTRIM")];
+    char stringpool_str819[sizeof("BIG-FIVE")];
+    char stringpool_str885[sizeof("KO_KR.JOHAP92")];
+    char stringpool_str894[sizeof("MACHEBREW")];
+    char stringpool_str895[sizeof("BIG5-HKSCS:2001")];
+    char stringpool_str899[sizeof("BIG5-HKSCS:2008")];
+    char stringpool_str906[sizeof("BIG5-HKSCS:1999")];
+    char stringpool_str942[sizeof("BIG5-HKSCS:2004")];
   };
 static const struct stringpool_t stringpool_contents =
   {
@@ -496,7 +500,6 @@ static const struct stringpool_t stringpool_contents =
     "ISO-8859-16",
     "ISO-8859-5",
     "ISO-8859-15",
-    "HZ",
     "ISO-8859-8",
     "ISO-8859-2",
     "ISO8859-9",
@@ -507,6 +510,7 @@ static const struct stringpool_t stringpool_contents =
     "CP1250",
     "ISO-8859-9",
     "ISO-IR-166",
+    "HZ",
     "ISO-IR-165",
     "CP950",
     "ISO-IR-126",
@@ -566,8 +570,8 @@ static const struct stringpool_t stringpool_contents =
     "ISO_8859-10:1992",
     "TIS620",
     "ISO-IR-138",
-    "TIS620.2529-1",
     "IBM850",
+    "PT154",
     "LATIN1",
     "ISO-IR-100",
     "LATIN6",
@@ -586,7 +590,6 @@ static const struct stringpool_t stringpool_contents =
     "UNICODE-1-1",
     "ELOT_928",
     "L4",
-    "GB2312",
     "ISO8859-3",
     "ISO8859-13",
     "LATIN-9",
@@ -594,9 +597,11 @@ static const struct stringpool_t stringpool_contents =
     "TIS620-0",
     "X0212",
     "L10",
+    "UTF-16",
     "ISO-8859-3",
     "ISO-8859-13",
     "CSKOI8R",
+    "UTF-8",
     "CSKZ1048",
     "ISO_8859-4",
     "ISO_8859-14",
@@ -606,218 +611,221 @@ static const struct stringpool_t stringpool_contents =
     "L3",
     "ISO-IR-144",
     "X0201",
-    "MACTHAI",
+    "PTCP154",
     "LATIN10",
+    "GB2312",
     "KSC_5601",
     "X0208",
+    "CSPTCP154",
     "SJIS",
     "US-ASCII",
     "CP1133",
+    "MACTHAI",
+    "TCVN",
     "ISO-10646-UCS-4",
     "ISO-CELTIC",
     "CSUNICODE",
     "ECMA-118",
     "ISO-IR-179",
     "MS-ANSI",
-    "PT154",
     "ARMSCII-8",
     "CSUCS4",
     "LATIN4",
     "ISO-IR-203",
     "CP874",
-    "TCVN",
-    "UTF-16",
     "UCS-4",
     "ISO_8859-3",
     "ISO_8859-13",
-    "UTF-8",
-    "GB_1988-80",
-    "GB18030",
     "ISO-2022-KR",
     "EUCKR",
-    "BIG5",
-    "CSIBM866",
-    "CSBIG5",
-    "HP-ROMAN8",
+    "JP",
+    "PCK",
     "KOI8-U",
     "EUC-KR",
     "CNS11643",
-    "BIG-5",
+    "UTF-32",
     "MACCROATIAN",
-    "CN-BIG5",
-    "TIS620.2533-1",
+    "VISCII",
     "L7",
+    "CSVISCII",
     "ISO646-US",
-    "MACINTOSH",
+    "HP-ROMAN8",
+    "TIS620.2529-1",
+    "GB_1988-80",
+    "GB18030",
     "MACROMAN",
     "CSISOLATIN1",
     "CSISOLATIN6",
-    "ARABIC",
     "CSISOLATIN5",
     "KOREAN",
     "CHINESE",
     "LATIN3",
     "CSISOLATINCYRILLIC",
     "CSISOLATIN2",
-    "VISCII",
-    "GBK",
-    "CSVISCII",
     "MS-EE",
     "CP1257",
-    "TIS620.2533-0",
+    "ISO_8859-5:1988",
     "KS_C_5601-1989",
+    "ISO_8859-8:1988",
     "KOI8-RU",
     "CSISO2022KR",
     "CYRILLIC",
     "CSUNICODE11UTF7",
-    "VISCII1.1-1",
-    "GB_2312-80",
+    "MACINTOSH",
+    "CSIBM866",
     "ECMA-114",
+    "ISO_8859-9:1989",
     "UNICODE-1-1-UTF-7",
-    "UTF-32",
+    "CSHPROMAN8",
     "ISO8859-7",
+    "GBK",
     "CSEUCKR",
+    "ISO-2022-JP-1",
     "ASMO-708",
     "ISO-8859-7",
-    "JP",
-    "GREEK8",
-    "CSMACINTOSH",
-    "JIS0208",
-    "TIS620.2533",
-    "CSGB2312",
+    "ISO-2022-JP-2",
+    "ARABIC",
+    "BIG5",
+    "GB_2312-80",
+    "CSBIG5",
+    "ISO_8859-4:1988",
     "CSISOLATINARABIC",
-    "PCK",
+    "DECHANYU",
     "STRK1048-2002",
-    "EUCTW",
+    "BIG-5",
+    "JIS0208",
+    "CN-BIG5",
     "ISO-IR-57",
     "ISO-IR-157",
     "ISO-IR-87",
+    "DEC-HANYU",
     "ISO-IR-127",
     "MACICELAND",
-    "EUC-TW",
     "CP367",
+    "IBM-CP1133",
     "UNICODELITTLE",
-    "GEORGIAN-ACADEMY",
+    "GREEK8",
+    "ISO_8859-3:1988",
+    "CSMACINTOSH",
     "CSKSC56011987",
     "CSISOLATIN4",
-    "ISO_8859-5:1988",
-    "PTCP154",
-    "ISO_8859-8:1988",
+    "ISO646-JP",
+    "TCVN5712-1",
+    "ISO-2022-JP",
+    "TCVN-5712",
+    "EUCJP",
+    "DECKANJI",
+    "EUCTW",
+    "CSISO2022JP2",
+    "MACROMANIA",
+    "ISO_8859-7",
+    "EUC-JP",
+    "DEC-KANJI",
+    "EUC-TW",
+    "ISO-2022-JP-MS",
+    "TIS620.2533-1",
+    "CSISO159JISX02121990",
+    "JIS_C6220-1969-RO",
+    "CSISO14JISC6220RO",
     "WINDOWS-1251",
     "WINDOWS-1256",
     "WINDOWS-1255",
     "WINDOWS-1258",
     "WINDOWS-1252",
-    "ISO_646.IRV:1991",
-    "CSPTCP154",
-    "ISO_8859-9:1989",
-    "MACROMANIA",
-    "ISO_8859-7",
-    "CSHPROMAN8",
-    "CN-GB-ISOIR165",
-    "CSISO159JISX02121990",
-    "JIS_C6220-1969-RO",
-    "MACCYRILLIC",
-    "CSISO14JISC6220RO",
-    "TCVN5712-1",
-    "MS-CYRL",
-    "TCVN-5712",
-    "WINDOWS-1250",
-    "ISO-2022-JP-1",
-    "MACARABIC",
-    "ISO-2022-JP-2",
-    "HZ-GB-2312",
-    "ISO_8859-4:1988",
+    "VISCII1.1-1",
     "MS-TURK",
-    "WINDOWS-1254",
-    "CSEUCTW",
     "CSISOLATIN3",
+    "CSGB2312",
     "UCS-2LE",
-    "UCS-2-INTERNAL",
-    "CN-GB",
-    "GREEK",
-    "KS_C_5601-1987",
-    "LATIN7",
-    "JIS_C6226-1983",
-    "ISO_8859-3:1988",
-    "IBM367",
-    "CSISO58GB231280",
-    "WINDOWS-1253",
-    "IBM-CP1133",
-    "WINDOWS-936",
-    "CYRILLIC-ASIAN",
-    "MS-HEBR",
-    "UCS-2BE",
-    "CSISO2022JP2",
-    "UCS-4LE",
-    "UCS-4-INTERNAL",
-    "CSISOLATINHEBREW",
-    "CSISOLATINGREEK",
-    "ISO-2022-JP-MS",
-    "EXTENDED_UNIX_CODE_PACKED_FORMAT_FOR_JAPANESE",
-    "MULELAO-1",
-    "MACTURKISH",
-    "UNICODEBIG",
-    "CSISO57GB1988",
     "CSPC862LATINHEBREW",
-    "ANSI_X3.4-1986",
-    "UCS-4BE",
-    "ANSI_X3.4-1968",
-    "MACUKRAINE",
-    "UTF-16LE",
+    "UCS-2-INTERNAL",
+    "TIS620.2533-0",
+    "KS_C_5601-1987",
+    "CSISO2022JP",
+    "LATIN7",
     "ISO_8859-1:1987",
     "ISO_8859-6:1987",
+    "NEXTSTEP",
+    "WINDOWS-1250",
     "ISO_8859-2:1987",
-    "MS_KANJI",
-    "WINDOWS-1257",
-    "JISX0201-1976",
+    "IBM367",
+    "JIS_C6226-1983",
+    "UTF-16LE",
+    "MACCYRILLIC",
+    "CYRILLIC-ASIAN",
+    "MS-CYRL",
+    "WINDOWS-1254",
+    "CSEUCTW",
+    "MACARABIC",
+    "GREEK",
+    "UCS-4LE",
+    "UCS-4-INTERNAL",
     "UTF-7",
+    "TIS620.2533",
+    "CN-GB-ISOIR165",
+    "EXTENDED_UNIX_CODE_PACKED_FORMAT_FOR_JAPANESE",
+    "MULELAO-1",
+    "GEORGIAN-ACADEMY",
     "GB18030:2022",
-    "JAVA",
-    "ISO646-JP",
-    "MACCENTRALEUROPE",
-    "ISO-2022-JP",
-    "UTF-16BE",
-    "EUCJP",
+    "WINDOWS-1253",
+    "WINDOWS-936",
+    "ISO_646.IRV:1991",
     "GB18030:2005",
+    "MACUKRAINE",
+    "CSISOLATINGREEK",
+    "CSISOLATINHEBREW",
+    "ISO_8859-7:2003",
+    "HZ-GB-2312",
+    "UCS-2BE",
+    "MACTURKISH",
+    "JAVA",
+    "CSPC850MULTILINGUAL",
+    "MS-HEBR",
+    "CSISO58GB231280",
+    "UTF-32LE",
+    "MS_KANJI",
+    "JISX0201-1976",
+    "UTF-16BE",
+    "MACCENTRALEUROPE",
+    "SHIFT-JIS",
+    "GEORGIAN-PS",
+    "UCS-4BE",
+    "WINDOWS-1257",
     "JIS_X0212",
-    "EUC-JP",
+    "CN-GB",
+    "UCS-2-SWAPPED",
+    "CSEUCPKDFMTJAPANESE",
+    "CSISO57GB1988",
+    "JIS_X0201",
+    "ISO_8859-7:1987",
+    "JIS_X0208",
     "MACGREEK",
     "MS-GREEK",
-    "JIS_X0201",
-    "JIS_X0208",
-    "GEORGIAN-PS",
-    "MS-ARAB",
-    "JIS_X0212.1990-0",
-    "ISO_8859-7:2003",
-    "UTF-32LE",
     "JIS_X0212-1990",
-    "SHIFT-JIS",
-    "CSISO2022JP",
-    "HEBREW",
-    "WINDOWS-874",
-    "CSPC850MULTILINGUAL",
-    "NEXTSTEP",
-    "JIS_X0208-1990",
-    "UTF-32BE",
-    "BIG5HKSCS",
-    "CSSHIFTJIS",
-    "JOHAB",
-    "BIG5-HKSCS",
+    "UNICODEBIG",
     "SHIFT_JIS",
-    "ISO_8859-7:1987",
-    "JIS_X0208-1983",
-    "CSHALFWIDTHKATAKANA",
-    "CSISO87JISX0208",
-    "WINBALTRIM",
-    "CSEUCPKDFMTJAPANESE",
-    "UCS-2-SWAPPED",
-    "TCVN5712-1:1993",
-    "MACHEBREW",
+    "CSSHIFTJIS",
     "UCS-4-SWAPPED",
+    "UTF-32BE",
+    "JIS_X0208-1990",
+    "ANSI_X3.4-1986",
+    "ANSI_X3.4-1968",
+    "TCVN5712-1:1993",
+    "WINDOWS-874",
+    "CSHALFWIDTHKATAKANA",
+    "JIS_X0208-1983",
+    "CSISO87JISX0208",
+    "MS-ARAB",
+    "HEBREW",
+    "JIS_X0212.1990-0",
+    "BIG5HKSCS",
+    "BIG5-HKSCS",
+    "JOHAB",
     "BIGFIVE",
-    "KO_KR.JOHAP92",
+    "WINBALTRIM",
     "BIG-FIVE",
+    "KO_KR.JOHAP92",
+    "MACHEBREW",
     "BIG5-HKSCS:2001",
     "BIG5-HKSCS:2008",
     "BIG5-HKSCS:1999",
@@ -899,9 +907,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str55, ei_iso8859_5},
 #line 155 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str56, ei_iso8859_15},
-    {-1},
-#line 338 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str58, ei_hz},
+    {-1}, {-1},
 #line 115 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str59, ei_iso8859_8},
     {-1},
@@ -925,7 +931,8 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str73, ei_iso8859_9},
 #line 254 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str74, ei_tis620},
-    {-1},
+#line 338 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str75, ei_hz},
 #line 296 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str76, ei_isoir165},
 #line 350 "lib/generated/aliases_syssolaris.gperf"
@@ -1058,11 +1065,11 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str152, ei_tis620},
 #line 118 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str153, ei_iso8859_8},
-#line 251 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str154, ei_tis620},
+    {-1},
 #line 200 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str155, ei_cp850},
-    {-1},
+#line 236 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str156, ei_pt154},
 #line 60 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str157, ei_iso8859_1},
 #line 57 "lib/generated/aliases_syssolaris.gperf"
@@ -1104,10 +1111,7 @@ static const struct alias aliases[] =
     {-1}, {-1},
 #line 85 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str184, ei_iso8859_4},
-    {-1},
-#line 324 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str186, ei_euc_cn},
-    {-1},
+    {-1}, {-1}, {-1},
 #line 79 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str188, ei_iso8859_3},
 #line 146 "lib/generated/aliases_syssolaris.gperf"
@@ -1124,7 +1128,9 @@ static const struct alias aliases[] =
     {-1},
 #line 166 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str196, ei_iso8859_16},
-    {-1}, {-1},
+    {-1},
+#line 39 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str198, ei_utf16},
 #line 72 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str199, ei_iso8859_3},
 #line 141 "lib/generated/aliases_syssolaris.gperf"
@@ -1132,9 +1138,10 @@ static const struct alias aliases[] =
     {-1},
 #line 169 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str202, ei_koi8_r},
+#line 24 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str203, ei_utf8},
 #line 244 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str203, ei_rk1048},
-    {-1},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str204, ei_rk1048},
 #line 81 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str205, ei_iso8859_4},
 #line 148 "lib/generated/aliases_syssolaris.gperf"
@@ -1152,18 +1159,22 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str212, ei_iso8859_5},
 #line 272 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str213, ei_jisx0201},
+#line 237 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str214, ei_pt154},
     {-1},
-#line 226 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str215, ei_mac_thai},
 #line 165 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str216, ei_iso8859_16},
-    {-1}, {-1},
+#line 324 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str217, ei_euc_cn},
+    {-1},
 #line 298 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str219, ei_ksc5601},
     {-1},
 #line 278 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str221, ei_jisx0208},
-    {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1},
+#line 240 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str225, ei_pt154},
 #line 310 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str226, ei_sjis},
 #line 12 "lib/generated/aliases_syssolaris.gperf"
@@ -1171,7 +1182,12 @@ static const struct alias aliases[] =
     {-1},
 #line 246 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str229, ei_cp1133},
-    {-1}, {-1}, {-1}, {-1},
+    {-1},
+#line 226 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str231, ei_mac_thai},
+    {-1},
+#line 261 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str233, ei_tcvn},
 #line 35 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str234, ei_ucs4},
     {-1}, {-1},
@@ -1186,9 +1202,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str243, ei_iso8859_13},
 #line 181 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str244, ei_cp1252},
-    {-1},
-#line 236 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str246, ei_pt154},
+    {-1}, {-1},
 #line 232 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str247, ei_armscii_8},
     {-1}, {-1},
@@ -1201,10 +1215,7 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str253, ei_iso8859_15},
 #line 256 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str254, ei_cp874},
-#line 261 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str255, ei_tcvn},
-#line 39 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str256, ei_utf16},
+    {-1}, {-1},
 #line 34 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str257, ei_ucs4},
     {-1},
@@ -1212,28 +1223,18 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str259, ei_iso8859_3},
 #line 142 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str260, ei_iso8859_13},
-#line 24 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str261, ei_utf8},
-#line 288 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str262, ei_iso646_cn},
-#line 332 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str263, ei_gb18030_2005},
-    {-1},
+    {-1}, {-1}, {-1}, {-1},
 #line 366 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str265, ei_iso2022_kr},
     {-1},
 #line 358 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str267, ei_euc_kr},
-    {-1}, {-1}, {-1},
-#line 344 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str271, ei_ces_big5},
+    {-1}, {-1}, {-1}, {-1}, {-1},
+#line 268 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str273, ei_iso646_jp},
+#line 313 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str274, ei_sjis},
     {-1},
-#line 210 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str273, ei_cp866},
-#line 349 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str274, ei_ces_big5},
-#line 227 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str275, ei_hp_roman8},
 #line 170 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str276, ei_koi8_u},
     {-1},
@@ -1241,25 +1242,30 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str278, ei_euc_kr},
 #line 343 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str279, ei_euc_tw},
+#line 42 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str280, ei_utf32},
     {-1}, {-1},
-#line 345 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str282, ei_ces_big5},
 #line 218 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str283, ei_mac_croatian},
-    {-1},
-#line 348 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str285, ei_ces_big5},
-#line 253 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str286, ei_tis620},
+    {-1}, {-1},
+#line 258 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str286, ei_viscii},
 #line 145 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str287, ei_iso8859_13},
-    {-1}, {-1},
+    {-1},
+#line 260 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str289, ei_viscii},
 #line 14 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str290, ei_ascii},
-    {-1}, {-1},
-#line 213 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str293, ei_mac_roman},
-    {-1}, {-1},
+#line 227 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str291, ei_hp_roman8},
+#line 251 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str292, ei_tis620},
+#line 288 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str293, ei_iso646_cn},
+#line 332 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str294, ei_gb18030_2005},
+    {-1},
 #line 212 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str296, ei_mac_roman},
 #line 62 "lib/generated/aliases_syssolaris.gperf"
@@ -1267,8 +1273,7 @@ static const struct alias aliases[] =
     {-1},
 #line 136 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str299, ei_iso8859_10},
-#line 101 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str300, ei_iso8859_6},
+    {-1},
 #line 128 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str301, ei_iso8859_9},
 #line 303 "lib/generated/aliases_syssolaris.gperf"
@@ -1282,23 +1287,17 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str306, ei_iso8859_5},
 #line 70 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str307, ei_iso8859_2},
-#line 258 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str308, ei_viscii},
-    {-1},
-#line 328 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str310, ei_ces_gbk},
-#line 260 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str311, ei_viscii},
-    {-1},
+    {-1}, {-1}, {-1}, {-1}, {-1},
 #line 174 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str313, ei_cp1250},
 #line 194 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str314, ei_cp1257},
-#line 252 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str315, ei_tis620},
+#line 90 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str315, ei_iso8859_5},
 #line 300 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str316, ei_ksc5601},
-    {-1},
+#line 117 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str317, ei_iso8859_8},
 #line 171 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str318, ei_koi8_ru},
     {-1},
@@ -1309,426 +1308,442 @@ static const struct alias aliases[] =
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str322, ei_iso8859_5},
 #line 47 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str323, ei_utf7},
-#line 259 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str324, ei_viscii},
-    {-1}, {-1},
-#line 293 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str327, ei_gb2312},
+    {-1},
+#line 213 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str325, ei_mac_roman},
+    {-1},
+#line 210 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str327, ei_cp866},
 #line 99 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str328, ei_iso8859_6},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1},
+#line 124 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str331, ei_iso8859_9},
+    {-1}, {-1}, {-1}, {-1},
 #line 46 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str336, ei_utf7},
     {-1},
-#line 42 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str338, ei_utf32},
+#line 230 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str338, ei_hp_roman8},
     {-1},
 #line 114 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str340, ei_iso8859_7},
-    {-1}, {-1}, {-1},
+#line 328 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str341, ei_ces_gbk},
+    {-1}, {-1},
 #line 359 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str344, ei_euc_kr},
-    {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1},
+#line 317 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str348, ei_iso2022_jp1},
+    {-1},
 #line 100 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str350, ei_iso8859_6},
 #line 104 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str351, ei_iso8859_7},
-#line 268 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str352, ei_iso646_jp},
-    {-1}, {-1},
-#line 111 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str355, ei_iso8859_7},
-#line 215 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str356, ei_mac_roman},
-#line 277 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str357, ei_jisx0208},
-#line 255 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str358, ei_tis620},
-    {-1}, {-1},
-#line 326 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str361, ei_euc_cn},
     {-1},
+#line 318 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str353, ei_iso2022_jp2},
+#line 101 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str354, ei_iso8859_6},
+    {-1},
+#line 344 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str356, ei_ces_big5},
+    {-1},
+#line 293 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str358, ei_gb2312},
+#line 349 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str359, ei_ces_big5},
+#line 82 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str360, ei_iso8859_4},
+    {-1}, {-1},
 #line 102 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str363, ei_iso8859_6},
-#line 313 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str364, ei_sjis},
+#line 371 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str364, ei_dec_hanyu},
 #line 242 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str365, ei_rk1048},
     {-1},
-#line 341 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str367, ei_euc_tw},
-    {-1}, {-1}, {-1}, {-1},
+#line 345 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str367, ei_ces_big5},
+#line 277 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str368, ei_jisx0208},
+    {-1},
+#line 348 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str370, ei_ces_big5},
+    {-1},
 #line 290 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str372, ei_iso646_cn},
 #line 133 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str373, ei_iso8859_10},
 #line 279 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str374, ei_jisx0208},
-    {-1},
+#line 370 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str375, ei_dec_hanyu},
 #line 98 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str376, ei_iso8859_6},
 #line 217 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str377, ei_mac_iceland},
-#line 340 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str378, ei_euc_tw},
-    {-1}, {-1},
+    {-1}, {-1}, {-1},
 #line 19 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str381, ei_ascii},
-    {-1}, {-1},
+    {-1},
+#line 247 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str383, ei_cp1133},
 #line 33 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str384, ei_ucs2le},
-#line 233 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str385, ei_georgian_academy},
-    {-1}, {-1}, {-1}, {-1},
+    {-1},
+#line 111 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str386, ei_iso8859_7},
+#line 74 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str387, ei_iso8859_3},
+#line 215 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str388, ei_mac_roman},
+    {-1},
 #line 302 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str390, ei_ksc5601},
 #line 86 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str391, ei_iso8859_4},
-    {-1},
-#line 90 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str393, ei_iso8859_5},
-#line 237 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str394, ei_pt154},
-#line 117 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str395, ei_iso8859_8},
-#line 176 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str396, ei_cp1251},
-#line 192 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str397, ei_cp1256},
-#line 189 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str398, ei_cp1255},
-    {-1},
-#line 198 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str400, ei_cp1258},
-#line 180 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str401, ei_cp1252},
     {-1}, {-1},
-#line 15 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str404, ei_ascii},
-#line 240 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str405, ei_pt154},
+#line 266 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str394, ei_iso646_jp},
     {-1}, {-1}, {-1},
-#line 124 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str409, ei_iso8859_9},
+#line 263 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str398, ei_tcvn},
+    {-1}, {-1},
+#line 315 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str401, ei_iso2022_jp},
+#line 262 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str402, ei_tcvn},
+#line 305 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str403, ei_euc_jp},
+#line 369 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str404, ei_dec_kanji},
+#line 341 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str405, ei_euc_tw},
+    {-1},
+#line 319 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str407, ei_iso2022_jp2},
+    {-1}, {-1},
 #line 219 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str410, ei_mac_romania},
 #line 105 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str411, ei_iso8859_7},
-#line 230 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str412, ei_hp_roman8},
     {-1}, {-1},
-#line 297 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str415, ei_isoir165},
+#line 304 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str414, ei_euc_jp},
+#line 368 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str415, ei_dec_kanji},
+#line 340 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str416, ei_euc_tw},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 320 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str423, ei_iso2022_jpms},
+#line 253 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str424, ei_tis620},
+    {-1}, {-1},
 #line 287 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str416, ei_jisx0212},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str427, ei_jisx0212},
 #line 265 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str417, ei_iso646_jp},
-#line 220 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str418, ei_mac_cyrillic},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str428, ei_iso646_jp},
+    {-1},
 #line 269 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str419, ei_iso646_jp},
-#line 263 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str420, ei_tcvn},
-#line 177 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str421, ei_cp1251},
-    {-1}, {-1},
-#line 262 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str424, ei_tcvn},
-#line 173 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str425, ei_cp1250},
-    {-1},
-#line 317 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str427, ei_iso2022_jp1},
-    {-1}, {-1},
-#line 225 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str430, ei_mac_arabic},
-    {-1},
-#line 318 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str432, ei_iso2022_jp2},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str430, ei_iso646_jp},
     {-1}, {-1}, {-1},
-#line 339 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str436, ei_hz},
+#line 176 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str434, ei_cp1251},
+#line 192 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str435, ei_cp1256},
+#line 189 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str436, ei_cp1255},
     {-1},
-#line 82 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str438, ei_iso8859_4},
-    {-1}, {-1},
+#line 198 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str438, ei_cp1258},
+#line 180 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str439, ei_cp1252},
+#line 259 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str440, ei_viscii},
 #line 187 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str441, ei_cp1254},
-    {-1},
-#line 186 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str443, ei_cp1254},
-#line 342 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str444, ei_euc_tw},
+    {-1}, {-1}, {-1},
 #line 78 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str445, ei_iso8859_3},
-    {-1},
+#line 326 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str446, ei_euc_cn},
 #line 32 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str447, ei_ucs2le},
-    {-1}, {-1},
+#line 206 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str448, ei_cp862},
+    {-1},
 #line 48 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str450, ei_ucs2internal},
-#line 325 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str451, ei_euc_cn},
     {-1}, {-1},
-#line 112 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str454, ei_iso8859_7},
+#line 252 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str453, ei_tis620},
+    {-1},
 #line 299 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str455, ei_ksc5601},
-    {-1},
+#line 316 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str456, ei_iso2022_jp},
 #line 144 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str457, ei_iso8859_13},
-    {-1}, {-1},
-#line 280 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str460, ei_jisx0208},
-    {-1}, {-1}, {-1}, {-1},
-#line 74 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str465, ei_iso8859_3},
+    {-1},
+#line 56 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str459, ei_iso8859_1},
+#line 97 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str460, ei_iso8859_6},
+#line 231 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str461, ei_nextstep},
+    {-1},
+#line 173 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str463, ei_cp1250},
+#line 66 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str464, ei_iso8859_2},
+    {-1},
 #line 20 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str466, ei_ascii},
-#line 295 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str467, ei_gb2312},
-    {-1}, {-1},
-#line 183 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str470, ei_cp1253},
-    {-1}, {-1},
-#line 247 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str473, ei_cp1133},
+    {-1}, {-1}, {-1}, {-1},
+#line 280 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str471, ei_jisx0208},
+    {-1}, {-1}, {-1}, {-1},
+#line 41 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str476, ei_utf16le},
+#line 220 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str477, ei_mac_cyrillic},
     {-1},
-#line 331 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str475, ei_cp936},
-    {-1}, {-1}, {-1},
 #line 239 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str479, ei_pt154},
+#line 177 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str480, ei_cp1251},
+#line 186 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str481, ei_cp1254},
+#line 342 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str482, ei_euc_tw},
     {-1},
-#line 190 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str481, ei_cp1255},
-    {-1}, {-1},
-#line 28 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str484, ei_ucs2be},
-    {-1},
-#line 319 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str486, ei_iso2022_jp2},
-    {-1}, {-1},
+#line 225 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str484, ei_mac_arabic},
+#line 112 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str485, ei_iso8859_7},
+    {-1}, {-1}, {-1},
 #line 38 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str489, ei_ucs4le},
     {-1}, {-1},
 #line 50 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str492, ei_ucs4internal},
-    {-1}, {-1}, {-1}, {-1},
-#line 120 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str497, ei_iso8859_8},
     {-1}, {-1},
-#line 113 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str500, ei_iso8859_7},
-    {-1},
-#line 320 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str502, ei_iso2022_jpms},
+#line 45 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str495, ei_utf7},
+#line 255 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str496, ei_tis620},
+    {-1}, {-1}, {-1},
+#line 297 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str500, ei_isoir165},
+    {-1}, {-1},
 #line 306 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str503, ei_euc_jp},
     {-1},
 #line 245 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str505, ei_mulelao},
-    {-1}, {-1}, {-1},
-#line 223 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str509, ei_mac_turkish},
-    {-1}, {-1}, {-1},
-#line 29 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str513, ei_ucs2be},
+#line 233 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str506, ei_georgian_academy},
+#line 334 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str507, ei_gb18030_2022},
+#line 183 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str508, ei_cp1253},
     {-1}, {-1}, {-1}, {-1},
-#line 292 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str518, ei_iso646_cn},
-#line 206 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str519, ei_cp862},
-    {-1}, {-1}, {-1}, {-1}, {-1},
-#line 18 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str525, ei_ascii},
-#line 37 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str526, ei_ucs4be},
-    {-1},
-#line 17 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str528, ei_ascii},
+#line 331 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str513, ei_cp936},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 15 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str520, ei_ascii},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 333 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str528, ei_gb18030_2005},
 #line 221 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str529, ei_mac_ukraine},
-    {-1}, {-1}, {-1}, {-1},
-#line 41 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str534, ei_utf16le},
-    {-1}, {-1},
-#line 56 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str537, ei_iso8859_1},
-#line 97 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str538, ei_iso8859_6},
+    {-1},
+#line 113 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str531, ei_iso8859_7},
+#line 120 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str532, ei_iso8859_8},
+#line 107 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str533, ei_iso8859_7},
     {-1}, {-1}, {-1},
-#line 66 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str542, ei_iso8859_2},
-    {-1},
-#line 311 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str544, ei_sjis},
-    {-1},
-#line 195 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str546, ei_cp1257},
-    {-1}, {-1}, {-1}, {-1},
-#line 271 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str551, ei_jisx0201},
-    {-1},
-#line 45 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str553, ei_utf7},
-#line 334 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str554, ei_gb18030_2022},
-    {-1},
+#line 339 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str537, ei_hz},
+#line 28 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str538, ei_ucs2be},
+    {-1}, {-1},
+#line 223 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str541, ei_mac_turkish},
+    {-1}, {-1}, {-1},
 #line 53 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str556, ei_java},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str545, ei_java},
+    {-1}, {-1},
+#line 202 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str548, ei_cp850},
+    {-1}, {-1},
+#line 190 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str551, ei_cp1255},
+#line 295 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str552, ei_gb2312},
+    {-1},
+#line 44 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str554, ei_utf32le},
+#line 311 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str555, ei_sjis},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 266 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str563, ei_iso646_jp},
+#line 271 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str562, ei_jisx0201},
     {-1}, {-1}, {-1}, {-1},
+#line 40 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str567, ei_utf16be},
 #line 216 "lib/generated/aliases_syssolaris.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str568, ei_mac_centraleurope},
-    {-1},
-#line 315 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str570, ei_iso2022_jp},
-#line 40 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str571, ei_utf16be},
-#line 305 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str572, ei_euc_jp},
-    {-1}, {-1},
-#line 333 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str575, ei_gb18030_2005},
-#line 282 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str576, ei_jisx0212},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 304 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str583, ei_euc_jp},
-#line 222 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str584, ei_mac_greek},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 184 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str593, ei_cp1253},
-    {-1},
-#line 270 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str595, ei_jisx0201},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 274 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str603, ei_jisx0208},
-    {-1},
-#line 234 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str605, ei_georgian_ps},
-    {-1},
-#line 193 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str607, ei_cp1256},
-#line 283 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str608, ei_jisx0212},
-    {-1}, {-1},
-#line 107 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str611, ei_iso8859_7},
-#line 44 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str612, ei_utf32le},
-    {-1}, {-1},
-#line 284 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str615, ei_jisx0212},
     {-1}, {-1},
 #line 309 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str618, ei_sjis},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 316 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str625, ei_iso2022_jp},
-#line 119 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str626, ei_iso8859_8},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 257 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str636, ei_cp874},
-    {-1},
-#line 202 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str638, ei_cp850},
-    {-1}, {-1},
-#line 231 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str641, ei_nextstep},
-    {-1},
-#line 276 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str643, ei_jisx0208},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str571, ei_sjis},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 43 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str649, ei_utf32be},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 355 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str659, ei_big5hkscs2008},
-    {-1}, {-1}, {-1}, {-1},
-#line 312 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str664, ei_sjis},
+#line 234 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str577, ei_georgian_ps},
+    {-1}, {-1},
+#line 37 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str580, ei_ucs4be},
     {-1}, {-1}, {-1},
-#line 363 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str668, ei_johab},
+#line 195 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str584, ei_cp1257},
+    {-1}, {-1},
+#line 282 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str587, ei_jisx0212},
+    {-1}, {-1},
+#line 325 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str590, ei_euc_cn},
+    {-1}, {-1},
+#line 49 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str593, ei_ucs2swapped},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 307 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str602, ei_euc_jp},
+#line 292 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str603, ei_iso646_cn},
+    {-1}, {-1},
+#line 270 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str606, ei_jisx0201},
+    {-1}, {-1},
+#line 106 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str609, ei_iso8859_7},
+    {-1}, {-1}, {-1}, {-1},
+#line 274 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str614, ei_jisx0208},
+#line 222 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str615, ei_mac_greek},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 184 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str624, ei_cp1253},
+    {-1},
+#line 284 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str626, ei_jisx0212},
+    {-1}, {-1},
+#line 29 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str629, ei_ucs2be},
+    {-1},
+#line 308 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str631, ei_sjis},
+    {-1},
+#line 312 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str633, ei_sjis},
+    {-1},
+#line 51 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str635, ei_ucs4swapped},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 43 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str645, ei_utf32be},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 276 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str654, ei_jisx0208},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 18 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str663, ei_ascii},
+    {-1}, {-1},
+#line 17 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str666, ei_ascii},
+    {-1}, {-1}, {-1},
+#line 264 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str670, ei_tcvn},
+    {-1}, {-1}, {-1},
+#line 257 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str674, ei_cp874},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 273 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str692, ei_jisx0201},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 275 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str699, ei_jisx0208},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1},
+#line 281 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str712, ei_jisx0208},
+    {-1}, {-1},
+#line 193 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str715, ei_cp1256},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 119 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str734, ei_iso8859_8},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1}, {-1},
+#line 283 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str757, ei_jisx0212},
+    {-1}, {-1},
+#line 355 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str760, ei_big5hkscs2008},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
 #line 354 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str670, ei_big5hkscs2008},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 308 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str678, ei_sjis},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 106 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str687, ei_iso8859_7},
-#line 275 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str688, ei_jisx0208},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-    {-1},
-#line 273 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str699, ei_jisx0201},
-    {-1},
-#line 281 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str701, ei_jisx0208},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str771, ei_big5hkscs2008},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 196 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str745, ei_cp1257},
     {-1}, {-1}, {-1}, {-1},
-#line 307 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str750, ei_euc_jp},
-    {-1}, {-1}, {-1},
-#line 49 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str754, ei_ucs2swapped},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 264 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str770, ei_tcvn},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 224 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str786, ei_mac_hebrew},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 51 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str796, ei_ucs4swapped},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 363 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str803, ei_johab},
+    {-1}, {-1}, {-1}, {-1},
 #line 347 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str803, ei_ces_big5},
-    {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 365 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str810, ei_johab},
-    {-1}, {-1}, {-1},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str808, ei_ces_big5},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 196 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str818, ei_cp1257},
 #line 346 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str814, ei_ces_big5},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str819, ei_ces_big5},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-    {-1}, {-1}, {-1},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+    {-1}, {-1},
+#line 365 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str885, ei_johab},
+    {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
+#line 224 "lib/generated/aliases_syssolaris.gperf"
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str894, ei_mac_hebrew},
 #line 352 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str872, ei_big5hkscs2001},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str895, ei_big5hkscs2001},
     {-1}, {-1}, {-1},
 #line 356 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str876, ei_big5hkscs2008},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str899, ei_big5hkscs2008},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
 #line 351 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str883, ei_big5hkscs1999},
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str906, ei_big5hkscs1999},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
 #line 353 "lib/generated/aliases_syssolaris.gperf"
-    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str919, ei_big5hkscs2004}
+    {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str942, ei_big5hkscs2004}
   };
 
 const struct alias *

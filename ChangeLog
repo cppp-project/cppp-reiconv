@@ -2,6 +2,7 @@
 
 	Update compile options' name.
 	Use extra encodings always except less build.
+	Move OSF/1 encodings to general encodings.
 
 2023-10-28  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 

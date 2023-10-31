@@ -249,6 +249,9 @@ typedef struct {
 #include "johab.h"
 #include "iso2022_kr.h"
 
+#include "dec_kanji.h"
+#include "dec_hanyu.h"
+
 /* Encodings used by system dependent locales. */
 
 #ifdef USE_AIX
@@ -261,11 +264,6 @@ typedef struct {
 #include "cp1161.h"
 #include "cp1162.h"
 #include "cp1163.h"
-#endif
-
-#ifdef USE_OSF1
-#include "dec_kanji.h"
-#include "dec_hanyu.h"
 #endif
 
 #ifdef USE_DOS

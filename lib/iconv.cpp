@@ -44,7 +44,6 @@ namespace reiconv
  * and the extra encodings.
  */
 #define USE_AIX
-#define USE_OSF1
 #define USE_DOS
 #define USE_ZOS
 #define USE_EXTRA
@@ -55,9 +54,6 @@ namespace reiconv
  */
 #ifdef _AIX
 #define USE_AIX
-#endif
-#if defined(__osf__) || defined(VMS)
-#define USE_OSF1
 #endif
 #if defined(__DJGPP__) || (defined(_WIN32) && (defined(_MSC_VER) || defined(__MINGW32__)))
 #define USE_DOS
@@ -101,9 +97,6 @@ enum
 #ifdef USE_AIX
 #include "encodings_aix.def"
 #endif
-#ifdef USE_OSF1
-#include "encodings_osf1.def"
-#endif
 #ifdef USE_DOS
 #include "encodings_dos.def"
 #endif
@@ -123,9 +116,6 @@ static struct encoding const all_encodings[] = {
 #include "encodings.def"
 #ifdef USE_AIX
 #include "encodings_aix.def"
-#endif
-#ifdef USE_OSF1
-#include "encodings_osf1.def"
 #endif
 #ifdef USE_DOS
 #include "encodings_dos.def"
@@ -168,8 +158,6 @@ static inline int lookup_by_codepage(int codepage)
 #include "aliases_sysaix.h"
 #elif defined hpux || defined __hpux
 #include "aliases_syshpux.h"
-#elif defined __osf__
-#include "aliases_sysosf1.h"
 #elif defined __sun
 #include "aliases_syssolaris.h"
 #else
@@ -181,7 +169,7 @@ static inline int lookup_by_codepage(int codepage)
  * Defines
  *   inline static const struct alias* aliases2_lookup (const char *str);
  */
-#if defined(USE_AIX) || defined(USE_OSF1) || defined(USE_DOS) || defined(USE_ZOS) || defined(USE_EXTRA) /* || ... */
+#if defined(USE_AIX) || defined(USE_DOS) || defined(USE_ZOS) || defined(USE_EXTRA) /* || ... */
 struct stringpool2_t
 {
 #define S(tag, name, encoding_index) char stringpool_##tag[sizeof(name)];

@@ -1156,3 +1156,18 @@ DEFENCODING(( "ISO-2022-KR",            /* IANA, RFC 1557 */
             iso2022_kr,
             { iso2022_kr_mbtowc, nullptr },  { iso2022_kr_wctomb, iso2022_kr_reset })
 
+DEFENCODING(( "DEC-KANJI",
+            ),
+            -1,
+            dec_kanji,
+            { dec_kanji_mbtowc, nullptr },   { dec_kanji_wctomb, nullptr })
+DEFALIAS(     "DECKANJI",               /* OSF/1 */
+            dec_kanji)
+
+DEFENCODING(( "DEC-HANYU",
+            ),
+            -1,
+            dec_hanyu,
+            { dec_hanyu_mbtowc, nullptr },   { dec_hanyu_wctomb, nullptr })
+DEFALIAS(     "DECHANYU",               /* OSF/1 */
+            dec_hanyu)

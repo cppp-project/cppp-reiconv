@@ -120,8 +120,6 @@ lib/hkscs2008.h
 lib/mac_centraleurope.h
 lib/cp1129.h
 lib/generated/flags.h
-lib/generated/aliases_sysosf1.h
-lib/generated/aliases_osf1_sysosf1.h
 lib/generated/aliases_aix_sysaix.h
 lib/generated/aliases.h
 lib/generated/aliases_syssolaris.h
@@ -131,7 +129,6 @@ lib/generated/aliases_sysaix.h
 lib/generated/aliases_syshpux.h
 lib/generated/aliases_zos.h
 lib/generated/aliases_dos.h
-lib/generated/aliases_osf1.h
 lib/ebcdic12712.h
 lib/uhc_2.h
 lib/iso8859_1.h
@@ -223,7 +220,6 @@ lib/tis620.h
 lib/iso8859_4.h
 lib/loops.h
 lib/utf32be.h
-lib/encodings_osf1.def
 lib/cp943.h
 lib/ebcdic1148.h
 lib/ebcdic1147.h

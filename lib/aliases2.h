@@ -24,13 +24,6 @@
 #  include "aliases_aix.h"
 # endif
 #endif
-#ifdef USE_OSF1
-# if defined __osf__
-#  include "aliases_osf1_sysosf1.h"
-# else
-#  include "aliases_osf1.h"
-# endif
-#endif
 #ifdef USE_DOS
 # include "aliases_dos.h"
 #endif
