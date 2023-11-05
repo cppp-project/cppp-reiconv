@@ -1,9 +1,9 @@
 # CMake script for cppp-reiconv/tests
 
 
-option(TEST "Enable test suites build." OFF)
+option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." OFF)
 
-if (TEST)
+if (BUILD_TEST)
     # Init CTest
     enable_testing()
     include(CTest)
@@ -195,46 +195,79 @@ if (TEST)
     test("stateless" "JOHAB")
     test("stateful"  "ISO-2022-KR")
     
-    #if(CMAKE_SYSTEM_NAME STREQUAL "AIX")
-    # AIX specific encodings
-    test("stateless" "CP856")
-    test("stateless" "CP922")
-    test("stateless" "CP1046")
-    test("stateless" "CP1124")
-    test("stateless" "CP1129")
-    test("stateless" "CP1161")
-    test("stateless" "CP1162")
-    test("stateless" "CP1163")
-    #endif()
+    if(NOT LESS_BUILD OR CMAKE_SYSTEM_NAME STREQUAL "AIX")
+        message(STATUS "'${PROJECT_NAME}': Use AIX encodings.")
+        set(USE_AIX ON)
+    else()
+        message(STATUS "'${PROJECT_NAME}': AIX encodings disabled.")
+        set(USE_AIX OFF)
+    endif()
+
+    if(NOT LESS_BUILD
+            OR CMAKE_SYSTEM_NAME STREQUAL "Windows"
+            OR CMAKE_SYSTEM_NAME STREQUAL "Windows3x"
+            OR CMAKE_SYSTEM_NAME STREQUAL "DOS")
+        message(STATUS "'${PROJECT_NAME}': Use DOS encodings.")
+        set(USE_DOS ON)
+    else()
+        message(STATUS "'${PROJECT_NAME}': DOS encodings disabled.")
+        set(USE_DOS OFF)
+    endif()
+
+    if(NOT LESS_BUILD)
+        message(STATUS "'${PROJECT_NAME}': Use extra encodings.")
+        set(USE_EXTRA ON)
+    else()
+        message(STATUS "'${PROJECT_NAME}': Extra encodings disabled.")
+        set(USE_EXTRA OFF)
+    endif()
+
+
+    if(USE_AIX)
+        # AIX specific encodings
+        test("stateless" "CP856")
+        test("stateless" "CP922")
+        test("stateless" "CP1046")
+        test("stateless" "CP1124")
+        test("stateless" "CP1129")
+        test("stateless" "CP1161")
+        test("stateless" "CP1162")
+        test("stateless" "CP1163")
+    endif()
     
-    # OSF/1 specific encodings
+    # OSF/1 encodings
+    # We use OSF/1 encodings for general encodings.
     test("stateless" "DEC-KANJI")
     test("stateless" "DEC-HANYU")
 
     # DOS specific encodings
-    test("stateless" "CP437")
-    test("stateless" "CP737")
-    test("stateless" "CP775")
-    test("stateless" "CP852")
-    test("stateless" "CP853")
-    test("stateless" "CP855")
-    test("stateless" "CP857")
-    test("stateless" "CP858")
-    test("stateless" "CP860")
-    test("stateless" "CP861")
-    test("stateless" "CP863")
-    test("stateless" "CP864")
-    test("stateless" "CP865")
-    test("stateless" "CP869")
-    test("stateless" "CP1125")
+    if(USE_DOS)
+        test("stateless" "CP437")
+        test("stateless" "CP737")
+        test("stateless" "CP775")
+        test("stateless" "CP852")
+        test("stateless" "CP853")
+        test("stateless" "CP855")
+        test("stateless" "CP857")
+        test("stateless" "CP858")
+        test("stateless" "CP860")
+        test("stateless" "CP861")
+        test("stateless" "CP863")
+        test("stateless" "CP864")
+        test("stateless" "CP865")
+        test("stateless" "CP869")
+        test("stateless" "CP1125")
+    endif()
 
     # Extra encodings
-    test("stateless" "EUC-JISX0213")
-    test("stateless" "SHIFT_JISX0213")
-    test("stateful"  "ISO-2022-JP-3")
-    test("stateless" "BIG5-2003")
-    test("stateless" "TDS565")
-    test("stateless" "ATARIST")
-    test("stateless" "RISCOS-LATIN1")
+    if(USE_EXTRA)
+        test("stateless" "EUC-JISX0213")
+        test("stateless" "SHIFT_JISX0213")
+        test("stateful"  "ISO-2022-JP-3")
+        test("stateless" "BIG5-2003")
+        test("stateless" "TDS565")
+        test("stateless" "ATARIST")
+        test("stateless" "RISCOS-LATIN1")
+    endif()
 
 endif()

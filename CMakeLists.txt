@@ -111,30 +111,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
     include("tests/tests.cmake")
 endif()
 
-# Install
-# Static
-# PERMISSIONS 0644
-install(TARGETS libcppp-reiconv.static
-        DESTINATION "${install_staticdir}"
-        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
-        LIBRARY DESTINATION "${install_shareddir}"
-        ARCHIVE DESTINATION "${install_staticdir}"
-        RUNTIME DESTINATION "${install_bindir}"
-        INCLUDES DESTINATION "${install_includedir}" )
+# Install libraries
+cppp_install_library(${PROJECT_NAME})
 
-# Shared
-# PERMISSIONS 0755
-install(TARGETS libcppp-reiconv.shared
-        EXPORT libcppp-reiconv-export
-        DESTINATION "${install_shareddir}"
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
-        LIBRARY DESTINATION "${install_shareddir}"
-        ARCHIVE DESTINATION "${install_staticdir}"
-        RUNTIME DESTINATION "${install_bindir}"
-        INCLUDES DESTINATION "${install_includedir}" )
-
-# Includes
-# install includes
+# Install includes
 # PERMISSIONS 0644
 install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
         DESTINATION "${install_includedir}"

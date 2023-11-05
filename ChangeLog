@@ -1,3 +1,9 @@
+2023-11-05  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
+
+	Update test option.
+	More tests in 'Makefile.devel'.
+	Use 'cppp_install_library' for install libraries.
+
 2023-10-30  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Update compile options' name.
