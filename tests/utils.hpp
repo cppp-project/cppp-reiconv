@@ -24,8 +24,10 @@
 #pragma once
 
 #include <cstring>
+#include <filesystem>
 #include <iostream>
 #include <fstream>
+#include <stdexcept>
 #include <string>
 #include <cerrno>
 #include <vector>
@@ -80,23 +82,9 @@ void assert_compare_file(const std::string& path1, const std::string& path2)
 }
 
 // Get file size.
-long long get_file_size(const std::string& file_name)
+size_t get_file_size(const std::string& file_path)
 {
-    const char* filename = file_name.c_str();
-    long long file_size = -1;
-
-#if defined(_WIN32) || defined(_WIN64)
-    WIN32_FILE_ATTRIBUTE_DATA fileInfo;
-    if (GetFileAttributesEx(filename, GetFileExInfoStandard, &fileInfo)) {
-        file_size = ((long long)fileInfo.nFileSizeHigh << 32) | fileInfo.nFileSizeLow;
-    }
-#else
-    struct stat st;
-    if (stat(filename, &st) == 0) {
-        file_size = st.st_size;
-    }
-#endif
-    return file_size;
+    return std::filesystem::file_size(file_path);
 }
 
 
@@ -111,31 +99,24 @@ std::vector<char> read_all(const std::string& input_file_path)
     }
 
     size_t size = get_file_size(input_file_path.c_str());
-    char* buffer = new char[size];
-    input_file.read(buffer, size);
+    std::vector<char> buffer(size);
+    input_file.read(buffer.data(), size);
 
     input_file.close();
 
-    return std::vector<char>(buffer, buffer + size);
+    return buffer;
 }
 
 // Check if a file exists.
-bool file_exists(const std::string& file_name)
+bool file_exists(const std::string& file_path)
 {
-    std::ifstream file(file_name);
-    bool result = file.good();
-    file.close();
-    return result;
+    return std::filesystem::exists(file_path);
 }
 
 // Remove file.
-bool remove_file(const std::string& file_name)
+bool remove_file(const std::string& file_path)
 {
-    if (std::remove(file_name.c_str()) == 0)
-    {
-        return true;
-    }
-    return false;
+    return std::filesystem::remove(file_path);
 }
 
 
