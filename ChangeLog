@@ -1,3 +1,8 @@
+2024-01-13  xihale <xihale.top@qq.com>
+
+	transfer some raw file utils apis to std::filesystem apis
+	promote the performance of read_all function in test/utils.hpp(reduce the memory copy time)
+
 2023-11-05  ChenPi11  <wushengwuxi-msctinoulk@outlook.com>
 
 	Update test option.
