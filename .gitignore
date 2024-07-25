@@ -83,3 +83,6 @@ tests/data/GB18030-2022.TXT
 # Dist directory and temps
 cppp-reiconv-v*
 __pycache__
+dist
+distpkg
+

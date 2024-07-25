@@ -59,8 +59,6 @@ endif()
 get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
 include("${BUILD_AUX}/cmake/cppp.cmake")
 
-cppp_init_nls_util()
-
 # ----------------------------------------------------------------------------------
 check_have_visibility()
 
@@ -88,7 +86,6 @@ else()
     set(DLL_VARIABLE "")
 endif()
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
-cppp_nls_autotranslate("${output_includedir}/cppp/reiconv.hpp.inst" "${CMAKE_CURRENT_SOURCE_DIR}/lang")
 
 # Add includes
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")

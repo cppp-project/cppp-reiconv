@@ -133,8 +133,9 @@ test : all
 	cd build && $(CTEST) -C Debug --verbose
 	$(CMAKE) --install build --verbose
 
-	./cpppdist.py
-	{ diff cppp-reiconv-* . --recursive || echo ; }
+	./repoutil.py distpkg --type dpkg
+	./repoutil.py dist
+	{ diff cppp-reiconv-v* . --recursive || echo ; }
 
 # Alias to test
 check : test

@@ -29,7 +29,7 @@
 
 #include <stddef.h>
 
-#if _MSC_VER >= 1600 
+#if _MSC_VER >= 1600
 /* Use UTF-8 to decode this file. */
 #pragma execution_character_set("utf-8")
 #endif
@@ -46,7 +46,7 @@ extern "C++"
      * @brief Version infomation. (major<<8) + minor
      */
     extern @DLL_VARIABLE@ int reiconv_version;
-    
+
     /**
      * @brief Convert a ascii-only string to UTF-16.
      * @param str Source string.
@@ -56,7 +56,7 @@ extern "C++"
      * @warning Don't forget to free the result memory!
      * @return Return true if successful, otherwise return false.
      */
-    extern @DLL_VARIABLE@ bool ascii_mbtou16(const char* str, size_t length, char16_t** resultp, size_t* lengthp);
+    extern @DLL_VARIABLE@ bool ascii_mbtou16(const char *str, size_t length, char16_t **resultp, size_t *lengthp);
 
     /**
      * @brief Convert a ascii-only string to UTF-32.
@@ -67,15 +67,15 @@ extern "C++"
      * @warning Don't forget to free the result memory!
      * @return Return true if successful, otherwise return false.
      */
-    extern @DLL_VARIABLE@ bool ascii_mbtou32(const char* str, size_t length, char32_t** resultp, size_t* lengthp);
+    extern @DLL_VARIABLE@ bool ascii_mbtou32(const char *str, size_t length, char32_t **resultp, size_t *lengthp);
 
     /**
      * @brief Converts an entire string from one encoding to another,
      * and supports autodetect encodings on input.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
-     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and '//TRANSLIT'.
-     * except that FROMCODE may be one of the values.
+     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and
+     * '//TRANSLIT'. except that FROMCODE may be one of the values.
      *
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
@@ -92,16 +92,16 @@ extern "C++"
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(const char* tocode, const char* fromcode, const char* start,
-                                            size_t inlength, char** resultp, size_t* lengthp);
-    
+    extern @DLL_VARIABLE@ int convert(const char *tocode, const char *fromcode, const char *start, size_t inlength,
+                                       char **resultp, size_t *lengthp);
+
     /**
      * @brief Converts an entire string from one encoding to another,
      * and supports autodetect encodings on input.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
-     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and '//TRANSLIT'.
-     * except that FROMCODE may be one of the values.
+     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and
+     * '//TRANSLIT'. except that FROMCODE may be one of the values.
      *
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
@@ -118,16 +118,16 @@ extern "C++"
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(const char16_t* tocode, const char16_t* fromcode, const char* start,
-                                            size_t inlength, char** resultp, size_t* lengthp);
-    
+    extern @DLL_VARIABLE@ int convert(const char16_t *tocode, const char16_t *fromcode, const char *start,
+                                       size_t inlength, char **resultp, size_t *lengthp);
+
     /**
      * @brief Converts an entire string from one encoding to another,
      * and supports autodetect encodings on input.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
-     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and '//TRANSLIT'.
-     * except that FROMCODE may be one of the values.
+     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and
+     * '//TRANSLIT'. except that FROMCODE may be one of the values.
      *
      * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
      * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
@@ -144,8 +144,8 @@ extern "C++"
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(const char32_t* tocode, const char32_t* fromcode, const char* start,
-                                            size_t inlength, char** resultp, size_t* lengthp);
+    extern @DLL_VARIABLE@ int convert(const char32_t *tocode, const char32_t *fromcode, const char *start,
+                                       size_t inlength, char **resultp, size_t *lengthp);
 
     /**
      * @brief Converts an entire string from one encoding to another.
@@ -159,10 +159,8 @@ extern "C++"
      * @param strict Strict mode, if false, will ignore the invalid characters.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(int tocode_cp, int fromcode_cp, const char* start,
-                                            size_t inlength, char** resultp, size_t* lengthp, bool strict=true);
-
-
+    extern @DLL_VARIABLE@ int convert(int tocode_cp, int fromcode_cp, const char *start, size_t inlength,
+                                       char **resultp, size_t *lengthp, bool strict = true);
 
     } // namespace reiconv
     } // namespace base

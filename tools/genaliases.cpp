@@ -19,6 +19,8 @@
 
 /* Creates the aliases.gperf table. */
 
+// There is an old saying in China: If a code can work, do not change it.
+
 #include <iostream>
 
 /* When we create shell scripts, we need to make sure that on Cygwin they have
