@@ -28,10 +28,10 @@ BEGIN
             VALUE "CompanyName", "The C++ Plus Project\0"
             VALUE "FileDescription", "LGPLed cppp-reiconv for Windows\0"
             VALUE "FileVersion", PROJECT_VERSION "\0"
-            VALUE "InternalName", "libcppp-reiconv.dll\0"
+            VALUE "InternalName", "cppp-reiconv.dll\0"
             VALUE "LegalCopyright", "Copyright (C) 2023\0"
             VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "libcppp-reiconv.dll\0"
+            VALUE "OriginalFilename", "cppp-reiconv.dll\0"
             VALUE "ProductName", "cppp-reiconv: character set conversion library\0"
             VALUE "ProductVersion", PROJECT_VERSION "\0"
         END

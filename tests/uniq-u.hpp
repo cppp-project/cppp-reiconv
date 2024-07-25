@@ -18,6 +18,7 @@
 /* 2000-03-22  Trimmed down to the case of "uniq -u" by Bruno Haible. */
 /* 2023-08-22  Change it to a C++ header for reiconv-test by ChenPi11. */
 /* 2023-10-08  Use '#pragma once' for header. */
+
 #pragma once
 
 #include <iostream>

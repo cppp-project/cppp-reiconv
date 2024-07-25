@@ -18,8 +18,12 @@
 cmake_minimum_required(VERSION 3.12)
 project(cppp-reiconv VERSION 3.0.0)
 
-# Define options
 option(LESS_BUILD "Disable extra encodings." OFF)
+if (LESS_BUILD)
+    option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." OFF)
+else()
+    option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." ON)
+endif()
 
 # Ignore warnings
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -40,17 +44,18 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/wd4996)
     add_compile_options(/wd4267)
     add_compile_options(/wd4244)
+    add_compile_options(/wd4018)
 endif ()
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # ----------------------------------------------------------------------------------
-# Import build-aux subdirectory.
+# Import build auxiliaries.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
     set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
     add_subdirectory("${BUILD_AUX}")
-    message(STATUS "Using '${BUILD_AUX}' for C++ Plus build-aux directory.")
+    message(STATUS "Using '${BUILD_AUX}' for C+++ build-aux directory.")
 elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
     set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
 else()
@@ -58,13 +63,9 @@ else()
 endif()
 get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
 include("${BUILD_AUX}/cmake/cppp.cmake")
-
 # ----------------------------------------------------------------------------------
-check_have_visibility()
 
-if(MSVC)
-    add_compile_options(/wd4018)
-endif()
+check_have_visibility()
 
 # Generate header file for build
 if(WIN32)
@@ -77,7 +78,7 @@ endif()
 add_compile_definitions("DLL_VARIABLE=${DLL_VARIABLE}")
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/libcppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/cppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 
 # Generate header file for install
 if(WIN32)
@@ -101,10 +102,10 @@ else()
 endif()
 
 # Add library
-cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/libcppp-reiconv.rc")
+cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 
 # Include test suite.
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests" AND BUILD_TEST)
     include("tests/tests.cmake")
 endif()
 
