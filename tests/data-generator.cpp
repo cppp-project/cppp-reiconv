@@ -12,7 +12,7 @@
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the cppp-reiconv library; see the file COPYING.
+   License along with the cppp-reiconv library; see the file LICENSE.
    If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Creates the beyond-BMP part of the GB18030.TXT reference table. */

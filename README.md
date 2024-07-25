@@ -139,7 +139,7 @@ To use it, simply #include <cppp/reiconv.hpp> and import the lib to use the func
 # Copyright
 
 The cppp-reiconv is under LGPLv3,
-see file [COPYING](./COPYING).
+see file [LICENSE](./LICENSE).
 
 # Download
 
