@@ -114,14 +114,57 @@ extern "C++"
         std::cerr << "cd->discard_ilseq: " << cd->discard_ilseq << std::endl;
     }
 
+    static inline size_t name_canonicalize(const char* name, char* buf)
+    {
+        char* bp = buf;
+        const char* cp = name;
+        for (; *cp; cp++, bp++)
+        {
+            unsigned char c = (unsigned char)*cp;
+            if (c >= 'a' && c <= 'z')  // Uppercase
+            {
+                c -= 'a' - 'A';
+            }
+            if (c == '-' || c == '_')  // Ignore '-' and '_'
+            {
+                bp--;
+            }
+            else
+            {
+                *bp = c;
+            }
+        }
+        *bp = '\0';
+        return bp - buf;
+    }
+
     _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode)
     {
+        char tocode_buf[MAX_WORD_LENGTH + 9 + 9 + 1];
+        char fromcode_buf[MAX_WORD_LENGTH + 9 + 9 + 1];
         struct conv_struct* cd;
+        const struct alias *ap;
         unsigned int from_index;
         unsigned int to_index;
         int discard_ilseq;
 
-    #include "iconv_open1.h"
+        discard_ilseq = 0;
+        size_t tocode_buf_len = name_canonicalize(tocode, tocode_buf);
+        size_t fromcode_buf_len = name_canonicalize(fromcode, fromcode_buf);
+
+        ap = HashPool::aliases_lookup(tocode_buf, tocode_buf_len);
+        if (!ap)
+        {
+            goto invalid;
+        }
+        to_index = ap->encoding_index;
+
+        ap = HashPool::aliases_lookup(fromcode_buf, fromcode_buf_len);
+        if (!ap)
+        {
+            goto invalid;
+        }
+        from_index = ap->encoding_index;
 
         cd = (struct conv_struct*)malloc(sizeof(struct conv_struct));
         if (cd == nullptr)
