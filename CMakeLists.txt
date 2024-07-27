@@ -18,36 +18,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(cppp-reiconv VERSION 3.0.0)
 
-option(LESS_BUILD "Disable extra encodings." OFF)
-if (LESS_BUILD)
-    option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." OFF)
-else()
-    option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." ON)
-endif()
+option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." ON)
 
-# Ignore warnings
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    add_compile_options(-Wno-unused-parameter)
-    add_compile_options(-Wno-missing-field-initializers)
-    add_compile_options(-Wno-implicit-fallthrough)
-    add_compile_options(-Wno-unused-function)
-    add_compile_options(-Wno-sign-compare)
-    add_compile_options(-Wno-type-limits)
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    add_compile_options(-Wno-unused-parameter)
-    add_compile_options(-Wno-missing-field-initializers)
-    add_compile_options(-Wno-implicit-fallthrough)
-    add_compile_options(-Wno-unused-function)
-    add_compile_options(-Wno-sign-compare)
-    add_compile_options(-Wno-type-limits)
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    add_compile_options(/wd4996)
-    add_compile_options(/wd4267)
-    add_compile_options(/wd4244)
-    add_compile_options(/wd4018)
-endif ()
-
-# Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
 
 # ----------------------------------------------------------------------------------
@@ -67,41 +39,39 @@ include("${BUILD_AUX}/cmake/cppp.cmake")
 
 check_have_visibility()
 
-# Generate header file for build
+# Generate header file for build.
 if(WIN32)
-    set(DLL_VARIABLE "__declspec(dllexport)")
+    set(CPPP_API "__declspec(dllexport)")
 elseif(HAVE_VISIBILITY)
-    set(DLL_VARIABLE "__attribute__((__visibility__(\"default\")))")
+    set(CPPP_API "__attribute__((visibility(\"default\")))")
 else()
-    set(DLL_VARIABLE "")
+set(CPPP_API "")
 endif()
-add_compile_definitions("DLL_VARIABLE=${DLL_VARIABLE}")
+add_compile_definitions("_CPPP_API=${CPPP_API}")
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/cppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 
-# Generate header file for install
+# Generate header file for install.
 if(WIN32)
-    set(DLL_VARIABLE "__declspec(dllimport)")
+    set(CPPP_API "__declspec(dllimport)")
+elseif(HAVE_VISIBILITY)
+    set(CPPP_API "__attribute__((visibility(\"default\")))")
 else()
-    set(DLL_VARIABLE "")
+    set(CPPP_API "")
 endif()
+
+remove_definitions("_CPPP_API")
+add_compile_definitions("_CPPP_API=${CPPP_API}")
+
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
 
-# Add includes
+# Add includes.
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib/generated")
 include_directories("${output_includedir}")
 
-# Add definitions
-
-if(LESS_BUILD)
-    message(STATUS "Extra encoding disabled.")
-else()
-    add_compile_definitions(ENABLE_EXTRA=1)
-endif()
-
-# Add library
+# Add library.
 cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 
 # Include test suite.
@@ -109,10 +79,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests" AND BUILD_TEST)
     include("tests/tests.cmake")
 endif()
 
-# Install libraries
+# Install libraries.
 cppp_install_library(${PROJECT_NAME})
 
-# Install includes
+# Install headers.
 # PERMISSIONS 0644
 install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
         DESTINATION "${install_includedir}"

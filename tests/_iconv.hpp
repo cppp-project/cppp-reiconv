@@ -31,20 +31,11 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-extern "C++"
+namespace cppp::base::reiconv
 {
-    namespace cppp
-    {
-        namespace base
-        {
-            namespace reiconv
-            {
-                typedef void* iconv_t;
+    typedef void* iconv_t;
 
-                extern DLL_VARIABLE iconv_t iconv_open(const char* tocode, const char* fromcode);
-                extern DLL_VARIABLE size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
-                extern DLL_VARIABLE int iconv_close(iconv_t cd);
-            } // namespace reiconv
-        } // namespace base
-    } // namespace cppp
-}
+    extern _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode);
+    extern _CPPP_API size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
+    extern _CPPP_API int iconv_close(iconv_t cd);
+}  // namespace cppp::base::reiconv

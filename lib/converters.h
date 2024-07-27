@@ -254,7 +254,6 @@ typedef struct {
 
 /* Encodings used by system dependent locales. */
 
-#ifdef USE_AIX
 #include "cp856.h"
 #include "cp922.h"
 #include "cp943.h"
@@ -264,9 +263,7 @@ typedef struct {
 #include "cp1161.h"
 #include "cp1162.h"
 #include "cp1163.h"
-#endif
 
-#ifdef USE_DOS
 #include "cp437.h"
 #include "cp737.h"
 #include "cp775.h"
@@ -282,9 +279,7 @@ typedef struct {
 #include "cp865.h"
 #include "cp869.h"
 #include "cp1125.h"
-#endif
 
-#ifdef USE_ZOS
 
 #define DEDUPLICATE_TABLES 1
 
@@ -341,9 +336,7 @@ typedef struct {
 #include "ebcdic4971.h"
 #include "ebcdic12712.h"
 #include "ebcdic16804.h"
-#endif
 
-#ifdef USE_EXTRA
 #include "euc_jisx0213.h"
 #include "shift_jisx0213.h"
 #include "iso2022_jp3.h"
@@ -351,5 +344,3 @@ typedef struct {
 #include "tds565.h"
 #include "atarist.h"
 #include "riscos1.h"
-#endif
-

@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
     }
 #define DEFALIAS(xxx_alias, xxx) emit_alias(aliases_file, xxx_alias, #xxx);
 
-#include "encodings.def"
+#include "encodings.h.snippet"
 
 #undef DEFALIAS
 #undef BRACIFY

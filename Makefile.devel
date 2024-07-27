@@ -15,11 +15,7 @@ CFLAGS := $(CFLAGS)
 CXXFLAGS := $(CXXFLAGS) -Ilib
 
 all : lib/generated \
-      lib/generated/aliases.h lib/generated/aliases_sysaix.h lib/generated/aliases_syshpux.h lib/generated/aliases_syssolaris.h \
-      lib/generated/aliases_aix.h lib/generated/aliases_aix_sysaix.h \
-      lib/generated/aliases_dos.h \
-      lib/generated/aliases_zos.h \
-      lib/generated/aliases_extra.h \
+      lib/generated/aliases.h \
       lib/generated/flags.h
 
 lib/generated :
@@ -33,71 +29,6 @@ lib/generated/aliases.gperf : lib/generated/genaliases
 
 lib/generated/aliases.h : lib/generated/aliases.gperf
 	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
-
-
-lib/generated/genaliases_sysaix : tools/genaliases.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_AIX_ALIASES $< -o $@
-
-lib/generated/aliases_sysaix.gperf : lib/generated/genaliases_sysaix
-	./lib/generated/genaliases_sysaix $@
-
-lib/generated/aliases_sysaix.h : lib/generated/aliases_sysaix.gperf
-	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
-
-
-lib/generated/genaliases_syshpux : tools/genaliases.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_HPUX_ALIASES $< -o $@
-
-lib/generated/aliases_syshpux.gperf : lib/generated/genaliases_syshpux
-	./lib/generated/genaliases_syshpux $@
-
-lib/generated/aliases_syshpux.h : lib/generated/aliases_syshpux.gperf
-	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
-
-
-lib/generated/genaliases_syssolaris : tools/genaliases.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_SOLARIS_ALIASES $< -o $@
-
-lib/generated/aliases_syssolaris.gperf : lib/generated/genaliases_syssolaris
-	./lib/generated/genaliases_syssolaris $@
-
-lib/generated/aliases_syssolaris.h : lib/generated/aliases_syssolaris.gperf
-	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
-
-
-lib/generated/genaliases2_aix : tools/genaliases2.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_AIX $< -o $@
-
-lib/generated/aliases_aix.h : lib/generated/genaliases2_aix
-	./lib/generated/genaliases2_aix aix $@
-
-
-lib/generated/genaliases2_aix_sysaix : tools/genaliases2.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_AIX -DUSE_AIX_ALIASES $< -o $@
-
-lib/generated/aliases_aix_sysaix.h : lib/generated/genaliases2_aix_sysaix
-	./lib/generated/genaliases2_aix_sysaix aix $@
-
-
-lib/generated/genaliases2_dos : tools/genaliases2.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_DOS $< -o $@
-
-lib/generated/aliases_dos.h : lib/generated/genaliases2_dos
-	./lib/generated/genaliases2_dos dos $@
-
-
-lib/generated/genaliases2_zos : tools/genaliases2.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_ZOS $< -o $@
-
-lib/generated/aliases_zos.h : lib/generated/genaliases2_zos
-	./lib/generated/genaliases2_zos zos $@
-
-
-lib/generated/genaliases2_extra : tools/genaliases2.cpp
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -DUSE_EXTRA $< -o $@
-
-lib/generated/aliases_extra.h : lib/generated/genaliases2_extra
-	./lib/generated/genaliases2_extra extra $@
 
 lib/generated/genflags : tools/genflags.cpp
 	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@
@@ -145,18 +76,7 @@ clean :
 	$(RM) -r -f cppp-reiconv-v*
 	$(RM) -r -f .cache
 	$(RM) -f lib/generated/aliases.gperf
-	$(RM) -f lib/generated/aliases_sysaix.gperf
-	$(RM) -f lib/generated/aliases_syshpux.gperf
-	$(RM) -f lib/generated/aliases_syssolaris.gperf
 	$(RM) -f lib/generated/genaliases
-	$(RM) -f lib/generated/genaliases2_aix
-	$(RM) -f lib/generated/genaliases2_aix_sysaix
-	$(RM) -f lib/generated/genaliases2_dos
-	$(RM) -f lib/generated/genaliases2_extra
-	$(RM) -f lib/generated/genaliases2_zos
-	$(RM) -f lib/generated/genaliases_sysaix
-	$(RM) -f lib/generated/genaliases_syshpux
-	$(RM) -f lib/generated/genaliases_syssolaris
 	$(RM) -f lib/generated/genflags
 	$(RM) -f tests/data/GB18030-2005.TXT
 	$(RM) -f tests/data/GB18030-2022.TXT

@@ -22,13 +22,6 @@
 #include <climits>
 #include <cstring>
 #include <iostream>
-
-/* Consider all encodings, including the system dependent ones. */
-#define USE_AIX
-#define USE_DOS
-#define USE_ZOS
-#define USE_EXTRA
-
 struct loop_funcs
 {
 };
@@ -111,11 +104,7 @@ int main()
     }
 #define DEFALIAS(xxx_alias, xxx) /* nothing */
 /* Consider all encodings, including the system dependent ones. */
-#include "encodings.def"
-#include "encodings_aix.def"
-#include "encodings_dos.def"
-#include "encodings_extra.def"
-#include "encodings_zos.def"
+#include "encodings.h.snippet"
 #undef DEFALIAS
 #undef DEFENCODING
 

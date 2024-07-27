@@ -1,9 +1,9 @@
 /**
  * @file cppp/reiconv.hpp
  * @author ChenPi11
- * @brief C++ Plus cppp-reiconv package.
+ * @brief C+++ cppp-reiconv package.
  * @version 3.0.0
- * @date 2023-10-28
+ * @date 2024-7-27
  * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
  */
 /* Copyright (C) 1999-2023 Free Software Foundation, Inc.
@@ -29,23 +29,27 @@
 
 #include <stddef.h>
 
+#ifndef _CPPP_API
+    #ifdef _MSC_VER
+        #define _CPPP_API __declspec(dllexport)
+    #elif defined(__GNUC__)
+        #define _CPPP_API __attribute__((visibility("default")))
+    #else
+        #define _CPPP_API
+    #endif
+#endif
+
 #if _MSC_VER >= 1600
 /* Use UTF-8 to decode this file. */
 #pragma execution_character_set("utf-8")
 #endif
 
-extern "C++"
+namespace cppp::base::reiconv
 {
-    namespace cppp
-    {
-    namespace base
-    {
-    namespace reiconv
-    {
     /**
      * @brief Version infomation. (major<<8) + minor
      */
-    extern @DLL_VARIABLE@ int reiconv_version;
+    extern _CPPP_API int reiconv_version;
 
     /**
      * @brief Convert a ascii-only string to UTF-16.
@@ -56,7 +60,8 @@ extern "C++"
      * @warning Don't forget to free the result memory!
      * @return Return true if successful, otherwise return false.
      */
-    extern @DLL_VARIABLE@ bool ascii_mbtou16(const char *str, size_t length, char16_t **resultp, size_t *lengthp);
+    extern _CPPP_API bool ascii_mbtou16(const char *str, size_t length,
+                                        char16_t **resultp, size_t *lengthp);
 
     /**
      * @brief Convert a ascii-only string to UTF-32.
@@ -67,7 +72,8 @@ extern "C++"
      * @warning Don't forget to free the result memory!
      * @return Return true if successful, otherwise return false.
      */
-    extern @DLL_VARIABLE@ bool ascii_mbtou32(const char *str, size_t length, char32_t **resultp, size_t *lengthp);
+    extern _CPPP_API bool ascii_mbtou32(const char *str, size_t length,
+                                        char32_t **resultp, size_t *lengthp);
 
     /**
      * @brief Converts an entire string from one encoding to another,
@@ -92,8 +98,9 @@ extern "C++"
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(const char *tocode, const char *fromcode, const char *start, size_t inlength,
-                                       char **resultp, size_t *lengthp);
+    extern _CPPP_API int convert(const char *tocode, const char *fromcode,
+                                 const char *start, size_t inlength,
+                                 char **resultp, size_t *lengthp);
 
     /**
      * @brief Converts an entire string from one encoding to another,
@@ -118,8 +125,9 @@ extern "C++"
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(const char16_t *tocode, const char16_t *fromcode, const char *start,
-                                       size_t inlength, char **resultp, size_t *lengthp);
+    extern _CPPP_API int convert(const char16_t *tocode, const char16_t *fromcode,
+                                 const char *start, size_t inlength,
+                                 char **resultp, size_t *lengthp);
 
     /**
      * @brief Converts an entire string from one encoding to another,
@@ -144,8 +152,9 @@ extern "C++"
      * @param lengthp Pointer to a variable that stores the length of the result.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(const char32_t *tocode, const char32_t *fromcode, const char *start,
-                                       size_t inlength, char **resultp, size_t *lengthp);
+    extern _CPPP_API int convert(const char32_t *tocode, const char32_t *fromcode,
+                                 const char *start, size_t inlength,
+                                 char **resultp, size_t *lengthp);
 
     /**
      * @brief Converts an entire string from one encoding to another.
@@ -159,10 +168,9 @@ extern "C++"
      * @param strict Strict mode, if false, will ignore the invalid characters.
      * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
      */
-    extern @DLL_VARIABLE@ int convert(int tocode_cp, int fromcode_cp, const char *start, size_t inlength,
-                                       char **resultp, size_t *lengthp, bool strict = true);
+    extern _CPPP_API int convert(int tocode_cp, int fromcode_cp,
+                                 const char *start, size_t inlength,
+                                 char **resultp, size_t *lengthp,
+                                 bool strict = true);
 
-    } // namespace reiconv
-    } // namespace base
-    } // namespace cppp
-}
+} // namespace cppp::base::reiconv

@@ -71,14 +71,12 @@ add_custom_command(TARGET data-generator POST_BUILD
     COMMENT "Sorting GB18030:2022 test data ... "
 )
 
-# Start test
+# Test ascii converters.
+add_test(NAME check-ascii-converters
+         WORKING_DIRECTORY "${output_testsdir}"
+         COMMAND "$<TARGET_FILE:check-ascii-converters>")
 
-# Test ascii converters
-add_test( NAME check-ascii-converters
-            WORKING_DIRECTORY "${output_testsdir}"
-            COMMAND "$<TARGET_FILE:check-ascii-converters>" )
-
-# General multi-byte encodings
+# General multi-byte encodings.
 test("stateless" "UTF-8")
 test("stateful"  "UTF-16")
 test("stateful"  "UCS-2BE")
@@ -92,7 +90,7 @@ test("stateful"  "UTF-32BE")
 test("stateful"  "UTF-32LE")
 test("stateful"  "UTF-7")
 
-# 8-bit encodings
+# 8-bit encodings.
 test("stateless" "ISO-8859-1")
 test("stateless" "ISO-8859-2")
 test("stateless" "ISO-8859-3")
@@ -154,13 +152,13 @@ test("stateless" "VISCII")
 test("stateless" "TCVN")
 test("stateful"  "TCVN")
 
-# CJK character sets
+# CJK character sets.
 test("stateless" "ISO646-JP")
 test("stateless" "JIS_X0201")
 test("stateless" "ISO646-CN")
 test("stateless" "ISO-IR-165")
 
-# CJK encodings
+# CJK encodings.
 test("stateless" "EUC-JP")
 test("stateless" "SHIFT_JIS")
 test("stateless" "CP932")
@@ -192,77 +190,42 @@ test("stateless" "CP949")
 test("stateless" "JOHAB")
 test("stateful"  "ISO-2022-KR")
 
-if(NOT LESS_BUILD OR CMAKE_SYSTEM_NAME STREQUAL "AIX")
-    message(STATUS "'${PROJECT_NAME}': Use AIX encodings.")
-    set(USE_AIX ON)
-else()
-    message(STATUS "'${PROJECT_NAME}': AIX encodings disabled.")
-    set(USE_AIX OFF)
-endif()
+# AIX specific encodings.
+test("stateless" "CP856")
+test("stateless" "CP922")
+test("stateless" "CP1046")
+test("stateless" "CP1124")
+test("stateless" "CP1129")
+test("stateless" "CP1161")
+test("stateless" "CP1162")
+test("stateless" "CP1163")
 
-if(NOT LESS_BUILD
-        OR CMAKE_SYSTEM_NAME STREQUAL "Windows"
-        OR CMAKE_SYSTEM_NAME STREQUAL "Windows3x"
-        OR CMAKE_SYSTEM_NAME STREQUAL "DOS")
-    message(STATUS "'${PROJECT_NAME}': Use DOS encodings.")
-    set(USE_DOS ON)
-else()
-    message(STATUS "'${PROJECT_NAME}': DOS encodings disabled.")
-    set(USE_DOS OFF)
-endif()
-
-if(NOT LESS_BUILD)
-    message(STATUS "'${PROJECT_NAME}': Use extra encodings.")
-    set(USE_EXTRA ON)
-else()
-    message(STATUS "'${PROJECT_NAME}': Extra encodings disabled.")
-    set(USE_EXTRA OFF)
-endif()
-
-
-if(USE_AIX)
-    # AIX specific encodings
-    test("stateless" "CP856")
-    test("stateless" "CP922")
-    test("stateless" "CP1046")
-    test("stateless" "CP1124")
-    test("stateless" "CP1129")
-    test("stateless" "CP1161")
-    test("stateless" "CP1162")
-    test("stateless" "CP1163")
-endif()
-
-# OSF/1 encodings
-# We use OSF/1 encodings for general encodings.
+# OSF/1 encodings.
 test("stateless" "DEC-KANJI")
 test("stateless" "DEC-HANYU")
 
-# DOS specific encodings
-if(USE_DOS)
-    test("stateless" "CP437")
-    test("stateless" "CP737")
-    test("stateless" "CP775")
-    test("stateless" "CP852")
-    test("stateless" "CP853")
-    test("stateless" "CP855")
-    test("stateless" "CP857")
-    test("stateless" "CP858")
-    test("stateless" "CP860")
-    test("stateless" "CP861")
-    test("stateless" "CP863")
-    test("stateless" "CP864")
-    test("stateless" "CP865")
-    test("stateless" "CP869")
-    test("stateless" "CP1125")
-endif()
+# DOS specific encodings.
+test("stateless" "CP437")
+test("stateless" "CP737")
+test("stateless" "CP775")
+test("stateless" "CP852")
+test("stateless" "CP853")
+test("stateless" "CP855")
+test("stateless" "CP857")
+test("stateless" "CP858")
+test("stateless" "CP860")
+test("stateless" "CP861")
+test("stateless" "CP863")
+test("stateless" "CP864")
+test("stateless" "CP865")
+test("stateless" "CP869")
+test("stateless" "CP1125")
 
-# Extra encodings
-if(USE_EXTRA)
-    test("stateless" "EUC-JISX0213")
-    test("stateless" "SHIFT_JISX0213")
-    test("stateful"  "ISO-2022-JP-3")
-    test("stateless" "BIG5-2003")
-    test("stateless" "TDS565")
-    test("stateless" "ATARIST")
-    test("stateless" "RISCOS-LATIN1")
-endif()
+# Extra encodings.
+test("stateless" "EUC-JISX0213")
+test("stateless" "SHIFT_JISX0213")
+test("stateful"  "ISO-2022-JP-3")
+test("stateless" "BIG5-2003")
+test("stateless" "TDS565")
+test("stateless" "ATARIST")
+test("stateless" "RISCOS-LATIN1")

@@ -24,10 +24,6 @@
 #include <iostream>
 #include <limits.h>
 
-#ifndef DLL_VARIABLE
-#error Macro "DLL_VARIABLE" is not defined, you should define it for export symbols.
-#endif
-
 namespace cppp
 {
 namespace base
@@ -37,33 +33,6 @@ namespace reiconv
 
     /* Iconv handle. */
     typedef void* iconv_t;
-
-#if ENABLE_EXTRA
-/*
- * Consider all system dependent encodings, for any system,
- * and the extra encodings.
- */
-#define USE_AIX
-#define USE_DOS
-#define USE_ZOS
-#define USE_EXTRA
-#else
-/*
- * Consider those system dependent encodings that are needed for the
- * current system.
- */
-#ifdef _AIX
-#define USE_AIX
-#endif
-#if defined(__DJGPP__) || (defined(_WIN32) && (defined(_MSC_VER) || defined(__MINGW32__)))
-#define USE_DOS
-#endif
-/* Enable the EBCDIC encodings not only on z/OS but also on Linux/s390, for
-  easier interoperability between z/OS and Linux/s390.  */
-#if defined(__MVS__) || (defined(__linux__) && (defined(__s390__) || defined(__s390x__)))
-#define USE_ZOS
-#endif
-#endif
 
 /*
  * Data type for general conversion loop.
@@ -93,19 +62,8 @@ struct encoding
 enum
 {
 #define DEFENCODING(xxx_names, codepage, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
-#include "encodings.def"
-#ifdef USE_AIX
-#include "encodings_aix.def"
-#endif
-#ifdef USE_DOS
-#include "encodings_dos.def"
-#endif
-#ifdef USE_ZOS
-#include "encodings_zos.def"
-#endif
-#ifdef USE_EXTRA
-#include "encodings_extra.def"
-#endif
+#include "encodings.h.snippet"
+
 #undef DEFENCODING
     ei_for_broken_compilers_that_dont_like_trailing_commas
 };
@@ -113,19 +71,7 @@ enum
 static struct encoding const all_encodings[] = {
 #define DEFENCODING(xxx_names, codepage, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                      \
     {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2, ei_##xxx##_oflags, codepage},
-#include "encodings.def"
-#ifdef USE_AIX
-#include "encodings_aix.def"
-#endif
-#ifdef USE_DOS
-#include "encodings_dos.def"
-#endif
-#ifdef USE_ZOS
-#include "encodings_zos.def"
-#endif
-#ifdef USE_EXTRA
-#include "encodings_extra.def"
-#endif
+#include "encodings.h.snippet"
 #undef DEFENCODING
 };
 #undef DEFALIAS
@@ -154,58 +100,27 @@ static inline int lookup_by_codepage(int codepage)
  *   const struct alias * HashPool::aliases_lookup (const char *str, unsigned int len);
  *   #define MAX_WORD_LENGTH ...
  */
-#if defined _AIX
-#include "aliases_sysaix.h"
-#elif defined hpux || defined __hpux
-#include "aliases_syshpux.h"
-#elif defined __sun
-#include "aliases_syssolaris.h"
-#else
 #include "aliases.h"
-#endif
 
-/*
- * System dependent alias lookup function.
- * Defines
- *   inline static const struct alias* aliases2_lookup (const char *str);
- */
-#if defined(USE_AIX) || defined(USE_DOS) || defined(USE_ZOS) || defined(USE_EXTRA) /* || ... */
-struct stringpool2_t
-{
-#define S(tag, name, encoding_index) char stringpool_##tag[sizeof(name)];
-#include "aliases2.h"
-#undef S
-};
-static const struct stringpool2_t stringpool2_contents = {
-#define S(tag, name, encoding_index) name,
-#include "aliases2.h"
-#undef S
-};
-#define stringpool2 ((const char *)&stringpool2_contents)
-static const struct alias sysdep_aliases[] = {
-#define S(tag, name, encoding_index) {(int)(size_t)(void*)&((struct stringpool2_t *)0)->stringpool_##tag, encoding_index},
-#include "aliases2.h"
-#undef S
-};
-inline static const struct alias* aliases2_lookup(const char* str)
-{
-    const struct alias *ptr;
-    unsigned int count;
-    for (ptr = sysdep_aliases, count = sizeof(sysdep_aliases) / sizeof(sysdep_aliases[0]); count > 0; ptr++, count--)
-        if (!strcmp(str, stringpool2 + ptr->name))
-            return ptr;
-    return nullptr;
-}
-#else
 #define aliases2_lookup(str) nullptr
 #define stringpool2 nullptr
-#endif
 
 extern "C++"
 {
 
 #pragma region hidden-api
-    DLL_VARIABLE iconv_t iconv_open(const char* tocode, const char* fromcode)
+
+    void cddump(struct conv_struct* cd)
+    {
+        std::cerr << "cd->iindex: " << cd->iindex << std::endl;
+        std::cerr << "cd->istate: " << cd->istate << std::endl;
+        std::cerr << "cd->oindex: " << cd->oindex << std::endl;
+        std::cerr << "cd->oflags: " << cd->oflags << std::endl;
+        std::cerr << "cd->ostate: " << cd->ostate << std::endl;
+        std::cerr << "cd->discard_ilseq: " << cd->discard_ilseq << std::endl;
+    }
+
+    _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode)
     {
         struct conv_struct* cd;
         unsigned int from_index;
@@ -223,13 +138,15 @@ extern "C++"
 
     #include "iconv_open2.h"
 
+        cddump(cd);
+
         return (iconv_t)cd;
     invalid:
         errno = EINVAL;
         return (iconv_t)(-1);
     }
 
-    DLL_VARIABLE iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
+    _CPPP_API iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
     {
         struct conv_struct *cd;
         unsigned int from_index;
@@ -257,7 +174,7 @@ extern "C++"
         return (iconv_t)cd;
     }
 
-    DLL_VARIABLE size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
+    _CPPP_API size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
     {
         conv_t cd = (conv_t)icd;
         if (inbuf == nullptr || *inbuf == nullptr)
@@ -266,7 +183,7 @@ extern "C++"
             return cd->lfuncs.loop_convert(icd, (const char **)inbuf, inbytesleft, outbuf, outbytesleft);
     }
 
-    DLL_VARIABLE int iconv_close(iconv_t icd)
+    _CPPP_API int iconv_close(iconv_t icd)
     {
         conv_t cd = (conv_t)icd;
         free(cd);
@@ -276,11 +193,11 @@ extern "C++"
 #pragma endregion
 
     /* version number: (major<<8) + minor */
-    DLL_VARIABLE int reiconv_version = (3 << 8) + 0;
+    _CPPP_API int reiconv_version = (3 << 8) + 0;
 
     constexpr const size_t tmpbufsize = 4096;
 
-    DLL_VARIABLE int convert(const iconv_t& cd, const char *start, size_t inlength, char **resultp,
+    _CPPP_API int convert(const iconv_t& cd, const char *start, size_t inlength, char **resultp,
                     size_t *lengthp)
     {
         size_t length;
@@ -370,7 +287,7 @@ extern "C++"
         return 0;
     }
 
-    DLL_VARIABLE int convert(const char* tocode, const char* fromcode, const char* start,
+    _CPPP_API int convert(const char* tocode, const char* fromcode, const char* start,
                     size_t inlength, char** resultp, size_t* lengthp)
     {
         iconv_t cd = iconv_open(tocode, fromcode);
@@ -438,7 +355,7 @@ extern "C++"
         return ret;
     }
 
-    DLL_VARIABLE int convert(int tocode_cp, int fromcode_cp, const char* start,
+    _CPPP_API int convert(int tocode_cp, int fromcode_cp, const char* start,
                     size_t inlength, char** resultp, size_t* lengthp, bool strict)
     {
         iconv_t cd = iconv_open(tocode_cp, fromcode_cp, strict);
@@ -452,7 +369,7 @@ extern "C++"
         return ret;
     }
 
-    DLL_VARIABLE bool ascii_mbtou16(const char* str, size_t length, char16_t** resultp, size_t* lengthp)
+    _CPPP_API bool ascii_mbtou16(const char* str, size_t length, char16_t** resultp, size_t* lengthp)
     {
         if (resultp == nullptr || lengthp == nullptr)
         {
@@ -478,7 +395,7 @@ extern "C++"
         return true;
     }
 
-    DLL_VARIABLE bool ascii_mbtou32(const char* str, size_t length, char32_t** resultp, size_t* lengthp)
+    _CPPP_API bool ascii_mbtou32(const char* str, size_t length, char32_t** resultp, size_t* lengthp)
     {
         if (resultp == nullptr || lengthp == nullptr)
         {
