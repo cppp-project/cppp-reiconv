@@ -56,37 +56,34 @@ struct encoding
     struct mbtowc_funcs ifuncs; /* conversion multibyte -> unicode */
     struct wctomb_funcs ofuncs; /* conversion unicode -> multibyte */
     int oflags;                 /* flags for unicode -> multibyte conversion */
-    int codepage;               /* codepage number */
 };
-#define DEFALIAS(xxx_alias, xxx) /* nothing */
+
+#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
+#define DEFCODEPAGE(codepage, xxx)
+
 enum
 {
-#define DEFENCODING(xxx_names, codepage, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
-#include "encodings.h.snippet"
-
-#undef DEFENCODING
+    #include "encodings.h.snippet"
     ei_for_broken_compilers_that_dont_like_trailing_commas
 };
-#include "flags.h"
-static struct encoding const all_encodings[] = {
-#define DEFENCODING(xxx_names, codepage, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                      \
-    {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2, ei_##xxx##_oflags, codepage},
-#include "encodings.h.snippet"
-#undef DEFENCODING
-};
-#undef DEFALIAS
 
-static inline int lookup_by_codepage(int codepage)
+#undef DEFCODEPAGE
+#undef DEFENCODING
+
+#include "flags.h"
+
+#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                      \
+    {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2, ei_##xxx##_oflags},
+#define DEFCODEPAGE(codepage, xxx)
+
+static struct encoding const all_encodings[] =
 {
-    for(size_t i = 0; i < sizeof(all_encodings) / sizeof(all_encodings[0]); i++)
-    {
-        if(all_encodings[i].codepage == codepage)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
+    #include "encodings.h.snippet"
+};
+
+#undef DEFENCODING
+// #undef DEFCODEPAGE
+
 
 /*
  * Conversion loops.
@@ -101,9 +98,6 @@ static inline int lookup_by_codepage(int codepage)
  *   #define MAX_WORD_LENGTH ...
  */
 #include "aliases.h"
-
-#define aliases2_lookup(str) nullptr
-#define stringpool2 nullptr
 
 extern "C++"
 {
@@ -145,6 +139,8 @@ extern "C++"
         errno = EINVAL;
         return (iconv_t)(-1);
     }
+
+    int lookup_by_codepage(int) {return 0;}
 
     _CPPP_API iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
     {

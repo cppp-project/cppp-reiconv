@@ -97,15 +97,15 @@ int main()
     printf("#define HAVE_HANGUL_JAMO %d\n", bitmask);
     printf("\n");
 
-#define DEFENCODING(xxx_names, codepage, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                      \
+#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                      \
     {                                                                                                                  \
         struct wctomb_funcs ofuncs = xxx_ofuncs1, xxx_ofuncs2;                                                         \
         emit_encoding(&ofuncs, #xxx);                                                                                  \
     }
-#define DEFALIAS(xxx_alias, xxx) /* nothing */
+#define DEFCODEPAGE(codepage, xxx)
+
 /* Consider all encodings, including the system dependent ones. */
 #include "encodings.h.snippet"
-#undef DEFALIAS
 #undef DEFENCODING
 
     if (ferror(stdout) || fclose(stdout))
