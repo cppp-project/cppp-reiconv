@@ -16,7 +16,11 @@
 # If not, see <https://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.12)
-project(cppp-reiconv VERSION 3.0.0)
+project(cppp-reiconv
+        VERSION 3.0.0
+        DESCRIPTION "A character set conversion library based on GNU LIBICONV."
+        HOMEPAGE_URL "https://github.com/cppp-project/cppp-reiconv"
+        LANGUAGES CXX)
 
 option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." ON)
 
@@ -102,3 +106,5 @@ install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
         DESTINATION "${install_includedir}"
         RENAME "cppp/reiconv.hpp"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+
+include("${CMAKE_CURRENT_SOURCE_DIR}/cpack.cmake")
