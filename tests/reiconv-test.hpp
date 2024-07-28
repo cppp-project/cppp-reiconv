@@ -48,7 +48,7 @@ namespace test
             char* s = (char*)malloc(srclen);
             fread(s, 1, srclen, src);
             fclose(src);
-            cppp::base::reiconv::convert(to.c_str(), from.c_str(), s, srclen, &res, &len);
+            cppp::base::reiconv::convert(to.c_str(), from.c_str(), s, srclen, &res, &len, true);
 
             FILE* out = fopen(output_file_path.c_str(), "wb");
             fwrite(res, 1, len, out);

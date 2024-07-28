@@ -23,95 +23,83 @@
 #include <cstring>
 #include <iostream>
 #include <limits.h>
+#include <map>
 
-namespace cppp
+namespace cppp::base::reiconv
 {
-namespace base
-{
-namespace reiconv
-{
-
-    /* Iconv handle. */
+    // Iconv handle.
     typedef void* iconv_t;
 
-/*
- * Data type for general conversion loop.
- */
-struct loop_funcs
-{
-    size_t (*loop_convert)(iconv_t icd, const char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
-    size_t (*loop_reset)(iconv_t icd, char **outbuf, size_t *outbytesleft);
-};
+    // Data type for general conversion loop.
+    struct loop_funcs
+    {
+        size_t (*loop_convert)(iconv_t icd, const char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
+        size_t (*loop_reset)(iconv_t icd, char **outbuf, size_t *outbytesleft);
+    };
 
-/*
- * Converters.
- */
-#include "converters.h"
+    // Converters
+    #include "converters.h"
 
-/*
- * Table of all supported encodings.
- */
-struct encoding
-{
-    struct mbtowc_funcs ifuncs; /* conversion multibyte -> unicode */
-    struct wctomb_funcs ofuncs; /* conversion unicode -> multibyte */
-    int oflags;                 /* flags for unicode -> multibyte conversion */
-};
+    // Table of all supported encodings.
+    struct encoding
+    {
+        struct mbtowc_funcs ifuncs; // conversion multibyte -> unicode
+        struct wctomb_funcs ofuncs; // conversion unicode -> multibyte
+    };
 
 #define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
 #define DEFCODEPAGE(codepage, xxx)
 
-enum
-{
-    #include "encodings.h.snippet"
-    ei_for_broken_compilers_that_dont_like_trailing_commas
-};
+    enum
+    {
+        #include "encodings.h.snippet"
+    };
 
 #undef DEFCODEPAGE
 #undef DEFENCODING
 
-#include "flags.h"
-
-#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                      \
-    {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2, ei_##xxx##_oflags},
+#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) \
+    {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2},
 #define DEFCODEPAGE(codepage, xxx)
 
-static struct encoding const all_encodings[] =
-{
-    #include "encodings.h.snippet"
-};
+    static struct encoding const all_encodings[] =
+    {
+        #include "encodings.h.snippet"
+    };
 
 #undef DEFENCODING
-// #undef DEFCODEPAGE
+#undef DEFCODEPAGE
+
+#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)
+#define DEFCODEPAGE(codepage, xxx) {codepage, ei_##xxx},
+
+    static const std::map<int, int> codepage_to_eindex =
+    {
+        #include "encodings.h.snippet"
+    };
+
+#undef DEFENCODING
+#undef DEFCODEPAGE
 
 
-/*
- * Conversion loops.
- */
-#include "loops.h"
+    // Conversion loops.
+    #include "loops.h"
 
-/*
- * Alias lookup function.
- * Defines
- *   struct alias { int name; unsigned int encoding_index; };
- *   const struct alias * HashPool::aliases_lookup (const char *str, unsigned int len);
- *   #define MAX_WORD_LENGTH ...
- */
-#include "aliases.h"
-
-extern "C++"
-{
+    /**
+     * Alias lookup function.
+     * Defines
+     *   struct alias { int name; unsigned int encoding_index; };
+     *   const struct alias * HashPool::aliases_lookup (const char *str, unsigned int len);
+     *   #define MAX_WORD_LENGTH ...
+     */
+    #include "generated/aliases.h"
 
 #pragma region hidden-api
 
-    void cddump(struct conv_struct* cd)
+    static inline int lookup_by_codepage(int codepage)
     {
-        std::cerr << "cd->iindex: " << cd->iindex << std::endl;
-        std::cerr << "cd->istate: " << cd->istate << std::endl;
-        std::cerr << "cd->oindex: " << cd->oindex << std::endl;
-        std::cerr << "cd->oflags: " << cd->oflags << std::endl;
-        std::cerr << "cd->ostate: " << cd->ostate << std::endl;
-        std::cerr << "cd->discard_ilseq: " << cd->discard_ilseq << std::endl;
+        auto it = codepage_to_eindex.find(codepage);
+        return it != codepage_to_eindex.end() ? it->second : -1;
     }
 
     static inline size_t name_canonicalize(const char* name, char* buf)
@@ -138,77 +126,78 @@ extern "C++"
         return bp - buf;
     }
 
-    _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode)
+    static inline int lookup_by_name(const char* name)
     {
-        char tocode_buf[MAX_WORD_LENGTH + 9 + 9 + 1];
-        char fromcode_buf[MAX_WORD_LENGTH + 9 + 9 + 1];
+        char buf[MAX_WORD_LENGTH + 9 + 9 + 1];
+        size_t buf_len = name_canonicalize(name, buf);
+
+        if (buf_len >= 2 && buf[0] == 'C' && buf[1] == 'P')
+        {
+            int codepage = atoi(buf + 2);
+            return lookup_by_codepage(codepage);
+        }
+
+        const struct alias* ap = HashPool::aliases_lookup(buf, buf_len);
+        if (ap)
+        {
+            return ap->encoding_index;
+        }
+        return -1;
+    }
+
+    static inline struct conv_struct* iconv_open_from_index(int to_index, int from_index, int discard_ilseq)
+    {
         struct conv_struct* cd;
-        const struct alias *ap;
-        unsigned int from_index;
-        unsigned int to_index;
-        int discard_ilseq;
-
-        discard_ilseq = 0;
-        size_t tocode_buf_len = name_canonicalize(tocode, tocode_buf);
-        size_t fromcode_buf_len = name_canonicalize(fromcode, fromcode_buf);
-
-        ap = HashPool::aliases_lookup(tocode_buf, tocode_buf_len);
-        if (!ap)
-        {
-            goto invalid;
-        }
-        to_index = ap->encoding_index;
-
-        ap = HashPool::aliases_lookup(fromcode_buf, fromcode_buf_len);
-        if (!ap)
-        {
-            goto invalid;
-        }
-        from_index = ap->encoding_index;
-
         cd = (struct conv_struct*)malloc(sizeof(struct conv_struct));
         if (cd == nullptr)
         {
             errno = ENOMEM;
-            return (iconv_t)(-1);
+            return (struct conv_struct*)(-1);
         }
+        cd->iindex = from_index;
+        cd->ifuncs = all_encodings[from_index].ifuncs;
+        cd->oindex = to_index;
+        cd->ofuncs = all_encodings[to_index].ofuncs;
+        /* Initialize the loop functions. */
+        cd->lfuncs.loop_convert = unicode_loop_convert;
+        cd->lfuncs.loop_reset = unicode_loop_reset;
+        /* Initialize the states. */
+        cd->istate = 0;
+        cd->ostate = 0;
+        /* Initialize the operation flags. */
+        cd->discard_ilseq = discard_ilseq;
 
-    #include "iconv_open2.h"
-
-        cddump(cd);
-
-        return (iconv_t)cd;
-    invalid:
-        errno = EINVAL;
-        return (iconv_t)(-1);
+        return cd;
     }
 
-    int lookup_by_codepage(int) {return 0;}
-
-    _CPPP_API iconv_t iconv_open(int tocode_cp, int fromcode_cp, bool strict)
+    _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode, bool strict)
     {
-        struct conv_struct *cd;
-        unsigned int from_index;
-        unsigned int to_index;
-        int discard_ilseq = (int)!strict;
+        unsigned int to_index = lookup_by_name(tocode);
+        unsigned int from_index = lookup_by_name(fromcode);
 
-        to_index = lookup_by_codepage(tocode_cp);
-        from_index = lookup_by_codepage(fromcode_cp);
-
-        if(to_index == -1 || from_index == -1 || tocode_cp == -1 || fromcode_cp == -1)
+        if (to_index == -1 || from_index == -1)
         {
             errno = EINVAL;
             return (iconv_t)(-1);
         }
 
-        cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
-        if (cd == nullptr)
+        struct conv_struct* cd = iconv_open_from_index(to_index, from_index, (int)!strict);
+
+        return (iconv_t)cd;
+    }
+
+    _CPPP_API iconv_t iconv_open(int tocode, int fromcode, bool strict)
+    {
+        unsigned int to_index = lookup_by_codepage(tocode);
+        unsigned int from_index = lookup_by_codepage(fromcode);
+
+        if (to_index == -1 || from_index == -1)
         {
-            errno = ENOMEM;
+            errno = EINVAL;
             return (iconv_t)(-1);
         }
 
-        #include "iconv_open2.h"
+        struct conv_struct* cd = iconv_open_from_index(to_index, from_index, (int)!strict);
 
         return (iconv_t)cd;
     }
@@ -234,23 +223,23 @@ extern "C++"
     /* version number: (major<<8) + minor */
     _CPPP_API int reiconv_version = (3 << 8) + 0;
 
-    constexpr const size_t tmpbufsize = 4096;
+    constexpr const size_t TEMP_BUFFER_SIZE = 4096;
 
     _CPPP_API int convert(const iconv_t& cd, const char *start, size_t inlength, char **resultp,
-                    size_t *lengthp)
+                    size_t *lengthp, bool strict)
     {
         size_t length;
         char* result;
         /* Determine the length we need. */
         {
             size_t count = 0;
-            char tmpbuf[tmpbufsize];
+            char tmpbuf[TEMP_BUFFER_SIZE];
             char* inptr = (char*)start;
             size_t insize = inlength;
             while (insize > 0)
             {
                 char *outptr = tmpbuf;
-                size_t outsize = tmpbufsize;
+                size_t outsize = TEMP_BUFFER_SIZE;
                 size_t res = iconv(cd, &inptr, &insize, &outptr, &outsize);
                 if (res == (size_t)(-1) && errno != E2BIG)
                 {
@@ -260,7 +249,7 @@ extern "C++"
             }
             {
                 char *outptr = tmpbuf;
-                size_t outsize = tmpbufsize;
+                size_t outsize = TEMP_BUFFER_SIZE;
                 size_t res = iconv(cd, nullptr, nullptr, &outptr, &outsize);
                 if (res == (size_t)(-1))
                 {
@@ -327,9 +316,9 @@ extern "C++"
     }
 
     _CPPP_API int convert(const char* tocode, const char* fromcode, const char* start,
-                    size_t inlength, char** resultp, size_t* lengthp)
+                    size_t inlength, char** resultp, size_t* lengthp, bool strict)
     {
-        iconv_t cd = iconv_open(tocode, fromcode);
+        iconv_t cd = iconv_open(tocode, fromcode, strict);
         if (cd == (iconv_t)(-1))
         {
             if (errno != EINVAL)
@@ -337,7 +326,7 @@ extern "C++"
                 return -1;
             }
 
-    #pragma region autodetect
+#pragma region autodetect
             /* Unsupported fromcode or tocode. Check whether the caller requested
             autodetection. */
             if (!strcmp(fromcode, "autodetect_utf8"))
@@ -345,10 +334,10 @@ extern "C++"
                 int ret;
                 /* Try UTF-8 first. There are very few ISO-8859-1 inputs that would
                 be valid UTF-8, but many UTF-8 inputs are valid ISO-8859-1. */
-                ret = convert(tocode, "UTF-8", start, inlength, resultp, lengthp);
+                ret = convert(tocode, "UTF-8", start, inlength, resultp, lengthp, strict);
                 if (!(ret < 0 && errno == EILSEQ))
                     return ret;
-                ret = convert(tocode, "ISO-8859-1", start, inlength, resultp, lengthp);
+                ret = convert(tocode, "ISO-8859-1", start, inlength, resultp, lengthp, strict);
                 return ret;
             }
             if (!strcmp(fromcode, "autodetect_jp"))
@@ -356,7 +345,7 @@ extern "C++"
                 int ret;
                 /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
                 it will fail. */
-                ret = convert(tocode, "ISO-2022-JP-2", start, inlength, resultp, lengthp);
+                ret = convert(tocode, "ISO-2022-JP-2", start, inlength, resultp, lengthp, strict);
                 if (!(ret < 0 && errno == EILSEQ))
                     return ret;
                 /* Try EUC-JP next. Short SHIFT_JIS inputs may come out wrong. This
@@ -364,11 +353,11 @@ extern "C++"
                 If we tried SHIFT_JIS first, then some short EUC-JP inputs would
                 come out wrong, and people would condemn EUC-JP and Unix, which
                 would not be good. */
-                ret = convert(tocode, "EUC-JP", start, inlength, resultp, lengthp);
+                ret = convert(tocode, "EUC-JP", start, inlength, resultp, lengthp, strict);
                 if (!(ret < 0 && errno == EILSEQ))
                     return ret;
                 /* Finally try SHIFT_JIS. */
-                ret = convert(tocode, "SHIFT_JIS", start, inlength, resultp, lengthp);
+                ret = convert(tocode, "SHIFT_JIS", start, inlength, resultp, lengthp, strict);
                 return ret;
             }
             if (!strcmp(fromcode, "autodetect_kr"))
@@ -376,23 +365,25 @@ extern "C++"
                 int ret;
                 /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
                 it will fail. */
-                ret = convert(tocode, "ISO-2022-KR", start, inlength, resultp, lengthp);
+                ret = convert(tocode, "ISO-2022-KR", start, inlength, resultp, lengthp, strict);
                 if (!(ret < 0 && errno == EILSEQ))
                     return ret;
                 /* Finally try EUC-KR. */
-                ret = convert(tocode, "EUC-KR", start, inlength, resultp, lengthp);
+                ret = convert(tocode, "EUC-KR", start, inlength, resultp, lengthp, strict);
                 return ret;
             }
-    #pragma endregion
+#pragma endregion
 
             errno = EINVAL;
             return -1;
         }
 
-        int ret = convert(cd, start, inlength, resultp, lengthp);
+        int ret = convert(cd, start, inlength, resultp, lengthp, strict);
         iconv_close(cd);
         return ret;
     }
+
+#if 0
 
     _CPPP_API int convert(int tocode_cp, int fromcode_cp, const char* start,
                     size_t inlength, char** resultp, size_t* lengthp, bool strict)
@@ -407,6 +398,8 @@ extern "C++"
         iconv_close(cd);
         return ret;
     }
+
+#endif
 
     _CPPP_API bool ascii_mbtou16(const char* str, size_t length, char16_t** resultp, size_t* lengthp)
     {
@@ -460,8 +453,4 @@ extern "C++"
         return true;
     }
 
-} // extern "C++"
-
-} // namespace reiconv
-} // namespace base
-} // namespace cppp
+} // namespace cppp::base::reiconv

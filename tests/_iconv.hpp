@@ -35,7 +35,7 @@ namespace cppp::base::reiconv
 {
     typedef void* iconv_t;
 
-    extern _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode);
+    extern _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode, bool strict);
     extern _CPPP_API size_t iconv(iconv_t icd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
     extern _CPPP_API int iconv_close(iconv_t cd);
 }  // namespace cppp::base::reiconv

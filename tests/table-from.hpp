@@ -131,7 +131,7 @@ namespace test
         iconv_t cd;
         int search_depth;
 
-        cd = iconv_open("UCS-4-INTERNAL", charset.c_str());
+        cd = iconv_open("UCS-4-INTERNAL", charset.c_str(), true);
         if (cd == (iconv_t)(-1))
         {
             error("iconv_open"," Iconv open error.");

@@ -47,6 +47,28 @@ elseif(HAVE_VISIBILITY)
 else()
 set(CPPP_API "")
 endif()
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")    
+    add_compile_options(-Wno-unused-parameter)
+    add_compile_options(-Wno-missing-field-initializers)
+    add_compile_options(-Wno-implicit-fallthrough)
+    add_compile_options(-Wno-unused-function)
+    add_compile_options(-Wno-sign-compare)
+    add_compile_options(-Wno-type-limits)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    add_compile_options(-Wno-unused-parameter)
+    add_compile_options(-Wno-missing-field-initializers)
+    add_compile_options(-Wno-implicit-fallthrough)
+    add_compile_options(-Wno-unused-function)
+    add_compile_options(-Wno-sign-compare)
+    add_compile_options(-Wno-type-limits)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    add_compile_options(/wd4996)
+    add_compile_options(/wd4267)
+    add_compile_options(/wd4244)
+    add_compile_options(/wd4018)
+endif()
+
 add_compile_definitions("_CPPP_API=${CPPP_API}")
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
@@ -68,7 +90,6 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${outp
 
 # Add includes.
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib/generated")
 include_directories("${output_includedir}")
 
 # Add library.

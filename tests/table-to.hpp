@@ -50,7 +50,7 @@ namespace test
         iconv_t cd;
         int bmp_only;
 
-        cd = iconv_open(charset.c_str(), "UCS-4-INTERNAL");
+        cd = iconv_open(charset.c_str(), "UCS-4-INTERNAL", true);
         if (cd == (iconv_t)(-1))
         {
             error("iconv_open", "Iconv open error.");

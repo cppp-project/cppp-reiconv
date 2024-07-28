@@ -100,7 +100,9 @@ namespace cppp::base::reiconv
      */
     extern _CPPP_API int convert(const char *tocode, const char *fromcode,
                                  const char *start, size_t inlength,
-                                 char **resultp, size_t *lengthp);
+                                 char **resultp, size_t *lengthp, bool strict);
+
+#if 0
 
     /**
      * @brief Converts an entire string from one encoding to another,
@@ -172,5 +174,7 @@ namespace cppp::base::reiconv
                                  const char *start, size_t inlength,
                                  char **resultp, size_t *lengthp,
                                  bool strict = true);
+
+#endif
 
 } // namespace cppp::base::reiconv

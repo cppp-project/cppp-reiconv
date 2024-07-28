@@ -102,7 +102,6 @@ struct conv_struct {
   /* Output (conversion unicode -> multibyte) */
   int oindex;
   struct wctomb_funcs ofuncs;
-  int oflags;
   state_t ostate;
   /* Operation flags */
   int discard_ilseq;
