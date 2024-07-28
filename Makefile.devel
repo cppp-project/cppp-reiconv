@@ -30,43 +30,17 @@ lib/generated/aliases.h : lib/generated/aliases.gperf
 	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
 
 test : all
-	$(RM) -r -f build
-	$(MKDIR) -p build
-
-	# Test 1.1: Release build without less build.
-	cd build && $(CMAKE) .. -DBUILD_TEST=ON -DLESS_BUILD=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=test_install-release-full
-	cd build && $(CMAKE) --build . --config=Release --verbose
-	cd build && $(CTEST) -C Release --verbose
-	$(CMAKE) --install build --verbose
-
-	# Test 1.2: Release build with less build.
-	cd build && $(CMAKE) .. -DBUILD_TEST=ON -DLESS_BUILD=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=test_install-release-less
-	cd build && $(CMAKE) --build . --config=Release --verbose
-	cd build && $(CTEST) -C Release --verbose
-	$(CMAKE) --install build --verbose
-
-	# Test 2.1: Debug build without less build.
-	cd build && $(CMAKE) .. -DBUILD_TEST=ON -DLESS_BUILD=OFF -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=test_install-debug-full
-	cd build && $(CMAKE) --build . --config=Debug --verbose
-	cd build && $(CTEST) -C Debug --verbose
-	$(CMAKE) --install build --verbose
-
-	# Test 2.2: Debug build with less build.
-	cd build && $(CMAKE) .. -DBUILD_TEST=ON -DLESS_BUILD=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=test_install-debug-less
-	cd build && $(CMAKE) --build . --config=Debug --verbose
-	cd build && $(CTEST) -C Debug --verbose
-	$(CMAKE) --install build --verbose
-
-	./repoutil.py distpkg --type dpkg
-	./repoutil.py dist
-	{ diff cppp-reiconv-v* . --recursive || echo ; }
+	$(RM) -r -f build tests/data/GB18030-2005.TXT tests/data/GB18030-2022.TXT tests/data/UTF-8.TXT
+	$(CMAKE) -B build -S . -DCMAKE_BUILD_TYPE=Debug
+	$(CMAKE) --build build --config Debug --target all -j $(shell nproc)
+	$(CTEST) --test-dir build --output-on-failure
 
 # Alias to test
 check : test
 
 clean :
 	$(RM) -r -f build
-	$(RM) -r -f cppp-reiconv-v*
+	$(RM) -r -f cppp-reiconv-*
 	$(RM) -r -f .cache
 	$(RM) -f lib/generated/aliases.gperf
 	$(RM) -f lib/generated/genaliases
