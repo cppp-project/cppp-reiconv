@@ -25,6 +25,7 @@
 
 #pragma once
 
+#include <cppp/reiconv.hpp>
 #include <stddef.h>
 
 #if _MSC_VER >= 1600

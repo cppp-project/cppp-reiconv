@@ -30,13 +30,7 @@
 #include <stddef.h>
 
 #ifndef _CPPP_API
-    #ifdef _MSC_VER
-        #define _CPPP_API __declspec(dllexport)
-    #elif defined(__GNUC__)
-        #define _CPPP_API __attribute__((visibility("default")))
-    #else
-        #define _CPPP_API
-    #endif
+#define _CPPP_API @CPPP_API@
 #endif
 
 #if _MSC_VER >= 1600

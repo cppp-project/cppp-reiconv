@@ -39,15 +39,6 @@ include("${BUILD_AUX}/cmake/cppp.cmake")
 
 check_have_visibility()
 
-# Generate header file for build.
-if(WIN32)
-    set(CPPP_API "__declspec(dllexport)")
-elseif(HAVE_VISIBILITY)
-    set(CPPP_API "__attribute__((visibility(\"default\")))")
-else()
-set(CPPP_API "")
-endif()
-
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")    
     add_compile_options(-Wno-unused-parameter)
     add_compile_options(-Wno-missing-field-initializers)
@@ -69,11 +60,6 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/wd4018)
 endif()
 
-add_compile_definitions("_CPPP_API=${CPPP_API}")
-
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/cppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
-
 # Generate header file for install.
 if(WIN32)
     set(CPPP_API "__declspec(dllimport)")
@@ -83,10 +69,17 @@ else()
     set(CPPP_API "")
 endif()
 
-remove_definitions("_CPPP_API")
-add_compile_definitions("_CPPP_API=${CPPP_API}")
-
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
+
+
+# Generate header file for build.
+if(WIN32)
+    set(CPPP_API "__declspec(dllexport)")
+endif()
+
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/cppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
+
 
 # Add includes.
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
