@@ -21,6 +21,7 @@
 
 /* DEFENCODING(( name, alias1, ..., ),
                xxx,
+               xxx_index,
                { xxx_mbtowc, xxx_flushwc },
                { xxx_wctomb, xxx_reset })
    defines an encoding with the given name and aliases. (There is no
@@ -29,7 +30,9 @@
    All names and aliases must be in ASCII. Case is not significant, but
    for the "cs*" aliases mixed case is preferred, otherwise UPPERCASE is
    preferred. For all names and aliases, note where it comes from.
-   xxx is the name as used in the C code (lowercase).
+   xxx is the name as used in the C code (lowercase). xxx_index provides
+   a unique index for the encoding. It will be used in a enum for fast
+   access to the encoding.
  */
 
 /* The list of all system independent user-visible encodings. */
@@ -49,15 +52,17 @@ DEFENCODING(("USASCII",         /* IANA */
              "646",             /* Solaris */
              ),
             ascii,
+            ASCII,
             {ascii_mbtowc, nullptr}, {ascii_wctomb, nullptr})
 
 DEFCODEPAGE(367, ascii)
 
-/* General multi-byte encodings */
 
+/* General multi-byte encodings */
 DEFENCODING(("UTF8", /* IANA, RFC 2279 */
              ),
             utf8,
+            UTF8,
             {utf8_mbtowc, nullptr}, {utf8_wctomb, nullptr})
 
 DEFCODEPAGE(65001, utf8)
@@ -67,72 +72,83 @@ DEFENCODING(("UCS2",         /* glibc */
              "csUnicode",    /* IANA */
              ),
             ucs2,
+            UCS2,
             {ucs2_mbtowc, nullptr}, {ucs2_wctomb, nullptr})
+
 
 DEFENCODING(("UCS2BE",      /* glibc */
              "UNICODEBIG",  /* glibc */
              "UNICODE11",   /* IANA */
              "csUnicode11", /* IANA */
-             /*"CP1201",                  Windows */
              ),
             ucs2be,
+            UCS2BE,
             {ucs2be_mbtowc, nullptr}, {ucs2be_wctomb, nullptr})
+
+DEFCODEPAGE(1201, ucs2be)
 
 DEFENCODING(("UCS2LE",        /* glibc */
              "UNICODELITTLE", /* glibc */
-             /*"CP1200",                  Windows */
              ),
             ucs2le,
+            UCS2LE,
             {ucs2le_mbtowc, nullptr}, {ucs2le_wctomb, nullptr})
+
+DEFCODEPAGE(1200, ucs2le)
 
 DEFENCODING(("UCS4",         /* glibc */
              "ISO10646UCS4", /* IANA */
              "csUCS4",       /* IANA */
              ),
             ucs4,
+            UCS4,
             {ucs4_mbtowc, nullptr}, {ucs4_wctomb, nullptr})
 
+
 DEFENCODING(("UCS4BE", /* glibc */
-             /*"CP12001",                 Windows */
              ),
             ucs4be,
+            UCS4BE,
             {ucs4be_mbtowc, nullptr}, {ucs4be_wctomb, nullptr})
 
+DEFCODEPAGE(12001, ucs4be)
+
 DEFENCODING(("UCS4LE", /* glibc */
-             /*"CP12000",                 Windows */
              ),
             ucs4le,
+            UCS4LE,
             {ucs4le_mbtowc, nullptr}, {ucs4le_wctomb, nullptr})
+
+DEFCODEPAGE(12000, ucs4le)
 
 DEFENCODING(("UTF16", /* IANA, RFC 2781 */
              ),
             utf16,
+            UTF16,
             {utf16_mbtowc, nullptr}, {utf16_wctomb, nullptr})
-
-/* MS-Windows Use little endian, so CP1200 means UTF-16LE */
 
 DEFENCODING(("UTF16BE", /* IANA, RFC 2781 */
              ),
             utf16be,
+            UTF16BE,
             {utf16be_mbtowc, nullptr}, {utf16be_wctomb, nullptr})
-
-DEFCODEPAGE(1201, utf16be)
 
 DEFENCODING(("UTF16LE", /* IANA, RFC 2781 */
              ),
             utf16le,
+            UTF16LE,
             {utf16le_mbtowc, nullptr}, {utf16le_wctomb, nullptr})
-
-DEFCODEPAGE(1200, utf16le)
 
 DEFENCODING(("UTF32", /* IANA, Unicode 3.1 */
              ),
             utf32,
+            UTF32,
             {utf32_mbtowc, nullptr}, {utf32_wctomb, nullptr})
 
 DEFENCODING(("UTF32BE", /* IANA, Unicode 3.1 */
              ),
             utf32be,
+            UTF32BE,
             {utf32be_mbtowc, nullptr}, {utf32be_wctomb, nullptr})
 
 DEFCODEPAGE(12001, utf32be)
@@ -140,6 +156,7 @@ DEFCODEPAGE(12001, utf32be)
 DEFENCODING(("UTF32LE", /* IANA, Unicode 3.1 */
              ),
             utf32le,
+            UTF32LE,
             {utf32le_mbtowc, nullptr}, {utf32le_wctomb, nullptr})
 
 DEFCODEPAGE(12000, utf32le)
@@ -147,43 +164,52 @@ DEFCODEPAGE(12000, utf32le)
 DEFENCODING(("UTF7",            /* IANA, RFC 2152 */
              "UNICODE11UTF7",   /* IANA, RFC 1642 */
              "csUnicode11UTF7", /* IANA */
-             /*"CP65000",                 Windows */
              ),
             utf7,
+            UTF7,
             {utf7_mbtowc, nullptr}, {utf7_wctomb, utf7_reset})
 
 DEFCODEPAGE(65000, utf7)
 
+// UCS-2/4-INTERNAL/SWAPPED are not standard encodings, but are used by
+// cppp-reiconv(and libiconv)'s testsuite.
+
 DEFENCODING(("UCS2INTERNAL", /* libiconv */
              ),
             ucs2internal,
+            UCS2_INTERNAL,
             {ucs2internal_mbtowc, nullptr}, {ucs2internal_wctomb, nullptr})
 
 DEFENCODING(("UCS2SWAPPED", /* libiconv */
              ),
             ucs2swapped,
+            UCS2_SWAPPED,
             {ucs2swapped_mbtowc, nullptr}, {ucs2swapped_wctomb, nullptr})
 
 DEFENCODING(("UCS4INTERNAL", /* libiconv */
              ),
             ucs4internal,
+            UCS4_INTERNAL,
             {ucs4internal_mbtowc, nullptr}, {ucs4internal_wctomb, nullptr})
 
 DEFENCODING(("UCS4SWAPPED", /* libiconv */
              ),
             ucs4swapped,
+            UCS4_SWAPPED,
             {ucs4swapped_mbtowc, nullptr}, {ucs4swapped_wctomb, nullptr})
 
 DEFENCODING(("C99", ),
             c99,
+            C99,
             {c99_mbtowc, nullptr}, {c99_wctomb, nullptr})
 
 DEFENCODING(("JAVA", ),
             java,
+            JAVA,
             {java_mbtowc, nullptr}, {java_wctomb, nullptr})
 
-/* Standard 8-bit encodings */
 
+/* Standard 8-bit encodings */
 DEFENCODING(("ISO88591",      /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1, Solaris */
              "ISO88591:1987", /* IANA */
              "ISOIR100",      /* IANA */
@@ -193,6 +219,7 @@ DEFENCODING(("ISO88591",      /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1
              "csISOLatin1",   /* IANA */
              ),
             iso8859_1,
+            ISO8859_1,
             {iso8859_1_mbtowc, nullptr}, {iso8859_1_wctomb, nullptr})
 
 DEFCODEPAGE(819, iso8859_1)
@@ -206,6 +233,7 @@ DEFENCODING(("ISO88592",       /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/
              "csISOLatin2",    /* IANA */
              ),
             iso8859_2,
+            ISO8859_2,
             {iso8859_2_mbtowc, nullptr}, {iso8859_2_wctomb, nullptr})
 
 DEFCODEPAGE(28592, iso8859_2)
@@ -218,6 +246,7 @@ DEFENCODING(("ISO88593",      /* IANA, X11R6.4, glibc, FreeBSD, Solaris */
              "csISOLatin3",   /* IANA */
              ),
             iso8859_3,
+            ISO8859_3,
             {iso8859_3_mbtowc, nullptr}, {iso8859_3_wctomb, nullptr})
 
 DEFCODEPAGE(28593, iso8859_3)
@@ -230,6 +259,7 @@ DEFENCODING(("ISO88594",      /* IANA, X11R6.4, glibc, FreeBSD, OSF/1, Solaris *
              "csISOLatin4",   /* IANA */
              ),
             iso8859_4,
+            ISO8859_4,
             {iso8859_4_mbtowc, nullptr}, {iso8859_4_wctomb, nullptr})
 
 DEFCODEPAGE(28594, iso8859_4)
@@ -241,6 +271,7 @@ DEFENCODING(("ISO88595",           /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, 
              "csISOLatinCyrillic", /* IANA */
              ),
             iso8859_5,
+            ISO8859_5,
             {iso8859_5_mbtowc, nullptr}, {iso8859_5_wctomb, nullptr})
 
 DEFCODEPAGE(28595, iso8859_5)
@@ -254,6 +285,7 @@ DEFENCODING(("ISO88596",         /* IANA, X11R6.4, glibc, FreeBSD, AIX, Solaris 
              "csISOLatinArabic", /* IANA */
              ),
             iso8859_6,
+            ISO8859_6,
             {iso8859_6_mbtowc, nullptr}, {iso8859_6_wctomb, nullptr})
 
 DEFCODEPAGE(28596, iso8859_6)
@@ -269,6 +301,7 @@ DEFENCODING(("ISO88597",      /* IANA, RFC 1947, X11R6.4, glibc, FreeBSD, AIX, I
              "csISOLatinGreek", /* IANA */
              ),
             iso8859_7,
+            ISO8859_7,
             {iso8859_7_mbtowc, nullptr}, {iso8859_7_wctomb, nullptr})
 
 DEFCODEPAGE(28597, iso8859_7)
@@ -280,6 +313,7 @@ DEFENCODING(("ISO88598",         /* IANA, X11R6.4, glibc, FreeBSD, AIX, OSF/1, S
              "csISOLatinHebrew", /* IANA */
              ),
             iso8859_8,
+            ISO8859_8,
             {iso8859_8_mbtowc, nullptr}, {iso8859_8_wctomb, nullptr})
 
 DEFCODEPAGE(28598, iso8859_8)
@@ -293,6 +327,7 @@ DEFENCODING(("ISO88599",      /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1
              "csISOLatin5",   /* IANA */
              ),
             iso8859_9,
+            ISO8859_9,
             {iso8859_9_mbtowc, nullptr}, {iso8859_9_wctomb, nullptr})
 
 DEFCODEPAGE(28599, iso8859_9)
@@ -305,11 +340,13 @@ DEFENCODING(("ISO885910",       /* IANA, X11R6.4, glibc, FreeBSD */
              "csISOLatin6",     /* IANA */
              ),
             iso8859_10,
+            ISO8859_10,
             {iso8859_10_mbtowc, nullptr}, {iso8859_10_wctomb, nullptr})
 
 DEFENCODING(("ISO885911", /* glibc, X11R6.7, glibc */
              ),
             iso8859_11,
+            ISO8859_11,
             {iso8859_11_mbtowc, nullptr}, {iso8859_11_wctomb, nullptr})
 
 DEFENCODING(("ISO885913", /* IANA, glibc, FreeBSD */
@@ -319,6 +356,7 @@ DEFENCODING(("ISO885913", /* IANA, glibc, FreeBSD */
              "IBM921"     /* AIX */
              ),
             iso8859_13,
+            ISO8859_13,
             {iso8859_13_mbtowc, nullptr}, {iso8859_13_wctomb, nullptr})
 
 DEFCODEPAGE(28603, iso8859_13)
@@ -331,6 +369,7 @@ DEFENCODING(("ISO885914",      /* IANA, glibc, FreeBSD */
              "ISOCELTIC",      /* IANA */
              ),
             iso8859_14,
+            ISO8859_14,
             {iso8859_14_mbtowc, nullptr}, {iso8859_14_wctomb, nullptr})
 
 DEFENCODING(("ISO885915",      /* IANA, glibc, FreeBSD, AIX, OSF/1, Solaris */
@@ -339,6 +378,7 @@ DEFENCODING(("ISO885915",      /* IANA, glibc, FreeBSD, AIX, OSF/1, Solaris */
              "LATIN9", /* IANA */
              ),
             iso8859_15,
+            ISO8859_15,
             {iso8859_15_mbtowc, nullptr}, {iso8859_15_wctomb, nullptr})
 
 DEFCODEPAGE(28605, iso8859_15)
@@ -350,12 +390,14 @@ DEFENCODING(("ISO885916",      /* IANA, glibc, FreeBSD */
              "L10",            /* IANA */
              ),
             iso8859_16,
+            ISO8859_16,
             {iso8859_16_mbtowc, nullptr}, {iso8859_16_wctomb, nullptr})
 
 DEFENCODING(("KOI8R",   /* IANA, RFC 1489, X11R6.4, JDK 1.1 */
              "csKOI8R", /* IANA */
              ),
             koi8_r,
+            KOI8_R,
             {koi8_r_mbtowc, nullptr}, {koi8_r_wctomb, nullptr})
 
 DEFCODEPAGE(20866, koi8_r)
@@ -363,90 +405,111 @@ DEFCODEPAGE(20866, koi8_r)
 DEFENCODING(("KOI8U", /* IANA, RFC 2319 */
              ),
             koi8_u,
+            KOI8_U,
             {koi8_u_mbtowc, nullptr}, {koi8_u_wctomb, nullptr})
 
 DEFENCODING(("KOI8RU", ),
             koi8_ru,
+            KOI8_RU,
             {koi8_ru_mbtowc, nullptr}, {koi8_ru_wctomb, nullptr})
 
 DEFCODEPAGE(21866, koi8_ru)
 
-/* Windows 8-bit encodings */
 
+/* Windows 8-bit encodings */
 DEFENCODING(("CP1250",      /* JDK 1.1 */
+             "csWindows1250", /* IANA */
              "WINDOWS1250", /* IANA */
              "MSEE", ),
             cp1250,
+            MSEE,
             {cp1250_mbtowc, nullptr}, {cp1250_wctomb, nullptr})
 
 DEFCODEPAGE(1250, cp1250)
 
 DEFENCODING(("WINDOWS1251", /* IANA */
+             "csWindows1251", /* IANA */
              "MSCYRL",
              "ANSI1251", /* Solaris */
              ),
             cp1251,
+            MSCYRL,
             {cp1251_mbtowc, nullptr}, {cp1251_wctomb, nullptr})
 
 DEFCODEPAGE(1251, cp1251)
 
 DEFENCODING(("WINDOWS1252", /* IANA */
+             "csWindows1252", /* IANA */
              "IBM1252",     /* AIX */
              "MSANSI", ),
             cp1252,
+            MSANSI,
             {cp1252_mbtowc, nullptr}, {cp1252_wctomb, nullptr})
 
 DEFCODEPAGE(1252, cp1252)
 
 DEFENCODING(("WINDOWS1253", /* IANA */
+             "csWindows1253", /* IANA */
              "MSGREEK", ),
             cp1253,
+            MSGREEK,
             {cp1253_mbtowc, nullptr}, {cp1253_wctomb, nullptr})
 
 DEFCODEPAGE(1253, cp1253)
 
 DEFENCODING(("WINDOWS1254", /* IANA */
+             "csWindows1254", /* IANA */
              "MSTURK", ),
             cp1254,
+            MSTURK,
             {cp1254_mbtowc, nullptr}, {cp1254_wctomb, nullptr})
 
 DEFCODEPAGE(1254, cp1254)
 
 DEFENCODING(("WINDOWS1255", /* IANA */
+             "csWindows1255", /* IANA */
              "MSHEBR", ),
             cp1255,
+            MSHEBR,
             {cp1255_mbtowc, cp1255_flushwc}, {cp1255_wctomb, nullptr})
 
 DEFCODEPAGE(1255, cp1255)
 
 DEFENCODING(("WINDOWS1256", /* IANA */
+             "csWindows1256", /* IANA */
              "MSARAB", ),
             cp1256,
+            MSARAB,
             {cp1256_mbtowc, nullptr}, {cp1256_wctomb, nullptr})
 
 DEFCODEPAGE(1256, cp1256)
 
 DEFENCODING(("WINDOWS1257", /* IANA */
+             "csWindows1257", /* IANA */
              "WINBALTRIM", ),
             cp1257,
+            WINBALTRIM,
             {cp1257_mbtowc, nullptr}, {cp1257_wctomb, nullptr})
 
 DEFCODEPAGE(1257, cp1257)
 
 DEFENCODING(("WINDOWS1258", /* IANA */
+             "csWindows1258", /* IANA */
              ),
             cp1258,
+            WINDOWS1258,
             {cp1258_mbtowc, cp1258_flushwc}, {cp1258_wctomb, nullptr})
 
 DEFCODEPAGE(1258, cp1258)
 
-/* DOS 8-bit encodings */
 
+/* DOS 8-bit encodings */
 DEFENCODING(("IBM850",              /* IANA */
              "850",                 /* IANA */
              "csPC850Multilingual", /* IANA */
              ),
             cp850,
+            IBM850,
             {cp850_mbtowc, nullptr}, {cp850_wctomb, nullptr})
 
 DEFCODEPAGE(850, cp850)
@@ -454,8 +517,10 @@ DEFCODEPAGE(850, cp850)
 DEFENCODING(("IBM862",             /* IANA */
              "862",                /* IANA */
              "csPC862LatinHebrew", /* IANA */
+             "DOS862",             /* .NET */
              ),
             cp862,
+            IBM862,
             {cp862_mbtowc, nullptr}, {cp862_wctomb, nullptr})
 
 DEFCODEPAGE(862, cp862)
@@ -465,6 +530,7 @@ DEFENCODING(("IBM866",   /* IANA */
              "csIBM866", /* IANA */
              ),
             cp866,
+            IBM866,
             {cp866_mbtowc, nullptr}, {cp866_wctomb, nullptr})
 
 DEFCODEPAGE(866, cp866)
@@ -472,13 +538,14 @@ DEFCODEPAGE(866, cp866)
 DEFENCODING(("IBM1131", /* AIX */
              ),
             cp1131,
+            IBM1131,
             {cp1131_mbtowc, nullptr}, {cp1131_wctomb, nullptr})
 
 DEFCODEPAGE(1131, cp1131)
 
 /* Macintosh 8-bit encodings */
 
-/* This is the best table for MACINTOSH. The
+/* This is the best table for MACINTOSH. The        :)
    ones in glibc and FreeBSD-iconv are bad quality. */
 DEFENCODING(("MacRoman",    /* JDK 1.1 */
              "MACINTOSH",   /* IANA */
@@ -486,84 +553,106 @@ DEFENCODING(("MacRoman",    /* JDK 1.1 */
              "csMacintosh", /* IANA */
              ),
             mac_roman,
+            MACINTOSH,
             {mac_roman_mbtowc, nullptr}, {mac_roman_wctomb, nullptr})
 
 DEFCODEPAGE(10000, mac_roman)
 
 DEFENCODING(("MacCentralEurope", /* JDK 1.1 */
-             "xmacce",           /* Windows */
+             "XMacCE",           /* Windows */
              ),
             mac_centraleurope,
+            MAC_CENTRALEUROPE,
             {mac_centraleurope_mbtowc, nullptr}, {mac_centraleurope_wctomb, nullptr})
 
 DEFCODEPAGE(10029, mac_centraleurope)
 
 DEFENCODING(("MacIceland", /* JDK 1.1 */
+             "XMacIcelandic", /* Windows */
              ),
             mac_iceland,
+            MAC_ICELAND,
             {mac_iceland_mbtowc, nullptr}, {mac_iceland_wctomb, nullptr})
 
 DEFCODEPAGE(10079, mac_iceland)
 
 DEFENCODING(("MacCroatian", /* JDK 1.1 */
+             "XMacCroatian", /* Windows */
              ),
             mac_croatian,
+            MAC_CROATIAN,
             {mac_croatian_mbtowc, nullptr}, {mac_croatian_wctomb, nullptr})
 
 DEFCODEPAGE(10082, mac_croatian)
 
 DEFENCODING(("MacRomania", /* JDK 1.1 */
+             "XMacRomanian", /* Windows */
              ),
             mac_romania,
+            MAC_ROMANIA,
             {mac_romania_mbtowc, nullptr}, {mac_romania_wctomb, nullptr})
 
 DEFCODEPAGE(10010, mac_romania)
 
 DEFENCODING(("MacCyrillic", /* JDK 1.1 */
+             "XMacCyrillic", /* Windows */
              ),
             mac_cyrillic,
+            MAC_CYRILLIC,
             {mac_cyrillic_mbtowc, nullptr}, {mac_cyrillic_wctomb, nullptr})
 
 DEFCODEPAGE(10007, mac_cyrillic)
 
 DEFENCODING(("MacUkraine", /* JDK 1.1 */
+             "XMacUkrainian", /* Windows */
              ),
             mac_ukraine,
+            MAC_UKRAINE,
             {mac_ukraine_mbtowc, nullptr}, {mac_ukraine_wctomb, nullptr})
 
 DEFCODEPAGE(10017, mac_ukraine)
 
 DEFENCODING(("MacGreek", /* JDK 1.1 */
+             "XMacGreek", /* Windows */
              ),
             mac_greek,
+            MAC_GREEK,
             {mac_greek_mbtowc, nullptr}, {mac_greek_wctomb, nullptr})
 
 DEFCODEPAGE(10006, mac_greek)
 
 DEFENCODING(("MacTurkish", /* JDK 1.1 */
+             "xmacturkish", /* Windows */
              ),
             mac_turkish,
+            MAC_TURKISH,
             {mac_turkish_mbtowc, nullptr}, {mac_turkish_wctomb, nullptr})
 
 DEFCODEPAGE(10081, mac_turkish)
 
 DEFENCODING(("MacHebrew", /* JDK 1.1 */
+             "XMacHebrew", /* Windows */
              ),
             mac_hebrew,
+            MAC_HEBREW,
             {mac_hebrew_mbtowc, nullptr}, {mac_hebrew_wctomb, nullptr})
 
 DEFCODEPAGE(10005, mac_hebrew)
 
 DEFENCODING(("MacArabic", /* JDK 1.1 */
+             "XMacArabic", /* Windows */
              ),
             mac_arabic,
+            MAC_ARABIC,
             {mac_arabic_mbtowc, nullptr}, {mac_arabic_wctomb, nullptr})
 
 DEFCODEPAGE(10004, mac_arabic)
 
 DEFENCODING(("MacThai", /* JDK 1.1 */
+             "XMacThai", /* Windows */
              ),
             mac_thai,
+            MAC_THAI,
             {mac_thai_mbtowc, nullptr}, {mac_thai_wctomb, nullptr})
 
 DEFCODEPAGE(10021, mac_thai)
@@ -576,28 +665,34 @@ DEFENCODING(("HPROMAN8",   /* IANA, X11R6.4 */
              "csHPRoman8", /* IANA */
              ),
             hp_roman8,
+            HPROMAN8,
             {hp_roman8_mbtowc, nullptr}, {hp_roman8_wctomb, nullptr})
 
 DEFENCODING(("NEXTSTEP", ),
             nextstep,
+            NEXTSTEP,
             {nextstep_mbtowc, nullptr}, {nextstep_wctomb, nullptr})
 
-/* Regional 8-bit encodings used for a single language */
 
+/* Regional 8-bit encodings used for a single language */
 DEFENCODING(("ARMSCII8", ),
             armscii_8,
+            ARMSCII8,
             {armscii_8_mbtowc, nullptr}, {armscii_8_wctomb, nullptr})
 
 DEFENCODING(("GEORGIANACADEMY", ),
             georgian_academy,
+            GEORGIANACADEMY,
             {georgian_academy_mbtowc, nullptr}, {georgian_academy_wctomb, nullptr})
 
 DEFENCODING(("GEORGIANPS", ),
             georgian_ps,
+            GEORGIANPS,
             {georgian_ps_mbtowc, nullptr}, {georgian_ps_wctomb, nullptr})
 
 DEFENCODING(("KOI8T", ),
             koi8_t,
+            KOI8T,
             {koi8_t_mbtowc, nullptr}, {koi8_t_wctomb, nullptr})
 
 DEFENCODING(("PT154",         /* IANA, glibc */
@@ -606,6 +701,7 @@ DEFENCODING(("PT154",         /* IANA, glibc */
              "csPTCP154",     /* IANA */
              ),
             pt154,
+            PT154,
             {pt154_mbtowc, nullptr}, {pt154_wctomb, nullptr})
 
 DEFCODEPAGE(154, pt154)
@@ -616,14 +712,17 @@ DEFENCODING(("RK1048",       /* IANA, glibc */
              "csKZ1048",     /* IANA */
              ),
             rk1048,
+            RK1048,
             {rk1048_mbtowc, nullptr}, {rk1048_wctomb, nullptr})
 
 DEFENCODING(("MULELAO1", ),
             mulelao,
+            MULELAO1,
             {mulelao_mbtowc, nullptr}, {mulelao_wctomb, nullptr})
 
 DEFENCODING(("IBMCP1133", ),
             cp1133,
+            IBMCP1133,
             {cp1133_mbtowc, nullptr}, {cp1133_wctomb, nullptr})
 
 DEFCODEPAGE(1133, cp1133)
@@ -638,10 +737,14 @@ DEFENCODING(("TIS620",       /* IANA, glibc, HP-UX */
              "TIS620.2533", /* Solaris */
              ),
             tis620,
+            TIS620,
             {tis620_mbtowc, nullptr}, {tis620_wctomb, nullptr})
 
-DEFENCODING(("WINDOWS874", ),
+DEFENCODING(("WINDOWS874", /* IANA */
+             "csWindows874", /* IANA */
+             ),
             cp874,
+            WINDOWS874,
             {cp874_mbtowc, nullptr}, {cp874_wctomb, nullptr})
 
 DEFCODEPAGE(874, cp874)
@@ -651,6 +754,7 @@ DEFENCODING(("VISCII", /* IANA, RFC 1456 */
              "csVISCII", /* IANA */
              ),
             viscii,
+            VISCII,
             {viscii_mbtowc, nullptr}, {viscii_wctomb, nullptr})
 
 DEFENCODING(("TCVN",
@@ -658,10 +762,10 @@ DEFENCODING(("TCVN",
              "TCVN57121",
              "TCVN57121:1993", ),
             tcvn,
+            TCVN,
             {tcvn_mbtowc, tcvn_flushwc}, {tcvn_wctomb, nullptr})
 
 /* CJK character sets (not documented) */
-
 DEFENCODING(("JISC62201969RO",    /* IANA */
              "ISO646JP",          /* IANA */
              "ISOIR14",           /* IANA */
@@ -669,6 +773,7 @@ DEFENCODING(("JISC62201969RO",    /* IANA */
              "csISO14JISC6220ro", /* IANA */
              ),
             iso646_jp,
+            JP,
             {iso646_jp_mbtowc, nullptr}, {iso646_jp_wctomb, nullptr})
 
 DEFENCODING(("JISX0201", /* IANA */
@@ -677,6 +782,7 @@ DEFENCODING(("JISX0201", /* IANA */
              "csHalfWidthKatakana", /* IANA */
              ),
             jisx0201,
+            JISX0201,
             {jisx0201_mbtowc, nullptr}, {jisx0201_wctomb, nullptr})
 
 DEFENCODING(("JISX0208",
@@ -689,6 +795,7 @@ DEFENCODING(("JISX0208",
              "csISO87JISX0208", /* IANA */
              ),
             jisx0208,
+            JISX0208,
             {jisx0208_mbtowc, nullptr}, {jisx0208_wctomb, nullptr})
 
 DEFENCODING(("JISX0212",
@@ -699,6 +806,7 @@ DEFENCODING(("JISX0212",
              "csISO159JISX02121990", /* IANA */
              ),
             jisx0212,
+            JISX0212,
             {jisx0212_mbtowc, nullptr}, {jisx0212_wctomb, nullptr})
 
 DEFENCODING(("GB198880",      /* IANA */
@@ -708,6 +816,7 @@ DEFENCODING(("GB198880",      /* IANA */
              "csISO57GB1988", /* IANA */
              ),
             iso646_cn,
+            GB1988_80,
             {iso646_cn_mbtowc, nullptr}, {iso646_cn_wctomb, nullptr})
 
 DEFENCODING(("GB231280",        /* IANA */
@@ -715,12 +824,14 @@ DEFENCODING(("GB231280",        /* IANA */
              "csISO58GB231280", /* IANA */
              ),
             gb2312,
+            GB2312_80,
             {gb2312_mbtowc, nullptr}, {gb2312_wctomb, nullptr})
 
 DEFENCODING(("ISOIR165",
              "CNGBISOIR165", /* RFC 1922 */
              ),
             isoir165,
+            CNGBISOIR165,
             {isoir165_mbtowc, nullptr}, {isoir165_wctomb, nullptr})
 
 DEFENCODING(("KSC5601",      /* IANA */
@@ -731,17 +842,19 @@ DEFENCODING(("KSC5601",      /* IANA */
              "KOREAN",        /* IANA */
              ),
             ksc5601,
+            KOREAN,
             {ksc5601_mbtowc, nullptr}, {ksc5601_wctomb, nullptr})
 
-/* CJK encodings */
 
+/* CJK encodings */
 DEFENCODING(("EUCJP",                                         /* IANA, glibc, HP-UX, IRIX, OSF/1, Solaris */
-             "ExtendedUNIXCodePackedFormatforJapanese", /* IANA */
+             "ExtendedUNIXCodePackedFormatforJapanese",       /* IANA */
              "csEUCPkdFmtJapanese",                           /* IANA */
              "IBMEUCJP",                                      /* AIX */
              "SDECKANJI",                                     /* OSF/1 */
              ),
             euc_jp,
+            EUC_JP,
             {euc_jp_mbtowc, nullptr}, {euc_jp_wctomb, nullptr})
 
 DEFCODEPAGE(51932, euc_jp)
@@ -753,35 +866,40 @@ DEFENCODING(("SHIFTJIS",  /* IANA, glibc */
              "PCK",        /* Solaris */
              ),
             sjis,
+            SHIFT_JIS,
             {sjis_mbtowc, nullptr}, {sjis_wctomb, nullptr})
 
 DEFENCODING(("IBM932", /* AIX */
              ),
             cp932,
+            IBM932,
             {cp932_mbtowc, nullptr}, {cp932_wctomb, nullptr})
 
 DEFCODEPAGE(932, cp932)
 
-DEFENCODING(("ISO2022JP",   /* IANA, RFC 1468 */
+DEFENCODING(("ISO2022JP",   /* IANA, RFC 1468, JDK 1.1 */
              "csISO2022JP", /* IANA */
-             /*"ISO2022JP",    JDK 1.1 */
              ),
             iso2022_jp,
+            ISO2022_JP,
             {iso2022_jp_mbtowc, nullptr}, {iso2022_jp_wctomb, iso2022_jp_reset})
 
 DEFENCODING(("ISO2022JP1", /* RFC 2237 */
              ),
             iso2022_jp1,
+            ISO2022_JP1,
             {iso2022_jp1_mbtowc, nullptr}, {iso2022_jp1_wctomb, iso2022_jp1_reset})
 
 DEFENCODING(("ISO2022JP2",   /* IANA, RFC 1554 */
              "csISO2022JP2", /* IANA */
              ),
             iso2022_jp2,
+            ISO2022_JP2,
             {iso2022_jp2_mbtowc, nullptr}, {iso2022_jp2_wctomb, iso2022_jp2_reset})
 
 DEFENCODING(("ISO2022JPMS", ),
             iso2022_jpms,
+            ISO2022_JPMS,
             {iso2022_jpms_mbtowc, nullptr}, {iso2022_jpms_wctomb, iso2022_jpms_reset})
 
 DEFCODEPAGE(50221, iso2022_jpms)
@@ -796,6 +914,7 @@ DEFENCODING(("EUCCN",    /* glibc, IRIX */
              "DECHANZI", /* OSF/1 */
              ),
             euc_cn,
+            GB2312,
             {euc_cn_mbtowc, nullptr}, {euc_cn_wctomb, nullptr})
 
 DEFCODEPAGE(51936, euc_cn)
@@ -803,44 +922,51 @@ DEFCODEPAGE(51936, euc_cn)
 DEFENCODING(("GBK", /* IANA, JDK 1.1 */
              ),
             ces_gbk,
+            GBK,
             {ces_gbk_mbtowc, nullptr}, {ces_gbk_wctomb, nullptr})
 
 DEFENCODING(("MS936",      /* IANA */
              "WINDOWS936", /* IANA */
              ),
             cp936,
+            CP936,  // Chinese developer use CP936 more often than MS936
             {cp936_mbtowc, nullptr}, {cp936_wctomb, nullptr})
 
 DEFCODEPAGE(936, cp936)
 
 DEFENCODING(("GB18030:2005", ),
             gb18030_2005,
+            GB18030_2005,
             {gb18030_2005_mbtowc, nullptr}, {gb18030_2005_wctomb, nullptr})
 
 DEFENCODING(("GB18030", /* IANA, glibc */
              "GB18030:2022", ),
             gb18030_2022,
+            GB18030_2022,
             {gb18030_2022_mbtowc, nullptr}, {gb18030_2022_wctomb, nullptr})
+
+DEFINDEX(GB18030, GB18030_2022)
 
 DEFCODEPAGE(54936, gb18030_2022)
 
-DEFENCODING(("ISO2022CN", /* IANA, RFC 1922 */
-             "csISO2022CN",
-             /*"ISO2022CN",    JDK 1.1 */
+DEFENCODING(("ISO2022CN", /* IANA, RFC 1922, JDK 1.1 */
+             "csISO2022CN", /* IANA */
              ),
             iso2022_cn,
+            ISO2022_CN,
             {iso2022_cn_mbtowc, nullptr}, {iso2022_cn_wctomb, iso2022_cn_reset})
 
 DEFENCODING(("ISO2022CNEXT", /* IANA, RFC 1922 */
              ),
             iso2022_cn_ext,
+            ISO2022_CN_EXT,
             {iso2022_cn_ext_mbtowc, nullptr}, {iso2022_cn_ext_wctomb, iso2022_cn_ext_reset})
 
 DEFENCODING(("HZ",       /* RFC 1843 */
              "HZGB2312", /* IANA, RFC 1842 */
-             /*"CP52936",     Windows */
              ),
             hz,
+            HZ,
             {hz_mbtowc, nullptr}, {hz_wctomb, hz_reset})
 
 DEFCODEPAGE(52936, hz)
@@ -851,6 +977,7 @@ DEFENCODING(("EUCTW", /* glibc, HPUX, IRIX, OSF/1 */
              "CNS11643", /* Solaris */
              ),
             euc_tw,
+            EUC_TW,
             {euc_tw_mbtowc, nullptr}, {euc_tw_wctomb, nullptr})
 
 DEFCODEPAGE(51950, euc_tw)
@@ -861,31 +988,39 @@ DEFENCODING(("BIG5",    /* IANA, JDK 1.1, glibc */
              "csBig5",  /* IANA */
              ),
             ces_big5,
+            BIG5,
             {ces_big5_mbtowc, nullptr}, {ces_big5_wctomb, nullptr})
 
 DEFENCODING(("WINDOWS950", /* JDK 1.1 */
              ),
             cp950,
+            WINDOWS950,
             {cp950_mbtowc, nullptr}, {cp950_wctomb, nullptr})
 
 DEFCODEPAGE(950, cp950)
 
 DEFENCODING(("BIG5HKSCS:1999", ),
             big5hkscs1999,
+            BIG5HKSCS_1999,
             {big5hkscs1999_mbtowc, big5hkscs1999_flushwc}, {big5hkscs1999_wctomb, big5hkscs1999_reset})
 
 DEFENCODING(("BIG5HKSCS:2001", ),
             big5hkscs2001,
+            BIG5HKSCS_2001,
             {big5hkscs2001_mbtowc, big5hkscs2001_flushwc}, {big5hkscs2001_wctomb, big5hkscs2001_reset})
 
 DEFENCODING(("BIG5HKSCS:2004", ),
             big5hkscs2004,
+            BIG5HKSCS_2004,
             {big5hkscs2004_mbtowc, big5hkscs2004_flushwc}, {big5hkscs2004_wctomb, big5hkscs2004_reset})
 
 DEFENCODING(("BIG5HKSCS", /* IANA, glibc */
              "BIG5HKSCS:2008", ),
             big5hkscs2008,
+            BIG5HKSCS_2008,
             {big5hkscs2008_mbtowc, big5hkscs2008_flushwc}, {big5hkscs2008_wctomb, big5hkscs2008_reset})
+
+DEFINDEX(BIG5HKSCS, BIG5HKSCS_2008)
 
 DEFENCODING(("EUCKR",     /* IANA, RFC 1557, glibc, HP-UX, IRIX, OSF/1 */
              "csEUCKR",   /* IANA */
@@ -894,6 +1029,7 @@ DEFENCODING(("EUCKR",     /* IANA, RFC 1557, glibc, HP-UX, IRIX, OSF/1 */
              "5601",      /* Solaris */
              ),
             euc_kr,
+            EUC_KR,
             {euc_kr_mbtowc, nullptr}, {euc_kr_wctomb, nullptr})
 
 DEFCODEPAGE(51949, euc_kr)
@@ -901,6 +1037,7 @@ DEFCODEPAGE(51949, euc_kr)
 DEFENCODING(("UHC",     /* glibc */
              ),
             cp949,
+            UHC,
             {cp949_mbtowc, nullptr}, {cp949_wctomb, nullptr})
 
 DEFCODEPAGE(949, cp949)
@@ -909,34 +1046,36 @@ DEFENCODING(("JOHAB",         /* glibc */
              "KOKR.JOHAP92", /* Solaris */
              ),
             johab,
+            JOHAB,
             {johab_mbtowc, nullptr}, {johab_wctomb, nullptr})
 
 DEFCODEPAGE(1361, johab)
 
-DEFENCODING(("ISO2022KR",   /* IANA, RFC 1557 */
+DEFENCODING(("ISO2022KR",   /* IANA, RFC 1557, JDK 1.1 */
              "csISO2022KR", /* IANA */
-             /*"ISO2022KR",    JDK 1.1 */
-             /*"CP50225",      Windows */
              ),
             iso2022_kr,
+            ISO2022_KR,
             {iso2022_kr_mbtowc, nullptr}, {iso2022_kr_wctomb, iso2022_kr_reset})
 
 DEFCODEPAGE(50225, iso2022_kr)
 
 DEFENCODING(("DECKANJI", ),
             dec_kanji,
+            DEC_KANJI,
             {dec_kanji_mbtowc, nullptr}, {dec_kanji_wctomb, nullptr})
 
 DEFENCODING(("DECHANYU", /* OSF/1 */
              ),
             dec_hanyu,
+            DEC_HANYU,
             {dec_hanyu_mbtowc, nullptr}, {dec_hanyu_wctomb, nullptr})
 
 /* Encodings used by system dependent locales on AIX. */
-
 DEFENCODING(("IBM856", /* AIX */
              ),
             cp856,
+            IBM856,
             {cp856_mbtowc, nullptr}, {cp856_wctomb, nullptr})
 
 DEFCODEPAGE(856, cp856)
@@ -944,6 +1083,7 @@ DEFCODEPAGE(856, cp856)
 DEFENCODING(("IBM922", /* AIX */
              ),
             cp922,
+            IBM922,
             {cp922_mbtowc, nullptr}, {cp922_wctomb, nullptr})
 
 DEFCODEPAGE(922, cp922)
@@ -951,6 +1091,7 @@ DEFCODEPAGE(922, cp922)
 DEFENCODING(("IBM943", /* AIX */
              ),
             cp943,
+            IBM943,
             {cp943_mbtowc, nullptr}, {cp943_wctomb, nullptr})
 
 DEFCODEPAGE(943, cp943)
@@ -958,6 +1099,7 @@ DEFCODEPAGE(943, cp943)
 DEFENCODING(("IBM1046", /* AIX */
              ),
             cp1046,
+            IBM1046,
             {cp1046_mbtowc, nullptr}, {cp1046_wctomb, nullptr})
 
 DEFCODEPAGE(1046, cp1046)
@@ -965,6 +1107,7 @@ DEFCODEPAGE(1046, cp1046)
 DEFENCODING(("IBM1124", /* AIX */
              ),
             cp1124,
+            IBM1124,
             {cp1124_mbtowc, nullptr}, {cp1124_wctomb, nullptr})
 
 DEFCODEPAGE(1124, cp1124)
@@ -972,6 +1115,7 @@ DEFCODEPAGE(1124, cp1124)
 DEFENCODING(("IBM1129", /* AIX */
              ),
             cp1129,
+            IBM1129,
             {cp1129_mbtowc, nullptr}, {cp1129_wctomb, nullptr})
 
 DEFCODEPAGE(1129, cp1129)
@@ -980,6 +1124,7 @@ DEFENCODING(("IBM1161",   /* glibc */
              "csIBM1161", /* glibc */
              ),
             cp1161,
+            IBM1161,
             {cp1161_mbtowc, nullptr}, {cp1161_wctomb, nullptr})
 
 DEFCODEPAGE(1161, cp1161)
@@ -988,6 +1133,7 @@ DEFENCODING(("IBM1162",   /* glibc */
              "csIBM1162", /* glibc */
              ),
             cp1162,
+            IBM1162,
             {cp1162_mbtowc, nullptr}, {cp1162_wctomb, nullptr})
 
 DEFCODEPAGE(1162, cp1162)
@@ -996,17 +1142,18 @@ DEFENCODING(("IBM1163",   /* glibc */
              "csIBM1163", /* glibc */
              ),
             cp1163,
+            IBM1163,
             {cp1163_mbtowc, nullptr}, {cp1163_wctomb, nullptr})
 
 DEFCODEPAGE(1163, cp1163)
 
-/* Encodings used by system dependent locales on MSDOS. */
-
+/* Encodings used by system dependent locales on MS-DOS. */
 DEFENCODING(("IBM437",           /* IANA */
              "437",              /* IANA */
              "csPC8CodePage437", /* IANA */
              ),
             cp437,
+            CP437,
             {cp437_mbtowc, nullptr}, {cp437_wctomb, nullptr})
 
 DEFCODEPAGE(437, cp437)
@@ -1014,6 +1161,7 @@ DEFCODEPAGE(437, cp437)
 DEFENCODING(("IBM737", /* Windows */
              ),
             cp737,
+            CP737,
             {cp737_mbtowc, nullptr}, {cp737_wctomb, nullptr})
 
 DEFCODEPAGE(737, cp737)
@@ -1022,6 +1170,7 @@ DEFENCODING(("IBM775",        /* IANA */
              "csPC775Baltic", /* IANA */
              ),
             cp775,
+            CP775,
             {cp775_mbtowc, nullptr}, {cp775_wctomb, nullptr})
 
 DEFCODEPAGE(775, cp775)
@@ -1031,6 +1180,7 @@ DEFENCODING(("IBM852",   /* IANA */
              "csPCp852", /* IANA */
              ),
             cp852,
+            CP852,
             {cp852_mbtowc, nullptr}, {cp852_wctomb, nullptr})
 
 DEFCODEPAGE(852, cp852)
@@ -1041,6 +1191,7 @@ DEFENCODING(("IBM853",
              "csIBM853"  /* I don't know */
              ),
             cp853,
+            CP853,
             {cp853_mbtowc, nullptr}, {cp853_wctomb, nullptr})
 
 DEFCODEPAGE(853, cp853)
@@ -1050,6 +1201,7 @@ DEFENCODING(("IBM855",   /* IANA */
              "csIBM855", /* IANA */
              ),
             cp855,
+            CP855,
             {cp855_mbtowc, nullptr}, {cp855_wctomb, nullptr})
 
 DEFCODEPAGE(855, cp855)
@@ -1059,6 +1211,7 @@ DEFENCODING(("IBM857",   /* IANA */
              "csIBM857", /* IANA */
              ),
             cp857,
+            CP857,
             {cp857_mbtowc, nullptr}, {cp857_wctomb, nullptr})
 
 DEFCODEPAGE(857, cp857)
@@ -1068,6 +1221,7 @@ DEFENCODING(("IBM858",
              "IBM00858", /* Windows */
              "csIBM858"),
             cp858,
+            CP858,
             {cp858_mbtowc, nullptr}, {cp858_wctomb, nullptr})
 
 DEFCODEPAGE(858, cp858)
@@ -1077,6 +1231,7 @@ DEFENCODING(("IBM860",   /* IANA */
              "csIBM860", /* IANA */
              ),
             cp860,
+            CP860,
             {cp860_mbtowc, nullptr}, {cp860_wctomb, nullptr})
 
 DEFCODEPAGE(860, cp860)
@@ -1087,6 +1242,7 @@ DEFENCODING(("IBM861",   /* IANA */
              "csIBM861", /* IANA */
              ),
             cp861,
+            CP861,
             {cp861_mbtowc, nullptr}, {cp861_wctomb, nullptr})
 
 DEFCODEPAGE(861, cp861)
@@ -1096,6 +1252,7 @@ DEFENCODING(("IBM863",   /* IANA */
              "csIBM863", /* IANA */
              ),
             cp863,
+            CP863,
             {cp863_mbtowc, nullptr}, {cp863_wctomb, nullptr})
 
 DEFCODEPAGE(863, cp863)
@@ -1104,6 +1261,7 @@ DEFENCODING(("IBM864",   /* IANA */
              "csIBM864", /* IANA */
              ),
             cp864,
+            CP864,
             {cp864_mbtowc, nullptr}, {cp864_wctomb, nullptr})
 
 DEFCODEPAGE(864, cp864)
@@ -1113,6 +1271,7 @@ DEFENCODING(("IBM865",   /* IANA */
              "csIBM865", /* IANA */
              ),
             cp865,
+            CP865,
             {cp865_mbtowc, nullptr}, {cp865_wctomb, nullptr})
 
 DEFCODEPAGE(865, cp865)
@@ -1123,6 +1282,7 @@ DEFENCODING(("IBM869",   /* IANA */
              "csIBM869", /* IANA */
              ),
             cp869,
+            CP869,
             {cp869_mbtowc, nullptr}, {cp869_wctomb, nullptr})
 
 DEFCODEPAGE(869, cp869)
@@ -1133,12 +1293,12 @@ DEFENCODING(("IBM1125",
              "csIBM1125" /* I don't know */
              ),
             cp1125,
+            CP1125,
             {cp1125_mbtowc, nullptr}, {cp1125_wctomb, nullptr})
 
 DEFCODEPAGE(1125, cp1125)
 
 /* Encodings used by system dependent locales on z/OS. */
-
 DEFENCODING(("IBM037",     /* IANA */
              "EBCDICCPUS", /* IANA */
              "EBCDICCPCA", /* IANA */
@@ -1147,6 +1307,7 @@ DEFENCODING(("IBM037",     /* IANA */
              "csIBM037",   /* IANA */
              ),
             ebcdic037,
+            EBCDIC_037,
             {ebcdic037_mbtowc, nullptr}, {ebcdic037_wctomb, nullptr})
 
 DEFCODEPAGE(37, ebcdic037)
@@ -1155,6 +1316,7 @@ DEFENCODING(("IBM273",   /* IANA */
              "csIBM273", /* IANA */
              ),
             ebcdic273,
+            EBCDIC_273,
             {ebcdic273_mbtowc, nullptr}, {ebcdic273_wctomb, nullptr})
 
 DEFCODEPAGE(273, ebcdic273)
@@ -1165,6 +1327,7 @@ DEFENCODING(("IBM277",     /* IANA */
              "csIBM277",   /* IANA */
              ),
             ebcdic277,
+            EBCDIC_277,
             {ebcdic277_mbtowc, nullptr}, {ebcdic277_wctomb, nullptr})
 
 DEFCODEPAGE(277, ebcdic277)
@@ -1175,6 +1338,7 @@ DEFENCODING(("IBM278",     /* IANA */
              "csIBM278",   /* IANA */
              ),
             ebcdic278,
+            EBCDIC_278,
             {ebcdic278_mbtowc, nullptr}, {ebcdic278_wctomb, nullptr})
 
 DEFCODEPAGE(278, ebcdic278)
@@ -1184,129 +1348,144 @@ DEFENCODING(("IBM280",     /* IANA */
              "csIBM280",   /* IANA */
              ),
             ebcdic280,
+            EBCDIC_280,
             {ebcdic280_mbtowc, nullptr}, {ebcdic280_wctomb, nullptr})
 
 DEFCODEPAGE(280, ebcdic280)
 
 DEFENCODING(("IBM282", ),
             ebcdic282,
+            EBCDIC_282,
             {ebcdic282_mbtowc, nullptr}, {ebcdic282_wctomb, nullptr})
 
 DEFCODEPAGE(282, ebcdic282)
 
 DEFENCODING(("IBM284",       /* IANA */
-             "EBCDICCPES", /* IANA */
+             "EBCDICCPES",   /* IANA */
              "csIBM284",     /* IANA */
              ),
             ebcdic284,
+            EBCDIC_284,
             {ebcdic284_mbtowc, nullptr}, {ebcdic284_wctomb, nullptr})
 
 DEFCODEPAGE(284, ebcdic284)
 
 DEFENCODING(("IBM285",       /* IANA */
              "CP285",        /* IANA */
-             "EBCDICCPGB", /* IANA */
+             "EBCDICCPGB",   /* IANA */
              "csIBM285",     /* IANA */
              ),
             ebcdic285,
+            EBCDIC_285,
             {ebcdic285_mbtowc, nullptr}, {ebcdic285_wctomb, nullptr})
 
 DEFCODEPAGE(285, ebcdic285)
 
 DEFENCODING(("IBM297",       /* IANA */
-             "EBCDICCPFR", /* IANA */
+             "EBCDICCPFR",   /* IANA */
              "csIBM297",     /* IANA */
              ),
             ebcdic297,
+            EBCDIC_297,
             {ebcdic297_mbtowc, nullptr}, {ebcdic297_wctomb, nullptr})
 
 DEFCODEPAGE(297, ebcdic297)
 
 DEFENCODING(("IBM423",       /* IANA */
-             "EBCDICCPGR", /* IANA */
+             "EBCDICCPGR",   /* IANA */
              "csIBM423",     /* IANA */
              ),
             ebcdic423,
+            EBCDIC_423,
             {ebcdic423_mbtowc, nullptr}, {ebcdic423_wctomb, nullptr})
 
 DEFCODEPAGE(423, ebcdic423)
 
 DEFENCODING(("IBM424",       /* IANA */
-             "EBCDICCPHE", /* IANA */
+             "EBCDICCPHE",   /* IANA */
              "csIBM424",     /* IANA */
              ),
             ebcdic424,
+            EBCDIC_424,
             {ebcdic424_mbtowc, nullptr}, {ebcdic424_wctomb, nullptr})
 
 DEFCODEPAGE(424, ebcdic424)
 
 DEFENCODING(("IBM425", ),
             ebcdic425,
+            EBCDIC_425,
             {ebcdic425_mbtowc, nullptr}, {ebcdic425_wctomb, nullptr})
 
 DEFCODEPAGE(425, ebcdic425)
 
 DEFENCODING(("IBM500",       /* IANA */
-             "EBCDICCPBE", /* IANA */
-             "EBCDICCPCH", /* IANA */
+             "EBCDICCPBE",   /* IANA */
+             "EBCDICCPCH",   /* IANA */
              "csIBM500",     /* IANA */
              ),
             ebcdic500,
+            EBCDIC_500,
             {ebcdic500_mbtowc, nullptr}, {ebcdic500_wctomb, nullptr})
 
 DEFCODEPAGE(500, ebcdic500)
 
 DEFENCODING(("IBM838",
-             "IBMTHAI",  /* IANA */
+             "IBMTHAI",   /* IANA */
              "csIBMThai", /* IANA */
              ),
             ebcdic838,
+            EBCDIC_838,
             {ebcdic838_mbtowc, nullptr}, {ebcdic838_wctomb, nullptr})
 
 DEFCODEPAGE(838, ebcdic838)
 
 DEFENCODING(("IBM870",          /* IANA */
              "CP870",           /* IANA */
-             "EBCDICCPROECE", /* IANA */
-             "EBCDICCPYU",    /* IANA */
+             "EBCDICCPROECE",  /* IANA */
+             "EBCDICCPYU",     /* IANA */
              "csIBM870",        /* IANA */
              ),
             ebcdic870,
+            EBCDIC_870,
             {ebcdic870_mbtowc, nullptr}, {ebcdic870_wctomb, nullptr})
 
 DEFCODEPAGE(870, ebcdic870)
 
 DEFENCODING(("IBM871",       /* IANA */
-             "EBCDICCPIS", /* IANA */
+             "EBCDICCPIS",  /* IANA */
              "csIBM871",     /* IANA */
              ),
             ebcdic871,
+            EBCDIC_871,
             {ebcdic871_mbtowc, nullptr}, {ebcdic871_wctomb, nullptr})
 
 DEFCODEPAGE(871, ebcdic871)
 
 DEFENCODING(("IBM875",       /* glibc */
-             "EBCDICGREEK", /* glibc */
+             "EBCDICGREEK",  /* glibc */
              ),
             ebcdic875,
+            EBCDIC_875,
             {ebcdic875_mbtowc, nullptr}, {ebcdic875_wctomb, nullptr})
 
 DEFCODEPAGE(875, ebcdic875)
 
 DEFENCODING(("IBM880",          /* IANA */
-             "EBCDICCYRILLIC", /* IANA */
+             "EBCDICCYRILLIC",  /* IANA */
              "csIBM880",        /* IANA */
              ),
             ebcdic880,
+            EBCDIC_880,
             {ebcdic880_mbtowc, nullptr}, {ebcdic880_wctomb, nullptr})
 
 DEFCODEPAGE(880, ebcdic880)
 
 DEFENCODING(("IBM905",       /* IANA */
-             "EBCDICCPTR", /* IANA */
+             "EBCDICCPTR",  /* IANA */
              "csIBM905",     /* IANA */
              ),
             ebcdic905,
+            EBCDIC_905,
             {ebcdic905_mbtowc, nullptr}, {ebcdic905_wctomb, nullptr})
 
 DEFCODEPAGE(905, ebcdic905)
@@ -1315,10 +1494,11 @@ DEFENCODING(("IBM924",
              "IBM00924",           /* IANA */
              "CCSID00924",         /* IANA */
              "CP00924",            /* IANA */
-             "EBCDICLATIN9EURO", /* IANA */
+             "EBCDICLATIN9EURO",   /* IANA */
              "csIBM00924",         /* IANA */
              ),
             ebcdic924,
+            EBCDIC_924,
             {ebcdic924_mbtowc, nullptr}, {ebcdic924_wctomb, nullptr})
 
 DEFCODEPAGE(924, ebcdic924)
@@ -1326,6 +1506,7 @@ DEFCODEPAGE(924, ebcdic924)
 DEFENCODING(("IBM1025", /* glibc */
              ),
             ebcdic1025,
+            EBCDIC_1025,
             {ebcdic1025_mbtowc, nullptr}, {ebcdic1025_wctomb, nullptr})
 
 DEFCODEPAGE(1025, ebcdic1025)
@@ -1334,6 +1515,7 @@ DEFENCODING(("IBM1026",   /* IANA */
              "csIBM1026", /* IANA */
              ),
             ebcdic1026,
+            EBCDIC_1026,
             {ebcdic1026_mbtowc, nullptr}, {ebcdic1026_wctomb, nullptr})
 
 DEFCODEPAGE(1026, ebcdic1026)
@@ -1342,6 +1524,7 @@ DEFENCODING(("IBM1047",   /* IANA */
              "csIBM1047", /* IANA */
              ),
             ebcdic1047,
+            EBCDIC_1047,
             {ebcdic1047_mbtowc, nullptr}, {ebcdic1047_wctomb, nullptr})
 
 DEFCODEPAGE(1047, ebcdic1047)
@@ -1349,6 +1532,7 @@ DEFCODEPAGE(1047, ebcdic1047)
 DEFENCODING(("IBM1097", /* glibc */
              ),
             ebcdic1097,
+            EBCDIC_1097,
             {ebcdic1097_mbtowc, nullptr}, {ebcdic1097_wctomb, nullptr})
 
 DEFCODEPAGE(1097, ebcdic1097)
@@ -1356,6 +1540,7 @@ DEFCODEPAGE(1097, ebcdic1097)
 DEFENCODING(("IBM1112", /* glibc */
              ),
             ebcdic1112,
+            EBCDIC_1112,
             {ebcdic1112_mbtowc, nullptr}, {ebcdic1112_wctomb, nullptr})
 
 DEFCODEPAGE(1112, ebcdic1112)
@@ -1363,6 +1548,7 @@ DEFCODEPAGE(1112, ebcdic1112)
 DEFENCODING(("IBM1122", /* glibc */
              ),
             ebcdic1122,
+            EBCDIC_1122,
             {ebcdic1122_mbtowc, nullptr}, {ebcdic1122_wctomb, nullptr})
 
 DEFCODEPAGE(1122, ebcdic1122)
@@ -1370,6 +1556,7 @@ DEFCODEPAGE(1122, ebcdic1122)
 DEFENCODING(("IBM1123", /* glibc */
              ),
             ebcdic1123,
+            EBCDIC_1123,
             {ebcdic1123_mbtowc, nullptr}, {ebcdic1123_wctomb, nullptr})
 
 DEFCODEPAGE(1123, ebcdic1123)
@@ -1377,6 +1564,7 @@ DEFCODEPAGE(1123, ebcdic1123)
 DEFENCODING(("IBM1130", /* glibc */
              ),
             ebcdic1130,
+            EBCDIC_1130,
             {ebcdic1130_mbtowc, nullptr}, {ebcdic1130_wctomb, nullptr})
 
 DEFCODEPAGE(1130, ebcdic1130)
@@ -1384,6 +1572,7 @@ DEFCODEPAGE(1130, ebcdic1130)
 DEFENCODING(("IBM1132", /* glibc */
              ),
             ebcdic1132,
+            EBCDIC_1132,
             {ebcdic1132_mbtowc, nullptr}, {ebcdic1132_wctomb, nullptr})
 
 DEFCODEPAGE(1132, ebcdic1132)
@@ -1391,128 +1580,139 @@ DEFCODEPAGE(1132, ebcdic1132)
 DEFENCODING(("IBM1137", /* glibc */
              ),
             ebcdic1137,
+            EBCDIC_1137,
             {ebcdic1137_mbtowc, nullptr}, {ebcdic1137_wctomb, nullptr})
 
 DEFCODEPAGE(1137, ebcdic1137)
 
 DEFENCODING(("IBM1140",
-             "IBM01140",          /* IANA */
-             "CCSID01140",        /* IANA */
-             "CP01140",           /* IANA */
+             "IBM01140",        /* IANA */
+             "CCSID01140",      /* IANA */
+             "CP01140",         /* IANA */
              "EBCDICUS37+EURO", /* IANA */
-             "csIBM01140",        /* IANA */
+             "csIBM01140",      /* IANA */
              ),
             ebcdic1140,
+            EBCDIC_1140,
             {ebcdic1140_mbtowc, nullptr}, {ebcdic1140_wctomb, nullptr})
 
 DEFCODEPAGE(1140, ebcdic1140)
 
 DEFENCODING(("IBM1141",
-             "IBM01141",           /* IANA */
-             "CCSID01141",         /* IANA */
-             "CP01141",            /* IANA */
+             "IBM01141",         /* IANA */
+             "CCSID01141",       /* IANA */
+             "CP01141",          /* IANA */
              "EBCDICDE273+EURO", /* IANA */
-             "csIBM01141",         /* IANA */
+             "csIBM01141",       /* IANA */
              ),
             ebcdic1141,
+            EBCDIC_1141,
             {ebcdic1141_mbtowc, nullptr}, {ebcdic1141_wctomb, nullptr})
 
 DEFCODEPAGE(1141, ebcdic1141)
 
 DEFENCODING(("IBM1142",
-             "IBM01142",           /* IANA */
-             "CCSID01142",         /* IANA */
-             "CP01142",            /* IANA */
+             "IBM01142",         /* IANA */
+             "CCSID01142",       /* IANA */
+             "CP01142",          /* IANA */
              "EBCDICDK277+EURO", /* IANA */
              "EBCDICNO277+EURO", /* IANA */
-             "csIBM01142",         /* IANA */
+             "csIBM01142",       /* IANA */
              ),
             ebcdic1142,
+            EBCDIC_1142,
             {ebcdic1142_mbtowc, nullptr}, {ebcdic1142_wctomb, nullptr})
 
 DEFCODEPAGE(1142, ebcdic1142)
 
 DEFENCODING(("IBM1143",
-             "IBM01143",           /* IANA */
-             "CCSID01143",         /* IANA */
-             "CP01143",            /* IANA */
+             "IBM01143",         /* IANA */
+             "CCSID01143",       /* IANA */
+             "CP01143",          /* IANA */
              "EBCDICFI278+EURO", /* IANA */
              "EBCDICSE278+EURO", /* IANA */
-             "csIBM01143",         /* IANA */
+             "csIBM01143",       /* IANA */
              ),
             ebcdic1143,
+            EBCDIC_1143,
             {ebcdic1143_mbtowc, nullptr}, {ebcdic1143_wctomb, nullptr})
 
 DEFCODEPAGE(1143, ebcdic1143)
 
 DEFENCODING(("IBM1144",
-             "IBM01144",           /* IANA */
-             "CCSID01144",         /* IANA */
-             "CP01144",            /* IANA */
-             "EBCDICIT280+EURO", /* IANA */
-             "csPC8CodePage1144",  /* IANA */
+             "IBM01144",          /* IANA */
+             "CCSID01144",        /* IANA */
+             "CP01144",           /* IANA */
+             "EBCDICIT280+EURO",  /* IANA */
+             "csPC8CodePage1144", /* IANA */
              ),
             ebcdic1144,
+            EBCDIC_1144,
             {ebcdic1144_mbtowc, nullptr}, {ebcdic1144_wctomb, nullptr})
 
 DEFCODEPAGE(1144, ebcdic1144)
 
 DEFENCODING(("IBM1145",
-             "IBM01145",           /* IANA */
-             "CCSID01145",         /* IANA */
-             "CP01145",            /* IANA */
+             "IBM01145",         /* IANA */
+             "CCSID01145",       /* IANA */
+             "CP01145",          /* IANA */
              "EBCDICES284+EURO", /* IANA */
-             "csIBM01145",         /* IANA */
+             "csIBM01145",       /* IANA */
              ),
             ebcdic1145,
+            EBCDIC_1145,
             {ebcdic1145_mbtowc, nullptr}, {ebcdic1145_wctomb, nullptr})
 
 DEFCODEPAGE(1145, ebcdic1145)
 
 DEFENCODING(("IBM1146",
-             "IBM01146",           /* IANA */
-             "CCSID01146",         /* IANA */
-             "CP01146",            /* IANA */
-             "EBCDICGB285+EURO", /* IANA */
-             "csPC8CodePage1146",  /* IANA */
+             "IBM01146",          /* IANA */
+             "CCSID01146",        /* IANA */
+             "CP01146",           /* IANA */
+             "EBCDICGB285+EURO",  /* IANA */
+             "csPC8CodePage1146", /* IANA */
              ),
             ebcdic1146,
+            EBCDIC_1146,
             {ebcdic1146_mbtowc, nullptr}, {ebcdic1146_wctomb, nullptr})
 
 DEFCODEPAGE(1146, ebcdic1146)
 
 DEFENCODING(("IBM1147",
-             "IBM01147",           /* IANA */
-             "CCSID01147",         /* IANA */
-             "CP01147",            /* IANA */
+             "IBM01147",         /* IANA */
+             "CCSID01147",       /* IANA */
+             "CP01147",          /* IANA */
              "EBCDICFR297+EURO", /* IANA */
-             "csIBM01147",         /* IANA */
+             "csIBM01147",       /* IANA */
              ),
             ebcdic1147,
+            EBCDIC_1147,
             {ebcdic1147_mbtowc, nullptr}, {ebcdic1147_wctomb, nullptr})
 
 DEFCODEPAGE(1147, ebcdic1147)
 
 DEFENCODING(("IBM1148",
-             "IBM01148",                      /* IANA */
-             "CCSID01148",                    /* IANA */
-             "CP01148",                       /* IANA */
+             "IBM01148",                    /* IANA */
+             "CCSID01148",                  /* IANA */
+             "CP01148",                     /* IANA */
              "EBCDICINTERNATIONAL500+EURO", /* IANA */
-             "csIBM01148",                    /* IANA */
+             "csIBM01148",                  /* IANA */
              ),
             ebcdic1148,
+            EBCDIC_1148,
             {ebcdic1148_mbtowc, nullptr}, {ebcdic1148_wctomb, nullptr})
 
 DEFCODEPAGE(1148, ebcdic1148)
 
 DEFENCODING(("IBM1149",
-             "IBM01149",           /* IANA */
-             "CCSID01149",         /* IANA */
-             "CP01149",            /* IANA */
+             "IBM01149",         /* IANA */
+             "CCSID01149",       /* IANA */
+             "CP01149",          /* IANA */
              "EBCDICIS871+EURO", /* IANA */
-             "csIBM01149",         /* IANA */
+             "csIBM01149",       /* IANA */
              ),
             ebcdic1149,
+            EBCDIC_1149,
             {ebcdic1149_mbtowc, nullptr}, {ebcdic1149_wctomb, nullptr})
 
 DEFCODEPAGE(1149, ebcdic1149)
@@ -1520,6 +1720,7 @@ DEFCODEPAGE(1149, ebcdic1149)
 DEFENCODING(("IBM1153", /* glibc */
              ),
             ebcdic1153,
+            EBCDIC_1153,
             {ebcdic1153_mbtowc, nullptr}, {ebcdic1153_wctomb, nullptr})
 
 DEFCODEPAGE(1153, ebcdic1153)
@@ -1527,6 +1728,7 @@ DEFCODEPAGE(1153, ebcdic1153)
 DEFENCODING(("IBM1154", /* glibc */
              ),
             ebcdic1154,
+            EBCDIC_1154,
             {ebcdic1154_mbtowc, nullptr}, {ebcdic1154_wctomb, nullptr})
 
 DEFCODEPAGE(1154, ebcdic1154)
@@ -1534,6 +1736,7 @@ DEFCODEPAGE(1154, ebcdic1154)
 DEFENCODING(("IBM1155", /* glibc */
              ),
             ebcdic1155,
+            EBCDIC_1155,
             {ebcdic1155_mbtowc, nullptr}, {ebcdic1155_wctomb, nullptr})
 
 DEFCODEPAGE(1155, ebcdic1155)
@@ -1541,6 +1744,7 @@ DEFCODEPAGE(1155, ebcdic1155)
 DEFENCODING(("IBM1156", /* glibc */
              ),
             ebcdic1156,
+            EBCDIC_1156,
             {ebcdic1156_mbtowc, nullptr}, {ebcdic1156_wctomb, nullptr})
 
 DEFCODEPAGE(1156, ebcdic1156)
@@ -1548,6 +1752,7 @@ DEFCODEPAGE(1156, ebcdic1156)
 DEFENCODING(("IBM1157", /* glibc */
              ),
             ebcdic1157,
+            EBCDIC_1157,
             {ebcdic1157_mbtowc, nullptr}, {ebcdic1157_wctomb, nullptr})
 
 DEFCODEPAGE(1157, ebcdic1157)
@@ -1555,6 +1760,7 @@ DEFCODEPAGE(1157, ebcdic1157)
 DEFENCODING(("IBM1158", /* glibc */
              ),
             ebcdic1158,
+            EBCDIC_1158,
             {ebcdic1158_mbtowc, nullptr}, {ebcdic1158_wctomb, nullptr})
 
 DEFCODEPAGE(1158, ebcdic1158)
@@ -1562,6 +1768,7 @@ DEFCODEPAGE(1158, ebcdic1158)
 DEFENCODING(("IBM1160", /* glibc */
              ),
             ebcdic1160,
+            EBCDIC_1160,
             {ebcdic1160_mbtowc, nullptr}, {ebcdic1160_wctomb, nullptr})
 
 DEFCODEPAGE(1160, ebcdic1160)
@@ -1569,12 +1776,14 @@ DEFCODEPAGE(1160, ebcdic1160)
 DEFENCODING(("IBM1164", /* glibc */
              ),
             ebcdic1164,
+            EBCDIC_1164,
             {ebcdic1164_mbtowc, nullptr}, {ebcdic1164_wctomb, nullptr})
 
 DEFCODEPAGE(1164, ebcdic1164)
 
 DEFENCODING(("IBM1165", ),
             ebcdic1165,
+            EBCDIC_1165,
             {ebcdic1165_mbtowc, nullptr}, {ebcdic1165_wctomb, nullptr})
 
 DEFCODEPAGE(1165, ebcdic1165)
@@ -1582,6 +1791,7 @@ DEFCODEPAGE(1165, ebcdic1165)
 DEFENCODING(("IBM1166", /* glibc */
              ),
             ebcdic1166,
+            EBCDIC_1166,
             {ebcdic1166_mbtowc, nullptr}, {ebcdic1166_wctomb, nullptr})
 
 DEFCODEPAGE(1166, ebcdic1166)
@@ -1589,6 +1799,7 @@ DEFCODEPAGE(1166, ebcdic1166)
 DEFENCODING(("IBM4971", /* glibc */
              ),
             ebcdic4971,
+            EBCDIC_4971,
             {ebcdic4971_mbtowc, nullptr}, {ebcdic4971_wctomb, nullptr})
 
 DEFCODEPAGE(4971, ebcdic4971)
@@ -1596,6 +1807,7 @@ DEFCODEPAGE(4971, ebcdic4971)
 DEFENCODING(("IBM12712", /* glibc */
              ),
             ebcdic12712,
+            EBCDIC_12712,
             {ebcdic12712_mbtowc, nullptr}, {ebcdic12712_wctomb, nullptr})
 
 DEFCODEPAGE(12712, ebcdic12712)
@@ -1603,6 +1815,7 @@ DEFCODEPAGE(12712, ebcdic12712)
 DEFENCODING(("IBM16804", /* glibc */
              ),
             ebcdic16804,
+            EBCDIC_16804,
             {ebcdic16804_mbtowc, nullptr}, {ebcdic16804_wctomb, nullptr})
 
 DEFCODEPAGE(16804, ebcdic16804)
@@ -1611,34 +1824,43 @@ DEFENCODING(("EUCJISX0213",
              "EUCJIS2004", /* x0213.org */
              ),
             euc_jisx0213,
+            EUC_JISX0213,
             {euc_jisx0213_mbtowc, euc_jisx0213_flushwc}, {euc_jisx0213_wctomb, euc_jisx0213_reset})
 
 DEFENCODING(("SHIFTJISX0213",
              "SHIFTJIS2004", /* x0213.org */
              ),
             shift_jisx0213,
+            SHIFT_JISX0213,
             {shift_jisx0213_mbtowc, shift_jisx0213_flushwc}, {shift_jisx0213_wctomb, shift_jisx0213_reset})
 
 DEFENCODING(("ISO2022JP3",
              "ISO2022JP2004", /* x0213.org */
              ),
             iso2022_jp3,
+            ISO2022_JP3,
             {iso2022_jp3_mbtowc, iso2022_jp3_flushwc}, {iso2022_jp3_wctomb, iso2022_jp3_reset})
 
 DEFENCODING(("BIG52003", ),
             big5_2003,
+            BIG5_2003,
             {big5_2003_mbtowc, nullptr}, {big5_2003_wctomb, nullptr})
 
 DEFENCODING(("TDS565",
              "ISOIR230", ),
             tds565,
+            TDS565,
             {tds565_mbtowc, nullptr}, {tds565_wctomb, nullptr})
 
 DEFENCODING(("ATARIST",
              "ATARI", ),
             atarist,
+            ATARIST,
             {atarist_mbtowc, nullptr}, {atarist_wctomb, nullptr})
+
+DEFINDEX(ATARI, ATARIST)
 
 DEFENCODING(("RISCOSLATIN1", ),
             riscos1,
+            RISCOS_LATIN1,
             {riscos1_mbtowc, nullptr}, {riscos1_wctomb, nullptr})

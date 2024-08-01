@@ -83,7 +83,9 @@ endif()
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/cppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
-
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/lib/generated/indexes.hpp.shippet" _INDEXES_CODE)
+string(STRIP "${_INDEXES_CODE}" INDEXES_CODE)
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/encodings/reiconv.hpp.in" "${output_includedir}/cppp/encodings/reiconv.hpp")
 
 # Add includes.
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
@@ -103,6 +105,11 @@ cppp_install_library(${PROJECT_NAME})
 # Install headers.
 # PERMISSIONS 0644
 install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
+        DESTINATION "${install_includedir}"
+        RENAME "cppp/reiconv.hpp"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+
+install(FILES "${output_includedir}/cppp/encodings/reiconv.hpp"
         DESTINATION "${install_includedir}"
         RENAME "cppp/reiconv.hpp"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )

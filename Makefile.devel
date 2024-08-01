@@ -15,7 +15,8 @@ CFLAGS := $(CFLAGS)
 CXXFLAGS := $(CXXFLAGS) -Ilib
 
 all : lib/generated \
-      lib/generated/aliases.h
+      lib/generated/aliases.h \
+	  lib/generated/indexes.hpp.shippet
 
 lib/generated :
 	$(MKDIR) -p lib/generated
@@ -28,6 +29,12 @@ lib/generated/aliases.gperf : lib/generated/genaliases
 
 lib/generated/aliases.h : lib/generated/aliases.gperf
 	$(GPERF) -L C++ -Z HashPool -m 10 $< > $@
+
+lib/generated/genindexes : tools/genindexes.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@
+
+lib/generated/indexes.hpp.shippet : lib/generated/genindexes
+	./lib/generated/genindexes > $@
 
 test : all
 	$(RM) -r -f build tests/data/GB18030-2005.TXT tests/data/GB18030-2022.TXT tests/data/UTF-8.TXT

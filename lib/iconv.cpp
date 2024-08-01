@@ -47,37 +47,43 @@ namespace cppp::base::reiconv
         struct wctomb_funcs ofuncs; // conversion unicode -> multibyte
     };
 
-#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
+#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
 #define DEFCODEPAGE(codepage, xxx)
+#define DEFINDEX(alias, index)
 
     enum
     {
         #include "encodings.h.snippet"
     };
 
+#undef DEFINDEX
 #undef DEFCODEPAGE
 #undef DEFENCODING
 
-#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) \
+#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) \
     {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2},
 #define DEFCODEPAGE(codepage, xxx)
+#define DEFINDEX(alias, name)
 
     static struct encoding const all_encodings[] =
     {
         #include "encodings.h.snippet"
     };
 
+#undef DEFINDEX
 #undef DEFENCODING
 #undef DEFCODEPAGE
 
-#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)
+#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)
 #define DEFCODEPAGE(codepage, xxx) {codepage, ei_##xxx},
+#define DEFINDEX(alias, name)
 
     static const std::map<int, int> codepage_to_eindex =
     {
         #include "encodings.h.snippet"
     };
 
+#undef DEFINDEX
 #undef DEFENCODING
 #undef DEFCODEPAGE
 
@@ -225,8 +231,8 @@ namespace cppp::base::reiconv
 
     constexpr const size_t TEMP_BUFFER_SIZE = 4096;
 
-    _CPPP_API int convert(const iconv_t& cd, const char *start, size_t inlength, char **resultp,
-                    size_t *lengthp, bool strict)
+    _CPPP_API int convert(iconv_t cd, const char *start, size_t inlength, char **resultp,
+                    size_t *lengthp)
     {
         size_t length;
         char* result;
@@ -378,12 +384,10 @@ namespace cppp::base::reiconv
             return -1;
         }
 
-        int ret = convert(cd, start, inlength, resultp, lengthp, strict);
+        int ret = convert(cd, start, inlength, resultp, lengthp);
         iconv_close(cd);
         return ret;
     }
-
-#if 0
 
     _CPPP_API int convert(int tocode_cp, int fromcode_cp, const char* start,
                     size_t inlength, char** resultp, size_t* lengthp, bool strict)
@@ -398,8 +402,6 @@ namespace cppp::base::reiconv
         iconv_close(cd);
         return ret;
     }
-
-#endif
 
     _CPPP_API bool ascii_mbtou16(const char* str, size_t length, char16_t** resultp, size_t* lengthp)
     {

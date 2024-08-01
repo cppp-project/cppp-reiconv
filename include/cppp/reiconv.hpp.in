@@ -28,6 +28,7 @@
 #pragma once
 
 #include <stddef.h>
+#include <cppp/encodings/reiconv.hpp>
 
 #ifndef _CPPP_API
 #define _CPPP_API @CPPP_API@

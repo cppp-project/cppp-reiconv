@@ -89,15 +89,16 @@ int main(int argc, char* argv[])
     fprintf(aliases_file, "%%pic\n");
     fprintf(aliases_file, "%%%%\n");
 
-#define DEFENCODING(xxx_names, xxx, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                      \
-    {                                                                                                                  \
-        static const char *const names[] = BRACIFY xxx_names;                                                          \
-        emit_encoding(aliases_file, names, sizeof(names) / sizeof(names[0]), #xxx);                                    \
+#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) \
+    {                                                                                              \
+        static const char *const names[] = BRACIFY xxx_names;                                      \
+        emit_encoding(aliases_file, names, sizeof(names) / sizeof(names[0]), #xxx);                \
     }
 #define DEFCODEPAGE(codepage, xxx)
-#define BRACIFY(...)                                                                                                   \
-    {                                                                                                                  \
-        __VA_ARGS__                                                                                                    \
+#define DEFINDEX(alias, index)
+#define BRACIFY(...) \
+    {                \
+        __VA_ARGS__  \
     }
 
 #include "encodings.h.snippet"
