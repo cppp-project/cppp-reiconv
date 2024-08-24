@@ -91,6 +91,10 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/encodings/reiconv.hpp.i
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
 include_directories("${output_includedir}")
 
+add_compile_definitions(VERSION_MAJOR=${PROJECT_VERSION_MAJOR})
+add_compile_definitions(VERSION_MINOR=${PROJECT_VERSION_MINOR})
+add_compile_definitions(VERSION_PATCH=${PROJECT_VERSION_PATCH})
+
 # Add library.
 cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 

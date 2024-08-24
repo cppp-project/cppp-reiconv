@@ -112,10 +112,7 @@ namespace test
             }
         }
 
-        if (iconv_close(cd) < 0)
-        {
-            error("iconv_close", "Iconv close error.");
-        }
+        iconv_close(cd);
 
         if (fclose(save_file) < 0)
         {

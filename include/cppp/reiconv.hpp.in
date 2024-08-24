@@ -27,149 +27,155 @@
 
 #pragma once
 
-#include <stddef.h>
 #include <cppp/encodings/reiconv.hpp>
+
+#include <cstddef>
+#include <cstring>
+#include <string>
+
+#define _CPPP_API
 
 #ifndef _CPPP_API
 #define _CPPP_API @CPPP_API@
 #endif
 
 #if _MSC_VER >= 1600
-/* Use UTF-8 to decode this file. */
 #pragma execution_character_set("utf-8")
 #endif
 
 namespace cppp::base::reiconv
 {
-    /**
-     * @brief Version infomation. (major<<8) + minor
-     */
-    extern _CPPP_API int reiconv_version;
+    using cppp::base::encoding::Encodings;
+
+    template <typename ByteType>
+    struct BasicBuffer
+    {
+        /**
+         * @brief Buffer pointer.
+         */
+        ByteType *buffer;
+
+        /**
+         * @brief Buffer size.
+         */
+        std::size_t length;
+
+        /**
+         * @brief Construct a buffer.
+         */
+        BasicBuffer(ByteType *buffer, std::size_t length) : buffer(buffer), length(length) {}
+
+        /**
+         * @brief Construct a buffer from a string.
+         */
+        BasicBuffer(const std::string &str) : buffer(reinterpret_cast<ByteType*>(str.data())), length(str.size()) {}
+
+        /**
+         * @brief Construct a buffer from a string.
+         */
+        BasicBuffer(const char* str) : buffer(reinterpret_cast<ByteType*>(str)), length(std::strlen(str)) {}
+    };
 
     /**
-     * @brief Convert a ascii-only string to UTF-16.
-     * @param str Source string.
-     * @param length Source string length.
-     * @param resultp Result memory pointer.
-     * @param lengthp Pointer to a variable that stores the length of the result.
-     * @warning Don't forget to free the result memory!
-     * @return Return true if successful, otherwise return false.
+     * @brief Buffer for input.
      */
-    extern _CPPP_API bool ascii_mbtou16(const char *str, size_t length,
-                                        char16_t **resultp, size_t *lengthp);
+    using InputBuffer = BasicBuffer<const std::byte>;
 
     /**
-     * @brief Convert a ascii-only string to UTF-32.
-     * @param str Source string.
-     * @param length Source string length.
-     * @param resultp Result memory pointer.
-     * @param lengthp Pointer to a variable that stores the length of the result.
-     * @warning Don't forget to free the result memory!
-     * @return Return true if successful, otherwise return false.
+     * @brief Buffer for output.
      */
-    extern _CPPP_API bool ascii_mbtou32(const char *str, size_t length,
-                                        char32_t **resultp, size_t *lengthp);
+    using OutputBuffer = BasicBuffer<std::byte>;
 
     /**
-     * @brief Converts an entire string from one encoding to another,
-     * and supports autodetect encodings on input.
+     * @brief Encoding class.
+     */
+    class Encoding
+    {
+    private:
+        /**
+         * @brief Encoding index. This is the internal representation of the encoding.
+         */
+        int _index;
+
+    public:
+
+        /**
+         * @brief Find the encoding by name. IANA names are recommended.
+         * @throw std::invalid_argument if the encoding is not found.
+         */
+        _CPPP_API Encoding(const char* const name);
+
+        /**
+         * @brief Find the encoding by name. IANA names are recommended.
+         * @throw std::invalid_argument if the encoding is not found.
+         */
+        _CPPP_API Encoding(const std::string& name) : Encoding(name.c_str()) {}
+
+        /**
+         * @brief Find the encoding by codepage. Supports Windows and z/OS codepages.
+         * @throw std::invalid_argument if the encoding is not found.
+         */
+        _CPPP_API Encoding(const int codepage);
+
+        /**
+         * @brief Find the encoding by index.
+         * @throw std::invalid_argument if the encoding is not found.
+         */
+        constexpr Encoding(const Encodings index) : _index(static_cast<int>(index)) {}
+
+        /**
+         * @brief Get the encoding index.
+         */
+        operator int() const noexcept { return _index; }
+
+        /**
+         * @brief Get the encoding name.
+         */
+        bool operator==(const Encoding other) const noexcept { return _index == other._index; }
+    };
+
+    /**
+     * @brief Version information.
+     */
+    struct VersionInfo
+    {
+        /**
+         * @brief Major version.
+         */
+        int major;
+
+        /**
+         * @brief Minor version.
+         */
+        int minor;
+
+        /**
+         * @brief Patch version.
+         */
+        int patch;
+    };
+
+    /**
+     * @brief Version infomation.
+     */
+    extern _CPPP_API VersionInfo version;
+
+    /**
+     * @brief Converts an string from one encoding to another, supports encodings autodetecting.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
-     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and
-     * '//TRANSLIT'. except that FROMCODE may be one of the values.
-     *
-     * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
-     * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
-     * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note If resultp is not nullptr, the output string is stored in
-     * *resultp; malloc/realloc is used to allocate the result.
+     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support
+     * '//IGNORE' and '//TRANSLIT'.
+     * malloc/realloc is used to allocate the result.
      *
      * @note This function does not treat zero characters specially.
-     * @param tocode Target encoding.
-     * @param fromcode From encoding.
-     * @param start Source string.
-     * @param inlength Source string length.
-     * @param resultp Result memory pointer.
-     * @param lengthp Pointer to a variable that stores the length of the result.
-     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
+     * @param from The input buffer encoding.
+     * @param to The output buffer encoding.
+     * @param input Input buffer.
+     * @param strict If false. We will ignore all conversion errors. Same as iconv(3) '//IGNORE'.
+     * @return Return the output buffer.
+     * @throw std::system_error if an error occurs.
      */
-    extern _CPPP_API int convert(const char *tocode, const char *fromcode,
-                                 const char *start, size_t inlength,
-                                 char **resultp, size_t *lengthp, bool strict);
-
-#if 0
-
-    /**
-     * @brief Converts an entire string from one encoding to another,
-     * and supports autodetect encodings on input.
-     *
-     * @note Converts a memory region given in encoding FROMCODE to a new memory
-     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and
-     * '//TRANSLIT'. except that FROMCODE may be one of the values.
-     *
-     * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
-     * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
-     * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note If resultp is not nullptr, the output string is stored in
-     * *resultp; malloc/realloc is used to allocate the result.
-     *
-     * @note This function does not treat zero characters specially.
-     * @param tocode Target encoding.
-     * @param fromcode From encoding.
-     * @param start Source string.
-     * @param inlength Source string length.
-     * @param resultp Result memory pointer.
-     * @param lengthp Pointer to a variable that stores the length of the result.
-     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
-     */
-    extern _CPPP_API int convert(const char16_t *tocode, const char16_t *fromcode,
-                                 const char *start, size_t inlength,
-                                 char **resultp, size_t *lengthp);
-
-    /**
-     * @brief Converts an entire string from one encoding to another,
-     * and supports autodetect encodings on input.
-     *
-     * @note Converts a memory region given in encoding FROMCODE to a new memory
-     * region in encoding TOCODE. FROMCODE and TOCODE are as for iconv_open(3), we don't support '//IGNORE' and
-     * '//TRANSLIT'. except that FROMCODE may be one of the values.
-     *
-     * @note "autodetect_utf8"          supports ISO-8859-1 and UTF-8
-     * @note "autodetect_jp"            supports EUC-JP, ISO-2022-JP-2 and SHIFT_JIS
-     * @note "autodetect_kr"            supports EUC-KR and ISO-2022-KR
-     * @note If resultp is not nullptr, the output string is stored in
-     * *resultp; malloc/realloc is used to allocate the result.
-     *
-     * @note This function does not treat zero characters specially.
-     * @param tocode Target encoding.
-     * @param fromcode From encoding.
-     * @param start Source string.
-     * @param inlength Source string length.
-     * @param resultp Result memory pointer.
-     * @param lengthp Pointer to a variable that stores the length of the result.
-     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
-     */
-    extern _CPPP_API int convert(const char32_t *tocode, const char32_t *fromcode,
-                                 const char *start, size_t inlength,
-                                 char **resultp, size_t *lengthp);
-
-    /**
-     * @brief Converts an entire string from one encoding to another.
-     * @note This function does not treat zero characters specially.
-     * @param tocode_cp Target encoding codepage.
-     * @param fromcode_cp From encoding codepage.
-     * @param start Source string.
-     * @param inlength Source string length.
-     * @param resultp Result memory pointer.
-     * @param lengthp Pointer to a variable that stores the length of the result.
-     * @param strict Strict mode, if false, will ignore the invalid characters.
-     * @return Return 0 if successful, otherwise return errno and errno set. Particular errno values: EILSEQ and ENOMEM.
-     */
-    extern _CPPP_API int convert(int tocode_cp, int fromcode_cp,
-                                 const char *start, size_t inlength,
-                                 char **resultp, size_t *lengthp,
-                                 bool strict = true);
-
-#endif
+    extern _CPPP_API OutputBuffer convert(Encoding from, Encoding to, InputBuffer input, bool strict = true);
 
 } // namespace cppp::base::reiconv

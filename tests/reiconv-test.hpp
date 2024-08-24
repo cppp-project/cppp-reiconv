@@ -40,18 +40,15 @@ namespace test
     {
         void main(const std::string& from, const std::string& to,  const std::string& input_file_path, const std::string& output_file_path)
         {
-            char* res = nullptr;
-            size_t len = 0;
-
             FILE* src = fopen(input_file_path.c_str(), "rb");
             size_t srclen = get_file_size(input_file_path.c_str());
             char* s = (char*)malloc(srclen);
             fread(s, 1, srclen, src);
             fclose(src);
-            cppp::base::reiconv::convert(to.c_str(), from.c_str(), s, srclen, &res, &len, true);
+            auto res = cppp::base::reiconv::convert(Encoding(from), Encoding(to), {(std::byte*)s, srclen}, true);
 
             FILE* out = fopen(output_file_path.c_str(), "wb");
-            fwrite(res, 1, len, out);
+            fwrite(res.buffer, 1, res.length, out);
             fclose(out);
             free(s);
         }

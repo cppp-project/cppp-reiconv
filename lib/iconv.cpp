@@ -21,9 +21,10 @@
 
 #include <cstdlib>
 #include <cstring>
-#include <iostream>
 #include <limits.h>
 #include <map>
+#include <stdexcept>
+#include <system_error>
 
 namespace cppp::base::reiconv
 {
@@ -54,6 +55,7 @@ namespace cppp::base::reiconv
     enum
     {
         #include "encodings.h.snippet"
+        ei_end
     };
 
 #undef DEFINDEX
@@ -87,7 +89,6 @@ namespace cppp::base::reiconv
 #undef DEFENCODING
 #undef DEFCODEPAGE
 
-
     // Conversion loops.
     #include "loops.h"
 
@@ -100,8 +101,7 @@ namespace cppp::base::reiconv
      */
     #include "generated/aliases.h"
 
-#pragma region hidden-api
-
+#pragma region Utility functions.
     static inline int lookup_by_codepage(int codepage)
     {
         auto it = codepage_to_eindex.find(codepage);
@@ -176,6 +176,10 @@ namespace cppp::base::reiconv
         return cd;
     }
 
+#pragma endregion
+
+#pragma region Hidden APIs.
+
     _CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode, bool strict)
     {
         unsigned int to_index = lookup_by_name(tocode);
@@ -212,66 +216,91 @@ namespace cppp::base::reiconv
     {
         conv_t cd = (conv_t)icd;
         if (inbuf == nullptr || *inbuf == nullptr)
+        {
             return cd->lfuncs.loop_reset(icd, outbuf, outbytesleft);
+        }
         else
+        {
             return cd->lfuncs.loop_convert(icd, (const char **)inbuf, inbytesleft, outbuf, outbytesleft);
+        }
     }
 
-    _CPPP_API int iconv_close(iconv_t icd)
+    _CPPP_API void iconv_close(iconv_t icd)
     {
-        conv_t cd = (conv_t)icd;
-        free(cd);
-        return 0;
+        free(icd);
     }
 
 #pragma endregion
 
-    /* version number: (major<<8) + minor */
-    _CPPP_API int reiconv_version = (3 << 8) + 0;
+    _CPPP_API VersionInfo version = {VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
 
-    constexpr const size_t TEMP_BUFFER_SIZE = 4096;
+#pragma region Encoding class implementation.
+
+    _CPPP_API Encoding::Encoding(const char* const name)
+    {
+        int index = lookup_by_name(name);
+        if (index == -1)
+        {
+            throw std::invalid_argument("Invalid encoding name.");
+        }
+        this->_index = index;
+    }
+
+    _CPPP_API Encoding::Encoding(const int codepage)
+    {
+        int index = lookup_by_codepage(codepage);
+        if (index == -1)
+        {
+            throw std::invalid_argument("Invalid codepage.");
+        }
+        this->_index = index;
+    }
+
+#pragma endregion
+
+    constexpr const std::size_t TEMP_BUFFER_SIZE = 4096;
 
     _CPPP_API int convert(iconv_t cd, const char *start, size_t inlength, char **resultp,
                     size_t *lengthp)
     {
         size_t length;
         char* result;
-        /* Determine the length we need. */
+
+        // Determine the length we need.
+        size_t count = 0;
+        char tmpbuf[TEMP_BUFFER_SIZE];
+        char* inptr = (char*)start;
+        size_t insize = inlength;
+        while (insize > 0)
         {
-            size_t count = 0;
-            char tmpbuf[TEMP_BUFFER_SIZE];
-            char* inptr = (char*)start;
-            size_t insize = inlength;
-            while (insize > 0)
+            char *outptr = tmpbuf;
+            size_t outsize = TEMP_BUFFER_SIZE;
+            size_t res = iconv(cd, &inptr, &insize, &outptr, &outsize);
+            if (res == (size_t)(-1) && errno != E2BIG)
             {
-                char *outptr = tmpbuf;
-                size_t outsize = TEMP_BUFFER_SIZE;
-                size_t res = iconv(cd, &inptr, &insize, &outptr, &outsize);
-                if (res == (size_t)(-1) && errno != E2BIG)
-                {
-                    return (errno == EINVAL ? EILSEQ : errno);
-                }
-                count += outptr - tmpbuf;
+                return (errno == EINVAL ? EILSEQ : errno);
             }
-            {
-                char *outptr = tmpbuf;
-                size_t outsize = TEMP_BUFFER_SIZE;
-                size_t res = iconv(cd, nullptr, nullptr, &outptr, &outsize);
-                if (res == (size_t)(-1))
-                {
-                    return errno;
-                }
-                count += outptr - tmpbuf;
-            }
-            length = count;
+            count += outptr - tmpbuf;
         }
+        {
+            char *outptr = tmpbuf;
+            size_t outsize = TEMP_BUFFER_SIZE;
+            size_t res = iconv(cd, nullptr, nullptr, &outptr, &outsize);
+            if (res == (size_t)(-1))
+            {
+                return errno;
+            }
+            count += outptr - tmpbuf;
+        }
+        length = count;
+
         if (lengthp != nullptr)
         {
             *lengthp = length;
         }
         if (resultp == nullptr)
         {
-            /* If resultp is nullptrptr, we can't save results.  */
+            // If resultp is nullptrptr, we can't save results.
             return 0;
         }
         result = (*resultp == nullptr ? (char*)malloc(length) : (char*)realloc(*resultp, length));
@@ -282,9 +311,11 @@ namespace cppp::base::reiconv
         }
         if (result == nullptr)
         {
-            return (errno = ENOMEM);
+            return errno = ENOMEM;
         }
-        iconv(cd, nullptr, nullptr, nullptr, nullptr); /* return to the initial state */
+        // Return to the initial state.
+        iconv(cd, nullptr, nullptr, nullptr, nullptr);
+
         /* Do the conversion for real. */
         {
             char* inptr = (char*)start;
@@ -321,138 +352,26 @@ namespace cppp::base::reiconv
         return 0;
     }
 
-    _CPPP_API int convert(const char* tocode, const char* fromcode, const char* start,
-                    size_t inlength, char** resultp, size_t* lengthp, bool strict)
+    _CPPP_API OutputBuffer convert(Encoding from, Encoding to, InputBuffer input, bool strict)
     {
-        iconv_t cd = iconv_open(tocode, fromcode, strict);
+        iconv_t cd = iconv_open_from_index(to, from, strict);
         if (cd == (iconv_t)(-1))
         {
-            if (errno != EINVAL)
-            {
-                return -1;
-            }
-
-#pragma region autodetect
-            /* Unsupported fromcode or tocode. Check whether the caller requested
-            autodetection. */
-            if (!strcmp(fromcode, "autodetect_utf8"))
-            {
-                int ret;
-                /* Try UTF-8 first. There are very few ISO-8859-1 inputs that would
-                be valid UTF-8, but many UTF-8 inputs are valid ISO-8859-1. */
-                ret = convert(tocode, "UTF-8", start, inlength, resultp, lengthp, strict);
-                if (!(ret < 0 && errno == EILSEQ))
-                    return ret;
-                ret = convert(tocode, "ISO-8859-1", start, inlength, resultp, lengthp, strict);
-                return ret;
-            }
-            if (!strcmp(fromcode, "autodetect_jp"))
-            {
-                int ret;
-                /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
-                it will fail. */
-                ret = convert(tocode, "ISO-2022-JP-2", start, inlength, resultp, lengthp, strict);
-                if (!(ret < 0 && errno == EILSEQ))
-                    return ret;
-                /* Try EUC-JP next. Short SHIFT_JIS inputs may come out wrong. This
-                is unavoidable. People will condemn SHIFT_JIS.
-                If we tried SHIFT_JIS first, then some short EUC-JP inputs would
-                come out wrong, and people would condemn EUC-JP and Unix, which
-                would not be good. */
-                ret = convert(tocode, "EUC-JP", start, inlength, resultp, lengthp, strict);
-                if (!(ret < 0 && errno == EILSEQ))
-                    return ret;
-                /* Finally try SHIFT_JIS. */
-                ret = convert(tocode, "SHIFT_JIS", start, inlength, resultp, lengthp, strict);
-                return ret;
-            }
-            if (!strcmp(fromcode, "autodetect_kr"))
-            {
-                int ret;
-                /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
-                it will fail. */
-                ret = convert(tocode, "ISO-2022-KR", start, inlength, resultp, lengthp, strict);
-                if (!(ret < 0 && errno == EILSEQ))
-                    return ret;
-                /* Finally try EUC-KR. */
-                ret = convert(tocode, "EUC-KR", start, inlength, resultp, lengthp, strict);
-                return ret;
-            }
-#pragma endregion
-
-            errno = EINVAL;
-            return -1;
+            throw std::system_error(errno, std::system_category(), "iconv_open");
         }
 
-        int ret = convert(cd, start, inlength, resultp, lengthp);
+        char* result = nullptr;
+        std::size_t length = 0;
+        int err = convert(cd, (const char*)input.buffer, input.length, &result, &length);
         iconv_close(cd);
-        return ret;
-    }
 
-    _CPPP_API int convert(int tocode_cp, int fromcode_cp, const char* start,
-                    size_t inlength, char** resultp, size_t* lengthp, bool strict)
-    {
-        iconv_t cd = iconv_open(tocode_cp, fromcode_cp, strict);
-        if (cd == (iconv_t)(-1))
+        if (err != 0)
         {
-            return errno;
+            free(result);
+            throw std::system_error(err, std::system_category(), "iconv");
         }
 
-        int ret = convert(cd, start, inlength, resultp, lengthp);
-        iconv_close(cd);
-        return ret;
-    }
-
-    _CPPP_API bool ascii_mbtou16(const char* str, size_t length, char16_t** resultp, size_t* lengthp)
-    {
-        if (resultp == nullptr || lengthp == nullptr)
-        {
-            errno = EINVAL;
-            return false;
-        }
-
-        char16_t* result = (char16_t*)malloc(length * sizeof(char16_t));
-        if (result == nullptr)
-        {
-            errno = ENOMEM;
-            return false;
-        }
-
-        size_t count = 0;
-        for (size_t i = 0; i < length; i++)
-        {
-            result[count++] = (char16_t)str[i];
-        }
-
-        *resultp = result;
-        *lengthp = count;
-        return true;
-    }
-
-    _CPPP_API bool ascii_mbtou32(const char* str, size_t length, char32_t** resultp, size_t* lengthp)
-    {
-        if (resultp == nullptr || lengthp == nullptr)
-        {
-            errno = EINVAL;
-            return false;
-        }
-
-        char32_t* result = (char32_t*)malloc(length * sizeof(char32_t));
-        if (result == nullptr)
-        {
-            errno = ENOMEM;
-            return false;
-        }
-
-        size_t count = 0;
-        for (size_t i = 0; i < length; i++)
-        {
-            result[count++] = (char32_t)str[i];
-        }
-
-        *resultp = result;
-        *lengthp = count;
-        return true;
+        return {(std::byte*)result, length};
     }
 
 } // namespace cppp::base::reiconv
