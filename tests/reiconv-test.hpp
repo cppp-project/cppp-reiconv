@@ -23,12 +23,12 @@
 
 #include "utils.hpp"
 
-#include <iostream>
-#include <fstream>
-#include <errno.h>
 #include <cstring>
-#include <vector>
+#include <errno.h>
+#include <fstream>
 #include <initializer_list>
+#include <iostream>
+#include <vector>
 
 #include "throw_error.hpp"
 
@@ -36,21 +36,22 @@ using namespace cppp::base::reiconv;
 
 namespace test
 {
-    namespace iconv
-    {
-        void main(const std::string& from, const std::string& to,  const std::string& input_file_path, const std::string& output_file_path)
-        {
-            FILE* src = fopen(input_file_path.c_str(), "rb");
-            size_t srclen = get_file_size(input_file_path.c_str());
-            char* s = (char*)malloc(srclen);
-            fread(s, 1, srclen, src);
-            fclose(src);
-            auto res = cppp::base::reiconv::convert(Encoding(from), Encoding(to), {(std::byte*)s, srclen}, true);
+namespace iconv
+{
+void main(const std::string &from, const std::string &to, const std::string &input_file_path,
+          const std::string &output_file_path)
+{
+    FILE *src = fopen(input_file_path.c_str(), "rb");
+    size_t srclen = get_file_size(input_file_path.c_str());
+    char *s = (char *)malloc(srclen);
+    fread(s, 1, srclen, src);
+    fclose(src);
+    auto res = cppp::base::reiconv::convert(Encoding(from), Encoding(to), {(std::byte *)s, srclen}, true);
 
-            FILE* out = fopen(output_file_path.c_str(), "wb");
-            fwrite(res.buffer, 1, res.length, out);
-            fclose(out);
-            free(s);
-        }
-    }
+    FILE *out = fopen(output_file_path.c_str(), "wb");
+    fwrite(res.buffer, 1, res.length, out);
+    fclose(out);
+    free(s);
 }
+} // namespace iconv
+} // namespace test

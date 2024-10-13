@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <stdexcept>
 
+
 static void reiconv_handle_open_by_name(benchmark::State& state)
 {
     using namespace cppp::base;
@@ -218,10 +219,11 @@ static void libicu_convert(benchmark::State& state)
     {
         output = (char*)malloc(enough_size);
         memset(output, 0, enough_size);
-        ucnv_convert("GB18030",
+        
+        ucnv_convert_72("GB18030",
             NULL,
             output,
-            enough_size,
+            enough_size + 1,
             big_test_string_utf8,
             big_test_string_utf8_len,
             &status);

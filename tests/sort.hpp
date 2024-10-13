@@ -23,26 +23,26 @@
 
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <algorithm>
+#include <fstream>
+#include <iostream>
 #include <string>
+#include <vector>
 
 #include "throw_error.hpp"
 
-void sort_file(const std::string& file_name, const std::string& output_file_name)
+inline void sort_file(const std::string &file_name, const std::string &output_file_name)
 {
     std::vector<std::string> lines;
 
     std::ifstream input_file(file_name);
-    if(!input_file.is_open())
+    if (!input_file.is_open())
     {
         error("sort", "Failed to open file: " + file_name);
     }
 
     std::ofstream output_file(output_file_name, std::ios::trunc);
-    if(!output_file.is_open())
+    if (!output_file.is_open())
     {
         error("sort", "Failed to open file: " + output_file_name);
     }
@@ -56,7 +56,7 @@ void sort_file(const std::string& file_name, const std::string& output_file_name
 
     std::sort(lines.begin(), lines.end());
 
-    for (const std::string& line : lines)
+    for (const std::string &line : lines)
     {
         output_file << line << std::endl;
     }

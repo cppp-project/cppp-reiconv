@@ -20,29 +20,24 @@
 
 /* Usage: ./data_generator [utf-8 | gb18030:2005 gb18030:2022] datadir stdout */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
+#include <cstdio>
+#include <string>
 
-#include "throw_error.hpp"
 
 void gengb18030z()
 {
-    int i1, i2, i3, i4, uc;
+    int uc = 0x10000;
 
-    uc = 0x10000;
-    for (i1 = 0x90; i1 <= 0xe3; i1++)
+    for (int i1 = 0x90; i1 <= 0xe3; i1++)
     {
-        for (i2 = 0x30; i2 <= 0x39; i2++)
+        for (int i2 = 0x30; i2 <= 0x39; i2++)
         {
-            for (i3 = 0x81; i3 <= 0xfe; i3++)
+            for (int i3 = 0x81; i3 <= 0xfe; i3++)
             {
-                for (i4 = 0x30; i4 <= 0x39; i4++)
+                for (int i4 = 0x30; i4 <= 0x39; i4++)
                 {
-                    
-                    char buffer[32] {};
-                    sprintf(buffer, "0x%02X%02X%02X%02X\t0x%X\n", i1, i2, i3, i4, uc);
-                    fwrite(buffer, sizeof(char), strlen(buffer), stdout);
+                    std::printf("0x%02X%02X%02X%02X\t0x%X\n", i1, i2, i3, i4, uc);
                     uc++;
                     if (uc == 0x110000)
                     {
@@ -54,11 +49,7 @@ void gengb18030z()
     }
     done:
 
-    if (ferror(stdout) || fclose(stdout))
-    {
-        error("gengb18030z", "IO Error.");
-    }
-    fflush(stdout);
+    std::fflush(stdout);
 }
 
 void genutf8()
@@ -66,20 +57,17 @@ void genutf8()
     int i1, i2, i3;
 
     /* Range 0x0000..0x007f */
-    for (i1 = 0; i1 < 0x80; i1++)
+    for (int i1 = 0; i1 < 0x80; i1++)
     {
-        char buffer[32] {};
-        sprintf(buffer, "0x%02X\t0x%04X\n", i1, i1);
-        fwrite(buffer, sizeof(char), strlen(buffer), stdout);
+        std::printf("0x%02X\t0x%04X\n", i1, i1);
     }
+
     /* Range 0x0080..0x07ff */
     for (i1 = 2; i1 < 32; i1++)
     {
         for (i2 = 0; i2 < 64; i2++)
         {
-            char buffer[32] {};
-            sprintf(buffer, "0x%02X%02X\t0x%04X\n", 0xc0+i1, 0x80+i2, (i1 << 6) + i2);
-            fwrite(buffer, sizeof(char), strlen(buffer), stdout);
+            std::printf("0x%02X%02X\t0x%04X\n", 0xc0+i1, 0x80+i2, (i1 << 6) + i2);
         }
     }
     /* Range 0x0800..0xffff, except 0xd800..0xdfff */
@@ -91,41 +79,29 @@ void genutf8()
                 int u = (i1 << 12) + (i2 << 6) + i3;
                 if (!(u >= 0xd800 && u < 0xe000))
                 {
-                    char buffer[32] {};
-                    sprintf(buffer, "0x%02X%02X%02X\t0x%04X\n", 0xe0 + i1, 0x80 + i2, 0x80 + i3, u);
-                    fwrite(buffer, sizeof(char), strlen(buffer), stdout);
+                    std::printf("0x%02X%02X%02X\t0x%04X\n", 0xe0 + i1, 0x80 + i2, 0x80 + i3, u);
                 }
             }
         }
-
-    if (ferror(stdout) || fclose(stdout))
-    {
-        error("genutf8", "IO Error.");
-    }
-    fflush(stdout);
 }
 
 int main (int argc, char *argv[])
 {
     if (argc < 2)
     {
-        fprintf(stderr, "Usage: %s [utf-8 | gb18030z]\n", argv[0]);
-        return 1;
+        goto usage;
     }
 
-    if (strcmp(argv[1], "utf-8") == 0)
+    if (std::string(argv[1]) == "utf-8")
     {
         genutf8();
-    }
-    else if (strcmp(argv[1], "gb18030z") == 0)
-    {
-        gengb18030z();
-    }
-    else
-    {
-        fprintf(stderr, "Usage: %s [utf-8 | gb18030z]\n", argv[0]);
+        return EXIT_SUCCESS;
     }
 
-    fclose(stdout);
-    return 0;
+    gengb18030z();
+    return EXIT_SUCCESS;
+
+    usage:
+    fprintf(stderr, "Usage: %s [utf-8 | gb18030z]\n", argv[0]);
+    return EXIT_FAILURE;
 }

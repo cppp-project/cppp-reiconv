@@ -35,6 +35,7 @@ windows/cppp-reiconv.rc
 *.dll
 *.exe
 *.sln
+*.out
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user

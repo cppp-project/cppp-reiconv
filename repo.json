@@ -1,5 +1,6 @@
 {
     "name": "cppp-reiconv",
+    "maintainer": "ChenPi11 <wushengwuxi-msctinoulk@outlook.com>",
     "version": "3.0.0",
     "description": "C+++ character set conversion library.",
     "license": "LGPL-3.0",

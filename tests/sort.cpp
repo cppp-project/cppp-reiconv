@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The C++ Plus Project.
+ * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -17,18 +17,14 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
-  Sort file lines.
-*/
+/* Sort file lines. */
 
-
-#include <iostream>
+#include <cstdlib>
 
 #include "sort.hpp"
 #include "throw_error.hpp"
 
-// Usage: ./sort input_file output_file
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     if (argc < 3)
     {
@@ -37,5 +33,5 @@ int main(int argc, char* argv[])
 
     sort_file(argv[1], argv[2]);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

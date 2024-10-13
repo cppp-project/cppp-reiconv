@@ -115,11 +115,11 @@ namespace cppp::base::reiconv
         for (; *cp; cp++, bp++)
         {
             unsigned char c = (unsigned char)*cp;
-            if (c >= 'a' && c <= 'z')  // Uppercase
+            if (c >= 'a' && c <= 'z')  // Uppercase.
             {
                 c -= 'a' - 'A';
             }
-            if (c == '-' || c == '_')  // Ignore '-' and '_'
+            if (c == '-' || c == '_')  // Ignore '-' and '_'.
             {
                 bp--;
             }
@@ -219,10 +219,7 @@ namespace cppp::base::reiconv
         {
             return cd->lfuncs.loop_reset(icd, outbuf, outbytesleft);
         }
-        else
-        {
-            return cd->lfuncs.loop_convert(icd, (const char **)inbuf, inbytesleft, outbuf, outbytesleft);
-        }
+        return cd->lfuncs.loop_convert(icd, (const char **)inbuf, inbytesleft, outbuf, outbytesleft);
     }
 
     _CPPP_API void iconv_close(iconv_t icd)

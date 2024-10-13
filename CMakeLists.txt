@@ -24,8 +24,6 @@ project(cppp-reiconv
 
 option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." ON)
 
-set(CMAKE_CXX_STANDARD 20)
-
 # ----------------------------------------------------------------------------------
 # Import build auxiliaries.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
@@ -40,8 +38,6 @@ endif()
 get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
 include("${BUILD_AUX}/cmake/cppp.cmake")
 # ----------------------------------------------------------------------------------
-
-check_have_visibility()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")    
     add_compile_options(-Wno-unused-parameter)
@@ -64,24 +60,14 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/wd4018)
 endif()
 
-# Generate header file for install.
-if(WIN32)
-    set(CPPP_API "__declspec(dllimport)")
-elseif(HAVE_VISIBILITY)
-    set(CPPP_API "__attribute__((visibility(\"default\")))")
-else()
-    set(CPPP_API "")
-endif()
-
+# Header for install.
+set(CPPP_API "${CPPP_IMPORT_API}")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
 
-
-# Generate header file for build.
-if(WIN32)
-    set(CPPP_API "__declspec(dllexport)")
-endif()
-
+# Header for build.
+set(CPPP_API "${CPPP_EXPORT_API}")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
+
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/cppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/lib/generated/indexes.hpp.shippet" _INDEXES_CODE)
 string(STRIP "${_INDEXES_CODE}" INDEXES_CODE)
@@ -100,7 +86,7 @@ cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" T
 
 # Include test suite.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests" AND BUILD_TEST)
-    include("tests/tests.cmake")
+    include("${CMAKE_CURRENT_SOURCE_DIR}/tests/tests.cmake")
 endif()
 
 # Install libraries.
@@ -113,8 +99,9 @@ install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
         RENAME "cppp/reiconv.hpp"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
 
+# PERMISSIONS 0644
 install(FILES "${output_includedir}/cppp/encodings/reiconv.hpp"
-        DESTINATION "${install_includedir}"
+        DESTINATION "${install_includedir}/encodings"
         RENAME "cppp/reiconv.hpp"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
 

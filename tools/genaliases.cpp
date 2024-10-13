@@ -23,16 +23,6 @@
 
 #include <iostream>
 
-/* When we create shell scripts, we need to make sure that on Cygwin they have
-   Unix end-of-line characters, regardless of Cygwin choice of text mode vs.
-   binary mode. On z/OS, however, binary mode turns off charset tagging for
-   output files, which is not what we want. */
-#if defined __MVS__
-#define BINARY_MODE ""
-#else
-#define BINARY_MODE "b"
-#endif
-
 static void emit_alias(FILE* out, const char* alias, const char* c_name)
 {
     /* Output alias in upper case. */
@@ -70,7 +60,7 @@ int main(int argc, char* argv[])
 
     aliases_file_name = argv[1];
 
-    aliases_file = fopen(aliases_file_name, "w");
+    aliases_file = fopen(aliases_file_name, "wb");
     if (aliases_file == nullptr)
     {
         fprintf(stderr, "Could not open '%s' for writing\n", aliases_file_name);
@@ -104,6 +94,8 @@ int main(int argc, char* argv[])
 #include "encodings.h.snippet"
 
     if (ferror(aliases_file) || fclose(aliases_file))
+    {
         return 1;
+    }
     return 0;
 }
