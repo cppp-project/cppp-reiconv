@@ -58,12 +58,9 @@ void assert_compare_file(const std::string& path1, const std::string& path2)
 
     char file1_c;
     char file2_c;
-    size_t read_seek = 0;
 
     while(1)
     {
-        ++read_seek;
-
         if(file1.get(file1_c).eof()) { file1_c = EOF; }
         if(file1_c == '\r') { continue; }
 
@@ -73,11 +70,11 @@ void assert_compare_file(const std::string& path1, const std::string& path2)
         if(file1_c != file2_c)
         {
             errno = 0;
-            error("assert_compare_file", "Files are not equal at " + std::to_string(read_seek) + " byte.");
+            error("assert_compare_file", "The files are different.");
         }
         if(file1_c == EOF && file2_c == EOF) { break; }
     }
-    success("assert_compare_file", "Files are equal.");
+    success("assert_compare_file", "The file content is the same.");
     
 }
 
@@ -98,7 +95,7 @@ std::vector<char> read_all(const std::string& input_file_path)
         error(input_file_path, "Unable to open input file.");
     }
 
-    size_t size = get_file_size(input_file_path.c_str());
+    size_t size = std::filesystem::file_size(input_file_path);
     std::vector<char> buffer(size);
     input_file.read(buffer.data(), size);
 
