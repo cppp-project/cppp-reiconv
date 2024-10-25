@@ -13,7 +13,6 @@ New in 2.1.0:
 * Move `lib/gen*.c` to `tools/gen*.cpp`.
 * Optimize `Makefile.devel`.
 * Fix bugs, warnings, typos.
-
 * Change the 'autodetect' feature of 'iconv_string' to a non extra feature.
 
 New in 2.0.0:
