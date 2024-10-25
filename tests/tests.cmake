@@ -28,42 +28,60 @@ set_target_properties(sort                   PROPERTIES RUNTIME_OUTPUT_DIRECTORY
 macro(test state encoding)
     add_test( NAME "check-${state}-${encoding}"
               WORKING_DIRECTORY "${output_testsdir}"
-              COMMAND "$<TARGET_FILE:check-${state}>" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data" "${encoding}"
+              COMMAND "$<TARGET_FILE:check-${state}>" "${TEST_DATA_DIR}" "${encoding}"
               )
 endmacro(test)
 
 # Init test
+set(TEST_DATA_DIR "${output_testsdir}/data")
 
+# Copy data directory.
+if (NOT EXISTS "${TEST_DATA_DIR}")
+    file(MAKE_DIRECTORY "${TEST_DATA_DIR}")
+    file(GLOB_RECURSE TEST_DATA_FILES "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/*")
+
+    foreach(TEST_FILE ${TEST_DATA_FILES})
+        if(NOT IS_DIRECTORY "${TEST_FILE}")
+            get_filename_component(TEST_FILE_NAME "${TEST_FILE}" NAME)
+            file(COPY_FILE "${TEST_FILE}" "${TEST_DATA_DIR}/${TEST_FILE_NAME}")
+        endif()
+    endforeach()
+    unset(TEST_DATA_FILES)
+endif()
+
+# Generate UTF-8 test data.
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:data-generator>" "utf-8" > "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/UTF-8.TXT"
+    COMMAND "$<TARGET_FILE:data-generator>" "utf-8" > "${TEST_DATA_DIR}/UTF-8.TXT"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Generating UTF-8 test data ... "
 )
 
-file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005-BMP.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT")
+# Generate GB18030:2005 test data.
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT"
+    COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2005-BMP.TXT" "${TEST_DATA_DIR}/GB18030-2005.TXT"
+    COMMAND "$<TARGET_FILE:data-generator>" gb18030z >> "${TEST_DATA_DIR}/GB18030-2005.TXT"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Generating GB18030:2005 test data ... "
 )
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:sort>" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT.tmp"
-    COMMAND "${CMAKE_COMMAND}" -E copy "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT.tmp" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT"
-    COMMAND "${CMAKE_COMMAND}" -E remove "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2005.TXT.tmp"
+    COMMAND "$<TARGET_FILE:sort>" "${TEST_DATA_DIR}/GB18030-2005.TXT" "${TEST_DATA_DIR}/GB18030-2005.TXT.tmp"
+    COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2005.TXT.tmp" "${TEST_DATA_DIR}/GB18030-2005.TXT"
+    COMMAND "${CMAKE_COMMAND}" -E remove "${TEST_DATA_DIR}/GB18030-2005.TXT.tmp"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Sorting GB18030:2005 test data ... "
 )
 
-file(COPY_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022-BMP.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT")
+# Generate GB18030:2022 test data.
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:data-generator>" "gb18030z" >> "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT"
+    COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2022-BMP.TXT" "${TEST_DATA_DIR}/GB18030-2022.TXT"
+    COMMAND "$<TARGET_FILE:data-generator>" gb18030z >> "${TEST_DATA_DIR}/GB18030-2022.TXT"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Generating GB18030:2022 test data ... "
 )
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:sort>" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT.tmp"
-    COMMAND "${CMAKE_COMMAND}" -E copy "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT.tmp" "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT"
-    COMMAND "${CMAKE_COMMAND}" -E remove "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/GB18030-2022.TXT.tmp"
+    COMMAND "$<TARGET_FILE:sort>" "${TEST_DATA_DIR}/GB18030-2022.TXT" "${TEST_DATA_DIR}/GB18030-2022.TXT.tmp"
+    COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2022.TXT.tmp" "${TEST_DATA_DIR}/GB18030-2022.TXT"
+    COMMAND "${CMAKE_COMMAND}" -E remove "${TEST_DATA_DIR}/GB18030-2022.TXT.tmp"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Sorting GB18030:2022 test data ... "
 )
