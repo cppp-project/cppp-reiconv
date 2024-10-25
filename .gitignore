@@ -65,6 +65,7 @@ cppp-reiconv-*
 # Makefile.devel temp files
 lib/generated/genaliases
 lib/generated/genindexes
+lib/generated/check-encodings
 *.gperf
 
 # Patterns for all subdirectories: all kinds of automatic backup files.

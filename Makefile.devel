@@ -15,11 +15,16 @@ CFLAGS := $(CFLAGS)
 CXXFLAGS := $(CXXFLAGS) -Ilib
 
 all : lib/generated \
+      lib/generated/check-encodings \
       lib/generated/aliases.h \
-	  lib/generated/indexes.hpp.shippet
+      lib/generated/indexes.hpp.shippet
 
 lib/generated :
 	$(MKDIR) -p lib/generated
+
+lib/generated/check-encodings : tools/check-encodings.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@
+	./lib/generated/check-encodings
 
 lib/generated/genaliases : tools/genaliases.cpp
 	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@

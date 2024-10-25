@@ -22,7 +22,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <limits.h>
-#include <map>
+#include <unordered_map>
 #include <stdexcept>
 #include <system_error>
 
@@ -80,7 +80,7 @@ namespace cppp::base::reiconv
 #define DEFCODEPAGE(codepage, xxx) {codepage, ei_##xxx},
 #define DEFINDEX(alias, name)
 
-    static const std::map<int, int> codepage_to_eindex =
+    static const std::unordered_map<int, int> codepage_to_eindex =
     {
         #include "encodings.h.snippet"
     };
@@ -137,11 +137,11 @@ namespace cppp::base::reiconv
         char buf[MAX_WORD_LENGTH + 9 + 9 + 1];
         size_t buf_len = name_canonicalize(name, buf);
 
-        if (buf_len >= 2 && buf[0] == 'C' && buf[1] == 'P')
+        /* if (buf_len >= 2 && buf[0] == 'C' && buf[1] == 'P')
         {
             int codepage = atoi(buf + 2);
             return lookup_by_codepage(codepage);
-        }
+        } */ // TODO: Remove this later.
 
         const struct alias* ap = HashPool::aliases_lookup(buf, buf_len);
         if (ap)
