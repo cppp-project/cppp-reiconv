@@ -1,5 +1,10 @@
+/**
+ * @file check-stateful.hpp
+ * @brief Simple check of a stateful encoding.
+ * @author ChenPi11
+ * @copyright Copyright (C) 2024 The C++ Plus Project
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -17,45 +22,48 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
-  Simple check of a stateful encoding.
-*/
-
-#include <iostream>
+#include <cstdio>
 #include <cstring>
+#include <filesystem>
 
-#include "utils.hpp"
 #include "reiconv-test.hpp"
+#include "utils.hpp"
 
-std::string srcdir, charset;
+std::filesystem::path datadir;
+std::string charset;
 
-// Usage: check-stateful SRCDIR CHARSET
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if(argc < 3)
+    if (argc != 3)
     {
-        std::cerr << "Usage: check-stateful SRCDIR CHARSET\n";
-        return 1;
+        print_stderr("Usage: check-stateful DATADIR CHARSET\n");
+        return EXIT_FAILURE;
     }
-    srcdir = argv[1];
+    datadir = argv[1];
     charset = argv[2];
 
     std::string charsetf = replace(charset, ":", "-");
 
-    if(file_exists(srcdir + "/" + charsetf + "-snippet.alt"))
+    std::filesystem::path snippet_alt_file { datadir / (charsetf + "-snippet.alt") };
+    std::filesystem::path utf8_snippet_file { datadir / (charsetf + "-snippet.UTF-8") };
+
+    Buffer res, snippet_data;
+    if (std::filesystem::exists(snippet_alt_file))
     {
-        test::iconv::main(charset, "UTF-8", srcdir + "/" + charsetf + "-snippet.alt", "tmp-snippet");
-        assert_compare_file(srcdir + "/" + charsetf + "-snippet.UTF-8", "tmp-snippet");
+        res = reiconv_test(charset, "UTF-8", snippet_alt_file);
+        snippet_data = read_all(utf8_snippet_file);
+        compare_data(snippet_data, res);
     }
 
-    test::iconv::main(charset, "UTF-8", srcdir + "/" + charsetf + "-snippet", "tmp-snippet");
-    assert_compare_file(srcdir + "/" + charsetf + "-snippet.UTF-8", "tmp-snippet");
+    res = reiconv_test(charset, "UTF-8", datadir / (charsetf + "-snippet"));
+    snippet_data = read_all(utf8_snippet_file);
+    compare_data(snippet_data, res);
 
-    test::iconv::main("UTF-8", charset, srcdir + "/" + charsetf + "-snippet.UTF-8", "tmp-snippet");
-    assert_compare_file(srcdir + "/" + charsetf + "-snippet", "tmp-snippet");
-
-    remove_file("tmp-snippet");
+    res = reiconv_test("UTF-8", charset, utf8_snippet_file);
+    snippet_data = read_all(datadir / (charsetf + "-snippet"));
+    compare_data(snippet_data, res);
 
     success("check-stateful", charset + " OK.");
-    return 0;
+
+    return EXIT_SUCCESS;
 }

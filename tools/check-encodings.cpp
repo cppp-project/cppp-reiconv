@@ -64,5 +64,5 @@ int main(int argc, char *argv[])
 
 #include "encodings.h.snippet"
 
-    return 0;
+    return EXIT_SUCCESS;
 }

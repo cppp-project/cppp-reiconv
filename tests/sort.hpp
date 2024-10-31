@@ -1,5 +1,10 @@
+/**
+ * @file sort.hpp
+ * @brief Sort file lines.
+ * @author ChenPi11
+ * @copyright Copyright (C) 2024 The C++ Plus Project
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -17,34 +22,30 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
-  Sort file lines.
-*/
-
 #pragma once
 
 #include <algorithm>
 #include <fstream>
-#include <iostream>
 #include <string>
 #include <vector>
 
-#include "throw_error.hpp"
+#include "output.hpp"
+#include "utils.hpp"
 
 inline void sort_file(const std::string &file_name, const std::string &output_file_name)
 {
     std::vector<std::string> lines;
 
-    std::ifstream input_file(file_name);
-    if (!input_file.is_open())
+    std::ifstream input_file {file_name};
+    if (!input_file.good())
     {
-        error("sort", "Failed to open file: " + file_name);
+        error("sort", "Failed to open the input file.");
     }
 
-    std::ofstream output_file(output_file_name, std::ios::trunc);
-    if (!output_file.is_open())
+    std::ofstream output_file {output_file_name, std::ios::trunc};
+    if (!output_file.good())
     {
-        error("sort", "Failed to open file: " + output_file_name);
+        error("sort", "Failed to open the output file.");
     }
 
     std::string line;
@@ -58,6 +59,6 @@ inline void sort_file(const std::string &file_name, const std::string &output_fi
 
     for (const std::string &line : lines)
     {
-        output_file << line << std::endl;
+        write_stream(output_file, line + "\n");
     }
 }

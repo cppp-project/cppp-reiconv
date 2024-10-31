@@ -1,5 +1,10 @@
+/**
+ * @file reiconv-test.hpp
+ * @brief Conversion test.
+ * @author ChenPi11
+ * @copyright Copyright (C) 2024 The C++ Plus Project
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -19,39 +24,18 @@
 
 #pragma once
 
-#include <cppp/reiconv.hpp>
-
 #include "utils.hpp"
 
-#include <cstring>
-#include <errno.h>
-#include <fstream>
-#include <initializer_list>
-#include <iostream>
-#include <vector>
+#include <cppp/reiconv.hpp>
 
-#include "throw_error.hpp"
+#include <cstddef>
+#include <filesystem>
+#include <memory>
 
-using namespace cppp::base::reiconv;
-
-namespace test
+inline Buffer reiconv_test(const std::string &from, const std::string &to, const std::filesystem::path &input_file_path)
 {
-namespace iconv
-{
-void main(const std::string &from, const std::string &to, const std::string &input_file_path,
-          const std::string &output_file_path)
-{
-    FILE *src = fopen(input_file_path.c_str(), "rb");
-    size_t srclen = get_file_size(input_file_path.c_str());
-    char *s = (char *)malloc(srclen);
-    fread(s, 1, srclen, src);
-    fclose(src);
-    auto res = cppp::base::reiconv::convert(Encoding(from), Encoding(to), {(std::byte *)s, srclen}, true);
-
-    FILE *out = fopen(output_file_path.c_str(), "wb");
-    fwrite(res.buffer, 1, res.length, out);
-    fclose(out);
-    free(s);
+    using namespace cppp::base::reiconv;
+    auto s = read_all(input_file_path);
+    auto res = convert(Encoding(from), Encoding(to), {(std::byte *)s.first.get(), s.second}, true);
+    return {std::shared_ptr<std::byte[]> {res.buffer}, res.length};
 }
-} // namespace iconv
-} // namespace test

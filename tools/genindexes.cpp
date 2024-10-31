@@ -21,28 +21,28 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <map>
+#include <unordered_map>
 
 #define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
 #define DEFCODEPAGE(codepage, xxx)
 #define DEFINDEX(alias, index)
 
-    enum
-    {
-        #include "encodings.h.snippet"
-    };
+enum
+{
+#include "encodings.h.snippet"
+};
 
 #undef DEFINDEX
 #undef DEFCODEPAGE
 #undef DEFENCODING
 
-#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) { #xxx_index, ei_##xxx },
+#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                     \
+    {#xxx_index, ei_##xxx},
 #define DEFCODEPAGE(codepage, xxx)
 #define DEFINDEX(alias, index)
 
-std::map<std::string, int> enum_data =
-{
-    #include "encodings.h.snippet"
+std::unordered_map<std::string, int> enum_data = {
+#include "encodings.h.snippet"
 };
 
 #undef DEFINDEX
@@ -53,9 +53,8 @@ std::map<std::string, int> enum_data =
 #define DEFCODEPAGE(codepage, xxx)
 #define DEFINDEX(alias, index) {#alias, #index},
 
-std::map<std::string, std::string> aliases =
-{
-    #include "encodings.h.snippet"
+std::unordered_map<std::string, std::string> aliases = {
+#include "encodings.h.snippet"
 };
 
 #undef DEFINDEX
@@ -68,11 +67,11 @@ int main()
     std::cout << "{\n";
     std::cout << "    enum class Encodings\n";
     std::cout << "    {\n";
-    for (auto& it : enum_data)
+    for (auto &it : enum_data)
     {
         std::cout << "        " << it.first << " = " << it.second << ",\n";
     }
-    for (auto& it : aliases)
+    for (auto &it : aliases)
     {
         std::cout << "        " << it.first << " = " << it.second << ",\n";
     }

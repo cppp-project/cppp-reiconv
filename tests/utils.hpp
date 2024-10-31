@@ -1,5 +1,11 @@
+/**
+ * @file utils.hpp
+ * @brief Utils for tests.
+ * @author ChenPi11
+ * @copyright Copyright (C) 2024 The C++ Plus Project
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
+ * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -17,178 +23,188 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
-  Utils for tests.
-*/
-
 #pragma once
 
+#include <cerrno>
+#include <cstddef>
+#include <cstdint>
 #include <cstring>
 #include <filesystem>
-#include <iostream>
 #include <fstream>
+#include <memory>
 #include <stdexcept>
 #include <string>
-#include <cerrno>
 #include <vector>
 
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-#else
-    #include <sys/stat.h>
-#endif
+#include "output.hpp"
 
-#include "throw_error.hpp"
-
-// Compare 2 files difference but ignore CR.
-void assert_compare_file(const std::string& path1, const std::string& path2)
+using _Buffer = std::pair<std::shared_ptr<std::byte[]>, std::size_t>;
+class Buffer : public std::pair<std::shared_ptr<std::byte[]>, std::size_t>
 {
-    std::ifstream file1(path1, std::ios::binary);
-    if (!file1.is_open())
+public:
+    std::string id;
+    Buffer() : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(), id("<unnamed>") {}
+    Buffer(std::shared_ptr<std::byte[]> first, std::size_t second, std::string id = "<unnamed>")
+        : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(first, second), id(id) {}
+    Buffer(const Buffer& buffer) : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(buffer), id(buffer.id) {}
+};
+
+
+/**
+ * @brief Dump a buffer to a file.
+ */
+inline void dump_data(const Buffer &buffer, const std::filesystem::path &output_file_path)
+{
+    std::ofstream output_file{output_file_path, std::ios::binary | std::ios::trunc};
+    if (!output_file.good())
     {
-        error(path1, path1 + " " + strerror(errno));
-    }
-    std::ifstream file2(path2, std::ios::binary);
-    if (!file2.is_open())
-    {
-        error(path2, path2 + " " + strerror(errno));
+        error(output_file_path, "Unable to open output file.");
     }
 
-    std::cerr << "Comparing " << path1 << " and " << path2 << " ..." << std::endl;
-
-    char file1_c;
-    char file2_c;
-
-    while(1)
-    {
-        if(file1.get(file1_c).eof()) { file1_c = EOF; }
-        if(file1_c == '\r') { continue; }
-
-        if(file2.get(file2_c).eof()) { file2_c = EOF; }
-        if(file2_c == '\r') { file1.unget(); continue; }
-
-        if(file1_c != file2_c)
-        {
-            errno = 0;
-            error("assert_compare_file", "The files are different.");
-        }
-        if(file1_c == EOF && file2_c == EOF) { break; }
-    }
-    success("assert_compare_file", "The file content is the same.");
-    
+    output_file.write((char *)buffer.first.get(), buffer.second);
+    output_file.close();
 }
 
-// Get file size.
-size_t get_file_size(const std::string& file_path)
+/**
+ * @brief Compare two buffers.
+ * @param buffer1 The first buffer.
+ * @param buffer2 The second buffer.
+ */
+inline void compare_data(const Buffer &buffer1, const Buffer &buffer2)
 {
-    return std::filesystem::file_size(file_path);
+    if (buffer1.second != buffer2.second || std::memcmp(buffer1.first.get(), buffer2.first.get(), buffer1.second) != 0)
+    {
+        dump_data(buffer1, "buffer1.dump");
+        dump_data(buffer2, "buffer2.dump");
+        print_stderr("{} {}\n", colorize(buffer1.id, COLOR_RED | CONTROL_UNDERLINE), colorize(buffer2.id, COLOR_RED | CONTROL_UNDERLINE));
+        error("compare_data", "The data is different.");
+    }
+    success("compare_data", "The data is the same.");
 }
 
-
-/* This code is not optimal, only for test. */
-// Read all data in a file.
-std::vector<char> read_all(const std::string& input_file_path)
+/**
+ * @brief Read all content from a file.
+ * @param input_file_path The file path.
+ * @return The content of the file and its size.
+ */
+inline Buffer read_all(const std::filesystem::path &input_file_path)
 {
-    std::ifstream input_file(input_file_path);
-    if (!input_file.is_open())
+    std::ifstream input_file{input_file_path, std::ios::binary};
+    if (!input_file.good())
     {
         error(input_file_path, "Unable to open input file.");
     }
 
-    size_t size = std::filesystem::file_size(input_file_path);
-    std::vector<char> buffer(size);
-    input_file.read(buffer.data(), size);
-
+    std::size_t size = std::filesystem::file_size(input_file_path);
+    auto buffer = std::make_shared<std::byte[]>(size);
+    input_file.read((char *)buffer.get(), size);
     input_file.close();
 
-    return buffer;
+    return {std::move(buffer), size, input_file_path.string()};
 }
 
-// Check if a file exists.
-bool file_exists(const std::string& file_path)
+/**
+ * @brief Compare two files.
+ * @param file1 The first file.
+ * @param file2 The second file.
+ */
+inline void compare_files(const std::filesystem::path &file1, const std::filesystem::path &file2)
 {
-    return std::filesystem::exists(file_path);
+    auto buffer1 = read_all(file1);
+    auto buffer2 = read_all(file2);
+    compare_data(buffer1, buffer2);
 }
 
-// Remove file.
-bool remove_file(const std::string& file_path)
+/**
+ * @brief Write all content to a file.
+ * @param output_file_path The file path.
+ * @param buffer The content to write.
+ * @param append Append to the file.
+ */
+inline void write_all(const std::filesystem::path &output_file_path, const std::string &buffer, bool append = false)
 {
-    return std::filesystem::remove(file_path);
-}
-
-
-// Merge files.
-void merge_files(const std::vector<std::string>& files, const std::string& output_file_path)
-{
-    std::ofstream output_file(output_file_path, std::ios::trunc);
-    
-    if (!output_file.is_open())
+    std::ofstream output_file{output_file_path,
+                              std::ios::binary | std::ios::ate | (append ? std::ios::app : std::ios::trunc)};
+    if (!output_file.good())
     {
         error(output_file_path, "Unable to open output file.");
     }
-    
-    for (const std::string& file : files)
-    {
-        std::ifstream input_file(file);
-        
-        if (!input_file.is_open())
-        {
-            error(file, "Unable to open input file.");
-        }
-        output_file << input_file.rdbuf() << std::endl;
-        input_file.close();
-    }
-    
+
+    output_file << buffer;
     output_file.close();
 }
 
-// Copy file.
-void copy_file(const std::string& from, const std::string& to)
+/**
+ * @brief Write all content to a file.
+ * @param output_file_path The file path.
+ * @param buffer The content to write.
+ * @param size The size of the content.
+ * @param append Append to the file.
+ */
+inline void write_all(const std::filesystem::path &output_file_path, const std::shared_ptr<std::byte[]> &buffer,
+                      std::size_t size, bool append = false)
 {
-    std::ifstream input_file(from, std::ios::binary);
-    std::ofstream output_file(to, std::ios::binary | std::ios::trunc);
-    
-    if (input_file.is_open() && output_file.is_open())
+    std::ofstream output_file{output_file_path,
+                              std::ios::binary | std::ios::ate | (append ? std::ios::app : std::ios::trunc)};
+    if (!output_file.good())
     {
-        output_file << input_file.rdbuf();
+        error(output_file_path, "Unable to open output file.");
+    }
+
+    output_file << buffer;
+    output_file.close();
+}
+
+/**
+ * @brief Write a string to a stream.
+ * @param output The stream.
+ * @param buffer The string.
+ */
+inline void write_stream(std::ostream& output, const std::string_view buffer)
+{
+    output.write(buffer.data(), buffer.size());
+    if (!output.good())
+    {
+        error("write_stream", "Unable to write to stream.");
+    }
+}
+
+/**
+ * @brief Merge files into one.
+ * @param files The files to merge.
+ * @param output_file_path The output file path.
+ */
+inline void merge_files(const std::vector<std::filesystem::path> &files, const std::filesystem::path &output_file_path)
+{
+    std::ofstream output_file{output_file_path, std::ios::binary | std::ios::trunc};
+    if (!output_file.good())
+    {
+        error(output_file_path, "Unable to open output file.");
+    }
+
+    for (const auto &file : files)
+    {
+        std::ifstream input_file{file, std::ios::binary};
+        if (!input_file.good())
+        {
+            error(file, "Unable to open input file.");
+        }
+
+        output_file << input_file.rdbuf() << std::endl;
         input_file.close();
-        output_file.close();
     }
-    else
-    {
-        error(from + " " + to, "Unable to open file.");
-    }
+
+    output_file.close();
 }
 
-// Copy file to a stream.
-void cat(const std::string& input_file_path, FILE* dstfile)
-{
-    FILE* srcfile;
-    char buffer[1024];
-    size_t len = 0;
-    srcfile = fopen(input_file_path.c_str(), "r");
-    if (srcfile == nullptr)
-    {
-        error(input_file_path, "Error opening source file");
-    }
-    while ((len = fread(buffer, 1, sizeof(buffer), srcfile)) > 0)
-    {
-        fwrite(buffer, 1, len, dstfile);
-    }
-    fclose(srcfile);
-}
-
-// Move file.
-void mv(const std::string& from, const std::string& to)
-{
-    if (rename(from.c_str(), to.c_str()) != 0)
-    {
-        error(from + " " + to, "Unable to move file.");
-    }
-}
-
-// Replace A to B in string src.
-std::string replace(const std::string& src, const std::string& from, const std::string& to)
+/**
+ * @brief Replace A to B in string src.
+ * @param src The source string.
+ * @param from The string to replace.
+ * @param to The string to replace with.
+ * @return The replaced string.
+ */
+inline std::string replace(const std::string &src, const std::string &from, const std::string &to)
 {
     std::string result = src;
     size_t pos = 0;
@@ -200,4 +216,55 @@ std::string replace(const std::string& src, const std::string& from, const std::
     }
 
     return result;
+}
+
+constexpr std::uint32_t _fromhex(char hex) noexcept
+{
+    return (hex >= '0' && hex <= '9') ? hex - '0' : hex - 'A' + 10;
+}
+
+constexpr std::uint32_t _fromhex(char hex1, char hex2)
+{
+    return _fromhex(hex1) << 4 | _fromhex(hex2);
+}
+
+/**
+ * @brief Check if the system is big endian.
+ * @return True if the system is big endian, false otherwise.
+ */
+inline bool is_big_endian() noexcept
+{
+    return *reinterpret_cast<const std::uint16_t *>("\0\x01") == 1;
+}
+
+/**
+ * @brief Convert a hex string to a number.
+ * @param hex The hex string.
+ * @return The number.
+ */
+inline std::uint64_t fromhex(std::string hex)
+{
+    if (hex.size() % 2 != 0)
+    {
+        hex.insert(hex.begin(), '0');
+    }
+    std::size_t x = 0;
+    for (std::size_t i = 0; i < hex.size(); i += 2)
+    {
+        hex[i] = std::toupper(hex[i]);
+        hex[i + 1] = std::toupper(hex[i + 1]);
+        if (!std::isxdigit(hex[i]) || !std::isxdigit(hex[i + 1]))
+        {
+            throw std::invalid_argument("Invalid hex: " + hex);
+        }
+        if (is_big_endian())
+        {
+            x |= _fromhex(hex[i], hex[i + 1]) << (4 * i);
+        }
+        else
+        {
+            x |= _fromhex(hex[i], hex[i + 1]) << (4 * (hex.size() - i - 2));
+        }
+    }
+    return x;
 }
