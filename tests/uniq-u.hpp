@@ -43,7 +43,6 @@
 inline void *xmalloc(size_t n)
 {
     void *p = std::malloc(n);
-    ;
     if (p == nullptr)
     {
         error("xmalloc", "uniq-u: virtual memory exhausted.");
@@ -193,14 +192,14 @@ static void uniq_u(const std::filesystem::path& infile, std::filesystem::path& o
     FILE *istream = std::fopen(infile.c_str(), "r");
     if (istream == nullptr)
     {
-        std::cerr << "uniq-u: Error while opening " << infile << std::endl;
+        print_stderr("uniq-u: Error while opening {}\n", infile);
         error("fopen", "File open error.");
     }
 
     FILE *ostream = std::fopen(outfile.c_str(), "w");
     if (ostream == nullptr)
     {
-        std::cerr << "uniq-u: Error while opening " << outfile << std::endl;
+        print_stderr("uniq-u: Error while opening {}\n", outfile);
         error("fopen", "File open error.");
     }
 
@@ -255,13 +254,13 @@ static void uniq_u(const std::filesystem::path& infile, std::filesystem::path& o
 closefiles:
     if (std::ferror(istream) || std::fclose(istream) == EOF)
     {
-        std::cerr << "uniq-u: Error while reading " << infile << std::endl;
+        print_stderr("uniq-u: Error while reading {}\n", infile);
         error("fclose", "I/O Error.");
     }
 
     if (ferror(ostream) || fclose(ostream) == EOF)
     {
-        std::cerr << "uniq-u: Error while writing " << outfile << std::endl;
+        print_stderr("uniq-u: Error while writing {}\n", outfile);
         error("fclose", "I/O Error.");
     }
 

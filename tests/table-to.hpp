@@ -34,6 +34,7 @@
 #include <fstream>
 
 #include "output.hpp"
+#include "utils.hpp"
 
 inline void table_to(const std::filesystem::path &save_file_path, const std::string &charset)
 {
@@ -75,9 +76,7 @@ inline void table_to(const std::filesystem::path &save_file_path, const std::str
         {
             if (errno != EILSEQ)
             {
-                std::cerr << "0x";
-                std::cerr << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << i;
-                std::cerr << ": Iconv error." << "\n";
+                print_stderr("0x{}: Iconv error.\n", tohex(in, 4));
                 error("table-to", "Iconv error.");
             }
         }
@@ -87,13 +86,12 @@ inline void table_to(const std::filesystem::path &save_file_path, const std::str
             {
                 unsigned int jmax = sizeof(buf) - outbytesleft;
                 unsigned int j;
-                save_file << "0x";
+                save_file.write("0x", 2);
                 for (j = 0; j < jmax; j++)
                 {
-                    save_file << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << (int)buf[j];
+                    write_stream(save_file, tohex(buf[j], 2));
                 }
-                save_file << "\t0x";
-                save_file << std::hex << std::uppercase << std::setw(4) << std::setfill('0') << i << "\n";
+                write_stream(save_file, print_string("\t0x{}\n", tohex(in, 4)));
             }
             else if (inbytesleft == 0 && i >= 0xe0000 && i < 0xe0080)
             {
@@ -101,10 +99,9 @@ inline void table_to(const std::filesystem::path &save_file_path, const std::str
             }
             else
             {
-                std::cerr << "0x";
-                std::cerr << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << i;
-                std::cerr << ": inbytes = " << (long)(sizeof(unsigned int) - inbytesleft);
-                std::cerr << ", outbytes = " << (long)(sizeof(buf) - outbytesleft) << "\n";
+                print_stderr("0x{}: inbytes = {}, outbytes = {}\n", tohex(in, 2),
+                             std::to_string(sizeof(unsigned int) - inbytesleft),
+                             std::to_string(sizeof(buf) - outbytesleft));
                 error("iconv", "Iconv error.");
             }
         }

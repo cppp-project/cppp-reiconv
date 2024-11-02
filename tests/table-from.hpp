@@ -32,11 +32,9 @@
 #include <cstring>
 #include <filesystem>
 #include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <sstream>
 
 #include "output.hpp"
+#include "utils.hpp"
 
 /**
  * @brief Hex dump of a buffer.
@@ -46,14 +44,13 @@
  */
 inline std::string hexbuf(unsigned char *buf, unsigned int buflen)
 {
-    std::ostringstream ss;
-    ss << "0x";
+    std::string res{"0x"};
     for (unsigned int i = 0; i < buflen; i++)
     {
-        ss << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << (int)buf[i];
+        res += tohex(buf[i], 2);
     }
 
-    return ss.str();
+    return res;
 }
 
 /**
@@ -90,7 +87,7 @@ static int try_convert(cppp::base::reiconv::iconv_t cd, unsigned char *buf, unsi
         }
         else
         {
-            std::cerr << hexbuf(buf, buflen) << ": Iconv error." << "\n";
+            print_stderr("hexbuf(): {}\n", hexbuf(buf, buflen));
             error("table-from", "Iconv error.");
         }
     }
@@ -102,8 +99,8 @@ static int try_convert(cppp::base::reiconv::iconv_t cd, unsigned char *buf, unsi
     {
         if (inbytesleft != 0)
         {
-            std::cerr << hexbuf(buf, buflen) << ": inbytes = " << (long)(buflen - inbytesleft);
-            std::cerr << ", outbytes = " << (long)(3 * sizeof(unsigned int) - outbytesleft) << "\n";
+            print_stderr("{}: inbytes = {}, outbytes = {}\n", hexbuf(buf, buflen), std::to_string(buflen - inbytesleft),
+                         std::to_string(3 * sizeof(unsigned int) - outbytesleft));
             error("table-from", "Iconv error.");
         }
         return (3 * sizeof(unsigned int) - outbytesleft) / sizeof(unsigned int);
@@ -163,19 +160,21 @@ inline void run_table_from_test(cppp::base::reiconv::iconv_t cd, unsigned int (&
             const char *unicode = ucs4_decode(out, result, bmp_only);
             if (unicode != nullptr)
             {
-                save_file << "0x";
+                save_file.write("0x", 2);
                 for (std::size_t j = 0; j < index + 1; j++)
                 {
-                    save_file << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << (int)i[j];
+                    write_stream(save_file, tohex(i[j], 2));
                 }
-                save_file << "\t" << unicode << "\n";
+                write_stream(save_file, print_string("\t{}\n", unicode));
             }
         }
         else if (result == 0)
         {
             if (index >= 3)
             {
-                std::cerr << hexbuf(buf, 4) << ": Incomplete byte sequence" << "\n";
+                print_stderr("{}: Incomplete byte sequence"
+                             "\n",
+                             hexbuf(buf, 4));
                 error("table-from", "Incomplete byte sequence.");
             }
             run_table_from_test(cd, i, index + 1, out, buf, bmp_only, save_file);

@@ -38,17 +38,21 @@
 
 #include "output.hpp"
 
-using _Buffer = std::pair<std::shared_ptr<std::byte[]>, std::size_t>;
 class Buffer : public std::pair<std::shared_ptr<std::byte[]>, std::size_t>
 {
-public:
+  public:
     std::string id;
-    Buffer() : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(), id("<unnamed>") {}
+    Buffer() : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(), id("<unnamed>")
+    {
+    }
     Buffer(std::shared_ptr<std::byte[]> first, std::size_t second, std::string id = "<unnamed>")
-        : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(first, second), id(id) {}
-    Buffer(const Buffer& buffer) : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(buffer), id(buffer.id) {}
+        : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(first, second), id(id)
+    {
+    }
+    Buffer(const Buffer &buffer) : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(buffer), id(buffer.id)
+    {
+    }
 };
-
 
 /**
  * @brief Dump a buffer to a file.
@@ -76,7 +80,8 @@ inline void compare_data(const Buffer &buffer1, const Buffer &buffer2)
     {
         dump_data(buffer1, "buffer1.dump");
         dump_data(buffer2, "buffer2.dump");
-        print_stderr("{} {}\n", colorize(buffer1.id, COLOR_RED | CONTROL_UNDERLINE), colorize(buffer2.id, COLOR_RED | CONTROL_UNDERLINE));
+        print_stderr("{} {}\n", colorize(buffer1.id, COLOR_RED | CONTROL_UNDERLINE),
+                     colorize(buffer2.id, COLOR_RED | CONTROL_UNDERLINE));
         error("compare_data", "The data is different.");
     }
     success("compare_data", "The data is the same.");
@@ -130,7 +135,7 @@ inline void write_all(const std::filesystem::path &output_file_path, const std::
         error(output_file_path, "Unable to open output file.");
     }
 
-    output_file << buffer;
+    output_file.write(buffer.data(), buffer.size());
     output_file.close();
 }
 
@@ -141,8 +146,7 @@ inline void write_all(const std::filesystem::path &output_file_path, const std::
  * @param size The size of the content.
  * @param append Append to the file.
  */
-inline void write_all(const std::filesystem::path &output_file_path, const std::shared_ptr<std::byte[]> &buffer,
-                      std::size_t size, bool append = false)
+inline void write_all(const std::filesystem::path &output_file_path, const Buffer &buffer, bool append = false)
 {
     std::ofstream output_file{output_file_path,
                               std::ios::binary | std::ios::ate | (append ? std::ios::app : std::ios::trunc)};
@@ -151,7 +155,7 @@ inline void write_all(const std::filesystem::path &output_file_path, const std::
         error(output_file_path, "Unable to open output file.");
     }
 
-    output_file << buffer;
+    output_file.write((char *)buffer.first.get(), buffer.second);
     output_file.close();
 }
 
@@ -160,7 +164,7 @@ inline void write_all(const std::filesystem::path &output_file_path, const std::
  * @param output The stream.
  * @param buffer The string.
  */
-inline void write_stream(std::ostream& output, const std::string_view buffer)
+inline void write_stream(std::ostream &output, const std::string_view buffer)
 {
     output.write(buffer.data(), buffer.size());
     if (!output.good())
@@ -190,7 +194,7 @@ inline void merge_files(const std::vector<std::filesystem::path> &files, const s
             error(file, "Unable to open input file.");
         }
 
-        output_file << input_file.rdbuf() << std::endl;
+        output_file << input_file.rdbuf() << std::endl; // Flush after each write.
         input_file.close();
     }
 
@@ -267,4 +271,40 @@ inline std::uint64_t fromhex(std::string hex)
         }
     }
     return x;
+}
+
+constexpr std::uint32_t log16(std::uint32_t value)
+{
+    std::uint32_t result = 0;
+    while (value)
+    {
+        value >>= 4;
+        result++;
+    }
+    return result;
+}
+
+/**
+ * @brief Convert a number to a hex string.
+ * @param value The number.
+ * @param length The length of the hex string.
+ */
+inline std::string tohex(std::uint32_t value, std::size_t length)
+{
+    std::uint32_t orig_value = value;
+    std::size_t orig_length = length;
+    std::string hex(length, '0');
+
+    while (value)
+    {
+        if (length <= 0)
+        {
+            return tohex(orig_value, orig_length + 1);
+            error("tohex", print_string("Value too large: {} + {}", hex, std::to_string(value)));
+        }
+        hex[--length] = "0123456789ABCDEF"[value % 16];
+        value /= 16;
+    }
+
+    return hex;
 }
