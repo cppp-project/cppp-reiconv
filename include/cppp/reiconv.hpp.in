@@ -1,39 +1,43 @@
 /**
  * @file cppp/reiconv.hpp
  * @author ChenPi11
- * @brief C+++ cppp-reiconv package.
+ * @brief reiconv C++ API.
  * @version 3.0.0
- * @date 2024-7-27
  * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2023-2024 The C++ Plus Project.
  */
-/* Copyright (C) 1999-2023 Free Software Foundation, Inc.
-   This file is part of the cppp-reiconv library.
-
-   The cppp-reiconv library is free software; you can redistribute it
-   and/or modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either version 3
-   of the License, or (at your option) any later version.
-
-   The cppp-reiconv library is distributed in the hope that it will be
-   useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the cppp-reiconv library; see the file LICENSE.
-   If not, see <https://www.gnu.org/licenses/>.  */
+/*
+ * This file is part of the cppp-reiconv Library.
+ *
+ * The cppp-reiconv Library is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * The cppp-reiconv Library is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with the cppp-reiconv Library; see the file LICENSE.
+ * If not, see <https://www.gnu.org/licenses/>.
+ */
 
 /* When installed, this file is called "cppp/reiconv.hpp". */
 
 #pragma once
+#ifndef _CPPP_REICONV_HPP_
+#define _CPPP_REICONV_HPP_
 
 #include <cppp/encodings/reiconv.hpp>
 
 #include <cstddef>
 #include <cstring>
 #include <string>
+#include <string_view>
 
-#define _CPPP_API
+#define _CPPP_API // TODO: Remove this.
 
 #ifndef _CPPP_API
 #define _CPPP_API @CPPP_API@
@@ -43,51 +47,12 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-namespace cppp::base::reiconv
+namespace reiconv
 {
-    using cppp::base::encoding::Encodings;
-
-    template <typename ByteType>
-    struct BasicBuffer
-    {
-        /**
-         * @brief Buffer pointer.
-         */
-        ByteType *buffer;
-
-        /**
-         * @brief Buffer size.
-         */
-        std::size_t length;
-
-        /**
-         * @brief Construct a buffer.
-         */
-        BasicBuffer(ByteType *buffer, std::size_t length) : buffer(buffer), length(length) {}
-
-        /**
-         * @brief Construct a buffer from a string.
-         */
-        BasicBuffer(const std::string &str) : buffer(reinterpret_cast<ByteType*>(str.data())), length(str.size()) {}
-
-        /**
-         * @brief Construct a buffer from a string.
-         */
-        BasicBuffer(const char* str) : buffer(reinterpret_cast<ByteType*>(str)), length(std::strlen(str)) {}
-    };
+    using reiconv::encoding::Encodings;
 
     /**
-     * @brief Buffer for input.
-     */
-    using InputBuffer = BasicBuffer<const std::byte>;
-
-    /**
-     * @brief Buffer for output.
-     */
-    using OutputBuffer = BasicBuffer<std::byte>;
-
-    /**
-     * @brief Encoding class.
+     * @brief Encoding.
      */
     class Encoding
     {
@@ -98,7 +63,6 @@ namespace cppp::base::reiconv
         int _index;
 
     public:
-
         /**
          * @brief Find the encoding by name. IANA names are recommended.
          * @throw std::invalid_argument if the encoding is not found.
@@ -176,6 +140,8 @@ namespace cppp::base::reiconv
      * @return Return the output buffer.
      * @throw std::system_error if an error occurs.
      */
-    extern _CPPP_API OutputBuffer convert(Encoding from, Encoding to, InputBuffer input, bool strict = true);
+    extern _CPPP_API std::string convert(Encoding from, Encoding to, const std::string_view input, bool strict = true);
 
-} // namespace cppp::base::reiconv
+} // namespace reiconv
+
+#endif // _CPPP_REICONV_HPP_

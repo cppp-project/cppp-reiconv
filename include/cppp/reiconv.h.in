@@ -1,0 +1,167 @@
+/**
+ * @file cppp/reiconv.h
+ * @author ChenPi11
+ * @brief reiconv C API.
+ * @version 3.0.0
+ * @date 2024-11-3
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
+/*
+ * This file is part of the cppp-reiconv Library.
+ *
+ * The cppp-reiconv Library is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * The cppp-reiconv Library is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with the cppp-reiconv Library; see the file LICENSE.
+ * If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* When installed, this file is called "cppp/reiconv.h". */
+
+#pragma once
+
+#ifndef _CPPP_REICONV_H_
+#define _CPPP_REICONV_H_
+
+#include <cppp/encodings/reiconv.h>
+
+#include <stdbool.h>
+#include <stddef.h>
+
+#define _CPPP_API
+
+#ifndef _CPPP_API
+#define _CPPP_API @CPPP_API @
+#endif
+
+#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Version information.
+ */
+struct VersionInfo
+{
+    /**
+     * @brief Major version.
+     */
+    int major;
+
+    /**
+     * @brief Minor version.
+     */
+    int minor;
+
+    /**
+     * @brief Patch version.
+     */
+    int patch;
+};
+
+/**
+ * @brief Version infomation.
+ */
+extern _CPPP_API struct VersionInfo reiconv_version;
+
+/**
+ * @brief Canonicalize an encoding name.
+ * @note We will ignore '-' and '_', and uppercase all characters.
+ * @param name The encoding name.
+ * @param outbuf The output buffer. Must allocated with enough space.
+ * @return The length of the canonicalized name.
+ */
+extern _CPPP_API size_t reiconv_name_canonicalize(const char *name, char *outbuf);
+
+/**
+ * @brief Lookup an encoding by it's name.
+ * @note The return value is an encoding index that can be used with `reiconv_open_from_codepage`.
+ * @note We will ignore '-' and '_', and uppercase all characters.
+ * @param encoding The encoding name.
+ * @return The encoding index. If the it is not found, -1 is returned.
+ */
+extern _CPPP_API int reiconv_lookup_from_name(const char *encoding);
+
+/**
+ * @brief Lookup an encoding by it's codepage.
+ * @note The return value is an encoding index that can be used with `reiconv_open_from_codepage`.
+ * @param codepage The codepage.
+ * @return The encoding index. If the it is not found, -1 is returned.
+ */
+extern _CPPP_API int reiconv_lookup_from_codepage(int codepage);
+
+/**
+ * @brief Conversion descriptor.
+ */
+typedef void *reiconv_t;
+
+/**
+ * @brief Open a conversion descriptor from encoding index.
+ * @note The return value is a conversion descriptor.
+ * @param fromcode The input buffer encoding's index.
+ * @param tocode The output buffer encoding's index.
+ * @param discard_ilseq If true, we will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @return The conversion descriptor. Indexes MUST BE VALID or the behavior is undefined.
+ * @note If the conversion descriptor cannot be created, returns (reiconv_t)(-1) and errno is set to ENOMEM.
+ */
+extern _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool discard_ilseq);
+
+/**
+ * @brief Close a conversion descriptor.
+ * @param cd The conversion descriptor.
+ */
+extern _CPPP_API void reiconv_handle_close(reiconv_t cd);
+
+/**
+ * @brief Do conversion. For iconv compatibility.
+ * @note At most `*inbytesleft` bytes starting at `*inbuf`.
+ * @note writing at most `*outbytesleft` bytes starting at `*outbuf`.
+ * @note Decrements `*inbytesleft` and increments `*inbuf` by the same amount.
+ * @note Decrements `*outbytesleft` and increments `*outbuf` by the same amount.
+ */
+_CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
+
+/**
+ * @brief Get the size of the result. -1 on error with errno set.
+ * @note This function does not treat zero characters specially.
+ * @param start The input buffer.
+ * @param inlength The input buffer length.
+ * @return The size of the result.
+ */
+_CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, size_t inlength);
+
+/**
+ * @brief Converts an string from one encoding to another.
+ * @note Converts a string given in encoding `fromcode` to a new string in encoding `tocode`.
+ * `fromcode` and `tocode` are same as for iconv_open(3), but we don't support '//IGNORE' and
+ * '//TRANSLIT'. `malloc`/`realloc` is used to allocate the result.
+ * @note This function does not treat zero characters specially.
+ * @param fromcode The input buffer encoding's index.
+ * @param tocode The output buffer encoding's index.
+ * @param input Input buffer.
+ * @param inputlen Input buffer length.
+ * @param poutput Output buffer pointer.
+ * @param poutputlen Output buffer length pointer.
+ * @param strict If false. We will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @return 0 on success, -1 on error with errno set.
+ */
+extern _CPPP_API int reiconv_convert(reiconv_t cd, const char *start, size_t inlength, char **resultp, size_t *lengthp);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _CPPP_REICONV_H_ */

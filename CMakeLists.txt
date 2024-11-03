@@ -19,10 +19,9 @@ cmake_minimum_required(VERSION 3.12)
 project(cppp-reiconv
         VERSION 3.0.0
         DESCRIPTION "A character set conversion library based on GNU LIBICONV."
-        HOMEPAGE_URL "https://github.com/cppp-project/cppp-reiconv"
-        LANGUAGES CXX)
+        HOMEPAGE_URL "https://github.com/cppp-project/cppp-reiconv")
 
-option(BUILD_TEST "Test suites for '${PROJECT_NAME}' enabled." ON)
+option(BUILD_TESTING "Test suites for '${PROJECT_NAME}' enabled." ON)
 
 # ----------------------------------------------------------------------------------
 # Import build auxiliaries.
@@ -61,17 +60,35 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 # Header for install.
+# cppp/reiconv.hpp
 set(CPPP_API "${CPPP_IMPORT_API}")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp.inst")
 
+# cppp/reiconv.h
+set(CPPP_API "${CPPP_IMPORT_API}")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.h.in" "${output_includedir}/cppp/reiconv.h.inst")
+
 # Header for build.
+# cppp/reiconv.hpp
 set(CPPP_API "${CPPP_EXPORT_API}")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${output_includedir}/cppp/reiconv.hpp")
 
+# cppp/reiconv.h
+set(CPPP_API "${CPPP_EXPORT_API}")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.h.in" "${output_includedir}/cppp/reiconv.h")
+
+# cppp-reiconv.rc
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/windows/cppp-reiconv.rc.in" "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
+
+# cppp/encodings/reiconv.hpp
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/lib/generated/indexes.hpp.shippet" _INDEXES_CODE)
 string(STRIP "${_INDEXES_CODE}" INDEXES_CODE)
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/encodings/reiconv.hpp.in" "${output_includedir}/cppp/encodings/reiconv.hpp")
+
+# cppp/encodings/reiconv.h
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/lib/generated/indexes.h.shippet" _INDEXES_CODE)
+string(STRIP "${_INDEXES_CODE}" INDEXES_CODE)
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/encodings/reiconv.h.in" "${output_includedir}/cppp/encodings/reiconv.h")
 
 # Add includes.
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
@@ -82,10 +99,11 @@ add_compile_definitions(VERSION_MINOR=${PROJECT_VERSION_MINOR})
 add_compile_definitions(VERSION_PATCH=${PROJECT_VERSION_PATCH})
 
 # Add library.
-cppp_build_library(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.cpp" TRUE TRUE "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
+set(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.c" "${CMAKE_CURRENT_SOURCE_DIR}/lib/reiconv.cpp")
+cppp_build_library(${PROJECT_NAME} SOURCES TRUE TRUE "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 
 # Include test suite.
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests" AND BUILD_TEST)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests" AND BUILD_TESTING)
     include("${CMAKE_CURRENT_SOURCE_DIR}/tests/tests.cmake")
 endif()
 

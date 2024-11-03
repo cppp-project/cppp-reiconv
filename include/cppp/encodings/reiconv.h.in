@@ -1,5 +1,5 @@
 /**
- * @file cppp/encodings/reiconv.hpp
+ * @file cppp/encodings/reiconv.h
  * @author ChenPi11
  * @brief cppp-reiconv encodings list.
  * @version 3.0.0
@@ -23,10 +23,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* When installed, this file is called "cppp/reiconv.hpp". */
+/* When installed, this file is called "cppp/reiconv.h". */
 
-#ifndef _CPPP_ENCODINGS_REICONV_HPP_
-#define _CPPP_ENCODINGS_REICONV_HPP_
+#ifndef _CPPP_ENCODINGS_REICONV_H_
+#define _CPPP_ENCODINGS_REICONV_H_
 #pragma once
 
 #if _MSC_VER >= 1600
@@ -34,4 +34,4 @@
 #endif
 
 @INDEXES_CODE@
-#endif // _CPPP_ENCODINGS_REICONV_HPP_
+#endif // _CPPP_ENCODINGS_REICONV_H_

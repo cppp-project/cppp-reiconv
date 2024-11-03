@@ -1,4 +1,4 @@
-namespace cppp::base::encoding
+namespace reiconv::encoding
 {
     enum class Encodings
     {
@@ -201,6 +201,7 @@ namespace cppp::base::encoding
         IBM1162 = 121,
         CP437 = 123,
         CP1256 = MSARAB,
+        MAC_ROMAN = MACINTOSH,
         CP1258 = WINDOWS1258,
         CP1255 = MSHEBR,
         CP1254 = MSTURK,
@@ -213,4 +214,4 @@ namespace cppp::base::encoding
         BIG5HKSCS = BIG5HKSCS_2008,
         GB18030 = GB18030_2022,
     };
-} // cppp::base::encoding
+} // reiconv::encoding

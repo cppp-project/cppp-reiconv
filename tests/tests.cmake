@@ -11,14 +11,17 @@ include_directories("${output_includedir}")
 
 # Test executables
 add_executable(data-generator         "${CMAKE_CURRENT_SOURCE_DIR}/tests/data-generator.cpp")
+add_executable(check-encoding         "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-encoding.cpp")
 add_executable(check-stateful         "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateful.cpp")
 add_executable(check-stateless        "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateless.cpp")
 add_executable(sort                   "${CMAKE_CURRENT_SOURCE_DIR}/tests/sort.cpp")
 
+target_link_libraries(check-encoding         libcppp-reiconv.static)
 target_link_libraries(check-stateful         libcppp-reiconv.static)
 target_link_libraries(check-stateless        libcppp-reiconv.static)
 
 set_target_properties(data-generator         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+set_target_properties(check-encoding         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 set_target_properties(check-stateful         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 set_target_properties(check-stateless        PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 set_target_properties(sort                   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
@@ -85,6 +88,11 @@ add_custom_command(TARGET data-generator POST_BUILD
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Sorting GB18030:2022 test data ... "
 )
+
+add_test(NAME check-encoding
+         WORKING_DIRECTORY "${output_testsdir}"
+         COMMAND "$<TARGET_FILE:check-encoding>"
+         )
 
 # General multi-byte encodings.
 test("stateless" "UTF-8")

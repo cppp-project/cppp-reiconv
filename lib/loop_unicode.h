@@ -19,7 +19,7 @@
 
 /* This file defines the conversion loop via Unicode as a pivot encoding. */
 
-static size_t unicode_loop_convert (iconv_t icd,
+static size_t unicode_loop_convert (reiconv_t icd,
                                     const char* * inbuf, size_t *inbytesleft,
                                     char* * outbuf, size_t *outbytesleft)
 {
@@ -114,11 +114,11 @@ static size_t unicode_loop_convert (iconv_t icd,
   return result;
 }
 
-static size_t unicode_loop_reset (iconv_t icd,
+static size_t unicode_loop_reset (reiconv_t icd,
                                   char* * outbuf, size_t *outbytesleft)
 {
   conv_t cd = (conv_t) icd;
-  if (outbuf == nullptr || *outbuf == nullptr) {
+  if (outbuf == NULL || *outbuf == NULL) {
     /* Reset the states. */
     memset(&cd->istate,'\0',sizeof(state_t));
     memset(&cd->ostate,'\0',sizeof(state_t));

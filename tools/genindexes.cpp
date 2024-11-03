@@ -61,22 +61,62 @@ std::unordered_map<std::string, std::string> aliases = {
 #undef DEFCODEPAGE
 #undef DEFENCODING
 
-int main()
+void cpp_gen()
 {
-    std::cout << "namespace cppp::base::encoding\n";
-    std::cout << "{\n";
-    std::cout << "    enum class Encodings\n";
-    std::cout << "    {\n";
+    std::printf("namespace reiconv::encoding\n");
+    std::printf("{\n");
+    std::printf("    enum class Encodings\n");
+    std::printf("    {\n");
     for (auto &it : enum_data)
     {
-        std::cout << "        " << it.first << " = " << it.second << ",\n";
+        std::printf("        %s = %d,\n", it.first.c_str(), it.second);
     }
     for (auto &it : aliases)
     {
-        std::cout << "        " << it.first << " = " << it.second << ",\n";
+        std::printf("        %s = %s,\n", it.first.c_str(), it.second.c_str());
     }
-    std::cout << "    };\n";
-    std::cout << "} // cppp::base::encoding\n";
+    std::printf("    };\n");
+    std::printf("} // reiconv::encoding\n");
+    std::fflush(stdout);
+}
+
+void c_gen()
+{
+    std::printf("enum\n");
+    std::printf("{\n");
+    for (auto &it : enum_data)
+    {
+        std::printf("    ENCODING_%s = %d,\n", it.first.c_str(), it.second);
+    }
+    for (auto &it : aliases)
+    {
+        std::printf("    ENCODING_%s = ENCODING_%s,\n", it.first.c_str(), it.second.c_str());
+    }
+    std::printf("};\n");
+    std::fflush(stdout);
+}
+
+int main(int argc, char* argv[])
+{
+    if (argc != 2)
+    {
+        std::fprintf(stderr, "Usage: %s [C | C++]\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (std::string(argv[1]) == "C")
+    {
+        c_gen();
+    }
+    else if (std::string(argv[1]) == "C++")
+    {
+        cpp_gen();
+    }
+    else
+    {
+        std::fprintf(stderr, "Usage: %s [C | C++]\n", argv[0]);
+        return EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }

@@ -1,9 +1,9 @@
 #include "benchmark.hpp"
-#include "cppp/encodings/reiconv.hpp"
 #include "test_string.hpp"
 
 #include <benchmark/benchmark.h>
 #include <cppp/reiconv.hpp>
+#include <cppp/reiconv.h>
 #include <unicode/ucnv.h>
 
 #include <cstddef>
@@ -12,12 +12,10 @@
 
 static void reiconv_handle_open_by_name(benchmark::State& state)
 {
-    using namespace cppp::base;
-    auto inbuf = reiconv::InputBuffer(simple_test_string_utf8);
     for (auto _: state)
     {
-        auto s = reiconv::convert("UTF-8", "GB18030", inbuf);
-        free(s.buffer);
+        volatile reiconv::Encoding index = {"UTF-8"};
+        volatile reiconv::Encoding index2 = {"CP936"};
     }
 }
 
@@ -25,12 +23,10 @@ BENCHMARK(reiconv_handle_open_by_name);
 
 static void reiconv_handle_open_by_codepage(benchmark::State& state)
 {
-    using namespace cppp::base;
-    auto inbuf = reiconv::InputBuffer(simple_test_string_utf8);
     for (auto _: state)
     {
-        auto s = reiconv::convert(65001, 54936, inbuf);
-        free(s.buffer);
+        volatile reiconv::Encoding index = {65001};
+        volatile reiconv::Encoding index2 = {936};
     }
 }
 
@@ -38,12 +34,10 @@ BENCHMARK(reiconv_handle_open_by_codepage);
 
 static void reiconv_handle_open_by_index(benchmark::State& state)
 {
-    using namespace cppp::base;
-    auto inbuf = reiconv::InputBuffer(simple_test_string_utf8);
     for (auto _: state)
     {
-        auto s = reiconv::convert(encoding::Encodings::UTF8, encoding::Encodings::GB18030, inbuf);
-        free(s.buffer);
+        volatile reiconv::Encoding index = {reiconv::Encodings::UTF8};
+        volatile reiconv::Encoding index2 = {reiconv::Encodings::CP936};
     }
 }
 
@@ -169,12 +163,14 @@ constexpr std::size_t big_test_string_utf8_len = sizeof(big_test_string_utf8) - 
 
 static void reiconv_convert(benchmark::State& state)
 {
-    using namespace cppp::base;
-    auto inbuf = reiconv::InputBuffer((const std::byte*)big_test_string_utf8, big_test_string_utf8_len);
+    using namespace reiconv;
     for (auto _: state)
     {
-        auto s = reiconv::convert(encoding::Encodings::UTF8, encoding::Encodings::GB18030, inbuf);
-        free(s.buffer);
+        reiconv_t cd = reiconv_open_from_index(ENCODING_UTF8, ENCODING_GB18030, false);
+        char* output = nullptr;
+        size_t length = 0;
+        reiconv_convert(cd, big_test_string_utf8, big_test_string_utf8_len, &output, &length);
+        free(output);
     }
 }
 
