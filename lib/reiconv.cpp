@@ -58,8 +58,7 @@ _CPPP_API std::string reiconv::convert(reiconv::Encoding from, reiconv::Encoding
 
     std::string res (outlen, '\0');
     char* result = const_cast<char*>(res.data());
-    std::size_t length = 0;
-    if (::reiconv_convert(cd, input.data(), input.size(), &result, &length) != 0)
+    if (::reiconv_convert_static_size(cd, input.data(), input.size(), result, outlen) != 0)
     {
         ::reiconv_handle_close(cd);
         throw std::system_error(errno, std::system_category(), "reiconv_convert");

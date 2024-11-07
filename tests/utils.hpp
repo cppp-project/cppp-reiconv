@@ -31,82 +31,11 @@
 #include <cstring>
 #include <filesystem>
 #include <fstream>
-#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
-#include "output.hpp"
-
-class Buffer : public std::pair<std::shared_ptr<std::byte[]>, std::size_t>
-{
-  public:
-    std::string id;
-    Buffer() : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(), id("<unnamed>")
-    {
-    }
-    Buffer(std::shared_ptr<std::byte[]> first, std::size_t second, std::string id = "<unnamed>")
-        : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(first, second), id(id)
-    {
-    }
-    Buffer(const Buffer &buffer) : std::pair<std::shared_ptr<std::byte[]>, std::size_t>(buffer), id(buffer.id)
-    {
-    }
-};
-
-/**
- * @brief Dump a buffer to a file.
- */
-inline void dump_data(const Buffer &buffer, const std::filesystem::path &output_file_path)
-{
-    std::ofstream output_file{output_file_path, std::ios::binary | std::ios::trunc};
-    if (!output_file.good())
-    {
-        error(output_file_path, "Unable to open output file.");
-    }
-
-    output_file.write((char *)buffer.first.get(), buffer.second);
-    output_file.close();
-}
-
-/**
- * @brief Compare two buffers.
- * @param buffer1 The first buffer.
- * @param buffer2 The second buffer.
- */
-inline void compare_data(const Buffer &buffer1, const Buffer &buffer2)
-{
-    if (buffer1.second != buffer2.second || std::memcmp(buffer1.first.get(), buffer2.first.get(), buffer1.second) != 0)
-    {
-        dump_data(buffer1, "buffer1.dump");
-        dump_data(buffer2, "buffer2.dump");
-        print_stderr("{} {}\n", colorize(buffer1.id, COLOR_RED | CONTROL_UNDERLINE),
-                     colorize(buffer2.id, COLOR_RED | CONTROL_UNDERLINE));
-        error("compare_data", "The data is different.");
-    }
-    success("compare_data", "The data is the same.");
-}
-
-/**
- * @brief Read all content from a file.
- * @param input_file_path The file path.
- * @return The content of the file and its size.
- */
-inline Buffer read_all(const std::filesystem::path &input_file_path)
-{
-    std::ifstream input_file{input_file_path, std::ios::binary};
-    if (!input_file.good())
-    {
-        error(input_file_path, "Unable to open input file.");
-    }
-
-    std::size_t size = std::filesystem::file_size(input_file_path);
-    auto buffer = std::make_shared<std::byte[]>(size);
-    input_file.read((char *)buffer.get(), size);
-    input_file.close();
-
-    return {std::move(buffer), size, input_file_path.string()};
-}
+#include "buffer.hpp"
 
 /**
  * @brief Compare two files.
@@ -115,9 +44,15 @@ inline Buffer read_all(const std::filesystem::path &input_file_path)
  */
 inline void compare_files(const std::filesystem::path &file1, const std::filesystem::path &file2)
 {
-    auto buffer1 = read_all(file1);
-    auto buffer2 = read_all(file2);
-    compare_data(buffer1, buffer2);
+    Buffer::read_from_file(file1).compare_assert(Buffer::read_from_file(file2));
+}
+
+/**
+ * @brief Write all content to a stream.
+ */
+inline void write_stream(std::ostream &stream, const std::string &buffer)
+{
+    stream.write(buffer.data(), buffer.size());
 }
 
 /**
@@ -155,22 +90,8 @@ inline void write_all(const std::filesystem::path &output_file_path, const Buffe
         error(output_file_path, "Unable to open output file.");
     }
 
-    output_file.write((char *)buffer.first.get(), buffer.second);
+    output_file.write(buffer.data(), buffer.size);
     output_file.close();
-}
-
-/**
- * @brief Write a string to a stream.
- * @param output The stream.
- * @param buffer The string.
- */
-inline void write_stream(std::ostream &output, const std::string_view buffer)
-{
-    output.write(buffer.data(), buffer.size());
-    if (!output.good())
-    {
-        error("write_stream", "Unable to write to stream.");
-    }
 }
 
 /**
@@ -188,14 +109,8 @@ inline void merge_files(const std::vector<std::filesystem::path> &files, const s
 
     for (const auto &file : files)
     {
-        std::ifstream input_file{file, std::ios::binary};
-        if (!input_file.good())
-        {
-            error(file, "Unable to open input file.");
-        }
-
-        output_file << input_file.rdbuf() << std::endl; // Flush after each write.
-        input_file.close();
+        Buffer input_file = Buffer::read_from_file(file);
+        input_file.write_stream(output_file, true, true);
     }
 
     output_file.close();

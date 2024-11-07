@@ -24,18 +24,16 @@
 
 #pragma once
 
-#include "utils.hpp"
-
 #include <cppp/reiconv.hpp>
 
-#include <cstddef>
 #include <filesystem>
-#include <memory>
 
-inline Buffer reiconv_test(const std::string &from, const std::string &to, const std::filesystem::path &input_file_path)
+#include "buffer.hpp"
+
+inline Buffer reiconv_test(reiconv::Encoding from, reiconv::Encoding to, const std::filesystem::path &input_file_path)
 {
-    using namespace cppp::base::reiconv;
-    auto s = read_all(input_file_path);
-    auto res = convert(Encoding(from), Encoding(to), {(std::byte *)s.first.get(), s.second}, true);
-    return {std::shared_ptr<std::byte[]> {res.buffer}, res.length};
+    using namespace reiconv;
+    Buffer input = Buffer::read_from_file(input_file_path);
+    std::string res = convert(from, to, {input.data(), input.size}, true);
+    return Buffer(res, "converted");
 }

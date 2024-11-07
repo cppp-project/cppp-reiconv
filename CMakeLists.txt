@@ -22,6 +22,7 @@ project(cppp-reiconv
         HOMEPAGE_URL "https://github.com/cppp-project/cppp-reiconv")
 
 option(BUILD_TESTING "Test suites for '${PROJECT_NAME}' enabled." ON)
+option(ICONV_COMPAT "Enable compatibility with iconv." OFF)
 
 # ----------------------------------------------------------------------------------
 # Import build auxiliaries.
@@ -68,6 +69,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${outp
 set(CPPP_API "${CPPP_IMPORT_API}")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.h.in" "${output_includedir}/cppp/reiconv.h.inst")
 
+
 # Header for build.
 # cppp/reiconv.hpp
 set(CPPP_API "${CPPP_EXPORT_API}")
@@ -89,6 +91,9 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/encodings/reiconv.hpp.i
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/lib/generated/indexes.h.shippet" _INDEXES_CODE)
 string(STRIP "${_INDEXES_CODE}" INDEXES_CODE)
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/encodings/reiconv.h.in" "${output_includedir}/cppp/encodings/reiconv.h")
+
+# iconv.h
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/iconv.h.in" "${output_includedir}/iconv.h")
 
 # Add includes.
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
@@ -122,5 +127,24 @@ install(FILES "${output_includedir}/cppp/encodings/reiconv.hpp"
         DESTINATION "${install_includedir}/encodings"
         RENAME "cppp/reiconv.hpp"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+
+# PERMISSIONS 0644
+install(FILES "${output_includedir}/cppp/reiconv.h.inst"
+        DESTINATION "${install_includedir}"
+        RENAME "cppp/reiconv.h"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+
+# PERMISSIONS 0644
+install(FILES "${output_includedir}/cppp/encodings/reiconv.h"
+        DESTINATION "${install_includedir}/encodings"
+        RENAME "cppp/reiconv.h"
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+
+# PERMISSIONS 0644
+if(ICONV_COMPAT)
+    install(FILES "${output_includedir}/iconv.h"
+            DESTINATION "${install_includedir}"
+            PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
+endif()
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/cpack.cmake")

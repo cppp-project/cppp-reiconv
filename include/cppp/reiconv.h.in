@@ -3,8 +3,6 @@
  * @author ChenPi11
  * @brief reiconv C API.
  * @version 3.0.0
- * @date 2024-11-3
- * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * @copyright Copyright (C) 2024 The C++ Plus Project.
  */
 /*
@@ -40,7 +38,7 @@
 #define _CPPP_API
 
 #ifndef _CPPP_API
-#define _CPPP_API @CPPP_API @
+#define _CPPP_API @CPPP_API@
 #endif
 
 #if _MSC_VER >= 1600
@@ -120,19 +118,24 @@ typedef void *reiconv_t;
 extern _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool discard_ilseq);
 
 /**
- * @brief Close a conversion descriptor.
- * @param cd The conversion descriptor.
+ * @brief Open a conversion descriptor from codepage.
+ * @note The return value is a conversion descriptor.
+ * @param fromcode The input buffer encoding's codepage.
+ * @param tocode The output buffer encoding's codepage.
+ * @param discard_ilseq If true, we will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @return The conversion descriptor. (reiconv_t)(-1) is returned if error occured with errno set.
  */
-extern _CPPP_API void reiconv_handle_close(reiconv_t cd);
+extern _CPPP_API reiconv_t reiconv_open_from_codepage(int fromcode, int tocode, bool discard_ilseq);
 
 /**
- * @brief Do conversion. For iconv compatibility.
- * @note At most `*inbytesleft` bytes starting at `*inbuf`.
- * @note writing at most `*outbytesleft` bytes starting at `*outbuf`.
- * @note Decrements `*inbytesleft` and increments `*inbuf` by the same amount.
- * @note Decrements `*outbytesleft` and increments `*outbuf` by the same amount.
+ * @brief Open a conversion descriptor from encoding name.
+ * @note The return value is a conversion descriptor.
+ * @param fromcode The input buffer encoding's name.
+ * @param tocode The output buffer encoding's name.
+ * @param discard_ilseq If true, we will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @return The conversion descriptor. (reiconv_t)(-1) is returned if error occured with errno set.
  */
-_CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
+extern _CPPP_API reiconv_t reiconv_open_from_name(const char* fromcode, const char* tocode, bool discard_ilseq);
 
 /**
  * @brief Get the size of the result. -1 on error with errno set.
@@ -141,24 +144,54 @@ _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, 
  * @param inlength The input buffer length.
  * @return The size of the result.
  */
-_CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, size_t inlength);
+extern _CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, size_t inlength);
+
+/**
+ * @brief Converts a string using conversion descriptor `cd`, with a static size output buffer.
+ * @note The function `reiconv_convert` is more easy to use. This function is for performance and flexibility.
+ * @note This function does not treat zero characters specially.
+ * @param cd The input conversion descriptor.
+ * @param input_data the input buffer.
+ * @param input_length Input buffer length.
+ * @param output_data The output buffer pointer.
+ * @param output_length the output buffer's length.
+ * @note If the output buffer is too small, -1 is returned.
+ * @note If the output buffer is too big, the rest of the buffer is filled with zero.
+ * @return 0 on success, -1 on error with errno set.
+ */
+extern _CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char* input_data, size_t input_length, char* output_data, size_t output_length);
 
 /**
  * @brief Converts an string from one encoding to another.
- * @note Converts a string given in encoding `fromcode` to a new string in encoding `tocode`.
- * `fromcode` and `tocode` are same as for iconv_open(3), but we don't support '//IGNORE' and
- * '//TRANSLIT'. `malloc`/`realloc` is used to allocate the result.
+ * @note Converts a string using conversion descriptor `cd`.
+ * @note `malloc`/`realloc` is used to allocate the result.
  * @note This function does not treat zero characters specially.
- * @param fromcode The input buffer encoding's index.
- * @param tocode The output buffer encoding's index.
- * @param input Input buffer.
- * @param inputlen Input buffer length.
- * @param poutput Output buffer pointer.
- * @param poutputlen Output buffer length pointer.
- * @param strict If false. We will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @param cd The input conversion descriptor.
+ * @param input_data Input buffer.
+ * @param input_length Input buffer length.
+ * @param output_data_ptr Output buffer pointer's pointer. If NULL, error will be occured.
+ * @note If `*output_data_ptr` is NULL, `malloc` is used to allocate the result. if not, `realloc` is used.
+ * @param output_length_ptr Output buffer length pointer. If NULL, error will be occured.
+ * @note The length of the result is stored in `*output_length_ptr`.
  * @return 0 on success, -1 on error with errno set.
  */
-extern _CPPP_API int reiconv_convert(reiconv_t cd, const char *start, size_t inlength, char **resultp, size_t *lengthp);
+extern _CPPP_API int reiconv_convert(reiconv_t cd, const char *input_data, size_t input_length, char **output_data_ptr, size_t *output_length_ptr);
+
+/**
+ * @brief Do conversion. For iconv compatibility.
+ * @note At most `*inbytesleft` bytes starting at `*inbuf`.
+ * @note Writing at most `*outbytesleft` bytes starting at `*outbuf`.
+ * @note Decrements `*inbytesleft` and increments `*inbuf` by the same amount.
+ * @note Decrements `*outbytesleft` and increments `*outbuf` by the same amount.
+ */
+extern _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
+
+/**
+ * @brief Close a conversion descriptor. For iconv compatibility.
+ * @param cd The conversion descriptor.
+ * @return 0 on success. Returns 0 every time.
+ */
+extern _CPPP_API int reiconv_handle_close(reiconv_t cd);
 
 #ifdef __cplusplus
 }

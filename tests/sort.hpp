@@ -59,6 +59,7 @@ inline void sort_file(const std::string &file_name, const std::string &output_fi
 
     for (const std::string &line : lines)
     {
+        print_string("");
         write_stream(output_file, line + "\n");
     }
 }

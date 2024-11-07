@@ -19,9 +19,9 @@
 
 #include <cppp/reiconv.h>
 
-#include <stdlib.h>
 #include <errno.h>
 #include <limits.h>
+#include <stdlib.h>
 #include <string.h>
 
 const size_t TEMP_BUFFER_SIZE = 4096;
@@ -49,7 +49,7 @@ struct encoding
 
 enum
 {
-    #include "encodings.h.snippet"
+#include "encodings.h.snippet"
     ei_end
 };
 
@@ -57,14 +57,13 @@ enum
 #undef DEFCODEPAGE
 #undef DEFENCODING
 
-#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) \
-{xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2},
+#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                     \
+    {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2},
 #define DEFCODEPAGE(codepage, xxx)
 #define DEFINDEX(alias, name)
 
-static struct encoding const all_encodings[] =
-{
-    #include "encodings.h.snippet"
+static struct encoding const all_encodings[] = {
+#include "encodings.h.snippet"
 };
 
 #undef DEFINDEX
@@ -72,12 +71,11 @@ static struct encoding const all_encodings[] =
 #undef DEFCODEPAGE
 
 #define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)
-#define DEFCODEPAGE(codepage, xxx) [codepage]=ei_##xxx + 1,
+#define DEFCODEPAGE(codepage, xxx) [codepage] = ei_##xxx + 1,
 #define DEFINDEX(alias, name)
 
-static const int codepage_to_eindex[] =
-{
-    #include "encodings.h.snippet"
+static const int codepage_to_eindex[] = {
+#include "encodings.h.snippet"
 };
 
 #undef DEFINDEX
@@ -98,18 +96,18 @@ static const int codepage_to_eindex[] =
 
 _CPPP_API struct VersionInfo version = {VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
 
-_CPPP_API size_t reiconv_name_canonicalize(const char* name, char* outbuf)
+_CPPP_API size_t reiconv_name_canonicalize(const char *name, char *outbuf)
 {
-    char* bp = outbuf;
-    const char* cp = name;
+    char *bp = outbuf;
+    const char *cp = name;
     for (; *cp; cp++, bp++)
     {
         char c = (char)*cp;
-        if (c >= 'a' && c <= 'z')  // Uppercase.
+        if (c >= 'a' && c <= 'z') // Uppercase.
         {
             c -= 'a' - 'A';
         }
-        if (c == '-' || c == '_')  // Ignore '-' and '_'.
+        if (c == '-' || c == '_') // Ignore '-' and '_'.
         {
             bp--;
         }
@@ -122,12 +120,12 @@ _CPPP_API size_t reiconv_name_canonicalize(const char* name, char* outbuf)
     return bp - outbuf;
 }
 
-_CPPP_API int reiconv_lookup_from_name(const char* encoding)
+_CPPP_API int reiconv_lookup_from_name(const char *encoding)
 {
     char buf[MAX_WORD_LENGTH + 2];
     size_t buf_len = reiconv_name_canonicalize(encoding, buf);
 
-    const struct alias* ap = aliases_lookup(buf, buf_len);
+    const struct alias *ap = aliases_lookup(buf, buf_len);
     return ap ? ap->encoding_index : -1;
 }
 
@@ -138,8 +136,8 @@ _CPPP_API int reiconv_lookup_from_codepage(int codepage)
 
 _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool discard_ilseq)
 {
-    struct conv_struct* cd;
-    cd = (struct conv_struct*)malloc(sizeof(struct conv_struct));
+    struct conv_struct *cd;
+    cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
     if (cd == NULL)
     {
         errno = ENOMEM;
@@ -166,6 +164,32 @@ _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool disca
     return cd;
 }
 
+_CPPP_API reiconv_t reiconv_open_from_codepage(int fromcode, int tocode, bool discard_ilseq)
+{
+    int from_index = reiconv_lookup_from_codepage(fromcode);
+    int to_index = reiconv_lookup_from_codepage(tocode);
+
+    if (from_index == -1 || to_index == -1)
+    {
+        errno = EINVAL;
+        return (reiconv_t)(-1);
+    }
+    return reiconv_open_from_index(from_index, to_index, discard_ilseq);
+}
+
+_CPPP_API reiconv_t reiconv_open_from_name(const char *fromcode, const char *tocode, bool discard_ilseq)
+{
+    int from_index = reiconv_lookup_from_name(fromcode);
+    int to_index = reiconv_lookup_from_name(tocode);
+
+    if (from_index == -1 || to_index == -1)
+    {
+        errno = EINVAL;
+        return (reiconv_t)(-1);
+    }
+    return reiconv_open_from_index(from_index, to_index, discard_ilseq);
+}
+
 _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
 {
     if (inbuf == NULL || *inbuf == NULL)
@@ -175,34 +199,17 @@ _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, 
     return ((conv_t)cd)->lfuncs.loop_convert(cd, (const char **)inbuf, inbytesleft, outbuf, outbytesleft);
 }
 
-/*
-_CPPP_API iconv_t iconv_open(const char* tocode, const char* fromcode, bool strict)
-{
-    unsigned int to_index = lookup_by_name(tocode);
-    unsigned int from_index = lookup_by_name(fromcode);
-
-    if (to_index == -1 || from_index == -1)
-    {
-        errno = EINVAL;
-        return (iconv_t)(-1);
-    }
-
-    struct conv_struct* cd = iconv_open_from_index(to_index, from_index, (int)!strict);
-
-    return (iconv_t)cd;
-}*/
-
-_CPPP_API void reiconv_handle_close(reiconv_t icd)
+_CPPP_API int reiconv_handle_close(reiconv_t icd)
 {
     free(icd);
+    return 0;
 }
 
 _CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, size_t inlength)
 {
-    // Determine the length we need.
     size_t count = 0;
     char tmpbuf[TEMP_BUFFER_SIZE];
-    char* inptr = (char*)start;
+    char *inptr = (char *)start;
     size_t insize = inlength;
     while (insize > 0)
     {
@@ -215,7 +222,7 @@ _CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, size_t inl
             {
                 errno = EILSEQ;
             }
-            return -1;
+            return (size_t)(-1);
         }
         count += outptr - tmpbuf;
     }
@@ -226,45 +233,19 @@ _CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, size_t inl
     {
         // Return to the initial state.
         reiconv_iconv(cd, NULL, NULL, NULL, NULL);
-        return -1;
+        return (size_t)(-1);
     }
     reiconv_iconv(cd, NULL, NULL, NULL, NULL);
     return count + outptr - tmpbuf;
 }
 
-_CPPP_API int reiconv_convert(reiconv_t cd, const char *start, size_t inlength, char **resultp,
-                size_t *lengthp)
+_CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char *input_data, size_t input_length, char *output_data,
+                                          size_t output_length)
 {
-    size_t length = reiconv_result_size(cd, start, inlength);
-    char* result;
-
-    if (length == 0)
-    {
-        return 0;
-    }
-
-    if (lengthp != NULL)
-    {
-        *lengthp = length;
-    }
-    if (resultp == NULL)
-    {
-        // If resultp is NULL, we can't save results.
-        return -1;
-    }
-    result = (*resultp == NULL ? (char*)malloc(length) : (char*)realloc(*resultp, length));
-    *resultp = result;
-    if (result == NULL)
-    {
-        errno = ENOMEM;
-        return -1;
-    }
-
-    // Do the conversion for real.
-    char *inptr = (char*)start;
-    size_t insize = inlength;
-    char* outptr = result;
-    size_t outsize = length;
+    char *inptr = (char *)input_data;
+    size_t insize = input_length;
+    char *outptr = output_data;
+    size_t outsize = output_length;
     while (insize > 0)
     {
         size_t res = reiconv_iconv(cd, &inptr, &insize, &outptr, &outsize);
@@ -280,14 +261,41 @@ _CPPP_API int reiconv_convert(reiconv_t cd, const char *start, size_t inlength, 
             }
         }
     }
-    size_t res = reiconv_iconv(cd, NULL, NULL, &outptr, &outsize);
-    if (res == (size_t)(-1))
+    if (reiconv_iconv(cd, NULL, NULL, &outptr, &outsize) == (size_t)(-1))
     {
         return -1;
     }
-    if (outsize != 0)
+    memset(outptr, 0, outsize); // Fill the rest of the buffer with '\0'.
+    return 0;
+}
+_CPPP_API int reiconv_convert(reiconv_t cd, const char *input_data, size_t input_length, char **output_data_ptr,
+                              size_t *output_length_ptr)
+{
+    size_t output_length = reiconv_result_size(cd, input_data, input_length);
+    if (output_length == (size_t)(-1))
     {
-        abort();
+        return -1;
     }
+
+    if (output_length_ptr != NULL)
+    {
+        *output_length_ptr = output_length;
+    }
+
+    if (output_data_ptr == NULL)
+    {
+        errno = EINVAL;
+        return -1;
+    }
+
+    *output_data_ptr = (*output_data_ptr == NULL ? (char *)malloc(output_length) : (char *)realloc(*output_data_ptr, output_length));
+
+    if (reiconv_convert_static_size(cd, input_data, input_length, *output_data_ptr, output_length) == -1)
+    {
+        free(*output_data_ptr);
+        *output_data_ptr = NULL;
+        return -1;
+    }
+
     return 0;
 }

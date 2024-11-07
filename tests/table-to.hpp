@@ -25,7 +25,7 @@
 
 #pragma once
 
-#include "_iconv.hpp"
+#include "iconv.h"
 
 #include <cerrno>
 #include <cstdlib>
@@ -38,8 +38,6 @@
 
 inline void table_to(const std::filesystem::path &save_file_path, const std::string &charset)
 {
-    using namespace cppp::base::reiconv;
-
     // When testing UTF-8, stop at 0x10000, otherwise the output file gets too big.
     int bmp_only = (charset == "UTF-8");
 
@@ -49,7 +47,7 @@ inline void table_to(const std::filesystem::path &save_file_path, const std::str
         error(save_file_path, "Cannot open save file.");
     }
 
-    iconv_t cd = iconv_open(charset.c_str(), "UCS-4-INTERNAL", true);
+    iconv_t cd = iconv_open(charset.c_str(), "UCS-4-INTERNAL");
     if (cd == (iconv_t)(-1))
     {
         error("iconv_open", "Iconv open error.");

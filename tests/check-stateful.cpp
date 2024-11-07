@@ -26,6 +26,8 @@
 #include <cstring>
 #include <filesystem>
 
+#include "buffer.hpp"
+#include "cppp/reiconv.hpp"
 #include "reiconv-test.hpp"
 #include "utils.hpp"
 
@@ -50,18 +52,18 @@ int main(int argc, char *argv[])
     Buffer res, snippet_data;
     if (std::filesystem::exists(snippet_alt_file))
     {
-        res = reiconv_test(charset, "UTF-8", snippet_alt_file);
-        snippet_data = read_all(utf8_snippet_file);
-        compare_data(snippet_data, res);
+        res = reiconv_test(charset, reiconv::Encodings::UTF8, snippet_alt_file);
+        snippet_data = Buffer::read_from_file(utf8_snippet_file);
+        res.compare_assert(snippet_data);
     }
 
-    res = reiconv_test(charset, "UTF-8", datadir / (charsetf + "-snippet"));
-    snippet_data = read_all(utf8_snippet_file);
-    compare_data(snippet_data, res);
+    res = reiconv_test(charset, reiconv::Encodings::UTF8, datadir / (charsetf + "-snippet"));
+    snippet_data = Buffer::read_from_file(utf8_snippet_file);
+    res.compare_assert(snippet_data);
 
-    res = reiconv_test("UTF-8", charset, utf8_snippet_file);
-    snippet_data = read_all(datadir / (charsetf + "-snippet"));
-    compare_data(snippet_data, res);
+    res = reiconv_test(reiconv::Encodings::UTF8, charset, utf8_snippet_file);
+    snippet_data = Buffer::read_from_file(datadir / (charsetf + "-snippet"));
+    res.compare_assert(snippet_data);
 
     success("check-stateful", charset + " OK.");
 

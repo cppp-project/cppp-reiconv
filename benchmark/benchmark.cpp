@@ -47,12 +47,6 @@ static void glibc_iconv_dynamic_length(benchmark::State& state)
 {
     char* output = nullptr;
     std::size_t length = 0;
-    if(glibc_iconv_string("GB18030", "UTF-8", simple_test_string_utf8, simple_test_string_utf8 + 1, &output, &length) != 0)
-    {
-        free(output);
-        throw std::runtime_error("glibc_iconv_string failed");
-    }
-    free(output);
 
     for (auto _: state)
     {
@@ -69,12 +63,6 @@ static void libiconv_iconv_dynamic_length(benchmark::State& state)
 {
     char* output = nullptr;
     std::size_t length = 0;
-    if(libiconv_iconv_string("GB18030", "UTF-8", simple_test_string_utf8, simple_test_string_utf8 + 1, &output, &length) != 0)
-    {
-        free(output);
-        throw std::runtime_error("libiconv_iconv_string failed");
-    }
-    free(output);
 
     for (auto _: state)
     {
@@ -166,7 +154,7 @@ static void reiconv_convert(benchmark::State& state)
     using namespace reiconv;
     for (auto _: state)
     {
-        reiconv_t cd = reiconv_open_from_index(ENCODING_UTF8, ENCODING_GB18030, false);
+        reiconv_t cd = reiconv_open_from_index(reiconv_lookup_from_name("UTF-8"), reiconv_lookup_from_name("GB18030"), false);
         char* output = nullptr;
         size_t length = 0;
         reiconv_convert(cd, big_test_string_utf8, big_test_string_utf8_len, &output, &length);

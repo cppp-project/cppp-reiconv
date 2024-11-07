@@ -134,7 +134,8 @@ inline void error(const std::string& operation, const std::string &msg,
         print_stderr("{}: ", operation);
     }
     std::string file_info = std::string(location.file_name()) + ":" + std::to_string(location.line());
-    print_stderr(msg, "\n\tAt ", colorize(file_info, CONTROL_UNDERLINE), "\n");
+    print_stderr(msg);
+    print_stderr("\n\tAt {}\n", colorize(file_info, CONTROL_UNDERLINE), "\n");
 
     exit(EXIT_FAILURE);
 }

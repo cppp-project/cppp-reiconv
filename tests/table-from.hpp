@@ -25,7 +25,12 @@
 
 #pragma once
 
-#include "_iconv.hpp"
+#include <cppp/reiconv.h>
+#include <iconv.h>
+
+#ifndef _CPPP_API
+#error This header is not cppp-reiconv's API header.
+#endif
 
 #include <cerrno>
 #include <cstdlib>
@@ -61,9 +66,8 @@ inline std::string hexbuf(unsigned char *buf, unsigned int buflen)
  * @param out The output buffer.
  * @return The number of Unicode values in the output buffer.
  */
-static int try_convert(cppp::base::reiconv::iconv_t cd, unsigned char *buf, unsigned int buflen, unsigned int *out)
+static int try_convert(iconv_t cd, unsigned char *buf, unsigned int buflen, unsigned int *out)
 {
-    using namespace cppp::base::reiconv;
     const char *inbuf = (const char *)buf;
     std::size_t inbytesleft = buflen;
     char *outbuf = (char *)out;
@@ -146,9 +150,8 @@ static const char *ucs4_decode(const unsigned int *out, unsigned int outlen, boo
  * @param bmp_only When true, ignore conversions outside Unicode plane 0.
  * @param save_file The save file stream.
  */
-inline void run_table_from_test(cppp::base::reiconv::iconv_t cd, unsigned int (&i)[4], std::size_t index,
-                                unsigned int (&out)[3], unsigned char (&buf)[4], bool bmp_only,
-                                std::ofstream &save_file)
+inline void run_table_from_test(iconv_t cd, unsigned int (&i)[4], std::size_t index, unsigned int (&out)[3],
+                                unsigned char (&buf)[4], bool bmp_only, std::ofstream &save_file)
 {
     int result;
     for (i[index] = 0; i[index] < 0x100; i[index]++)
@@ -189,8 +192,6 @@ inline void run_table_from_test(cppp::base::reiconv::iconv_t cd, unsigned int (&
  */
 inline void table_from(const std::filesystem::path &save_file_path, const std::string &charset)
 {
-    using namespace cppp::base::reiconv;
-
     /* If nonzero, ignore conversions outside Unicode plane 0. */
     bool bmp_only = (charset == "UTF-8");
     int search_depth = (bmp_only ? 3 : 4);
@@ -201,7 +202,7 @@ inline void table_from(const std::filesystem::path &save_file_path, const std::s
         error(save_file_path, "Cannot open save file.");
     }
 
-    iconv_t cd = iconv_open("UCS-4-INTERNAL", charset.c_str(), true);
+    iconv_t cd = iconv_open("UCS-4-INTERNAL", charset.c_str());
     if (cd == (iconv_t)(-1))
     {
         error("iconv_open", " Iconv open error.");
