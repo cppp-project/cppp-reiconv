@@ -29,7 +29,7 @@
 #include <iconv.h>
 
 #ifndef _CPPP_API
-#error This header is not cppp-reiconv's API header.
+#error This header is not API header of cppp-reiconv.
 #endif
 
 #include <cerrno>
