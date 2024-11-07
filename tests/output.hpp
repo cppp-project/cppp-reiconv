@@ -121,7 +121,7 @@ template <typename... Args> inline void print_stderr(const std::string &format, 
     std::fputs(str.c_str(), stderr);
 }
 
-inline void error(const std::string& operation, const std::string &msg,
+inline void error(const std::string &operation, const std::string &msg,
                   const std::source_location location = std::source_location::current())
 {
     print_stderr(colorize("", COLOR_RED, false));
@@ -135,12 +135,12 @@ inline void error(const std::string& operation, const std::string &msg,
     }
     std::string file_info = std::string(location.file_name()) + ":" + std::to_string(location.line());
     print_stderr(msg);
-    print_stderr("\n\tAt {}\n", colorize(file_info, CONTROL_UNDERLINE), "\n");
+    print_stderr("\n\tAt {}", colorize(file_info, CONTROL_UNDERLINE));
 
     exit(EXIT_FAILURE);
 }
 
 inline void success(const std::string &operation, const std::string &msg)
 {
-    print_stdout(colorize(operation + ": " + msg + "\n", COLOR_GREEN));
+    print_stdout(colorize("{}: {}", COLOR_GREEN), operation, msg);
 }

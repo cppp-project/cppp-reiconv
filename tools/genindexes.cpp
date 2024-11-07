@@ -20,21 +20,10 @@
 /* Generate indexes enum. */
 
 #include <cstdlib>
-#include <iostream>
+#include <string>
 #include <unordered_map>
 
-#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
-#define DEFCODEPAGE(codepage, xxx)
-#define DEFINDEX(alias, index)
-
-enum
-{
-#include "encodings.h.snippet"
-};
-
-#undef DEFINDEX
-#undef DEFCODEPAGE
-#undef DEFENCODING
+#include "encoding_indexes.h"
 
 #define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                     \
     {#xxx_index, ei_##xxx},
@@ -63,10 +52,10 @@ std::unordered_map<std::string, std::string> aliases = {
 
 void cpp_gen()
 {
-    std::printf("namespace reiconv::encoding\n");
-    std::printf("{\n");
-    std::printf("    enum class Encodings\n");
-    std::printf("    {\n");
+    std::puts("namespace reiconv::encoding");
+    std::puts("{");
+    std::puts("    enum class Encodings");
+    std::puts("    {");
     for (auto &it : enum_data)
     {
         std::printf("        %s = %d,\n", it.first.c_str(), it.second);
@@ -75,15 +64,15 @@ void cpp_gen()
     {
         std::printf("        %s = %s,\n", it.first.c_str(), it.second.c_str());
     }
-    std::printf("    };\n");
-    std::printf("} // reiconv::encoding\n");
+    std::puts("    };");
+    std::puts("} // reiconv::encoding");
     std::fflush(stdout);
 }
 
 void c_gen()
 {
-    std::printf("enum\n");
-    std::printf("{\n");
+    std::puts("enum");
+    std::puts("{");
     for (auto &it : enum_data)
     {
         std::printf("    ENCODING_%s = %d,\n", it.first.c_str(), it.second);
@@ -92,7 +81,7 @@ void c_gen()
     {
         std::printf("    ENCODING_%s = ENCODING_%s,\n", it.first.c_str(), it.second.c_str());
     }
-    std::printf("};\n");
+    std::puts("};");
     std::fflush(stdout);
 }
 

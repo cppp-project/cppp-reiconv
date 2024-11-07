@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008, 2011, 2016, 2018, 2020, 2022-2023 Free Software Foundation, Inc.
+ * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it

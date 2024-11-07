@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 1999-2008, 2011, 2016, 2018, 2020, 2022-2023 Free Software Foundation, Inc.
+ * Copyright (C) The C++ Plus Project.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -24,51 +25,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-const size_t TEMP_BUFFER_SIZE = 4096;
-
-// Data type for general conversion loop.
-struct loop_funcs
-{
-    size_t (*loop_convert)(reiconv_t icd, const char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
-    size_t (*loop_reset)(reiconv_t icd, char **outbuf, size_t *outbytesleft);
-};
-
-// Converters
+#include "all_encodings.h"
 #include "converters.h"
+#include "encoding_indexes.h"
+#include "loop_funcs.h"
+#include "encoding.h"
 
-// Table of all supported encodings.
-struct encoding
-{
-    struct mbtowc_funcs ifuncs; // conversion multibyte -> unicode
-    struct wctomb_funcs ofuncs; // conversion unicode -> multibyte
-};
-
-#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2) ei_##xxx,
-#define DEFCODEPAGE(codepage, xxx)
-#define DEFINDEX(alias, index)
-
-enum
-{
-#include "encodings.h.snippet"
-    ei_end
-};
-
-#undef DEFINDEX
-#undef DEFCODEPAGE
-#undef DEFENCODING
-
-#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                     \
-    {xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2},
-#define DEFCODEPAGE(codepage, xxx)
-#define DEFINDEX(alias, name)
-
-static struct encoding const all_encodings[] = {
-#include "encodings.h.snippet"
-};
-
-#undef DEFINDEX
-#undef DEFENCODING
-#undef DEFCODEPAGE
+const size_t TEMP_BUFFER_SIZE = 4096;
 
 #define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)
 #define DEFCODEPAGE(codepage, xxx) [codepage] = ei_##xxx + 1,
@@ -288,7 +251,8 @@ _CPPP_API int reiconv_convert(reiconv_t cd, const char *input_data, size_t input
         return -1;
     }
 
-    *output_data_ptr = (*output_data_ptr == NULL ? (char *)malloc(output_length) : (char *)realloc(*output_data_ptr, output_length));
+    *output_data_ptr =
+        (*output_data_ptr == NULL ? (char *)malloc(output_length) : (char *)realloc(*output_data_ptr, output_length));
 
     if (reiconv_convert_static_size(cd, input_data, input_length, *output_data_ptr, output_length) == -1)
     {

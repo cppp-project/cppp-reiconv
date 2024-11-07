@@ -79,6 +79,8 @@
 
 #include "isoir165ext.h"
 
+#include <stdlib.h>
+
 static int
 isoir165_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
