@@ -1,39 +1,59 @@
-/* Copyright (C) 1999-2011 Free Software Foundation, Inc.
-   This file is part of the cppp-reiconv library.
-
-   The cppp-reiconv library is free software; you can redistribute it
-   and/or modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either version 3
-   of the License, or (at your option) any later version.
-
-   The cppp-reiconv library is distributed in the hope that it will be
-   useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the cppp-reiconv library; see the file LICENSE.
-   If not, see <https://www.gnu.org/licenses/>.  */
-
-/* By convention, an encoding named FOOBAR or FOO_BAR or FOO-BAR is defined
-   in a file named "foobar.h" through the functions foobar_mbtowc and
-   foobar_wctomb (and possibly foobar_reset). */
+/**
+ * @file encodings.h.snippet
+ * @brief Definitions of encodings.
+ * @copyright Copyright (C) 1999-2011 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2023-2024 The C++ Plus Project.
+ * @note By convention, an encoding named "FOOBAR" or "FOO_BAR" or "FOO-BAR" is defined in a file
+ * named `converters/foobar.h` through the functions `foobar_mbtowc` and `foobar_wctomb` (and
+ * possibly `foobar_reset`). With FOOBAR's index (and possibly codepage)
+ */
+/*
+ * This file is part of the cppp-reiconv library.
+ *
+ * The cppp-reiconv library is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * The cppp-reiconv library is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with the cppp-reiconv library; see the file LICENSE.
+ * If not, see <https://www.gnu.org/licenses/>.
+ */
 
 /* DEFENCODING(( name, alias1, ..., ),
-               xxx,
-               xxx_index,
-               { xxx_mbtowc, xxx_flushwc },
-               { xxx_wctomb, xxx_reset })
-   defines an encoding with the given name and aliases. (There is no
-   difference between a name and an alias. By convention, the name is chosen
-   as the preferred MIME name or the standard name.)
-   All names and aliases must be in ASCII. Case is not significant, but
-   for the "cs*" aliases mixed case is preferred, otherwise UPPERCASE is
-   preferred. For all names and aliases, note where it comes from.
-   xxx is the name as used in the C code (lowercase). xxx_index provides
-   a unique index for the encoding. It will be used in a enum for fast
-   access to the encoding. We removed all '-' and '_' of encoding's name. And
-   turn their names to upper case.
+ *             xxx,
+ *             xxx_index,
+ *             { xxx_mbtowc, xxx_flushwc },
+ *             { xxx_wctomb, xxx_reset })
+ * Defines an encoding with the given name and aliases. (There is no difference between a name and
+ * an alias. By convention, the name is chosen as the preferred MIME name or the standard name.)
+ * All names and aliases must be in ASCII. Case is not significant, but for the "cs*" aliases mixed
+ * case is preferred, otherwise UPPERCASE is preferred. For all names and aliases, note where it
+ * comes from. 
+ * xxx is the name as used in the C code (lowercase). xxx_index provides a unique index for the
+ * encoding. It will be used in a enum for fast access to the encoding. xxx is for reiconv's
+ * internal use only and xxx_index is for the user's
+ * use. Their values may be same.
+ * We removed all '-' and '_' of encoding's name. And turn their names to upper case.
+ */
+
+/*
+ * DEFCODEPAGE(codepage, xxx)
+ * Defines a codepage for the given encoding.
+ * codepage is the codepage number, which is often used in Windows, z/OS and AIX.
+ * xxx is the encoding internal name.
+ */
+
+/*
+ * DEFINDEX(alias, index)
+ * Defines an index alias for the given encoding.
+ * All encoding has its own index. But some encoding's index is strange. (e.g. GB18030_2022)
+ * So we define an alias for the index. (e.g. GB18030)
  */
 
 // ASCII

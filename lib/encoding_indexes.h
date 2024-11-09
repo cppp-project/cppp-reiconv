@@ -1,3 +1,9 @@
+/**
+ * @file encoding_indexes.h
+ * @brief All encoding's internal indexes.
+ * @copyright Copyright (C) 1999-2002, 2004-2011, 2016, 2022-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
  * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv library.

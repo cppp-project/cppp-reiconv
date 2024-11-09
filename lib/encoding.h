@@ -1,5 +1,9 @@
+/**
+ * @file encoding.h
+ * @brief Encoding structure definition.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it

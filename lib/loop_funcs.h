@@ -1,5 +1,9 @@
+/**
+ * @file loop_funcs.h
+ * @brief Data type for general conversion loop.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -29,7 +33,24 @@
  */
 struct loop_funcs
 {
+    /**
+     * @brief Conversion loop.
+     * @param icd Conversion descriptor.
+     * @param inbuf Pointer to the input buffer.
+     * @param inbytesleft Number of bytes available at `inbuf`.
+     * @param outbuf Pointer to the output buffer.
+     * @param outbytesleft Number of bytes available at `outbuf`.
+     * @return Number of bytes written to `outbuf`.
+     */
     size_t (*loop_convert)(reiconv_t icd, const char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
+
+    /**
+     * @brief Reset conversion loop.
+     * @param icd Conversion descriptor.
+     * @param outbuf Pointer to the output buffer.
+     * @param outbytesleft Number of bytes available at `outbuf`.
+     * @return Number of bytes written to `outbuf`.
+     */
     size_t (*loop_reset)(reiconv_t icd, char **outbuf, size_t *outbytesleft);
 };
 

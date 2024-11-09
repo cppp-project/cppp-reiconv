@@ -1,5 +1,9 @@
+/**
+ * @file genaliases.cpp
+ * @brief Generate index enum for reiconv users.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -17,13 +21,11 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* Generate indexes enum. */
-
 #include <cstdlib>
 #include <string>
 #include <unordered_map>
 
-#include "encoding_indexes.h"
+#include "encoding_indexes.h"  // IWYU pragma: keep
 
 #define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                     \
     {#xxx_index, ei_##xxx},

@@ -1,5 +1,9 @@
+/**
+ * @file all_encodings.h
+ * @brief Definition of `all_encodings[]`.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -20,7 +24,7 @@
 #ifndef _ALL_ENCODINGS_H_
 #define _ALL_ENCODINGS_H_
 
-#include "converters.h"
+#include "converters.h" // IWYU pragma: keep. Include all the converters for `encodings.h.snippet`.
 #include "encoding.h"
 
 #define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)                     \

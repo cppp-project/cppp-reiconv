@@ -1,5 +1,10 @@
+/**
+ * @file loops.h
+ * @brief All the loops.
+ * @copyright Copyright (C) 2000 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2000 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,6 +22,9 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* This file defines all the loops. */
+#ifndef _LOOPS_H_
+#define _LOOPS_H_
 
-#include "loop_unicode.h"
+#include "loop_unicode.h"  // IWYU pragma: export
+
+#endif /* _LOOPS_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file check-encodings.cpp
+ * @brief Check if all names in `encodings.h.snippet` are in upper case.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ * @note `name_canonicalize()` will upper the encoding name. So lower-case cannot be recognized.
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -15,10 +20,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with the cppp-reiconv Library; see the file LICENSE.
  * If not, see <https://www.gnu.org/licenses/>.
- */
-
-/* Check encoding names in `encodings.h.snippet` is not in lower case.
- * `name_canonicalize()` will upper the encoding name. So lower-case cannot be recognized.
  */
 
 #include <cctype>

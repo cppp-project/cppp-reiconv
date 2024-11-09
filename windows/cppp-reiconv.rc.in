@@ -32,7 +32,7 @@ BEGIN
             VALUE "LegalCopyright", "Copyright (C) 2023\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "cppp-reiconv.dll\0"
-            VALUE "ProductName", "cppp-reiconv: character set conversion library\0"
+            VALUE "ProductName", "cppp-reiconv: Character set conversion library.\0"
             VALUE "ProductVersion", PROJECT_VERSION "\0"
         END
     END

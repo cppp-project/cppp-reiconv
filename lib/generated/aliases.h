@@ -29,7 +29,7 @@
 #error "gperf generated tables don't work with this execution character set. Please report a bug to <bug-gperf@gnu.org>."
 #endif
 
-#line 1 "lib/generated/aliases.gperf"
+#line 2 "lib/generated/aliases.gperf"
 struct alias { int name; unsigned int encoding_index; };
 
 #define TOTAL_KEYWORDS 840
@@ -1795,2234 +1795,2234 @@ static const struct stringpool_t stringpool_contents =
 static const struct alias aliases[] =
   {
     {-1}, {-1}, {-1}, {-1},
-#line 354 "lib/generated/aliases.gperf"
+#line 355 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str4, ei_mac_roman},
     {-1},
-#line 20 "lib/generated/aliases.gperf"
+#line 21 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str6, ei_ascii},
-#line 83 "lib/generated/aliases.gperf"
+#line 84 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str7, ei_sjis},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 37 "lib/generated/aliases.gperf"
+#line 38 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str22, ei_ucs2be},
     {-1}, {-1},
-#line 295 "lib/generated/aliases.gperf"
+#line 296 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str25, ei_cp1251},
-#line 46 "lib/generated/aliases.gperf"
+#line 47 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str26, ei_ucs4be},
     {-1},
-#line 41 "lib/generated/aliases.gperf"
+#line 42 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str28, ei_ucs2le},
     {-1}, {-1},
-#line 289 "lib/generated/aliases.gperf"
+#line 290 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str31, ei_cp1250},
-#line 50 "lib/generated/aliases.gperf"
+#line 51 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str32, ei_ucs4le},
     {-1}, {-1}, {-1}, {-1},
-#line 318 "lib/generated/aliases.gperf"
+#line 319 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str37, ei_cp1255},
-#line 474 "lib/generated/aliases.gperf"
+#line 475 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str38, ei_iso646_cn},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 645 "lib/generated/aliases.gperf"
+#line 646 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str45, ei_ebcdic425},
     {-1}, {-1},
-#line 373 "lib/generated/aliases.gperf"
+#line 374 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str48, ei_mac_romania},
-#line 651 "lib/generated/aliases.gperf"
+#line 652 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str49, ei_ebcdic500},
     {-1},
-#line 357 "lib/generated/aliases.gperf"
+#line 358 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str51, ei_mac_roman},
     {-1}, {-1},
-#line 177 "lib/generated/aliases.gperf"
+#line 178 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str54, ei_iso8859_2},
-#line 312 "lib/generated/aliases.gperf"
+#line 313 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str55, ei_cp1254},
     {-1},
-#line 393 "lib/generated/aliases.gperf"
+#line 394 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str57, ei_mac_hebrew},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 642 "lib/generated/aliases.gperf"
+#line 643 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str63, ei_ebcdic424},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 397 "lib/generated/aliases.gperf"
+#line 398 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str75, ei_mac_arabic},
-#line 401 "lib/generated/aliases.gperf"
+#line 402 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str76, ei_mac_thai},
-#line 146 "lib/generated/aliases.gperf"
+#line 147 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str77, ei_euc_kr},
     {-1},
-#line 58 "lib/generated/aliases.gperf"
+#line 59 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str79, ei_utf32},
     {-1}, {-1}, {-1}, {-1},
-#line 690 "lib/generated/aliases.gperf"
+#line 691 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str84, ei_ebcdic1025},
     {-1}, {-1}, {-1}, {-1},
-#line 44 "lib/generated/aliases.gperf"
+#line 45 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str89, ei_ucs4},
     {-1}, {-1}, {-1},
-#line 301 "lib/generated/aliases.gperf"
+#line 302 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str93, ei_cp1252},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1},
-#line 389 "lib/generated/aliases.gperf"
+#line 390 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str106, ei_mac_turkish},
     {-1},
-#line 155 "lib/generated/aliases.gperf"
+#line 156 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str108, ei_johab},
     {-1}, {-1}, {-1}, {-1},
-#line 97 "lib/generated/aliases.gperf"
+#line 98 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str113, ei_iso2022_jpms},
     {-1}, {-1}, {-1}, {-1},
-#line 193 "lib/generated/aliases.gperf"
+#line 194 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str118, ei_iso8859_4},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 159 "lib/generated/aliases.gperf"
+#line 160 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str125, ei_iso2022_kr},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 557 "lib/generated/aliases.gperf"
+#line 558 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str131, ei_cp861},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 553 "lib/generated/aliases.gperf"
+#line 554 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str137, ei_cp860},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 570 "lib/generated/aliases.gperf"
+#line 571 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str143, ei_cp865},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 335 "lib/generated/aliases.gperf"
+#line 336 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str153, ei_cp1258},
     {-1},
-#line 559 "lib/generated/aliases.gperf"
+#line 560 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str155, ei_cp861},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 568 "lib/generated/aliases.gperf"
+#line 569 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str161, ei_cp864},
     {-1}, {-1}, {-1}, {-1},
-#line 839 "lib/generated/aliases.gperf"
+#line 840 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str166, ei_ebcdic16804},
-#line 245 "lib/generated/aliases.gperf"
+#line 246 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str167, ei_iso8859_10},
     {-1}, {-1}, {-1},
-#line 650 "lib/generated/aliases.gperf"
+#line 651 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str171, ei_ebcdic500},
-#line 406 "lib/generated/aliases.gperf"
+#line 407 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str172, ei_hp_roman8},
     {-1},
-#line 369 "lib/generated/aliases.gperf"
+#line 370 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str174, ei_mac_croatian},
     {-1},
-#line 372 "lib/generated/aliases.gperf"
+#line 373 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str176, ei_mac_romania},
     {-1},
-#line 733 "lib/generated/aliases.gperf"
+#line 734 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str178, ei_ebcdic1141},
     {-1}, {-1},
-#line 120 "lib/generated/aliases.gperf"
+#line 121 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str181, ei_hz},
     {-1}, {-1}, {-1},
-#line 356 "lib/generated/aliases.gperf"
+#line 357 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str185, ei_mac_roman},
     {-1}, {-1}, {-1}, {-1},
-#line 725 "lib/generated/aliases.gperf"
+#line 726 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str190, ei_ebcdic1140},
-#line 392 "lib/generated/aliases.gperf"
+#line 393 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str191, ei_mac_hebrew},
-#line 418 "lib/generated/aliases.gperf"
+#line 419 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str192, ei_pt154},
     {-1}, {-1},
-#line 200 "lib/generated/aliases.gperf"
+#line 201 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str195, ei_iso8859_5},
     {-1},
-#line 443 "lib/generated/aliases.gperf"
+#line 444 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str197, ei_viscii},
     {-1},
-#line 341 "lib/generated/aliases.gperf"
+#line 342 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str199, ei_cp862},
-#line 36 "lib/generated/aliases.gperf"
+#line 37 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str200, ei_ucs2be},
-#line 656 "lib/generated/aliases.gperf"
+#line 657 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str201, ei_ebcdic838},
-#line 292 "lib/generated/aliases.gperf"
+#line 293 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str202, ei_cp1251},
-#line 294 "lib/generated/aliases.gperf"
+#line 295 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str203, ei_cp1251},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 396 "lib/generated/aliases.gperf"
+#line 397 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str209, ei_mac_arabic},
-#line 47 "lib/generated/aliases.gperf"
+#line 48 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str210, ei_ucs4be},
     {-1},
-#line 40 "lib/generated/aliases.gperf"
+#line 41 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str212, ei_ucs2le},
     {-1},
-#line 374 "lib/generated/aliases.gperf"
+#line 375 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str214, ei_mac_cyrillic},
-#line 284 "lib/generated/aliases.gperf"
+#line 285 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str215, ei_cp1250},
-#line 49 "lib/generated/aliases.gperf"
+#line 50 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str216, ei_ucs4le},
-#line 644 "lib/generated/aliases.gperf"
+#line 645 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str217, ei_ebcdic425},
     {-1}, {-1}, {-1},
-#line 324 "lib/generated/aliases.gperf"
+#line 325 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str221, ei_cp1256},
     {-1}, {-1}, {-1},
-#line 730 "lib/generated/aliases.gperf"
+#line 731 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str225, ei_ebcdic1141},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 722 "lib/generated/aliases.gperf"
+#line 723 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str231, ei_ebcdic1140},
-#line 339 "lib/generated/aliases.gperf"
+#line 340 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str232, ei_cp850},
     {-1}, {-1},
-#line 641 "lib/generated/aliases.gperf"
+#line 642 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str235, ei_ebcdic424},
     {-1},
-#line 764 "lib/generated/aliases.gperf"
+#line 765 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str237, ei_ebcdic1145},
-#line 540 "lib/generated/aliases.gperf"
+#line 541 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str238, ei_cp855},
     {-1}, {-1},
-#line 385 "lib/generated/aliases.gperf"
+#line 386 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str241, ei_mac_greek},
-#line 805 "lib/generated/aliases.gperf"
+#line 806 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str242, ei_ebcdic1154},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 412 "lib/generated/aliases.gperf"
+#line 413 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str248, ei_pt154},
-#line 498 "lib/generated/aliases.gperf"
+#line 499 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str249, ei_cp1046},
     {-1},
-#line 759 "lib/generated/aliases.gperf"
+#line 760 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str251, ei_ebcdic1144},
     {-1}, {-1}, {-1},
-#line 756 "lib/generated/aliases.gperf"
+#line 757 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str255, ei_ebcdic1144},
     {-1}, {-1}, {-1}, {-1},
-#line 613 "lib/generated/aliases.gperf"
+#line 614 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str260, ei_ebcdic280},
-#line 507 "lib/generated/aliases.gperf"
+#line 508 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str261, ei_cp1161},
-#line 400 "lib/generated/aliases.gperf"
+#line 401 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str262, ei_mac_thai},
     {-1}, {-1},
-#line 167 "lib/generated/aliases.gperf"
+#line 168 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str265, ei_iso8859_1},
-#line 624 "lib/generated/aliases.gperf"
+#line 625 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str266, ei_ebcdic285},
     {-1},
-#line 694 "lib/generated/aliases.gperf"
+#line 695 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str268, ei_ebcdic1026},
     {-1},
-#line 500 "lib/generated/aliases.gperf"
+#line 501 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str270, ei_cp1124},
-#line 185 "lib/generated/aliases.gperf"
+#line 186 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str271, ei_iso8859_3},
-#line 271 "lib/generated/aliases.gperf"
+#line 272 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str272, ei_iso8859_16},
-#line 820 "lib/generated/aliases.gperf"
+#line 821 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str273, ei_ebcdic1160},
     {-1}, {-1},
-#line 311 "lib/generated/aliases.gperf"
+#line 312 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str276, ei_cp1254},
     {-1}, {-1},
-#line 734 "lib/generated/aliases.gperf"
+#line 735 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str279, ei_ebcdic1141},
-#line 27 "lib/generated/aliases.gperf"
+#line 28 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str280, ei_utf8},
     {-1},
-#line 809 "lib/generated/aliases.gperf"
+#line 810 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str282, ei_ebcdic1155},
     {-1},
-#line 621 "lib/generated/aliases.gperf"
+#line 622 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str284, ei_ebcdic284},
-#line 726 "lib/generated/aliases.gperf"
+#line 727 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str285, ei_ebcdic1140},
-#line 67 "lib/generated/aliases.gperf"
+#line 68 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str286, ei_utf7},
     {-1}, {-1},
-#line 702 "lib/generated/aliases.gperf"
+#line 703 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str289, ei_ebcdic1112},
-#line 675 "lib/generated/aliases.gperf"
+#line 676 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str290, ei_ebcdic880},
-#line 768 "lib/generated/aliases.gperf"
+#line 769 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str291, ei_ebcdic1145},
     {-1},
-#line 738 "lib/generated/aliases.gperf"
+#line 739 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str293, ei_ebcdic1142},
-#line 531 "lib/generated/aliases.gperf"
+#line 532 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str294, ei_cp852},
     {-1},
-#line 455 "lib/generated/aliases.gperf"
+#line 456 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str296, ei_jisx0201},
     {-1}, {-1},
-#line 96 "lib/generated/aliases.gperf"
+#line 97 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str299, ei_iso2022_jpms},
-#line 806 "lib/generated/aliases.gperf"
+#line 807 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str300, ei_ebcdic1154},
     {-1}, {-1}, {-1},
-#line 742 "lib/generated/aliases.gperf"
+#line 743 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str304, ei_ebcdic1142},
     {-1}, {-1}, {-1}, {-1},
-#line 760 "lib/generated/aliases.gperf"
+#line 761 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str309, ei_ebcdic1144},
-#line 580 "lib/generated/aliases.gperf"
+#line 581 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str310, ei_cp1125},
-#line 158 "lib/generated/aliases.gperf"
+#line 159 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str311, ei_iso2022_kr},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 558 "lib/generated/aliases.gperf"
+#line 559 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str318, ei_cp861},
     {-1}, {-1}, {-1},
-#line 617 "lib/generated/aliases.gperf"
+#line 618 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str322, ei_ebcdic282},
-#line 705 "lib/generated/aliases.gperf"
+#line 706 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str323, ei_ebcdic1122},
-#line 555 "lib/generated/aliases.gperf"
+#line 556 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str324, ei_cp860},
     {-1}, {-1},
-#line 346 "lib/generated/aliases.gperf"
+#line 347 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str327, ei_cp866},
-#line 501 "lib/generated/aliases.gperf"
+#line 502 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str328, ei_cp1124},
-#line 300 "lib/generated/aliases.gperf"
+#line 301 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str329, ei_cp1252},
-#line 572 "lib/generated/aliases.gperf"
+#line 573 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str330, ei_cp865},
     {-1},
-#line 703 "lib/generated/aliases.gperf"
+#line 704 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str332, ei_ebcdic1112},
     {-1},
-#line 823 "lib/generated/aliases.gperf"
+#line 824 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str334, ei_ebcdic1164},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1},
-#line 743 "lib/generated/aliases.gperf"
+#line 744 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str347, ei_ebcdic1142},
-#line 567 "lib/generated/aliases.gperf"
+#line 568 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str348, ei_cp864},
     {-1}, {-1}, {-1}, {-1},
-#line 788 "lib/generated/aliases.gperf"
+#line 789 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str353, ei_ebcdic1148},
-#line 548 "lib/generated/aliases.gperf"
+#line 549 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str354, ei_cp858},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 468 "lib/generated/aliases.gperf"
+#line 469 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str361, ei_jisx0212},
-#line 508 "lib/generated/aliases.gperf"
+#line 509 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str362, ei_cp1161},
     {-1},
-#line 42 "lib/generated/aliases.gperf"
+#line 43 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str364, ei_ucs4},
-#line 838 "lib/generated/aliases.gperf"
+#line 839 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str365, ei_ebcdic16804},
-#line 706 "lib/generated/aliases.gperf"
+#line 707 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str366, ei_ebcdic1122},
     {-1},
-#line 821 "lib/generated/aliases.gperf"
+#line 822 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str368, ei_ebcdic1160},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 827 "lib/generated/aliases.gperf"
+#line 828 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str374, ei_ebcdic1165},
-#line 384 "lib/generated/aliases.gperf"
+#line 385 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str375, ei_mac_greek},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
-#line 344 "lib/generated/aliases.gperf"
+#line 345 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str386, ei_cp862},
-#line 511 "lib/generated/aliases.gperf"
+#line 512 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str387, ei_cp1162},
     {-1},
-#line 687 "lib/generated/aliases.gperf"
+#line 688 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str389, ei_ebcdic924},
     {-1}, {-1},
-#line 824 "lib/generated/aliases.gperf"
+#line 825 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str392, ei_ebcdic1164},
     {-1}, {-1},
-#line 24 "lib/generated/aliases.gperf"
+#line 25 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str395, ei_ascii},
     {-1}, {-1},
-#line 818 "lib/generated/aliases.gperf"
+#line 819 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str398, ei_ebcdic1158},
     {-1}, {-1}, {-1},
-#line 29 "lib/generated/aliases.gperf"
+#line 30 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str402, ei_ucs2},
     {-1}, {-1}, {-1}, {-1},
-#line 792 "lib/generated/aliases.gperf"
+#line 793 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str407, ei_ebcdic1148},
-#line 667 "lib/generated/aliases.gperf"
+#line 668 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str408, ei_ebcdic871},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 662 "lib/generated/aliases.gperf"
+#line 663 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str414, ei_ebcdic870},
     {-1}, {-1}, {-1},
-#line 89 "lib/generated/aliases.gperf"
+#line 90 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str418, ei_cp932},
     {-1},
-#line 671 "lib/generated/aliases.gperf"
+#line 672 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str420, ei_ebcdic875},
-#line 772 "lib/generated/aliases.gperf"
+#line 773 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str421, ei_ebcdic1146},
-#line 488 "lib/generated/aliases.gperf"
+#line 489 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str422, ei_cp856},
-#line 350 "lib/generated/aliases.gperf"
+#line 351 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str423, ei_cp1131},
-#line 461 "lib/generated/aliases.gperf"
+#line 462 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str424, ei_jisx0208},
     {-1}, {-1},
-#line 492 "lib/generated/aliases.gperf"
+#line 493 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str427, ei_cp922},
     {-1}, {-1},
-#line 512 "lib/generated/aliases.gperf"
+#line 513 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str430, ei_cp1162},
-#line 276 "lib/generated/aliases.gperf"
+#line 277 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str431, ei_koi8_r},
     {-1},
-#line 584 "lib/generated/aliases.gperf"
+#line 585 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str433, ei_cp1125},
     {-1},
-#line 711 "lib/generated/aliases.gperf"
+#line 712 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str435, ei_ebcdic1130},
     {-1}, {-1},
-#line 440 "lib/generated/aliases.gperf"
+#line 441 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str438, ei_cp874},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 166 "lib/generated/aliases.gperf"
+#line 167 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str450, ei_iso8859_1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 270 "lib/generated/aliases.gperf"
+#line 271 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str457, ei_iso8859_16},
     {-1}, {-1}, {-1},
-#line 52 "lib/generated/aliases.gperf"
+#line 53 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str461, ei_utf16},
-#line 575 "lib/generated/aliases.gperf"
+#line 576 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str462, ei_cp869},
-#line 338 "lib/generated/aliases.gperf"
+#line 339 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str463, ei_cp850},
-#line 578 "lib/generated/aliases.gperf"
+#line 579 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str464, ei_cp869},
     {-1},
-#line 812 "lib/generated/aliases.gperf"
+#line 813 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str466, ei_ebcdic1156},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 776 "lib/generated/aliases.gperf"
+#line 777 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str475, ei_ebcdic1146},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 732 "lib/generated/aliases.gperf"
+#line 733 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str484, ei_ebcdic1141},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 724 "lib/generated/aliases.gperf"
+#line 725 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str490, ei_ebcdic1140},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 766 "lib/generated/aliases.gperf"
+#line 767 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str496, ei_ebcdic1145},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 104 "lib/generated/aliases.gperf"
+#line 105 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str502, ei_euc_cn},
     {-1}, {-1},
-#line 582 "lib/generated/aliases.gperf"
+#line 583 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str505, ei_cp1125},
-#line 609 "lib/generated/aliases.gperf"
+#line 610 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str506, ei_ebcdic278},
     {-1}, {-1},
-#line 135 "lib/generated/aliases.gperf"
+#line 136 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str509, ei_cp950},
-#line 808 "lib/generated/aliases.gperf"
+#line 809 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str510, ei_ebcdic1155},
     {-1}, {-1}, {-1},
-#line 348 "lib/generated/aliases.gperf"
+#line 349 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str514, ei_cp866},
     {-1}, {-1}, {-1}, {-1},
-#line 767 "lib/generated/aliases.gperf"
+#line 768 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str519, ei_ebcdic1145},
     {-1},
-#line 154 "lib/generated/aliases.gperf"
+#line 155 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str521, ei_johab},
     {-1},
-#line 192 "lib/generated/aliases.gperf"
+#line 193 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str523, ei_iso8859_4},
-#line 351 "lib/generated/aliases.gperf"
+#line 352 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str524, ei_cp1131},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 712 "lib/generated/aliases.gperf"
+#line 713 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str530, ei_ebcdic1130},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 13 "lib/generated/aliases.gperf"
+#line 14 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str537, ei_ascii},
-#line 585 "lib/generated/aliases.gperf"
+#line 586 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str538, ei_cp1125},
     {-1},
-#line 21 "lib/generated/aliases.gperf"
+#line 22 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str540, ei_ascii},
-#line 689 "lib/generated/aliases.gperf"
+#line 690 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str541, ei_ebcdic1025},
-#line 12 "lib/generated/aliases.gperf"
+#line 13 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str542, ei_ascii},
     {-1},
-#line 317 "lib/generated/aliases.gperf"
+#line 318 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str544, ei_cp1255},
-#line 306 "lib/generated/aliases.gperf"
+#line 307 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str545, ei_cp1253},
-#line 110 "lib/generated/aliases.gperf"
+#line 111 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str546, ei_cp936},
     {-1}, {-1},
-#line 714 "lib/generated/aliases.gperf"
+#line 715 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str549, ei_ebcdic1132},
     {-1},
-#line 299 "lib/generated/aliases.gperf"
+#line 300 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str551, ei_cp1252},
-#line 741 "lib/generated/aliases.gperf"
+#line 742 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str552, ei_ebcdic1142},
-#line 637 "lib/generated/aliases.gperf"
+#line 638 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str553, ei_ebcdic423},
     {-1},
-#line 237 "lib/generated/aliases.gperf"
+#line 238 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str555, ei_iso8859_9},
-#line 175 "lib/generated/aliases.gperf"
+#line 176 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str556, ei_iso8859_2},
-#line 506 "lib/generated/aliases.gperf"
+#line 507 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str557, ei_cp1161},
-#line 830 "lib/generated/aliases.gperf"
+#line 831 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str558, ei_ebcdic1166},
-#line 191 "lib/generated/aliases.gperf"
+#line 192 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str559, ei_iso8859_4},
     {-1},
-#line 686 "lib/generated/aliases.gperf"
+#line 687 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str561, ei_ebcdic924},
-#line 164 "lib/generated/aliases.gperf"
+#line 165 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str562, ei_iso8859_1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1},
-#line 176 "lib/generated/aliases.gperf"
+#line 177 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str576, ei_iso8859_2},
-#line 419 "lib/generated/aliases.gperf"
+#line 420 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str577, ei_pt154},
     {-1},
-#line 118 "lib/generated/aliases.gperf"
+#line 119 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str579, ei_iso2022_cn},
-#line 640 "lib/generated/aliases.gperf"
+#line 641 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str580, ei_ebcdic424},
     {-1},
-#line 450 "lib/generated/aliases.gperf"
+#line 451 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str582, ei_iso646_jp},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 117 "lib/generated/aliases.gperf"
+#line 118 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str588, ei_iso2022_cn},
     {-1}, {-1}, {-1},
-#line 715 "lib/generated/aliases.gperf"
+#line 716 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str592, ei_ebcdic1132},
     {-1},
-#line 149 "lib/generated/aliases.gperf"
+#line 150 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str594, ei_cp949},
     {-1}, {-1}, {-1},
-#line 199 "lib/generated/aliases.gperf"
+#line 200 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str598, ei_iso8859_5},
-#line 491 "lib/generated/aliases.gperf"
+#line 492 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str599, ei_cp922},
     {-1}, {-1},
-#line 826 "lib/generated/aliases.gperf"
+#line 827 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str602, ei_ebcdic1165},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 655 "lib/generated/aliases.gperf"
+#line 656 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str608, ei_ebcdic838},
     {-1},
-#line 413 "lib/generated/aliases.gperf"
+#line 414 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str610, ei_pt154},
     {-1},
-#line 790 "lib/generated/aliases.gperf"
+#line 791 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str612, ei_ebcdic1148},
     {-1}, {-1}, {-1}, {-1},
-#line 337 "lib/generated/aliases.gperf"
+#line 338 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str617, ei_cp850},
     {-1}, {-1},
-#line 612 "lib/generated/aliases.gperf"
+#line 613 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str620, ei_ebcdic280},
     {-1}, {-1},
-#line 538 "lib/generated/aliases.gperf"
+#line 539 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str623, ei_cp855},
-#line 129 "lib/generated/aliases.gperf"
+#line 130 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str624, ei_euc_tw},
-#line 510 "lib/generated/aliases.gperf"
+#line 511 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str625, ei_cp1162},
-#line 626 "lib/generated/aliases.gperf"
+#line 627 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str626, ei_ebcdic285},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 836 "lib/generated/aliases.gperf"
+#line 837 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str632, ei_ebcdic12712},
-#line 683 "lib/generated/aliases.gperf"
+#line 684 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str633, ei_ebcdic924},
     {-1}, {-1}, {-1}, {-1},
-#line 481 "lib/generated/aliases.gperf"
+#line 482 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str638, ei_ksc5601},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 620 "lib/generated/aliases.gperf"
+#line 621 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str644, ei_ebcdic284},
     {-1},
-#line 438 "lib/generated/aliases.gperf"
+#line 439 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str646, ei_cp874},
     {-1}, {-1}, {-1}, {-1},
-#line 562 "lib/generated/aliases.gperf"
+#line 563 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str651, ei_cp863},
     {-1},
-#line 28 "lib/generated/aliases.gperf"
+#line 29 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str653, ei_utf8},
     {-1}, {-1}, {-1},
-#line 283 "lib/generated/aliases.gperf"
+#line 284 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str657, ei_koi8_ru},
     {-1},
-#line 68 "lib/generated/aliases.gperf"
+#line 69 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str659, ei_utf7},
     {-1}, {-1}, {-1},
-#line 479 "lib/generated/aliases.gperf"
+#line 480 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str663, ei_isoir165},
     {-1}, {-1}, {-1},
-#line 293 "lib/generated/aliases.gperf"
+#line 294 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str667, ei_cp1251},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 529 "lib/generated/aliases.gperf"
+#line 530 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str679, ei_cp852},
-#line 423 "lib/generated/aliases.gperf"
+#line 424 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str680, ei_rk1048},
     {-1},
-#line 48 "lib/generated/aliases.gperf"
+#line 49 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str682, ei_ucs4le},
     {-1}, {-1}, {-1}, {-1},
-#line 614 "lib/generated/aliases.gperf"
+#line 615 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str687, ei_ebcdic280},
     {-1}, {-1}, {-1}, {-1},
-#line 692 "lib/generated/aliases.gperf"
+#line 693 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str692, ei_ebcdic1026},
-#line 627 "lib/generated/aliases.gperf"
+#line 628 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str693, ei_ebcdic285},
-#line 583 "lib/generated/aliases.gperf"
+#line 584 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str694, ei_cp1125},
-#line 277 "lib/generated/aliases.gperf"
+#line 278 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str695, ei_koi8_u},
-#line 235 "lib/generated/aliases.gperf"
+#line 236 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str696, ei_iso8859_9},
-#line 550 "lib/generated/aliases.gperf"
+#line 551 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str697, ei_cp858},
     {-1},
-#line 441 "lib/generated/aliases.gperf"
+#line 442 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str699, ei_viscii},
     {-1},
-#line 38 "lib/generated/aliases.gperf"
+#line 39 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str701, ei_ucs2le},
     {-1}, {-1}, {-1}, {-1},
-#line 62 "lib/generated/aliases.gperf"
+#line 63 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str706, ei_utf32le},
     {-1}, {-1}, {-1}, {-1},
-#line 622 "lib/generated/aliases.gperf"
+#line 623 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str711, ei_ebcdic284},
-#line 26 "lib/generated/aliases.gperf"
+#line 27 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str712, ei_utf8},
-#line 258 "lib/generated/aliases.gperf"
+#line 259 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str713, ei_iso8859_14},
     {-1}, {-1}, {-1},
-#line 676 "lib/generated/aliases.gperf"
+#line 677 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str717, ei_ebcdic880},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 636 "lib/generated/aliases.gperf"
+#line 637 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str725, ei_ebcdic423},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1},
-#line 546 "lib/generated/aliases.gperf"
+#line 547 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str739, ei_cp858},
     {-1},
-#line 414 "lib/generated/aliases.gperf"
+#line 415 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str741, ei_pt154},
-#line 417 "lib/generated/aliases.gperf"
+#line 418 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str742, ei_pt154},
     {-1}, {-1},
-#line 747 "lib/generated/aliases.gperf"
+#line 748 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str745, ei_ebcdic1143},
-#line 536 "lib/generated/aliases.gperf"
+#line 537 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str746, ei_cp853},
-#line 442 "lib/generated/aliases.gperf"
+#line 443 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str747, ei_viscii},
     {-1},
-#line 616 "lib/generated/aliases.gperf"
+#line 617 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str749, ei_ebcdic282},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 361 "lib/generated/aliases.gperf"
+#line 362 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str758, ei_mac_centraleurope},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 666 "lib/generated/aliases.gperf"
+#line 667 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str764, ei_ebcdic871},
     {-1}, {-1},
-#line 451 "lib/generated/aliases.gperf"
+#line 452 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str767, ei_iso646_jp},
     {-1}, {-1},
-#line 658 "lib/generated/aliases.gperf"
+#line 659 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str770, ei_ebcdic870},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 670 "lib/generated/aliases.gperf"
+#line 671 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str776, ei_ebcdic875},
     {-1}, {-1}, {-1}, {-1},
-#line 728 "lib/generated/aliases.gperf"
+#line 729 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str781, ei_ebcdic1141},
-#line 646 "lib/generated/aliases.gperf"
+#line 647 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str782, ei_ebcdic500},
-#line 216 "lib/generated/aliases.gperf"
+#line 217 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str783, ei_iso8859_7},
     {-1},
-#line 25 "lib/generated/aliases.gperf"
+#line 26 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str785, ei_utf8},
     {-1},
-#line 720 "lib/generated/aliases.gperf"
+#line 721 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str787, ei_ebcdic1140},
     {-1}, {-1},
-#line 803 "lib/generated/aliases.gperf"
+#line 804 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str790, ei_ebcdic1153},
-#line 236 "lib/generated/aliases.gperf"
+#line 237 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str791, ei_iso8859_9},
     {-1},
-#line 762 "lib/generated/aliases.gperf"
+#line 763 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str793, ei_ebcdic1145},
-#line 439 "lib/generated/aliases.gperf"
+#line 440 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str794, ei_cp874},
     {-1},
-#line 266 "lib/generated/aliases.gperf"
+#line 267 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str796, ei_iso8859_15},
     {-1}, {-1},
-#line 752 "lib/generated/aliases.gperf"
+#line 753 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str799, ei_ebcdic1143},
     {-1},
-#line 133 "lib/generated/aliases.gperf"
+#line 134 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str801, ei_ces_big5},
-#line 649 "lib/generated/aliases.gperf"
+#line 650 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str802, ei_ebcdic500},
     {-1}, {-1},
-#line 107 "lib/generated/aliases.gperf"
+#line 108 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str805, ei_cp936},
     {-1},
-#line 489 "lib/generated/aliases.gperf"
+#line 490 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str807, ei_cp856},
     {-1}, {-1},
-#line 835 "lib/generated/aliases.gperf"
+#line 836 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str810, ei_ebcdic12712},
-#line 754 "lib/generated/aliases.gperf"
+#line 755 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str811, ei_ebcdic1144},
     {-1},
-#line 574 "lib/generated/aliases.gperf"
+#line 575 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str813, ei_cp869},
     {-1}, {-1}, {-1}, {-1},
-#line 709 "lib/generated/aliases.gperf"
+#line 710 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str818, ei_ebcdic1123},
     {-1},
-#line 727 "lib/generated/aliases.gperf"
+#line 728 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str820, ei_ebcdic1141},
     {-1}, {-1},
-#line 123 "lib/generated/aliases.gperf"
+#line 124 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str823, ei_hz},
-#line 132 "lib/generated/aliases.gperf"
+#line 133 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str824, ei_ces_big5},
-#line 88 "lib/generated/aliases.gperf"
+#line 89 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str825, ei_cp932},
-#line 719 "lib/generated/aliases.gperf"
+#line 720 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str826, ei_ebcdic1140},
     {-1}, {-1}, {-1},
-#line 701 "lib/generated/aliases.gperf"
+#line 702 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str830, ei_ebcdic1112},
     {-1},
-#line 761 "lib/generated/aliases.gperf"
+#line 762 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str832, ei_ebcdic1145},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 564 "lib/generated/aliases.gperf"
+#line 565 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str838, ei_cp863},
     {-1}, {-1}, {-1}, {-1},
-#line 336 "lib/generated/aliases.gperf"
+#line 337 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str843, ei_cp850},
     {-1}, {-1}, {-1},
-#line 433 "lib/generated/aliases.gperf"
+#line 434 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str847, ei_tis620},
     {-1},
-#line 736 "lib/generated/aliases.gperf"
+#line 737 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str849, ei_ebcdic1142},
-#line 753 "lib/generated/aliases.gperf"
+#line 754 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str850, ei_ebcdic1144},
     {-1},
-#line 128 "lib/generated/aliases.gperf"
+#line 129 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str852, ei_euc_tw},
     {-1},
-#line 51 "lib/generated/aliases.gperf"
+#line 52 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str854, ei_utf16},
     {-1}, {-1}, {-1}, {-1},
-#line 279 "lib/generated/aliases.gperf"
+#line 280 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str859, ei_koi8_ru},
     {-1},
-#line 404 "lib/generated/aliases.gperf"
+#line 405 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str861, ei_hp_roman8},
-#line 608 "lib/generated/aliases.gperf"
+#line 609 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str862, ei_ebcdic278},
     {-1}, {-1}, {-1},
-#line 579 "lib/generated/aliases.gperf"
+#line 580 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str866, ei_cp1125},
     {-1}, {-1},
-#line 688 "lib/generated/aliases.gperf"
+#line 689 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str869, ei_ebcdic1025},
     {-1},
-#line 610 "lib/generated/aliases.gperf"
+#line 611 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str871, ei_ebcdic280},
     {-1}, {-1}, {-1},
-#line 269 "lib/generated/aliases.gperf"
+#line 270 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str875, ei_iso8859_16},
     {-1},
-#line 685 "lib/generated/aliases.gperf"
+#line 686 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str877, ei_ebcdic924},
     {-1}, {-1}, {-1}, {-1},
-#line 516 "lib/generated/aliases.gperf"
+#line 517 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str882, ei_cp1163},
-#line 638 "lib/generated/aliases.gperf"
+#line 639 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str883, ei_ebcdic424},
-#line 499 "lib/generated/aliases.gperf"
+#line 500 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str884, ei_cp1124},
     {-1}, {-1}, {-1},
-#line 735 "lib/generated/aliases.gperf"
+#line 736 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str888, ei_ebcdic1142},
-#line 66 "lib/generated/aliases.gperf"
+#line 67 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str889, ei_utf7},
-#line 251 "lib/generated/aliases.gperf"
+#line 252 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str890, ei_iso8859_13},
-#line 98 "lib/generated/aliases.gperf"
+#line 99 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str891, ei_euc_cn},
     {-1}, {-1},
-#line 136 "lib/generated/aliases.gperf"
+#line 137 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str894, ei_cp950},
     {-1}, {-1}, {-1},
-#line 597 "lib/generated/aliases.gperf"
+#line 598 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str898, ei_ebcdic273},
     {-1},
-#line 527 "lib/generated/aliases.gperf"
+#line 528 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str900, ei_cp775},
-#line 672 "lib/generated/aliases.gperf"
+#line 673 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str901, ei_ebcdic880},
-#line 169 "lib/generated/aliases.gperf"
+#line 170 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str902, ei_iso8859_1},
     {-1}, {-1},
-#line 811 "lib/generated/aliases.gperf"
+#line 812 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str905, ei_ebcdic1156},
-#line 116 "lib/generated/aliases.gperf"
+#line 117 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str906, ei_gb18030_2022},
-#line 796 "lib/generated/aliases.gperf"
+#line 797 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str907, ei_ebcdic1149},
     {-1},
-#line 786 "lib/generated/aliases.gperf"
+#line 787 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str909, ei_ebcdic1148},
     {-1},
-#line 848 "lib/generated/aliases.gperf"
+#line 849 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str911, ei_tds565},
     {-1}, {-1},
-#line 775 "lib/generated/aliases.gperf"
+#line 776 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str914, ei_ebcdic1146},
     {-1},
-#line 100 "lib/generated/aliases.gperf"
+#line 101 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str916, ei_euc_cn},
-#line 497 "lib/generated/aliases.gperf"
+#line 498 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str917, ei_cp1046},
     {-1}, {-1},
-#line 415 "lib/generated/aliases.gperf"
+#line 416 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str920, ei_pt154},
     {-1},
-#line 704 "lib/generated/aliases.gperf"
+#line 705 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str922, ei_ebcdic1122},
-#line 556 "lib/generated/aliases.gperf"
+#line 557 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str923, ei_cp861},
     {-1}, {-1}, {-1},
-#line 34 "lib/generated/aliases.gperf"
+#line 35 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str927, ei_ucs2be},
-#line 581 "lib/generated/aliases.gperf"
+#line 582 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str928, ei_cp1125},
     {-1}, {-1}, {-1},
-#line 618 "lib/generated/aliases.gperf"
+#line 619 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str932, ei_ebcdic284},
     {-1}, {-1},
-#line 552 "lib/generated/aliases.gperf"
+#line 553 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str935, ei_cp860},
-#line 693 "lib/generated/aliases.gperf"
+#line 694 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str936, ei_ebcdic1026},
-#line 398 "lib/generated/aliases.gperf"
+#line 399 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str937, ei_mac_thai},
     {-1},
-#line 323 "lib/generated/aliases.gperf"
+#line 324 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str939, ei_cp1256},
-#line 81 "lib/generated/aliases.gperf"
+#line 82 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str940, ei_euc_jp},
-#line 226 "lib/generated/aliases.gperf"
+#line 227 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str941, ei_iso8859_8},
     {-1}, {-1},
-#line 360 "lib/generated/aliases.gperf"
+#line 361 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str944, ei_mac_centraleurope},
     {-1}, {-1}, {-1},
-#line 785 "lib/generated/aliases.gperf"
+#line 786 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str948, ei_ebcdic1148},
     {-1}, {-1}, {-1}, {-1},
-#line 109 "lib/generated/aliases.gperf"
+#line 110 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str953, ei_cp936},
     {-1}, {-1}, {-1},
-#line 528 "lib/generated/aliases.gperf"
+#line 529 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str957, ei_cp852},
     {-1}, {-1},
-#line 444 "lib/generated/aliases.gperf"
+#line 445 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str960, ei_tcvn},
-#line 800 "lib/generated/aliases.gperf"
+#line 801 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str961, ei_ebcdic1149},
-#line 495 "lib/generated/aliases.gperf"
+#line 496 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str962, ei_cp943},
     {-1}, {-1}, {-1}, {-1},
-#line 802 "lib/generated/aliases.gperf"
+#line 803 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str967, ei_ebcdic1153},
     {-1}, {-1}, {-1}, {-1},
-#line 130 "lib/generated/aliases.gperf"
+#line 131 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str972, ei_ces_big5},
     {-1}, {-1}, {-1},
-#line 751 "lib/generated/aliases.gperf"
+#line 752 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str976, ei_ebcdic1143},
-#line 770 "lib/generated/aliases.gperf"
+#line 771 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str977, ei_ebcdic1146},
     {-1}, {-1},
-#line 504 "lib/generated/aliases.gperf"
+#line 505 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str980, ei_cp1129},
-#line 353 "lib/generated/aliases.gperf"
+#line 354 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str981, ei_mac_roman},
     {-1},
-#line 530 "lib/generated/aliases.gperf"
+#line 531 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str983, ei_cp852},
     {-1},
-#line 615 "lib/generated/aliases.gperf"
+#line 616 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str985, ei_ebcdic282},
-#line 57 "lib/generated/aliases.gperf"
+#line 58 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str986, ei_utf32},
     {-1}, {-1}, {-1}, {-1},
-#line 288 "lib/generated/aliases.gperf"
+#line 289 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str991, ei_cp1250},
     {-1},
-#line 273 "lib/generated/aliases.gperf"
+#line 274 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str993, ei_koi8_r},
     {-1},
-#line 708 "lib/generated/aliases.gperf"
+#line 709 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str995, ei_ebcdic1123},
-#line 565 "lib/generated/aliases.gperf"
+#line 566 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str996, ei_cp864},
-#line 829 "lib/generated/aliases.gperf"
+#line 830 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str997, ei_ebcdic1166},
     {-1}, {-1},
-#line 577 "lib/generated/aliases.gperf"
+#line 578 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1000, ei_cp869},
-#line 305 "lib/generated/aliases.gperf"
+#line 306 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1001, ei_cp1253},
     {-1}, {-1},
-#line 750 "lib/generated/aliases.gperf"
+#line 751 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1004, ei_ebcdic1143},
     {-1}, {-1}, {-1}, {-1},
-#line 170 "lib/generated/aliases.gperf"
+#line 171 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1009, ei_iso8859_1},
     {-1}, {-1}, {-1},
-#line 388 "lib/generated/aliases.gperf"
+#line 389 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1013, ei_mac_turkish},
     {-1},
-#line 477 "lib/generated/aliases.gperf"
+#line 478 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1015, ei_gb2312},
-#line 769 "lib/generated/aliases.gperf"
+#line 770 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1016, ei_ebcdic1146},
     {-1}, {-1},
-#line 496 "lib/generated/aliases.gperf"
+#line 497 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1019, ei_cp1046},
-#line 421 "lib/generated/aliases.gperf"
+#line 422 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1020, ei_rk1048},
     {-1}, {-1}, {-1},
-#line 56 "lib/generated/aliases.gperf"
+#line 57 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1024, ei_utf16le},
     {-1}, {-1},
-#line 143 "lib/generated/aliases.gperf"
+#line 144 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1027, ei_euc_kr},
     {-1}, {-1},
-#line 172 "lib/generated/aliases.gperf"
+#line 173 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1030, ei_iso8859_1},
     {-1},
-#line 494 "lib/generated/aliases.gperf"
+#line 495 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1032, ei_cp943},
     {-1}, {-1},
-#line 405 "lib/generated/aliases.gperf"
+#line 406 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1035, ei_hp_roman8},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 203 "lib/generated/aliases.gperf"
+#line 204 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1042, ei_iso8859_5},
     {-1},
-#line 427 "lib/generated/aliases.gperf"
+#line 428 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1044, ei_cp1133},
     {-1}, {-1}, {-1}, {-1},
-#line 340 "lib/generated/aliases.gperf"
+#line 341 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1049, ei_cp862},
     {-1}, {-1}, {-1},
-#line 691 "lib/generated/aliases.gperf"
+#line 692 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1053, ei_ebcdic1026},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 515 "lib/generated/aliases.gperf"
+#line 516 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1059, ei_cp1163},
-#line 196 "lib/generated/aliases.gperf"
+#line 197 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1060, ei_iso8859_4},
     {-1}, {-1},
-#line 832 "lib/generated/aliases.gperf"
+#line 833 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1063, ei_ebcdic4971},
     {-1}, {-1}, {-1},
-#line 171 "lib/generated/aliases.gperf"
+#line 172 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1067, ei_iso8859_1},
     {-1}, {-1},
-#line 635 "lib/generated/aliases.gperf"
+#line 636 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1070, ei_ebcdic423},
     {-1},
-#line 84 "lib/generated/aliases.gperf"
+#line 85 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1072, ei_sjis},
     {-1}, {-1}, {-1},
-#line 817 "lib/generated/aliases.gperf"
+#line 818 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1076, ei_ebcdic1158},
-#line 514 "lib/generated/aliases.gperf"
+#line 515 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1077, ei_cp1163},
     {-1},
-#line 202 "lib/generated/aliases.gperf"
+#line 203 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1079, ei_iso8859_5},
     {-1},
-#line 368 "lib/generated/aliases.gperf"
+#line 369 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1081, ei_mac_croatian},
     {-1}, {-1}, {-1},
-#line 791 "lib/generated/aliases.gperf"
+#line 792 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1085, ei_ebcdic1148},
     {-1}, {-1}, {-1},
-#line 420 "lib/generated/aliases.gperf"
+#line 421 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1089, ei_rk1048},
-#line 428 "lib/generated/aliases.gperf"
+#line 429 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1090, ei_tis620},
     {-1},
-#line 408 "lib/generated/aliases.gperf"
+#line 409 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1092, ei_armscii_8},
     {-1},
-#line 429 "lib/generated/aliases.gperf"
+#line 430 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1094, ei_tis620},
     {-1},
-#line 282 "lib/generated/aliases.gperf"
+#line 283 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1096, ei_koi8_ru},
-#line 195 "lib/generated/aliases.gperf"
+#line 196 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1097, ei_iso8859_4},
-#line 180 "lib/generated/aliases.gperf"
+#line 181 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1098, ei_iso8859_2},
-#line 275 "lib/generated/aliases.gperf"
+#line 276 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1099, ei_koi8_r},
     {-1}, {-1},
-#line 101 "lib/generated/aliases.gperf"
+#line 102 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1102, ei_euc_cn},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 807 "lib/generated/aliases.gperf"
+#line 808 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1109, ei_ebcdic1155},
-#line 334 "lib/generated/aliases.gperf"
+#line 335 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1110, ei_cp1258},
     {-1},
-#line 518 "lib/generated/aliases.gperf"
+#line 519 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1112, ei_cp437},
-#line 330 "lib/generated/aliases.gperf"
+#line 331 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1113, ei_cp1257},
-#line 103 "lib/generated/aliases.gperf"
+#line 104 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1114, ei_euc_cn},
     {-1},
-#line 729 "lib/generated/aliases.gperf"
+#line 730 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1116, ei_ebcdic1141},
-#line 80 "lib/generated/aliases.gperf"
+#line 81 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1117, ei_euc_jp},
     {-1}, {-1},
-#line 45 "lib/generated/aliases.gperf"
+#line 46 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1120, ei_ucs4be},
     {-1},
-#line 721 "lib/generated/aliases.gperf"
+#line 722 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1122, ei_ebcdic1140},
     {-1},
-#line 151 "lib/generated/aliases.gperf"
+#line 152 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1124, ei_cp949},
     {-1}, {-1},
-#line 804 "lib/generated/aliases.gperf"
+#line 805 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1127, ei_ebcdic1154},
-#line 763 "lib/generated/aliases.gperf"
+#line 764 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1128, ei_ebcdic1145},
-#line 410 "lib/generated/aliases.gperf"
+#line 411 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1129, ei_georgian_ps},
-#line 381 "lib/generated/aliases.gperf"
+#line 382 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1130, ei_mac_ukraine},
-#line 533 "lib/generated/aliases.gperf"
+#line 534 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1131, ei_cp853},
     {-1},
-#line 377 "lib/generated/aliases.gperf"
+#line 378 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1133, ei_mac_cyrillic},
     {-1},
-#line 179 "lib/generated/aliases.gperf"
+#line 180 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1135, ei_iso8859_2},
     {-1},
-#line 287 "lib/generated/aliases.gperf"
+#line 288 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1137, ei_cp1250},
     {-1},
-#line 32 "lib/generated/aliases.gperf"
+#line 33 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1139, ei_ucs2be},
     {-1},
-#line 698 "lib/generated/aliases.gperf"
+#line 699 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1141, ei_ebcdic1047},
     {-1},
-#line 316 "lib/generated/aliases.gperf"
+#line 317 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1143, ei_cp1255},
-#line 60 "lib/generated/aliases.gperf"
+#line 61 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1144, ei_utf32be},
     {-1},
-#line 755 "lib/generated/aliases.gperf"
+#line 756 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1146, ei_ebcdic1144},
     {-1}, {-1}, {-1}, {-1},
-#line 643 "lib/generated/aliases.gperf"
+#line 644 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1151, ei_ebcdic425},
     {-1}, {-1}, {-1},
-#line 14 "lib/generated/aliases.gperf"
+#line 15 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1155, ei_ascii},
     {-1}, {-1},
-#line 230 "lib/generated/aliases.gperf"
+#line 231 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1158, ei_iso8859_8},
     {-1},
-#line 343 "lib/generated/aliases.gperf"
+#line 344 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1160, ei_cp862},
-#line 309 "lib/generated/aliases.gperf"
+#line 310 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1161, ei_cp1254},
     {-1}, {-1}, {-1}, {-1},
-#line 798 "lib/generated/aliases.gperf"
+#line 799 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1166, ei_ebcdic1149},
     {-1},
-#line 262 "lib/generated/aliases.gperf"
+#line 263 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1168, ei_iso8859_15},
     {-1}, {-1}, {-1},
-#line 537 "lib/generated/aliases.gperf"
+#line 538 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1172, ei_cp855},
     {-1},
-#line 259 "lib/generated/aliases.gperf"
+#line 260 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1174, ei_iso8859_14},
-#line 472 "lib/generated/aliases.gperf"
+#line 473 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1175, ei_iso646_cn},
     {-1},
-#line 43 "lib/generated/aliases.gperf"
+#line 44 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1177, ei_ucs4},
     {-1}, {-1}, {-1},
-#line 92 "lib/generated/aliases.gperf"
+#line 93 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1181, ei_iso2022_jp1},
-#line 91 "lib/generated/aliases.gperf"
+#line 92 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1182, ei_iso2022_jp},
-#line 95 "lib/generated/aliases.gperf"
+#line 96 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1183, ei_iso2022_jpms},
-#line 737 "lib/generated/aliases.gperf"
+#line 738 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1184, ei_ebcdic1142},
-#line 99 "lib/generated/aliases.gperf"
+#line 100 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1185, ei_euc_cn},
-#line 244 "lib/generated/aliases.gperf"
+#line 245 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1186, ei_iso8859_10},
     {-1}, {-1}, {-1},
-#line 264 "lib/generated/aliases.gperf"
+#line 265 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1190, ei_iso8859_15},
     {-1},
-#line 94 "lib/generated/aliases.gperf"
+#line 95 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1192, ei_iso2022_jp2},
     {-1},
-#line 150 "lib/generated/aliases.gperf"
+#line 151 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1194, ei_cp949},
-#line 229 "lib/generated/aliases.gperf"
+#line 230 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1195, ei_iso8859_8},
-#line 30 "lib/generated/aliases.gperf"
+#line 31 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1196, ei_ucs2},
     {-1}, {-1},
-#line 298 "lib/generated/aliases.gperf"
+#line 299 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1199, ei_cp1252},
-#line 623 "lib/generated/aliases.gperf"
+#line 624 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1200, ei_ebcdic285},
     {-1}, {-1}, {-1}, {-1},
-#line 90 "lib/generated/aliases.gperf"
+#line 91 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1205, ei_iso2022_jp},
-#line 162 "lib/generated/aliases.gperf"
+#line 163 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1206, ei_iso8859_1},
-#line 247 "lib/generated/aliases.gperf"
+#line 248 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1207, ei_iso8859_11},
     {-1},
-#line 680 "lib/generated/aliases.gperf"
+#line 681 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1209, ei_ebcdic924},
-#line 352 "lib/generated/aliases.gperf"
+#line 353 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1210, ei_mac_roman},
-#line 430 "lib/generated/aliases.gperf"
+#line 431 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1211, ei_tis620},
-#line 127 "lib/generated/aliases.gperf"
+#line 128 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1212, ei_euc_tw},
-#line 241 "lib/generated/aliases.gperf"
+#line 242 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1213, ei_iso8859_10},
     {-1}, {-1}, {-1}, {-1},
-#line 197 "lib/generated/aliases.gperf"
+#line 198 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1218, ei_iso8859_5},
-#line 260 "lib/generated/aliases.gperf"
+#line 261 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1219, ei_iso8859_15},
     {-1},
-#line 426 "lib/generated/aliases.gperf"
+#line 427 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1221, ei_cp1133},
-#line 607 "lib/generated/aliases.gperf"
+#line 608 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1222, ei_ebcdic278},
-#line 476 "lib/generated/aliases.gperf"
+#line 477 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1223, ei_gb2312},
     {-1},
-#line 816 "lib/generated/aliases.gperf"
+#line 817 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1225, ei_ebcdic1158},
-#line 212 "lib/generated/aliases.gperf"
+#line 213 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1226, ei_iso8859_6},
     {-1}, {-1},
-#line 157 "lib/generated/aliases.gperf"
+#line 158 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1229, ei_iso2022_kr},
-#line 207 "lib/generated/aliases.gperf"
+#line 208 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1230, ei_iso8859_6},
     {-1}, {-1},
-#line 845 "lib/generated/aliases.gperf"
+#line 846 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1233, ei_iso2022_jp3},
     {-1}, {-1},
-#line 189 "lib/generated/aliases.gperf"
+#line 190 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1236, ei_iso8859_4},
-#line 254 "lib/generated/aliases.gperf"
+#line 255 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1237, ei_iso8859_14},
-#line 183 "lib/generated/aliases.gperf"
+#line 184 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1238, ei_iso8859_3},
     {-1}, {-1},
-#line 469 "lib/generated/aliases.gperf"
+#line 470 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1241, ei_jisx0212},
     {-1}, {-1},
-#line 787 "lib/generated/aliases.gperf"
+#line 788 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1244, ei_ebcdic1148},
     {-1}, {-1}, {-1},
-#line 184 "lib/generated/aliases.gperf"
+#line 185 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1248, ei_iso8859_3},
-#line 93 "lib/generated/aliases.gperf"
+#line 94 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1249, ei_iso2022_jp2},
-#line 484 "lib/generated/aliases.gperf"
+#line 485 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1250, ei_ksc5601},
-#line 147 "lib/generated/aliases.gperf"
+#line 148 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1251, ei_euc_kr},
     {-1}, {-1},
-#line 596 "lib/generated/aliases.gperf"
+#line 597 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1254, ei_ebcdic273},
     {-1},
-#line 526 "lib/generated/aliases.gperf"
+#line 527 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1256, ei_cp775},
     {-1},
-#line 380 "lib/generated/aliases.gperf"
+#line 381 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1258, ei_mac_ukraine},
-#line 333 "lib/generated/aliases.gperf"
+#line 334 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1259, ei_cp1258},
-#line 115 "lib/generated/aliases.gperf"
+#line 116 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1260, ei_gb18030_2022},
     {-1},
-#line 490 "lib/generated/aliases.gperf"
+#line 491 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1262, ei_cp922},
-#line 211 "lib/generated/aliases.gperf"
+#line 212 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1263, ei_iso8859_6},
-#line 569 "lib/generated/aliases.gperf"
+#line 570 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1264, ei_cp865},
     {-1},
-#line 407 "lib/generated/aliases.gperf"
+#line 408 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1266, ei_nextstep},
-#line 376 "lib/generated/aliases.gperf"
+#line 377 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1267, ei_mac_cyrillic},
-#line 365 "lib/generated/aliases.gperf"
+#line 366 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1268, ei_mac_iceland},
     {-1}, {-1}, {-1},
-#line 679 "lib/generated/aliases.gperf"
+#line 680 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1272, ei_ebcdic905},
     {-1},
-#line 173 "lib/generated/aliases.gperf"
+#line 174 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1274, ei_iso8859_2},
     {-1}, {-1},
-#line 121 "lib/generated/aliases.gperf"
+#line 122 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1277, ei_hz},
     {-1},
-#line 122 "lib/generated/aliases.gperf"
+#line 123 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1279, ei_hz},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 460 "lib/generated/aliases.gperf"
+#line 461 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1286, ei_jisx0208},
-#line 16 "lib/generated/aliases.gperf"
+#line 17 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1287, ei_ascii},
-#line 315 "lib/generated/aliases.gperf"
+#line 316 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1288, ei_cp1255},
     {-1}, {-1},
-#line 478 "lib/generated/aliases.gperf"
+#line 479 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1291, ei_gb2312},
     {-1},
-#line 810 "lib/generated/aliases.gperf"
+#line 811 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1293, ei_ebcdic1156},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 349 "lib/generated/aliases.gperf"
+#line 350 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1300, ei_cp1131},
-#line 745 "lib/generated/aliases.gperf"
+#line 746 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1301, ei_ebcdic1143},
-#line 549 "lib/generated/aliases.gperf"
+#line 550 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1302, ei_cp858},
     {-1},
-#line 253 "lib/generated/aliases.gperf"
+#line 254 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1304, ei_iso8859_13},
-#line 375 "lib/generated/aliases.gperf"
+#line 376 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1305, ei_mac_cyrillic},
-#line 710 "lib/generated/aliases.gperf"
+#line 711 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1306, ei_ebcdic1130},
     {-1}, {-1},
-#line 148 "lib/generated/aliases.gperf"
+#line 149 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1309, ei_euc_kr},
     {-1}, {-1},
-#line 771 "lib/generated/aliases.gperf"
+#line 772 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1312, ei_ebcdic1146},
-#line 780 "lib/generated/aliases.gperf"
+#line 781 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1313, ei_ebcdic1147},
-#line 544 "lib/generated/aliases.gperf"
+#line 545 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1314, ei_cp857},
     {-1}, {-1}, {-1},
-#line 799 "lib/generated/aliases.gperf"
+#line 800 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1318, ei_ebcdic1149},
-#line 539 "lib/generated/aliases.gperf"
+#line 540 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1319, ei_cp855},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 321 "lib/generated/aliases.gperf"
+#line 322 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1327, ei_cp1256},
-#line 217 "lib/generated/aliases.gperf"
+#line 218 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1328, ei_iso8859_7},
     {-1}, {-1}, {-1},
-#line 119 "lib/generated/aliases.gperf"
+#line 120 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1332, ei_iso2022_cn_ext},
     {-1},
-#line 224 "lib/generated/aliases.gperf"
+#line 225 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1334, ei_iso8859_8},
     {-1}, {-1},
-#line 503 "lib/generated/aliases.gperf"
+#line 504 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1337, ei_cp1129},
     {-1}, {-1},
-#line 744 "lib/generated/aliases.gperf"
+#line 745 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1340, ei_ebcdic1143},
-#line 402 "lib/generated/aliases.gperf"
+#line 403 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1341, ei_hp_roman8},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 847 "lib/generated/aliases.gperf"
+#line 848 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1350, ei_tds565},
     {-1}, {-1},
-#line 470 "lib/generated/aliases.gperf"
+#line 471 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1353, ei_jisx0212},
     {-1}, {-1}, {-1},
-#line 257 "lib/generated/aliases.gperf"
+#line 258 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1357, ei_iso8859_14},
-#line 815 "lib/generated/aliases.gperf"
+#line 816 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1358, ei_ebcdic1157},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 784 "lib/generated/aliases.gperf"
+#line 785 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1367, ei_ebcdic1147},
-#line 713 "lib/generated/aliases.gperf"
+#line 714 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1368, ei_ebcdic1132},
-#line 663 "lib/generated/aliases.gperf"
+#line 664 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1369, ei_ebcdic871},
     {-1},
-#line 674 "lib/generated/aliases.gperf"
+#line 675 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1371, ei_ebcdic880},
     {-1}, {-1},
-#line 707 "lib/generated/aliases.gperf"
+#line 708 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1374, ei_ebcdic1123},
     {-1},
-#line 86 "lib/generated/aliases.gperf"
+#line 87 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1376, ei_sjis},
-#line 112 "lib/generated/aliases.gperf"
+#line 113 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1377, ei_gb18030_2022},
-#line 156 "lib/generated/aliases.gperf"
+#line 157 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1378, ei_iso2022_kr},
-#line 33 "lib/generated/aliases.gperf"
+#line 34 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1379, ei_ucs2be},
-#line 654 "lib/generated/aliases.gperf"
+#line 655 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1380, ei_ebcdic838},
-#line 657 "lib/generated/aliases.gperf"
+#line 658 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1381, ei_ebcdic870},
     {-1}, {-1},
-#line 232 "lib/generated/aliases.gperf"
+#line 233 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1384, ei_iso8859_8},
     {-1}, {-1}, {-1},
-#line 483 "lib/generated/aliases.gperf"
+#line 484 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1388, ei_ksc5601},
-#line 168 "lib/generated/aliases.gperf"
+#line 169 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1389, ei_iso8859_1},
-#line 434 "lib/generated/aliases.gperf"
+#line 435 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1390, ei_tis620},
     {-1}, {-1},
-#line 272 "lib/generated/aliases.gperf"
+#line 273 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1393, ei_iso8859_16},
-#line 210 "lib/generated/aliases.gperf"
+#line 211 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1394, ei_iso8859_6},
-#line 238 "lib/generated/aliases.gperf"
+#line 239 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1395, ei_iso8859_9},
-#line 201 "lib/generated/aliases.gperf"
+#line 202 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1396, ei_iso8859_5},
     {-1},
-#line 850 "lib/generated/aliases.gperf"
+#line 851 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1398, ei_atarist},
-#line 560 "lib/generated/aliases.gperf"
+#line 561 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1399, ei_cp861},
-#line 505 "lib/generated/aliases.gperf"
+#line 506 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1400, ei_cp1161},
-#line 452 "lib/generated/aliases.gperf"
+#line 453 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1401, ei_iso646_jp},
-#line 204 "lib/generated/aliases.gperf"
+#line 205 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1402, ei_iso8859_6},
-#line 267 "lib/generated/aliases.gperf"
+#line 268 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1403, ei_iso8859_16},
-#line 194 "lib/generated/aliases.gperf"
+#line 195 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1404, ei_iso8859_4},
-#line 554 "lib/generated/aliases.gperf"
+#line 555 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1405, ei_cp860},
-#line 819 "lib/generated/aliases.gperf"
+#line 820 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1406, ei_ebcdic1160},
-#line 833 "lib/generated/aliases.gperf"
+#line 834 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1407, ei_ebcdic4971},
     {-1}, {-1}, {-1},
-#line 571 "lib/generated/aliases.gperf"
+#line 572 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1411, ei_cp865},
-#line 825 "lib/generated/aliases.gperf"
+#line 826 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1412, ei_ebcdic1165},
     {-1}, {-1},
-#line 22 "lib/generated/aliases.gperf"
+#line 23 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1415, ei_ascii},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 231 "lib/generated/aliases.gperf"
+#line 232 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1421, ei_iso8859_8},
     {-1},
-#line 178 "lib/generated/aliases.gperf"
+#line 179 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1423, ei_iso8859_2},
     {-1},
-#line 71 "lib/generated/aliases.gperf"
+#line 72 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1425, ei_ucs4internal},
     {-1}, {-1}, {-1},
-#line 566 "lib/generated/aliases.gperf"
+#line 567 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1429, ei_cp864},
-#line 822 "lib/generated/aliases.gperf"
+#line 823 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1430, ei_ebcdic1164},
-#line 453 "lib/generated/aliases.gperf"
+#line 454 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1431, ei_jisx0201},
     {-1}, {-1}, {-1},
-#line 551 "lib/generated/aliases.gperf"
+#line 552 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1435, ei_cp858},
     {-1},
-#line 432 "lib/generated/aliases.gperf"
+#line 433 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1437, ei_tis620},
     {-1},
-#line 55 "lib/generated/aliases.gperf"
+#line 56 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1439, ei_utf16le},
-#line 431 "lib/generated/aliases.gperf"
+#line 432 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1440, ei_tis620},
     {-1}, {-1}, {-1},
-#line 69 "lib/generated/aliases.gperf"
+#line 70 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1444, ei_ucs2internal},
     {-1},
-#line 677 "lib/generated/aliases.gperf"
+#line 678 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1446, ei_ebcdic905},
-#line 422 "lib/generated/aliases.gperf"
+#line 423 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1447, ei_rk1048},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1},
-#line 394 "lib/generated/aliases.gperf"
+#line 395 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1460, ei_mac_arabic},
     {-1},
-#line 54 "lib/generated/aliases.gperf"
+#line 55 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1462, ei_utf16be},
-#line 794 "lib/generated/aliases.gperf"
+#line 795 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1463, ei_ebcdic1149},
     {-1}, {-1},
-#line 603 "lib/generated/aliases.gperf"
+#line 604 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1466, ei_ebcdic277},
     {-1},
-#line 509 "lib/generated/aliases.gperf"
+#line 510 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1468, ei_cp1162},
     {-1},
-#line 359 "lib/generated/aliases.gperf"
+#line 360 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1470, ei_mac_centraleurope},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 64 "lib/generated/aliases.gperf"
+#line 65 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1477, ei_utf7},
     {-1}, {-1}, {-1}, {-1},
-#line 310 "lib/generated/aliases.gperf"
+#line 311 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1482, ei_cp1254},
-#line 386 "lib/generated/aliases.gperf"
+#line 387 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1483, ei_mac_turkish},
     {-1}, {-1}, {-1},
-#line 246 "lib/generated/aliases.gperf"
+#line 247 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1487, ei_iso8859_10},
-#line 87 "lib/generated/aliases.gperf"
+#line 88 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1488, ei_cp932},
     {-1}, {-1}, {-1}, {-1},
-#line 35 "lib/generated/aliases.gperf"
+#line 36 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1493, ei_ucs2be},
     {-1}, {-1},
-#line 465 "lib/generated/aliases.gperf"
+#line 466 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1496, ei_jisx0212},
     {-1}, {-1}, {-1}, {-1},
-#line 82 "lib/generated/aliases.gperf"
+#line 83 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1501, ei_sjis},
-#line 793 "lib/generated/aliases.gperf"
+#line 794 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1502, ei_ebcdic1149},
     {-1}, {-1}, {-1}, {-1},
-#line 592 "lib/generated/aliases.gperf"
+#line 593 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1507, ei_ebcdic037},
-#line 75 "lib/generated/aliases.gperf"
+#line 76 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1508, ei_euc_jp},
-#line 682 "lib/generated/aliases.gperf"
+#line 683 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1509, ei_ebcdic924},
     {-1},
-#line 485 "lib/generated/aliases.gperf"
+#line 486 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1511, ei_ksc5601},
     {-1},
-#line 382 "lib/generated/aliases.gperf"
+#line 383 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1513, ei_mac_greek},
-#line 304 "lib/generated/aliases.gperf"
+#line 305 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1514, ei_cp1253},
-#line 466 "lib/generated/aliases.gperf"
+#line 467 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1515, ei_jisx0212},
     {-1}, {-1}, {-1},
-#line 520 "lib/generated/aliases.gperf"
+#line 521 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1519, ei_cp437},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 252 "lib/generated/aliases.gperf"
+#line 253 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1526, ei_iso8859_13},
     {-1},
-#line 281 "lib/generated/aliases.gperf"
+#line 282 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1528, ei_koi8_ru},
-#line 73 "lib/generated/aliases.gperf"
+#line 74 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1529, ei_c99},
     {-1}, {-1}, {-1}, {-1},
-#line 140 "lib/generated/aliases.gperf"
+#line 141 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1534, ei_big5hkscs2008},
     {-1},
-#line 502 "lib/generated/aliases.gperf"
+#line 503 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1536, ei_cp1129},
-#line 15 "lib/generated/aliases.gperf"
+#line 16 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1537, ei_ascii},
     {-1},
-#line 411 "lib/generated/aliases.gperf"
+#line 412 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1539, ei_koi8_t},
     {-1}, {-1},
-#line 846 "lib/generated/aliases.gperf"
+#line 847 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1542, ei_big5_2003},
-#line 355 "lib/generated/aliases.gperf"
+#line 356 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1543, ei_mac_roman},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 188 "lib/generated/aliases.gperf"
+#line 189 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1550, ei_iso8859_3},
-#line 814 "lib/generated/aliases.gperf"
+#line 815 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1551, ei_ebcdic1157},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 843 "lib/generated/aliases.gperf"
+#line 844 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1557, ei_shift_jisx0213},
     {-1},
-#line 457 "lib/generated/aliases.gperf"
+#line 458 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1559, ei_jisx0208},
-#line 783 "lib/generated/aliases.gperf"
+#line 784 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1560, ei_ebcdic1147},
     {-1},
-#line 480 "lib/generated/aliases.gperf"
+#line 481 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1562, ei_isoir165},
-#line 697 "lib/generated/aliases.gperf"
+#line 698 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1563, ei_ebcdic1047},
     {-1},
-#line 696 "lib/generated/aliases.gperf"
+#line 697 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1565, ei_ebcdic1047},
     {-1},
-#line 487 "lib/generated/aliases.gperf"
+#line 488 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1567, ei_cp856},
     {-1},
-#line 425 "lib/generated/aliases.gperf"
+#line 426 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1569, ei_cp1133},
     {-1}, {-1},
-#line 782 "lib/generated/aliases.gperf"
+#line 783 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1572, ei_ebcdic1147},
     {-1}, {-1},
-#line 113 "lib/generated/aliases.gperf"
+#line 114 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1575, ei_gb18030_2022},
-#line 256 "lib/generated/aliases.gperf"
+#line 257 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1576, ei_iso8859_14},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 329 "lib/generated/aliases.gperf"
+#line 330 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1585, ei_cp1257},
     {-1},
-#line 187 "lib/generated/aliases.gperf"
+#line 188 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1587, ei_iso8859_3},
     {-1}, {-1},
-#line 263 "lib/generated/aliases.gperf"
+#line 264 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1590, ei_iso8859_15},
-#line 482 "lib/generated/aliases.gperf"
+#line 483 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1591, ei_ksc5601},
     {-1},
-#line 424 "lib/generated/aliases.gperf"
+#line 425 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1593, ei_mulelao},
     {-1},
-#line 347 "lib/generated/aliases.gperf"
+#line 348 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1595, ei_cp866},
-#line 828 "lib/generated/aliases.gperf"
+#line 829 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1596, ei_ebcdic1166},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 23 "lib/generated/aliases.gperf"
+#line 24 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1602, ei_ascii},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 633 "lib/generated/aliases.gperf"
+#line 634 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1608, ei_ebcdic423},
     {-1}, {-1}, {-1},
-#line 718 "lib/generated/aliases.gperf"
+#line 719 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1612, ei_ebcdic1137},
-#line 208 "lib/generated/aliases.gperf"
+#line 209 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1613, ei_iso8859_6},
-#line 595 "lib/generated/aliases.gperf"
+#line 596 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1614, ei_ebcdic273},
-#line 758 "lib/generated/aliases.gperf"
+#line 759 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1615, ei_ebcdic1144},
     {-1},
-#line 801 "lib/generated/aliases.gperf"
+#line 802 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1617, ei_ebcdic1153},
     {-1},
-#line 631 "lib/generated/aliases.gperf"
+#line 632 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1619, ei_ebcdic297},
     {-1},
-#line 105 "lib/generated/aliases.gperf"
+#line 106 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1621, ei_euc_cn},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 532 "lib/generated/aliases.gperf"
+#line 533 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1629, ei_cp853},
     {-1},
-#line 125 "lib/generated/aliases.gperf"
+#line 126 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1631, ei_euc_tw},
-#line 681 "lib/generated/aliases.gperf"
+#line 682 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1632, ei_ebcdic924},
     {-1}, {-1},
-#line 61 "lib/generated/aliases.gperf"
+#line 62 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1635, ei_utf32le},
-#line 746 "lib/generated/aliases.gperf"
+#line 747 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1636, ei_ebcdic1143},
-#line 161 "lib/generated/aliases.gperf"
+#line 162 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1637, ei_dec_hanyu},
     {-1}, {-1}, {-1},
-#line 523 "lib/generated/aliases.gperf"
+#line 524 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1641, ei_cp737},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 243 "lib/generated/aliases.gperf"
+#line 244 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1647, ei_iso8859_10},
     {-1},
-#line 186 "lib/generated/aliases.gperf"
+#line 187 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1649, ei_iso8859_3},
     {-1}, {-1},
-#line 227 "lib/generated/aliases.gperf"
+#line 228 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1652, ei_iso8859_8},
-#line 409 "lib/generated/aliases.gperf"
+#line 410 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1653, ei_georgian_academy},
     {-1}, {-1}, {-1}, {-1},
-#line 366 "lib/generated/aliases.gperf"
+#line 367 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1658, ei_mac_croatian},
-#line 345 "lib/generated/aliases.gperf"
+#line 346 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1659, ei_cp866},
     {-1},
-#line 291 "lib/generated/aliases.gperf"
+#line 292 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1661, ei_cp1251},
     {-1}, {-1},
-#line 285 "lib/generated/aliases.gperf"
+#line 286 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1664, ei_cp1250},
     {-1}, {-1},
-#line 314 "lib/generated/aliases.gperf"
+#line 315 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1667, ei_cp1255},
     {-1}, {-1}, {-1}, {-1},
-#line 265 "lib/generated/aliases.gperf"
+#line 266 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1672, ei_iso8859_15},
     {-1}, {-1},
-#line 206 "lib/generated/aliases.gperf"
+#line 207 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1675, ei_iso8859_6},
-#line 308 "lib/generated/aliases.gperf"
+#line 309 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1676, ei_cp1254},
     {-1}, {-1}, {-1}, {-1},
-#line 142 "lib/generated/aliases.gperf"
+#line 143 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1681, ei_euc_kr},
     {-1}, {-1}, {-1},
-#line 653 "lib/generated/aliases.gperf"
+#line 654 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1685, ei_ebcdic838},
-#line 39 "lib/generated/aliases.gperf"
+#line 40 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1686, ei_ucs2le},
     {-1}, {-1}, {-1},
-#line 364 "lib/generated/aliases.gperf"
+#line 365 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1690, ei_mac_iceland},
     {-1}, {-1}, {-1}, {-1},
-#line 297 "lib/generated/aliases.gperf"
+#line 298 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1695, ei_cp1252},
-#line 435 "lib/generated/aliases.gperf"
+#line 436 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1696, ei_tis620},
     {-1},
-#line 774 "lib/generated/aliases.gperf"
+#line 775 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1698, ei_ebcdic1146},
-#line 542 "lib/generated/aliases.gperf"
+#line 543 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1699, ei_cp857},
     {-1},
-#line 844 "lib/generated/aliases.gperf"
+#line 845 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1701, ei_iso2022_jp3},
     {-1},
-#line 834 "lib/generated/aliases.gperf"
+#line 835 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1703, ei_ebcdic12712},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 668 "lib/generated/aliases.gperf"
+#line 669 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1710, ei_ebcdic875},
     {-1},
-#line 240 "lib/generated/aliases.gperf"
+#line 241 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1712, ei_iso8859_9},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 561 "lib/generated/aliases.gperf"
+#line 562 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1721, ei_cp863},
     {-1},
-#line 218 "lib/generated/aliases.gperf"
+#line 219 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1723, ei_iso8859_7},
-#line 403 "lib/generated/aliases.gperf"
+#line 404 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1724, ei_hp_roman8},
-#line 332 "lib/generated/aliases.gperf"
+#line 333 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1725, ei_cp1258},
-#line 181 "lib/generated/aliases.gperf"
+#line 182 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1726, ei_iso8859_3},
-#line 248 "lib/generated/aliases.gperf"
+#line 249 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1727, ei_iso8859_13},
     {-1}, {-1}, {-1},
-#line 78 "lib/generated/aliases.gperf"
+#line 79 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1731, ei_euc_jp},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 837 "lib/generated/aliases.gperf"
+#line 838 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1737, ei_ebcdic16804},
-#line 545 "lib/generated/aliases.gperf"
+#line 546 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1738, ei_cp858},
-#line 437 "lib/generated/aliases.gperf"
+#line 438 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1739, ei_cp874},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 63 "lib/generated/aliases.gperf"
+#line 64 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1745, ei_utf7},
-#line 547 "lib/generated/aliases.gperf"
+#line 548 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1746, ei_cp858},
     {-1}, {-1},
-#line 239 "lib/generated/aliases.gperf"
+#line 240 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1749, ei_iso8859_9},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 278 "lib/generated/aliases.gperf"
+#line 279 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1758, ei_koi8_u},
-#line 320 "lib/generated/aliases.gperf"
+#line 321 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1759, ei_cp1256},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 106 "lib/generated/aliases.gperf"
+#line 107 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1776, ei_ces_gbk},
     {-1}, {-1},
-#line 249 "lib/generated/aliases.gperf"
+#line 250 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1779, ei_iso8859_13},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 85 "lib/generated/aliases.gperf"
+#line 86 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1791, ei_sjis},
-#line 449 "lib/generated/aliases.gperf"
+#line 450 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1792, ei_iso646_jp},
     {-1}, {-1},
-#line 17 "lib/generated/aliases.gperf"
+#line 18 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1795, ei_ascii},
-#line 475 "lib/generated/aliases.gperf"
+#line 476 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1796, ei_iso646_cn},
     {-1},
-#line 795 "lib/generated/aliases.gperf"
+#line 796 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1798, ei_ebcdic1149},
-#line 486 "lib/generated/aliases.gperf"
+#line 487 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1799, ei_ksc5601},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 717 "lib/generated/aliases.gperf"
+#line 718 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1805, ei_ebcdic1137},
     {-1}, {-1}, {-1}, {-1},
-#line 467 "lib/generated/aliases.gperf"
+#line 468 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1810, ei_jisx0212},
-#line 593 "lib/generated/aliases.gperf"
+#line 594 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1811, ei_ebcdic037},
     {-1}, {-1}, {-1},
-#line 591 "lib/generated/aliases.gperf"
+#line 592 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1815, ei_ebcdic037},
     {-1}, {-1}, {-1},
-#line 31 "lib/generated/aliases.gperf"
+#line 32 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1819, ei_ucs2},
     {-1}, {-1},
-#line 602 "lib/generated/aliases.gperf"
+#line 603 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1822, ei_ebcdic277},
     {-1}, {-1}, {-1}, {-1},
-#line 535 "lib/generated/aliases.gperf"
+#line 536 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1827, ei_cp853},
     {-1},
-#line 18 "lib/generated/aliases.gperf"
+#line 19 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1829, ei_ascii},
     {-1}, {-1},
-#line 250 "lib/generated/aliases.gperf"
+#line 251 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1832, ei_iso8859_13},
     {-1}, {-1},
-#line 74 "lib/generated/aliases.gperf"
+#line 75 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1835, ei_java},
     {-1}, {-1},
-#line 446 "lib/generated/aliases.gperf"
+#line 447 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1838, ei_tcvn},
     {-1}, {-1}, {-1}, {-1},
-#line 459 "lib/generated/aliases.gperf"
+#line 460 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1843, ei_jisx0208},
     {-1},
-#line 665 "lib/generated/aliases.gperf"
+#line 666 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1845, ei_ebcdic871},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 661 "lib/generated/aliases.gperf"
+#line 662 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1851, ei_ebcdic870},
-#line 371 "lib/generated/aliases.gperf"
+#line 372 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1852, ei_mac_romania},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 664 "lib/generated/aliases.gperf"
+#line 665 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1864, ei_ebcdic871},
     {-1},
-#line 587 "lib/generated/aliases.gperf"
+#line 588 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1866, ei_ebcdic037},
     {-1}, {-1},
-#line 778 "lib/generated/aliases.gperf"
+#line 779 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1869, ei_ebcdic1147},
     {-1},
-#line 445 "lib/generated/aliases.gperf"
+#line 446 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1871, ei_tcvn},
     {-1}, {-1},
-#line 454 "lib/generated/aliases.gperf"
+#line 455 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1874, ei_jisx0201},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 590 "lib/generated/aliases.gperf"
+#line 591 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1881, ei_ebcdic037},
-#line 660 "lib/generated/aliases.gperf"
+#line 661 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1882, ei_ebcdic870},
-#line 53 "lib/generated/aliases.gperf"
+#line 54 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1883, ei_utf16be},
     {-1}, {-1}, {-1}, {-1},
-#line 233 "lib/generated/aliases.gperf"
+#line 234 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1888, ei_iso8859_9},
-#line 700 "lib/generated/aliases.gperf"
+#line 701 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1889, ei_ebcdic1097},
     {-1}, {-1}, {-1},
-#line 242 "lib/generated/aliases.gperf"
+#line 243 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1893, ei_iso8859_10},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 378 "lib/generated/aliases.gperf"
+#line 379 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1902, ei_mac_ukraine},
-#line 221 "lib/generated/aliases.gperf"
+#line 222 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1903, ei_iso8859_7},
-#line 144 "lib/generated/aliases.gperf"
+#line 145 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1904, ei_euc_kr},
     {-1}, {-1}, {-1},
-#line 777 "lib/generated/aliases.gperf"
+#line 778 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1908, ei_ebcdic1147},
     {-1},
-#line 280 "lib/generated/aliases.gperf"
+#line 281 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1910, ei_koi8_ru},
-#line 695 "lib/generated/aliases.gperf"
+#line 696 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1911, ei_ebcdic1047},
     {-1}, {-1}, {-1},
-#line 493 "lib/generated/aliases.gperf"
+#line 494 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1915, ei_cp943},
     {-1}, {-1}, {-1},
-#line 563 "lib/generated/aliases.gperf"
+#line 564 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1919, ei_cp863},
-#line 513 "lib/generated/aliases.gperf"
+#line 514 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1920, ei_cp1163},
-#line 303 "lib/generated/aliases.gperf"
+#line 304 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1921, ei_cp1253},
     {-1}, {-1}, {-1},
-#line 198 "lib/generated/aliases.gperf"
+#line 199 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1925, ei_iso8859_5},
-#line 261 "lib/generated/aliases.gperf"
+#line 262 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1926, ei_iso8859_15},
     {-1}, {-1}, {-1},
-#line 228 "lib/generated/aliases.gperf"
+#line 229 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1930, ei_iso8859_8},
     {-1},
-#line 358 "lib/generated/aliases.gperf"
+#line 359 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1932, ei_mac_centraleurope},
     {-1},
-#line 190 "lib/generated/aliases.gperf"
+#line 191 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1934, ei_iso8859_4},
-#line 255 "lib/generated/aliases.gperf"
+#line 256 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1935, ei_iso8859_14},
-#line 209 "lib/generated/aliases.gperf"
+#line 210 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1936, ei_iso8859_6},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 268 "lib/generated/aliases.gperf"
+#line 269 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1954, ei_iso8859_16},
     {-1},
-#line 831 "lib/generated/aliases.gperf"
+#line 832 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1956, ei_ebcdic4971},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 165 "lib/generated/aliases.gperf"
+#line 166 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1965, ei_iso8859_1},
     {-1}, {-1}, {-1},
-#line 632 "lib/generated/aliases.gperf"
+#line 633 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1969, ei_ebcdic297},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 473 "lib/generated/aliases.gperf"
+#line 474 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1975, ei_iso646_cn},
     {-1}, {-1}, {-1},
-#line 630 "lib/generated/aliases.gperf"
+#line 631 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1979, ei_ebcdic297},
     {-1}, {-1}, {-1},
-#line 225 "lib/generated/aliases.gperf"
+#line 226 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1983, ei_iso8859_8},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 842 "lib/generated/aliases.gperf"
+#line 843 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1989, ei_shift_jisx0213},
     {-1}, {-1},
-#line 652 "lib/generated/aliases.gperf"
+#line 653 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str1992, ei_ebcdic838},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 673 "lib/generated/aliases.gperf"
+#line 674 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2008, ei_ebcdic880},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 72 "lib/generated/aliases.gperf"
+#line 73 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2020, ei_ucs4swapped},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 363 "lib/generated/aliases.gperf"
+#line 364 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2026, ei_mac_iceland},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1},
-#line 70 "lib/generated/aliases.gperf"
+#line 71 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2039, ei_ucs2swapped},
-#line 463 "lib/generated/aliases.gperf"
+#line 464 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2040, ei_jisx0208},
-#line 65 "lib/generated/aliases.gperf"
+#line 66 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2041, ei_utf7},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 522 "lib/generated/aliases.gperf"
+#line 523 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2048, ei_cp737},
     {-1}, {-1},
-#line 362 "lib/generated/aliases.gperf"
+#line 363 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2051, ei_mac_iceland},
     {-1}, {-1}, {-1}, {-1},
-#line 274 "lib/generated/aliases.gperf"
+#line 275 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2056, ei_koi8_r},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 573 "lib/generated/aliases.gperf"
+#line 574 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2063, ei_cp869},
     {-1}, {-1},
-#line 111 "lib/generated/aliases.gperf"
+#line 112 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2066, ei_gb18030_2005},
     {-1}, {-1},
-#line 841 "lib/generated/aliases.gperf"
+#line 842 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2069, ei_euc_jisx0213},
     {-1}, {-1}, {-1},
-#line 448 "lib/generated/aliases.gperf"
+#line 449 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2073, ei_iso646_jp},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 59 "lib/generated/aliases.gperf"
+#line 60 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2079, ei_utf32be},
     {-1},
-#line 576 "lib/generated/aliases.gperf"
+#line 577 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2081, ei_cp869},
-#line 416 "lib/generated/aliases.gperf"
+#line 417 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2082, ei_pt154},
     {-1}, {-1},
-#line 471 "lib/generated/aliases.gperf"
+#line 472 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2085, ei_iso646_cn},
     {-1}, {-1}, {-1}, {-1},
-#line 131 "lib/generated/aliases.gperf"
+#line 132 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2090, ei_ces_big5},
     {-1}, {-1}, {-1},
-#line 114 "lib/generated/aliases.gperf"
+#line 115 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2094, ei_gb18030_2022},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 458 "lib/generated/aliases.gperf"
+#line 459 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2100, ei_jisx0208},
-#line 399 "lib/generated/aliases.gperf"
+#line 400 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2101, ei_mac_thai},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 220 "lib/generated/aliases.gperf"
+#line 221 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2110, ei_iso8859_7},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 223 "lib/generated/aliases.gperf"
+#line 224 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2118, ei_iso8859_7},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 102 "lib/generated/aliases.gperf"
+#line 103 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2127, ei_euc_cn},
     {-1}, {-1},
-#line 322 "lib/generated/aliases.gperf"
+#line 323 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2130, ei_cp1256},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 594 "lib/generated/aliases.gperf"
+#line 595 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2137, ei_ebcdic273},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 519 "lib/generated/aliases.gperf"
+#line 520 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2143, ei_cp437},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 222 "lib/generated/aliases.gperf"
+#line 223 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2155, ei_iso8859_7},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 634 "lib/generated/aliases.gperf"
+#line 635 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2171, ei_ebcdic423},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 182 "lib/generated/aliases.gperf"
+#line 183 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2179, ei_iso8859_3},
     {-1}, {-1},
-#line 601 "lib/generated/aliases.gperf"
+#line 602 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2182, ei_ebcdic277},
-#line 138 "lib/generated/aliases.gperf"
+#line 139 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2183, ei_big5hkscs2001},
     {-1},
-#line 813 "lib/generated/aliases.gperf"
+#line 814 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2185, ei_ebcdic1157},
     {-1}, {-1}, {-1}, {-1},
-#line 524 "lib/generated/aliases.gperf"
+#line 525 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2190, ei_cp775},
     {-1},
-#line 619 "lib/generated/aliases.gperf"
+#line 620 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2192, ei_ebcdic284},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 139 "lib/generated/aliases.gperf"
+#line 140 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2198, ei_big5hkscs2004},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 779 "lib/generated/aliases.gperf"
+#line 780 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2204, ei_ebcdic1147},
-#line 326 "lib/generated/aliases.gperf"
+#line 327 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2205, ei_cp1257},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 541 "lib/generated/aliases.gperf"
+#line 542 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2213, ei_cp857},
     {-1}, {-1}, {-1}, {-1},
-#line 648 "lib/generated/aliases.gperf"
+#line 649 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2218, ei_ebcdic500},
-#line 328 "lib/generated/aliases.gperf"
+#line 329 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2219, ei_cp1257},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 379 "lib/generated/aliases.gperf"
+#line 380 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2240, ei_mac_ukraine},
     {-1}, {-1}, {-1},
-#line 79 "lib/generated/aliases.gperf"
+#line 80 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2244, ei_euc_jp},
     {-1},
-#line 604 "lib/generated/aliases.gperf"
+#line 605 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2246, ei_ebcdic278},
-#line 141 "lib/generated/aliases.gperf"
+#line 142 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2247, ei_big5hkscs2008},
     {-1}, {-1},
-#line 290 "lib/generated/aliases.gperf"
+#line 291 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2250, ei_cp1251},
     {-1}, {-1},
-#line 286 "lib/generated/aliases.gperf"
+#line 287 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2253, ei_cp1250},
     {-1}, {-1},
-#line 313 "lib/generated/aliases.gperf"
+#line 314 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2256, ei_cp1255},
     {-1}, {-1}, {-1}, {-1},
-#line 370 "lib/generated/aliases.gperf"
+#line 371 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2261, ei_mac_romania},
     {-1}, {-1}, {-1},
-#line 307 "lib/generated/aliases.gperf"
+#line 308 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2265, ei_cp1254},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 342 "lib/generated/aliases.gperf"
+#line 343 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2280, ei_cp862},
     {-1}, {-1}, {-1},
-#line 296 "lib/generated/aliases.gperf"
+#line 297 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2284, ei_cp1252},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 213 "lib/generated/aliases.gperf"
+#line 214 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2294, ei_iso8859_7},
-#line 152 "lib/generated/aliases.gperf"
+#line 153 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2295, ei_johab},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 331 "lib/generated/aliases.gperf"
+#line 332 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2314, ei_cp1258},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 605 "lib/generated/aliases.gperf"
+#line 606 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2333, ei_ebcdic278},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 319 "lib/generated/aliases.gperf"
+#line 320 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2348, ei_cp1256},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 124 "lib/generated/aliases.gperf"
+#line 125 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2365, ei_euc_tw},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1},
-#line 716 "lib/generated/aliases.gperf"
+#line 717 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2388, ei_ebcdic1137},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 543 "lib/generated/aliases.gperf"
+#line 544 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2395, ei_cp857},
     {-1}, {-1}, {-1},
-#line 163 "lib/generated/aliases.gperf"
+#line 164 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2399, ei_iso8859_1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 586 "lib/generated/aliases.gperf"
+#line 587 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2406, ei_ebcdic037},
     {-1},
-#line 525 "lib/generated/aliases.gperf"
+#line 526 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2408, ei_cp775},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 517 "lib/generated/aliases.gperf"
+#line 518 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2418, ei_cp437},
     {-1}, {-1}, {-1}, {-1},
-#line 387 "lib/generated/aliases.gperf"
+#line 388 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2423, ei_mac_turkish},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 174 "lib/generated/aliases.gperf"
+#line 175 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2433, ei_iso8859_2},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 464 "lib/generated/aliases.gperf"
+#line 465 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2449, ei_jisx0208},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 534 "lib/generated/aliases.gperf"
+#line 535 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2459, ei_cp853},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 462 "lib/generated/aliases.gperf"
+#line 463 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2483, ei_jisx0208},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1},
-#line 205 "lib/generated/aliases.gperf"
+#line 206 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2497, ei_iso8859_6},
     {-1}, {-1}, {-1},
-#line 19 "lib/generated/aliases.gperf"
+#line 20 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2501, ei_ascii},
-#line 153 "lib/generated/aliases.gperf"
+#line 154 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2502, ei_johab},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 302 "lib/generated/aliases.gperf"
+#line 303 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2510, ei_cp1253},
     {-1}, {-1}, {-1},
-#line 219 "lib/generated/aliases.gperf"
+#line 220 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2514, ei_iso8859_7},
     {-1}, {-1},
-#line 840 "lib/generated/aliases.gperf"
+#line 841 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2517, ei_euc_jisx0213},
-#line 628 "lib/generated/aliases.gperf"
+#line 629 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2518, ei_ebcdic297},
     {-1},
-#line 606 "lib/generated/aliases.gperf"
+#line 607 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2520, ei_ebcdic278},
     {-1}, {-1}, {-1},
-#line 137 "lib/generated/aliases.gperf"
+#line 138 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2524, ei_big5hkscs1999},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
-#line 390 "lib/generated/aliases.gperf"
+#line 391 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2535, ei_mac_hebrew},
     {-1},
-#line 234 "lib/generated/aliases.gperf"
+#line 235 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2537, ei_iso8859_9},
     {-1}, {-1}, {-1},
-#line 160 "lib/generated/aliases.gperf"
+#line 161 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2541, ei_dec_kanji},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
-#line 851 "lib/generated/aliases.gperf"
+#line 852 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2552, ei_riscos1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 134 "lib/generated/aliases.gperf"
+#line 135 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2562, ei_cp950},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 126 "lib/generated/aliases.gperf"
+#line 127 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2588, ei_euc_tw},
     {-1},
-#line 678 "lib/generated/aliases.gperf"
+#line 679 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2590, ei_ebcdic905},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 629 "lib/generated/aliases.gperf"
+#line 630 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2635, ei_ebcdic297},
     {-1}, {-1}, {-1}, {-1},
-#line 327 "lib/generated/aliases.gperf"
+#line 328 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2640, ei_cp1257},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 600 "lib/generated/aliases.gperf"
+#line 601 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2647, ei_ebcdic277},
     {-1}, {-1}, {-1}, {-1},
-#line 699 "lib/generated/aliases.gperf"
+#line 700 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2652, ei_ebcdic1097},
     {-1}, {-1}, {-1}, {-1},
-#line 765 "lib/generated/aliases.gperf"
+#line 766 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2657, ei_ebcdic1145},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 367 "lib/generated/aliases.gperf"
+#line 368 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2681, ei_mac_croatian},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 215 "lib/generated/aliases.gperf"
+#line 216 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2693, ei_iso8859_7},
     {-1}, {-1}, {-1},
-#line 639 "lib/generated/aliases.gperf"
+#line 640 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2697, ei_ebcdic424},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 611 "lib/generated/aliases.gperf"
+#line 612 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2712, ei_ebcdic280},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 145 "lib/generated/aliases.gperf"
+#line 146 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2720, ei_euc_kr},
-#line 598 "lib/generated/aliases.gperf"
+#line 599 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2721, ei_ebcdic277},
     {-1}, {-1}, {-1}, {-1},
-#line 76 "lib/generated/aliases.gperf"
+#line 77 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2726, ei_euc_jp},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 659 "lib/generated/aliases.gperf"
+#line 660 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2732, ei_ebcdic870},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1},
-#line 447 "lib/generated/aliases.gperf"
+#line 448 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2747, ei_tcvn},
     {-1}, {-1}, {-1},
-#line 625 "lib/generated/aliases.gperf"
+#line 626 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2751, ei_ebcdic285},
     {-1},
-#line 757 "lib/generated/aliases.gperf"
+#line 758 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2753, ei_ebcdic1144},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1},
-#line 773 "lib/generated/aliases.gperf"
+#line 774 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2775, ei_ebcdic1146},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 849 "lib/generated/aliases.gperf"
+#line 850 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2784, ei_atarist},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 325 "lib/generated/aliases.gperf"
+#line 326 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2794, ei_cp1257},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 395 "lib/generated/aliases.gperf"
+#line 396 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2829, ei_mac_arabic},
     {-1},
-#line 77 "lib/generated/aliases.gperf"
+#line 78 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2831, ei_euc_jp},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 797 "lib/generated/aliases.gperf"
+#line 798 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2839, ei_ebcdic1149},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 436 "lib/generated/aliases.gperf"
+#line 437 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2847, ei_cp874},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
@@ -4033,35 +4033,35 @@ static const struct alias aliases[] =
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1},
-#line 588 "lib/generated/aliases.gperf"
+#line 589 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2924, ei_ebcdic037},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 214 "lib/generated/aliases.gperf"
+#line 215 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2943, ei_iso8859_7},
     {-1}, {-1}, {-1},
-#line 521 "lib/generated/aliases.gperf"
+#line 522 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2947, ei_cp737},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1},
-#line 647 "lib/generated/aliases.gperf"
+#line 648 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str2961, ei_ebcdic500},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 789 "lib/generated/aliases.gperf"
+#line 790 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3005, ei_ebcdic1148},
-#line 108 "lib/generated/aliases.gperf"
+#line 109 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3006, ei_cp936},
     {-1},
-#line 383 "lib/generated/aliases.gperf"
+#line 384 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3008, ei_mac_greek},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 723 "lib/generated/aliases.gperf"
+#line 724 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3036, ei_ebcdic1140},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
@@ -4075,43 +4075,43 @@ static const struct alias aliases[] =
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
-#line 749 "lib/generated/aliases.gperf"
+#line 750 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3137, ei_ebcdic1143},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 669 "lib/generated/aliases.gperf"
+#line 670 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3162, ei_ebcdic875},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 684 "lib/generated/aliases.gperf"
+#line 685 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3188, ei_ebcdic924},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 740 "lib/generated/aliases.gperf"
+#line 741 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3206, ei_ebcdic1142},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
-#line 781 "lib/generated/aliases.gperf"
+#line 782 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3226, ei_ebcdic1147},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1},
-#line 589 "lib/generated/aliases.gperf"
+#line 590 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3248, ei_ebcdic037},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1},
-#line 748 "lib/generated/aliases.gperf"
+#line 749 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3278, ei_ebcdic1143},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 391 "lib/generated/aliases.gperf"
+#line 392 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3315, ei_mac_hebrew},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
@@ -4140,7 +4140,7 @@ static const struct alias aliases[] =
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 456 "lib/generated/aliases.gperf"
+#line 457 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3558, ei_jisx0201},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
@@ -4151,7 +4151,7 @@ static const struct alias aliases[] =
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
-#line 599 "lib/generated/aliases.gperf"
+#line 600 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3632, ei_ebcdic277},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
@@ -4181,7 +4181,7 @@ static const struct alias aliases[] =
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
-#line 731 "lib/generated/aliases.gperf"
+#line 732 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str3885, ei_ebcdic1141},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
@@ -4204,7 +4204,7 @@ static const struct alias aliases[] =
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1}, {-1},
     {-1},
-#line 739 "lib/generated/aliases.gperf"
+#line 740 "lib/generated/aliases.gperf"
     {(int)(size_t)&((struct stringpool_t *)0)->stringpool_str4067, ei_ebcdic1142}
   };
 

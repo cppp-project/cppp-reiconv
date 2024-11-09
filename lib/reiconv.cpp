@@ -1,5 +1,9 @@
+/**
+ * @file reiconv.cpp
+ * @brief reiconv C++ bindings implementation.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2024 The C++ Plus Project.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -27,7 +31,7 @@
 
 #include <cppp/reiconv.h>
 
-_CPPP_API reiconv::Encoding::Encoding(const char* const name)
+_CPPP_API reiconv::Encoding::Encoding(const char *const name)
 {
     _index = ::reiconv_lookup_from_name(name);
     if (_index == -1)
@@ -45,9 +49,10 @@ _CPPP_API reiconv::Encoding::Encoding(const int codepage)
     }
 }
 
-_CPPP_API reiconv::VersionInfo reiconv::version { VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH };
+_CPPP_API reiconv::VersionInfo reiconv::version{VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
 
-_CPPP_API std::string reiconv::convert(reiconv::Encoding from, reiconv::Encoding to, const std::string_view input, bool strict)
+_CPPP_API std::string reiconv::convert(reiconv::Encoding from, reiconv::Encoding to, const std::string_view input,
+                                       bool strict)
 {
     ::reiconv_t cd = ::reiconv_open_from_index(from, to, !strict);
     if (cd == (::reiconv_t)(-1))
@@ -56,8 +61,8 @@ _CPPP_API std::string reiconv::convert(reiconv::Encoding from, reiconv::Encoding
     }
     std::size_t outlen = ::reiconv_result_size(cd, input.data(), input.size());
 
-    std::string res (outlen, '\0');
-    char* result = const_cast<char*>(res.data());
+    std::string res(outlen, '\0');
+    char *result = const_cast<char *>(res.data());
     if (::reiconv_convert_static_size(cd, input.data(), input.size(), result, outlen) != 0)
     {
         ::reiconv_handle_close(cd);

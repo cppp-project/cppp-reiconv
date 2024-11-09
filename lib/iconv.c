@@ -1,6 +1,10 @@
+/**
+ * @file encoding.h
+ * @brief Encoding structure definition.
+ * @copyright Copyright (C) 1999-2008, 2011, 2016, 2018, 2020, 2022-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2008, 2011, 2016, 2018, 2020, 2022-2023 Free Software Foundation, Inc.
- * Copyright (C) The C++ Plus Project.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -26,36 +30,21 @@
 #include <string.h>
 
 #include "all_encodings.h"
-#include "converters.h"
-#include "encoding_indexes.h"
-#include "loop_funcs.h"
+#include "codepage_to_ei.h"
 #include "encoding.h"
-
-const size_t TEMP_BUFFER_SIZE = 4096;
-
-#define DEFENCODING(xxx_names, xxx, xxx_index, xxx_ifuncs1, xxx_ifuncs2, xxx_ofuncs1, xxx_ofuncs2)
-#define DEFCODEPAGE(codepage, xxx) [codepage] = ei_##xxx + 1,
-#define DEFINDEX(alias, name)
-
-static const int codepage_to_eindex[] = {
-#include "encodings.h.snippet"
-};
-
-#undef DEFINDEX
-#undef DEFENCODING
-#undef DEFCODEPAGE
-
-// Conversion loops.
+#include "loop_funcs.h"
 #include "loops.h"
 
 /*
  * Alias lookup function.
  * Defines
  *   struct alias { int name; unsigned int encoding_index; };
- *   const struct alias * HashPool::aliases_lookup (const char *str, unsigned int len);
+ *   const struct alias * aliases_lookup (const char *str, unsigned int len);
  *   #define MAX_WORD_LENGTH ...
  */
 #include "generated/aliases.h"
+
+const size_t TEMP_BUFFER_SIZE = 4096;
 
 _CPPP_API struct VersionInfo version = {VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
 
