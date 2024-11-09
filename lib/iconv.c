@@ -88,8 +88,7 @@ _CPPP_API int reiconv_lookup_from_codepage(int codepage)
 
 _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool discard_ilseq)
 {
-    struct conv_struct *cd;
-    cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
+    struct conv_struct *cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
     if (cd == NULL)
     {
         errno = ENOMEM;
@@ -139,6 +138,51 @@ _CPPP_API reiconv_t reiconv_open_from_name(const char *fromcode, const char *toc
         errno = EINVAL;
         return (reiconv_t)(-1);
     }
+    return reiconv_open_from_index(from_index, to_index, discard_ilseq);
+}
+
+_CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
+{
+    char fromcode_buf[MAX_WORD_LENGTH + 2];
+    char tocode_buf[MAX_WORD_LENGTH + 2];
+
+    size_t fromcode_len = reiconv_name_canonicalize(fromcode, fromcode_buf);
+    size_t tocode_len = reiconv_name_canonicalize(tocode, tocode_buf);
+
+    bool discard_ilseq = false;
+
+    for (size_t i = 0; i < fromcode_len; i++)
+    {
+        if (i < fromcode_len && fromcode_buf[i] == '/')
+        {
+            fromcode_buf[i] = '\0';
+            if (i + 7 < fromcode_len && memcmp(fromcode_buf + i + 1, "/IGNORE", 8) == 0)
+            {
+                discard_ilseq = true;
+            }
+        }
+    }
+
+    for (size_t i = 0; i < tocode_len; i++)
+    {
+        if (tocode_buf[i] == '/')
+        {
+            tocode_buf[i] = '\0';
+            if (i + 7 < fromcode_len && memcmp(tocode_buf + i + 1, "/IGNORE", 8) == 0)
+            {
+                discard_ilseq = true;
+            }
+        }
+    }
+
+    int from_index = reiconv_lookup_from_name(fromcode_buf);
+    int to_index = reiconv_lookup_from_name(tocode_buf);
+    if (from_index == -1 || to_index == -1)
+    {
+        errno = EINVAL;
+        return (reiconv_t)(-1);
+    }
+
     return reiconv_open_from_index(from_index, to_index, discard_ilseq);
 }
 

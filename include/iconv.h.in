@@ -46,15 +46,13 @@
  */
 #define iconv_t reiconv_t
 
-/**
- * @brief Open a conversion descriptor.
- * @param tocode The target encoding.
+ /**
+ * @brief Open a conversion descriptor. For iconv compatibility.
+ * @param tocode The target encoding. Supports "//IGNORE".
  * @param fromcode The source encoding.
  * @return The conversion descriptor. (iconv_t)(-1) on error with errno set.
- * @note This function is equivalent to `reiconv_open_from_name(fromcode, tocode)`.
- * @see reiconv_open_from_name
  */
-#define iconv_open(tocode, fromcode) reiconv_open_from_name(fromcode, tocode, false)
+#define iconv_open reiconv_open
 
 /**
  * @brief Convert at most `*inbytesleft` bytes from `*inbuf` according to the code conversion

@@ -178,6 +178,14 @@ extern _CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char* input
 extern _CPPP_API int reiconv_convert(reiconv_t cd, const char *input_data, size_t input_length, char **output_data_ptr, size_t *output_length_ptr);
 
 /**
+ * @brief Open a conversion descriptor. For iconv compatibility.
+ * @param tocode The output buffer encoding. Supports "//IGNORE".
+ * @param fromcode The input buffer encoding.
+ * @return The conversion descriptor. (reiconv_t)(-1) is returned if error occured with errno set.
+ */
+extern _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode);
+
+/**
  * @brief Do conversion. For iconv compatibility.
  * @note At most `*inbytesleft` bytes starting at `*inbuf`.
  * @note Writing at most `*outbytesleft` bytes starting at `*outbuf`.
