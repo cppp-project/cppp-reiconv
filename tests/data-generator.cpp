@@ -1,7 +1,7 @@
 /**
  * @file reiconv-test.hpp
  * @brief Creates the beyond-BMP part of the GB18030.TXT reference table.
- * @brief Or creates the UTF-8.TXT reference table.
+ * Or creates the UTF-8.TXT reference table.
  * @author ChenPi11
  * @copyright Copyright (C) 2005, 2012 Free Software Foundation, Inc.
  * @copyright Copyright (C) 2024 The C++ Plus Project.
