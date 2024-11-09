@@ -1,5 +1,10 @@
+/**
+ * @file georgian_academy.h
+ * @brief GEORGIAN-ACADEMY
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * GEORGIAN-ACADEMY
- */
+#ifndef _GEORGIAN_ACADEMY_H_
+#define _GEORGIAN_ACADEMY_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short georgian_academy_2uni[32] = {
   /* 0x80 */
@@ -30,17 +36,16 @@ static const unsigned short georgian_academy_2uni[32] = {
   0x02dc, 0x2122, 0x0161, 0x203a, 0x0153, 0x009d, 0x009e, 0x0178,
 };
 
-static int
-georgian_academy_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int georgian_academy_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c >= 0x80 && c < 0xa0)
-    *pwc = (ucs4_t) georgian_academy_2uni[c-0x80];
-  else if (c >= 0xc0 && c < 0xe7)
-    *pwc = (ucs4_t) c + 0x1010;
-  else
-    *pwc = (ucs4_t) c;
-  return 1;
+    unsigned char c = *s;
+    if (c >= 0x80 && c < 0xa0)
+        *pwc = (ucs4_t)georgian_academy_2uni[c - 0x80];
+    else if (c >= 0xc0 && c < 0xe7)
+        *pwc = (ucs4_t)c + 0x1010;
+    else
+        *pwc = (ucs4_t)c;
+    return 1;
 }
 
 static const unsigned char georgian_academy_page00[32] = {
@@ -75,31 +80,34 @@ static const unsigned char georgian_academy_page20[48] = {
   0x00, 0x8b, 0x9b, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x38-0x3f */
 };
 
-static int
-georgian_academy_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int georgian_academy_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x0080 && wc < 0x00a0)
-    c = georgian_academy_page00[wc-0x0080];
-  else if ((wc >= 0x00a0 && wc < 0x00c0) || (wc >= 0x00e7 && wc < 0x0100))
-    c = wc;
-  else if (wc >= 0x0150 && wc < 0x0198)
-    c = georgian_academy_page01[wc-0x0150];
-  else if (wc >= 0x02c0 && wc < 0x02e0)
-    c = georgian_academy_page02[wc-0x02c0];
-  else if (wc >= 0x10d0 && wc < 0x10f7)
-    c = wc-0x1010;
-  else if (wc >= 0x2010 && wc < 0x2040)
-    c = georgian_academy_page20[wc-0x2010];
-  else if (wc == 0x2122)
-    c = 0x99;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x0080 && wc < 0x00a0)
+        c = georgian_academy_page00[wc - 0x0080];
+    else if ((wc >= 0x00a0 && wc < 0x00c0) || (wc >= 0x00e7 && wc < 0x0100))
+        c = wc;
+    else if (wc >= 0x0150 && wc < 0x0198)
+        c = georgian_academy_page01[wc - 0x0150];
+    else if (wc >= 0x02c0 && wc < 0x02e0)
+        c = georgian_academy_page02[wc - 0x02c0];
+    else if (wc >= 0x10d0 && wc < 0x10f7)
+        c = wc - 0x1010;
+    else if (wc >= 0x2010 && wc < 0x2040)
+        c = georgian_academy_page20[wc - 0x2010];
+    else if (wc == 0x2122)
+        c = 0x99;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _GEORGIAN_ACADEMY_H_ */

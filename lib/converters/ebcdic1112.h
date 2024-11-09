@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic1112.h
+ * @brief IBM-1112
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-1112
- */
+#ifndef _EBCDIC1112_H_
+#define _EBCDIC1112_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic1112_2uni[256] = {
   /* 0x00 */
@@ -72,12 +78,11 @@ static const unsigned short ebcdic1112_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x0106, 0x00dc, 0x0141, 0x015a, 0x009f,
 };
 
-static int
-ebcdic1112_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic1112_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  *pwc = (ucs4_t) ebcdic1112_2uni[c];
-  return 1;
+    unsigned char c = *s;
+    *pwc = (ucs4_t)ebcdic1112_2uni[c];
+    return 1;
 }
 
 static const unsigned char ebcdic1112_page00[384] = {
@@ -135,17 +140,19 @@ static const unsigned char ebcdic1112_page20[8] = {
   0x00, 0xdf, 0x00, 0x00, 0x57, 0xaa, 0x56, 0x00, /* 0x18-0x1f */
 };
 
-static int
-ebcdic1112_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic1112_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0180)
-    c = ebcdic1112_page00[wc];
-  else if (wc >= 0x2018 && wc < 0x2020)
-    c = ebcdic1112_page20[wc-0x2018];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0180)
+        c = ebcdic1112_page00[wc];
+    else if (wc >= 0x2018 && wc < 0x2020)
+        c = ebcdic1112_page20[wc - 0x2018];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC1112_H_ */

@@ -112,13 +112,6 @@
 #include "converters/viscii.h"
 #pragma endregion
 
-/* [CCS = coded character set] [CJKV.INF chapter 3]  */
-typedef struct
-{
-    unsigned short indx; /* Index into big table. */
-    unsigned short used; /* Bitmask of used entries. */
-} Summary16;
-
 #pragma region CJK character sets
 #include "converters/iso646_jp.h"
 #include "converters/jisx0201.h"

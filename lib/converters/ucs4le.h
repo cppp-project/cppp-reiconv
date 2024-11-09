@@ -1,5 +1,10 @@
+/**
+ * @file ucs4le.h
+ * @brief UCS-4LE = UCS-4 little endian
+ * @copyright Copyright (C) 1999-2000, 2016, 2024 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2000, 2016, 2024 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,32 +22,33 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * UCS-4LE = UCS-4 little endian
- */
+#ifndef _UCS4LE_H_
+#define _UCS4LE_H_
 
-static int
-ucs4le_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+#include "reiconv_defines.h"
+
+static int ucs4le_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  if (n >= 4) {
-    *pwc =    (ucs4_t) s[0]
-           + ((ucs4_t) s[1] << 8)
-           + ((ucs4_t) s[2] << 16)
-           + ((ucs4_t) s[3] << 24);
-    return 4;
-  }
-  return RET_TOOFEW(0);
+    if (n >= 4)
+    {
+        *pwc = (ucs4_t)s[0] + ((ucs4_t)s[1] << 8) + ((ucs4_t)s[2] << 16) + ((ucs4_t)s[3] << 24);
+        return 4;
+    }
+    return RET_TOOFEW(0);
 }
 
-static int
-ucs4le_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ucs4le_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 4) {
-    r[0] = (unsigned char) wc;
-    r[1] = (unsigned char) (wc >> 8);
-    r[2] = (unsigned char) (wc >> 16);
-    r[3] = (unsigned char) (wc >> 24);
-    return 4;
-  } else
-    return RET_TOOSMALL;
+    if (n >= 4)
+    {
+        r[0] = (unsigned char)wc;
+        r[1] = (unsigned char)(wc >> 8);
+        r[2] = (unsigned char)(wc >> 16);
+        r[3] = (unsigned char)(wc >> 24);
+        return 4;
+    }
+    else
+        return RET_TOOSMALL;
 }
+
+#endif /* _UCS4LE_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file cp1254.h
+ * @brief CP1254
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP1254
- */
+#ifndef _CP1254_H_
+#define _CP1254_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp1254_2uni_1[32] = {
   /* 0x80 */
@@ -40,38 +46,44 @@ static const unsigned short cp1254_2uni_3[16] = {
   0x00f8, 0x00f9, 0x00fa, 0x00fb, 0x00fc, 0x0131, 0x015f, 0x00ff,
 };
 
-static int
-cp1254_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp1254_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else if (c < 0xa0) {
-    unsigned short wc = cp1254_2uni_1[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  else if (c < 0xd0) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else if (c < 0xe0) {
-    *pwc = (ucs4_t) cp1254_2uni_2[c-0xd0];
-    return 1;
-  }
-  else if (c < 0xf0) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    *pwc = (ucs4_t) cp1254_2uni_3[c-0xf0];
-    return 1;
-  }
-  return RET_ILSEQ;
+    else if (c < 0xa0)
+    {
+        unsigned short wc = cp1254_2uni_1[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    else if (c < 0xd0)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
+    }
+    else if (c < 0xe0)
+    {
+        *pwc = (ucs4_t)cp1254_2uni_2[c - 0xd0];
+        return 1;
+    }
+    else if (c < 0xf0)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
+    }
+    else
+    {
+        *pwc = (ucs4_t)cp1254_2uni_3[c - 0xf0];
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char cp1254_page00[48] = {
@@ -115,31 +127,34 @@ static const unsigned char cp1254_page20[48] = {
   0x00, 0x8b, 0x9b, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x38-0x3f */
 };
 
-static int
-cp1254_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp1254_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00d0)
-    c = wc;
-  else if (wc >= 0x00d0 && wc < 0x0100)
-    c = cp1254_page00[wc-0x00d0];
-  else if (wc >= 0x0118 && wc < 0x0198)
-    c = cp1254_page01[wc-0x0118];
-  else if (wc >= 0x02c0 && wc < 0x02e0)
-    c = cp1254_page02[wc-0x02c0];
-  else if (wc >= 0x2010 && wc < 0x2040)
-    c = cp1254_page20[wc-0x2010];
-  else if (wc == 0x20ac)
-    c = 0x80;
-  else if (wc == 0x2122)
-    c = 0x99;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00d0)
+        c = wc;
+    else if (wc >= 0x00d0 && wc < 0x0100)
+        c = cp1254_page00[wc - 0x00d0];
+    else if (wc >= 0x0118 && wc < 0x0198)
+        c = cp1254_page01[wc - 0x0118];
+    else if (wc >= 0x02c0 && wc < 0x02e0)
+        c = cp1254_page02[wc - 0x02c0];
+    else if (wc >= 0x2010 && wc < 0x2040)
+        c = cp1254_page20[wc - 0x2010];
+    else if (wc == 0x20ac)
+        c = 0x80;
+    else if (wc == 0x2122)
+        c = 0x99;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP1254_H_ */

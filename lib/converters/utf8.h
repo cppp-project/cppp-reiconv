@@ -1,5 +1,10 @@
+/**
+ * @file utf8.h
+ * @brief UTF-8
+ * @copyright Copyright (C) 1999-2001, 2004, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2004, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * UTF-8
- */
+#ifndef _UTF8_H_
+#define _UTF8_H_
+
+#include "reiconv_defines.h"
 
 /* Specification: RFC 3629 */
 
@@ -96,3 +102,5 @@ utf8_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n) /* n == 0 is ac
   }
   return count;
 }
+
+#endif /* _UTF8_H_ */

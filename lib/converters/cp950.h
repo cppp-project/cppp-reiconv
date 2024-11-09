@@ -1,5 +1,10 @@
+/**
+ * @file cp950.h
+ * @brief CP950
+ * @copyright Copyright (C) 1999-2001, 2005, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2005, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -15,10 +20,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with the cppp-reiconv library; see the file LICENSE.
  * If not, see <https://www.gnu.org/licenses/>.
- */
-
-/*
- * CP950
  */
 
 /*
@@ -81,6 +82,15 @@
  * point, they are useful for some people in practice.
  */
 
+#ifndef _CP950_H_
+#define _CP950_H_
+
+#include "converters/ascii.h"
+#include "converters/big5.h"
+#include "converters/cp950ext.h"
+#include "reiconv_defines.h"
+#include <stdlib.h>
+
 static const unsigned short cp950_2uni_pagea1[314] = {
   /* 0xa1 */
   0x3000, 0xff0c, 0x3001, 0x3002, 0xff0e, 0x2027, 0xff1b, 0xff1a,
@@ -126,158 +136,293 @@ static const unsigned short cp950_2uni_pagea1[314] = {
   0xff52, 0xff53, 0xff54, 0xff55, 0xff56,
 };
 
-#include "cp950ext.h"
-
-static int
-cp950_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp950_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  /* Code set 0 (ASCII) */
-  if (c < 0x80)
-    return ascii_mbtowc(conv,pwc,s,n);
-  /* Code set 1 (BIG5 extended) */
-  if (c >= 0x81 && c < 0xff) {
-    if (n < 2)
-      return RET_TOOFEW(0);
+    unsigned char c = *s;
+    /* Code set 0 (ASCII) */
+    if (c < 0x80)
+        return ascii_mbtowc(conv, pwc, s, n);
+    /* Code set 1 (BIG5 extended) */
+    if (c >= 0x81 && c < 0xff)
     {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff)) {
-        if (c >= 0xa1) {
-          if (c < 0xa3) {
-            unsigned int i = 157 * (c - 0xa1) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
-            unsigned short wc = cp950_2uni_pagea1[i];
-            if (wc != 0xfffd) {
-              *pwc = (ucs4_t) wc;
-              return 2;
+        if (n < 2)
+            return RET_TOOFEW(0);
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff))
+            {
+                if (c >= 0xa1)
+                {
+                    if (c < 0xa3)
+                    {
+                        unsigned int i = 157 * (c - 0xa1) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
+                        unsigned short wc = cp950_2uni_pagea1[i];
+                        if (wc != 0xfffd)
+                        {
+                            *pwc = (ucs4_t)wc;
+                            return 2;
+                        }
+                    }
+                    if (!((c == 0xc6 && c2 >= 0xa1) || c == 0xc7))
+                    {
+                        int ret = big5_mbtowc(conv, pwc, s, 2);
+                        if (ret != RET_ILSEQ)
+                            return ret;
+                    }
+                    if (c == 0xa3 && c2 == 0xe1)
+                    {
+                        *pwc = 0x20ac;
+                        return 2;
+                    }
+                    if (c >= 0xfa)
+                    {
+                        /* User-defined characters */
+                        *pwc = 0xe000 + 157 * (c - 0xfa) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
+                        return 2;
+                    }
+                }
+                else
+                {
+                    /* 0x81 <= c < 0xa1. */
+                    /* User-defined characters */
+                    *pwc = (c >= 0x8e ? 0xdb18 : 0xeeb8) + 157 * (c - 0x81) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
+                    return 2;
+                }
             }
-          }
-          if (!((c == 0xc6 && c2 >= 0xa1) || c == 0xc7)) {
-            int ret = big5_mbtowc(conv,pwc,s,2);
-            if (ret != RET_ILSEQ)
-              return ret;
-          }
-          if (c == 0xa3 && c2 == 0xe1) {
-            *pwc = 0x20ac;
-            return 2;
-          }
-          if (c >= 0xfa) {
-            /* User-defined characters */
-            *pwc = 0xe000 + 157 * (c - 0xfa) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
-            return 2;
-          }
-        } else {
-          /* 0x81 <= c < 0xa1. */
-          /* User-defined characters */
-          *pwc = (c >= 0x8e ? 0xdb18 : 0xeeb8) + 157 * (c - 0x81)
-                 + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
-          return 2;
         }
-      }
+        if (c == 0xf9)
+        {
+            int ret = cp950ext_mbtowc(conv, pwc, s, 2);
+            if (ret != RET_ILSEQ)
+                return ret;
+        }
     }
-    if (c == 0xf9) {
-      int ret = cp950ext_mbtowc(conv,pwc,s,2);
-      if (ret != RET_ILSEQ)
-        return ret;
-    }
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
-static int
-cp950_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp950_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char buf[2];
-  int ret;
+    unsigned char buf[2];
+    int ret;
 
-  /* Code set 0 (ASCII) */
-  ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILUNI)
-    return ret;
+    /* Code set 0 (ASCII) */
+    ret = ascii_wctomb(conv, r, wc, n);
+    if (ret != RET_ILUNI)
+        return ret;
 
-  /* Code set 1 (BIG5 extended) */
-  switch (wc >> 8) {
+    /* Code set 1 (BIG5 extended) */
+    switch (wc >> 8)
+    {
     case 0x00:
-      if (wc == 0x00af) { buf[0] = 0xa1; buf[1] = 0xc2; ret = 2; break; }
-      if (wc == 0x00a2 || wc == 0x00a3 || wc == 0x00a4)
-        return RET_ILUNI;
-      break;
+        if (wc == 0x00af)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0xc2;
+            ret = 2;
+            break;
+        }
+        if (wc == 0x00a2 || wc == 0x00a3 || wc == 0x00a4)
+            return RET_ILUNI;
+        break;
     case 0x02:
-      if (wc == 0x02cd) { buf[0] = 0xa1; buf[1] = 0xc5; ret = 2; break; }
-      break;
+        if (wc == 0x02cd)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0xc5;
+            ret = 2;
+            break;
+        }
+        break;
     case 0x20:
-      if (wc == 0x2027) { buf[0] = 0xa1; buf[1] = 0x45; ret = 2; break; }
-      if (wc == 0x20ac) { buf[0] = 0xa3; buf[1] = 0xe1; ret = 2; break; }
-      if (wc == 0x2022 || wc == 0x203e)
-        return RET_ILUNI;
-      break;
+        if (wc == 0x2027)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0x45;
+            ret = 2;
+            break;
+        }
+        if (wc == 0x20ac)
+        {
+            buf[0] = 0xa3;
+            buf[1] = 0xe1;
+            ret = 2;
+            break;
+        }
+        if (wc == 0x2022 || wc == 0x203e)
+            return RET_ILUNI;
+        break;
     case 0x22:
-      if (wc == 0x2215) { buf[0] = 0xa2; buf[1] = 0x41; ret = 2; break; }
-      if (wc == 0x2295) { buf[0] = 0xa1; buf[1] = 0xf2; ret = 2; break; }
-      if (wc == 0x2299) { buf[0] = 0xa1; buf[1] = 0xf3; ret = 2; break; }
-      if (wc == 0x223c)
-        return RET_ILUNI;
-      break;
+        if (wc == 0x2215)
+        {
+            buf[0] = 0xa2;
+            buf[1] = 0x41;
+            ret = 2;
+            break;
+        }
+        if (wc == 0x2295)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0xf2;
+            ret = 2;
+            break;
+        }
+        if (wc == 0x2299)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0xf3;
+            ret = 2;
+            break;
+        }
+        if (wc == 0x223c)
+            return RET_ILUNI;
+        break;
     case 0x25:
-      if (wc == 0x2574) { buf[0] = 0xa1; buf[1] = 0x5a; ret = 2; break; }
-      break;
+        if (wc == 0x2574)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0x5a;
+            ret = 2;
+            break;
+        }
+        break;
     case 0x26:
-      if (wc == 0x2609 || wc == 0x2641)
-        return RET_ILUNI;
-      break;
-    case 0xe0: case 0xe1: case 0xe2: case 0xe3: case 0xe4: case 0xe5:
-    case 0xe6: case 0xe7: case 0xe8: case 0xe9: case 0xea: case 0xeb:
-    case 0xec: case 0xed: case 0xee: case 0xef: case 0xf0: case 0xf1:
-    case 0xf2: case 0xf3: case 0xf4: case 0xf5: case 0xf6:
-      {
+        if (wc == 0x2609 || wc == 0x2641)
+            return RET_ILUNI;
+        break;
+    case 0xe0:
+    case 0xe1:
+    case 0xe2:
+    case 0xe3:
+    case 0xe4:
+    case 0xe5:
+    case 0xe6:
+    case 0xe7:
+    case 0xe8:
+    case 0xe9:
+    case 0xea:
+    case 0xeb:
+    case 0xec:
+    case 0xed:
+    case 0xee:
+    case 0xef:
+    case 0xf0:
+    case 0xf1:
+    case 0xf2:
+    case 0xf3:
+    case 0xf4:
+    case 0xf5:
+    case 0xf6: {
         /* User-defined characters */
         unsigned int i = wc - 0xe000;
-        if (i < 5809) {
-          unsigned int c1 = i / 157;
-          unsigned int c2 = i % 157;
-          buf[0] = c1 + (c1 < 5 ? 0xfa : c1 < 24 ? 0x89 : 0x69);
-          buf[1] = c2 + (c2 < 0x3f ? 0x40 : 0x62);
-          ret = 2;
-          break;
+        if (i < 5809)
+        {
+            unsigned int c1 = i / 157;
+            unsigned int c2 = i % 157;
+            buf[0] = c1 + (c1 < 5 ? 0xfa : c1 < 24 ? 0x89 : 0x69);
+            buf[1] = c2 + (c2 < 0x3f ? 0x40 : 0x62);
+            ret = 2;
+            break;
         }
-      }
-      break;
-    case 0xfe:
-      if (wc == 0xfe51) { buf[0] = 0xa1; buf[1] = 0x4e; ret = 2; break; }
-      if (wc == 0xfe68) { buf[0] = 0xa2; buf[1] = 0x42; ret = 2; break; }
-      break;
-    case 0xff:
-      if (wc == 0xff0f) { buf[0] = 0xa1; buf[1] = 0xfe; ret = 2; break; }
-      if (wc == 0xff3c) { buf[0] = 0xa2; buf[1] = 0x40; ret = 2; break; }
-      if (wc == 0xff5e) { buf[0] = 0xa1; buf[1] = 0xe3; ret = 2; break; }
-      if (wc == 0xffe0) { buf[0] = 0xa2; buf[1] = 0x46; ret = 2; break; }
-      if (wc == 0xffe1) { buf[0] = 0xa2; buf[1] = 0x47; ret = 2; break; }
-      if (wc == 0xffe3) { buf[0] = 0xa1; buf[1] = 0xc3; ret = 2; break; }
-      if (wc == 0xffe5) { buf[0] = 0xa2; buf[1] = 0x44; ret = 2; break; }
-      if (wc == 0xff64)
-        return RET_ILUNI;
-      break;
-  }
-  if (ret == RET_ILUNI)
-    ret = big5_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILUNI) {
-    if (ret != 2) abort();
-    if (!((buf[0] == 0xc6 && buf[1] >= 0xa1) || buf[0] == 0xc7)) {
-      if (n < 2)
-        return RET_TOOSMALL;
-      r[0] = buf[0];
-      r[1] = buf[1];
-      return 2;
     }
-  }
-  ret = cp950ext_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILUNI) {
-    if (ret != 2) abort();
-    if (n < 2)
-      return RET_TOOSMALL;
-    r[0] = buf[0];
-    r[1] = buf[1];
-    return 2;
-  }
+    break;
+    case 0xfe:
+        if (wc == 0xfe51)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0x4e;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xfe68)
+        {
+            buf[0] = 0xa2;
+            buf[1] = 0x42;
+            ret = 2;
+            break;
+        }
+        break;
+    case 0xff:
+        if (wc == 0xff0f)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0xfe;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xff3c)
+        {
+            buf[0] = 0xa2;
+            buf[1] = 0x40;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xff5e)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0xe3;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xffe0)
+        {
+            buf[0] = 0xa2;
+            buf[1] = 0x46;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xffe1)
+        {
+            buf[0] = 0xa2;
+            buf[1] = 0x47;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xffe3)
+        {
+            buf[0] = 0xa1;
+            buf[1] = 0xc3;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xffe5)
+        {
+            buf[0] = 0xa2;
+            buf[1] = 0x44;
+            ret = 2;
+            break;
+        }
+        if (wc == 0xff64)
+            return RET_ILUNI;
+        break;
+    }
+    if (ret == RET_ILUNI)
+        ret = big5_wctomb(conv, buf, wc, 2);
+    if (ret != RET_ILUNI)
+    {
+        if (ret != 2)
+            abort();
+        if (!((buf[0] == 0xc6 && buf[1] >= 0xa1) || buf[0] == 0xc7))
+        {
+            if (n < 2)
+                return RET_TOOSMALL;
+            r[0] = buf[0];
+            r[1] = buf[1];
+            return 2;
+        }
+    }
+    ret = cp950ext_wctomb(conv, buf, wc, 2);
+    if (ret != RET_ILUNI)
+    {
+        if (ret != 2)
+            abort();
+        if (n < 2)
+            return RET_TOOSMALL;
+        r[0] = buf[0];
+        r[1] = buf[1];
+        return 2;
+    }
 
-  return RET_ILUNI;
+    return RET_ILUNI;
 }
+
+#endif /* _CP950_H_ */

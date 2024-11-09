@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic12712.h
+ * @brief IBM-12712
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-12712
- */
+#ifndef _EBCDIC12712_H_
+#define _EBCDIC12712_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic12712_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic12712_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x202a, 0x202b, 0x200e, 0x200f, 0x009f,
 };
 
-static int
-ebcdic12712_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic12712_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic12712_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic12712_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 #if DEDUPLICATE_TABLES
@@ -144,21 +150,23 @@ static const unsigned char ebcdic12712_page20_1[8] = {
   0x00, 0x00, 0x9e, 0x00, 0x9c, 0x00, 0x00, 0x00, /* 0xa8-0xaf */
 };
 
-static int
-ebcdic12712_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic12712_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00f8)
-    c = ebcdic12712_page00[wc];
-  else if (wc >= 0x05d0 && wc < 0x05f0)
-    c = ebcdic12712_page05[wc-0x05d0];
-  else if (wc >= 0x2008 && wc < 0x2040)
-    c = ebcdic12712_page20[wc-0x2008];
-  else if (wc >= 0x20a8 && wc < 0x20b0)
-    c = ebcdic12712_page20_1[wc-0x20a8];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00f8)
+        c = ebcdic12712_page00[wc];
+    else if (wc >= 0x05d0 && wc < 0x05f0)
+        c = ebcdic12712_page05[wc - 0x05d0];
+    else if (wc >= 0x2008 && wc < 0x2040)
+        c = ebcdic12712_page20[wc - 0x2008];
+    else if (wc >= 0x20a8 && wc < 0x20b0)
+        c = ebcdic12712_page20_1[wc - 0x20a8];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC12712_H_ */

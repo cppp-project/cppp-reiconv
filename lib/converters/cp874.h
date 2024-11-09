@@ -1,5 +1,10 @@
+/**
+ * @file cp874.h
+ * @brief CP874
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP874
- */
+#ifndef _CP874_H_
+#define _CP874_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp874_2uni[128] = {
   /* 0x80 */
@@ -48,22 +54,24 @@ static const unsigned short cp874_2uni[128] = {
   0x0e58, 0x0e59, 0x0e5a, 0x0e5b, 0xfffd, 0xfffd, 0xfffd, 0xfffd,
 };
 
-static int
-cp874_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp874_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = cp874_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = cp874_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char cp874_page0e[96] = {
@@ -86,25 +94,28 @@ static const unsigned char cp874_page20[24] = {
   0x00, 0x00, 0x95, 0x00, 0x00, 0x00, 0x85, 0x00, /* 0x20-0x27 */
 };
 
-static int
-cp874_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp874_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc == 0x00a0)
-    c = 0xa0;
-  else if (wc >= 0x0e00 && wc < 0x0e60)
-    c = cp874_page0e[wc-0x0e00];
-  else if (wc >= 0x2010 && wc < 0x2028)
-    c = cp874_page20[wc-0x2010];
-  else if (wc == 0x20ac)
-    c = 0x80;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc == 0x00a0)
+        c = 0xa0;
+    else if (wc >= 0x0e00 && wc < 0x0e60)
+        c = cp874_page0e[wc - 0x0e00];
+    else if (wc >= 0x2010 && wc < 0x2028)
+        c = cp874_page20[wc - 0x2010];
+    else if (wc == 0x20ac)
+        c = 0x80;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP874_H_ */

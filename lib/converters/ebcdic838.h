@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic838.h
+ * @brief IBM-838
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-838
- */
+#ifndef _EBCDIC838_H_
+#define _EBCDIC838_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic838_2uni[256] = {
   /* 0x00 */
@@ -72,12 +78,11 @@ static const unsigned short ebcdic838_2uni[256] = {
   0x0038, 0x0039, 0x0e4b, 0x0e4c, 0x0e4d, 0x0e4b, 0x0e4c, 0x009f,
 };
 
-static int
-ebcdic838_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic838_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  *pwc = (ucs4_t) ebcdic838_2uni[c];
-  return 1;
+    unsigned char c = *s;
+    *pwc = (ucs4_t)ebcdic838_2uni[c];
+    return 1;
 }
 
 static const unsigned char ebcdic838_page00[176] = {
@@ -119,17 +124,19 @@ static const unsigned char ebcdic838_page0e[96] = {
   0xb8, 0xb9, 0x90, 0xa0, 0x00, 0x00, 0x00, 0x00, /* 0x58-0x5f */
 };
 
-static int
-ebcdic838_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic838_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00b0)
-    c = ebcdic838_page00[wc];
-  else if (wc >= 0x0e00 && wc < 0x0e60)
-    c = ebcdic838_page0e[wc-0x0e00];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00b0)
+        c = ebcdic838_page00[wc];
+    else if (wc >= 0x0e00 && wc < 0x0e60)
+        c = ebcdic838_page0e[wc - 0x0e00];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC838_H_ */

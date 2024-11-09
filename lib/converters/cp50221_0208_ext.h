@@ -1,5 +1,10 @@
+/**
+ * @file cp50221_0208_ext.h
+ * @brief CP50221 JISX0208 extensions
+ * @copyright Copyright (C) 1999-2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP50221 JISX0208 extensions
- */
+#ifndef _CP50221_0208_EXT_H_
+#define _CP50221_0208_EXT_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp50221_0208_ext_2uni[96] = {
   /* 0x00 */
@@ -42,18 +48,19 @@ static const unsigned short cp50221_0208_ext_2uni[96] = {
   0x221f, 0x22bf, 0xfffd, 0xfffd, 0xfffd, 0xfffd, 0xfffd, 0xfffd,
 };
 
-static int
-cp50221_0208_ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp50221_0208_ext_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x60) {
-    unsigned short wc = cp50221_0208_ext_2uni[c];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x60)
+    {
+        unsigned short wc = cp50221_0208_ext_2uni[c];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
     }
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned char cp50221_0208_ext_page21[96] = {
@@ -121,29 +128,31 @@ static const unsigned char cp50221_0208_ext_page33[208] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x43, 0x00, 0x00, /* 0xc8-0xcf */
 };
 
-static int
-cp50221_0208_ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp50221_0208_ext_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc >= 0x2110 && wc < 0x2170)
-    c = cp50221_0208_ext_page21[wc-0x2110];
-  else if (wc >= 0x2210 && wc < 0x2230)
-    c = cp50221_0208_ext_page22[wc-0x2210];
-  else if (wc == 0x22bf)
-    c = 0x59;
-  else if (wc >= 0x2460 && wc < 0x2478)
-    c = cp50221_0208_ext_page24[wc-0x2460];
-  else if (wc >= 0x3018 && wc < 0x3020)
-    c = cp50221_0208_ext_page30[wc-0x3018];
-  else if (wc >= 0x3230 && wc < 0x3240)
-    c = cp50221_0208_ext_page32[wc-0x3230];
-  else if (wc >= 0x32a0 && wc < 0x32b0)
-    c = cp50221_0208_ext_page32_1[wc-0x32a0];
-  else if (wc >= 0x3300 && wc < 0x33d0)
-    c = cp50221_0208_ext_page33[wc-0x3300];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc >= 0x2110 && wc < 0x2170)
+        c = cp50221_0208_ext_page21[wc - 0x2110];
+    else if (wc >= 0x2210 && wc < 0x2230)
+        c = cp50221_0208_ext_page22[wc - 0x2210];
+    else if (wc == 0x22bf)
+        c = 0x59;
+    else if (wc >= 0x2460 && wc < 0x2478)
+        c = cp50221_0208_ext_page24[wc - 0x2460];
+    else if (wc >= 0x3018 && wc < 0x3020)
+        c = cp50221_0208_ext_page30[wc - 0x3018];
+    else if (wc >= 0x3230 && wc < 0x3240)
+        c = cp50221_0208_ext_page32[wc - 0x3230];
+    else if (wc >= 0x32a0 && wc < 0x32b0)
+        c = cp50221_0208_ext_page32_1[wc - 0x32a0];
+    else if (wc >= 0x3300 && wc < 0x33d0)
+        c = cp50221_0208_ext_page33[wc - 0x3300];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP50221_0208_EXT_H_ */

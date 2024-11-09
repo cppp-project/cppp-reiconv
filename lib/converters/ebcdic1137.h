@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic1137.h
+ * @brief IBM-1137
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-1137
- */
+#ifndef _EBCDIC1137_H_
+#define _EBCDIC1137_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic1137_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic1137_2uni[256] = {
   0x0038, 0x0039, 0x096c, 0x096d, 0x096e, 0x096f, 0x0970, 0x009f,
 };
 
-static int
-ebcdic1137_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic1137_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic1137_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic1137_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char ebcdic1137_page00[168] = {
@@ -128,19 +134,21 @@ static const unsigned char ebcdic1137_page20[8] = {
   0x00, 0x00, 0x00, 0x00, 0xa0, 0xe1, 0x00, 0x00, /* 0x08-0x0f */
 };
 
-static int
-ebcdic1137_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic1137_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00a8)
-    c = ebcdic1137_page00[wc];
-  else if (wc >= 0x0900 && wc < 0x0978)
-    c = ebcdic1137_page09[wc-0x0900];
-  else if (wc >= 0x2008 && wc < 0x2010)
-    c = ebcdic1137_page20[wc-0x2008];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00a8)
+        c = ebcdic1137_page00[wc];
+    else if (wc >= 0x0900 && wc < 0x0978)
+        c = ebcdic1137_page09[wc - 0x0900];
+    else if (wc >= 0x2008 && wc < 0x2010)
+        c = ebcdic1137_page20[wc - 0x2008];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC1137_H_ */

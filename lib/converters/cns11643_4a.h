@@ -1,5 +1,10 @@
+/**
+ * @file cns11643_4a.h
+ * @brief CNS 11643-1992 plane 4 part a
+ * @copyright Copyright (C) 1999-2002 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CNS 11643-1992 plane 4 part a
- */
+#ifndef _CNS11643_4A_H_
+#define _CNS11643_4A_H_
 
-static const unsigned short cns11643_4a_2uni_page21[2914] = {
+#include "reiconv_defines.h"
+
+static const unsigned short cns11643_4a_2uni_page21[2914] =
+{
   /* 0x21 */
   0x5a86, 0x1840, 0x1841, 0x185a, 0x75e8, 0x1802, 0x1829, 0x5b0e,
   0x6027, 0x1c02, 0x013e, 0x27dc, 0x5f3c, 0x6075, 0xd128, 0x1d42,
@@ -457,3 +464,4 @@ static const ucs4_t cns11643_4a_2uni_upages[212] = {
   0x29d00, 0x2f800, 0x2f900, 0x2fa00,
 };
 
+#endif /* _CNS11643_4A_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic870.h
+ * @brief IBM-870
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-870
- */
+#ifndef _EBCDIC870_H_
+#define _EBCDIC870_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic870_2uni[256] = {
   /* 0x00 */
@@ -72,12 +78,11 @@ static const unsigned short ebcdic870_2uni[256] = {
   0x0038, 0x0039, 0x010e, 0x0170, 0x00dc, 0x0164, 0x00da, 0x009f,
 };
 
-static int
-ebcdic870_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic870_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  *pwc = (ucs4_t) ebcdic870_2uni[c];
-  return 1;
+    unsigned char c = *s;
+    *pwc = (ucs4_t)ebcdic870_2uni[c];
+    return 1;
 }
 
 static const unsigned char ebcdic870_page00[384] = {
@@ -138,17 +143,19 @@ static const unsigned char ebcdic870_page02[32] = {
   0x80, 0xb0, 0x00, 0x9e, 0x00, 0x64, 0x00, 0x00, /* 0xd8-0xdf */
 };
 
-static int
-ebcdic870_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic870_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0180)
-    c = ebcdic870_page00[wc];
-  else if (wc >= 0x02c0 && wc < 0x02e0)
-    c = ebcdic870_page02[wc-0x02c0];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0180)
+        c = ebcdic870_page00[wc];
+    else if (wc >= 0x02c0 && wc < 0x02e0)
+        c = ebcdic870_page02[wc - 0x02c0];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC870_H_ */

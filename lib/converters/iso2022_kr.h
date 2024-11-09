@@ -1,5 +1,10 @@
+/**
+ * @file iso2022_kr.h
+ * @brief ISO-2022-KR
+ * @copyright Copyright (C) 1999-2001, 2008, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2008, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,14 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * ISO-2022-KR
- */
+#ifndef _ISO2022_KR_H_
+#define _ISO2022_KR_H_
+
+#include "converters/ascii.h"
+#include "converters/ksc5601.h"
+#include "reiconv_defines.h"
+
+#include <stdlib.h>
 
 /* Specification: RFC 1557 */
 
@@ -29,188 +39,213 @@
    SO characters. RFC 1557 does not mandate this. */
 
 #define ESC 0x1b
-#define SO  0x0e
-#define SI  0x0f
+#define SO 0x0e
+#define SI 0x0f
 
 /*
  * The state is composed of one of the following values
  */
-#define STATE_ASCII          0
-#define STATE_TWOBYTE        1
+#define STATE_ASCII 0
+#define STATE_TWOBYTE 1
 /*
  * and one of the following values, << 8
  */
-#define STATE2_NONE                0
-#define STATE2_DESIGNATED_KSC5601  1
+#define STATE2_NONE 0
+#define STATE2_DESIGNATED_KSC5601 1
 
-#define SPLIT_STATE \
-  unsigned int state1 = state & 0xff, state2 = state >> 8
-#define COMBINE_STATE \
-  state = (state2 << 8) | state1
+#define SPLIT_STATE unsigned int state1 = state & 0xff, state2 = state >> 8
+#define COMBINE_STATE state = (state2 << 8) | state1
 
-static int
-iso2022_kr_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int iso2022_kr_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  state_t state = conv->istate;
-  SPLIT_STATE;
-  int count = 0;
-  unsigned char c;
-  for (;;) {
-    c = *s;
-    if (c == ESC) {
-      if (n < count+4)
-        goto none;
-      if (s[1] == '$') {
-        if (s[2] == ')') {
-          if (s[3] == 'C') {
-            state2 = STATE2_DESIGNATED_KSC5601;
-            s += 4; count += 4;
-            if (n < count+1)
-              goto none;
-            continue;
-          }
+    state_t state = conv->istate;
+    SPLIT_STATE;
+    int count = 0;
+    unsigned char c;
+    for (;;)
+    {
+        c = *s;
+        if (c == ESC)
+        {
+            if (n < count + 4)
+                goto none;
+            if (s[1] == '$')
+            {
+                if (s[2] == ')')
+                {
+                    if (s[3] == 'C')
+                    {
+                        state2 = STATE2_DESIGNATED_KSC5601;
+                        s += 4;
+                        count += 4;
+                        if (n < count + 1)
+                            goto none;
+                        continue;
+                    }
+                }
+            }
+            goto ilseq;
         }
-      }
-      goto ilseq;
+        if (c == SO)
+        {
+            if (state2 != STATE2_DESIGNATED_KSC5601)
+                goto ilseq;
+            state1 = STATE_TWOBYTE;
+            s++;
+            count++;
+            if (n < count + 1)
+                goto none;
+            continue;
+        }
+        if (c == SI)
+        {
+            state1 = STATE_ASCII;
+            s++;
+            count++;
+            if (n < count + 1)
+                goto none;
+            continue;
+        }
+        break;
     }
-    if (c == SO) {
-      if (state2 != STATE2_DESIGNATED_KSC5601)
-        goto ilseq;
-      state1 = STATE_TWOBYTE;
-      s++; count++;
-      if (n < count+1)
-        goto none;
-      continue;
-    }
-    if (c == SI) {
-      state1 = STATE_ASCII;
-      s++; count++;
-      if (n < count+1)
-        goto none;
-      continue;
-    }
-    break;
-  }
-  switch (state1) {
+    switch (state1)
+    {
     case STATE_ASCII:
-      if (c < 0x80) {
-        int ret = ascii_mbtowc(conv,pwc,s,1);
-        if (ret == RET_ILSEQ)
-          goto ilseq;
-        if (ret != 1) abort();
+        if (c < 0x80)
+        {
+            int ret = ascii_mbtowc(conv, pwc, s, 1);
+            if (ret == RET_ILSEQ)
+                goto ilseq;
+            if (ret != 1)
+                abort();
 #if 0 /* Accept ISO-2022-KR according to CJK.INF. */
         if (*pwc == 0x000a || *pwc == 0x000d)
           state2 = STATE2_NONE;
 #endif
-        COMBINE_STATE;
-        conv->istate = state;
-        return count+1;
-      } else
-        goto ilseq;
+            COMBINE_STATE;
+            conv->istate = state;
+            return count + 1;
+        }
+        else
+            goto ilseq;
     case STATE_TWOBYTE:
-      if (n < count+2)
-        goto none;
-      if (state2 != STATE2_DESIGNATED_KSC5601) abort();
-      if (s[0] < 0x80 && s[1] < 0x80) {
-        int ret = ksc5601_mbtowc(conv,pwc,s,2);
-        if (ret == RET_ILSEQ)
-          goto ilseq;
-        if (ret != 2) abort();
-        COMBINE_STATE;
-        conv->istate = state;
-        return count+2;
-      } else
-        goto ilseq;
-    default: abort();
-  }
+        if (n < count + 2)
+            goto none;
+        if (state2 != STATE2_DESIGNATED_KSC5601)
+            abort();
+        if (s[0] < 0x80 && s[1] < 0x80)
+        {
+            int ret = ksc5601_mbtowc(conv, pwc, s, 2);
+            if (ret == RET_ILSEQ)
+                goto ilseq;
+            if (ret != 2)
+                abort();
+            COMBINE_STATE;
+            conv->istate = state;
+            return count + 2;
+        }
+        else
+            goto ilseq;
+    default:
+        abort();
+    }
 
 none:
-  COMBINE_STATE;
-  conv->istate = state;
-  return RET_TOOFEW(count);
+    COMBINE_STATE;
+    conv->istate = state;
+    return RET_TOOFEW(count);
 
 ilseq:
-  COMBINE_STATE;
-  conv->istate = state;
-  return RET_SHIFT_ILSEQ(count);
+    COMBINE_STATE;
+    conv->istate = state;
+    return RET_SHIFT_ILSEQ(count);
 }
 
-static int
-iso2022_kr_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int iso2022_kr_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  state_t state = conv->ostate;
-  SPLIT_STATE;
-  unsigned char buf[2];
-  int ret;
+    state_t state = conv->ostate;
+    SPLIT_STATE;
+    unsigned char buf[2];
+    int ret;
 
-  /* Try ASCII. */
-  ret = ascii_wctomb(conv,buf,wc,1);
-  if (ret != RET_ILUNI) {
-    if (ret != 1) abort();
-    if (buf[0] < 0x80) {
-      int count = (state1 == STATE_ASCII ? 1 : 2);
-      if (n < count)
-        return RET_TOOSMALL;
-      if (state1 != STATE_ASCII) {
+    /* Try ASCII. */
+    ret = ascii_wctomb(conv, buf, wc, 1);
+    if (ret != RET_ILUNI)
+    {
+        if (ret != 1)
+            abort();
+        if (buf[0] < 0x80)
+        {
+            int count = (state1 == STATE_ASCII ? 1 : 2);
+            if (n < count)
+                return RET_TOOSMALL;
+            if (state1 != STATE_ASCII)
+            {
+                r[0] = SI;
+                r += 1;
+                state1 = STATE_ASCII;
+            }
+            r[0] = buf[0];
+            if (wc == 0x000a || wc == 0x000d)
+                state2 = STATE2_NONE;
+            COMBINE_STATE;
+            conv->ostate = state;
+            return count;
+        }
+    }
+
+    /* Try KS C 5601-1992. */
+    ret = ksc5601_wctomb(conv, buf, wc, 2);
+    if (ret != RET_ILUNI)
+    {
+        if (ret != 2)
+            abort();
+        if (buf[0] < 0x80 && buf[1] < 0x80)
+        {
+            int count = (state2 == STATE2_DESIGNATED_KSC5601 ? 0 : 4) + (state1 == STATE_TWOBYTE ? 0 : 1) + 2;
+            if (n < count)
+                return RET_TOOSMALL;
+            if (state2 != STATE2_DESIGNATED_KSC5601)
+            {
+                r[0] = ESC;
+                r[1] = '$';
+                r[2] = ')';
+                r[3] = 'C';
+                r += 4;
+                state2 = STATE2_DESIGNATED_KSC5601;
+            }
+            if (state1 != STATE_TWOBYTE)
+            {
+                r[0] = SO;
+                r += 1;
+                state1 = STATE_TWOBYTE;
+            }
+            r[0] = buf[0];
+            r[1] = buf[1];
+            COMBINE_STATE;
+            conv->ostate = state;
+            return count;
+        }
+    }
+
+    return RET_ILUNI;
+}
+
+static int iso2022_kr_reset(conv_t conv, unsigned char *r, size_t n)
+{
+    state_t state = conv->ostate;
+    SPLIT_STATE;
+    (void)state2;
+    if (state1 != STATE_ASCII)
+    {
+        if (n < 1)
+            return RET_TOOSMALL;
         r[0] = SI;
-        r += 1;
-        state1 = STATE_ASCII;
-      }
-      r[0] = buf[0];
-      if (wc == 0x000a || wc == 0x000d)
-        state2 = STATE2_NONE;
-      COMBINE_STATE;
-      conv->ostate = state;
-      return count;
+        /* conv->ostate = 0; will be done by the caller */
+        return 1;
     }
-  }
-
-  /* Try KS C 5601-1992. */
-  ret = ksc5601_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILUNI) {
-    if (ret != 2) abort();
-    if (buf[0] < 0x80 && buf[1] < 0x80) {
-      int count = (state2 == STATE2_DESIGNATED_KSC5601 ? 0 : 4) + (state1 == STATE_TWOBYTE ? 0 : 1) + 2;
-      if (n < count)
-        return RET_TOOSMALL;
-      if (state2 != STATE2_DESIGNATED_KSC5601) {
-        r[0] = ESC;
-        r[1] = '$';
-        r[2] = ')';
-        r[3] = 'C';
-        r += 4;
-        state2 = STATE2_DESIGNATED_KSC5601;
-      }
-      if (state1 != STATE_TWOBYTE) {
-        r[0] = SO;
-        r += 1;
-        state1 = STATE_TWOBYTE;
-      }
-      r[0] = buf[0];
-      r[1] = buf[1];
-      COMBINE_STATE;
-      conv->ostate = state;
-      return count;
-    }
-  }
-
-  return RET_ILUNI;
-}
-
-static int
-iso2022_kr_reset (conv_t conv, unsigned char *r, size_t n)
-{
-  state_t state = conv->ostate;
-  SPLIT_STATE;
-  (void)state2;
-  if (state1 != STATE_ASCII) {
-    if (n < 1)
-      return RET_TOOSMALL;
-    r[0] = SI;
-    /* conv->ostate = 0; will be done by the caller */
-    return 1;
-  } else
-    return 0;
+    else
+        return 0;
 }
 
 #undef COMBINE_STATE
@@ -219,3 +254,5 @@ iso2022_kr_reset (conv_t conv, unsigned char *r, size_t n)
 #undef STATE2_NONE
 #undef STATE_TWOBYTE
 #undef STATE_ASCII
+
+#endif /* _ISO2022_KR_H_ */

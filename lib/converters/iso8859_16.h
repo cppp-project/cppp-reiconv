@@ -1,5 +1,10 @@
+/**
+ * @file iso8859_16.h
+ * @brief ISO-8859-16
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * ISO-8859-16
- */
+#ifndef _ISO8859_16_H_
+#define _ISO8859_16_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short iso8859_16_2uni[96] = {
   /* 0xa0 */
@@ -42,15 +48,14 @@ static const unsigned short iso8859_16_2uni[96] = {
   0x0171, 0x00f9, 0x00fa, 0x00fb, 0x00fc, 0x0119, 0x021b, 0x00ff,
 };
 
-static int
-iso8859_16_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int iso8859_16_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0xa0)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) iso8859_16_2uni[c-0xa0];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0xa0)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)iso8859_16_2uni[c - 0xa0];
+    return 1;
 }
 
 static const unsigned char iso8859_16_page00[224] = {
@@ -91,25 +96,28 @@ static const unsigned char iso8859_16_page20[8] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0xb5, 0xa5, 0x00, /* 0x18-0x1f */
 };
 
-static int
-iso8859_16_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int iso8859_16_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00a0) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0180)
-    c = iso8859_16_page00[wc-0x00a0];
-  else if (wc >= 0x0218 && wc < 0x0220)
-    c = iso8859_16_page02[wc-0x0218];
-  else if (wc >= 0x2018 && wc < 0x2020)
-    c = iso8859_16_page20[wc-0x2018];
-  else if (wc == 0x20ac)
-    c = 0xa4;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00a0)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0180)
+        c = iso8859_16_page00[wc - 0x00a0];
+    else if (wc >= 0x0218 && wc < 0x0220)
+        c = iso8859_16_page02[wc - 0x0218];
+    else if (wc >= 0x2018 && wc < 0x2020)
+        c = iso8859_16_page20[wc - 0x2018];
+    else if (wc == 0x20ac)
+        c = 0xa4;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _ISO8859_16_H_ */

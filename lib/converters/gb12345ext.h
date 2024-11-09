@@ -1,5 +1,10 @@
+/**
+ * @file gb12345ext.h
+ * @brief GB/T 12345.1990-0 extensions
+ * @copyright Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * GB/T 12345.1990-0 extensions
- */
+#ifndef _GB12345EXT_H_
+#define _GB12345EXT_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short gb12345ext_2uni_page21[12] = {
   /* 0x21 */
@@ -1757,39 +1763,44 @@ static const Summary16 gb12345ext_uni2indx_pagefe[5] = {
   { 2247, 0x001f },
 };
 
-static int
-gb12345ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int gb12345ext_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc >= 0x0100 && wc < 0x0270)
-      summary = &gb12345ext_uni2indx_page01[(wc>>4)-0x010];
-    else if (wc >= 0x1e00 && wc < 0x1e40)
-      summary = &gb12345ext_uni2indx_page1e[(wc>>4)-0x1e0];
-    else if (wc >= 0x2200 && wc < 0x2230)
-      summary = &gb12345ext_uni2indx_page22[(wc>>4)-0x220];
-    else if (wc >= 0x4e00 && wc < 0x9fa0)
-      summary = &gb12345ext_uni2indx_page4e[(wc>>4)-0x4e0];
-    else if (wc >= 0xfe00 && wc < 0xfe50)
-      summary = &gb12345ext_uni2indx_pagefe[(wc>>4)-0xfe0];
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        c = gb12345ext_2charset[summary->indx + used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc >= 0x0100 && wc < 0x0270)
+            summary = &gb12345ext_uni2indx_page01[(wc >> 4) - 0x010];
+        else if (wc >= 0x1e00 && wc < 0x1e40)
+            summary = &gb12345ext_uni2indx_page1e[(wc >> 4) - 0x1e0];
+        else if (wc >= 0x2200 && wc < 0x2230)
+            summary = &gb12345ext_uni2indx_page22[(wc >> 4) - 0x220];
+        else if (wc >= 0x4e00 && wc < 0x9fa0)
+            summary = &gb12345ext_uni2indx_page4e[(wc >> 4) - 0x4e0];
+        else if (wc >= 0xfe00 && wc < 0xfe50)
+            summary = &gb12345ext_uni2indx_pagefe[(wc >> 4) - 0xfe0];
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                c = gb12345ext_2charset[summary->indx + used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _GB12345EXT_H_ */

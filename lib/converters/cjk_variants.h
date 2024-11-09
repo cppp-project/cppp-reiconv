@@ -1,5 +1,10 @@
+/**
+ * @file cjk_variants.h
+ * @brief CJK variants table
+ * @copyright Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,8 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CJK variants table
- */
+#ifndef _CJK_VARIANTS_H_
+#define _CJK_VARIANTS_H_
 
 static const unsigned short cjk_variants[12038] = {
   0x9e44, 0x1e2a, 0x200b, 0xcb87, 0xaf0c, 0x9e0a, 0x9e0b, 0xd42c,
@@ -4238,3 +4242,5 @@ static const short cjk_variants_indx[0x5200] = {
      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
 };
 
+
+#endif /* _CJK_VARIANTS_H_ */

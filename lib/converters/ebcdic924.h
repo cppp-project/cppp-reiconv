@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic924.h
+ * @brief IBM-924
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-924
- */
+#ifndef _EBCDIC924_H_
+#define _EBCDIC924_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic924_2uni[256] = {
   /* 0x00 */
@@ -72,12 +78,11 @@ static const unsigned short ebcdic924_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x00db, 0x00dc, 0x00d9, 0x00da, 0x009f,
 };
 
-static int
-ebcdic924_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic924_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  *pwc = (ucs4_t) ebcdic924_2uni[c];
-  return 1;
+    unsigned char c = *s;
+    *pwc = (ucs4_t)ebcdic924_2uni[c];
+    return 1;
 }
 
 static const unsigned char ebcdic924_page00[256] = {
@@ -123,19 +128,21 @@ static const unsigned char ebcdic924_page01[48] = {
   0xb9, 0x00, 0x00, 0x00, 0x00, 0xbe, 0x9d, 0x00, /* 0x78-0x7f */
 };
 
-static int
-ebcdic924_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic924_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0100)
-    c = ebcdic924_page00[wc];
-  else if (wc >= 0x0150 && wc < 0x0180)
-    c = ebcdic924_page01[wc-0x0150];
-  else if (wc == 0x20ac)
-    c = 0x9f;
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0100)
+        c = ebcdic924_page00[wc];
+    else if (wc >= 0x0150 && wc < 0x0180)
+        c = ebcdic924_page01[wc - 0x0150];
+    else if (wc == 0x20ac)
+        c = 0x9f;
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC924_H_ */

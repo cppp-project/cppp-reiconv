@@ -1,5 +1,10 @@
+/**
+ * @file iso2022_jp3.h
+ * @brief ISO-2022-JP-3
+ * @copyright Copyright (C) 1999-2004, 2008, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2004, 2008, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -18,16 +23,22 @@
  */
 
 /*
- * ISO-2022-JP-3
+ * The state is composed of one of the following values
  */
 
-#include "jisx0213.h"
+#ifndef _ISO2022_JP3_H_
+#define _ISO2022_JP3_H_
+
+#include "converters/ascii.h"
+#include "converters/jisx0201.h"
+#include "converters/jisx0208.h"
+#include "converters/jisx0213.h"
+#include "reiconv_defines.h"
+
+#include <stdlib.h>
 
 #define ESC 0x1b
 
-/*
- * The state is composed of one of the following values
- */
 #define STATE_ASCII             0  /* Esc ( B */
 #define STATE_JISX0201ROMAN     1  /* Esc ( J */
 #define STATE_JISX0201KATAKANA  2  /* Esc ( I */
@@ -535,3 +546,5 @@ iso2022_jp3_reset (conv_t conv, unsigned char *r, size_t n)
 #undef STATE_JISX0201KATAKANA
 #undef STATE_JISX0201ROMAN
 #undef STATE_ASCII
+
+#endif /* _ISO2022_JP3_H_ */

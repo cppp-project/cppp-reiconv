@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic4971.h
+ * @brief IBM-4971
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-4971
- */
+#ifndef _EBCDIC4971_H_
+#define _EBCDIC4971_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic4971_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic4971_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x00a9, 0x20ac, 0xfffd, 0x00bb, 0x009f,
 };
 
-static int
-ebcdic4971_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic4971_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic4971_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic4971_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 #if DEDUPLICATE_TABLES
@@ -139,21 +145,23 @@ static const unsigned char ebcdic4971_page20[16] = {
 };
 #endif
 
-static int
-ebcdic4971_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic4971_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00c0)
-    c = ebcdic4971_page00[wc];
-  else if (wc >= 0x0380 && wc < 0x03d0)
-    c = ebcdic4971_page03[wc-0x0380];
-  else if (wc >= 0x2010 && wc < 0x2020)
-    c = ebcdic4971_page20[wc-0x2010];
-  else if (wc == 0x20ac)
-    c = 0xfc;
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00c0)
+        c = ebcdic4971_page00[wc];
+    else if (wc >= 0x0380 && wc < 0x03d0)
+        c = ebcdic4971_page03[wc - 0x0380];
+    else if (wc >= 0x2010 && wc < 0x2020)
+        c = ebcdic4971_page20[wc - 0x2010];
+    else if (wc == 0x20ac)
+        c = 0xfc;
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC4971_H_ */

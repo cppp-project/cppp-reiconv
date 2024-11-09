@@ -1,5 +1,10 @@
+/**
+ * @file riscos1.h
+ * @brief RISCOS-LATIN1
+ * @copyright Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * RISCOS-LATIN1
- */
+#ifndef _RISCOS1_H_
+#define _RISCOS1_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short riscos1_2uni[32] = {
   /* 0x80 */
@@ -30,15 +36,14 @@ static const unsigned short riscos1_2uni[32] = {
   0x2014, 0x2212, 0x0152, 0x0153, 0x2020, 0x2021, 0xfb01, 0xfb02,
 };
 
-static int
-riscos1_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int riscos1_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c >= 0x80 && c < 0xa0)
-    *pwc = (ucs4_t) riscos1_2uni[c-0x80];
-  else
-    *pwc = (ucs4_t) c;
-  return 1;
+    unsigned char c = *s;
+    if (c >= 0x80 && c < 0xa0)
+        *pwc = (ucs4_t)riscos1_2uni[c - 0x80];
+    else
+        *pwc = (ucs4_t)c;
+    return 1;
 }
 
 static const unsigned char riscos1_page01[40] = {
@@ -65,31 +70,34 @@ static const unsigned char riscos1_page22[16] = {
   0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x18-0x1f */
 };
 
-static int
-riscos1_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int riscos1_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080 || wc == 0x0083 || wc == 0x0087 || (wc >= 0x00a0 && wc < 0x0100)) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x0150 && wc < 0x0178)
-    c = riscos1_page01[wc-0x0150];
-  else if (wc >= 0x2010 && wc < 0x2040)
-    c = riscos1_page20[wc-0x2010];
-  else if (wc == 0x2122)
-    c = 0x8d;
-  else if (wc >= 0x21e0 && wc < 0x21f0)
-    c = riscos1_page21[wc-0x21e0];
-  else if (wc >= 0x2210 && wc < 0x2220)
-    c = riscos1_page22[wc-0x2210];
-  else if (wc == 0x2573)
-    c = 0x84;
-  else if (wc >= 0xfb01 && wc < 0xfb03)
-    c = wc-0xfa63;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080 || wc == 0x0083 || wc == 0x0087 || (wc >= 0x00a0 && wc < 0x0100))
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x0150 && wc < 0x0178)
+        c = riscos1_page01[wc - 0x0150];
+    else if (wc >= 0x2010 && wc < 0x2040)
+        c = riscos1_page20[wc - 0x2010];
+    else if (wc == 0x2122)
+        c = 0x8d;
+    else if (wc >= 0x21e0 && wc < 0x21f0)
+        c = riscos1_page21[wc - 0x21e0];
+    else if (wc >= 0x2210 && wc < 0x2220)
+        c = riscos1_page22[wc - 0x2210];
+    else if (wc == 0x2573)
+        c = 0x84;
+    else if (wc >= 0xfb01 && wc < 0xfb03)
+        c = wc - 0xfa63;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _RISCOS1_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file mac_hebrew.h
+ * @brief MacHebrew
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * MacHebrew
- */
+#ifndef _MAC_HEBREW_H_
+#define _MAC_HEBREW_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short mac_hebrew_2uni[128] = {
   /* 0x80 */
@@ -48,22 +54,24 @@ static const unsigned short mac_hebrew_2uni[128] = {
   0x05e8, 0x05e9, 0x05ea, 0xfffd, 0xfffd, 0xfffd, 0xfffd, 0xfffd,
 };
 
-static int
-mac_hebrew_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int mac_hebrew_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else if (c >= 0x80) {
-    unsigned short wc = mac_hebrew_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else if (c >= 0x80)
+    {
+        unsigned short wc = mac_hebrew_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char mac_hebrew_page00[96] = {
@@ -105,27 +113,30 @@ static const unsigned char mac_hebrew_pagefb[56] = {
   0x00, 0x00, 0x00, 0xc7, 0x00, 0x00, 0x00, 0x00, /* 0x48-0x4f */
 };
 
-static int
-mac_hebrew_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int mac_hebrew_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0100)
-    c = mac_hebrew_page00[wc-0x00a0];
-  else if (wc >= 0x05b0 && wc < 0x05f0)
-    c = mac_hebrew_page05[wc-0x05b0];
-  else if (wc >= 0x2010 && wc < 0x2028)
-    c = mac_hebrew_page20[wc-0x2010];
-  else if (wc == 0x20aa)
-    c = 0xa6;
-  else if (wc >= 0xfb18 && wc < 0xfb50)
-    c = mac_hebrew_pagefb[wc-0xfb18];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0100)
+        c = mac_hebrew_page00[wc - 0x00a0];
+    else if (wc >= 0x05b0 && wc < 0x05f0)
+        c = mac_hebrew_page05[wc - 0x05b0];
+    else if (wc >= 0x2010 && wc < 0x2028)
+        c = mac_hebrew_page20[wc - 0x2010];
+    else if (wc == 0x20aa)
+        c = 0xa6;
+    else if (wc >= 0xfb18 && wc < 0xfb50)
+        c = mac_hebrew_pagefb[wc - 0xfb18];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _MAC_HEBREW_H_ */

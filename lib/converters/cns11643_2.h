@@ -1,5 +1,10 @@
+/**
+ * @file cns11643_2.h
+ * @brief CNS 11643-1992 plane 2
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CNS 11643-1992 plane 2
- */
+#ifndef _CNS11643_2_H_
+#define _CNS11643_2_H_
 
-static const unsigned short cns11643_2_2uni_page21[7650] = {
+#include "reiconv_defines.h"
+
+static const unsigned short cns11643_2_2uni_page21[7650] =
+{
   /* 0x21 */
   0x4e42, 0x4e5c, 0x51f5, 0x531a, 0x5382, 0x4e07, 0x4e0c, 0x4e47,
   0x4e8d, 0x56d7, 0x5c6e, 0x5f73, 0x4e0f, 0x5187, 0x4e0e, 0x4e2e,
@@ -1083,29 +1090,33 @@ static const unsigned short cns11643_2_2uni_page21[7650] = {
   0x9ea4, 0x9f7e, 0x9f49, 0x9f98,
 };
 
-static int
-cns11643_2_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cns11643_2_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x21 && c1 <= 0x72)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x21 && c2 < 0x7f) {
-        unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
-        unsigned short wc = 0xfffd;
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x21 && c1 <= 0x72))
+    {
+        if (n >= 2)
         {
-          if (i < 7650)
-            wc = cns11643_2_2uni_page21[i];
+            unsigned char c2 = s[1];
+            if (c2 >= 0x21 && c2 < 0x7f)
+            {
+                unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
+                unsigned short wc = 0xfffd;
+                {
+                    if (i < 7650)
+                        wc = cns11643_2_2uni_page21[i];
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
+#endif /* _CNS11643_2_H_ */

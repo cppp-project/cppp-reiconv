@@ -1,5 +1,10 @@
+/**
+ * @file mac_greek.h
+ * @brief MacGreek
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * MacGreek
- */
+#ifndef _MAC_GREEK_H_
+#define _MAC_GREEK_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short mac_greek_2uni[128] = {
   /* 0x80 */
@@ -48,22 +54,24 @@ static const unsigned short mac_greek_2uni[128] = {
   0x03c7, 0x03c5, 0x03b6, 0x03ca, 0x03cb, 0x0390, 0x03b0, 0xfffd,
 };
 
-static int
-mac_greek_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int mac_greek_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = mac_greek_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = mac_greek_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char mac_greek_page00[96] = {
@@ -106,29 +114,32 @@ static const unsigned char mac_greek_page22[32] = {
   0xad, 0x00, 0x00, 0x00, 0xb2, 0xb3, 0x00, 0x00, /* 0x60-0x67 */
 };
 
-static int
-mac_greek_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int mac_greek_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0100)
-    c = mac_greek_page00[wc-0x00a0];
-  else if (wc == 0x0153)
-    c = 0xcf;
-  else if (wc >= 0x0380 && wc < 0x03d0)
-    c = mac_greek_page03[wc-0x0380];
-  else if (wc >= 0x2010 && wc < 0x2038)
-    c = mac_greek_page20[wc-0x2010];
-  else if (wc == 0x2122)
-    c = 0x93;
-  else if (wc >= 0x2248 && wc < 0x2268)
-    c = mac_greek_page22[wc-0x2248];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0100)
+        c = mac_greek_page00[wc - 0x00a0];
+    else if (wc == 0x0153)
+        c = 0xcf;
+    else if (wc >= 0x0380 && wc < 0x03d0)
+        c = mac_greek_page03[wc - 0x0380];
+    else if (wc >= 0x2010 && wc < 0x2038)
+        c = mac_greek_page20[wc - 0x2010];
+    else if (wc == 0x2122)
+        c = 0x93;
+    else if (wc >= 0x2248 && wc < 0x2268)
+        c = mac_greek_page22[wc - 0x2248];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _MAC_GREEK_H_ */

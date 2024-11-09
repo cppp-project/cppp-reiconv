@@ -1,5 +1,10 @@
+/**
+ * @file mac_centraleurope.h
+ * @brief MacCentralEurope
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * MacCentralEurope
- */
+#ifndef _MAC_CENTRALEUROPE_H_
+#define _MAC_CENTRALEUROPE_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short mac_centraleurope_2uni[128] = {
   /* 0x80 */
@@ -48,15 +54,14 @@ static const unsigned short mac_centraleurope_2uni[128] = {
   0x00dd, 0x00fd, 0x0137, 0x017b, 0x0141, 0x017c, 0x0122, 0x02c7,
 };
 
-static int
-mac_centraleurope_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int mac_centraleurope_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) mac_centraleurope_2uni[c-0x80];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)mac_centraleurope_2uni[c - 0x80];
+    return 1;
 }
 
 static const unsigned char mac_centraleurope_page00[224] = {
@@ -108,31 +113,34 @@ static const unsigned char mac_centraleurope_page22_1[8] = {
   0xad, 0x00, 0x00, 0x00, 0xb2, 0xb3, 0x00, 0x00, /* 0x60-0x67 */
 };
 
-static int
-mac_centraleurope_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int mac_centraleurope_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0180)
-    c = mac_centraleurope_page00[wc-0x00a0];
-  else if (wc == 0x02c7)
-    c = 0xff;
-  else if (wc >= 0x2010 && wc < 0x2040)
-    c = mac_centraleurope_page20[wc-0x2010];
-  else if (wc == 0x2122)
-    c = 0xaa;
-  else if (wc >= 0x2200 && wc < 0x2220)
-    c = mac_centraleurope_page22[wc-0x2200];
-  else if (wc >= 0x2260 && wc < 0x2268)
-    c = mac_centraleurope_page22_1[wc-0x2260];
-  else if (wc == 0x25ca)
-    c = 0xd7;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0180)
+        c = mac_centraleurope_page00[wc - 0x00a0];
+    else if (wc == 0x02c7)
+        c = 0xff;
+    else if (wc >= 0x2010 && wc < 0x2040)
+        c = mac_centraleurope_page20[wc - 0x2010];
+    else if (wc == 0x2122)
+        c = 0xaa;
+    else if (wc >= 0x2200 && wc < 0x2220)
+        c = mac_centraleurope_page22[wc - 0x2200];
+    else if (wc >= 0x2260 && wc < 0x2268)
+        c = mac_centraleurope_page22_1[wc - 0x2260];
+    else if (wc == 0x25ca)
+        c = 0xd7;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _MAC_CENTRALEUROPE_H_ */

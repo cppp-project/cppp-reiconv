@@ -1,5 +1,10 @@
+/**
+ * @file gb18030ext.h
+ * @brief GB18030 two-byte extension
+ * @copyright Copyright (C) 1999-2001, 2005, 2011, 2016, 2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2005, 2011, 2016, 2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * GB18030 two-byte extension
- */
+#ifndef _GB18030EXT_H_
+#define _GB18030EXT_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short gb18030ext_2uni_pagea9[13] = {
   /* 0xa9 */
@@ -58,204 +64,212 @@ static const unsigned short gb18030_2022_ext_2uni_pagefe[96] = {
   0x4d14, 0x4d15, 0x4d16, 0x4d17, 0x4d18, 0x4d19, 0x4dae, 0x9fbb,
 };
 
-static int
-gb18030_2005_ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int gb18030_2005_ext_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 == 0xa2) || (c1 >= 0xa4 && c1 <= 0xa9) || (c1 == 0xd7) || (c1 == 0xfe)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xff)) {
-        unsigned int i = 190 * (c1 - 0x81) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
-        unsigned int wc = 0xfffd;
-        switch (c1) {
-          case 0xa2:
-            if (i >= 6376 && i <= 6381) /* 0xA2AB..0xA2B0 */
-              wc = 0xe766 + (i - 6376);
-            else if (i == 6432) /* 0xA2E3 */
-              wc = 0x20ac;
-            else if (i == 6433) /* 0xA2E4 */
-              wc = 0xe76d;
-            else if (i >= 6444 && i <= 6445) /* 0xA2EF..0xA2F0 */
-              wc = 0xe76e + (i - 6444);
-            else if (i >= 6458 && i <= 6459) /* 0xA2FD..0xA2FE */
-              wc = 0xe770 + (i - 6458);
-            break;
-          case 0xa4:
-            if (i >= 6829 && i <= 6839) /* 0xA4F4..0xA4FE */
-              wc = 0xe772 + (i - 6829);
-            break;
-          case 0xa5:
-            if (i >= 7022 && i <= 7029) /* 0xA5F7..0xA5FE */
-              wc = 0xe77d + (i - 7022);
-            break;
-          case 0xa6:
-            if (i >= 7150 && i <= 7157) /* 0xA6B9..0xA6C0 */
-              wc = 0xe785 + (i - 7150);
-            else if (i >= 7183 && i <= 7184) /* 0xA6DA..0xA6DB */
-              wc = 0xfe12 - (i - 7183);
-            else if (i >= 7182 && i <= 7190) /* 0xA6D9..0xA6DF */
-              wc = 0xfe10 + (i - 7182);
-            else if (i >= 7201 && i <= 7202) /* 0xA6EC..0xA6ED */
-              wc = 0xfe17 + (i - 7201);
-            else if (i == 7208) /* 0xA6F3 */
-              wc = 0xfe19;
-            else if (i >= 7211 && i <= 7219) /* 0xA6F6..0xA6FE */
-              wc = 0xe797 + (i - 7211);
-            break;
-          case 0xa7:
-            if (i >= 7349 && i <= 7363) /* 0xA7C2..0xA7D0 */
-              wc = 0xe7a0 + (i - 7349);
-            else if (i >= 7397 && i <= 7409) /* 0xA7F2..0xA7FE */
-              wc = 0xe7af + (i - 7397);
-            break;
-          case 0xa8:
-            if (i >= 7495 && i <= 7505) /* 0xA896..0xA8A0 */
-              wc = 0xe7bc + (i - 7495);
-            else if (i == 7533) /* 0xA8BC */
-              wc = 0x1e3f;
-            else if (i == 7536) /* 0xA8BF */
-              wc = 0x01f9;
-            else if (i >= 7538 && i <= 7541) /* 0xA8C1..0xA8C4 */
-              wc = 0xe7c9 + (i - 7538);
-            else if (i >= 7579 && i <= 7599) /* 0xA8EA..0xA8FE */
-              wc = 0xe7cd + (i - 7579);
-            break;
-          case 0xa9:
-            if (i == 7624) /* 0xA958 */
-              wc = 0xe7e2;
-            else if (i == 7627) /* 0xA95B */
-              wc = 0xe7e3;
-            else if (i >= 7629 && i <= 7631) /* 0xA95D..0xA95F */
-              wc = 0xe7e4 + (i - 7629);
-            else if (i >= 7672 && i < 7685) /* 0xA989..0xA995 */
-              wc = gb18030ext_2uni_pagea9[i-7672];
-            else if (i >= 7686 && i <= 7698) /* 0xA997..0xA9A3 */
-              wc = 0xe7f4 + (i - 7686);
-            else if (i >= 7775 && i <= 7789) /* 0xA9F0..0xA9FE */
-              wc = 0xe801 + (i - 7775);
-            break;
-          case 0xd7:
-            if (i >= 16525 && i <= 16529) /* 0xD7FA..0xD7FE */
-              wc = 0xe810 + (i - 16525);
-            break;
-          case 0xfe:
-            if (i < 23846)
-              wc = gb18030_2005_ext_2uni_pagefe[i-23750];
-            break;
-          default:
-            break;
+    unsigned char c1 = s[0];
+    if ((c1 == 0xa2) || (c1 >= 0xa4 && c1 <= 0xa9) || (c1 == 0xd7) || (c1 == 0xfe))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xff))
+            {
+                unsigned int i = 190 * (c1 - 0x81) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
+                unsigned int wc = 0xfffd;
+                switch (c1)
+                {
+                case 0xa2:
+                    if (i >= 6376 && i <= 6381) /* 0xA2AB..0xA2B0 */
+                        wc = 0xe766 + (i - 6376);
+                    else if (i == 6432) /* 0xA2E3 */
+                        wc = 0x20ac;
+                    else if (i == 6433) /* 0xA2E4 */
+                        wc = 0xe76d;
+                    else if (i >= 6444 && i <= 6445) /* 0xA2EF..0xA2F0 */
+                        wc = 0xe76e + (i - 6444);
+                    else if (i >= 6458 && i <= 6459) /* 0xA2FD..0xA2FE */
+                        wc = 0xe770 + (i - 6458);
+                    break;
+                case 0xa4:
+                    if (i >= 6829 && i <= 6839) /* 0xA4F4..0xA4FE */
+                        wc = 0xe772 + (i - 6829);
+                    break;
+                case 0xa5:
+                    if (i >= 7022 && i <= 7029) /* 0xA5F7..0xA5FE */
+                        wc = 0xe77d + (i - 7022);
+                    break;
+                case 0xa6:
+                    if (i >= 7150 && i <= 7157) /* 0xA6B9..0xA6C0 */
+                        wc = 0xe785 + (i - 7150);
+                    else if (i >= 7183 && i <= 7184) /* 0xA6DA..0xA6DB */
+                        wc = 0xfe12 - (i - 7183);
+                    else if (i >= 7182 && i <= 7190) /* 0xA6D9..0xA6DF */
+                        wc = 0xfe10 + (i - 7182);
+                    else if (i >= 7201 && i <= 7202) /* 0xA6EC..0xA6ED */
+                        wc = 0xfe17 + (i - 7201);
+                    else if (i == 7208) /* 0xA6F3 */
+                        wc = 0xfe19;
+                    else if (i >= 7211 && i <= 7219) /* 0xA6F6..0xA6FE */
+                        wc = 0xe797 + (i - 7211);
+                    break;
+                case 0xa7:
+                    if (i >= 7349 && i <= 7363) /* 0xA7C2..0xA7D0 */
+                        wc = 0xe7a0 + (i - 7349);
+                    else if (i >= 7397 && i <= 7409) /* 0xA7F2..0xA7FE */
+                        wc = 0xe7af + (i - 7397);
+                    break;
+                case 0xa8:
+                    if (i >= 7495 && i <= 7505) /* 0xA896..0xA8A0 */
+                        wc = 0xe7bc + (i - 7495);
+                    else if (i == 7533) /* 0xA8BC */
+                        wc = 0x1e3f;
+                    else if (i == 7536) /* 0xA8BF */
+                        wc = 0x01f9;
+                    else if (i >= 7538 && i <= 7541) /* 0xA8C1..0xA8C4 */
+                        wc = 0xe7c9 + (i - 7538);
+                    else if (i >= 7579 && i <= 7599) /* 0xA8EA..0xA8FE */
+                        wc = 0xe7cd + (i - 7579);
+                    break;
+                case 0xa9:
+                    if (i == 7624) /* 0xA958 */
+                        wc = 0xe7e2;
+                    else if (i == 7627) /* 0xA95B */
+                        wc = 0xe7e3;
+                    else if (i >= 7629 && i <= 7631) /* 0xA95D..0xA95F */
+                        wc = 0xe7e4 + (i - 7629);
+                    else if (i >= 7672 && i < 7685) /* 0xA989..0xA995 */
+                        wc = gb18030ext_2uni_pagea9[i - 7672];
+                    else if (i >= 7686 && i <= 7698) /* 0xA997..0xA9A3 */
+                        wc = 0xe7f4 + (i - 7686);
+                    else if (i >= 7775 && i <= 7789) /* 0xA9F0..0xA9FE */
+                        wc = 0xe801 + (i - 7775);
+                    break;
+                case 0xd7:
+                    if (i >= 16525 && i <= 16529) /* 0xD7FA..0xD7FE */
+                        wc = 0xe810 + (i - 16525);
+                    break;
+                case 0xfe:
+                    if (i < 23846)
+                        wc = gb18030_2005_ext_2uni_pagefe[i - 23750];
+                    break;
+                default:
+                    break;
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
-static int
-gb18030_2022_ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int gb18030_2022_ext_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 == 0xa2) || (c1 >= 0xa4 && c1 <= 0xa9) || (c1 == 0xd7) || (c1 == 0xfe)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xff)) {
-        unsigned int i = 190 * (c1 - 0x81) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
-        unsigned int wc = 0xfffd;
-        switch (c1) {
-          case 0xa2:
-            if (i >= 6376 && i <= 6381) /* 0xA2AB..0xA2B0 */
-              wc = 0xe766 + (i - 6376);
-            else if (i == 6432) /* 0xA2E3 */
-              wc = 0x20ac;
-            else if (i == 6433) /* 0xA2E4 */
-              wc = 0xe76d;
-            else if (i >= 6444 && i <= 6445) /* 0xA2EF..0xA2F0 */
-              wc = 0xe76e + (i - 6444);
-            else if (i >= 6458 && i <= 6459) /* 0xA2FD..0xA2FE */
-              wc = 0xe770 + (i - 6458);
-            break;
-          case 0xa4:
-            if (i >= 6829 && i <= 6839) /* 0xA4F4..0xA4FE */
-              wc = 0xe772 + (i - 6829);
-            break;
-          case 0xa5:
-            if (i >= 7022 && i <= 7029) /* 0xA5F7..0xA5FE */
-              wc = 0xe77d + (i - 7022);
-            break;
-          case 0xa6:
-            if (i >= 7150 && i <= 7157) /* 0xA6B9..0xA6C0 */
-              wc = 0xe785 + (i - 7150);
-            else if (i >= 7183 && i <= 7184) /* 0xA6DA..0xA6DB */
-              wc = 0xfe12 - (i - 7183);
-            else if (i >= 7182 && i <= 7190) /* 0xA6D9..0xA6DF */
-              wc = 0xfe10 + (i - 7182);
-            else if (i >= 7201 && i <= 7202) /* 0xA6EC..0xA6ED */
-              wc = 0xfe17 + (i - 7201);
-            else if (i == 7208) /* 0xA6F3 */
-              wc = 0xfe19;
-            else if (i >= 7211 && i <= 7219) /* 0xA6F6..0xA6FE */
-              wc = 0xe797 + (i - 7211);
-            break;
-          case 0xa7:
-            if (i >= 7349 && i <= 7363) /* 0xA7C2..0xA7D0 */
-              wc = 0xe7a0 + (i - 7349);
-            else if (i >= 7397 && i <= 7409) /* 0xA7F2..0xA7FE */
-              wc = 0xe7af + (i - 7397);
-            break;
-          case 0xa8:
-            if (i >= 7495 && i <= 7505) /* 0xA896..0xA8A0 */
-              wc = 0xe7bc + (i - 7495);
-            else if (i == 7533) /* 0xA8BC */
-              wc = 0x1e3f;
-            else if (i == 7536) /* 0xA8BF */
-              wc = 0x01f9;
-            else if (i >= 7538 && i <= 7541) /* 0xA8C1..0xA8C4 */
-              wc = 0xe7c9 + (i - 7538);
-            else if (i >= 7579 && i <= 7599) /* 0xA8EA..0xA8FE */
-              wc = 0xe7cd + (i - 7579);
-            break;
-          case 0xa9:
-            if (i == 7624) /* 0xA958 */
-              wc = 0xe7e2;
-            else if (i == 7627) /* 0xA95B */
-              wc = 0xe7e3;
-            else if (i >= 7629 && i <= 7631) /* 0xA95D..0xA95F */
-              wc = 0xe7e4 + (i - 7629);
-            else if (i >= 7672 && i < 7685) /* 0xA989..0xA995 */
-              wc = gb18030ext_2uni_pagea9[i-7672];
-            else if (i >= 7686 && i <= 7698) /* 0xA997..0xA9A3 */
-              wc = 0xe7f4 + (i - 7686);
-            else if (i >= 7775 && i <= 7789) /* 0xA9F0..0xA9FE */
-              wc = 0xe801 + (i - 7775);
-            break;
-          case 0xd7:
-            if (i >= 16525 && i <= 16529) /* 0xD7FA..0xD7FE */
-              wc = 0xe810 + (i - 16525);
-            break;
-          case 0xfe:
-            if (i < 23846)
-              wc = gb18030_2022_ext_2uni_pagefe[i-23750];
-            break;
-          default:
-            break;
+    unsigned char c1 = s[0];
+    if ((c1 == 0xa2) || (c1 >= 0xa4 && c1 <= 0xa9) || (c1 == 0xd7) || (c1 == 0xfe))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xff))
+            {
+                unsigned int i = 190 * (c1 - 0x81) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
+                unsigned int wc = 0xfffd;
+                switch (c1)
+                {
+                case 0xa2:
+                    if (i >= 6376 && i <= 6381) /* 0xA2AB..0xA2B0 */
+                        wc = 0xe766 + (i - 6376);
+                    else if (i == 6432) /* 0xA2E3 */
+                        wc = 0x20ac;
+                    else if (i == 6433) /* 0xA2E4 */
+                        wc = 0xe76d;
+                    else if (i >= 6444 && i <= 6445) /* 0xA2EF..0xA2F0 */
+                        wc = 0xe76e + (i - 6444);
+                    else if (i >= 6458 && i <= 6459) /* 0xA2FD..0xA2FE */
+                        wc = 0xe770 + (i - 6458);
+                    break;
+                case 0xa4:
+                    if (i >= 6829 && i <= 6839) /* 0xA4F4..0xA4FE */
+                        wc = 0xe772 + (i - 6829);
+                    break;
+                case 0xa5:
+                    if (i >= 7022 && i <= 7029) /* 0xA5F7..0xA5FE */
+                        wc = 0xe77d + (i - 7022);
+                    break;
+                case 0xa6:
+                    if (i >= 7150 && i <= 7157) /* 0xA6B9..0xA6C0 */
+                        wc = 0xe785 + (i - 7150);
+                    else if (i >= 7183 && i <= 7184) /* 0xA6DA..0xA6DB */
+                        wc = 0xfe12 - (i - 7183);
+                    else if (i >= 7182 && i <= 7190) /* 0xA6D9..0xA6DF */
+                        wc = 0xfe10 + (i - 7182);
+                    else if (i >= 7201 && i <= 7202) /* 0xA6EC..0xA6ED */
+                        wc = 0xfe17 + (i - 7201);
+                    else if (i == 7208) /* 0xA6F3 */
+                        wc = 0xfe19;
+                    else if (i >= 7211 && i <= 7219) /* 0xA6F6..0xA6FE */
+                        wc = 0xe797 + (i - 7211);
+                    break;
+                case 0xa7:
+                    if (i >= 7349 && i <= 7363) /* 0xA7C2..0xA7D0 */
+                        wc = 0xe7a0 + (i - 7349);
+                    else if (i >= 7397 && i <= 7409) /* 0xA7F2..0xA7FE */
+                        wc = 0xe7af + (i - 7397);
+                    break;
+                case 0xa8:
+                    if (i >= 7495 && i <= 7505) /* 0xA896..0xA8A0 */
+                        wc = 0xe7bc + (i - 7495);
+                    else if (i == 7533) /* 0xA8BC */
+                        wc = 0x1e3f;
+                    else if (i == 7536) /* 0xA8BF */
+                        wc = 0x01f9;
+                    else if (i >= 7538 && i <= 7541) /* 0xA8C1..0xA8C4 */
+                        wc = 0xe7c9 + (i - 7538);
+                    else if (i >= 7579 && i <= 7599) /* 0xA8EA..0xA8FE */
+                        wc = 0xe7cd + (i - 7579);
+                    break;
+                case 0xa9:
+                    if (i == 7624) /* 0xA958 */
+                        wc = 0xe7e2;
+                    else if (i == 7627) /* 0xA95B */
+                        wc = 0xe7e3;
+                    else if (i >= 7629 && i <= 7631) /* 0xA95D..0xA95F */
+                        wc = 0xe7e4 + (i - 7629);
+                    else if (i >= 7672 && i < 7685) /* 0xA989..0xA995 */
+                        wc = gb18030ext_2uni_pagea9[i - 7672];
+                    else if (i >= 7686 && i <= 7698) /* 0xA997..0xA9A3 */
+                        wc = 0xe7f4 + (i - 7686);
+                    else if (i >= 7775 && i <= 7789) /* 0xA9F0..0xA9FE */
+                        wc = 0xe801 + (i - 7775);
+                    break;
+                case 0xd7:
+                    if (i >= 16525 && i <= 16529) /* 0xD7FA..0xD7FE */
+                        wc = 0xe810 + (i - 16525);
+                    break;
+                case 0xfe:
+                    if (i < 23846)
+                        wc = gb18030_2022_ext_2uni_pagefe[i - 23750];
+                    break;
+                default:
+                    break;
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned short gb18030ext_page2e[80] = {
@@ -356,76 +370,80 @@ static const unsigned short gb18030ext_pagefe[16] = {
   0xa6ed, 0xa6f3, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, /*0x18-0x1f*/
 };
 
-static int
-gb18030ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int gb18030ext_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    unsigned short c = 0;
-    if (wc == 0x01f9)
-      c = 0xa8bf;
-    else if (wc == 0x1e3f)
-      c = 0xa8bc;
-    else if (wc == 0x20ac)
-      c = 0xa2e3;
-    else if (wc >= 0x2e80 && wc < 0x2ed0)
-      c = gb18030ext_page2e[wc-0x2e80];
-    else if (wc >= 0x2ff0 && wc < 0x3000)
-      c = gb18030ext_page2f[wc-0x2ff0];
-    else if (wc == 0x303e)
-      c = 0xa989;
-    else if (wc >= 0x3440 && wc < 0x3478)
-      c = gb18030ext_page34[wc-0x3440];
-    else if (wc == 0x359e)
-      c = 0xfe5a;
-    else if (wc >= 0x3608 && wc < 0x3620)
-      c = gb18030ext_page36[wc-0x3608];
-    else if (wc == 0x3918)
-      c = 0xfe60;
-    else if (wc == 0x396e)
-      c = 0xfe5f;
-    else if (wc >= 0x39c8 && wc < 0x39e0)
-      c = gb18030ext_page39[wc-0x39c8];
-    else if (wc == 0x3a73)
-      c = 0xfe64;
-    else if (wc == 0x3b4e)
-      c = 0xfe68;
-    else if (wc == 0x3c6e)
-      c = 0xfe69;
-    else if (wc == 0x3ce0)
-      c = 0xfe6a;
-    else if (wc == 0x4056)
-      c = 0xfe6f;
-    else if (wc == 0x415f)
-      c = 0xfe70;
-    else if (wc == 0x4337)
-      c = 0xfe72;
-    else if (wc >= 0x43a8 && wc < 0x43e0)
-      c = gb18030ext_page43[wc-0x43a8];
-    else if (wc == 0x44d6)
-      c = 0xfe7b;
-    else if (wc >= 0x4648 && wc < 0x4668)
-      c = gb18030ext_page46[wc-0x4648];
-    else if (wc >= 0x4720 && wc < 0x4730)
-      c = gb18030ext_page47_1[wc-0x4720];
-    else if (wc >= 0x4778 && wc < 0x4790)
-      c = gb18030ext_page47_2[wc-0x4778];
-    else if (wc >= 0x4940 && wc < 0x49b8)
-      c = gb18030ext_page49[wc-0x4940];
-    else if (wc >= 0x4c70 && wc < 0x4ca8)
-      c = gb18030ext_page4c[wc-0x4c70];
-    else if (wc >= 0x4d10 && wc < 0x4d20)
-      c = gb18030ext_page4d[wc-0x4d10];
-    else if (wc == 0x4dae)
-      c = 0xfe9f;
-    else if (wc >= 0x9fb4 && wc < 0x9fbc)
-      c = gb18030ext_page9f[wc-0x9fb0];
-    else if (wc >= 0xfe10 && wc < 0xfe1a)
-      c = gb18030ext_pagefe[wc-0xfe10];
-    if (c != 0) {
-      r[0] = (c >> 8); r[1] = (c & 0xff);
-      return 2;
+    if (n >= 2)
+    {
+        unsigned short c = 0;
+        if (wc == 0x01f9)
+            c = 0xa8bf;
+        else if (wc == 0x1e3f)
+            c = 0xa8bc;
+        else if (wc == 0x20ac)
+            c = 0xa2e3;
+        else if (wc >= 0x2e80 && wc < 0x2ed0)
+            c = gb18030ext_page2e[wc - 0x2e80];
+        else if (wc >= 0x2ff0 && wc < 0x3000)
+            c = gb18030ext_page2f[wc - 0x2ff0];
+        else if (wc == 0x303e)
+            c = 0xa989;
+        else if (wc >= 0x3440 && wc < 0x3478)
+            c = gb18030ext_page34[wc - 0x3440];
+        else if (wc == 0x359e)
+            c = 0xfe5a;
+        else if (wc >= 0x3608 && wc < 0x3620)
+            c = gb18030ext_page36[wc - 0x3608];
+        else if (wc == 0x3918)
+            c = 0xfe60;
+        else if (wc == 0x396e)
+            c = 0xfe5f;
+        else if (wc >= 0x39c8 && wc < 0x39e0)
+            c = gb18030ext_page39[wc - 0x39c8];
+        else if (wc == 0x3a73)
+            c = 0xfe64;
+        else if (wc == 0x3b4e)
+            c = 0xfe68;
+        else if (wc == 0x3c6e)
+            c = 0xfe69;
+        else if (wc == 0x3ce0)
+            c = 0xfe6a;
+        else if (wc == 0x4056)
+            c = 0xfe6f;
+        else if (wc == 0x415f)
+            c = 0xfe70;
+        else if (wc == 0x4337)
+            c = 0xfe72;
+        else if (wc >= 0x43a8 && wc < 0x43e0)
+            c = gb18030ext_page43[wc - 0x43a8];
+        else if (wc == 0x44d6)
+            c = 0xfe7b;
+        else if (wc >= 0x4648 && wc < 0x4668)
+            c = gb18030ext_page46[wc - 0x4648];
+        else if (wc >= 0x4720 && wc < 0x4730)
+            c = gb18030ext_page47_1[wc - 0x4720];
+        else if (wc >= 0x4778 && wc < 0x4790)
+            c = gb18030ext_page47_2[wc - 0x4778];
+        else if (wc >= 0x4940 && wc < 0x49b8)
+            c = gb18030ext_page49[wc - 0x4940];
+        else if (wc >= 0x4c70 && wc < 0x4ca8)
+            c = gb18030ext_page4c[wc - 0x4c70];
+        else if (wc >= 0x4d10 && wc < 0x4d20)
+            c = gb18030ext_page4d[wc - 0x4d10];
+        else if (wc == 0x4dae)
+            c = 0xfe9f;
+        else if (wc >= 0x9fb4 && wc < 0x9fbc)
+            c = gb18030ext_page9f[wc - 0x9fb0];
+        else if (wc >= 0xfe10 && wc < 0xfe1a)
+            c = gb18030ext_pagefe[wc - 0xfe10];
+        if (c != 0)
+        {
+            r[0] = (c >> 8);
+            r[1] = (c & 0xff);
+            return 2;
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _GB18030EXT_H_ */

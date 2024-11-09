@@ -1,5 +1,10 @@
+/**
+ * @file mulelao.h
+ * @brief MULELAO-1
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * MULELAO-1
- */
+#ifndef _MULELAO_H_
+#define _MULELAO_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short mulelao_2uni[96] = {
   /* 0xa0 */
@@ -42,22 +48,24 @@ static const unsigned short mulelao_2uni[96] = {
   0x0ed8, 0x0ed9, 0xfffd, 0xfffd, 0x0edc, 0x0edd, 0xfffd, 0xfffd,
 };
 
-static int
-mulelao_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int mulelao_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0xa0) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = mulelao_2uni[c-0xa0];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0xa0)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = mulelao_2uni[c - 0xa0];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char mulelao_page0e[96] = {
@@ -75,21 +83,24 @@ static const unsigned char mulelao_page0e[96] = {
   0xf8, 0xf9, 0x00, 0x00, 0xfc, 0xfd, 0x00, 0x00, /* 0xd8-0xdf */
 };
 
-static int
-mulelao_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int mulelao_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00a0) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc == 0x00a0)
-    c = 0xa0;
-  else if (wc >= 0x0e80 && wc < 0x0ee0)
-    c = mulelao_page0e[wc-0x0e80];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00a0)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc == 0x00a0)
+        c = 0xa0;
+    else if (wc >= 0x0e80 && wc < 0x0ee0)
+        c = mulelao_page0e[wc - 0x0e80];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _MULELAO_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file cns11643_4b.h
+ * @brief CNS 11643-1992 plane 4 part b
+ * @copyright Copyright (C) 1999-2002 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CNS 11643-1992 plane 4 part b
- */
+#ifndef _CNS11643_4B_H_
+#define _CNS11643_4B_H_
 
-static const unsigned short cns11643_4b_2uni_page40[4384] = {
+#include "reiconv_defines.h"
+
+static const unsigned short cns11643_4b_2uni_page40[4384] =
+{
   /* 0x40 */
   0xb65b, 0xb66a, 0x1011, 0xb668, 0x101b, 0x1012, 0x100e, 0x1015,
   0x3f68, 0x1010, 0xb681, 0x1017, 0x4046, 0x4043, 0x1070, 0x10ed,
@@ -631,7 +638,8 @@ static const unsigned short cns11643_4b_2uni_page40[4384] = {
   0x1911, 0x19ab, 0x189c, 0xdfd4,
 };
 
-static const ucs4_t cns11643_4b_2uni_upages[248] = {
+static const ucs4_t cns11643_4b_2uni_upages[248] =
+{
   0x03400, 0x03500, 0x03600, 0x03700, 0x03800, 0x03900, 0x03a00, 0x03b00,
   0x03c00, 0x03d00, 0x03e00, 0x03f00, 0x04000, 0x04100, 0x04200, 0x04300,
   0x04400, 0x04500, 0x04600, 0x04700, 0x04800, 0x04900, 0x04a00, 0x04b00,
@@ -665,3 +673,4 @@ static const ucs4_t cns11643_4b_2uni_upages[248] = {
   0x2a200, 0x2a300, 0x2a400, 0x2a500, 0x2a600, 0x2f800, 0x2f900, 0x2fa00,
 };
 
+#endif /* _CNS11643_4B_H_ */

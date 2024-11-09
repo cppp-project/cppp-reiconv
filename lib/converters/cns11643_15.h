@@ -1,5 +1,10 @@
+/**
+ * @file cns11643_15.h
+ * @brief CNS 11643-1992 plane 15
+ * @copyright Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CNS 11643-1992 plane 15
- */
+#ifndef _CNS11643_15_H_
+#define _CNS11643_15_H_
 
-static const unsigned short cns11643_15_2uni_page21[7169] = {
+#include "reiconv_defines.h"
+
+static const unsigned short cns11643_15_2uni_page21[7169] =
+{
   /* 0x21 */
   0x5302, 0x538c, 0x53d4, 0x54a5, 0x5392, 0x5393, 0x53d8, 0x53d9,
   0x54a7, 0x592b, 0x592c, 0x592d, 0x5930, 0x592e, 0x59ab, 0x1a01,
@@ -1052,31 +1059,34 @@ static const ucs4_t cns11643_15_2uni_upages[253] = {
   0x2a500, 0x2a600, 0x2f800, 0x2f900, 0x2fa00,
 };
 
-static int
-cns11643_15_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cns11643_15_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x21 && c1 <= 0x6d)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x21 && c2 < 0x7f) {
-        unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
-        ucs4_t wc = 0xfffd;
-        unsigned short swc;
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x21 && c1 <= 0x6d))
+    {
+        if (n >= 2)
         {
-          if (i < 7169)
-            swc = cns11643_15_2uni_page21[i],
-            wc = cns11643_15_2uni_upages[swc>>8] | (swc & 0xff);
+            unsigned char c2 = s[1];
+            if (c2 >= 0x21 && c2 < 0x7f)
+            {
+                unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
+                ucs4_t wc = 0xfffd;
+                unsigned short swc;
+                {
+                    if (i < 7169)
+                        swc = cns11643_15_2uni_page21[i], wc = cns11643_15_2uni_upages[swc >> 8] | (swc & 0xff);
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
+#endif /* _CNS11643_15_H_ */

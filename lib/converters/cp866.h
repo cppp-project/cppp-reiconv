@@ -1,5 +1,10 @@
+/**
+ * @file cp866.h
+ * @brief CP866
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP866
- */
+#ifndef _CP866_H_
+#define _CP866_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp866_2uni[80] = {
   /* 0xb0 */
@@ -39,17 +45,16 @@ static const unsigned short cp866_2uni[80] = {
   0x00b0, 0x2219, 0x00b7, 0x221a, 0x2116, 0x00a4, 0x25a0, 0x00a0,
 };
 
-static int
-cp866_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp866_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80)
-    *pwc = (ucs4_t) c;
-  else if (c < 0xb0)
-    *pwc = (ucs4_t) c + 0x0390;
-  else
-    *pwc = (ucs4_t) cp866_2uni[c-0xb0];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+        *pwc = (ucs4_t)c;
+    else if (c < 0xb0)
+        *pwc = (ucs4_t)c + 0x0390;
+    else
+        *pwc = (ucs4_t)cp866_2uni[c - 0xb0];
+    return 1;
 }
 
 static const unsigned char cp866_page00[24] = {
@@ -98,27 +103,30 @@ static const unsigned char cp866_page25[168] = {
   0xfe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xa0-0xa7 */
 };
 
-static int
-cp866_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp866_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00b8)
-    c = cp866_page00[wc-0x00a0];
-  else if (wc >= 0x0400 && wc < 0x0460)
-    c = cp866_page04[wc-0x0400];
-  else if (wc == 0x2116)
-    c = 0xfc;
-  else if (wc >= 0x2218 && wc < 0x2220)
-    c = cp866_page22[wc-0x2218];
-  else if (wc >= 0x2500 && wc < 0x25a8)
-    c = cp866_page25[wc-0x2500];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00b8)
+        c = cp866_page00[wc - 0x00a0];
+    else if (wc >= 0x0400 && wc < 0x0460)
+        c = cp866_page04[wc - 0x0400];
+    else if (wc == 0x2116)
+        c = 0xfc;
+    else if (wc >= 0x2218 && wc < 0x2220)
+        c = cp866_page22[wc - 0x2218];
+    else if (wc >= 0x2500 && wc < 0x25a8)
+        c = cp866_page25[wc - 0x2500];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP866_H_ */

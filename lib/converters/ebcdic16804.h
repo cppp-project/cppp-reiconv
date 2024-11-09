@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic16804.h
+ * @brief IBM-16804
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-16804
- */
+#ifndef _EBCDIC16804_H_
+#define _EBCDIC16804_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic16804_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic16804_2uni[256] = {
   0x0038, 0x0039, 0x20ac, 0x0666, 0x0667, 0x0668, 0x0669, 0x009f,
 };
 
-static int
-ebcdic16804_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic16804_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic16804_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic16804_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char ebcdic16804_page00[248] = {
@@ -156,23 +162,25 @@ static const unsigned char ebcdic16804_pagefe[136] = {
   0xb5, 0x00, 0x00, 0xb8, 0xb9, 0x00, 0x00, 0x00, /* 0xf8-0xff */
 };
 
-static int
-ebcdic16804_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic16804_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00f8)
-    c = ebcdic16804_page00[wc];
-  else if (wc >= 0x0608 && wc < 0x0670)
-    c = ebcdic16804_page06[wc-0x0608];
-  else if (wc >= 0x2000 && wc < 0x2010)
-    c = ebcdic16804_page20[wc-0x2000];
-  else if (wc == 0x20ac)
-    c = 0xfa;
-  else if (wc >= 0xfe78 && wc < 0xff00)
-    c = ebcdic16804_pagefe[wc-0xfe78];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00f8)
+        c = ebcdic16804_page00[wc];
+    else if (wc >= 0x0608 && wc < 0x0670)
+        c = ebcdic16804_page06[wc - 0x0608];
+    else if (wc >= 0x2000 && wc < 0x2010)
+        c = ebcdic16804_page20[wc - 0x2000];
+    else if (wc == 0x20ac)
+        c = 0xfa;
+    else if (wc >= 0xfe78 && wc < 0xff00)
+        c = ebcdic16804_pagefe[wc - 0xfe78];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC16804_H_ */

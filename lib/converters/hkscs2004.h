@@ -1,5 +1,10 @@
+/**
+ * @file hkscs2004.h
+ * @brief HKSCS:2004
+ * @copyright Copyright (C) 1999-2006, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2006, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * HKSCS:2004
- */
+#ifndef _HKSCS2004_H_
+#define _HKSCS2004_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short hkscs2004_2uni_page87[58] = {
   /* 0x87 */
@@ -74,36 +80,40 @@ static const ucs4_t hkscs2004_2uni_upages[78] = {
   0x29000, 0x29800, 0x29900, 0x29e00, 0x2a100, 0x2a300,
 };
 
-static int
-hkscs2004_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int hkscs2004_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 == 0x87) || (c1 >= 0x8c && c1 <= 0x8d)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff)) {
-        unsigned int i = 157 * (c1 - 0x80) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
-        ucs4_t wc = 0xfffd;
-        unsigned short swc;
-        if (i < 1884) {
-          if (i < 1157)
-            swc = hkscs2004_2uni_page87[i-1099],
-            wc = hkscs2004_2uni_upages[swc>>8] | (swc & 0xff);
-        } else {
-          if (i < 2073)
-            swc = hkscs2004_2uni_page8c[i-1884],
-            wc = hkscs2004_2uni_upages[swc>>8] | (swc & 0xff);
+    unsigned char c1 = s[0];
+    if ((c1 == 0x87) || (c1 >= 0x8c && c1 <= 0x8d))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff))
+            {
+                unsigned int i = 157 * (c1 - 0x80) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
+                ucs4_t wc = 0xfffd;
+                unsigned short swc;
+                if (i < 1884)
+                {
+                    if (i < 1157)
+                        swc = hkscs2004_2uni_page87[i - 1099], wc = hkscs2004_2uni_upages[swc >> 8] | (swc & 0xff);
+                }
+                else
+                {
+                    if (i < 2073)
+                        swc = hkscs2004_2uni_page8c[i - 1884], wc = hkscs2004_2uni_upages[swc >> 8] | (swc & 0xff);
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned short hkscs2004_2charset[123] = {
@@ -541,138 +551,152 @@ static const Summary16 hkscs2004_uni2indx_page2a3[6] = {
   {  122, 0x0000 }, {  122, 0x0002 },
 };
 
-static int
-hkscs2004_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int hkscs2004_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc < 0x21a00) {
-      if (wc < 0x6e00) {
-        if (wc >= 0x3400 && wc < 0x3450)
-          summary = &hkscs2004_uni2indx_page34[(wc>>4)-0x340];
-        else if (wc >= 0x3600 && wc < 0x3980)
-          summary = &hkscs2004_uni2indx_page36[(wc>>4)-0x360];
-        else if (wc >= 0x3b00 && wc < 0x3ba0)
-          summary = &hkscs2004_uni2indx_page3b[(wc>>4)-0x3b0];
-        else if (wc >= 0x3d00 && wc < 0x3e00)
-          summary = &hkscs2004_uni2indx_page3d[(wc>>4)-0x3d0];
-        else if (wc >= 0x3f00 && wc < 0x41f0)
-          summary = &hkscs2004_uni2indx_page3f[(wc>>4)-0x3f0];
-        else if (wc >= 0x4300 && wc < 0x4750)
-          summary = &hkscs2004_uni2indx_page43[(wc>>4)-0x430];
-        else if (wc >= 0x4a00 && wc < 0x4ab0)
-          summary = &hkscs2004_uni2indx_page4a[(wc>>4)-0x4a0];
-        else if (wc >= 0x4c00 && wc < 0x4d90)
-          summary = &hkscs2004_uni2indx_page4c[(wc>>4)-0x4c0];
-        else if (wc >= 0x4f00 && wc < 0x4fc0)
-          summary = &hkscs2004_uni2indx_page4f[(wc>>4)-0x4f0];
-        else if (wc >= 0x5600 && wc < 0x5700)
-          summary = &hkscs2004_uni2indx_page56[(wc>>4)-0x560];
-        else if (wc >= 0x5900 && wc < 0x5d80)
-          summary = &hkscs2004_uni2indx_page59[(wc>>4)-0x590];
-        else if (wc >= 0x5f00 && wc < 0x5f40)
-          summary = &hkscs2004_uni2indx_page5f[(wc>>4)-0x5f0];
-        else if (wc >= 0x6600 && wc < 0x6770)
-          summary = &hkscs2004_uni2indx_page66[(wc>>4)-0x660];
-      } else {
-        if (wc >= 0x6e00 && wc < 0x6e60)
-          summary = &hkscs2004_uni2indx_page6e[(wc>>4)-0x6e0];
-        else if (wc >= 0x7100 && wc < 0x7230)
-          summary = &hkscs2004_uni2indx_page71[(wc>>4)-0x710];
-        else if (wc >= 0x7400 && wc < 0x74a0)
-          summary = &hkscs2004_uni2indx_page74[(wc>>4)-0x740];
-        else if (wc >= 0x7900 && wc < 0x79d0)
-          summary = &hkscs2004_uni2indx_page79[(wc>>4)-0x790];
-        else if (wc >= 0x7d00 && wc < 0x7da0)
-          summary = &hkscs2004_uni2indx_page7d[(wc>>4)-0x7d0];
-        else if (wc >= 0x8100 && wc < 0x8170)
-          summary = &hkscs2004_uni2indx_page81[(wc>>4)-0x810];
-        else if (wc >= 0x8500 && wc < 0x85a0)
-          summary = &hkscs2004_uni2indx_page85[(wc>>4)-0x850];
-        else if (wc >= 0x8a00 && wc < 0x8b00)
-          summary = &hkscs2004_uni2indx_page8a[(wc>>4)-0x8a0];
-        else if (wc >= 0x9700 && wc < 0x9860)
-          summary = &hkscs2004_uni2indx_page97[(wc>>4)-0x970];
-        else if (wc >= 0x9f00 && wc < 0x9fc0)
-          summary = &hkscs2004_uni2indx_page9f[(wc>>4)-0x9f0];
-        else if (wc >= 0x20100 && wc < 0x20240)
-          summary = &hkscs2004_uni2indx_page201[(wc>>4)-0x2010];
-        else if (wc >= 0x20a00 && wc < 0x20ba0)
-          summary = &hkscs2004_uni2indx_page20a[(wc>>4)-0x20a0];
-      }
-    } else {
-      if (wc < 0x26b00) {
-        if (wc >= 0x21a00 && wc < 0x21a70)
-          summary = &hkscs2004_uni2indx_page21a[(wc>>4)-0x21a0];
-        else if (wc >= 0x21d00 && wc < 0x21e30)
-          summary = &hkscs2004_uni2indx_page21d[(wc>>4)-0x21d0];
-        else if (wc >= 0x22100 && wc < 0x221d0)
-          summary = &hkscs2004_uni2indx_page221[(wc>>4)-0x2210];
-        else if (wc >= 0x22700 && wc < 0x227a0)
-          summary = &hkscs2004_uni2indx_page227[(wc>>4)-0x2270];
-        else if (wc >= 0x23200 && wc < 0x23260)
-          summary = &hkscs2004_uni2indx_page232[(wc>>4)-0x2320];
-        else if (wc >= 0x23500 && wc < 0x23620)
-          summary = &hkscs2004_uni2indx_page235[(wc>>4)-0x2350];
-        else if (wc >= 0x23b00 && wc < 0x23b20)
-          summary = &hkscs2004_uni2indx_page23b[(wc>>4)-0x23b0];
-        else if (wc >= 0x23e00 && wc < 0x240f0)
-          summary = &hkscs2004_uni2indx_page23e[(wc>>4)-0x23e0];
-        else if (wc >= 0x24200 && wc < 0x242c0)
-          summary = &hkscs2004_uni2indx_page242[(wc>>4)-0x2420];
-        else if (wc >= 0x24b00 && wc < 0x24b10)
-          summary = &hkscs2004_uni2indx_page24b[(wc>>4)-0x24b0];
-        else if (wc >= 0x25400 && wc < 0x254a0)
-          summary = &hkscs2004_uni2indx_page254[(wc>>4)-0x2540];
-        else if (wc >= 0x25a00 && wc < 0x25a60)
-          summary = &hkscs2004_uni2indx_page25a[(wc>>4)-0x25a0];
-      } else {
-        if (wc >= 0x26b00 && wc < 0x26c50)
-          summary = &hkscs2004_uni2indx_page26b[(wc>>4)-0x26b0];
-        else if (wc >= 0x26e00 && wc < 0x26e90)
-          summary = &hkscs2004_uni2indx_page26e[(wc>>4)-0x26e0];
-        else if (wc >= 0x27000 && wc < 0x270e0)
-          summary = &hkscs2004_uni2indx_page270[(wc>>4)-0x2700];
-        else if (wc >= 0x27200 && wc < 0x27400)
-          summary = &hkscs2004_uni2indx_page272[(wc>>4)-0x2720];
-        else if (wc >= 0x27b00 && wc < 0x27cd0)
-          summary = &hkscs2004_uni2indx_page27b[(wc>>4)-0x27b0];
-        else if (wc >= 0x28600 && wc < 0x286c0)
-          summary = &hkscs2004_uni2indx_page286[(wc>>4)-0x2860];
-        else if (wc >= 0x28900 && wc < 0x28970)
-          summary = &hkscs2004_uni2indx_page289[(wc>>4)-0x2890];
-        else if (wc >= 0x28b00 && wc < 0x28bc0)
-          summary = &hkscs2004_uni2indx_page28b[(wc>>4)-0x28b0];
-        else if (wc >= 0x29000 && wc < 0x29080)
-          summary = &hkscs2004_uni2indx_page290[(wc>>4)-0x2900];
-        else if (wc >= 0x29800 && wc < 0x29950)
-          summary = &hkscs2004_uni2indx_page298[(wc>>4)-0x2980];
-        else if (wc >= 0x29e00 && wc < 0x29ec0)
-          summary = &hkscs2004_uni2indx_page29e[(wc>>4)-0x29e0];
-        else if (wc >= 0x2a100 && wc < 0x2a1c0)
-          summary = &hkscs2004_uni2indx_page2a1[(wc>>4)-0x2a10];
-        else if (wc >= 0x2a300 && wc < 0x2a360)
-          summary = &hkscs2004_uni2indx_page2a3[(wc>>4)-0x2a30];
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc < 0x21a00)
+        {
+            if (wc < 0x6e00)
+            {
+                if (wc >= 0x3400 && wc < 0x3450)
+                    summary = &hkscs2004_uni2indx_page34[(wc >> 4) - 0x340];
+                else if (wc >= 0x3600 && wc < 0x3980)
+                    summary = &hkscs2004_uni2indx_page36[(wc >> 4) - 0x360];
+                else if (wc >= 0x3b00 && wc < 0x3ba0)
+                    summary = &hkscs2004_uni2indx_page3b[(wc >> 4) - 0x3b0];
+                else if (wc >= 0x3d00 && wc < 0x3e00)
+                    summary = &hkscs2004_uni2indx_page3d[(wc >> 4) - 0x3d0];
+                else if (wc >= 0x3f00 && wc < 0x41f0)
+                    summary = &hkscs2004_uni2indx_page3f[(wc >> 4) - 0x3f0];
+                else if (wc >= 0x4300 && wc < 0x4750)
+                    summary = &hkscs2004_uni2indx_page43[(wc >> 4) - 0x430];
+                else if (wc >= 0x4a00 && wc < 0x4ab0)
+                    summary = &hkscs2004_uni2indx_page4a[(wc >> 4) - 0x4a0];
+                else if (wc >= 0x4c00 && wc < 0x4d90)
+                    summary = &hkscs2004_uni2indx_page4c[(wc >> 4) - 0x4c0];
+                else if (wc >= 0x4f00 && wc < 0x4fc0)
+                    summary = &hkscs2004_uni2indx_page4f[(wc >> 4) - 0x4f0];
+                else if (wc >= 0x5600 && wc < 0x5700)
+                    summary = &hkscs2004_uni2indx_page56[(wc >> 4) - 0x560];
+                else if (wc >= 0x5900 && wc < 0x5d80)
+                    summary = &hkscs2004_uni2indx_page59[(wc >> 4) - 0x590];
+                else if (wc >= 0x5f00 && wc < 0x5f40)
+                    summary = &hkscs2004_uni2indx_page5f[(wc >> 4) - 0x5f0];
+                else if (wc >= 0x6600 && wc < 0x6770)
+                    summary = &hkscs2004_uni2indx_page66[(wc >> 4) - 0x660];
+            }
+            else
+            {
+                if (wc >= 0x6e00 && wc < 0x6e60)
+                    summary = &hkscs2004_uni2indx_page6e[(wc >> 4) - 0x6e0];
+                else if (wc >= 0x7100 && wc < 0x7230)
+                    summary = &hkscs2004_uni2indx_page71[(wc >> 4) - 0x710];
+                else if (wc >= 0x7400 && wc < 0x74a0)
+                    summary = &hkscs2004_uni2indx_page74[(wc >> 4) - 0x740];
+                else if (wc >= 0x7900 && wc < 0x79d0)
+                    summary = &hkscs2004_uni2indx_page79[(wc >> 4) - 0x790];
+                else if (wc >= 0x7d00 && wc < 0x7da0)
+                    summary = &hkscs2004_uni2indx_page7d[(wc >> 4) - 0x7d0];
+                else if (wc >= 0x8100 && wc < 0x8170)
+                    summary = &hkscs2004_uni2indx_page81[(wc >> 4) - 0x810];
+                else if (wc >= 0x8500 && wc < 0x85a0)
+                    summary = &hkscs2004_uni2indx_page85[(wc >> 4) - 0x850];
+                else if (wc >= 0x8a00 && wc < 0x8b00)
+                    summary = &hkscs2004_uni2indx_page8a[(wc >> 4) - 0x8a0];
+                else if (wc >= 0x9700 && wc < 0x9860)
+                    summary = &hkscs2004_uni2indx_page97[(wc >> 4) - 0x970];
+                else if (wc >= 0x9f00 && wc < 0x9fc0)
+                    summary = &hkscs2004_uni2indx_page9f[(wc >> 4) - 0x9f0];
+                else if (wc >= 0x20100 && wc < 0x20240)
+                    summary = &hkscs2004_uni2indx_page201[(wc >> 4) - 0x2010];
+                else if (wc >= 0x20a00 && wc < 0x20ba0)
+                    summary = &hkscs2004_uni2indx_page20a[(wc >> 4) - 0x20a0];
+            }
+        }
+        else
+        {
+            if (wc < 0x26b00)
+            {
+                if (wc >= 0x21a00 && wc < 0x21a70)
+                    summary = &hkscs2004_uni2indx_page21a[(wc >> 4) - 0x21a0];
+                else if (wc >= 0x21d00 && wc < 0x21e30)
+                    summary = &hkscs2004_uni2indx_page21d[(wc >> 4) - 0x21d0];
+                else if (wc >= 0x22100 && wc < 0x221d0)
+                    summary = &hkscs2004_uni2indx_page221[(wc >> 4) - 0x2210];
+                else if (wc >= 0x22700 && wc < 0x227a0)
+                    summary = &hkscs2004_uni2indx_page227[(wc >> 4) - 0x2270];
+                else if (wc >= 0x23200 && wc < 0x23260)
+                    summary = &hkscs2004_uni2indx_page232[(wc >> 4) - 0x2320];
+                else if (wc >= 0x23500 && wc < 0x23620)
+                    summary = &hkscs2004_uni2indx_page235[(wc >> 4) - 0x2350];
+                else if (wc >= 0x23b00 && wc < 0x23b20)
+                    summary = &hkscs2004_uni2indx_page23b[(wc >> 4) - 0x23b0];
+                else if (wc >= 0x23e00 && wc < 0x240f0)
+                    summary = &hkscs2004_uni2indx_page23e[(wc >> 4) - 0x23e0];
+                else if (wc >= 0x24200 && wc < 0x242c0)
+                    summary = &hkscs2004_uni2indx_page242[(wc >> 4) - 0x2420];
+                else if (wc >= 0x24b00 && wc < 0x24b10)
+                    summary = &hkscs2004_uni2indx_page24b[(wc >> 4) - 0x24b0];
+                else if (wc >= 0x25400 && wc < 0x254a0)
+                    summary = &hkscs2004_uni2indx_page254[(wc >> 4) - 0x2540];
+                else if (wc >= 0x25a00 && wc < 0x25a60)
+                    summary = &hkscs2004_uni2indx_page25a[(wc >> 4) - 0x25a0];
+            }
+            else
+            {
+                if (wc >= 0x26b00 && wc < 0x26c50)
+                    summary = &hkscs2004_uni2indx_page26b[(wc >> 4) - 0x26b0];
+                else if (wc >= 0x26e00 && wc < 0x26e90)
+                    summary = &hkscs2004_uni2indx_page26e[(wc >> 4) - 0x26e0];
+                else if (wc >= 0x27000 && wc < 0x270e0)
+                    summary = &hkscs2004_uni2indx_page270[(wc >> 4) - 0x2700];
+                else if (wc >= 0x27200 && wc < 0x27400)
+                    summary = &hkscs2004_uni2indx_page272[(wc >> 4) - 0x2720];
+                else if (wc >= 0x27b00 && wc < 0x27cd0)
+                    summary = &hkscs2004_uni2indx_page27b[(wc >> 4) - 0x27b0];
+                else if (wc >= 0x28600 && wc < 0x286c0)
+                    summary = &hkscs2004_uni2indx_page286[(wc >> 4) - 0x2860];
+                else if (wc >= 0x28900 && wc < 0x28970)
+                    summary = &hkscs2004_uni2indx_page289[(wc >> 4) - 0x2890];
+                else if (wc >= 0x28b00 && wc < 0x28bc0)
+                    summary = &hkscs2004_uni2indx_page28b[(wc >> 4) - 0x28b0];
+                else if (wc >= 0x29000 && wc < 0x29080)
+                    summary = &hkscs2004_uni2indx_page290[(wc >> 4) - 0x2900];
+                else if (wc >= 0x29800 && wc < 0x29950)
+                    summary = &hkscs2004_uni2indx_page298[(wc >> 4) - 0x2980];
+                else if (wc >= 0x29e00 && wc < 0x29ec0)
+                    summary = &hkscs2004_uni2indx_page29e[(wc >> 4) - 0x29e0];
+                else if (wc >= 0x2a100 && wc < 0x2a1c0)
+                    summary = &hkscs2004_uni2indx_page2a1[(wc >> 4) - 0x2a10];
+                else if (wc >= 0x2a300 && wc < 0x2a360)
+                    summary = &hkscs2004_uni2indx_page2a3[(wc >> 4) - 0x2a30];
+            }
+        }
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                c = hkscs2004_2charset[summary->indx + used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        c = hkscs2004_2charset[summary->indx + used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
-    }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _HKSCS2004_H_ */

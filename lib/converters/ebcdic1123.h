@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic1123.h
+ * @brief IBM-1123
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-1123
- */
+#ifndef _EBCDIC1123_H_
+#define _EBCDIC1123_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic1123_2uni[256] = {
   /* 0x00 */
@@ -72,12 +78,11 @@ static const unsigned short ebcdic1123_2uni[256] = {
   0x0038, 0x0039, 0x0417, 0x0428, 0x042d, 0x0429, 0x0427, 0x009f,
 };
 
-static int
-ebcdic1123_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic1123_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  *pwc = (ucs4_t) ebcdic1123_2uni[c];
-  return 1;
+    unsigned char c = *s;
+    *pwc = (ucs4_t)ebcdic1123_2uni[c];
+    return 1;
 }
 
 #if DEDUPLICATE_TABLES
@@ -130,19 +135,21 @@ static const unsigned char ebcdic1123_page04[152] = {
   0x62, 0x43, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x90-0x97 */
 };
 
-static int
-ebcdic1123_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic1123_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00b0)
-    c = ebcdic1123_page00[wc];
-  else if (wc >= 0x0400 && wc < 0x0498)
-    c = ebcdic1123_page04[wc-0x0400];
-  else if (wc == 0x2116)
-    c = 0x58;
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00b0)
+        c = ebcdic1123_page00[wc];
+    else if (wc >= 0x0400 && wc < 0x0498)
+        c = ebcdic1123_page04[wc - 0x0400];
+    else if (wc == 0x2116)
+        c = 0x58;
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC1123_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file johab_hangul.h
+ * @brief JOHAB Hangul
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -18,7 +23,6 @@
  */
 
 /*
- * JOHAB Hangul
  *
  * Ken Lunde writes in his "CJKV Information Processing" book, p. 114:
  * "Hangul can be composed of two or three jamo (some jamo are considered
@@ -46,6 +50,13 @@
  *                + jamo_final_index[johab & 31]
  * where the index tables are defined as below.
  */
+
+#ifndef _JOHAB_HANGUL_H_
+#define _JOHAB_HANGUL_H_
+
+#include "reiconv_defines.h"
+
+#include <stdlib.h>
 
 /* Tables mapping 5-bit groups to jamo letters. */
 /* Note that Jamo XX = UHC 0xA4A0+XX = Unicode 0x3130+XX */
@@ -100,61 +111,76 @@ static const signed char jamo_final_index[32] = {
   0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, none, none,
 };
 
-static int
-johab_hangul_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int johab_hangul_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x84 && c1 <= 0xd3)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x41 && c2 < 0x7f) || (c2 >= 0x81 && c2 < 0xff)) {
-        unsigned int johab = (c1 << 8) | c2;
-        unsigned int bitspart1 = (johab >> 10) & 31;
-        unsigned int bitspart2 = (johab >> 5) & 31;
-        unsigned int bitspart3 = johab & 31;
-        int index1 = jamo_initial_index[bitspart1];
-        int index2 = jamo_medial_index[bitspart2];
-        int index3 = jamo_final_index[bitspart3];
-        /* Exclude "none" values. */
-        if (index1 >= 0 && index2 >= 0 && index3 >= 0) {
-          /* Deal with "fill" values in initial or medial position. */
-          if (index1 == fill) {
-            if (index2 == fill) {
-              unsigned char jamo3 = jamo_final_notinitial[bitspart3];
-              if (jamo3 != NONE) {
-                *pwc = (ucs4_t) 0x3130 + jamo3;
-                return 2;
-              }
-            } else if (index3 == fill) {
-              unsigned char jamo2 = jamo_medial[bitspart2];
-              if (jamo2 != NONE && jamo2 != FILL) {
-                *pwc = (ucs4_t) 0x3130 + jamo2;
-                return 2;
-              }
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x84 && c1 <= 0xd3))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x41 && c2 < 0x7f) || (c2 >= 0x81 && c2 < 0xff))
+            {
+                unsigned int johab = (c1 << 8) | c2;
+                unsigned int bitspart1 = (johab >> 10) & 31;
+                unsigned int bitspart2 = (johab >> 5) & 31;
+                unsigned int bitspart3 = johab & 31;
+                int index1 = jamo_initial_index[bitspart1];
+                int index2 = jamo_medial_index[bitspart2];
+                int index3 = jamo_final_index[bitspart3];
+                /* Exclude "none" values. */
+                if (index1 >= 0 && index2 >= 0 && index3 >= 0)
+                {
+                    /* Deal with "fill" values in initial or medial position. */
+                    if (index1 == fill)
+                    {
+                        if (index2 == fill)
+                        {
+                            unsigned char jamo3 = jamo_final_notinitial[bitspart3];
+                            if (jamo3 != NONE)
+                            {
+                                *pwc = (ucs4_t)0x3130 + jamo3;
+                                return 2;
+                            }
+                        }
+                        else if (index3 == fill)
+                        {
+                            unsigned char jamo2 = jamo_medial[bitspart2];
+                            if (jamo2 != NONE && jamo2 != FILL)
+                            {
+                                *pwc = (ucs4_t)0x3130 + jamo2;
+                                return 2;
+                            }
+                        }
+                        /* Syllables composed only of medial and final don't exist. */
+                    }
+                    else if (index2 == fill)
+                    {
+                        if (index3 == fill)
+                        {
+                            unsigned char jamo1 = jamo_initial[bitspart1];
+                            if (jamo1 != NONE && jamo1 != FILL)
+                            {
+                                *pwc = (ucs4_t)0x3130 + jamo1;
+                                return 2;
+                            }
+                        }
+                        /* Syllables composed only of initial and final don't exist. */
+                    }
+                    else
+                    {
+                        /* index1 and index2 are not fill, but index3 may be fill. */
+                        /* Nothing more to exclude. All 11172 code points are valid. */
+                        *pwc = 0xac00 + ((index1 - 1) * 21 + (index2 - 1)) * 28 + index3;
+                        return 2;
+                    }
+                }
             }
-            /* Syllables composed only of medial and final don't exist. */
-          } else if (index2 == fill) {
-            if (index3 == fill) {
-              unsigned char jamo1 = jamo_initial[bitspart1];
-              if (jamo1 != NONE && jamo1 != FILL) {
-                *pwc = (ucs4_t) 0x3130 + jamo1;
-                return 2;
-              }
-            }
-            /* Syllables composed only of initial and final don't exist. */
-          } else {
-             /* index1 and index2 are not fill, but index3 may be fill. */
-             /* Nothing more to exclude. All 11172 code points are valid. */
-             *pwc = 0xac00 + ((index1 - 1) * 21 + (index2 - 1)) * 28 + index3;
-             return 2;
-          }
+            return RET_ILSEQ;
         }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 /* 51 Jamo: 19 initial, 21 medial, 11 final not initial. */
@@ -193,33 +219,38 @@ static const char jamo_final_index_inverse[28] = {
   0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d,
 };
 
-static int
-johab_hangul_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int johab_hangul_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    if (wc >= 0x3131 && wc < 0x3164) {
-      unsigned short c = johab_hangul_page31[wc-0x3131];
-      r[0] = (c >> 8); r[1] = (c & 0xff);
-      return 2;
-    } else if (wc >= 0xac00 && wc < 0xd7a4) {
-      unsigned int index1;
-      unsigned int index2;
-      unsigned int index3;
-      unsigned short c;
-      unsigned int tmp = wc - 0xac00;
-      index3 = tmp % 28; tmp = tmp / 28;
-      index2 = tmp % 21; tmp = tmp / 21;
-      index1 = tmp;
-      c = (((((1 << 5)
-              | jamo_initial_index_inverse[index1]) << 5)
-            | jamo_medial_index_inverse[index2]) << 5)
-          | jamo_final_index_inverse[index3];
-      r[0] = (c >> 8); r[1] = (c & 0xff);
-      return 2;
+    if (n >= 2)
+    {
+        if (wc >= 0x3131 && wc < 0x3164)
+        {
+            unsigned short c = johab_hangul_page31[wc - 0x3131];
+            r[0] = (c >> 8);
+            r[1] = (c & 0xff);
+            return 2;
+        }
+        else if (wc >= 0xac00 && wc < 0xd7a4)
+        {
+            unsigned int index1;
+            unsigned int index2;
+            unsigned int index3;
+            unsigned short c;
+            unsigned int tmp = wc - 0xac00;
+            index3 = tmp % 28;
+            tmp = tmp / 28;
+            index2 = tmp % 21;
+            tmp = tmp / 21;
+            index1 = tmp;
+            c = (((((1 << 5) | jamo_initial_index_inverse[index1]) << 5) | jamo_medial_index_inverse[index2]) << 5) |
+                jamo_final_index_inverse[index3];
+            r[0] = (c >> 8);
+            r[1] = (c & 0xff);
+            return 2;
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
 
 /*
@@ -229,33 +260,38 @@ johab_hangul_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 /* Decompose wc into r[0..2], and return the number of resulting Jamo elements.
    Return RET_ILUNI if decomposition is not possible. */
 
-static int johab_hangul_decompose (conv_t conv, ucs4_t* r, ucs4_t wc)
+static int johab_hangul_decompose(conv_t conv, ucs4_t *r, ucs4_t wc)
 {
-  unsigned char buf[2];
-  int ret = johab_hangul_wctomb(conv,buf,wc,2);
-  if (ret != RET_ILUNI) {
-    unsigned int hangul = (buf[0] << 8) | buf[1];
-    unsigned char jamo1 = jamo_initial[(hangul >> 10) & 31];
-    unsigned char jamo2 = jamo_medial[(hangul >> 5) & 31];
-    unsigned char jamo3 = jamo_final[hangul & 31];
-    if ((hangul >> 15) != 1) abort();
-    if (jamo1 != NONE && jamo2 != NONE && jamo3 != NONE) {
-      /* They are not all three == FILL because that would correspond to
-         johab = 0x8441, which doesn't exist. */
-      ucs4_t* p = r;
-      if (jamo1 != FILL)
-        *p++ = 0x3130 + jamo1;
-      if (jamo2 != FILL)
-        *p++ = 0x3130 + jamo2;
-      if (jamo3 != FILL)
-        *p++ = 0x3130 + jamo3;
-      return p-r;
+    unsigned char buf[2];
+    int ret = johab_hangul_wctomb(conv, buf, wc, 2);
+    if (ret != RET_ILUNI)
+    {
+        unsigned int hangul = (buf[0] << 8) | buf[1];
+        unsigned char jamo1 = jamo_initial[(hangul >> 10) & 31];
+        unsigned char jamo2 = jamo_medial[(hangul >> 5) & 31];
+        unsigned char jamo3 = jamo_final[hangul & 31];
+        if ((hangul >> 15) != 1)
+            abort();
+        if (jamo1 != NONE && jamo2 != NONE && jamo3 != NONE)
+        {
+            /* They are not all three == FILL because that would correspond to
+               johab = 0x8441, which doesn't exist. */
+            ucs4_t *p = r;
+            if (jamo1 != FILL)
+                *p++ = 0x3130 + jamo1;
+            if (jamo2 != FILL)
+                *p++ = 0x3130 + jamo2;
+            if (jamo3 != FILL)
+                *p++ = 0x3130 + jamo3;
+            return p - r;
+        }
     }
-  }
-  return RET_ILUNI;
+    return RET_ILUNI;
 }
 
 #undef fill
 #undef none
 #undef FILL
 #undef NONE
+
+#endif /* _JOHAB_HANGUL_H_ */

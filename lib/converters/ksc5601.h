@@ -1,5 +1,10 @@
+/**
+ * @file ksc5601.h
+ * @brief KSC5601.1987-0, now KS X 1001:2002
+ * @copyright Copyright (C) 1999-2007, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2007, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * KSC5601.1987-0, now KS X 1001:2002
- */
+#ifndef _KSC5601_H_
+#define _KSC5601_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ksc5601_2uni_page21[1115] = {
   /* 0x21 */
@@ -1184,36 +1190,44 @@ static const unsigned short ksc5601_2uni_page4a[4888] = {
   0x71ba, 0x72a7, 0x79a7, 0x7a00, 0x7fb2, 0x8a70,
 };
 
-static int
-ksc5601_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ksc5601_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x21 && c1 <= 0x2c) || (c1 >= 0x30 && c1 <= 0x48) || (c1 >= 0x4a && c1 <= 0x7d)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x21 && c2 < 0x7f) {
-        unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
-        unsigned short wc = 0xfffd;
-        if (i < 1410) {
-          if (i < 1115)
-            wc = ksc5601_2uni_page21[i];
-        } else if (i < 3854) {
-          if (i < 3760)
-            wc = ksc5601_2uni_page30[i-1410];
-        } else {
-          if (i < 8742)
-            wc = ksc5601_2uni_page4a[i-3854];
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x21 && c1 <= 0x2c) || (c1 >= 0x30 && c1 <= 0x48) || (c1 >= 0x4a && c1 <= 0x7d))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if (c2 >= 0x21 && c2 < 0x7f)
+            {
+                unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
+                unsigned short wc = 0xfffd;
+                if (i < 1410)
+                {
+                    if (i < 1115)
+                        wc = ksc5601_2uni_page21[i];
+                }
+                else if (i < 3854)
+                {
+                    if (i < 3760)
+                        wc = ksc5601_2uni_page30[i - 1410];
+                }
+                else
+                {
+                    if (i < 8742)
+                        wc = ksc5601_2uni_page4a[i - 3854];
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned short ksc5601_2charset[8227] = {
@@ -2979,43 +2993,48 @@ static const Summary16 ksc5601_uni2indx_pageff[15] = {
   { 8221, 0x0000 }, { 8221, 0x0000 }, { 8221, 0x006f },
 };
 
-static int
-ksc5601_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ksc5601_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc >= 0x0000 && wc < 0x0460)
-      summary = &ksc5601_uni2indx_page00[(wc>>4)];
-    else if (wc >= 0x2000 && wc < 0x2670)
-      summary = &ksc5601_uni2indx_page20[(wc>>4)-0x200];
-    else if (wc >= 0x3000 && wc < 0x33e0)
-      summary = &ksc5601_uni2indx_page30[(wc>>4)-0x300];
-    else if (wc >= 0x4e00 && wc < 0x9fa0)
-      summary = &ksc5601_uni2indx_page4e[(wc>>4)-0x4e0];
-    else if (wc >= 0xac00 && wc < 0xd7a0)
-      summary = &ksc5601_uni2indx_pageac[(wc>>4)-0xac0];
-    else if (wc >= 0xf900 && wc < 0xfa10)
-      summary = &ksc5601_uni2indx_pagef9[(wc>>4)-0xf90];
-    else if (wc >= 0xff00 && wc < 0xfff0)
-      summary = &ksc5601_uni2indx_pageff[(wc>>4)-0xff0];
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        c = ksc5601_2charset[summary->indx + used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc >= 0x0000 && wc < 0x0460)
+            summary = &ksc5601_uni2indx_page00[(wc >> 4)];
+        else if (wc >= 0x2000 && wc < 0x2670)
+            summary = &ksc5601_uni2indx_page20[(wc >> 4) - 0x200];
+        else if (wc >= 0x3000 && wc < 0x33e0)
+            summary = &ksc5601_uni2indx_page30[(wc >> 4) - 0x300];
+        else if (wc >= 0x4e00 && wc < 0x9fa0)
+            summary = &ksc5601_uni2indx_page4e[(wc >> 4) - 0x4e0];
+        else if (wc >= 0xac00 && wc < 0xd7a0)
+            summary = &ksc5601_uni2indx_pageac[(wc >> 4) - 0xac0];
+        else if (wc >= 0xf900 && wc < 0xfa10)
+            summary = &ksc5601_uni2indx_pagef9[(wc >> 4) - 0xf90];
+        else if (wc >= 0xff00 && wc < 0xfff0)
+            summary = &ksc5601_uni2indx_pageff[(wc >> 4) - 0xff0];
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                c = ksc5601_2charset[summary->indx + used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _KSC5601_H_ */

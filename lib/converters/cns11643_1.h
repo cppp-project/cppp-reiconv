@@ -1,5 +1,10 @@
+/**
+ * @file cns11643_1.h
+ * @brief CNS 11643-1992 plane 1
+ * @copyright Copyright (C) 1999-2005, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2005, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CNS 11643-1992 plane 1
- */
+#ifndef _CNS11643_1_H_
+#define _CNS11643_1_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cns11643_1_2uni_page21[500] = {
   /* 0x21 */
@@ -852,41 +858,50 @@ static const unsigned short cns11643_1_2uni_page44[5401] = {
   0x9e1b, 0x9e1e, 0x7c72,
 };
 
-static int
-cns11643_1_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cns11643_1_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x21 && c1 <= 0x27) || (c1 == 0x42) || (c1 >= 0x44 && c1 <= 0x7d)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x21 && c2 < 0x7f) {
-        unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
-        unsigned short wc = 0xfffd;
-        if (i < 3102) {
-          if (i < 500)
-            wc = cns11643_1_2uni_page21[i];
-          else if (i == 571)
-            wc = 0x4ea0;
-          else if (i == 578)
-            wc = 0x51ab;
-          else if (i == 583)
-            wc = 0x52f9;
-        } else if (i < 3290) {
-          if (i < 3136)
-            wc = cns11643_1_2uni_page42[i-3102];
-        } else {
-          if (i < 8691)
-            wc = cns11643_1_2uni_page44[i-3290];
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x21 && c1 <= 0x27) || (c1 == 0x42) || (c1 >= 0x44 && c1 <= 0x7d))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if (c2 >= 0x21 && c2 < 0x7f)
+            {
+                unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
+                unsigned short wc = 0xfffd;
+                if (i < 3102)
+                {
+                    if (i < 500)
+                        wc = cns11643_1_2uni_page21[i];
+                    else if (i == 571)
+                        wc = 0x4ea0;
+                    else if (i == 578)
+                        wc = 0x51ab;
+                    else if (i == 583)
+                        wc = 0x52f9;
+                }
+                else if (i < 3290)
+                {
+                    if (i < 3136)
+                        wc = cns11643_1_2uni_page42[i - 3102];
+                }
+                else
+                {
+                    if (i < 8691)
+                        wc = cns11643_1_2uni_page44[i - 3290];
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
+#endif /* _CNS11643_1_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file hkscs1999.h
+ * @brief HKSCS:1999
+ * @copyright Copyright (C) 1999-2006, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2006, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * HKSCS:1999
- */
+#ifndef _HKSCS1999_H_
+#define _HKSCS1999_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short hkscs1999_2uni_page88[627] = {
   /* 0x88 */
@@ -848,44 +854,51 @@ static const ucs4_t hkscs1999_2uni_upages[973] = {
   0x2f840, 0x2f880, 0x2f8c0, 0x2f980, 0x2f9c0,
 };
 
-static int
-hkscs1999_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int hkscs1999_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x88 && c1 <= 0x8b) || (c1 >= 0x8d && c1 <= 0xa0) || (c1 >= 0xc6 && c1 <= 0xc8) || (c1 >= 0xf9 && c1 <= 0xfe)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff)) {
-        unsigned int i = 157 * (c1 - 0x80) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
-        ucs4_t wc = 0xfffd;
-        unsigned short swc;
-        if (i < 2041) {
-          if (i < 1883)
-            swc = hkscs1999_2uni_page88[i-1256],
-            wc = hkscs1999_2uni_upages[swc>>6] | (swc & 0x3f);
-        } else if (i < 10990) {
-          if (i < 5181)
-            swc = hkscs1999_2uni_page8d[i-2041],
-            wc = hkscs1999_2uni_upages[swc>>6] | (swc & 0x3f);
-        } else if (i < 18997) {
-          if (i < 11461)
-            swc = hkscs1999_2uni_pagec6[i-10990],
-            wc = hkscs1999_2uni_upages[swc>>6] | (swc & 0x3f);
-        } else {
-          if (i < 19939)
-            swc = hkscs1999_2uni_pagef9[i-18997],
-            wc = hkscs1999_2uni_upages[swc>>6] | (swc & 0x3f);
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x88 && c1 <= 0x8b) || (c1 >= 0x8d && c1 <= 0xa0) || (c1 >= 0xc6 && c1 <= 0xc8) ||
+        (c1 >= 0xf9 && c1 <= 0xfe))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff))
+            {
+                unsigned int i = 157 * (c1 - 0x80) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
+                ucs4_t wc = 0xfffd;
+                unsigned short swc;
+                if (i < 2041)
+                {
+                    if (i < 1883)
+                        swc = hkscs1999_2uni_page88[i - 1256], wc = hkscs1999_2uni_upages[swc >> 6] | (swc & 0x3f);
+                }
+                else if (i < 10990)
+                {
+                    if (i < 5181)
+                        swc = hkscs1999_2uni_page8d[i - 2041], wc = hkscs1999_2uni_upages[swc >> 6] | (swc & 0x3f);
+                }
+                else if (i < 18997)
+                {
+                    if (i < 11461)
+                        swc = hkscs1999_2uni_pagec6[i - 10990], wc = hkscs1999_2uni_upages[swc >> 6] | (swc & 0x3f);
+                }
+                else
+                {
+                    if (i < 19939)
+                        swc = hkscs1999_2uni_pagef9[i - 18997], wc = hkscs1999_2uni_upages[swc >> 6] | (swc & 0x3f);
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned short hkscs1999_2charset[4698] = {
@@ -2948,57 +2961,62 @@ static const Summary16 hkscs1999_uni2indx_page2f8[30] = {
   { 4697, 0x0000 }, { 4697, 0x0010 },
 };
 
-static int
-hkscs1999_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int hkscs1999_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc >= 0x0000 && wc < 0x02d0)
-      summary = &hkscs1999_uni2indx_page00[(wc>>4)];
-    else if (wc >= 0x0400 && wc < 0x0460)
-      summary = &hkscs1999_uni2indx_page04[(wc>>4)-0x040];
-    else if (wc >= 0x1e00 && wc < 0x1ed0)
-      summary = &hkscs1999_uni2indx_page1e[(wc>>4)-0x1e0];
-    else if (wc >= 0x2100 && wc < 0x21f0)
-      summary = &hkscs1999_uni2indx_page21[(wc>>4)-0x210];
-    else if (wc >= 0x2300 && wc < 0x2580)
-      summary = &hkscs1999_uni2indx_page23[(wc>>4)-0x230];
-    else if (wc >= 0x2700 && wc < 0x2740)
-      summary = &hkscs1999_uni2indx_page27[(wc>>4)-0x270];
-    else if (wc >= 0x2e00 && wc < 0x3240)
-      summary = &hkscs1999_uni2indx_page2e[(wc>>4)-0x2e0];
-    else if (wc >= 0x3400 && wc < 0x9fc0)
-      summary = &hkscs1999_uni2indx_page34[(wc>>4)-0x340];
-    else if (wc >= 0xf900 && wc < 0xf910)
-      summary = &hkscs1999_uni2indx_pagef9[(wc>>4)-0xf90];
-    else if (wc >= 0xff00 && wc < 0xfff0)
-      summary = &hkscs1999_uni2indx_pageff[(wc>>4)-0xff0];
-    else if (wc >= 0x20000 && wc < 0x291f0)
-      summary = &hkscs1999_uni2indx_page200[(wc>>4)-0x2000];
-    else if (wc >= 0x29400 && wc < 0x29600)
-      summary = &hkscs1999_uni2indx_page294[(wc>>4)-0x2940];
-    else if (wc >= 0x29700 && wc < 0x2a6b0)
-      summary = &hkscs1999_uni2indx_page297[(wc>>4)-0x2970];
-    else if (wc >= 0x2f800 && wc < 0x2f9e0)
-      summary = &hkscs1999_uni2indx_page2f8[(wc>>4)-0x2f80];
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        c = hkscs1999_2charset[summary->indx + used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc >= 0x0000 && wc < 0x02d0)
+            summary = &hkscs1999_uni2indx_page00[(wc >> 4)];
+        else if (wc >= 0x0400 && wc < 0x0460)
+            summary = &hkscs1999_uni2indx_page04[(wc >> 4) - 0x040];
+        else if (wc >= 0x1e00 && wc < 0x1ed0)
+            summary = &hkscs1999_uni2indx_page1e[(wc >> 4) - 0x1e0];
+        else if (wc >= 0x2100 && wc < 0x21f0)
+            summary = &hkscs1999_uni2indx_page21[(wc >> 4) - 0x210];
+        else if (wc >= 0x2300 && wc < 0x2580)
+            summary = &hkscs1999_uni2indx_page23[(wc >> 4) - 0x230];
+        else if (wc >= 0x2700 && wc < 0x2740)
+            summary = &hkscs1999_uni2indx_page27[(wc >> 4) - 0x270];
+        else if (wc >= 0x2e00 && wc < 0x3240)
+            summary = &hkscs1999_uni2indx_page2e[(wc >> 4) - 0x2e0];
+        else if (wc >= 0x3400 && wc < 0x9fc0)
+            summary = &hkscs1999_uni2indx_page34[(wc >> 4) - 0x340];
+        else if (wc >= 0xf900 && wc < 0xf910)
+            summary = &hkscs1999_uni2indx_pagef9[(wc >> 4) - 0xf90];
+        else if (wc >= 0xff00 && wc < 0xfff0)
+            summary = &hkscs1999_uni2indx_pageff[(wc >> 4) - 0xff0];
+        else if (wc >= 0x20000 && wc < 0x291f0)
+            summary = &hkscs1999_uni2indx_page200[(wc >> 4) - 0x2000];
+        else if (wc >= 0x29400 && wc < 0x29600)
+            summary = &hkscs1999_uni2indx_page294[(wc >> 4) - 0x2940];
+        else if (wc >= 0x29700 && wc < 0x2a6b0)
+            summary = &hkscs1999_uni2indx_page297[(wc >> 4) - 0x2970];
+        else if (wc >= 0x2f800 && wc < 0x2f9e0)
+            summary = &hkscs1999_uni2indx_page2f8[(wc >> 4) - 0x2f80];
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                c = hkscs1999_2charset[summary->indx + used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _HKSCS1999_H_ */

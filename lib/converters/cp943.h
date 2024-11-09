@@ -1,5 +1,10 @@
+/**
+ * @file cp943.h
+ * @brief IBM CP943
+ * @copyright Copyright (C) 1999-2001 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,12 +22,15 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM CP943
- */
+#ifndef _CP943_H_
+#define _CP943_H_
+
+#include "reiconv_defines.h" // IWYU pragma: keep
 
 /* This is essentially CP932, with many mappings missing in the AIX conversion
    table. We just pretend it were the same as CP932. */
 
 #define cp943_mbtowc cp932_mbtowc
 #define cp943_wctomb cp932_wctomb
+
+#endif /* _CP943_H_ */

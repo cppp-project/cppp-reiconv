@@ -1,5 +1,10 @@
+/**
+ * @file cns11643_inv.h
+ * @brief CNS 11643-1992 planes 1-7, CNS 11643-1986 plane 15
+ * @copyright Copyright (C) 1999-2005, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2005, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CNS 11643-1992 planes 1-7, CNS 11643-1986 plane 15
- */
+#ifndef _CNS11643_INV_H_
+#define _CNS11643_INV_H_
 
-static const unsigned char cns11643_inv_2charset[3*55442] = {
+#include "reiconv_defines.h"
+
+static const unsigned char cns11643_inv_2charset[3 * 55442] =
+{
   0x1,0x21,0x70, 0x1,0x22,0x78, 0x1,0x22,0x34, 0x1,0x21,0x31,
   0x1,0x22,0x32, 0x1,0x22,0x33, 0x1,0x25,0x6f, 0x1,0x25,0x6d,
   0x1,0x25,0x6e, 0x1,0x25,0x70, 0x1,0x25,0x6c, 0x1,0x24,0x75,
@@ -13885,14 +13892,16 @@ static const unsigned char cns11643_inv_2charset[3*55442] = {
   0x4,0x48,0x77, 0x7,0x5e,0x4d,
 };
 
-static const Summary16 cns11643_inv_uni2indx_page00[16] = {
+static const Summary16 cns11643_inv_uni2indx_page00[16] =
+{
   /* 0x0000 */
   {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 },
   {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 },
   {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0080 }, {    1, 0x0083 },
   {    4, 0x0000 }, {    4, 0x0080 }, {    5, 0x0000 }, {    5, 0x0080 },
 };
-static const Summary16 cns11643_inv_uni2indx_page02[29] = {
+static const Summary16 cns11643_inv_uni2indx_page02[29] =
+{
   /* 0x0200 */
   {    6, 0x0000 }, {    6, 0x0000 }, {    6, 0x0000 }, {    6, 0x0000 },
   {    6, 0x0000 }, {    6, 0x0000 }, {    6, 0x0000 }, {    6, 0x0000 },
@@ -13904,7 +13913,8 @@ static const Summary16 cns11643_inv_uni2indx_page02[29] = {
   {   11, 0x0000 }, {   11, 0xfffe }, {   26, 0x03fb }, {   35, 0xfffe },
   {   50, 0x03fb },
 };
-static const Summary16 cns11643_inv_uni2indx_page20[44] = {
+static const Summary16 cns11643_inv_uni2indx_page20[44] =
+{
   /* 0x2000 */
   {   59, 0x0000 }, {   59, 0x3358 }, {   66, 0x0060 }, {   68, 0x4824 },
   {   72, 0x0000 }, {   72, 0x0000 }, {   72, 0x0000 }, {   72, 0x0000 },
@@ -13920,7 +13930,8 @@ static const Summary16 cns11643_inv_uni2indx_page20[44] = {
   {  116, 0x0000 }, {  116, 0x0004 }, {  117, 0x00c3 }, {  121, 0x0000 },
   {  121, 0x0000 }, {  121, 0x0000 }, {  121, 0x0020 }, {  122, 0x8000 },
 };
-static const Summary16 cns11643_inv_uni2indx_page24[37] = {
+static const Summary16 cns11643_inv_uni2indx_page24[37] =
+{
   /* 0x2400 */
   {  123, 0xffff }, {  139, 0xffff }, {  155, 0x0002 }, {  156, 0x0000 },
   {  156, 0x0000 }, {  156, 0x0000 }, {  156, 0x03ff }, {  166, 0x3ff0 },
@@ -13935,7 +13946,8 @@ static const Summary16 cns11643_inv_uni2indx_page24[37] = {
   {  230, 0x0260 }, {  233, 0x0000 }, {  233, 0x0000 }, {  233, 0x0000 },
   {  233, 0x0007 },
 };
-static const Summary16 cns11643_inv_uni2indx_page30[1787] = {
+static const Summary16 cns11643_inv_uni2indx_page30[1787] =
+{
   /* 0x3000 */
   {  236, 0xff0f }, {  248, 0x6037 }, {  255, 0x03fe }, {  264, 0x0000 },
   {  264, 0x0000 }, {  264, 0x0000 }, {  264, 0x0000 }, {  264, 0x0000 },
@@ -14496,11 +14508,13 @@ static const Summary16 cns11643_inv_uni2indx_page30[1787] = {
   { 24505, 0xffff }, { 24521, 0xfffd }, { 24536, 0xfffb }, { 24551, 0x7fff },
   { 24566, 0xe000 }, { 24569, 0x73ff }, { 24582, 0x003f },
 };
-static const Summary16 cns11643_inv_uni2indx_pagefa[3] = {
+static const Summary16 cns11643_inv_uni2indx_pagefa[3] =
+{
   /* 0xfa00 */
   { 24588, 0x0000 }, { 24588, 0x0000 }, { 24588, 0x0100 },
 };
-static const Summary16 cns11643_inv_uni2indx_pagefe[31] = {
+static const Summary16 cns11643_inv_uni2indx_pagefe[31] =
+{
   /* 0xfe00 */
   { 24589, 0x0000 }, { 24589, 0x0000 }, { 24589, 0x0000 }, { 24589, 0xffe7 },
   { 24603, 0x7e1f }, { 24614, 0xfef7 }, { 24628, 0x0f7f }, { 24639, 0x0000 },
@@ -14512,7 +14526,8 @@ static const Summary16 cns11643_inv_uni2indx_pagefe[31] = {
   { 24726, 0x0000 }, { 24726, 0x0000 }, { 24726, 0x0000 }, { 24726, 0x0000 },
   { 24726, 0x0000 }, { 24726, 0x0000 }, { 24726, 0x0023 },
 };
-static const Summary16 cns11643_inv_uni2indx_page200[2670] = {
+static const Summary16 cns11643_inv_uni2indx_page200[2670] =
+{
   /* 0x20000 */
   { 24729, 0x8bbd }, { 24739, 0x0715 }, { 24745, 0x722f }, { 24754, 0x0860 },
   { 24757, 0x39ca }, { 24765, 0x08ec }, { 24771, 0xeaf6 }, { 24782, 0xe0d7 },
@@ -15364,48 +15379,52 @@ static const Summary16 cns11643_inv_uni2indx_page2f8[34] = {
   { 55412, 0xffff }, { 55428, 0x3fff },
 };
 
-static int
-cns11643_inv_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cns11643_inv_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc >= 0x0000 && wc < 0x0100)
-      summary = &cns11643_inv_uni2indx_page00[(wc>>4)];
-    else if (wc >= 0x0200 && wc < 0x03d0)
-      summary = &cns11643_inv_uni2indx_page02[(wc>>4)-0x020];
-    else if (wc >= 0x2000 && wc < 0x22c0)
-      summary = &cns11643_inv_uni2indx_page20[(wc>>4)-0x200];
-    else if (wc >= 0x2400 && wc < 0x2650)
-      summary = &cns11643_inv_uni2indx_page24[(wc>>4)-0x240];
-    else if (wc >= 0x3000 && wc < 0x9fb0)
-      summary = &cns11643_inv_uni2indx_page30[(wc>>4)-0x300];
-    else if (wc >= 0xfa00 && wc < 0xfa30)
-      summary = &cns11643_inv_uni2indx_pagefa[(wc>>4)-0xfa0];
-    else if (wc >= 0xfe00 && wc < 0xfff0)
-      summary = &cns11643_inv_uni2indx_pagefe[(wc>>4)-0xfe0];
-    else if (wc >= 0x20000 && wc < 0x2a6e0)
-      summary = &cns11643_inv_uni2indx_page200[(wc>>4)-0x2000];
-    else if (wc >= 0x2f800 && wc < 0x2fa20)
-      summary = &cns11643_inv_uni2indx_page2f8[(wc>>4)-0x2f80];
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        used += summary->indx;
-        r[0] = cns11643_inv_2charset[3*used];
-        r[1] = cns11643_inv_2charset[3*used+1];
-        r[2] = cns11643_inv_2charset[3*used+2];
-        return 3;
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc >= 0x0000 && wc < 0x0100)
+            summary = &cns11643_inv_uni2indx_page00[(wc >> 4)];
+        else if (wc >= 0x0200 && wc < 0x03d0)
+            summary = &cns11643_inv_uni2indx_page02[(wc >> 4) - 0x020];
+        else if (wc >= 0x2000 && wc < 0x22c0)
+            summary = &cns11643_inv_uni2indx_page20[(wc >> 4) - 0x200];
+        else if (wc >= 0x2400 && wc < 0x2650)
+            summary = &cns11643_inv_uni2indx_page24[(wc >> 4) - 0x240];
+        else if (wc >= 0x3000 && wc < 0x9fb0)
+            summary = &cns11643_inv_uni2indx_page30[(wc >> 4) - 0x300];
+        else if (wc >= 0xfa00 && wc < 0xfa30)
+            summary = &cns11643_inv_uni2indx_pagefa[(wc >> 4) - 0xfa0];
+        else if (wc >= 0xfe00 && wc < 0xfff0)
+            summary = &cns11643_inv_uni2indx_pagefe[(wc >> 4) - 0xfe0];
+        else if (wc >= 0x20000 && wc < 0x2a6e0)
+            summary = &cns11643_inv_uni2indx_page200[(wc >> 4) - 0x2000];
+        else if (wc >= 0x2f800 && wc < 0x2fa20)
+            summary = &cns11643_inv_uni2indx_page2f8[(wc >> 4) - 0x2f80];
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                used += summary->indx;
+                r[0] = cns11643_inv_2charset[3 * used];
+                r[1] = cns11643_inv_2charset[3 * used + 1];
+                r[2] = cns11643_inv_2charset[3 * used + 2];
+                return 3;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _CNS11643_INV_H_ */

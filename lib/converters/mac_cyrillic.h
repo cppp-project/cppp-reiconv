@@ -1,5 +1,10 @@
+/**
+ * @file mac_cyrillic.h
+ * @brief MacCyrillic
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * MacCyrillic
- */
+#ifndef _MAC_CYRILLIC_H_
+#define _MAC_CYRILLIC_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short mac_cyrillic_2uni[128] = {
   /* 0x80 */
@@ -105,31 +111,34 @@ static const unsigned char mac_cyrillic_page22[104] = {
   0xad, 0x00, 0x00, 0x00, 0xb2, 0xb3, 0x00, 0x00, /* 0x60-0x67 */
 };
 
-static int
-mac_cyrillic_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int mac_cyrillic_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00c0)
-    c = mac_cyrillic_page00[wc-0x00a0];
-  else if (wc == 0x00f7)
-    c = 0xd6;
-  else if (wc == 0x0192)
-    c = 0xc4;
-  else if (wc >= 0x0400 && wc < 0x0460)
-    c = mac_cyrillic_page04[wc-0x0400];
-  else if (wc >= 0x2010 && wc < 0x2028)
-    c = mac_cyrillic_page20[wc-0x2010];
-  else if (wc >= 0x2110 && wc < 0x2128)
-    c = mac_cyrillic_page21[wc-0x2110];
-  else if (wc >= 0x2200 && wc < 0x2268)
-    c = mac_cyrillic_page22[wc-0x2200];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00c0)
+        c = mac_cyrillic_page00[wc - 0x00a0];
+    else if (wc == 0x00f7)
+        c = 0xd6;
+    else if (wc == 0x0192)
+        c = 0xc4;
+    else if (wc >= 0x0400 && wc < 0x0460)
+        c = mac_cyrillic_page04[wc - 0x0400];
+    else if (wc >= 0x2010 && wc < 0x2028)
+        c = mac_cyrillic_page20[wc - 0x2010];
+    else if (wc >= 0x2110 && wc < 0x2128)
+        c = mac_cyrillic_page21[wc - 0x2110];
+    else if (wc >= 0x2200 && wc < 0x2268)
+        c = mac_cyrillic_page22[wc - 0x2200];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _MAC_CYRILLIC_H_ */

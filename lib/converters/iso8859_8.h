@@ -1,5 +1,10 @@
+/**
+ * @file iso8859_8.h
+ * @brief ISO-8859-8
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * ISO-8859-8
- */
+#ifndef _ISO8859_8_H_
+#define _ISO8859_8_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short iso8859_8_2uni[96] = {
   /* 0xa0 */
@@ -42,22 +48,24 @@ static const unsigned short iso8859_8_2uni[96] = {
   0x05e8, 0x05e9, 0x05ea, 0xfffd, 0xfffd, 0x200e, 0x200f, 0xfffd,
 };
 
-static int
-iso8859_8_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int iso8859_8_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c >= 0xa0) {
-    unsigned short wc = iso8859_8_2uni[c-0xa0];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c >= 0xa0)
+    {
+        unsigned short wc = iso8859_8_2uni[c - 0xa0];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
     }
-  }
-  else {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  return RET_ILSEQ;
+    else
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char iso8859_8_page00[88] = {
@@ -84,23 +92,26 @@ static const unsigned char iso8859_8_page20[16] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xdf, /* 0x10-0x17 */
 };
 
-static int
-iso8859_8_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int iso8859_8_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00a0) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00f8)
-    c = iso8859_8_page00[wc-0x00a0];
-  else if (wc >= 0x05d0 && wc < 0x05f0)
-    c = iso8859_8_page05[wc-0x05d0];
-  else if (wc >= 0x2008 && wc < 0x2018)
-    c = iso8859_8_page20[wc-0x2008];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00a0)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00f8)
+        c = iso8859_8_page00[wc - 0x00a0];
+    else if (wc >= 0x05d0 && wc < 0x05f0)
+        c = iso8859_8_page05[wc - 0x05d0];
+    else if (wc >= 0x2008 && wc < 0x2018)
+        c = iso8859_8_page20[wc - 0x2008];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _ISO8859_8_H_ */

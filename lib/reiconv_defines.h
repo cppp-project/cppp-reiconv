@@ -135,4 +135,11 @@ struct conv_struct
     int discard_ilseq;
 };
 
+/* [CCS = coded character set] [CJKV.INF chapter 3]  */
+typedef struct
+{
+    unsigned short indx; /* Index into big table. */
+    unsigned short used; /* Bitmask of used entries. */
+} Summary16;
+
 #endif /* _REICONV_DEFINES_H_ */

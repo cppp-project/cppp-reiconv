@@ -1,5 +1,10 @@
+/**
+ * @file cp864.h
+ * @brief CP864
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP864
- */
+#ifndef _CP864_H_
+#define _CP864_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp864_2uni_1[16] = {
   /* 0x20 */
@@ -53,30 +59,34 @@ static const unsigned short cp864_2uni_2[128] = {
   0xfed5, 0xfef5, 0xfef6, 0xfedd, 0xfed9, 0xfef1, 0x25a0, 0xfffd,
 };
 
-static int
-cp864_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp864_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x20) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else if (c < 0x30) {
-    *pwc = (ucs4_t) cp864_2uni_1[c-0x20];
-    return 1;
-  }
-  else if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = cp864_2uni_2[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x20)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else if (c < 0x30)
+    {
+        *pwc = (ucs4_t)cp864_2uni_1[c - 0x20];
+        return 1;
+    }
+    else if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
+    }
+    else
+    {
+        unsigned short wc = cp864_2uni_2[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char cp864_page00[8] = {
@@ -149,39 +159,42 @@ static const unsigned char cp864_pagefe[136] = {
   0x9a, 0x00, 0x00, 0x9d, 0x9e, 0x00, 0x00, 0x00, /* 0xf8-0xff */
 };
 
-static int
-cp864_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp864_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0020) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x0020 && wc < 0x0028)
-    c = cp864_page00[wc-0x0020];
-  else if (wc >= 0x0028 && wc < 0x0080)
-    c = wc;
-  else if (wc >= 0x00a0 && wc < 0x00f8)
-    c = cp864_page00_1[wc-0x00a0];
-  else if (wc == 0x03b2)
-    c = 0x90;
-  else if (wc == 0x03c6)
-    c = 0x92;
-  else if (wc >= 0x0608 && wc < 0x0670)
-    c = cp864_page06[wc-0x0608];
-  else if (wc >= 0x2218 && wc < 0x2250)
-    c = cp864_page22[wc-0x2218];
-  else if (wc >= 0x2500 && wc < 0x2540)
-    c = cp864_page25[wc-0x2500];
-  else if (wc == 0x2592)
-    c = 0x84;
-  else if (wc == 0x25a0)
-    c = 0xfe;
-  else if (wc >= 0xfe78 && wc < 0xff00)
-    c = cp864_pagefe[wc-0xfe78];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0020)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x0020 && wc < 0x0028)
+        c = cp864_page00[wc - 0x0020];
+    else if (wc >= 0x0028 && wc < 0x0080)
+        c = wc;
+    else if (wc >= 0x00a0 && wc < 0x00f8)
+        c = cp864_page00_1[wc - 0x00a0];
+    else if (wc == 0x03b2)
+        c = 0x90;
+    else if (wc == 0x03c6)
+        c = 0x92;
+    else if (wc >= 0x0608 && wc < 0x0670)
+        c = cp864_page06[wc - 0x0608];
+    else if (wc >= 0x2218 && wc < 0x2250)
+        c = cp864_page22[wc - 0x2218];
+    else if (wc >= 0x2500 && wc < 0x2540)
+        c = cp864_page25[wc - 0x2500];
+    else if (wc == 0x2592)
+        c = 0x84;
+    else if (wc == 0x25a0)
+        c = 0xfe;
+    else if (wc >= 0xfe78 && wc < 0xff00)
+        c = cp864_pagefe[wc - 0xfe78];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP864_H_ */

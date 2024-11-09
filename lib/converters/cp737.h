@@ -1,5 +1,10 @@
+/**
+ * @file cp737.h
+ * @brief CP737
+ * @copyright Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP737
- */
+#ifndef _CP737_H_
+#define _CP737_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp737_2uni[128] = {
   /* 0x80 */
@@ -48,15 +54,14 @@ static const unsigned short cp737_2uni[128] = {
   0x00b0, 0x2219, 0x00b7, 0x221a, 0x207f, 0x00b2, 0x25a0, 0x00a0,
 };
 
-static int
-cp737_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp737_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) cp737_2uni[c-0x80];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)cp737_2uni[c - 0x80];
+    return 1;
 }
 
 static const unsigned char cp737_page00[24] = {
@@ -112,29 +117,32 @@ static const unsigned char cp737_page25[168] = {
   0xfe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xa0-0xa7 */
 };
 
-static int
-cp737_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp737_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00b8)
-    c = cp737_page00[wc-0x00a0];
-  else if (wc == 0x00f7)
-    c = 0xf6;
-  else if (wc >= 0x0380 && wc < 0x03d0)
-    c = cp737_page03[wc-0x0380];
-  else if (wc == 0x207f)
-    c = 0xfc;
-  else if (wc >= 0x2218 && wc < 0x2268)
-    c = cp737_page22[wc-0x2218];
-  else if (wc >= 0x2500 && wc < 0x25a8)
-    c = cp737_page25[wc-0x2500];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00b8)
+        c = cp737_page00[wc - 0x00a0];
+    else if (wc == 0x00f7)
+        c = 0xf6;
+    else if (wc >= 0x0380 && wc < 0x03d0)
+        c = cp737_page03[wc - 0x0380];
+    else if (wc == 0x207f)
+        c = 0xfc;
+    else if (wc >= 0x2218 && wc < 0x2268)
+        c = cp737_page22[wc - 0x2218];
+    else if (wc >= 0x2500 && wc < 0x25a8)
+        c = cp737_page25[wc - 0x2500];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP737_H_ */

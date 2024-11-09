@@ -1,5 +1,10 @@
+/**
+ * @file cp1250.h
+ * @brief CP1250
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP1250
- */
+#ifndef _CP1250_H_
+#define _CP1250_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp1250_2uni[128] = {
   /* 0x80 */
@@ -48,22 +54,24 @@ static const unsigned short cp1250_2uni[128] = {
   0x0159, 0x016f, 0x00fa, 0x0171, 0x00fc, 0x00fd, 0x0163, 0x02d9,
 };
 
-static int
-cp1250_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp1250_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = cp1250_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = cp1250_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char cp1250_page00[224] = {
@@ -112,27 +120,30 @@ static const unsigned char cp1250_page20[48] = {
   0x00, 0x8b, 0x9b, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x38-0x3f */
 };
 
-static int
-cp1250_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp1250_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0180)
-    c = cp1250_page00[wc-0x00a0];
-  else if (wc >= 0x02c0 && wc < 0x02e0)
-    c = cp1250_page02[wc-0x02c0];
-  else if (wc >= 0x2010 && wc < 0x2040)
-    c = cp1250_page20[wc-0x2010];
-  else if (wc == 0x20ac)
-    c = 0x80;
-  else if (wc == 0x2122)
-    c = 0x99;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0180)
+        c = cp1250_page00[wc - 0x00a0];
+    else if (wc >= 0x02c0 && wc < 0x02e0)
+        c = cp1250_page02[wc - 0x02c0];
+    else if (wc >= 0x2010 && wc < 0x2040)
+        c = cp1250_page20[wc - 0x2010];
+    else if (wc == 0x20ac)
+        c = 0x80;
+    else if (wc == 0x2122)
+        c = 0x99;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP1250_H_ */

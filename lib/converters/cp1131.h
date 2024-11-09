@@ -1,5 +1,10 @@
+/**
+ * @file cp1131.h
+ * @brief CP1131
+ * @copyright Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP1131
- */
+#ifndef _CP1131_H_
+#define _CP1131_H_
 
-static const unsigned short cp1131_2uni[128] = {
+#include "reiconv_defines.h"
+
+static const unsigned short cp1131_2uni[128] =
+{
   /* 0x80 */
   0x0410, 0x0411, 0x0412, 0x0413, 0x0414, 0x0415, 0x0416, 0x0417,
   0x0418, 0x0419, 0x041a, 0x041b, 0x041c, 0x041d, 0x041e, 0x041f,
@@ -48,23 +55,25 @@ static const unsigned short cp1131_2uni[128] = {
   0x0406, 0x0456, 0x00b7, 0x00a4, 0x0490, 0x0491, 0x2219, 0x00a0,
 };
 
-static int
-cp1131_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp1131_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) cp1131_2uni[c-0x80];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)cp1131_2uni[c - 0x80];
+    return 1;
 }
 
-static const unsigned char cp1131_page00[24] = {
+static const unsigned char cp1131_page00[24] =
+{
   0xff, 0x00, 0x00, 0x00, 0xfb, 0x00, 0x00, 0x00, /* 0xa0-0xa7 */
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xa8-0xaf */
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfa, /* 0xb0-0xb7 */
 };
-static const unsigned char cp1131_page04[152] = {
+
+static const unsigned char cp1131_page04[152] =
+{
   0x00, 0xf0, 0x00, 0x00, 0xf2, 0x00, 0xf8, 0xf4, /* 0x00-0x07 */
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf6, 0x00, /* 0x08-0x0f */
   0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, /* 0x10-0x17 */
@@ -85,7 +94,8 @@ static const unsigned char cp1131_page04[152] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x88-0x8f */
   0xfc, 0xfd, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x90-0x97 */
 };
-static const unsigned char cp1131_page25[152] = {
+static const unsigned char cp1131_page25[152] =
+{
   0xc4, 0x00, 0xb3, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x00-0x07 */
   0x00, 0x00, 0x00, 0x00, 0xda, 0x00, 0x00, 0x00, /* 0x08-0x0f */
   0xbf, 0x00, 0x00, 0x00, 0xc0, 0x00, 0x00, 0x00, /* 0x10-0x17 */
@@ -107,25 +117,28 @@ static const unsigned char cp1131_page25[152] = {
   0xde, 0xb0, 0xb1, 0xb2, 0x00, 0x00, 0x00, 0x00, /* 0x90-0x97 */
 };
 
-static int
-cp1131_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp1131_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00b8)
-    c = cp1131_page00[wc-0x00a0];
-  else if (wc >= 0x0400 && wc < 0x0498)
-    c = cp1131_page04[wc-0x0400];
-  else if (wc == 0x2219)
-    c = 0xfe;
-  else if (wc >= 0x2500 && wc < 0x2598)
-    c = cp1131_page25[wc-0x2500];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00b8)
+        c = cp1131_page00[wc - 0x00a0];
+    else if (wc >= 0x0400 && wc < 0x0498)
+        c = cp1131_page04[wc - 0x0400];
+    else if (wc == 0x2219)
+        c = 0xfe;
+    else if (wc >= 0x2500 && wc < 0x2598)
+        c = cp1131_page25[wc - 0x2500];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP1131_H_ */

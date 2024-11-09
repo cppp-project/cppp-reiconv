@@ -1,5 +1,10 @@
+/**
+ * @file atarist.h
+ * @brief Atari ST
+ * @copyright Copyright (C) 1999-2005, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2005, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * Atari ST
- */
+#ifndef _ATARIST_H_
+#define _ATARIST_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short atarist_2uni[128] = {
   /* 0x80 */
@@ -48,15 +54,14 @@ static const unsigned short atarist_2uni[128] = {
   0x00b0, 0x2219, 0x00b7, 0x221a, 0x207f, 0x00b2, 0x00b3, 0x00af,
 };
 
-static int
-atarist_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int atarist_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) atarist_2uni[c-0x80];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)atarist_2uni[c - 0x80];
+    return 1;
 }
 
 static const unsigned char atarist_page00[96] = {
@@ -123,35 +128,38 @@ static const unsigned char atarist_page23[24] = {
   0xf4, 0xf5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x20-0x27 */
 };
 
-static int
-atarist_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int atarist_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0100)
-    c = atarist_page00[wc-0x00a0];
-  else if (wc >= 0x0130 && wc < 0x0198)
-    c = atarist_page01[wc-0x0130];
-  else if (wc >= 0x0390 && wc < 0x03c8)
-    c = atarist_page03[wc-0x0390];
-  else if (wc >= 0x05d0 && wc < 0x05f0)
-    c = atarist_page05[wc-0x05d0];
-  else if (wc == 0x2020)
-    c = 0xbb;
-  else if (wc == 0x207f)
-    c = 0xfc;
-  else if (wc == 0x2122)
-    c = 0xbf;
-  else if (wc >= 0x2208 && wc < 0x2268)
-    c = atarist_page22[wc-0x2208];
-  else if (wc >= 0x2310 && wc < 0x2328)
-    c = atarist_page23[wc-0x2310];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0100)
+        c = atarist_page00[wc - 0x00a0];
+    else if (wc >= 0x0130 && wc < 0x0198)
+        c = atarist_page01[wc - 0x0130];
+    else if (wc >= 0x0390 && wc < 0x03c8)
+        c = atarist_page03[wc - 0x0390];
+    else if (wc >= 0x05d0 && wc < 0x05f0)
+        c = atarist_page05[wc - 0x05d0];
+    else if (wc == 0x2020)
+        c = 0xbb;
+    else if (wc == 0x207f)
+        c = 0xfc;
+    else if (wc == 0x2122)
+        c = 0xbf;
+    else if (wc >= 0x2208 && wc < 0x2268)
+        c = atarist_page22[wc - 0x2208];
+    else if (wc >= 0x2310 && wc < 0x2328)
+        c = atarist_page23[wc - 0x2310];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _ATARIST_H_ */

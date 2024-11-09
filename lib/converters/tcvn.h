@@ -1,5 +1,10 @@
+/**
+ * @file tcvn.h
+ * @brief TCVN-5712
+ * @copyright Copyright (C) 1999-2002, 2004, 2016, 2019 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2004, 2016, 2019 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,12 +22,15 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * TCVN-5712
- */
+#ifndef _TCVN_H_
+#define _TCVN_H_
 
-#include "flushwc.h"
+#include "reiconv_defines.h"
+
+//#include "flushwc.h"
 #include "vietcomb.h"
+
+#include <stdlib.h>
 
 static const unsigned char tcvn_comb_table[] = {
   0xb0, 0xb3, 0xb2, 0xb1, 0xb4,
@@ -288,3 +296,5 @@ tcvn_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
   }
   return RET_ILUNI;
 }
+
+#endif /* _TCVN_H_ */

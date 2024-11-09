@@ -1,5 +1,10 @@
+/**
+ * @file vietcomb.h
+ * @brief mbining characters used in Vietnamese encodings CP1258, TCVN.
+ * @copyright Copyright (C) 2001, 2004, 2011 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2001, 2004, 2011 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,10 +22,8 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* Combining characters used in Vietnamese encodings CP1258, TCVN. */
-
-#ifndef _VIETCOMB_H
-#define _VIETCOMB_H
+#ifndef _VIETCOMB_H_
+#define _VIETCOMB_H_
 
 /* Relevant combining characters:
    0x0300, 0x0301, 0x0303, 0x0309, 0x0323. */
@@ -462,4 +465,4 @@ static const struct viet_decomp viet_decomp_table[] = {
   { 0x1FEE, 0x00A8, 1 }, /* U+1FEE => U+0385 => U+00A8 U+0301 */
 };
 
-#endif /* _VIETCOMB_H */
+#endif /* _VIETCOMB_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file cns11643_7.h
+ * @brief CNS 11643-1992 plane 7
+ * @copyright Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CNS 11643-1992 plane 7
- */
+#ifndef _CNS11643_7_H_
+#define _CNS11643_7_H_
 
-static const unsigned short cns11643_7_2uni_page21[6539] = {
+#include "reiconv_defines.h"
+
+static const unsigned short cns11643_7_2uni_page21[6539] =
+{
   /* 0x21 */
   0x2b55, 0x2c82, 0x2c89, 0x2c87, 0x2dbe, 0x2dbd, 0x2dca, 0x2dd4,
   0x2dbc, 0x2dc4, 0x2dc1, 0x2dc2, 0x2dd7, 0x2d70, 0x2dba, 0x2de3,
@@ -929,7 +936,8 @@ static const unsigned short cns11643_7_2uni_page21[6539] = {
   0xadd3, 0xc0ca, 0x87c4, 0x94b1, 0xb264,
 };
 
-static const ucs4_t cns11643_7_2uni_upages[198] = {
+static const ucs4_t cns11643_7_2uni_upages[198] =
+{
   0x03400, 0x03500, 0x03600, 0x03700, 0x03800, 0x03900, 0x03a00, 0x03b00,
   0x03c00, 0x03d00, 0x03e00, 0x03f00, 0x04000, 0x04100, 0x04200, 0x04300,
   0x04400, 0x04500, 0x04600, 0x04700, 0x04800, 0x04900, 0x04a00, 0x04b00,
@@ -957,31 +965,34 @@ static const ucs4_t cns11643_7_2uni_upages[198] = {
   0x2a400, 0x2a500, 0x2a600, 0x2f800, 0x2f900, 0x2fa00,
 };
 
-static int
-cns11643_7_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cns11643_7_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x21 && c1 <= 0x66)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x21 && c2 < 0x7f) {
-        unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
-        ucs4_t wc = 0xfffd;
-        unsigned short swc;
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x21 && c1 <= 0x66))
+    {
+        if (n >= 2)
         {
-          if (i < 6539)
-            swc = cns11643_7_2uni_page21[i],
-            wc = cns11643_7_2uni_upages[swc>>8] | (swc & 0xff);
+            unsigned char c2 = s[1];
+            if (c2 >= 0x21 && c2 < 0x7f)
+            {
+                unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
+                ucs4_t wc = 0xfffd;
+                unsigned short swc;
+                {
+                    if (i < 6539)
+                        swc = cns11643_7_2uni_page21[i], wc = cns11643_7_2uni_upages[swc >> 8] | (swc & 0xff);
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
+#endif /* _CNS11643_7_H_ */

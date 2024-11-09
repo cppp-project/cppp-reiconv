@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic1155.h
+ * @brief IBM-1155
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-1155
- */
+#ifndef _EBCDIC1155_H_
+#define _EBCDIC1155_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic1155_2uni[256] = {
   /* 0x00 */
@@ -72,12 +78,11 @@ static const unsigned short ebcdic1155_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x00db, 0x0022, 0x00d9, 0x00da, 0x009f,
 };
 
-static int
-ebcdic1155_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic1155_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  *pwc = (ucs4_t) ebcdic1155_2uni[c];
-  return 1;
+    unsigned char c = *s;
+    *pwc = (ucs4_t)ebcdic1155_2uni[c];
+    return 1;
 }
 
 static const unsigned char ebcdic1155_page00[256] = {
@@ -130,19 +135,21 @@ static const unsigned char ebcdic1155_page01[72] = {
 };
 #endif
 
-static int
-ebcdic1155_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic1155_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0100)
-    c = ebcdic1155_page00[wc];
-  else if (wc >= 0x0118 && wc < 0x0160)
-    c = ebcdic1155_page01[wc-0x0118];
-  else if (wc == 0x20ac)
-    c = 0x9f;
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0100)
+        c = ebcdic1155_page00[wc];
+    else if (wc >= 0x0118 && wc < 0x0160)
+        c = ebcdic1155_page01[wc - 0x0118];
+    else if (wc == 0x20ac)
+        c = 0x9f;
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC1155_H_ */

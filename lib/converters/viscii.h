@@ -1,5 +1,10 @@
+/**
+ * @file viscii.h
+ * @brief VISCII1.1-1
+ * @copyright Copyright (C) 1999-2001, 2016, 2019 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016, 2019 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * VISCII1.1-1
- */
+#ifndef _VISCII_H_
+#define _VISCII_H_
+
+#include "reiconv_defines.h"
 
 /* Specification: RFC 1456 */
 
@@ -138,3 +144,5 @@ viscii_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
   }
   return RET_ILUNI;
 }
+
+#endif /* _VISCII_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file big5.h
+ * @brief BIG5
+ * @copyright Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * BIG5
- */
+#ifndef _BIG5_H_
+#define _BIG5_H_
 
-static const unsigned short big5_2uni_pagea1[6121] = {
+#include "reiconv_defines.h"
+
+static const unsigned short big5_2uni_pagea1[6121] =
+{
   /* 0xa1 */
   0x3000, 0xff0c, 0x3001, 0x3002, 0xff0e, 0x2022, 0xff1b, 0xff1a,
   0xff1f, 0xff01, 0xfe30, 0x2026, 0x2025, 0xfe50, 0xff64, 0xfe52,
@@ -842,7 +849,8 @@ static const unsigned short big5_2uni_pagea1[6121] = {
   0x2469, 0x2474, 0x2475, 0x2476, 0x2477, 0x2478, 0x2479, 0x247a,
   0x247b, 0x247c, 0x247d,
 };
-static const unsigned short big5_2uni_pagec9[7652] = {
+static const unsigned short big5_2uni_pagec9[7652] =
+{
   /* 0xc9 */
   0x4e42, 0x4e5c, 0x51f5, 0x531a, 0x5382, 0x4e07, 0x4e0c, 0x4e47,
   0x4e8d, 0x56d7, 0xfa0c, 0x5c6e, 0x5f73, 0x4e0f, 0x5187, 0x4e0e,
@@ -1869,36 +1877,43 @@ static const unsigned short big5_2uni_pagec9[7652] = {
   0x9ea4, 0x9f7e, 0x9f49, 0x9f98,
 };
 
-static int
-big5_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int big5_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0xa1 && c1 <= 0xc7) || (c1 >= 0xc9 && c1 <= 0xf9)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff)) {
-        unsigned int i = 157 * (c1 - 0xa1) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
-        unsigned short wc = 0xfffd;
-        if (i < 6280) {
-          if (i < 6121)
-            wc = big5_2uni_pagea1[i];
-        } else {
-          if (i < 13932)
-            wc = big5_2uni_pagec9[i-6280];
+    unsigned char c1 = s[0];
+    if ((c1 >= 0xa1 && c1 <= 0xc7) || (c1 >= 0xc9 && c1 <= 0xf9))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0xa1 && c2 < 0xff))
+            {
+                unsigned int i = 157 * (c1 - 0xa1) + (c2 - (c2 >= 0xa1 ? 0x62 : 0x40));
+                unsigned short wc = 0xfffd;
+                if (i < 6280)
+                {
+                    if (i < 6121)
+                        wc = big5_2uni_pagea1[i];
+                }
+                else
+                {
+                    if (i < 13932)
+                        wc = big5_2uni_pagec9[i - 6280];
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
-static const unsigned short big5_2charset[13703] = {
+static const unsigned short big5_2charset[13703] =
+{
   0xa246, 0xa247, 0xa244, 0xa1b1, 0xa258, 0xa1d3, 0xa150, 0xa1d1,
   0xa1d2, 0xa3be, 0xa3bc, 0xa3bd, 0xa3bf, 0xa3bb, 0xa344, 0xa345,
   0xa346, 0xa347, 0xa348, 0xa349, 0xa34a, 0xa34b, 0xa34c, 0xa34d,
@@ -3614,14 +3629,16 @@ static const unsigned short big5_2charset[13703] = {
   0xa341, 0xa342, 0xa343, 0xa161, 0xa155, 0xa162, 0xa14e,
 };
 
-static const Summary16 big5_uni2indx_page00[16] = {
+static const Summary16 big5_uni2indx_page00[16] =
+{
   /* 0x0000 */
   {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 },
   {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x0000 },
   {    0, 0x0000 }, {    0, 0x0000 }, {    0, 0x00ac }, {    4, 0x0083 },
   {    7, 0x0000 }, {    7, 0x0080 }, {    8, 0x0000 }, {    8, 0x0080 },
 };
-static const Summary16 big5_uni2indx_page02[38] = {
+static const Summary16 big5_uni2indx_page02[38] =
+{
   /* 0x0200 */
   {    9, 0x0000 }, {    9, 0x0000 }, {    9, 0x0000 }, {    9, 0x0000 },
   {    9, 0x0000 }, {    9, 0x0000 }, {    9, 0x0000 }, {    9, 0x0000 },
@@ -3636,7 +3653,8 @@ static const Summary16 big5_uni2indx_page02[38] = {
   {   62, 0x0002 }, {   63, 0x1ff0 }, {   72, 0xfff8 }, {   85, 0xffff },
   {  101, 0xffff }, {  117, 0x0002 },
 };
-static const Summary16 big5_uni2indx_page20[44] = {
+static const Summary16 big5_uni2indx_page20[44] =
+{
   /* 0x2000 */
   {  118, 0x0000 }, {  118, 0x3318 }, {  124, 0x0064 }, {  127, 0x4824 },
   {  131, 0x0000 }, {  131, 0x0000 }, {  131, 0x0000 }, {  131, 0x0000 },
@@ -3652,7 +3670,8 @@ static const Summary16 big5_uni2indx_page20[44] = {
   {  165, 0x0000 }, {  165, 0x0004 }, {  166, 0x00c3 }, {  170, 0x0000 },
   {  170, 0x0000 }, {  170, 0x0000 }, {  170, 0x0020 }, {  171, 0x8000 },
 };
-static const Summary16 big5_uni2indx_page24[37] = {
+static const Summary16 big5_uni2indx_page24[37] =
+{
   /* 0x2400 */
   {  172, 0x0000 }, {  172, 0x0000 }, {  172, 0x0000 }, {  172, 0x0000 },
   {  172, 0x0000 }, {  172, 0x0000 }, {  172, 0x03ff }, {  182, 0x3ff0 },
@@ -3667,7 +3686,8 @@ static const Summary16 big5_uni2indx_page24[37] = {
   {  246, 0x0260 }, {  249, 0x0000 }, {  249, 0x0000 }, {  249, 0x0000 },
   {  249, 0x0007 },
 };
-static const Summary16 big5_uni2indx_page30[62] = {
+static const Summary16 big5_uni2indx_page30[62] =
+{
   /* 0x3000 */
   {  252, 0xff2f }, {  265, 0x6037 }, {  272, 0x03fe }, {  281, 0x0000 },
   {  281, 0xfffe }, {  296, 0xffff }, {  312, 0xffff }, {  328, 0xffff },
@@ -3689,7 +3709,8 @@ static const Summary16 big5_uni2indx_page30[62] = {
   {  491, 0xc000 }, {  493, 0x7000 }, {  496, 0x0002 }, {  497, 0x0000 },
   {  497, 0x4010 }, {  499, 0x0026 },
 };
-static const Summary16 big5_uni2indx_page4e[1307] = {
+static const Summary16 big5_uni2indx_page4e[1307] =
+{
   /* 0x4e00 */
   {  502, 0xff8b }, {  514, 0xc373 }, {  523, 0x6840 }, {  527, 0x1b0f },
   {  535, 0xe9ac }, {  544, 0xf34c }, {  553, 0x0200 }, {  554, 0xc008 },
@@ -4100,11 +4121,13 @@ static const Summary16 big5_uni2indx_page4e[1307] = {
   { 13502, 0xffcf }, { 13516, 0xfbf4 }, { 13528, 0xdcfb }, { 13540, 0x4ff7 },
   { 13552, 0x2000 }, { 13553, 0x1137 }, { 13560, 0x0015 },
 };
-static const Summary16 big5_uni2indx_pagefa[1] = {
+static const Summary16 big5_uni2indx_pagefa[1] =
+{
   /* 0xfa00 */
   { 13563, 0x3000 },
 };
-static const Summary16 big5_uni2indx_pagefe[23] = {
+static const Summary16 big5_uni2indx_pagefe[23] =
+{
   /* 0xfe00 */
   { 13565, 0x0000 }, { 13565, 0x0000 }, { 13565, 0x0000 }, { 13565, 0xfffb },
   { 13580, 0xfe1f }, { 13592, 0xfef5 }, { 13605, 0x0e7f }, { 13615, 0x0000 },
@@ -4115,45 +4138,50 @@ static const Summary16 big5_uni2indx_pagefe[23] = {
   { 13673, 0xfffe }, { 13688, 0x3fff }, { 13702, 0x0010 },
 };
 
-static int
-big5_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int big5_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc >= 0x0000 && wc < 0x0100)
-      summary = &big5_uni2indx_page00[(wc>>4)];
-    else if (wc >= 0x0200 && wc < 0x0460)
-      summary = &big5_uni2indx_page02[(wc>>4)-0x020];
-    else if (wc >= 0x2000 && wc < 0x22c0)
-      summary = &big5_uni2indx_page20[(wc>>4)-0x200];
-    else if (wc >= 0x2400 && wc < 0x2650)
-      summary = &big5_uni2indx_page24[(wc>>4)-0x240];
-    else if (wc >= 0x3000 && wc < 0x33e0)
-      summary = &big5_uni2indx_page30[(wc>>4)-0x300];
-    else if (wc >= 0x4e00 && wc < 0x9fb0)
-      summary = &big5_uni2indx_page4e[(wc>>4)-0x4e0];
-    else if (wc >= 0xfa00 && wc < 0xfa10)
-      summary = &big5_uni2indx_pagefa[(wc>>4)-0xfa0];
-    else if (wc >= 0xfe00 && wc < 0xff70)
-      summary = &big5_uni2indx_pagefe[(wc>>4)-0xfe0];
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        c = big5_2charset[summary->indx + used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc >= 0x0000 && wc < 0x0100)
+            summary = &big5_uni2indx_page00[(wc >> 4)];
+        else if (wc >= 0x0200 && wc < 0x0460)
+            summary = &big5_uni2indx_page02[(wc >> 4) - 0x020];
+        else if (wc >= 0x2000 && wc < 0x22c0)
+            summary = &big5_uni2indx_page20[(wc >> 4) - 0x200];
+        else if (wc >= 0x2400 && wc < 0x2650)
+            summary = &big5_uni2indx_page24[(wc >> 4) - 0x240];
+        else if (wc >= 0x3000 && wc < 0x33e0)
+            summary = &big5_uni2indx_page30[(wc >> 4) - 0x300];
+        else if (wc >= 0x4e00 && wc < 0x9fb0)
+            summary = &big5_uni2indx_page4e[(wc >> 4) - 0x4e0];
+        else if (wc >= 0xfa00 && wc < 0xfa10)
+            summary = &big5_uni2indx_pagefa[(wc >> 4) - 0xfa0];
+        else if (wc >= 0xfe00 && wc < 0xff70)
+            summary = &big5_uni2indx_pagefe[(wc >> 4) - 0xfe0];
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                c = big5_2charset[summary->indx + used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _BIG5_H_ */

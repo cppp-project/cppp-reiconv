@@ -1,5 +1,10 @@
+/**
+ * @file jisx0212.h
+ * @brief JISX0212.1990-0
+ * @copyright Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * JISX0212.1990-0
- */
+#ifndef _JISX0212_H_
+#define _JISX0212_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short jisx0212_2uni_page22[81] = {
   /* 0x22 */
@@ -909,39 +915,49 @@ static const unsigned short jisx0212_2uni_page30[5801] = {
   0x9fa2, 0x9fa3, 0x9fa5,
 };
 
-static int
-jisx0212_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int jisx0212_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 == 0x22) || (c1 >= 0x26 && c1 <= 0x27) || (c1 >= 0x29 && c1 <= 0x2b) || (c1 >= 0x30 && c1 <= 0x6d)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x21 && c2 < 0x7f) {
-        unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
-        unsigned short wc = 0xfffd;
-        if (i < 470) {
-          if (i < 175)
-            wc = jisx0212_2uni_page22[i-94];
-        } else if (i < 752) {
-          if (i < 658)
-            wc = jisx0212_2uni_page26[i-470];
-        } else if (i < 1410) {
-          if (i < 1027)
-            wc = jisx0212_2uni_page29[i-752];
-        } else {
-          if (i < 7211)
-            wc = jisx0212_2uni_page30[i-1410];
+    unsigned char c1 = s[0];
+    if ((c1 == 0x22) || (c1 >= 0x26 && c1 <= 0x27) || (c1 >= 0x29 && c1 <= 0x2b) || (c1 >= 0x30 && c1 <= 0x6d))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if (c2 >= 0x21 && c2 < 0x7f)
+            {
+                unsigned int i = 94 * (c1 - 0x21) + (c2 - 0x21);
+                unsigned short wc = 0xfffd;
+                if (i < 470)
+                {
+                    if (i < 175)
+                        wc = jisx0212_2uni_page22[i - 94];
+                }
+                else if (i < 752)
+                {
+                    if (i < 658)
+                        wc = jisx0212_2uni_page26[i - 470];
+                }
+                else if (i < 1410)
+                {
+                    if (i < 1027)
+                        wc = jisx0212_2uni_page29[i - 752];
+                }
+                else
+                {
+                    if (i < 7211)
+                        wc = jisx0212_2uni_page30[i - 1410];
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned short jisx0212_2charset[6067] = {
@@ -2152,37 +2168,42 @@ static const Summary16 jisx0212_uni2indx_pageff[6] = {
   { 6066, 0x0000 }, { 6066, 0x4000 },
 };
 
-static int
-jisx0212_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int jisx0212_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc >= 0x0000 && wc < 0x0460)
-      summary = &jisx0212_uni2indx_page00[(wc>>4)];
-    else if (wc >= 0x2100 && wc < 0x2130)
-      summary = &jisx0212_uni2indx_page21[(wc>>4)-0x210];
-    else if (wc >= 0x4e00 && wc < 0x9fb0)
-      summary = &jisx0212_uni2indx_page4e[(wc>>4)-0x4e0];
-    else if (wc >= 0xff00 && wc < 0xff60)
-      summary = &jisx0212_uni2indx_pageff[(wc>>4)-0xff0];
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        c = jisx0212_2charset[summary->indx + used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc >= 0x0000 && wc < 0x0460)
+            summary = &jisx0212_uni2indx_page00[(wc >> 4)];
+        else if (wc >= 0x2100 && wc < 0x2130)
+            summary = &jisx0212_uni2indx_page21[(wc >> 4) - 0x210];
+        else if (wc >= 0x4e00 && wc < 0x9fb0)
+            summary = &jisx0212_uni2indx_page4e[(wc >> 4) - 0x4e0];
+        else if (wc >= 0xff00 && wc < 0xff60)
+            summary = &jisx0212_uni2indx_pageff[(wc >> 4) - 0xff0];
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                c = jisx0212_2charset[summary->indx + used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _JISX0212_H_ */

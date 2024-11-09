@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic1132.h
+ * @brief IBM-1132
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-1132
- */
+#ifndef _EBCDIC1132_H_
+#define _EBCDIC1132_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic1132_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic1132_2uni[256] = {
   0x0038, 0x0039, 0xfffd, 0xfffd, 0xfffd, 0xfffd, 0xfffd, 0x009f,
 };
 
-static int
-ebcdic1132_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic1132_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic1132_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic1132_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 #if DEDUPLICATE_TABLES
@@ -127,19 +133,21 @@ static const unsigned char ebcdic1132_page0e[96] = {
   0xb8, 0xb9, 0x00, 0x00, 0xdd, 0xde, 0x00, 0x00, /* 0xd8-0xdf */
 };
 
-static int
-ebcdic1132_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic1132_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00b0)
-    c = ebcdic1132_page00[wc];
-  else if (wc >= 0x0e80 && wc < 0x0ee0)
-    c = ebcdic1132_page0e[wc-0x0e80];
-  else if (wc == 0x20ad)
-    c = 0x70;
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00b0)
+        c = ebcdic1132_page00[wc];
+    else if (wc >= 0x0e80 && wc < 0x0ee0)
+        c = ebcdic1132_page0e[wc - 0x0e80];
+    else if (wc == 0x20ad)
+        c = 0x70;
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC1132_H_ */

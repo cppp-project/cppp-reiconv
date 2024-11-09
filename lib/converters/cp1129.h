@@ -1,5 +1,10 @@
+/**
+ * @file cp1129.h
+ * @brief CP1129
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP1129
- */
+#ifndef _CP1129_H_
+#define _CP1129_H_
 
-static const unsigned short cp1129_2uni[96] = {
+#include "reiconv_defines.h"
+
+static const unsigned short cp1129_2uni[96] =
+{
   /* 0xa0 */
   0x00a0, 0x00a1, 0x00a2, 0x00a3, 0x00a4, 0x00a5, 0x00a6, 0x00a7,
   0x0153, 0x00a9, 0x00aa, 0x00ab, 0x00ac, 0x00ad, 0x00ae, 0x00af,
@@ -42,18 +49,18 @@ static const unsigned short cp1129_2uni[96] = {
   0x00f8, 0x00f9, 0x00fa, 0x00fb, 0x00fc, 0x01b0, 0x20ab, 0x00ff,
 };
 
-static int
-cp1129_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp1129_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0xa0)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) cp1129_2uni[c-0xa0];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0xa0)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)cp1129_2uni[c - 0xa0];
+    return 1;
 }
 
-static const unsigned char cp1129_page00[272] = {
+static const unsigned char cp1129_page00[272] =
+{
   0x00, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, /* 0xa8-0xaf */
   0xb0, 0xb1, 0xb2, 0xb3, 0x00, 0xb5, 0xb6, 0xb7, /* 0xb0-0xb7 */
   0x00, 0xb9, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf, /* 0xb8-0xbf */
@@ -90,7 +97,9 @@ static const unsigned char cp1129_page00[272] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xdd, /* 0xa8-0xaf */
   0xfd, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xb0-0xb7 */
 };
-static const unsigned char cp1129_page03[40] = {
+
+static const unsigned char cp1129_page03[40] =
+{
   0xcc, 0xec, 0x00, 0xde, 0x00, 0x00, 0x00, 0x00, /* 0x00-0x07 */
   0x00, 0xd2, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x08-0x0f */
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x10-0x17 */
@@ -98,23 +107,26 @@ static const unsigned char cp1129_page03[40] = {
   0x00, 0x00, 0x00, 0xf2, 0x00, 0x00, 0x00, 0x00, /* 0x20-0x27 */
 };
 
-static int
-cp1129_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp1129_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00a8) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a8 && wc < 0x01b8)
-    c = cp1129_page00[wc-0x00a8];
-  else if (wc >= 0x0300 && wc < 0x0328)
-    c = cp1129_page03[wc-0x0300];
-  else if (wc == 0x20ab)
-    c = 0xfe;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00a8)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a8 && wc < 0x01b8)
+        c = cp1129_page00[wc - 0x00a8];
+    else if (wc >= 0x0300 && wc < 0x0328)
+        c = cp1129_page03[wc - 0x0300];
+    else if (wc == 0x20ab)
+        c = 0xfe;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP1129_H_ */

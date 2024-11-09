@@ -1,5 +1,10 @@
+/**
+ * @file iso8859_4.h
+ * @brief ISO-8859-4
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * ISO-8859-4
- */
+#ifndef _ISO8859_4_H_
+#define _ISO8859_4_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short iso8859_4_2uni[96] = {
   /* 0xa0 */
@@ -42,15 +48,14 @@ static const unsigned short iso8859_4_2uni[96] = {
   0x00f8, 0x0173, 0x00fa, 0x00fb, 0x00fc, 0x0169, 0x016b, 0x02d9,
 };
 
-static int
-iso8859_4_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int iso8859_4_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0xa0)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) iso8859_4_2uni[c-0xa0];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0xa0)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)iso8859_4_2uni[c - 0xa0];
+    return 1;
 }
 
 static const unsigned char iso8859_4_page00[224] = {
@@ -91,21 +96,24 @@ static const unsigned char iso8859_4_page02[32] = {
   0x00, 0xff, 0x00, 0xb2, 0x00, 0x00, 0x00, 0x00, /* 0xd8-0xdf */
 };
 
-static int
-iso8859_4_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int iso8859_4_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00a0) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0180)
-    c = iso8859_4_page00[wc-0x00a0];
-  else if (wc >= 0x02c0 && wc < 0x02e0)
-    c = iso8859_4_page02[wc-0x02c0];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00a0)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0180)
+        c = iso8859_4_page00[wc - 0x00a0];
+    else if (wc >= 0x02c0 && wc < 0x02e0)
+        c = iso8859_4_page02[wc - 0x02c0];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _ISO8859_4_H_ */

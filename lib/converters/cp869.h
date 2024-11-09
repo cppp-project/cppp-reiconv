@@ -1,5 +1,10 @@
+/**
+ * @file cp869.h
+ * @brief CP869
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP869
- */
+#ifndef _CP869_H_
+#define _CP869_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp869_2uni[128] = {
   /* 0x80 */
@@ -48,22 +54,24 @@ static const unsigned short cp869_2uni[128] = {
   0x00b0, 0x00a8, 0x03c9, 0x03cb, 0x03b0, 0x03ce, 0x25a0, 0x00a0,
 };
 
-static int
-cp869_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp869_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = cp869_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = cp869_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char cp869_page00[32] = {
@@ -112,25 +120,28 @@ static const unsigned char cp869_page25[168] = {
   0xfe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xa0-0xa7 */
 };
 
-static int
-cp869_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp869_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00c0)
-    c = cp869_page00[wc-0x00a0];
-  else if (wc >= 0x0380 && wc < 0x03d0)
-    c = cp869_page03[wc-0x0380];
-  else if (wc >= 0x2010 && wc < 0x2020)
-    c = cp869_page20[wc-0x2010];
-  else if (wc >= 0x2500 && wc < 0x25a8)
-    c = cp869_page25[wc-0x2500];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00c0)
+        c = cp869_page00[wc - 0x00a0];
+    else if (wc >= 0x0380 && wc < 0x03d0)
+        c = cp869_page03[wc - 0x0380];
+    else if (wc >= 0x2010 && wc < 0x2020)
+        c = cp869_page20[wc - 0x2010];
+    else if (wc >= 0x2500 && wc < 0x25a8)
+        c = cp869_page25[wc - 0x2500];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP869_H_ */

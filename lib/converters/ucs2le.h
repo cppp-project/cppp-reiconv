@@ -1,5 +1,10 @@
+/**
+ * @file ucs2le.h
+ * @brief UCS-2LE = UCS-2 little endian
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,34 +22,42 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * UCS-2LE = UCS-2 little endian
- */
+#ifndef _UCS2LE_H_
+#define _UCS2LE_H_
 
-static int
-ucs2le_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+#include "reiconv_defines.h"
+
+static int ucs2le_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  if (n >= 2) {
-    if (s[1] >= 0xd8 && s[1] < 0xe0) {
-      return RET_ILSEQ;
-    } else {
-      *pwc = s[0] + (s[1] << 8);
-      return 2;
+    if (n >= 2)
+    {
+        if (s[1] >= 0xd8 && s[1] < 0xe0)
+        {
+            return RET_ILSEQ;
+        }
+        else
+        {
+            *pwc = s[0] + (s[1] << 8);
+            return 2;
+        }
     }
-  }
-  return RET_TOOFEW(0);
+    return RET_TOOFEW(0);
 }
 
-static int
-ucs2le_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ucs2le_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (wc < 0x10000 && !(wc >= 0xd800 && wc < 0xe000)) {
-    if (n >= 2) {
-      r[0] = (unsigned char) wc;
-      r[1] = (unsigned char) (wc >> 8);
-      return 2;
-    } else
-      return RET_TOOSMALL;
-  }
-  return RET_ILUNI;
+    if (wc < 0x10000 && !(wc >= 0xd800 && wc < 0xe000))
+    {
+        if (n >= 2)
+        {
+            r[0] = (unsigned char)wc;
+            r[1] = (unsigned char)(wc >> 8);
+            return 2;
+        }
+        else
+            return RET_TOOSMALL;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _UCS2LE_H_ */

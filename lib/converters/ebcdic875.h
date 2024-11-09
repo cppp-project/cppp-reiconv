@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic875.h
+ * @brief IBM-875
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-875
- */
+#ifndef _EBCDIC875_H_
+#define _EBCDIC875_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic875_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic875_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x00a9, 0xfffd, 0xfffd, 0x00bb, 0x009f,
 };
 
-static int
-ebcdic875_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic875_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic875_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic875_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char ebcdic875_page00[192] = {
@@ -127,19 +133,21 @@ static const unsigned char ebcdic875_page20[16] = {
   0xce, 0xde, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x18-0x1f */
 };
 
-static int
-ebcdic875_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic875_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x00c0)
-    c = ebcdic875_page00[wc];
-  else if (wc >= 0x0380 && wc < 0x03d0)
-    c = ebcdic875_page03[wc-0x0380];
-  else if (wc >= 0x2010 && wc < 0x2020)
-    c = ebcdic875_page20[wc-0x2010];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x00c0)
+        c = ebcdic875_page00[wc];
+    else if (wc >= 0x0380 && wc < 0x03d0)
+        c = ebcdic875_page03[wc - 0x0380];
+    else if (wc >= 0x2010 && wc < 0x2020)
+        c = ebcdic875_page20[wc - 0x2010];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC875_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file flushwc.h
+ * @brief tput the buffered character.
+ * @copyright Copyright (C) 2001 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 2001 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,8 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _FLUSHWC_H
-#define _FLUSHWC_H
+#ifndef _FLUSHWC_H_
+#define _FLUSHWC_H_
+
+#include "reiconv_defines.h"
 
 static int
 normal_flushwc (conv_t conv, ucs4_t *pwc)
@@ -33,4 +40,4 @@ normal_flushwc (conv_t conv, ucs4_t *pwc)
     return 0;
 }
 
-#endif /* _FLUSHWC_H */
+#endif /* _FLUSHWC_H_ */

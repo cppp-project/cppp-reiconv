@@ -1,5 +1,10 @@
+/**
+ * @file gb18030_2005.h
+ * @brief GB18030:2005
+ * @copyright Copyright (C) 1999-2001, 2005, 2012, 2016, 2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2005, 2012, 2016, 2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,14 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * GB18030:2005
- */
+#ifndef _GB18030_2005_H_
+#define _GB18030_2005_H_
+
+#include "converters/ascii.h"
+#include "converters/gb18030ext.h"
+#include "converters/gb18030uni.h"
+#include "converters/gbk.h"
+#include "reiconv_defines.h"
 
 /*
  * GB18030, as specified in the GB18030 standard, is an extension of GBK.
@@ -181,89 +191,103 @@
  *
  */
 
-#include "gb18030ext.h"
-#include "gb18030uni.h"
-
-static int
-gb18030_2005_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int gb18030_2005_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  int ret;
+    int ret;
 
-  /* Code set 0 (ASCII) */
-  if (*s < 0x80)
-    return ascii_mbtowc(conv,pwc,s,n);
+    /* Code set 0 (ASCII) */
+    if (*s < 0x80)
+        return ascii_mbtowc(conv, pwc, s, n);
 
-  /* Code set 1 (GBK extended) */
-  ret = gbk_mbtowc(conv,pwc,s,n);
-  if (ret != RET_ILSEQ)
-    return ret;
+    /* Code set 1 (GBK extended) */
+    ret = gbk_mbtowc(conv, pwc, s, n);
+    if (ret != RET_ILSEQ)
+        return ret;
 
-  ret = gb18030_2005_ext_mbtowc(conv,pwc,s,n);
-  if (ret != RET_ILSEQ)
-    return ret;
+    ret = gb18030_2005_ext_mbtowc(conv, pwc, s, n);
+    if (ret != RET_ILSEQ)
+        return ret;
 
-  /* Code set 2 (remainder of Unicode U+0000..U+FFFF), including
-     User-defined characters, two-byte part of range U+E766..U+E864 */
-  ret = gb18030_2005_uni_mbtowc(conv,pwc,s,n);
-  if (ret != RET_ILSEQ)
-    return ret;
-  /* User-defined characters range U+E000..U+E765 */
-  {
-    unsigned char c1 = s[0];
-    if ((c1 >= 0xaa && c1 <= 0xaf) || (c1 >= 0xf8 && c1 <= 0xfe)) {
-      if (n >= 2) {
-        unsigned char c2 = s[1];
-        if (c2 >= 0xa1 && c2 <= 0xfe) {
-          *pwc = 0xe000 + 94 * (c1 >= 0xf8 ? c1 - 0xf2 : c1 - 0xaa) + (c2 - 0xa1);
-          return 2;
+    /* Code set 2 (remainder of Unicode U+0000..U+FFFF), including
+       User-defined characters, two-byte part of range U+E766..U+E864 */
+    ret = gb18030_2005_uni_mbtowc(conv, pwc, s, n);
+    if (ret != RET_ILSEQ)
+        return ret;
+    /* User-defined characters range U+E000..U+E765 */
+    {
+        unsigned char c1 = s[0];
+        if ((c1 >= 0xaa && c1 <= 0xaf) || (c1 >= 0xf8 && c1 <= 0xfe))
+        {
+            if (n >= 2)
+            {
+                unsigned char c2 = s[1];
+                if (c2 >= 0xa1 && c2 <= 0xfe)
+                {
+                    *pwc = 0xe000 + 94 * (c1 >= 0xf8 ? c1 - 0xf2 : c1 - 0xaa) + (c2 - 0xa1);
+                    return 2;
+                }
+            }
+            else
+                return RET_TOOFEW(0);
         }
-      } else
-        return RET_TOOFEW(0);
-    } else if (c1 >= 0xa1 && c1 <= 0xa7) {
-      if (n >= 2) {
-        unsigned char c2 = s[1];
-        if (c2 >= 0x40 && c2 <= 0xa1 && c2 != 0x7f) {
-          *pwc = 0xe4c6 + 96 * (c1 - 0xa1) + c2 - (c2 >= 0x80 ? 0x41 : 0x40);
-          return 2;
+        else if (c1 >= 0xa1 && c1 <= 0xa7)
+        {
+            if (n >= 2)
+            {
+                unsigned char c2 = s[1];
+                if (c2 >= 0x40 && c2 <= 0xa1 && c2 != 0x7f)
+                {
+                    *pwc = 0xe4c6 + 96 * (c1 - 0xa1) + c2 - (c2 >= 0x80 ? 0x41 : 0x40);
+                    return 2;
+                }
+            }
+            else
+                return RET_TOOFEW(0);
         }
-      } else
-        return RET_TOOFEW(0);
     }
-  }
 
-  /* Code set 3 (Unicode U+10000..U+10FFFF) */
-  {
-    unsigned char c1 = s[0];
-    if (c1 >= 0x90 && c1 <= 0xe3) {
-      if (n >= 2) {
-        unsigned char c2 = s[1];
-        if (c2 >= 0x30 && c2 <= 0x39) {
-          if (n >= 3) {
-            unsigned char c3 = s[2];
-            if (c3 >= 0x81 && c3 <= 0xfe) {
-              if (n >= 4) {
-                unsigned char c4 = s[3];
-                if (c4 >= 0x30 && c4 <= 0x39) {
-                  unsigned int i = (((c1 - 0x90) * 10 + (c2 - 0x30)) * 126 + (c3 - 0x81)) * 10 + (c4 - 0x30);
-                  if (i >= 0 && i < 0x100000) {
-                    *pwc = (ucs4_t) (0x10000 + i);
-                    return 4;
-                  }
+    /* Code set 3 (Unicode U+10000..U+10FFFF) */
+    {
+        unsigned char c1 = s[0];
+        if (c1 >= 0x90 && c1 <= 0xe3)
+        {
+            if (n >= 2)
+            {
+                unsigned char c2 = s[1];
+                if (c2 >= 0x30 && c2 <= 0x39)
+                {
+                    if (n >= 3)
+                    {
+                        unsigned char c3 = s[2];
+                        if (c3 >= 0x81 && c3 <= 0xfe)
+                        {
+                            if (n >= 4)
+                            {
+                                unsigned char c4 = s[3];
+                                if (c4 >= 0x30 && c4 <= 0x39)
+                                {
+                                    unsigned int i =
+                                        (((c1 - 0x90) * 10 + (c2 - 0x30)) * 126 + (c3 - 0x81)) * 10 + (c4 - 0x30);
+                                    if (i >= 0 && i < 0x100000)
+                                    {
+                                        *pwc = (ucs4_t)(0x10000 + i);
+                                        return 4;
+                                    }
+                                }
+                                return RET_ILSEQ;
+                            }
+                            return RET_TOOFEW(0);
+                        }
+                        return RET_ILSEQ;
+                    }
+                    return RET_TOOFEW(0);
                 }
                 return RET_ILSEQ;
-              }
-              return RET_TOOFEW(0);
             }
-            return RET_ILSEQ;
-          }
-          return RET_TOOFEW(0);
+            return RET_TOOFEW(0);
         }
         return RET_ILSEQ;
-      }
-      return RET_TOOFEW(0);
     }
-    return RET_ILSEQ;
-  }
 }
 
 static const struct { unsigned short uni[2]; unsigned int charset; } gb18030_2005_pua2charset[35] = {
@@ -305,89 +329,111 @@ static const struct { unsigned short uni[2]; unsigned int charset; } gb18030_200
   { { 0xe864, 0xe864 },  0xfea0                 },
 };
 
-static int
-gb18030_2005_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int gb18030_2005_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  int ret;
+    int ret;
 
-  /* Code set 0 (ASCII) */
-  ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILUNI)
-    return ret;
+    /* Code set 0 (ASCII) */
+    ret = ascii_wctomb(conv, r, wc, n);
+    if (ret != RET_ILUNI)
+        return ret;
 
-  /* Code set 1 (GBK extended) */
-  ret = gbk_wctomb(conv,r,wc,n);
-  if (ret != RET_ILUNI)
-    return ret;
+    /* Code set 1 (GBK extended) */
+    ret = gbk_wctomb(conv, r, wc, n);
+    if (ret != RET_ILUNI)
+        return ret;
 
-  ret = gb18030ext_wctomb(conv,r,wc,n);
-  if (ret != RET_ILUNI)
-    return ret;
+    ret = gb18030ext_wctomb(conv, r, wc, n);
+    if (ret != RET_ILUNI)
+        return ret;
 
-  /* Code set 2 (remainder of Unicode U+0000..U+FFFF) */
-  if (wc >= 0xe000 && wc <= 0xe864) {
-    if (n >= 2) {
-      if (wc < 0xe766) {
-        /* User-defined characters range U+E000..U+E765 */
-        if (wc < 0xe4c6) {
-          unsigned int i = wc - 0xe000;
-          r[1] = (i % 94) + 0xa1; i = i / 94;
-          r[0] = (i < 6 ? i + 0xaa : i + 0xf2);
-          return 2;
-        } else {
-          unsigned int i = wc - 0xe4c6;
-          r[0] = (i / 96) + 0xa1; i = i % 96;
-          r[1] = i + (i >= 0x3f ? 0x41 : 0x40);
-          return 2;
-        }
-      } else {
-        /* User-defined characters, two-byte part and 6 four-byte mappings in
-           range U+E766..U+E864 */
-        unsigned int k1 = 0;
-        unsigned int k2 = 35;
-        /* Invariant: We know that if wc occurs in Unicode interval in
-           gb18030_2005_pua2charset, it does so at a k with  k1 <= k < k2. */
-        while (k1 < k2) {
-          unsigned int k = (k1 + k2) / 2;
-          if (wc < gb18030_2005_pua2charset[k].uni[0])
-            k2 = k;
-          else if (wc > gb18030_2005_pua2charset[k].uni[1])
-            k1 = k + 1;
-          else {
-            unsigned int c =
-              gb18030_2005_pua2charset[k].charset + (wc - gb18030_2005_pua2charset[k].uni[0]);
-            if (c < 0x10000) {
-              r[0] = (c >> 8);
-              r[1] = c & 0xff;
-              return 2;
-            } else {
-              r[0] = (c >> 24);
-              r[1] = (c >> 16) & 0xff;
-              r[2] = (c >> 8) & 0xff;
-              r[3] = c & 0xff;
-              return 4;
+    /* Code set 2 (remainder of Unicode U+0000..U+FFFF) */
+    if (wc >= 0xe000 && wc <= 0xe864)
+    {
+        if (n >= 2)
+        {
+            if (wc < 0xe766)
+            {
+                /* User-defined characters range U+E000..U+E765 */
+                if (wc < 0xe4c6)
+                {
+                    unsigned int i = wc - 0xe000;
+                    r[1] = (i % 94) + 0xa1;
+                    i = i / 94;
+                    r[0] = (i < 6 ? i + 0xaa : i + 0xf2);
+                    return 2;
+                }
+                else
+                {
+                    unsigned int i = wc - 0xe4c6;
+                    r[0] = (i / 96) + 0xa1;
+                    i = i % 96;
+                    r[1] = i + (i >= 0x3f ? 0x41 : 0x40);
+                    return 2;
+                }
             }
-          }
+            else
+            {
+                /* User-defined characters, two-byte part and 6 four-byte mappings in
+                   range U+E766..U+E864 */
+                unsigned int k1 = 0;
+                unsigned int k2 = 35;
+                /* Invariant: We know that if wc occurs in Unicode interval in
+                   gb18030_2005_pua2charset, it does so at a k with  k1 <= k < k2. */
+                while (k1 < k2)
+                {
+                    unsigned int k = (k1 + k2) / 2;
+                    if (wc < gb18030_2005_pua2charset[k].uni[0])
+                        k2 = k;
+                    else if (wc > gb18030_2005_pua2charset[k].uni[1])
+                        k1 = k + 1;
+                    else
+                    {
+                        unsigned int c =
+                            gb18030_2005_pua2charset[k].charset + (wc - gb18030_2005_pua2charset[k].uni[0]);
+                        if (c < 0x10000)
+                        {
+                            r[0] = (c >> 8);
+                            r[1] = c & 0xff;
+                            return 2;
+                        }
+                        else
+                        {
+                            r[0] = (c >> 24);
+                            r[1] = (c >> 16) & 0xff;
+                            r[2] = (c >> 8) & 0xff;
+                            r[3] = c & 0xff;
+                            return 4;
+                        }
+                    }
+                }
+            }
         }
-      }
-    } else
-      return RET_TOOSMALL;
-  }
-  ret = gb18030_2005_uni_wctomb(conv,r,wc,n);
-  if (ret != RET_ILUNI)
-    return ret;
-
-  /* Code set 3 (Unicode U+10000..U+10FFFF) */
-  if (n >= 4) {
-    if (wc >= 0x10000 && wc < 0x110000) {
-      unsigned int i = wc - 0x10000;
-      r[3] = (i % 10) + 0x30; i = i / 10;
-      r[2] = (i % 126) + 0x81; i = i / 126;
-      r[1] = (i % 10) + 0x30; i = i / 10;
-      r[0] = i + 0x90;
-      return 4;
+        else
+            return RET_TOOSMALL;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    ret = gb18030_2005_uni_wctomb(conv, r, wc, n);
+    if (ret != RET_ILUNI)
+        return ret;
+
+    /* Code set 3 (Unicode U+10000..U+10FFFF) */
+    if (n >= 4)
+    {
+        if (wc >= 0x10000 && wc < 0x110000)
+        {
+            unsigned int i = wc - 0x10000;
+            r[3] = (i % 10) + 0x30;
+            i = i / 10;
+            r[2] = (i % 126) + 0x81;
+            i = i / 126;
+            r[1] = (i % 10) + 0x30;
+            i = i / 10;
+            r[0] = i + 0x90;
+            return 4;
+        }
+        return RET_ILUNI;
+    }
+    return RET_TOOSMALL;
 }
+
+#endif /* _GB18030_2005_H_ */

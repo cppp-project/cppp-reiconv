@@ -1,5 +1,10 @@
+/**
+ * @file mac_thai.h
+ * @brief MacThai
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * MacThai
- */
+#ifndef _MAC_THAI_H_
+#define _MAC_THAI_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short mac_thai_2uni[128] = {
   /* 0x80 */
@@ -48,22 +54,24 @@ static const unsigned short mac_thai_2uni[128] = {
   0x0e58, 0x0e59, 0x00ae, 0x00a9, 0xfffd, 0xfffd, 0xfffd, 0xfffd,
 };
 
-static int
-mac_thai_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int mac_thai_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = mac_thai_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = mac_thai_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char mac_thai_page00[32] = {
@@ -99,29 +107,32 @@ static const unsigned char mac_thai_pagef8[32] = {
   0x87, 0x8f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x98-0x9f */
 };
 
-static int
-mac_thai_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int mac_thai_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00c0)
-    c = mac_thai_page00[wc-0x00a0];
-  else if (wc >= 0x0e00 && wc < 0x0e60)
-    c = mac_thai_page0e[wc-0x0e00];
-  else if (wc >= 0x2008 && wc < 0x2028)
-    c = mac_thai_page20[wc-0x2008];
-  else if (wc == 0x2122)
-    c = 0xee;
-  else if (wc >= 0xf880 && wc < 0xf8a0)
-    c = mac_thai_pagef8[wc-0xf880];
-  else if (wc == 0xfeff)
-    c = 0xdb;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00c0)
+        c = mac_thai_page00[wc - 0x00a0];
+    else if (wc >= 0x0e00 && wc < 0x0e60)
+        c = mac_thai_page0e[wc - 0x0e00];
+    else if (wc >= 0x2008 && wc < 0x2028)
+        c = mac_thai_page20[wc - 0x2008];
+    else if (wc == 0x2122)
+        c = 0xee;
+    else if (wc >= 0xf880 && wc < 0xf8a0)
+        c = mac_thai_pagef8[wc - 0xf880];
+    else if (wc == 0xfeff)
+        c = 0xdb;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _MAC_THAI_H_ */

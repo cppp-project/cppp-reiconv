@@ -1,5 +1,10 @@
+/**
+ * @file cp932ext.h
+ * @brief CP932 extensions
+ * @copyright Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP932 extensions
- */
+#ifndef _CP932EXT_H_
+#define _CP932EXT_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp932ext_2uni_page87[92] = {
   /* 0x87 */
@@ -144,36 +150,44 @@ static const unsigned short cp932ext_2uni_pagefa[388] = {
   0x9d6b, 0xfa2d, 0x9e19, 0x9ed1,
 };
 
-static int
-cp932ext_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp932ext_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 == 0x87) || (c1 >= 0xed && c1 <= 0xee) || (c1 >= 0xfa && c1 <= 0xfc)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xfd)) {
-        unsigned int i = 188 * (c1 - (c1 >= 0xe0 ? 0xc1 : 0x81)) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
-        unsigned short wc = 0xfffd;
-        if (i < 8272) {
-          if (i < 1220)
-            wc = cp932ext_2uni_page87[i-1128];
-        } else if (i < 10716) {
-          if (i < 8648)
-            wc = cp932ext_2uni_pageed[i-8272];
-        } else {
-          if (i < 11104)
-            wc = cp932ext_2uni_pagefa[i-10716];
+    unsigned char c1 = s[0];
+    if ((c1 == 0x87) || (c1 >= 0xed && c1 <= 0xee) || (c1 >= 0xfa && c1 <= 0xfc))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xfd))
+            {
+                unsigned int i = 188 * (c1 - (c1 >= 0xe0 ? 0xc1 : 0x81)) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
+                unsigned short wc = 0xfffd;
+                if (i < 8272)
+                {
+                    if (i < 1220)
+                        wc = cp932ext_2uni_page87[i - 1128];
+                }
+                else if (i < 10716)
+                {
+                    if (i < 8648)
+                        wc = cp932ext_2uni_pageed[i - 8272];
+                }
+                else
+                {
+                    if (i < 11104)
+                        wc = cp932ext_2uni_pagefa[i - 10716];
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned short cp932ext_2charset[457] = {
@@ -652,57 +666,62 @@ static const Summary16 cp932ext_uni2indx_pageff[15] = {
   {  455, 0x0000 }, {  455, 0x0000 }, {  455, 0x0014 },
 };
 
-static int
-cp932ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp932ext_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    const Summary16 *summary = NULL;
-    if (wc >= 0x2100 && wc < 0x22c0)
-      summary = &cp932ext_uni2indx_page21[(wc>>4)-0x210];
-    else if (wc >= 0x2400 && wc < 0x2480)
-      summary = &cp932ext_uni2indx_page24[(wc>>4)-0x240];
-    else if (wc >= 0x3000 && wc < 0x3020)
-      summary = &cp932ext_uni2indx_page30[(wc>>4)-0x300];
-    else if (wc >= 0x3200 && wc < 0x33d0)
-      summary = &cp932ext_uni2indx_page32[(wc>>4)-0x320];
-    else if (wc >= 0x4e00 && wc < 0x5590)
-      summary = &cp932ext_uni2indx_page4e[(wc>>4)-0x4e0];
-    else if (wc >= 0x5700 && wc < 0x59c0)
-      summary = &cp932ext_uni2indx_page57[(wc>>4)-0x570];
-    else if (wc >= 0x5b00 && wc < 0x5de0)
-      summary = &cp932ext_uni2indx_page5b[(wc>>4)-0x5b0];
-    else if (wc >= 0x5f00 && wc < 0x7ba0)
-      summary = &cp932ext_uni2indx_page5f[(wc>>4)-0x5f0];
-    else if (wc >= 0x7d00 && wc < 0x7fb0)
-      summary = &cp932ext_uni2indx_page7d[(wc>>4)-0x7d0];
-    else if (wc >= 0x8300 && wc < 0x85c0)
-      summary = &cp932ext_uni2indx_page83[(wc>>4)-0x830];
-    else if (wc >= 0x8800 && wc < 0x8ed0)
-      summary = &cp932ext_uni2indx_page88[(wc>>4)-0x880];
-    else if (wc >= 0x9000 && wc < 0x9ee0)
-      summary = &cp932ext_uni2indx_page90[(wc>>4)-0x900];
-    else if (wc >= 0xf900 && wc < 0xfa30)
-      summary = &cp932ext_uni2indx_pagef9[(wc>>4)-0xf90];
-    else if (wc >= 0xff00 && wc < 0xfff0)
-      summary = &cp932ext_uni2indx_pageff[(wc>>4)-0xff0];
-    if (summary) {
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        c = cp932ext_2charset[summary->indx + used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
+    if (n >= 2)
+    {
+        const Summary16 *summary = NULL;
+        if (wc >= 0x2100 && wc < 0x22c0)
+            summary = &cp932ext_uni2indx_page21[(wc >> 4) - 0x210];
+        else if (wc >= 0x2400 && wc < 0x2480)
+            summary = &cp932ext_uni2indx_page24[(wc >> 4) - 0x240];
+        else if (wc >= 0x3000 && wc < 0x3020)
+            summary = &cp932ext_uni2indx_page30[(wc >> 4) - 0x300];
+        else if (wc >= 0x3200 && wc < 0x33d0)
+            summary = &cp932ext_uni2indx_page32[(wc >> 4) - 0x320];
+        else if (wc >= 0x4e00 && wc < 0x5590)
+            summary = &cp932ext_uni2indx_page4e[(wc >> 4) - 0x4e0];
+        else if (wc >= 0x5700 && wc < 0x59c0)
+            summary = &cp932ext_uni2indx_page57[(wc >> 4) - 0x570];
+        else if (wc >= 0x5b00 && wc < 0x5de0)
+            summary = &cp932ext_uni2indx_page5b[(wc >> 4) - 0x5b0];
+        else if (wc >= 0x5f00 && wc < 0x7ba0)
+            summary = &cp932ext_uni2indx_page5f[(wc >> 4) - 0x5f0];
+        else if (wc >= 0x7d00 && wc < 0x7fb0)
+            summary = &cp932ext_uni2indx_page7d[(wc >> 4) - 0x7d0];
+        else if (wc >= 0x8300 && wc < 0x85c0)
+            summary = &cp932ext_uni2indx_page83[(wc >> 4) - 0x830];
+        else if (wc >= 0x8800 && wc < 0x8ed0)
+            summary = &cp932ext_uni2indx_page88[(wc >> 4) - 0x880];
+        else if (wc >= 0x9000 && wc < 0x9ee0)
+            summary = &cp932ext_uni2indx_page90[(wc >> 4) - 0x900];
+        else if (wc >= 0xf900 && wc < 0xfa30)
+            summary = &cp932ext_uni2indx_pagef9[(wc >> 4) - 0xf90];
+        else if (wc >= 0xff00 && wc < 0xfff0)
+            summary = &cp932ext_uni2indx_pageff[(wc >> 4) - 0xff0];
+        if (summary)
+        {
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                c = cp932ext_2charset[summary->indx + used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _CP932EXT_H_ */

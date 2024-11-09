@@ -1,5 +1,10 @@
+/**
+ * @file cp1161.h
+ * @brief CP1161
+ * @copyright Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,11 +22,14 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP1161
- */
+#ifndef _CP1161_H_
+#define _CP1161_H_
 
-static const unsigned short cp1161_2uni[96] = {
+#include "converters/cp874.h"
+#include "reiconv_defines.h"
+
+static const unsigned short cp1161_2uni[96] =
+{
   /* 0xa0 */
   0x0e48, 0x0e01, 0x0e02, 0x0e03, 0x0e04, 0x0e05, 0x0e06, 0x0e07,
   0x0e08, 0x0e09, 0x0e0a, 0x0e0b, 0x0e0c, 0x0e0d, 0x0e0e, 0x0e0f,
@@ -42,47 +50,53 @@ static const unsigned short cp1161_2uni[96] = {
   0x0e58, 0x0e59, 0x0e5a, 0x0e5b, 0x00a2, 0x00ac, 0x00a6, 0x00a0,
 };
 
-static int
-cp1161_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp1161_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else if (c < 0xa0) {
-  }
-  else {
-    *pwc = (ucs4_t) cp1161_2uni[c-0xa0];
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
+    }
+    else if (c < 0xa0)
+    {
+    }
+    else
+    {
+        *pwc = (ucs4_t)cp1161_2uni[c - 0xa0];
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
-static const unsigned char cp1161_page00[16] = {
+static const unsigned char cp1161_page00[16] =
+{
   0xff, 0x00, 0xfc, 0x00, 0x00, 0x00, 0xfe, 0x00, /* 0xa0-0xa7 */
   0x00, 0x00, 0x00, 0x00, 0xfd, 0x00, 0x00, 0x00, /* 0xa8-0xaf */
 };
 
-static int
-cp1161_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp1161_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00b0)
-    c = cp1161_page00[wc-0x00a0];
-  else if (wc >= 0x0e48 && wc < 0x0e4c)
-    c = wc-0x0d60;
-  else if (wc >= 0x0e00 && wc < 0x0e60)
-    c = cp874_page0e[wc-0x0e00];
-  else if (wc == 0x20ac)
-    c = 0xde;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00b0)
+        c = cp1161_page00[wc - 0x00a0];
+    else if (wc >= 0x0e48 && wc < 0x0e4c)
+        c = wc - 0x0d60;
+    else if (wc >= 0x0e00 && wc < 0x0e60)
+        c = cp874_page0e[wc - 0x0e00];
+    else if (wc == 0x20ac)
+        c = 0xde;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP1161_H_ */

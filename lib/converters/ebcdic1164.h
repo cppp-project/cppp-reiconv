@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic1164.h
+ * @brief IBM-1164
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-1164
- */
+#ifndef _EBCDIC1164_H_
+#define _EBCDIC1164_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic1164_2uni[256] = {
   /* 0x00 */
@@ -72,12 +78,11 @@ static const unsigned short ebcdic1164_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x00db, 0x00dc, 0x00d9, 0x00da, 0x009f,
 };
 
-static int
-ebcdic1164_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic1164_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  *pwc = (ucs4_t) ebcdic1164_2uni[c];
-  return 1;
+    unsigned char c = *s;
+    *pwc = (ucs4_t)ebcdic1164_2uni[c];
+    return 1;
 }
 
 static const unsigned char ebcdic1164_page00[440] = {
@@ -153,19 +158,21 @@ static const unsigned char ebcdic1164_page20[8] = {
   0x00, 0x00, 0x00, 0x78, 0x9f, 0x00, 0x00, 0x00, /* 0xa8-0xaf */
 };
 
-static int
-ebcdic1164_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic1164_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x01b8)
-    c = ebcdic1164_page00[wc];
-  else if (wc >= 0x0300 && wc < 0x0328)
-    c = ebcdic1164_page03[wc-0x0300];
-  else if (wc >= 0x20a8 && wc < 0x20b0)
-    c = ebcdic1164_page20[wc-0x20a8];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x01b8)
+        c = ebcdic1164_page00[wc];
+    else if (wc >= 0x0300 && wc < 0x0328)
+        c = ebcdic1164_page03[wc - 0x0300];
+    else if (wc >= 0x20a8 && wc < 0x20b0)
+        c = ebcdic1164_page20[wc - 0x20a8];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC1164_H_ */

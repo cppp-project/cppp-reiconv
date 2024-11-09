@@ -1,5 +1,10 @@
+/**
+ * @file uhc_1.h
+ * @brief Unified Hangul Code part 1
+ * @copyright Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2012, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * Unified Hangul Code part 1
- */
+#ifndef _UHC_1_H_
+#define _UHC_1_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short uhc_1_2uni_main_page81[64] = {
   0xac02, 0xac8d, 0xad14, 0xad91, 0xadfa, 0xae7a, 0xaee6, 0xaf57,
@@ -802,27 +808,30 @@ static const unsigned char uhc_1_2uni_page81[5696] = {
   0x71, 0x72,
 };
 
-static int
-uhc_1_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int uhc_1_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x81 && c1 <= 0xa0)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x41 && c2 < 0x5b) || (c2 >= 0x61 && c2 < 0x7b) || (c2 >= 0x81 && c2 < 0xff)) {
-        unsigned int row = c1 - 0x81;
-        unsigned int col = c2 - (c2 >= 0x81 ? 0x4d : c2 >= 0x61 ? 0x47 : 0x41);
-        unsigned int i = 178 * row + col;
-        if (i < 5696) {
-          *pwc = (ucs4_t) (uhc_1_2uni_main_page81[2*row+(col>=89?1:0)] + uhc_1_2uni_page81[i]);
-          return 2;
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x81 && c1 <= 0xa0))
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x41 && c2 < 0x5b) || (c2 >= 0x61 && c2 < 0x7b) || (c2 >= 0x81 && c2 < 0xff))
+            {
+                unsigned int row = c1 - 0x81;
+                unsigned int col = c2 - (c2 >= 0x81 ? 0x4d : c2 >= 0x61 ? 0x47 : 0x41);
+                unsigned int i = 178 * row + col;
+                if (i < 5696)
+                {
+                    *pwc = (ucs4_t)(uhc_1_2uni_main_page81[2 * row + (col >= 89 ? 1 : 0)] + uhc_1_2uni_page81[i]);
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned short uhc_1_2charset_main[45] = {
@@ -1695,30 +1704,35 @@ static const Summary16 uhc_1_uni2indx_pageac[459] = {
   { 5672, 0xc714 }, { 5679, 0x5fef }, { 5692, 0x001d },
 };
 
-static int
-uhc_1_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int uhc_1_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 2) {
-    if (wc >= 0xac00 && wc < 0xc8b0) {
-      const Summary16 *summary = &uhc_1_uni2indx_pageac[(wc>>4)-0xac0];
-      unsigned short used = summary->used;
-      unsigned int i = wc & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        unsigned short c;
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        used += summary->indx;
-        c = uhc_1_2charset_main[used>>7] + uhc_1_2charset[used];
-        r[0] = (c >> 8); r[1] = (c & 0xff);
-        return 2;
-      }
+    if (n >= 2)
+    {
+        if (wc >= 0xac00 && wc < 0xc8b0)
+        {
+            const Summary16 *summary = &uhc_1_uni2indx_pageac[(wc >> 4) - 0xac0];
+            unsigned short used = summary->used;
+            unsigned int i = wc & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                unsigned short c;
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                used += summary->indx;
+                c = uhc_1_2charset_main[used >> 7] + uhc_1_2charset[used];
+                r[0] = (c >> 8);
+                r[1] = (c & 0xff);
+                return 2;
+            }
+        }
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _UHC_1_H_ */

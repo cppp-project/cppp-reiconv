@@ -1,5 +1,10 @@
+/**
+ * @file nextstep.h
+ * @brief NEXTSTEP
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * NEXTSTEP
- */
+#ifndef _NEXTSTEP_H_
+#define _NEXTSTEP_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short nextstep_2uni[128] = {
   /* 0x80 */
@@ -48,22 +54,24 @@ static const unsigned short nextstep_2uni[128] = {
   0x0142, 0x00f8, 0x0153, 0x00df, 0x00fe, 0x00ff, 0xfffd, 0xfffd,
 };
 
-static int
-nextstep_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int nextstep_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = nextstep_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = nextstep_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char nextstep_page00[96] = {
@@ -114,27 +122,30 @@ static const unsigned char nextstep_pagefb[8] = {
   0x00, 0xae, 0xaf, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x00-0x07 */
 };
 
-static int
-nextstep_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int nextstep_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0100)
-    c = nextstep_page00[wc-0x00a0];
-  else if (wc >= 0x0130 && wc < 0x0198)
-    c = nextstep_page01[wc-0x0130];
-  else if (wc >= 0x02c0 && wc < 0x02e0)
-    c = nextstep_page02[wc-0x02c0];
-  else if (wc >= 0x2010 && wc < 0x2048)
-    c = nextstep_page20[wc-0x2010];
-  else if (wc >= 0xfb00 && wc < 0xfb08)
-    c = nextstep_pagefb[wc-0xfb00];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0100)
+        c = nextstep_page00[wc - 0x00a0];
+    else if (wc >= 0x0130 && wc < 0x0198)
+        c = nextstep_page01[wc - 0x0130];
+    else if (wc >= 0x02c0 && wc < 0x02e0)
+        c = nextstep_page02[wc - 0x02c0];
+    else if (wc >= 0x2010 && wc < 0x2048)
+        c = nextstep_page20[wc - 0x2010];
+    else if (wc >= 0xfb00 && wc < 0xfb08)
+        c = nextstep_pagefb[wc - 0xfb00];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _NEXTSTEP_H_ */

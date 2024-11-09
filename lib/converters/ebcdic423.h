@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic423.h
+ * @brief IBM-423
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-423
- */
+#ifndef _EBCDIC423_H_
+#define _EBCDIC423_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic423_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic423_2uni[256] = {
   0x0038, 0x0039, 0x00ff, 0x00e7, 0x00c7, 0xfffd, 0xfffd, 0x009f,
 };
 
-static int
-ebcdic423_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic423_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic423_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic423_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char ebcdic423_page00[256] = {
@@ -131,17 +137,19 @@ static const unsigned char ebcdic423_page03[80] = {
   0xbf, 0xcb, 0xb4, 0xb8, 0xb6, 0xb7, 0xb9, 0x00, /* 0xc8-0xcf */
 };
 
-static int
-ebcdic423_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic423_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0100)
-    c = ebcdic423_page00[wc];
-  else if (wc >= 0x0380 && wc < 0x03d0)
-    c = ebcdic423_page03[wc-0x0380];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0100)
+        c = ebcdic423_page00[wc];
+    else if (wc >= 0x0380 && wc < 0x03d0)
+        c = ebcdic423_page03[wc - 0x0380];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC423_H_ */

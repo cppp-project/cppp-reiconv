@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic425.h
+ * @brief IBM-425
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-425
- */
+#ifndef _EBCDIC425_H_
+#define _EBCDIC425_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic425_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic425_2uni[256] = {
   0x0038, 0x0039, 0xfffd, 0x00db, 0x00dc, 0x00d9, 0x00a4, 0x009f,
 };
 
-static int
-ebcdic425_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic425_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic425_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic425_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char ebcdic425_page00[256] = {
@@ -142,23 +148,25 @@ static const unsigned char ebcdic425_page20[8] = {
   0x00, 0x00, 0x00, 0x00, 0xec, 0xed, 0xee, 0xef, /* 0x08-0x0f */
 };
 
-static int
-ebcdic425_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic425_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0100)
-    c = ebcdic425_page00[wc];
-  else if (wc >= 0x0150 && wc < 0x0180)
-    c = ebcdic425_page01[wc-0x0150];
-  else if (wc >= 0x0608 && wc < 0x0658)
-    c = ebcdic425_page06[wc-0x0608];
-  else if (wc >= 0x2008 && wc < 0x2010)
-    c = ebcdic425_page20[wc-0x2008];
-  else if (wc == 0x20ac)
-    c = 0x9f;
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0100)
+        c = ebcdic425_page00[wc];
+    else if (wc >= 0x0150 && wc < 0x0180)
+        c = ebcdic425_page01[wc - 0x0150];
+    else if (wc >= 0x0608 && wc < 0x0658)
+        c = ebcdic425_page06[wc - 0x0608];
+    else if (wc >= 0x2008 && wc < 0x2010)
+        c = ebcdic425_page20[wc - 0x2008];
+    else if (wc == 0x20ac)
+        c = 0x9f;
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC425_H_ */

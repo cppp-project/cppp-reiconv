@@ -1,5 +1,10 @@
+/**
+ * @file jisx0213.h
+ * @brief JISX0213:2004
+ * @copyright Copyright (C) 1999-2004, 2012 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2004, 2012 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,19 +22,17 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * JISX0213:2004
+/* JISX0213 plane 1 (= ISO-IR-233) characters are in the range
+ * 0x{21..7E}{21..7E}.
+ * JISX0213 plane 2 (= ISO-IR-229) characters are in the range
+ * 0x{21,23..25,28,2C..2F,6E..7E}{21..7E}.
+ * Together this makes 120 rows of 94 characters.
  */
 
-#ifndef _JISX0213_H
-#define _JISX0213_H
+#ifndef _JISX0213_H_
+#define _JISX0213_H_
 
-/* JISX0213 plane 1 (= ISO-IR-233) characters are in the range
-   0x{21..7E}{21..7E}.
-   JISX0213 plane 2 (= ISO-IR-229) characters are in the range
-   0x{21,23..25,28,2C..2F,6E..7E}{21..7E}.
-   Together this makes 120 rows of 94 characters.
-*/
+#include "reiconv_defines.h"
 
 static const unsigned short jisx0213_to_ucs_combining[][2] = {
   { 0x304b, 0x309a },
@@ -5859,35 +5862,36 @@ __inline
 inline
 #endif
 #endif
-static ucs4_t jisx0213_to_ucs4 (unsigned int row, unsigned int col)
+    static ucs4_t
+    jisx0213_to_ucs4(unsigned int row, unsigned int col)
 {
-  ucs4_t val;
+    ucs4_t val;
 
-  if (row >= 0x121 && row <= 0x17e)
-    row -= 289;
-  else if (row == 0x221)
-    row -= 451;
-  else if (row >= 0x223 && row <= 0x225)
-    row -= 452;
-  else if (row == 0x228)
-    row -= 454;
-  else if (row >= 0x22c && row <= 0x22f)
-    row -= 457;
-  else if (row >= 0x26e && row <= 0x27e)
-    row -= 519;
-  else
-    return 0x0000;
+    if (row >= 0x121 && row <= 0x17e)
+        row -= 289;
+    else if (row == 0x221)
+        row -= 451;
+    else if (row >= 0x223 && row <= 0x225)
+        row -= 452;
+    else if (row == 0x228)
+        row -= 454;
+    else if (row >= 0x22c && row <= 0x22f)
+        row -= 457;
+    else if (row >= 0x26e && row <= 0x27e)
+        row -= 519;
+    else
+        return 0x0000;
 
-  if (col >= 0x21 && col <= 0x7e)
-    col -= 0x21;
-  else
-    return 0x0000;
+    if (col >= 0x21 && col <= 0x7e)
+        col -= 0x21;
+    else
+        return 0x0000;
 
-  val = jisx0213_to_ucs_main[row * 94 + col];
-  val = jisx0213_to_ucs_pagestart[val >> 8] + (val & 0xff);
-  if (val == 0xfffd)
-    val = 0x0000;
-  return val;
+    val = jisx0213_to_ucs_main[row * 94 + col];
+    val = jisx0213_to_ucs_pagestart[val >> 8] + (val & 0xff);
+    if (val == 0xfffd)
+        val = 0x0000;
+    return val;
 }
 
 #ifdef __GNUC__
@@ -5897,27 +5901,31 @@ __inline
 inline
 #endif
 #endif
-static unsigned short ucs4_to_jisx0213 (ucs4_t ucs)
+    static unsigned short
+    ucs4_to_jisx0213(ucs4_t ucs)
 {
-  if (ucs < (sizeof(jisx0213_from_ucs_level1)/sizeof(jisx0213_from_ucs_level1[0])) << 6) {
-    int index1 = jisx0213_from_ucs_level1[ucs >> 6];
-    if (index1 >= 0) {
-      const Summary16 *summary = &jisx0213_from_ucs_level2_2indx[((index1 << 6) + (ucs & 0x3f)) >> 4];
-      unsigned short used = summary->used;
-      unsigned int i = ucs & 0x0f;
-      if (used & ((unsigned short) 1 << i)) {
-        /* Keep in 'used' only the bits 0..i-1. */
-        used &= ((unsigned short) 1 << i) - 1;
-        /* Add 'summary->indx' and the number of bits set in 'used'. */
-        used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
-        used = (used & 0x3333) + ((used & 0xcccc) >> 2);
-        used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
-        used = (used & 0x00ff) + (used >> 8);
-        return jisx0213_from_ucs_level2_data[summary->indx + used];
-      };
-    };
-  }
-  return 0x0000;
+    if (ucs < (sizeof(jisx0213_from_ucs_level1) / sizeof(jisx0213_from_ucs_level1[0])) << 6)
+    {
+        int index1 = jisx0213_from_ucs_level1[ucs >> 6];
+        if (index1 >= 0)
+        {
+            const Summary16 *summary = &jisx0213_from_ucs_level2_2indx[((index1 << 6) + (ucs & 0x3f)) >> 4];
+            unsigned short used = summary->used;
+            unsigned int i = ucs & 0x0f;
+            if (used & ((unsigned short)1 << i))
+            {
+                /* Keep in 'used' only the bits 0..i-1. */
+                used &= ((unsigned short)1 << i) - 1;
+                /* Add 'summary->indx' and the number of bits set in 'used'. */
+                used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
+                used = (used & 0x3333) + ((used & 0xcccc) >> 2);
+                used = (used & 0x0f0f) + ((used & 0xf0f0) >> 4);
+                used = (used & 0x00ff) + (used >> 8);
+                return jisx0213_from_ucs_level2_data[summary->indx + used];
+            };
+        };
+    }
+    return 0x0000;
 }
 
-#endif /* _JISX0213_H */
+#endif /* _JISX0213_H_ */

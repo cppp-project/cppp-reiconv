@@ -1,5 +1,10 @@
+/**
+ * @file mac_ukraine.h
+ * @brief MacUkraine
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * MacUkraine
- */
+#ifndef _MAC_UKRAINE_H_
+#define _MAC_UKRAINE_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short mac_ukraine_2uni[128] = {
   /* 0x80 */
@@ -48,15 +54,14 @@ static const unsigned short mac_ukraine_2uni[128] = {
   0x0448, 0x0449, 0x044a, 0x044b, 0x044c, 0x044d, 0x044e, 0x00a4,
 };
 
-static int
-mac_ukraine_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int mac_ukraine_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c >= 0x80)
-    *pwc = (ucs4_t) mac_ukraine_2uni[c-0x80];
-  else
-    *pwc = (ucs4_t) c;
-  return 1;
+    unsigned char c = *s;
+    if (c >= 0x80)
+        *pwc = (ucs4_t)mac_ukraine_2uni[c - 0x80];
+    else
+        *pwc = (ucs4_t)c;
+    return 1;
 }
 
 static const unsigned char mac_ukraine_page00[32] = {
@@ -112,31 +117,34 @@ static const unsigned char mac_ukraine_page22[104] = {
   0xad, 0x00, 0x00, 0x00, 0xb2, 0xb3, 0x00, 0x00, /* 0x60-0x67 */
 };
 
-static int
-mac_ukraine_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int mac_ukraine_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00c0)
-    c = mac_ukraine_page00[wc-0x00a0];
-  else if (wc == 0x00f7)
-    c = 0xd6;
-  else if (wc == 0x0192)
-    c = 0xc4;
-  else if (wc >= 0x0400 && wc < 0x0498)
-    c = mac_ukraine_page04[wc-0x0400];
-  else if (wc >= 0x2010 && wc < 0x2028)
-    c = mac_ukraine_page20[wc-0x2010];
-  else if (wc >= 0x2110 && wc < 0x2128)
-    c = mac_ukraine_page21[wc-0x2110];
-  else if (wc >= 0x2200 && wc < 0x2268)
-    c = mac_ukraine_page22[wc-0x2200];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00c0)
+        c = mac_ukraine_page00[wc - 0x00a0];
+    else if (wc == 0x00f7)
+        c = 0xd6;
+    else if (wc == 0x0192)
+        c = 0xc4;
+    else if (wc >= 0x0400 && wc < 0x0498)
+        c = mac_ukraine_page04[wc - 0x0400];
+    else if (wc >= 0x2010 && wc < 0x2028)
+        c = mac_ukraine_page20[wc - 0x2010];
+    else if (wc >= 0x2110 && wc < 0x2128)
+        c = mac_ukraine_page21[wc - 0x2110];
+    else if (wc >= 0x2200 && wc < 0x2268)
+        c = mac_ukraine_page22[wc - 0x2200];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _MAC_UKRAINE_H_ */

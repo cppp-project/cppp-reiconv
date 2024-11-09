@@ -1,5 +1,10 @@
+/**
+ * @file ebcdic905.h
+ * @brief IBM-905
+ * @copyright Copyright (C) 1999-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * IBM-905
- */
+#ifndef _EBCDIC905_H_
+#define _EBCDIC905_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short ebcdic905_2uni[256] = {
   /* 0x00 */
@@ -72,16 +78,16 @@ static const unsigned short ebcdic905_2uni[256] = {
   0x0038, 0x0039, 0x00b3, 0x00db, 0x0022, 0x00d9, 0x00da, 0x009f,
 };
 
-static int
-ebcdic905_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int ebcdic905_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  unsigned short wc = ebcdic905_2uni[c];
-  if (wc != 0xfffd) {
-    *pwc = (ucs4_t) wc;
-    return 1;
-  }
-  return RET_ILSEQ;
+    unsigned char c = *s;
+    unsigned short wc = ebcdic905_2uni[c];
+    if (wc != 0xfffd)
+    {
+        *pwc = (ucs4_t)wc;
+        return 1;
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char ebcdic905_page00[256] = {
@@ -139,19 +145,21 @@ static const unsigned char ebcdic905_page02[8] = {
   0x80, 0xb0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xd8-0xdf */
 };
 
-static int
-ebcdic905_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int ebcdic905_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0100)
-    c = ebcdic905_page00[wc];
-  else if (wc >= 0x0108 && wc < 0x0180)
-    c = ebcdic905_page01[wc-0x0108];
-  else if (wc >= 0x02d8 && wc < 0x02e0)
-    c = ebcdic905_page02[wc-0x02d8];
-  if (c != 0 || wc == 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0100)
+        c = ebcdic905_page00[wc];
+    else if (wc >= 0x0108 && wc < 0x0180)
+        c = ebcdic905_page01[wc - 0x0108];
+    else if (wc >= 0x02d8 && wc < 0x02e0)
+        c = ebcdic905_page02[wc - 0x02d8];
+    if (c != 0 || wc == 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _EBCDIC905_H_ */

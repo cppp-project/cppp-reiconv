@@ -1,5 +1,10 @@
+/**
+ * @file koi8_u.h
+ * @brief KOI8-U
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * KOI8-U
- */
+#ifndef _KOI8_U_H_
+#define _KOI8_U_H_
+
+#include "reiconv_defines.h"
 
 /* Specification: RFC 2319 */
 
@@ -50,15 +56,14 @@ static const unsigned short koi8_u_2uni[128] = {
   0x042c, 0x042b, 0x0417, 0x0428, 0x042d, 0x0429, 0x0427, 0x042a,
 };
 
-static int
-koi8_u_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int koi8_u_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80)
-    *pwc = (ucs4_t) c;
-  else
-    *pwc = (ucs4_t) koi8_u_2uni[c-0x80];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+        *pwc = (ucs4_t)c;
+    else
+        *pwc = (ucs4_t)koi8_u_2uni[c - 0x80];
+    return 1;
 }
 
 static const unsigned char koi8_u_page00[88] = {
@@ -134,27 +139,30 @@ static const unsigned char koi8_u_page25[168] = {
   0x94, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0xa0-0xa7 */
 };
 
-static int
-koi8_u_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int koi8_u_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00f8)
-    c = koi8_u_page00[wc-0x00a0];
-  else if (wc >= 0x0400 && wc < 0x0498)
-    c = koi8_u_page04[wc-0x0400];
-  else if (wc >= 0x2218 && wc < 0x2268)
-    c = koi8_u_page22[wc-0x2218];
-  else if (wc >= 0x2320 && wc < 0x2328)
-    c = koi8_u_page23[wc-0x2320];
-  else if (wc >= 0x2500 && wc < 0x25a8)
-    c = koi8_u_page25[wc-0x2500];
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00f8)
+        c = koi8_u_page00[wc - 0x00a0];
+    else if (wc >= 0x0400 && wc < 0x0498)
+        c = koi8_u_page04[wc - 0x0400];
+    else if (wc >= 0x2218 && wc < 0x2268)
+        c = koi8_u_page22[wc - 0x2218];
+    else if (wc >= 0x2320 && wc < 0x2328)
+        c = koi8_u_page23[wc - 0x2320];
+    else if (wc >= 0x2500 && wc < 0x25a8)
+        c = koi8_u_page25[wc - 0x2500];
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _KOI8_U_H_ */

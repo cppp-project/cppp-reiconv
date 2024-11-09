@@ -1,5 +1,10 @@
+/**
+ * @file gbkext1.h
+ * @brief GBK/3 extensions
+ * @copyright Copyright (C) 1999-2000, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2000, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * GBK/3 extensions
- */
+#ifndef _GBKEXT1_H_
+#define _GBKEXT1_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short gbkext1_2uni_page81[6080] = {
   /* 0x81 */
@@ -824,29 +830,33 @@ static const unsigned short gbkext1_2uni_page81[6080] = {
   0x72d4, 0x72d5, 0x72d6, 0x72d8, 0x72da, 0x72db,
 };
 
-static int
-gbkext1_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int gbkext1_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if ((c1 >= 0x81 && c1 <= 0xa0)) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xff)) {
-        unsigned int i = 190 * (c1 - 0x81) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
-        unsigned short wc = 0xfffd;
+    unsigned char c1 = s[0];
+    if ((c1 >= 0x81 && c1 <= 0xa0))
+    {
+        if (n >= 2)
         {
-          if (i < 6080)
-            wc = gbkext1_2uni_page81[i];
+            unsigned char c2 = s[1];
+            if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xff))
+            {
+                unsigned int i = 190 * (c1 - 0x81) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
+                unsigned short wc = 0xfffd;
+                {
+                    if (i < 6080)
+                        wc = gbkext1_2uni_page81[i];
+                }
+                if (wc != 0xfffd)
+                {
+                    *pwc = (ucs4_t)wc;
+                    return 2;
+                }
+            }
+            return RET_ILSEQ;
         }
-        if (wc != 0xfffd) {
-          *pwc = (ucs4_t) wc;
-          return 2;
-        }
-      }
-      return RET_ILSEQ;
+        return RET_TOOFEW(0);
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
+#endif /* _GBKEXT1_H_ */

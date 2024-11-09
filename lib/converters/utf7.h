@@ -1,5 +1,10 @@
+/**
+ * @file utf7.h
+ * @brief UTF-7
+ * @copyright Copyright (C) 1999-2001, 2008, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2008, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,12 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * UTF-7
- */
+#ifndef _UTF7_H_
+#define _UTF7_H_
+
+#include "reiconv_defines.h"
+
+#include <stdlib.h>
 
 /* Specification: RFC 2152 (and old RFC 1641, RFC 1642) */
 /* The original Base64 encoding is defined in RFC 2045. */
@@ -352,3 +360,5 @@ utf7_reset (conv_t conv, unsigned char *r, size_t n)
   } else
     return 0;
 }
+
+#endif /* _UTF7_H_ */

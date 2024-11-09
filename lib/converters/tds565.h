@@ -1,5 +1,10 @@
+/**
+ * @file tds565.h
+ * @brief TDS565
+ * @copyright Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * TDS565
- */
+#ifndef _TDS565_H_
+#define _TDS565_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short tds565_2uni[64] = {
   /* 0x40 */
@@ -104,3 +110,5 @@ tds565_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
   }
   return RET_ILUNI;
 }
+
+#endif /* _TDS565_H_ */

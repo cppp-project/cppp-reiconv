@@ -1,5 +1,10 @@
+/**
+ * @file pt154.h
+ * @brief PT154
+ * @copyright Copyright (C) 1999-2005, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2005, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * PT154
- */
+#ifndef _PT154_H_
+#define _PT154_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short pt154_2uni[64] = {
   /* 0x80 */
@@ -36,17 +42,16 @@ static const unsigned short pt154_2uni[64] = {
   0x0451, 0x2116, 0x04d9, 0x00bb, 0x0458, 0x04aa, 0x04ab, 0x049d,
 };
 
-static int
-pt154_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int pt154_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80)
-    *pwc = (ucs4_t) c;
-  else if (c >= 0xc0)
-    *pwc = (ucs4_t) c + 0x0350;
-  else
-    *pwc = (ucs4_t) pt154_2uni[c-0x80];
-  return 1;
+    unsigned char c = *s;
+    if (c < 0x80)
+        *pwc = (ucs4_t)c;
+    else if (c >= 0xc0)
+        *pwc = (ucs4_t)c + 0x0350;
+    else
+        *pwc = (ucs4_t)pt154_2uni[c - 0x80];
+    return 1;
 }
 
 static const unsigned char pt154_page00[32] = {
@@ -93,25 +98,28 @@ static const unsigned char pt154_page20[24] = {
   0x00, 0x00, 0x95, 0x00, 0x00, 0x00, 0x85, 0x00, /* 0x20-0x27 */
 };
 
-static int
-pt154_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int pt154_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x00c0)
-    c = pt154_page00[wc-0x00a0];
-  else if (wc >= 0x0400 && wc < 0x04f0)
-    c = pt154_page04[wc-0x0400];
-  else if (wc >= 0x2010 && wc < 0x2028)
-    c = pt154_page20[wc-0x2010];
-  else if (wc == 0x2116)
-    c = 0xb9;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x00c0)
+        c = pt154_page00[wc - 0x00a0];
+    else if (wc >= 0x0400 && wc < 0x04f0)
+        c = pt154_page04[wc - 0x0400];
+    else if (wc >= 0x2010 && wc < 0x2028)
+        c = pt154_page20[wc - 0x2010];
+    else if (wc == 0x2116)
+        c = 0xb9;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _PT154_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file gb18030uni.h
+ * @brief GB18030 four-byte extension
+ * @copyright Copyright (C) 1999-2001, 2005, 2012, 2016, 2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2005, 2012, 2016, 2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * GB18030 four-byte extension
- */
+#ifndef _GB18030UNI_H_
+#define _GB18030UNI_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short gb18030uni_charset2uni_ranges[412] = {
   0x0000, 0x0023,  0x0024, 0x0025,  0x0026, 0x002c,  0x002d, 0x0031,
@@ -174,114 +180,142 @@ static const unsigned short gb18030_2022_charset2uni_pua2[10] = {
   0xe78d, 0xe78f, 0xe78e, 0xe790, 0xe791, 0xe792, 0xe793, 0xe794, 0xe795, 0xe796
 };
 
-static int
-gb18030_2005_uni_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int gb18030_2005_uni_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if (c1 >= 0x81 && c1 <= 0x84) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x30 && c2 <= 0x39) {
-        if (n >= 3) {
-          unsigned char c3 = s[2];
-          if (c3 >= 0x81 && c3 <= 0xfe) {
-            if (n >= 4) {
-              unsigned char c4 = s[3];
-              if (c4 >= 0x30 && c4 <= 0x39) {
-                unsigned int i = (((c1 - 0x81) * 10 + (c2 - 0x30)) * 126 + (c3 - 0x81)) * 10 + (c4 - 0x30);
-                if (i >= 0 && i <= 39419) {
-                  if (i == 7457) {
-                    *pwc = 0xe7c7;
-                  } else {
-                    unsigned int k1 = 0;
-                    unsigned int k2 = 205;
-                    while (k1 < k2) {
-                      unsigned int k = (k1 + k2) / 2;
-                      if (i <= gb18030uni_charset2uni_ranges[2*k+1])
-                        k2 = k;
-                      else if (i >= gb18030uni_charset2uni_ranges[2*k+2])
-                        k1 = k + 1;
-                      else
-                        return RET_ILSEQ;
-                    }
+    unsigned char c1 = s[0];
+    if (c1 >= 0x81 && c1 <= 0x84)
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if (c2 >= 0x30 && c2 <= 0x39)
+            {
+                if (n >= 3)
+                {
+                    unsigned char c3 = s[2];
+                    if (c3 >= 0x81 && c3 <= 0xfe)
                     {
-                      unsigned int diff = gb18030uni_ranges[k1];
-                      *pwc = (ucs4_t) (i + diff);
+                        if (n >= 4)
+                        {
+                            unsigned char c4 = s[3];
+                            if (c4 >= 0x30 && c4 <= 0x39)
+                            {
+                                unsigned int i =
+                                    (((c1 - 0x81) * 10 + (c2 - 0x30)) * 126 + (c3 - 0x81)) * 10 + (c4 - 0x30);
+                                if (i >= 0 && i <= 39419)
+                                {
+                                    if (i == 7457)
+                                    {
+                                        *pwc = 0xe7c7;
+                                    }
+                                    else
+                                    {
+                                        unsigned int k1 = 0;
+                                        unsigned int k2 = 205;
+                                        while (k1 < k2)
+                                        {
+                                            unsigned int k = (k1 + k2) / 2;
+                                            if (i <= gb18030uni_charset2uni_ranges[2 * k + 1])
+                                                k2 = k;
+                                            else if (i >= gb18030uni_charset2uni_ranges[2 * k + 2])
+                                                k1 = k + 1;
+                                            else
+                                                return RET_ILSEQ;
+                                        }
+                                        {
+                                            unsigned int diff = gb18030uni_ranges[k1];
+                                            *pwc = (ucs4_t)(i + diff);
+                                        }
+                                    }
+                                    return 4;
+                                }
+                            }
+                            return RET_ILSEQ;
+                        }
+                        return RET_TOOFEW(0);
                     }
-                  }
-                  return 4;
+                    return RET_ILSEQ;
                 }
-              }
-              return RET_ILSEQ;
+                return RET_TOOFEW(0);
             }
-            return RET_TOOFEW(0);
-          }
-          return RET_ILSEQ;
+            return RET_ILSEQ;
         }
         return RET_TOOFEW(0);
-      }
-      return RET_ILSEQ;
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
-static int
-gb18030_2022_uni_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int gb18030_2022_uni_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c1 = s[0];
-  if (c1 >= 0x81 && c1 <= 0x84) {
-    if (n >= 2) {
-      unsigned char c2 = s[1];
-      if (c2 >= 0x30 && c2 <= 0x39) {
-        if (n >= 3) {
-          unsigned char c3 = s[2];
-          if (c3 >= 0x81 && c3 <= 0xfe) {
-            if (n >= 4) {
-              unsigned char c4 = s[3];
-              if (c4 >= 0x30 && c4 <= 0x39) {
-                unsigned int i = (((c1 - 0x81) * 10 + (c2 - 0x30)) * 126 + (c3 - 0x81)) * 10 + (c4 - 0x30);
-                if (i >= 0 && i <= 39419) {
-                  if (i == 7457) {
-                    *pwc = 0xe7c7;
-                  } else if (i >= 19057 && i <= 19064) {
-                    *pwc = gb18030_2022_charset2uni_pua1[i-19057];
-                  } else if (i >= 39076 && i <= 39085) {
-                    *pwc = gb18030_2022_charset2uni_pua2[i-39076];
-                  } else {
-                    unsigned int k1 = 0;
-                    unsigned int k2 = 205;
-                    while (k1 < k2) {
-                      unsigned int k = (k1 + k2) / 2;
-                      if (i <= gb18030uni_charset2uni_ranges[2*k+1])
-                        k2 = k;
-                      else if (i >= gb18030uni_charset2uni_ranges[2*k+2])
-                        k1 = k + 1;
-                      else
-                        return RET_ILSEQ;
-                    }
+    unsigned char c1 = s[0];
+    if (c1 >= 0x81 && c1 <= 0x84)
+    {
+        if (n >= 2)
+        {
+            unsigned char c2 = s[1];
+            if (c2 >= 0x30 && c2 <= 0x39)
+            {
+                if (n >= 3)
+                {
+                    unsigned char c3 = s[2];
+                    if (c3 >= 0x81 && c3 <= 0xfe)
                     {
-                      unsigned int diff = gb18030uni_ranges[k1];
-                      *pwc = (ucs4_t) (i + diff);
+                        if (n >= 4)
+                        {
+                            unsigned char c4 = s[3];
+                            if (c4 >= 0x30 && c4 <= 0x39)
+                            {
+                                unsigned int i =
+                                    (((c1 - 0x81) * 10 + (c2 - 0x30)) * 126 + (c3 - 0x81)) * 10 + (c4 - 0x30);
+                                if (i >= 0 && i <= 39419)
+                                {
+                                    if (i == 7457)
+                                    {
+                                        *pwc = 0xe7c7;
+                                    }
+                                    else if (i >= 19057 && i <= 19064)
+                                    {
+                                        *pwc = gb18030_2022_charset2uni_pua1[i - 19057];
+                                    }
+                                    else if (i >= 39076 && i <= 39085)
+                                    {
+                                        *pwc = gb18030_2022_charset2uni_pua2[i - 39076];
+                                    }
+                                    else
+                                    {
+                                        unsigned int k1 = 0;
+                                        unsigned int k2 = 205;
+                                        while (k1 < k2)
+                                        {
+                                            unsigned int k = (k1 + k2) / 2;
+                                            if (i <= gb18030uni_charset2uni_ranges[2 * k + 1])
+                                                k2 = k;
+                                            else if (i >= gb18030uni_charset2uni_ranges[2 * k + 2])
+                                                k1 = k + 1;
+                                            else
+                                                return RET_ILSEQ;
+                                        }
+                                        {
+                                            unsigned int diff = gb18030uni_ranges[k1];
+                                            *pwc = (ucs4_t)(i + diff);
+                                        }
+                                    }
+                                    return 4;
+                                }
+                            }
+                            return RET_ILSEQ;
+                        }
+                        return RET_TOOFEW(0);
                     }
-                  }
-                  return 4;
+                    return RET_ILSEQ;
                 }
-              }
-              return RET_ILSEQ;
+                return RET_TOOFEW(0);
             }
-            return RET_TOOFEW(0);
-          }
-          return RET_ILSEQ;
+            return RET_ILSEQ;
         }
         return RET_TOOFEW(0);
-      }
-      return RET_ILSEQ;
     }
-    return RET_TOOFEW(0);
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
 static const unsigned char gb18030_2022_uni2charset_pua1[71] = {
@@ -297,95 +331,120 @@ static const unsigned char gb18030_2022_uni2charset_pua2[10] = {
   0, 2, 1, 3, 4, 5, 6, 7, 8, 9
 };
 
-static int
-gb18030_2005_uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int gb18030_2005_uni_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 4) {
-    unsigned int i;
-    if (wc >= 0x0080 && wc <= 0xffff) {
-      if (wc == 0xe7c7) {
-        i = 7457;
-      } else {
-        unsigned int k1 = 0;
-        unsigned int k2 = 205;
-        i = wc;
-        while (k1 < k2) {
-          unsigned int k = (k1 + k2) / 2;
-          if (i <= gb18030uni_uni2charset_ranges[2*k+1])
-            k2 = k;
-          else if (i >= gb18030uni_uni2charset_ranges[2*k+2])
-            k1 = k + 1;
-          else
-            return RET_ILUNI;
-        }
+    if (n >= 4)
+    {
+        unsigned int i;
+        if (wc >= 0x0080 && wc <= 0xffff)
         {
-          unsigned int diff = gb18030uni_ranges[k1];
-          i -= diff;
+            if (wc == 0xe7c7)
+            {
+                i = 7457;
+            }
+            else
+            {
+                unsigned int k1 = 0;
+                unsigned int k2 = 205;
+                i = wc;
+                while (k1 < k2)
+                {
+                    unsigned int k = (k1 + k2) / 2;
+                    if (i <= gb18030uni_uni2charset_ranges[2 * k + 1])
+                        k2 = k;
+                    else if (i >= gb18030uni_uni2charset_ranges[2 * k + 2])
+                        k1 = k + 1;
+                    else
+                        return RET_ILUNI;
+                }
+                {
+                    unsigned int diff = gb18030uni_ranges[k1];
+                    i -= diff;
+                }
+            }
         }
-      }
-    } else if (wc >= 0x20087 && wc <= 0x241fe) {
-      if (wc == 0x20087)
-        i = 0x3e2cf;
-      else if (wc == 0x20089)
-        i = 0x3e2d1;
-      else if (wc == 0x200cc)
-        i = 0x3e314;
-      else if (wc == 0x215d7)
-        i = 0x3f81f;
-      else if (wc == 0x2298f)
-        i = 0x40bd7;
-      else if (wc == 0x241fe)
-        i = 0x42446;
-      else
-        return RET_ILUNI;
-    } else
-      return RET_ILUNI;
-    r[3] = (i % 10) + 0x30; i = i / 10;
-    r[2] = (i % 126) + 0x81; i = i / 126;
-    r[1] = (i % 10) + 0x30; i = i / 10;
-    r[0] = i + 0x81;
-    return 4;
-  }
-  return RET_TOOSMALL;
+        else if (wc >= 0x20087 && wc <= 0x241fe)
+        {
+            if (wc == 0x20087)
+                i = 0x3e2cf;
+            else if (wc == 0x20089)
+                i = 0x3e2d1;
+            else if (wc == 0x200cc)
+                i = 0x3e314;
+            else if (wc == 0x215d7)
+                i = 0x3f81f;
+            else if (wc == 0x2298f)
+                i = 0x40bd7;
+            else if (wc == 0x241fe)
+                i = 0x42446;
+            else
+                return RET_ILUNI;
+        }
+        else
+            return RET_ILUNI;
+        r[3] = (i % 10) + 0x30;
+        i = i / 10;
+        r[2] = (i % 126) + 0x81;
+        i = i / 126;
+        r[1] = (i % 10) + 0x30;
+        i = i / 10;
+        r[0] = i + 0x81;
+        return 4;
+    }
+    return RET_TOOSMALL;
 }
 
-static int
-gb18030_2022_uni_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int gb18030_2022_uni_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  if (n >= 4) {
-    if (wc >= 0x0080 && wc <= 0xffff) {
-      unsigned int i;
-      if (wc == 0xe7c7) {
-        i = 7457;
-      } else if (wc >= 0xe78d && wc <= 0xe796) {
-        i = 39076 + gb18030_2022_uni2charset_pua2[wc-0xe78d];
-      } else if (wc >= 0xe81e && wc <= 0xe864 && gb18030_2022_uni2charset_pua1[wc-0xe81e]) {
-        i = 19056 + gb18030_2022_uni2charset_pua1[wc-0xe81e];
-      } else {
-        unsigned int k1 = 0;
-        unsigned int k2 = 205;
-        i = wc;
-        while (k1 < k2) {
-          unsigned int k = (k1 + k2) / 2;
-          if (i <= gb18030uni_uni2charset_ranges[2*k+1])
-            k2 = k;
-          else if (i >= gb18030uni_uni2charset_ranges[2*k+2])
-            k1 = k + 1;
-          else
-            return RET_ILUNI;
-        }
+    if (n >= 4)
+    {
+        if (wc >= 0x0080 && wc <= 0xffff)
         {
-          unsigned int diff = gb18030uni_ranges[k1];
-          i -= diff;
+            unsigned int i;
+            if (wc == 0xe7c7)
+            {
+                i = 7457;
+            }
+            else if (wc >= 0xe78d && wc <= 0xe796)
+            {
+                i = 39076 + gb18030_2022_uni2charset_pua2[wc - 0xe78d];
+            }
+            else if (wc >= 0xe81e && wc <= 0xe864 && gb18030_2022_uni2charset_pua1[wc - 0xe81e])
+            {
+                i = 19056 + gb18030_2022_uni2charset_pua1[wc - 0xe81e];
+            }
+            else
+            {
+                unsigned int k1 = 0;
+                unsigned int k2 = 205;
+                i = wc;
+                while (k1 < k2)
+                {
+                    unsigned int k = (k1 + k2) / 2;
+                    if (i <= gb18030uni_uni2charset_ranges[2 * k + 1])
+                        k2 = k;
+                    else if (i >= gb18030uni_uni2charset_ranges[2 * k + 2])
+                        k1 = k + 1;
+                    else
+                        return RET_ILUNI;
+                }
+                {
+                    unsigned int diff = gb18030uni_ranges[k1];
+                    i -= diff;
+                }
+            }
+            r[3] = (i % 10) + 0x30;
+            i = i / 10;
+            r[2] = (i % 126) + 0x81;
+            i = i / 126;
+            r[1] = (i % 10) + 0x30;
+            i = i / 10;
+            r[0] = i + 0x81;
+            return 4;
         }
-      }
-      r[3] = (i % 10) + 0x30; i = i / 10;
-      r[2] = (i % 126) + 0x81; i = i / 126;
-      r[1] = (i % 10) + 0x30; i = i / 10;
-      r[0] = i + 0x81;
-      return 4;
+        return RET_ILUNI;
     }
-    return RET_ILUNI;
-  }
-  return RET_TOOSMALL;
+    return RET_TOOSMALL;
 }
+
+#endif /* _GB18030UNI_H_ */

@@ -1,5 +1,10 @@
+/**
+ * @file cp1252.h
+ * @brief CP1252
+ * @copyright Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -17,9 +22,10 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * CP1252
- */
+#ifndef _CP1252_H_
+#define _CP1252_H_
+
+#include "reiconv_defines.h"
 
 static const unsigned short cp1252_2uni[32] = {
   /* 0x80 */
@@ -30,22 +36,24 @@ static const unsigned short cp1252_2uni[32] = {
   0x02dc, 0x2122, 0x0161, 0x203a, 0x0153, 0xfffd, 0x017e, 0x0178,
 };
 
-static int
-cp1252_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+static int cp1252_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  if (c < 0x80 || c >= 0xa0) {
-    *pwc = (ucs4_t) c;
-    return 1;
-  }
-  else {
-    unsigned short wc = cp1252_2uni[c-0x80];
-    if (wc != 0xfffd) {
-      *pwc = (ucs4_t) wc;
-      return 1;
+    unsigned char c = *s;
+    if (c < 0x80 || c >= 0xa0)
+    {
+        *pwc = (ucs4_t)c;
+        return 1;
     }
-  }
-  return RET_ILSEQ;
+    else
+    {
+        unsigned short wc = cp1252_2uni[c - 0x80];
+        if (wc != 0xfffd)
+        {
+            *pwc = (ucs4_t)wc;
+            return 1;
+        }
+    }
+    return RET_ILSEQ;
 }
 
 static const unsigned char cp1252_page01[72] = {
@@ -74,29 +82,32 @@ static const unsigned char cp1252_page20[48] = {
   0x00, 0x8b, 0x9b, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0x38-0x3f */
 };
 
-static int
-cp1252_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp1252_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char c = 0;
-  if (wc < 0x0080) {
-    *r = wc;
-    return 1;
-  }
-  else if (wc >= 0x00a0 && wc < 0x0100)
-    c = wc;
-  else if (wc >= 0x0150 && wc < 0x0198)
-    c = cp1252_page01[wc-0x0150];
-  else if (wc >= 0x02c0 && wc < 0x02e0)
-    c = cp1252_page02[wc-0x02c0];
-  else if (wc >= 0x2010 && wc < 0x2040)
-    c = cp1252_page20[wc-0x2010];
-  else if (wc == 0x20ac)
-    c = 0x80;
-  else if (wc == 0x2122)
-    c = 0x99;
-  if (c != 0) {
-    *r = c;
-    return 1;
-  }
-  return RET_ILUNI;
+    unsigned char c = 0;
+    if (wc < 0x0080)
+    {
+        *r = wc;
+        return 1;
+    }
+    else if (wc >= 0x00a0 && wc < 0x0100)
+        c = wc;
+    else if (wc >= 0x0150 && wc < 0x0198)
+        c = cp1252_page01[wc - 0x0150];
+    else if (wc >= 0x02c0 && wc < 0x02e0)
+        c = cp1252_page02[wc - 0x02c0];
+    else if (wc >= 0x2010 && wc < 0x2040)
+        c = cp1252_page20[wc - 0x2010];
+    else if (wc == 0x20ac)
+        c = 0x80;
+    else if (wc == 0x2122)
+        c = 0x99;
+    if (c != 0)
+    {
+        *r = c;
+        return 1;
+    }
+    return RET_ILUNI;
 }
+
+#endif /* _CP1252_H_ */

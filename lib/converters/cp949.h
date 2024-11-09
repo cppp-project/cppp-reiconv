@@ -1,5 +1,10 @@
+/**
+ * @file cp949.h
+ * @brief CP949 is EUC-KR, extended with UHC (Unified Hangul Code).
+ * @copyright Copyright (C) 1999-2001, 2005, 2007, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2001, 2005, 2007, 2016 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -18,7 +23,6 @@
  */
 
 /*
- * CP949 is EUC-KR, extended with UHC (Unified Hangul Code).
  *
  * Some variants of CP949 (in JDK, Windows-2000, ICU) also add:
  *
@@ -33,95 +37,116 @@
  * point, they are useful for some people in practice.
  */
 
-#include "uhc_1.h"
-#include "uhc_2.h"
+#ifndef _CP949_H_
+#define _CP949_H_
 
-static int
-cp949_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+#include "converters/ascii.h"
+#include "converters/ksc5601.h"
+#include "converters/uhc_1.h"
+#include "converters/uhc_2.h"
+#include "reiconv_defines.h"
+
+#include <stdlib.h>
+
+static int cp949_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-  unsigned char c = *s;
-  /* Code set 0 (ASCII) */
-  if (c < 0x80)
-    return ascii_mbtowc(conv,pwc,s,n);
-  /* UHC part 1 */
-  if (c >= 0x81 && c <= 0xa0)
-    return uhc_1_mbtowc(conv,pwc,s,n);
-  if (c >= 0xa1 && c < 0xff) {
-    if (n < 2)
-      return RET_TOOFEW(0);
+    unsigned char c = *s;
+    /* Code set 0 (ASCII) */
+    if (c < 0x80)
+        return ascii_mbtowc(conv, pwc, s, n);
+    /* UHC part 1 */
+    if (c >= 0x81 && c <= 0xa0)
+        return uhc_1_mbtowc(conv, pwc, s, n);
+    if (c >= 0xa1 && c < 0xff)
     {
-      unsigned char c2 = s[1];
-      if (c2 < 0xa1)
-        /* UHC part 2 */
-        return uhc_2_mbtowc(conv,pwc,s,n);
-      else if (c2 < 0xff && !(c == 0xa2 && c2 == 0xe8)) {
-        /* Code set 1 (KS C 5601-1992, now KS X 1001:1998) */
-        unsigned char buf[2];
-        int ret;
-        buf[0] = c-0x80; buf[1] = c2-0x80;
-        ret = ksc5601_mbtowc(conv,pwc,buf,2);
-        if (ret != RET_ILSEQ)
-          return ret;
-        /* User-defined characters */
-        if (c == 0xc9) {
-          *pwc = 0xe000 + (c2 - 0xa1);
-          return 2;
+        if (n < 2)
+            return RET_TOOFEW(0);
+        {
+            unsigned char c2 = s[1];
+            if (c2 < 0xa1)
+                /* UHC part 2 */
+                return uhc_2_mbtowc(conv, pwc, s, n);
+            else if (c2 < 0xff && !(c == 0xa2 && c2 == 0xe8))
+            {
+                /* Code set 1 (KS C 5601-1992, now KS X 1001:1998) */
+                unsigned char buf[2];
+                int ret;
+                buf[0] = c - 0x80;
+                buf[1] = c2 - 0x80;
+                ret = ksc5601_mbtowc(conv, pwc, buf, 2);
+                if (ret != RET_ILSEQ)
+                    return ret;
+                /* User-defined characters */
+                if (c == 0xc9)
+                {
+                    *pwc = 0xe000 + (c2 - 0xa1);
+                    return 2;
+                }
+                if (c == 0xfe)
+                {
+                    *pwc = 0xe05e + (c2 - 0xa1);
+                    return 2;
+                }
+            }
         }
-        if (c == 0xfe) {
-          *pwc = 0xe05e + (c2 - 0xa1);
-          return 2;
-        }
-      }
     }
-  }
-  return RET_ILSEQ;
+    return RET_ILSEQ;
 }
 
-static int
-cp949_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+static int cp949_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 {
-  unsigned char buf[2];
-  int ret;
+    unsigned char buf[2];
+    int ret;
 
-  /* Code set 0 (ASCII) */
-  ret = ascii_wctomb(conv,r,wc,n);
-  if (ret != RET_ILUNI)
-    return ret;
+    /* Code set 0 (ASCII) */
+    ret = ascii_wctomb(conv, r, wc, n);
+    if (ret != RET_ILUNI)
+        return ret;
 
-  /* Code set 1 (KS C 5601-1992, now KS X 1001:1998) */
-  if (wc != 0x327e) {
-    ret = ksc5601_wctomb(conv,buf,wc,2);
-    if (ret != RET_ILUNI) {
-      if (ret != 2) abort();
-      if (n < 2)
-        return RET_TOOSMALL;
-      r[0] = buf[0]+0x80;
-      r[1] = buf[1]+0x80;
-      return 2;
+    /* Code set 1 (KS C 5601-1992, now KS X 1001:1998) */
+    if (wc != 0x327e)
+    {
+        ret = ksc5601_wctomb(conv, buf, wc, 2);
+        if (ret != RET_ILUNI)
+        {
+            if (ret != 2)
+                abort();
+            if (n < 2)
+                return RET_TOOSMALL;
+            r[0] = buf[0] + 0x80;
+            r[1] = buf[1] + 0x80;
+            return 2;
+        }
     }
-  }
 
-  /* UHC */
-  if (wc >= 0xac00 && wc < 0xd7a4) {
-    if (wc < 0xc8a5)
-      return uhc_1_wctomb(conv,r,wc,n);
-    else
-      return uhc_2_wctomb(conv,r,wc,n);
-  }
-
-  /* User-defined characters */
-  if (wc >= 0xe000 && wc < 0xe0bc) {
-    if (n < 2)
-      return RET_TOOSMALL;
-    if (wc < 0xe05e) {
-      r[0] = 0xc9;
-      r[1] = wc - 0xe000 + 0xa1;
-    } else {
-      r[0] = 0xfe;
-      r[1] = wc - 0xe05e + 0xa1;
+    /* UHC */
+    if (wc >= 0xac00 && wc < 0xd7a4)
+    {
+        if (wc < 0xc8a5)
+            return uhc_1_wctomb(conv, r, wc, n);
+        else
+            return uhc_2_wctomb(conv, r, wc, n);
     }
-    return 2;
-  }
 
-  return RET_ILUNI;
+    /* User-defined characters */
+    if (wc >= 0xe000 && wc < 0xe0bc)
+    {
+        if (n < 2)
+            return RET_TOOSMALL;
+        if (wc < 0xe05e)
+        {
+            r[0] = 0xc9;
+            r[1] = wc - 0xe000 + 0xa1;
+        }
+        else
+        {
+            r[0] = 0xfe;
+            r[1] = wc - 0xe05e + 0xa1;
+        }
+        return 2;
+    }
+
+    return RET_ILUNI;
 }
+
+#endif /* _CP949_H_ */
