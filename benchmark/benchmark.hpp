@@ -4,30 +4,14 @@
 
 #include <cstddef>
 
-extern int glibc_iconv_string(const char* tocode,
-                              const char* fromcode,
-                              const char* start,
-                              const char* end,
-                              char** resultp,
-                              std::size_t* lengthp);
+extern void* glibc_iconv_open();
+extern int glibc_static_size_convert(void* cd, const char *input_data, size_t input_length, char *output_data,
+                              size_t output_length);
 
-extern void glibc_static_size_convert(const char* tocode,
-                                     const char* fromcode,
-                                     const char* data,
-                                     std::size_t size,
-                                     char** resultp,
-                                     std::size_t result_size);
+extern void* libiconv_iconv_open();
+extern int libiconv_static_size_convert(void* cd, const char *input_data, size_t input_length, char *output_data,
+                              size_t output_length);
 
-extern int libiconv_iconv_string(const char* tocode,
-                                 const char* fromcode,
-                                 const char* start,
-                                 const char* end,
-                                 char** resultp,
-                                 std::size_t* lengthp);
-
-extern void libiconv_static_size_convert(const char* tocode,
-                                        const char* fromcode,
-                                        const char* data,
-                                        std::size_t size,
-                                        char** resultp,
-                                        std::size_t result_size);
+extern void* reiconv_iconv_open();
+extern int reiconv_static_size_convert(void* cd, const char *input_data, size_t input_length, char *output_data,
+                              size_t output_length); // Unused.

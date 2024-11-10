@@ -1,12 +1,13 @@
 #include "benchmark.hpp"
+
 #include <cerrno>
 #include <cstdlib>
 #include <cstring>
 
-#define iconv_t libiconv_t
-#define iconv_open libiconv_open
-#define iconv libiconv
-#define iconv_close libiconv_close
+#define iconv_t reiconv_t
+#define iconv_open reiconv_open
+#define iconv reiconv_iconv
+#define iconv_close reiconv_handle_close
 
 extern "C"
 {
@@ -16,12 +17,12 @@ extern "C"
     extern size_t iconv(iconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
 }
 
-void* libiconv_iconv_open()
+void* reiconv_iconv_open()
 {
     return iconv_open("GB18030", "UTF-8");
 }
 
-int libiconv_static_size_convert(void* cd, const char *input_data, size_t input_length, char *output_data,
+int reiconv_static_size_convert(void* cd, const char *input_data, size_t input_length, char *output_data,
                               size_t output_length)
 {
     char *inptr = (char *)input_data;

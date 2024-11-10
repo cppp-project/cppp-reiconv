@@ -124,8 +124,8 @@ install(FILES "${output_includedir}/cppp/reiconv.hpp.inst"
 
 # PERMISSIONS 0644
 install(FILES "${output_includedir}/cppp/encodings/reiconv.hpp"
-        DESTINATION "${install_includedir}/encodings"
-        RENAME "cppp/reiconv.hpp"
+        DESTINATION "${install_includedir}"
+        RENAME "cppp/encodings/reiconv.hpp"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
 
 # PERMISSIONS 0644
@@ -136,8 +136,8 @@ install(FILES "${output_includedir}/cppp/reiconv.h.inst"
 
 # PERMISSIONS 0644
 install(FILES "${output_includedir}/cppp/encodings/reiconv.h"
-        DESTINATION "${install_includedir}/encodings"
-        RENAME "cppp/reiconv.h"
+        DESTINATION "${install_includedir}"
+        RENAME "cppp/encodings/reiconv.h"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ )
 
 # PERMISSIONS 0644

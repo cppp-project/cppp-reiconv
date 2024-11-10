@@ -264,6 +264,7 @@ _CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char *input_data, 
     memset(outptr, 0, outsize); // Fill the rest of the buffer with '\0'.
     return 0;
 }
+
 _CPPP_API int reiconv_convert(reiconv_t cd, const char *input_data, size_t input_length, char **output_data_ptr,
                               size_t *output_length_ptr)
 {

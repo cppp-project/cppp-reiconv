@@ -89,3 +89,4 @@ tests/data/GB18030-2022.TXT
 tests/tmp-*.TXT
 *.tmp
 *.dump
+benchmark/benchmark
