@@ -44,7 +44,7 @@
  */
 #include "generated/aliases.h"
 
-const size_t TEMP_BUFFER_SIZE = 4096;
+#define TEMP_BUFFER_SIZE 4096
 
 _CPPP_API struct VersionInfo version = {VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
 

@@ -78,7 +78,7 @@ class Buffer
         std::ofstream output_file{output_file_path, std::ios::binary | std::ios::trunc};
         if (!output_file.good())
         {
-            error(output_file_path, "Unable to open output file.");
+            error(output_file_path.string(), "Unable to open output file.");
         }
 
         output_file.write(buffer, size);
@@ -156,9 +156,9 @@ class Buffer
     {
         if (*this != other)
         {
-            error("compare_data", "The data is different.");
+            error("compare_assert", "The data is different.");
         }
-        success("compare_data", "The data is the same.");
+        success("compare_assert", "The data is the same.");
     }
 
     void write_stream(std::ostream &stream, bool newline = false, bool flush = true) const
@@ -199,7 +199,7 @@ class Buffer
         std::ifstream input_file{input_file_path, binary ? std::ios::binary : std::ios::in};
         if (!input_file.good())
         {
-            error(input_file_path, "Unable to open file " + input_file_path.string());
+            error(input_file_path.string(), "Unable to open file " + input_file_path.string());
         }
 
         std::size_t size = std::filesystem::file_size(input_file_path);

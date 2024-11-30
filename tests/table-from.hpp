@@ -199,7 +199,7 @@ inline void table_from(const std::filesystem::path &save_file_path, const std::s
     std::ofstream save_file{save_file_path, std::ios::out | std::ios::trunc};
     if (!save_file.good())
     {
-        error(save_file_path, "Cannot open save file.");
+        error(save_file_path.string(), "Cannot open save file.");
     }
 
     iconv_t cd = iconv_open("UCS-4-INTERNAL", charset.c_str());
@@ -211,7 +211,7 @@ inline void table_from(const std::filesystem::path &save_file_path, const std::s
     unsigned int out[3];
     unsigned char buf[4];
     unsigned int i[4];
-    int result;
+
     run_table_from_test(cd, i, 0, out, buf, bmp_only, save_file);
 
     iconv_close(cd);

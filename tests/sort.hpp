@@ -26,13 +26,14 @@
 
 #include <algorithm>
 #include <fstream>
+#include <filesystem>
 #include <string>
 #include <vector>
 
 #include "output.hpp"
 #include "utils.hpp"
 
-inline void sort_file(const std::string &file_name, const std::string &output_file_name)
+inline void sort_file(const std::filesystem::path &file_name, const std::filesystem::path &output_file_name)
 {
     std::vector<std::string> lines;
 

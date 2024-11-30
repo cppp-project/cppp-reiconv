@@ -26,6 +26,10 @@ set_target_properties(check-stateful         PROPERTIES RUNTIME_OUTPUT_DIRECTORY
 set_target_properties(check-stateless        PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 set_target_properties(sort                   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 
+macro(convert_to_crlf input_file output_file)
+    file(READ ${input_file} file_content)
+    file(WRITE ${output_file} "${file_content}")
+endmacro()
 
 # Test macro
 macro(test state encoding)
@@ -39,14 +43,19 @@ endmacro(test)
 set(TEST_DATA_DIR "${output_testsdir}/data")
 
 # Copy data directory.
-if (NOT EXISTS "${TEST_DATA_DIR}")
+if (NOT EXISTS "${TEST_DATA_DIR}" OR TRUE)
     file(MAKE_DIRECTORY "${TEST_DATA_DIR}")
     file(GLOB_RECURSE TEST_DATA_FILES "${CMAKE_CURRENT_SOURCE_DIR}/tests/data/*")
 
     foreach(TEST_FILE ${TEST_DATA_FILES})
         if(NOT IS_DIRECTORY "${TEST_FILE}")
             get_filename_component(TEST_FILE_NAME "${TEST_FILE}" NAME)
-            file(COPY_FILE "${TEST_FILE}" "${TEST_DATA_DIR}/${TEST_FILE_NAME}")
+            if ("${TEST_FILE_NAME}" MATCHES "\\.TXT$" AND (WIN32 OR WINCE OR WINDOWS_PHONE OR WINDOWS_STORE))
+                # On Windows, copy the text-only file as CR LF.
+                convert_to_crlf("${TEST_FILE}" "${TEST_DATA_DIR}/${TEST_FILE_NAME}")
+            else()
+                file(COPY_FILE "${TEST_FILE}" "${TEST_DATA_DIR}/${TEST_FILE_NAME}")
+            endif()
         endif()
     endforeach()
     unset(TEST_DATA_FILES)

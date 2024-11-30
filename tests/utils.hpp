@@ -66,7 +66,7 @@ inline void write_all(const std::filesystem::path &output_file_path, const std::
                               std::ios::binary | std::ios::ate | (append ? std::ios::app : std::ios::trunc)};
     if (!output_file.good())
     {
-        error(output_file_path, "Unable to open output file.");
+        error(output_file_path.string(), "Unable to open output file.");
     }
 
     output_file.write(buffer.data(), buffer.size());
@@ -86,7 +86,7 @@ inline void write_all(const std::filesystem::path &output_file_path, const Buffe
                               std::ios::binary | std::ios::ate | (append ? std::ios::app : std::ios::trunc)};
     if (!output_file.good())
     {
-        error(output_file_path, "Unable to open output file.");
+        error(output_file_path.string(), "Unable to open output file.");
     }
 
     output_file.write(buffer.data(), buffer.size);
@@ -103,7 +103,7 @@ inline void merge_files(const std::vector<std::filesystem::path> &files, const s
     std::ofstream output_file{output_file_path, std::ios::binary | std::ios::trunc};
     if (!output_file.good())
     {
-        error(output_file_path, "Unable to open output file.");
+        error(output_file_path.string(), "Unable to open output file.");
     }
 
     for (const auto &file : files)

@@ -44,7 +44,7 @@ inline void table_to(const std::filesystem::path &save_file_path, const std::str
     std::ofstream save_file{save_file_path, std::ios::out | std::ios::trunc};
     if (!save_file.good())
     {
-        error(save_file_path, "Cannot open save file.");
+        error(save_file_path.string(), "Cannot open save file.");
     }
 
     iconv_t cd = iconv_open(charset.c_str(), "UCS-4-INTERNAL");

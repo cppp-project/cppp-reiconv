@@ -39,12 +39,12 @@ void check2_pre_process(const std::filesystem::path &input_file_path, const std:
     std::ifstream input_file {input_file_path};
     if (!input_file.good())
     {
-        error(input_file_path, "Unable to open input file.");
+        error(input_file_path.string(), "Unable to open input file.");
     }
     std::ofstream output_file {output_file_path, std::ios::trunc};
     if (!output_file.good())
     {
-        error(output_file_path, "Unable to open output file.");
+        error(output_file_path.string(), "Unable to open output file.");
     }
 
     std::string line;
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
         print_stderr("Usage: check-stateless DATADIR CHARSET [--debug]\n");
         return EXIT_FAILURE;
     }
-    bool debug;
+    bool debug = false;
     if (argc == 4)
     {
         debug = true;
