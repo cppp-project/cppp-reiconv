@@ -141,6 +141,19 @@ namespace reiconv
      */
     extern _CPPP_API std::string convert(Encoding from, Encoding to, const std::string_view input, bool strict = true);
 
+    /**
+     * @brief Determine the current locale's character encoding, and canonicalize it into one of 
+     * the canonical names.
+     * @note The result must not be freed. It is statically allocated.
+     * @note The result becomes invalid when `setlocale` is used to change the global locale, or
+     * when the value of one of the environment variables `LC_ALL`, `LC_CTYPE`, `LANG` is changed.
+     * Threads in multithreaded programs should not do this. If the canonical name cannot be
+     * determined, the result is a non-canonical name.
+     * @return The name of the current locale's character encoding.
+     * @see Libiconv's `locale_charset`.
+     */
+    extern _CPPP_API std::string_view locale_charset();
+
 } // namespace reiconv
 
 #endif // _CPPP_REICONV_HPP_
