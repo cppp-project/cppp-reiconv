@@ -16,11 +16,12 @@ CPackConfig.cmake
 CPackSourceConfig.cmake
 _CPack_Packages
 pdb
-tests/check-ascii-converters
+tests/check-encoding
 tests/check-stateful
 tests/check-stateless
 tests/data-generator
 tests/sort
+tests/test-bom-state
 windows/cppp-reiconv.rc
 *.inst
 *.log
