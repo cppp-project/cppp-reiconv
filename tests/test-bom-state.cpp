@@ -1,7 +1,7 @@
 /**
- * @file sort.cpp
+ * @file test-bom-state.cpp
  * @brief Checks that iconv does not forget about the byte-order state.
- * @author Bruno Haible
+ * @author Bruno Haible, ChenPi11
  * @copyright Copyright (C) 2024 Free Software Foundation, Inc.
  */
 /*
@@ -66,7 +66,7 @@ static void test_one_input(const char *fromcode, const char *input, std::size_t 
     char *outbuf = outbuf1;
     std::size_t outbytesleft = sizeof(outbuf1);
     std::size_t ret = ::reiconv_iconv(cd, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
-    if (ret != (size_t)(-1) || errno != E2BIG || outbytesleft != 0)
+    if (ret != (std::size_t)(-1) || errno != E2BIG || outbytesleft != 0)
     {
         std::abort();
     }

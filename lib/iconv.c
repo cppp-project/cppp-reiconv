@@ -154,7 +154,7 @@ _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
 
     for (size_t i = 0; i < fromcode_len; i++)
     {
-        if (i < fromcode_len && fromcode_buf[i] == '/')
+        if (fromcode_buf[i] == '/')
         {
             fromcode_buf[i] = '\0';
             if (i + 7 < fromcode_len && memcmp(fromcode_buf + i + 1, "/IGNORE", 8) == 0)
@@ -169,7 +169,7 @@ _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
         if (tocode_buf[i] == '/')
         {
             tocode_buf[i] = '\0';
-            if (i + 7 < fromcode_len && memcmp(tocode_buf + i + 1, "/IGNORE", 8) == 0)
+            if (i + 7 < tocode_len && memcmp(tocode_buf + i + 1, "/IGNORE", 7) == 0)
             {
                 discard_ilseq = true;
             }
