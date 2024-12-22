@@ -108,6 +108,7 @@ _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool disca
     // Initialize the states.
     cd->istate = 0;
     cd->ostate = 0;
+    cd->ibyteorder = 0;
 
     // Initialize the operation flags.
     cd->discard_ilseq = discard_ilseq;

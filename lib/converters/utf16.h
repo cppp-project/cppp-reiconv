@@ -1,7 +1,7 @@
 /**
  * @file utf16.h
  * @brief UTF-16
- * @copyright Copyright (C) 1999-2001, 2008, 2016 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 1999-2024 Free Software Foundation, Inc.
  * @copyright Copyright (C) 2024 The C++ Plus Project.
  */
 /*
@@ -40,7 +40,7 @@
 /* The state is 0 if big-endian, 1 if little-endian. */
 static int utf16_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-    state_t state = conv->istate;
+    state_t state = conv->ibyteorder;
     int count = 0;
     for (; n >= 2 && count <= RET_COUNT_MAX && count <= INT_MAX - 2;)
     {
@@ -60,7 +60,7 @@ static int utf16_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t
                 if (!(wc2 >= 0xdc00 && wc2 < 0xe000))
                     goto ilseq;
                 *pwc = 0x10000 + ((wc - 0xd800) << 10) + (wc2 - 0xdc00);
-                conv->istate = state;
+                conv->ibyteorder = state;
                 return count + 4;
             }
             else
@@ -73,18 +73,18 @@ static int utf16_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t
         else
         {
             *pwc = wc;
-            conv->istate = state;
+            conv->ibyteorder = state;
             return count + 2;
         }
         s += 2;
         n -= 2;
         count += 2;
     }
-    conv->istate = state;
+    conv->ibyteorder = state;
     return RET_TOOFEW(count);
 
 ilseq:
-    conv->istate = state;
+    conv->ibyteorder = state;
     return RET_SHIFT_ILSEQ(count);
 }
 

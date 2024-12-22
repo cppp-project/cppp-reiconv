@@ -1,7 +1,7 @@
 /**
  * @file ucs4.h
  * @brief UCS-4
- * @copyright Copyright (C) 1999-2001, 2008, 2011, 2016, 2024 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 1999-2024 Free Software Foundation, Inc.
  * @copyright Copyright (C) 2024 The C++ Plus Project.
  */
 /*
@@ -34,7 +34,7 @@
 /* The state is 0 if big-endian, 1 if little-endian. */
 static int ucs4_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 {
-    state_t state = conv->istate;
+    state_t state = conv->ibyteorder;
     int count = 0;
     for (; n >= 4 && count <= RET_COUNT_MAX && count <= INT_MAX - 4;)
     {
@@ -50,19 +50,19 @@ static int ucs4_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t 
         else if (wc <= 0x7fffffff)
         {
             *pwc = wc;
-            conv->istate = state;
+            conv->ibyteorder = state;
             return count + 4;
         }
         else
         {
-            conv->istate = state;
+            conv->ibyteorder = state;
             return RET_SHIFT_ILSEQ(count);
         }
         s += 4;
         n -= 4;
         count += 4;
     }
-    conv->istate = state;
+    conv->ibyteorder = state;
     return RET_TOOFEW(count);
 }
 

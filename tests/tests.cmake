@@ -10,21 +10,24 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/tests")
 include_directories("${output_includedir}")
 
 # Test executables
-add_executable(data-generator         "${CMAKE_CURRENT_SOURCE_DIR}/tests/data-generator.cpp")
-add_executable(check-encoding         "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-encoding.cpp")
-add_executable(check-stateful         "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateful.cpp")
-add_executable(check-stateless        "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateless.cpp")
-add_executable(sort                   "${CMAKE_CURRENT_SOURCE_DIR}/tests/sort.cpp")
+add_executable(data-generator  "${CMAKE_CURRENT_SOURCE_DIR}/tests/data-generator.cpp")
+add_executable(test-bom-state  "${CMAKE_CURRENT_SOURCE_DIR}/tests/test-bom-state.cpp")
+add_executable(check-encoding  "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-encoding.cpp")
+add_executable(check-stateful  "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateful.cpp")
+add_executable(check-stateless "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-stateless.cpp")
+add_executable(sort            "${CMAKE_CURRENT_SOURCE_DIR}/tests/sort.cpp")
 
-target_link_libraries(check-encoding         libcppp-reiconv.static)
-target_link_libraries(check-stateful         libcppp-reiconv.static)
-target_link_libraries(check-stateless        libcppp-reiconv.static)
+target_link_libraries(test-bom-state  libcppp-reiconv.static)
+target_link_libraries(check-encoding  libcppp-reiconv.static)
+target_link_libraries(check-stateful  libcppp-reiconv.static)
+target_link_libraries(check-stateless libcppp-reiconv.static)
 
-set_target_properties(data-generator         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-set_target_properties(check-encoding         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-set_target_properties(check-stateful         PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-set_target_properties(check-stateless        PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
-set_target_properties(sort                   PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+set_target_properties(data-generator  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+set_target_properties(test-bom-state  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+set_target_properties(check-encoding  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+set_target_properties(check-stateful  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+set_target_properties(check-stateless PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
+set_target_properties(sort            PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_testsdir}" )
 
 macro(convert_to_crlf input_file output_file)
     file(READ ${input_file} file_content)
@@ -101,6 +104,11 @@ add_custom_command(TARGET data-generator POST_BUILD
 add_test(NAME check-encoding
          WORKING_DIRECTORY "${output_testsdir}"
          COMMAND "$<TARGET_FILE:check-encoding>"
+         )
+
+add_test(NAME test-bom-state
+         WORKING_DIRECTORY "${output_testsdir}"
+         COMMAND "$<TARGET_FILE:test-bom-state>"
          )
 
 # General multi-byte encodings.

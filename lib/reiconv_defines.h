@@ -130,6 +130,7 @@ struct conv_struct
     /* Input (conversion multibyte -> unicode) */
     int iindex;
     struct mbtowc_funcs ifuncs;
+    state_t ibyteorder;
     state_t istate;
     /* Output (conversion unicode -> multibyte) */
     int oindex;
