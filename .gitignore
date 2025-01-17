@@ -83,6 +83,7 @@ lib/generated/check-encodings
 
 # Submodules.
 build-aux/
+cppp-platform/
 
 # Temp tests files.
 tests/data/UTF-8.TXT

@@ -39,6 +39,8 @@ get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
 include("${BUILD_AUX}/cmake/cppp.cmake")
 # ----------------------------------------------------------------------------------
 
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/cppp-platform")
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")    
     add_compile_options(-Wno-unused-parameter)
     add_compile_options(-Wno-missing-field-initializers)
@@ -99,12 +101,22 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/iconv.h.in" "${output_includ
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
 include_directories("${output_includedir}")
 
+# Add definitions.
 add_compile_definitions(VERSION_MAJOR=${PROJECT_VERSION_MAJOR})
 add_compile_definitions(VERSION_MINOR=${PROJECT_VERSION_MINOR})
 add_compile_definitions(VERSION_PATCH=${PROJECT_VERSION_PATCH})
 
+include(CheckFunctionExists)
+check_function_exists(nl_langinfo HAVE_LANGINFO_CODESET)
+if(HAVE_LANGINFO_CODESET)
+    add_compile_definitions(HAVE_LANGINFO_CODESET=1)
+endif()
+
 # Add library.
-set(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.c" "${CMAKE_CURRENT_SOURCE_DIR}/lib/reiconv.cpp")
+set(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/lib/iconv.c" 
+            "${CMAKE_CURRENT_SOURCE_DIR}/lib/reiconv.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/lib/locale_charset.c"
+            "${CMAKE_CURRENT_SOURCE_DIR}/lib/locale_charset.cpp")
 cppp_build_library(${PROJECT_NAME} SOURCES TRUE TRUE "${CMAKE_BINARY_DIR}/windows/cppp-reiconv.rc")
 
 # Include test suite.

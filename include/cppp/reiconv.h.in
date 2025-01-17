@@ -201,6 +201,13 @@ extern _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbyte
  */
 extern _CPPP_API int reiconv_handle_close(reiconv_t cd);
 
+/**
+ * @brief Determine the current locale's character encoding.
+ * @note The result is statically allocated.
+ * @return The canonicalized encoding name.
+ */
+extern _CPPP_API const char *locale_charset();
+
 #ifdef __cplusplus
 }
 #endif
