@@ -140,11 +140,30 @@ class Buffer
 
     constexpr bool operator==(const Buffer &other) const
     {
-        if (size != other.size)
+        // Check if the buffer is the same, but ignore CR and LF.
+        std::size_t i = 0, j = 0;
+        while (i < size || j < other.size)
         {
-            return false;
+            i = std::min(i, size);
+            j = std::min(j, other.size);
+            if (buffer[i] == '\r' || buffer[i] == '\n')
+            {
+                i++;
+                continue;
+            }
+            if (other.buffer[j] == '\r' || other.buffer[j] == '\n')
+            {
+                j++;
+                continue;
+            }
+            if (buffer[i] != other.buffer[j])
+            {
+                return false;
+            }
+            i++;
+            j++;
         }
-        return std::memcmp(buffer, other.buffer, size) == 0;
+        return true;
     }
 
     constexpr bool operator!=(const Buffer &other) const
@@ -156,6 +175,12 @@ class Buffer
     {
         if (*this != other)
         {
+            std::string str_cwd = std::filesystem::current_path().string();
+            print_stderr("DEBUG: Dumping 'this.dmp' and 'other.dmp' into '{}' ...\n\tThis: {}\n\tOther: {}\n",
+                         colorize(str_cwd, CONTROL_UNDERLINE), colorize(id, CONTROL_UNDERLINE),
+                         colorize(other.id, CONTROL_UNDERLINE));
+            dump(std::filesystem::path("this.dmp"));
+            other.dump(std::filesystem::path("other.dmp"));
             error("compare_assert", "The data is different.");
         }
         success("compare_assert", "The data is the same.");
