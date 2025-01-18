@@ -26,8 +26,8 @@
 
 #include <cerrno>
 #include <cstdio>
+#include <cstdlib>
 #include <errno.h>
-#include <stdlib.h>
 
 static const char input1[8] = "3\xd4\xe2\x84\x83\xc3\x9f";
 static const char input2[8] = "3\xe2\x84\x83\xd4\xc3\x9f";

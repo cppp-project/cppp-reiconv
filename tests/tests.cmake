@@ -41,7 +41,7 @@ endmacro()
 macro(test state encoding)
     add_test( NAME "check-${state}-${encoding}"
               WORKING_DIRECTORY "${output_testsdir}"
-              COMMAND "$<TARGET_FILE:check-${state}>" "${TEST_DATA_DIR}" "${encoding}"
+              COMMAND ${EXECUTOR} "$<TARGET_FILE:check-${state}>" "${TEST_DATA_DIR}" "${encoding}"
               )
 endmacro(test)
 
@@ -69,7 +69,7 @@ endif()
 
 # Generate UTF-8 test data.
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:data-generator>" "utf-8" > "${TEST_DATA_DIR}/UTF-8.TXT"
+    COMMAND ${EXECUTOR} "$<TARGET_FILE:data-generator>" "utf-8" > "${TEST_DATA_DIR}/UTF-8.TXT"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Generating UTF-8 test data ... "
 )
@@ -77,12 +77,12 @@ add_custom_command(TARGET data-generator POST_BUILD
 # Generate GB18030:2005 test data.
 add_custom_command(TARGET data-generator POST_BUILD
     COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2005-BMP.TXT" "${TEST_DATA_DIR}/GB18030-2005.TXT"
-    COMMAND "$<TARGET_FILE:data-generator>" gb18030z >> "${TEST_DATA_DIR}/GB18030-2005.TXT"
+    COMMAND ${EXECUTOR} "$<TARGET_FILE:data-generator>" gb18030z >> "${TEST_DATA_DIR}/GB18030-2005.TXT"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Generating GB18030:2005 test data ... "
 )
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:sort>" "${TEST_DATA_DIR}/GB18030-2005.TXT" "${TEST_DATA_DIR}/GB18030-2005.TXT.tmp"
+    COMMAND ${EXECUTOR} "$<TARGET_FILE:sort>" "${TEST_DATA_DIR}/GB18030-2005.TXT" "${TEST_DATA_DIR}/GB18030-2005.TXT.tmp"
     COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2005.TXT.tmp" "${TEST_DATA_DIR}/GB18030-2005.TXT"
     COMMAND "${CMAKE_COMMAND}" -E remove "${TEST_DATA_DIR}/GB18030-2005.TXT.tmp"
     WORKING_DIRECTORY "${output_testsdir}"
@@ -92,12 +92,12 @@ add_custom_command(TARGET data-generator POST_BUILD
 # Generate GB18030:2022 test data.
 add_custom_command(TARGET data-generator POST_BUILD
     COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2022-BMP.TXT" "${TEST_DATA_DIR}/GB18030-2022.TXT"
-    COMMAND "$<TARGET_FILE:data-generator>" gb18030z >> "${TEST_DATA_DIR}/GB18030-2022.TXT"
+    COMMAND ${EXECUTOR} "$<TARGET_FILE:data-generator>" gb18030z >> "${TEST_DATA_DIR}/GB18030-2022.TXT"
     WORKING_DIRECTORY "${output_testsdir}"
     COMMENT "Generating GB18030:2022 test data ... "
 )
 add_custom_command(TARGET data-generator POST_BUILD
-    COMMAND "$<TARGET_FILE:sort>" "${TEST_DATA_DIR}/GB18030-2022.TXT" "${TEST_DATA_DIR}/GB18030-2022.TXT.tmp"
+    COMMAND ${EXECUTOR} "$<TARGET_FILE:sort>" "${TEST_DATA_DIR}/GB18030-2022.TXT" "${TEST_DATA_DIR}/GB18030-2022.TXT.tmp"
     COMMAND "${CMAKE_COMMAND}" -E copy "${TEST_DATA_DIR}/GB18030-2022.TXT.tmp" "${TEST_DATA_DIR}/GB18030-2022.TXT"
     COMMAND "${CMAKE_COMMAND}" -E remove "${TEST_DATA_DIR}/GB18030-2022.TXT.tmp"
     WORKING_DIRECTORY "${output_testsdir}"
@@ -106,17 +106,17 @@ add_custom_command(TARGET data-generator POST_BUILD
 
 add_test(NAME check-encoding
          WORKING_DIRECTORY "${output_testsdir}"
-         COMMAND "$<TARGET_FILE:check-encoding>"
+         COMMAND ${EXECUTOR} "$<TARGET_FILE:check-encoding>"
          )
 
 add_test(NAME test-bom-state
          WORKING_DIRECTORY "${output_testsdir}"
-         COMMAND "$<TARGET_FILE:test-bom-state>"
+         COMMAND ${EXECUTOR} "$<TARGET_FILE:test-bom-state>"
          )
 
 add_test(NAME test-discard
          WORKING_DIRECTORY "${output_testsdir}"
-         COMMAND "$<TARGET_FILE:test-discard>"
+         COMMAND ${EXECUTOR} "$<TARGET_FILE:test-discard>"
          )
 
 # General multi-byte encodings.
