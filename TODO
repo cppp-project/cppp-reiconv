@@ -1,0 +1,2 @@
+1. Implement the //NON_IDENTICAL_DISCARD suffix from POSIX:2024.
+2. Add translit support.
