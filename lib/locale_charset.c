@@ -21,6 +21,8 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "cppp/reiconv.h"
+
 #include "cppp/cppp-platform.h"
 
 #include <locale.h>
@@ -57,7 +59,7 @@
 #include "localecharset/locale_table.h"
 #endif // !HAVE_LANGINFO_CODESET && !WINDOWS_NATIVE
 
-const char *locale_charset()
+_CPPP_API const char *locale_charset()
 {
 #if IS_WINDOWS_NATIVE
     return windows_getcp();
