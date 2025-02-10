@@ -46,7 +46,7 @@
 
 #define TEMP_BUFFER_SIZE 4096
 
-_CPPP_API struct VersionInfo version = {VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
+_CPPP_API struct VersionInfo reiconv_version = {VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
 
 _CPPP_API size_t reiconv_name_canonicalize(const char *name, char *outbuf)
 {
