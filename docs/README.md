@@ -4,6 +4,8 @@
 
 These docs is for `cppp-reiconv 3.0.0`.
 
+It's a unstable version.
+
 cppp-reiconv is a portable C/C++ library for converting between character
 encodings and locale charset detection.
 
