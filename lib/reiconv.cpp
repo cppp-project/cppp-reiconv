@@ -52,9 +52,9 @@ _CPPP_API reiconv::Encoding::Encoding(const int codepage)
 _CPPP_API reiconv::VersionInfo reiconv::version{VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH};
 
 _CPPP_API std::string reiconv::convert(reiconv::Encoding from, reiconv::Encoding to, const std::string_view input,
-                                       bool strict)
+                                       enum ConvertFlag flag)
 {
-    ::reiconv_t cd = ::reiconv_open_from_index(from, to, !strict);
+    ::reiconv_t cd = ::reiconv_open_from_index(from, to, (enum ::ConvertFlag)flag);
     if (cd == (::reiconv_t)(-1))
     {
         throw std::system_error(errno, std::system_category(), "reiconv_open_from_index");

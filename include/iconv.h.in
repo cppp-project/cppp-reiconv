@@ -23,8 +23,6 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* When installed, this file is called "iconv.h". */
-
 #ifndef _ICONV_H_
 #define _ICONV_H_
 

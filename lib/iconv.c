@@ -86,7 +86,7 @@ _CPPP_API int reiconv_lookup_from_codepage(int codepage)
     return codepage_to_eindex[codepage] - 1;
 }
 
-_CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool discard_ilseq)
+_CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, enum ConvertFlag flags)
 {
     struct conv_struct *cd = (struct conv_struct *)malloc(sizeof(struct conv_struct));
     if (cd == NULL)
@@ -111,12 +111,12 @@ _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool disca
     cd->ibyteorder = 0;
 
     // Initialize the operation flags.
-    cd->discard_ilseq = discard_ilseq;
+    cd->discard_ilseq = flags & REICONV_DISCARD_ILSEQ;
 
     return cd;
 }
 
-_CPPP_API reiconv_t reiconv_open_from_codepage(int fromcode, int tocode, bool discard_ilseq)
+_CPPP_API reiconv_t reiconv_open_from_codepage(int fromcode, int tocode, enum ConvertFlag flags)
 {
     int from_index = reiconv_lookup_from_codepage(fromcode);
     int to_index = reiconv_lookup_from_codepage(tocode);
@@ -126,10 +126,10 @@ _CPPP_API reiconv_t reiconv_open_from_codepage(int fromcode, int tocode, bool di
         errno = EINVAL;
         return (reiconv_t)(-1);
     }
-    return reiconv_open_from_index(from_index, to_index, discard_ilseq);
+    return reiconv_open_from_index(from_index, to_index, flags);
 }
 
-_CPPP_API reiconv_t reiconv_open_from_name(const char *fromcode, const char *tocode, bool discard_ilseq)
+_CPPP_API reiconv_t reiconv_open_from_name(const char *fromcode, const char *tocode, enum ConvertFlag flags)
 {
     int from_index = reiconv_lookup_from_name(fromcode);
     int to_index = reiconv_lookup_from_name(tocode);
@@ -139,7 +139,7 @@ _CPPP_API reiconv_t reiconv_open_from_name(const char *fromcode, const char *toc
         errno = EINVAL;
         return (reiconv_t)(-1);
     }
-    return reiconv_open_from_index(from_index, to_index, discard_ilseq);
+    return reiconv_open_from_index(from_index, to_index, flags);
 }
 
 _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
@@ -150,7 +150,7 @@ _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
     size_t fromcode_len = reiconv_name_canonicalize(fromcode, fromcode_buf);
     size_t tocode_len = reiconv_name_canonicalize(tocode, tocode_buf);
 
-    bool discard_ilseq = false;
+    enum ConvertFlag flag = REICONV_NO_FLAGS;
 
     for (size_t i = 0; i < fromcode_len; i++)
     {
@@ -159,7 +159,7 @@ _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
             fromcode_buf[i] = '\0';
             if (i + 7 < fromcode_len && memcmp(fromcode_buf + i + 1, "/IGNORE", 8) == 0)
             {
-                discard_ilseq = true;
+                flag |= REICONV_DISCARD_ILSEQ;
             }
         }
     }
@@ -171,7 +171,7 @@ _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
             tocode_buf[i] = '\0';
             if (i + 7 < tocode_len && memcmp(tocode_buf + i + 1, "/IGNORE", 7) == 0)
             {
-                discard_ilseq = true;
+                flag |= REICONV_DISCARD_ILSEQ;
             }
         }
     }
@@ -184,7 +184,7 @@ _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode)
         return (reiconv_t)(-1);
     }
 
-    return reiconv_open_from_index(from_index, to_index, discard_ilseq);
+    return reiconv_open_from_index(from_index, to_index, flag);
 }
 
 _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)

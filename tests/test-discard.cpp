@@ -22,6 +22,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "cppp/reiconv.h"
 #include "iconv.h"
 
 #include <cerrno>
@@ -196,11 +197,11 @@ int main()
     test_default(cd);
     ::reiconv_handle_close(cd);
 
-    cd = ::reiconv_open_from_index(ENCODING_UTF8, ENCODING_ISO8859_1, 0);
+    cd = ::reiconv_open_from_index(ENCODING_UTF8, ENCODING_ISO8859_1, REICONV_NO_FLAGS);
     test_default(cd);
     ::reiconv_handle_close(cd);
 
-    cd = ::reiconv_open_from_codepage(65001, 28591, 0);
+    cd = ::reiconv_open_from_codepage(65001, 28591, REICONV_NO_FLAGS);
     test_default(cd);
     ::reiconv_handle_close(cd);
 
@@ -216,11 +217,11 @@ int main()
     test_ignore(cd);
     ::reiconv_handle_close(cd);
 
-    cd = ::reiconv_open_from_index(ENCODING_UTF8, ENCODING_ISO8859_1, 1);
+    cd = ::reiconv_open_from_index(ENCODING_UTF8, ENCODING_ISO8859_1, REICONV_DISCARD_ILSEQ);
     test_ignore(cd);
     ::reiconv_handle_close(cd);
 
-    cd = ::reiconv_open_from_codepage(65001, 28591, 1);
+    cd = ::reiconv_open_from_codepage(65001, 28591, REICONV_DISCARD_ILSEQ);
     test_ignore(cd);
     ::reiconv_handle_close(cd);
 

@@ -33,7 +33,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/build-aux")
 elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
     set(BUILD_AUX "${CMAKE_CURRENT_SOURCE_DIR}/../build-aux")
 else()
-    message(FATAL_ERROR "CMake build-aux directory is not exists, try to execute 'setup.cmd' or './setup.sh' to get it.")
+    message(FATAL_ERROR "C+++ build-aux directory is not exists.")
 endif()
 get_filename_component(BUILD_AUX "${BUILD_AUX}" ABSOLUTE)
 include("${BUILD_AUX}/cmake/cppp.cmake")
@@ -70,7 +70,6 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.hpp.in" "${outp
 # cppp/reiconv.h
 set(CPPP_API "${CPPP_IMPORT_API}")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/cppp/reiconv.h.in" "${output_includedir}/cppp/reiconv.h.inst")
-
 
 # Header for build.
 # cppp/reiconv.hpp

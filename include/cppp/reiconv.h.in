@@ -23,31 +23,26 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* When installed, this file is called "cppp/reiconv.h". */
-
 #pragma once
-
 #ifndef _CPPP_REICONV_H_
 #define _CPPP_REICONV_H_
 
-#include <cppp/encodings/reiconv.h>
+#include "encodings/reiconv.h"
 
-#include <stdbool.h>
 #include <stddef.h>
-
-#define _CPPP_API
 
 #ifndef _CPPP_API
 #define _CPPP_API @CPPP_API@
-#endif
+#endif /* _CPPP_API */
 
 #if _MSC_VER >= 1600
 #pragma execution_character_set("utf-8")
-#endif
+#endif /* _MSC_VER >= 1600 */
 
 #ifdef __cplusplus
-extern "C" {
-#endif
+extern "C"
+{
+#endif /* __cplusplus */
 
 /**
  * @brief Version information.
@@ -86,7 +81,7 @@ extern _CPPP_API size_t reiconv_name_canonicalize(const char *name, char *outbuf
 
 /**
  * @brief Lookup an encoding by it's name.
- * @note The return value is an encoding index that can be used with `reiconv_open_from_codepage`.
+ * @note The return value is an encoding index that can be used with `reiconv_open_from_index`.
  * @note We will ignore '-' and '_', and uppercase all characters.
  * @param encoding The encoding name.
  * @return The encoding index. If the it is not found, -1 is returned.
@@ -95,7 +90,7 @@ extern _CPPP_API int reiconv_lookup_from_name(const char *encoding);
 
 /**
  * @brief Lookup an encoding by it's codepage.
- * @note The return value is an encoding index that can be used with `reiconv_open_from_codepage`.
+ * @note The return value is an encoding index that can be used with `reiconv_open_from_index`.
  * @param codepage The codepage.
  * @return The encoding index. If the it is not found, -1 is returned.
  */
@@ -107,35 +102,51 @@ extern _CPPP_API int reiconv_lookup_from_codepage(int codepage);
 typedef void *reiconv_t;
 
 /**
+ * @brief Convert flags. Used for open conversion descriptor.
+ */
+enum ConvertFlag
+{
+    /**
+     * @brief No flags.
+     */
+    REICONV_NO_FLAGS = 0,
+
+    /**
+     * @brief Discard illegal sequences. Same as iconv(3) '//IGNORE'.
+     */
+    REICONV_DISCARD_ILSEQ = 1,
+};
+
+/**
  * @brief Open a conversion descriptor from encoding index.
  * @note The return value is a conversion descriptor.
  * @param fromcode The input buffer encoding's index.
  * @param tocode The output buffer encoding's index.
- * @param discard_ilseq If true, we will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @param flags The convert flags.
  * @return The conversion descriptor. Indexes MUST BE VALID or the behavior is undefined.
  * @note If the conversion descriptor cannot be created, returns (reiconv_t)(-1) and errno is set to ENOMEM.
  */
-extern _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, bool discard_ilseq);
+extern _CPPP_API reiconv_t reiconv_open_from_index(int fromcode, int tocode, enum ConvertFlag flags);
 
 /**
  * @brief Open a conversion descriptor from codepage.
  * @note The return value is a conversion descriptor.
  * @param fromcode The input buffer encoding's codepage.
  * @param tocode The output buffer encoding's codepage.
- * @param discard_ilseq If true, we will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @param flags The convert flags.
  * @return The conversion descriptor. (reiconv_t)(-1) is returned if error occured with errno set.
  */
-extern _CPPP_API reiconv_t reiconv_open_from_codepage(int fromcode, int tocode, bool discard_ilseq);
+extern _CPPP_API reiconv_t reiconv_open_from_codepage(int fromcode, int tocode, enum ConvertFlag flags);
 
 /**
  * @brief Open a conversion descriptor from encoding name.
  * @note The return value is a conversion descriptor.
  * @param fromcode The input buffer encoding's name.
  * @param tocode The output buffer encoding's name.
- * @param discard_ilseq If true, we will ignore conversion errors. Same as iconv(3) '//IGNORE'.
+ * @param flags The convert flags.
  * @return The conversion descriptor. (reiconv_t)(-1) is returned if error occured with errno set.
  */
-extern _CPPP_API reiconv_t reiconv_open_from_name(const char* fromcode, const char* tocode, bool discard_ilseq);
+extern _CPPP_API reiconv_t reiconv_open_from_name(const char *fromcode, const char *tocode, enum ConvertFlag flags);
 
 /**
  * @brief Get the size of the result. -1 on error with errno set.
@@ -159,7 +170,8 @@ extern _CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, siz
  * @note If the output buffer is too big, the rest of the buffer is filled with zero.
  * @return 0 on success, -1 on error with errno set.
  */
-extern _CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char* input_data, size_t input_length, char* output_data, size_t output_length);
+extern _CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char *input_data, size_t input_length,
+                                                 char *output_data, size_t output_length);
 
 /**
  * @brief Converts an string from one encoding to another.
@@ -175,7 +187,8 @@ extern _CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char* input
  * @note The length of the result is stored in `*output_length_ptr`.
  * @return 0 on success, -1 on error with errno set.
  */
-extern _CPPP_API int reiconv_convert(reiconv_t cd, const char *input_data, size_t input_length, char **output_data_ptr, size_t *output_length_ptr);
+extern _CPPP_API int reiconv_convert(reiconv_t cd, const char *input_data, size_t input_length, char **output_data_ptr,
+                                     size_t *output_length_ptr);
 
 /**
  * @brief Open a conversion descriptor. For iconv compatibility.
@@ -192,7 +205,8 @@ extern _CPPP_API reiconv_t reiconv_open(const char *tocode, const char *fromcode
  * @note Decrements `*inbytesleft` and increments `*inbuf` by the same amount.
  * @note Decrements `*outbytesleft` and increments `*outbuf` by the same amount.
  */
-extern _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
+extern _CPPP_API size_t reiconv_iconv(reiconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf,
+                                      size_t *outbytesleft);
 
 /**
  * @brief Close a conversion descriptor. For iconv compatibility.
@@ -210,6 +224,6 @@ extern _CPPP_API const char *locale_charset();
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
 #endif /* _CPPP_REICONV_H_ */

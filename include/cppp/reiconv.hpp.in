@@ -23,20 +23,15 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* When installed, this file is called "cppp/reiconv.hpp". */
-
 #pragma once
 #ifndef _CPPP_REICONV_HPP_
 #define _CPPP_REICONV_HPP_
 
-#include <cppp/encodings/reiconv.hpp>
+#include "encodings/reiconv.hpp"
 
-#include <cstddef>
 #include <cstring>
 #include <string>
 #include <string_view>
-
-#define _CPPP_API // TODO: Remove this.
 
 #ifndef _CPPP_API
 #define _CPPP_API @CPPP_API@
@@ -124,6 +119,22 @@ namespace reiconv
     extern _CPPP_API VersionInfo version;
 
     /**
+     * @brief Convert flags. Used for open conversion descriptor.
+     */
+    enum class ConvertFlag
+    {
+        /**
+         * @brief No flags.
+         */
+        NO_FLAGS = 0,
+
+        /**
+         * @brief Discard illegal sequences. Same as iconv(3) '//IGNORE'.
+         */
+        DISCARD_ILSEQ = 1,
+    };
+
+    /**
      * @brief Converts an string from one encoding to another, supports encodings autodetecting.
      *
      * @note Converts a memory region given in encoding FROMCODE to a new memory
@@ -139,7 +150,7 @@ namespace reiconv
      * @return Return the output buffer.
      * @throw std::system_error if an error occurs.
      */
-    extern _CPPP_API std::string convert(Encoding from, Encoding to, const std::string_view input, bool strict = true);
+    extern _CPPP_API std::string convert(Encoding from, Encoding to, const std::string_view input, enum ConvertFlag flag = ConvertFlag::NO_FLAGS);
 
     /**
      * @brief Determine the current locale's character encoding.

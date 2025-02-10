@@ -34,6 +34,6 @@ inline Buffer reiconv_test(reiconv::Encoding from, reiconv::Encoding to, const s
 {
     using namespace reiconv;
     Buffer input = Buffer::read_from_file(input_file_path);
-    std::string res = convert(from, to, {input.data(), input.size}, true);
+    std::string res = convert(from, to, {input.data(), input.size}, ConvertFlag::DISCARD_ILSEQ);
     return Buffer(res, "converted");
 }

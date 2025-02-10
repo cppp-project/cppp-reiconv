@@ -23,15 +23,13 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* When installed, this file is called "cppp/reiconv.hpp". */
-
+#pragma once
 #ifndef _CPPP_ENCODINGS_REICONV_HPP_
 #define _CPPP_ENCODINGS_REICONV_HPP_
-#pragma once
 
 #if _MSC_VER >= 1600
 #pragma execution_character_set("utf-8")
-#endif
+#endif // _MSC_VER >= 1600
 
 @INDEXES_CODE@
 #endif // _CPPP_ENCODINGS_REICONV_HPP_
