@@ -1,53 +1,13 @@
 #include "benchmark.hpp"
 
+#include <cppp/reiconv.h>
+
 #include <cerrno>
 #include <cstdlib>
 #include <cstring>
 
-#define iconv_t reiconv_t
-#define iconv_open reiconv_open
-#define iconv reiconv_iconv
-#define iconv_close reiconv_handle_close
-
-extern "C"
-{
-    typedef void *iconv_t;
-    extern int iconv_close(iconv_t cd);
-    extern iconv_t iconv_open(const char *tocode, const char *fromcode);
-    extern size_t iconv(iconv_t cd, char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft);
-}
-
 void* reiconv_iconv_open()
 {
-    return iconv_open("GB18030", "UTF-8");
+    return reiconv_open_from_index(ENCODING_UTF8, ENCODING_GB18030, REICONV_NO_FLAGS);
 }
 
-int reiconv_static_size_convert(void* cd, const char *input_data, size_t input_length, char *output_data,
-                              size_t output_length)
-{
-    char *inptr = (char *)input_data;
-    size_t insize = input_length;
-    char *outptr = output_data;
-    size_t outsize = output_length;
-    while (insize > 0)
-    {
-        size_t res = iconv(cd, &inptr, &insize, &outptr, &outsize);
-        if (res == (size_t)(-1))
-        {
-            if (errno == EINVAL)
-            {
-                break;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-    }
-    if (iconv(cd, NULL, NULL, &outptr, &outsize) == (size_t)(-1))
-    {
-        return -1;
-    }
-    memset(outptr, 0, outsize); // Fill the rest of the buffer with '\0'.
-    return 0;
-}

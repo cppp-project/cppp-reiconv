@@ -13,5 +13,4 @@ extern int libiconv_static_size_convert(void* cd, const char *input_data, size_t
                               size_t output_length);
 
 extern void* reiconv_iconv_open();
-extern int reiconv_static_size_convert(void* cd, const char *input_data, size_t input_length, char *output_data,
-                              size_t output_length); // Unused.
+
