@@ -162,12 +162,12 @@ extern _CPPP_API size_t reiconv_result_size(reiconv_t cd, const char *start, siz
  * @note The function `reiconv_convert` is more easy to use. This function is for performance and flexibility.
  * @note This function does not treat zero characters specially.
  * @param cd The input conversion descriptor.
- * @param input_data the input buffer.
+ * @param input_data The input buffer.
  * @param input_length Input buffer length.
  * @param output_data The output buffer pointer.
- * @param output_length the output buffer's length.
+ * @param output_length The output buffer's length.
  * @note If the output buffer is too small, -1 is returned.
- * @note If the output buffer is too big, the rest of the buffer is filled with zero.
+ * @note If the output buffer is too big, the rest of the buffer will not change.
  * @return 0 on success, -1 on error with errno set.
  */
 extern _CPPP_API int reiconv_convert_static_size(reiconv_t cd, const char *input_data, size_t input_length,
