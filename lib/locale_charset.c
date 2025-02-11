@@ -120,14 +120,16 @@ _CPPP_API const char *locale_charset()
     if (p == NULL)
     {
         // No dot.
-        return DEFAULT_CHARSET;
+        return REICONV_DEFAULT_CHARSET;
     }
 
     // Split the locale into two parts.
     codeset = p + 1;
     return codeset;
 
+#if locale_table_defined
 done_table_lookup:
+#endif
 
 #if IS_DARWIN7
     /* Mac OS X sets MB_CUR_MAX to 1 when LC_ALL=C, and "UTF-8"

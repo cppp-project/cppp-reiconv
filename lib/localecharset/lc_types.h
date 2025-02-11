@@ -24,7 +24,7 @@
 #ifndef _LC_TYPES_H_
 #define _LC_TYPES_H_
 
-#define DEFAULT_CHARSET "UTF-8"
+#define REICONV_DEFAULT_CHARSET "UTF-8"
 
 struct locale_table_entry
 {

@@ -32,7 +32,7 @@
 
 #include <Windows.h>
 
-static const char *windows_getcp(char *resultbuf)
+static const char *windows_getcp()
 {
 #ifdef _CONSOLE
     UINT cp = GetConsoleOutputCP();
