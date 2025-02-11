@@ -20,7 +20,7 @@ Use the following command to fetch source code, or download source package:
 git clone https://github.com/cppp-project/cppp-reiconv
 cd cppp-reiconv
 git clone https://github.com/cppp-project/build-aux --depth 1
-git clone https://github.com/cppp-project/rubisco --depth 1
+git clone https://github.com/cppp-project/cppp-platform --depth 1
 ```
 
 Use the following command to build and install.

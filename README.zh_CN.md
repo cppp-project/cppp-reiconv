@@ -20,7 +20,7 @@
 git clone https://github.com/cppp-project/cppp-reiconv
 cd cppp-reiconv
 git clone https://github.com/cppp-project/build-aux --depth 1
-git clone https://github.com/cppp-project/rubisco --depth 1
+git clone https://github.com/cppp-project/cppp-platform --depth 1
 ```
 
 使用以下命令构建和安装：
