@@ -1,9 +1,9 @@
 name: 🧪 Run tests for ${{ project.name }}
 
 steps:
-  - name: 🛠️ Build
+  - name: 🛠️ Configure and build
     run: |
-      cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install
+      cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
       cmake --build build --config Release -v -j ${{ nproc }}
 
   - name: 🧪 Run tests

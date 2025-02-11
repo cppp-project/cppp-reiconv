@@ -8,6 +8,9 @@
         "build": {
             "run": ".rubisco/build.yml"
         },
+        "dist": {
+            "run": ".rubisco/dist.yml"
+        },
         "test": {
             "run": ".rubisco/test.yml"
         }

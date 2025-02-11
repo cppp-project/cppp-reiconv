@@ -11,61 +11,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: 📁 Checkout
+      uses: actions/checkout@v4
 
-    #--------------------------------------------collect--------------------------------------------
-    - uses: actions/checkout@v3
-    
-    - name: 🏷️ Get infomations
-      run: |
-        tag="${GITHUB_REF#refs/tags/}"
-        echo "tag=$tag" >> $GITHUB_ENV
-        echo "pkgname=cppp-reiconv-$tag" >> $GITHUB_ENV
-        echo "srcdir=$(pwd)" >> $GITHUB_ENV
+    - name: 🧰 Setup Rubisco
+      id: rubisco
+      uses: cppp-project/rubisco@main
+      with:
+        host: x86_64-linux-gnu
 
-    - name: 📁 Collect dependencies
+    - name: 📦 Build source distribution
       run: |
-        sudo apt-get update
-        sudo apt-get install p7zip-full zip xz-utils -y
-        sudo apt-get install gperf cmake gcc python3 -y
-        
-    #--------------------------------------------build--------------------------------------------
-    - name: 🧳 Prepare for source distribution building
-      run: |
-        mkdir -p ./dist
-        ./setup.sh
-    
-    - name: 🛠️ Build source distribution
-      run: |
-        ./cpppdist.py
-    
-    - name: 📦 Make packages
-      run: |
-        tar cvf ${{ env.pkgname }}.tar ${{ env.pkgname }}
-        zip -r -9 dist/${{ env.pkgname }}.zip ${{ env.pkgname }}
-        7z a dist/${{ env.pkgname }}.7z ${{ env.pkgname }}
-        xz -c -9 -k ${{ env.pkgname }}.tar > dist/${{ env.pkgname }}.tar.xz
-        gzip -c -9 -k ${{ env.pkgname }}.tar > dist/${{ env.pkgname }}.tar.gz
+        rubisco dist
 
+    # Rubisco will support it later.
+    - name: 📦 Generate checksum
+      run: |
         cd dist
-        for i in $(ls) ; do md5sum $i > $i.md5 ; done
+        for i in $(ls) ; do sha256sum $i > $i.sha256 ; done
         cd ..
-    
-    #--------------------------------------------publish--------------------------------------------
 
     - name: ⬆️ Create release and upload assets
       uses: softprops/action-gh-release@v1
       with:
-          tag_name: ${{ env.tag }}
+          tag_name: ${{ steps.rubisco.outputs.tag }}
           files: ./dist/*
 
   build-linux:
-  
-    needs: build-dist
 
     strategy:
       fail-fast: false
       matrix:
-        arch: [
+        host: [
             aarch64-linux-gnu,
             alpha-linux-gnu,
             arm-linux-gnueabi,
@@ -75,51 +52,39 @@ jobs:
             mips64-linux-gnuabi64,
             mips64el-linux-gnuabi64,
             mipsel-linux-gnu,
-            mipsisa32r6-linux-gnu,
-            mipsisa32r6el-linux-gnu,
-            mipsisa64r6-linux-gnuabi64,
-            mipsisa64r6el-linux-gnuabi64,
             powerpc-linux-gnu,
             powerpc64-linux-gnu,
-            powerpc64le-linux-gnu,
             riscv64-linux-gnu,
             sh4-linux-gnu,
             x86_64-linux-gnu
           ]
-    
-    runs-on: ubuntu-latest
-    
-    steps:
-    
-    #--------------------------------------------collect--------------------------------------------
-    - name: 🏷️ Get infomations
-      run: |
-        tag="${GITHUB_REF#refs/tags/}"
-        echo "tag=$tag" >> $GITHUB_ENV
-        echo "pkgname=cppp-reiconv-$tag" >> $GITHUB_ENV
-        echo "srcdir=$(pwd)" >> $GITHUB_ENV
 
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📁 Checkout
+      uses: actions/checkout@v4
+
+    - name: 🧰 Setup Rubisco
+      id: rubisco
+      uses: cppp-project/rubisco@main
+      with:
+        host: ${{ matrix.host }}
+
+    # Rubisco don't support setup cross-compiler now.
     - name: 📁 Collect dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install p7zip-full zip xz-utils wget -y
-        sudo apt-get install gperf cmake -y
-        if [ "${{ matrix.arch }}" = "x86_64-linux-gnu" ] ;
+        if [ "${{ matrix.host }}" = "x86_64-linux-gnu" ] ;
         then
           sudo apt-get install gcc g++ -y ;
         else
-          sudo apt-get install gcc-${{ matrix.arch }} g++-${{ matrix.arch }} -y ;
+          sudo apt-get install gcc-${{ matrix.host }} g++-${{ matrix.host }} -y ;
         fi
-    
-    - name: 📁 Get source distribution tarball
+
+    - name: 🧳 Prepare for building
       run: |
-        wget https://github.com/${{ github.repository }}/releases/download/${{ env.tag }}/${{ env.pkgname }}.tar.gz
-        tar zxvf ${{ env.pkgname }}.tar.gz
-        mv ${{ env.pkgname }}/* .
-    
-    #--------------------------------------------build--------------------------------------------
-    - name: 🧳 Prepare for binary distribution building
-      run: |
+        mkdir -p ${{ steps.rubisco.outputs.pkgname }}-${{ matrix.host }}
         mkdir -p dist
     
     - name: 🛠️ Build binary distribution
@@ -127,35 +92,32 @@ jobs:
         export C_COMPILER="gcc"
         export CXX_COMPILER="g++"
         export LINKER="ld"
-        export CC_CROSS="/usr/bin/${{ matrix.arch }}-$C_COMPILER"
-        export CXX_CROSS="/usr/bin/${{ matrix.arch }}-$CXX_COMPILER"
-        export LD="/usr/bin/${{ matrix.arch }}-$LINKER"
+        export CC_CROSS="/usr/bin/${{ matrix.host }}-$C_COMPILER"
+        export CXX_CROSS="/usr/bin/${{ matrix.host }}-$CXX_COMPILER"
+        export LD="/usr/bin/${{ matrix.host }}-$LINKER"
 
         mkdir build
         cd build
-        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.srcdir }}/${{ env.pkgname }}-${{ matrix.arch }} -DCMAKE_C_COMPILER=$CC_CROSS -DCMAKE_CXX_COMPILER=$CXX_CROSS -DCMAKE_LINKER=$LD
-        cmake --build . --config=Release
-        cmake --install .
+        cmake .. -DCMAKE_INSTALL_PREFIX="${{ steps.rubisco.outputs.srcdir }}/${{ steps.rubisco.outputs.pkgname }}-${{ matrix.host }}" -DCMAKE_C_COMPILER=$CC_CROSS -DCMAKE_CXX_COMPILER=$CXX_CROSS -DCMAKE_LINKER=$LD
+        cmake --build . --config=Release -j $(nproc)
+        cmake --install . --config=Release
         cd ..
     
     - name: 📦 Make packages
       run: |
-        tar cvf ${{ env.pkgname }}-${{ matrix.arch }}.tar ${{ env.pkgname }}-${{ matrix.arch }}
-        zip -r -9 dist/${{ env.pkgname }}-${{ matrix.arch }}.zip ${{ env.pkgname }}-${{ matrix.arch }}
-        7z a dist/${{ env.pkgname }}-${{ matrix.arch }}.7z ${{ env.pkgname }}-${{ matrix.arch }}
-        xz -c -9 -k ${{ env.pkgname }}-${{ matrix.arch }}.tar > dist/${{ env.pkgname }}-${{ matrix.arch }}.tar.xz
-        gzip -c -9 -k ${{ env.pkgname }}-${{ matrix.arch }}.tar > dist/${{ env.pkgname }}-${{ matrix.arch }}.tar.gz
+        tar cvf dist/${{ steps.rubisco.outputs.pkgname }}-${{ matrix.host }}.tar ${{ steps.rubisco.outputs.pkgname }}-${{ matrix.host }}
+        xz -9 dist/${{ steps.rubisco.outputs.pkgname }}-${{ matrix.host }}.tar
 
+    - name: 📦 Generate checksum
+      run: |
         cd dist
-        for i in $(ls) ; do md5sum $i > $i.md5 ; done
+        for i in $(ls) ; do sha256sum $i > $i.sha256 ; done
         cd ..
-    
-    #--------------------------------------------publish--------------------------------------------
 
     - name: ⬆️ Create release and upload assets
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ env.tag }}
+        tag_name: ${{ steps.rubisco.outputs.tag }}
         files: ./dist/*
 
   build-macos:

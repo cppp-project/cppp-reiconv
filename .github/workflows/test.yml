@@ -1,77 +1,38 @@
-name: ✔️ Test cppp-reiconv library
+name: ✔️ Test cppp-reiconv
 
 on:
   release:
     types: [published]
   push:
     branches: [ "main" ]
-  workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  test-linux:
+  build:
+    runs-on: ${{ matrix.os }}
 
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
 
-    steps:
-    #--------------------------------------------collect--------------------------------------------
-    - uses: actions/checkout@v3
-
-    - name: 🧰 Setup Python
-      uses: actions/setup-python@v4
-    
-    - name: 📁 Collect dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install gcc cmake -y
-    
-    - name: 🧰 Setup build-aux
-      run: |
-        ./setup.sh
-    
-    #--------------------------------------------build--------------------------------------------
-    - name: 🛠️ Build
-      run : |
-        mkdir -p build
-        cd build
-        cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
-        cmake --build . --config=Release
-        cd ..
-    
-    #--------------------------------------------test--------------------------------------------
-    - name: ✔️ Test
-      run : |
-        cd build
-        ctest --verbose -C Release
-        cd ..
-  
-  test-macos:
-
-    runs-on: macos-latest
+      matrix:
+        include:
+          - { os: macos-latest, host: aarch64-apple-darwin }
+          - { os: ubuntu-latest, host: x86_64-linux-gnu }
 
     steps:
-    #--------------------------------------------collect--------------------------------------------
-    - uses: actions/checkout@v3
-    
-    - name: 📁 Collect dependencies
+    - name: 📁 Checkout
+      uses: actions/checkout@v4
+
+    - name: 🧰 Setup Rubisco
+      uses: cppp-project/rubisco@main
+      with:
+        host: ${{ matrix.host }}
+
+    - name: 📁 Setup subpackages
       run: |
-        brew install cmake
-    
-    - name: 🧰 Setup build-aux
-      run : |
-        ./setup.sh
-    
-    #--------------------------------------------build--------------------------------------------
-    - name: 🛠️ Build
-      run : |
-        mkdir build
-        cd build
-        cmake .. -DENABLE_EXTRA=ON -DENABLE_TEST=ON
-        cmake --build . --config=Release
-        cd ..
-    
-    #--------------------------------------------test--------------------------------------------
-    - name: ✔️ Test
-      run : |
-        cd build
-        ctest --verbose -C Release
-        cd ..
+        git clone https://github.com/cppp-project/build-aux --depth 1
+        git clone https://github.com/cppp-project/cppp-platform --depth 1
+
+    - name: 🧪 Test
+      run: rubisco test
