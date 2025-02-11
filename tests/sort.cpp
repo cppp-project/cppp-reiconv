@@ -1,5 +1,10 @@
+/**
+ * @file sort.cpp
+ * @brief Sort file lines.
+ * @author ChenPi11
+ * @copyright Copyright (C) 2024 The C++ Plus Project
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -13,29 +18,23 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with the cppp-reiconv Library; see the file COPYING.
+ * License along with the cppp-reiconv Library; see the file LICENSE.
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
-  Sort file lines.
-*/
-
-
-#include <iostream>
+#include <cstdlib>
 
 #include "sort.hpp"
-#include "throw_error.hpp"
+#include "output.hpp"
 
-// Usage: ./sort input_file output_file
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if (argc < 3)
+    if (argc != 3)
     {
-        error("sort", "Usage: ./sort input_file output_file");
+        print_stderr("Usage: ./sort INPUT-FILE OUTPUT-FILE\n");
+        return EXIT_FAILURE;
     }
 
     sort_file(argv[1], argv[2]);
-
-    return 0;
+    return EXIT_SUCCESS;
 }

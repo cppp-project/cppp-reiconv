@@ -1,5 +1,10 @@
+/**
+ * @file converters.h
+ * @brief Include all the converters.
+ * @copyright Copyright (C) 1999-2002, 2004-2011, 2016, 2022-2023 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
 /*
- * Copyright (C) 1999-2002, 2004-2011, 2016, 2022-2023 Free Software Foundation, Inc.
  * This file is part of the cppp-reiconv library.
  *
  * The cppp-reiconv library is free software; you can redistribute it
@@ -13,376 +18,249 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with the cppp-reiconv library; see the file COPYING.
+ * License along with the cppp-reiconv library; see the file LICENSE.
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* This file defines all the converters. */
+#ifndef _CONVERTERS_H_
+#define _CONVERTERS_H_
 
+#include "reiconv_defines.h" // IWYU pragma: keep
 
-/* Our own notion of wide character, as UCS-4, according to ISO-10646-1. */
-typedef unsigned int ucs4_t;
+#pragma region ASCII
+#include "converters/ascii.h" // IWYU pragma: keep
+#pragma endregion
 
-/* State used by a conversion. 0 denotes the initial state. */
-typedef unsigned int state_t;
+#pragma region General multi-byte encodings
+#include "converters/c99.h" // IWYU pragma: keep
+#include "converters/java.h" // IWYU pragma: keep
+#include "converters/ucs2.h" // IWYU pragma: keep
+#include "converters/ucs2be.h" // IWYU pragma: keep
+#include "converters/ucs2internal.h" // IWYU pragma: keep
+#include "converters/ucs2le.h" // IWYU pragma: keep
+#include "converters/ucs2swapped.h" // IWYU pragma: keep
+#include "converters/ucs4.h" // IWYU pragma: keep
+#include "converters/ucs4be.h" // IWYU pragma: keep
+#include "converters/ucs4internal.h" // IWYU pragma: keep
+#include "converters/ucs4le.h" // IWYU pragma: keep
+#include "converters/ucs4swapped.h" // IWYU pragma: keep
+#include "converters/utf16.h" // IWYU pragma: keep
+#include "converters/utf16be.h" // IWYU pragma: keep
+#include "converters/utf16le.h" // IWYU pragma: keep
+#include "converters/utf32.h" // IWYU pragma: keep
+#include "converters/utf32be.h" // IWYU pragma: keep
+#include "converters/utf32le.h" // IWYU pragma: keep
+#include "converters/utf7.h" // IWYU pragma: keep
+#include "converters/utf8.h" // IWYU pragma: keep
+#pragma endregion
 
-/* iconv_t is an opaque type. This is the real iconv_t type. */
-typedef struct conv_struct * conv_t;
+#pragma region 8-bit encodings
+#include "converters/armscii_8.h" // IWYU pragma: keep
+#include "converters/cp1131.h" // IWYU pragma: keep
+#include "converters/cp1133.h" // IWYU pragma: keep
+#include "converters/cp1250.h" // IWYU pragma: keep
+#include "converters/cp1251.h" // IWYU pragma: keep
+#include "converters/cp1252.h" // IWYU pragma: keep
+#include "converters/cp1253.h" // IWYU pragma: keep
+#include "converters/cp1254.h" // IWYU pragma: keep
+#include "converters/cp1255.h" // IWYU pragma: keep
+#include "converters/cp1256.h" // IWYU pragma: keep
+#include "converters/cp1257.h" // IWYU pragma: keep
+#include "converters/cp1258.h" // IWYU pragma: keep
+#include "converters/cp850.h" // IWYU pragma: keep
+#include "converters/cp862.h" // IWYU pragma: keep
+#include "converters/cp866.h" // IWYU pragma: keep
+#include "converters/cp874.h" // IWYU pragma: keep
+#include "converters/georgian_academy.h" // IWYU pragma: keep
+#include "converters/georgian_ps.h" // IWYU pragma: keep
+#include "converters/hp_roman8.h" // IWYU pragma: keep
+#include "converters/iso8859_1.h" // IWYU pragma: keep
+#include "converters/iso8859_10.h" // IWYU pragma: keep
+#include "converters/iso8859_11.h" // IWYU pragma: keep
+#include "converters/iso8859_13.h" // IWYU pragma: keep
+#include "converters/iso8859_14.h" // IWYU pragma: keep
+#include "converters/iso8859_15.h" // IWYU pragma: keep
+#include "converters/iso8859_16.h" // IWYU pragma: keep
+#include "converters/iso8859_2.h" // IWYU pragma: keep
+#include "converters/iso8859_3.h" // IWYU pragma: keep
+#include "converters/iso8859_4.h" // IWYU pragma: keep
+#include "converters/iso8859_5.h" // IWYU pragma: keep
+#include "converters/iso8859_6.h" // IWYU pragma: keep
+#include "converters/iso8859_7.h" // IWYU pragma: keep
+#include "converters/iso8859_8.h" // IWYU pragma: keep
+#include "converters/iso8859_9.h" // IWYU pragma: keep
+#include "converters/koi8_r.h" // IWYU pragma: keep
+#include "converters/koi8_ru.h" // IWYU pragma: keep
+#include "converters/koi8_t.h" // IWYU pragma: keep
+#include "converters/koi8_u.h" // IWYU pragma: keep
+#include "converters/mac_arabic.h" // IWYU pragma: keep
+#include "converters/mac_centraleurope.h" // IWYU pragma: keep
+#include "converters/mac_croatian.h" // IWYU pragma: keep
+#include "converters/mac_cyrillic.h" // IWYU pragma: keep
+#include "converters/mac_greek.h" // IWYU pragma: keep
+#include "converters/mac_hebrew.h" // IWYU pragma: keep
+#include "converters/mac_iceland.h" // IWYU pragma: keep
+#include "converters/mac_roman.h" // IWYU pragma: keep
+#include "converters/mac_romania.h" // IWYU pragma: keep
+#include "converters/mac_thai.h" // IWYU pragma: keep
+#include "converters/mac_turkish.h" // IWYU pragma: keep
+#include "converters/mac_ukraine.h" // IWYU pragma: keep
+#include "converters/mulelao.h" // IWYU pragma: keep
+#include "converters/nextstep.h" // IWYU pragma: keep
+#include "converters/pt154.h" // IWYU pragma: keep
+#include "converters/rk1048.h" // IWYU pragma: keep
+#include "converters/tcvn.h" // IWYU pragma: keep
+#include "converters/tis620.h" // IWYU pragma: keep
+#include "converters/viscii.h" // IWYU pragma: keep
+#pragma endregion
 
-/*
- * Data type for conversion multibyte -> unicode
- */
-struct mbtowc_funcs {
-  int (*xxx_mbtowc) (conv_t conv, ucs4_t *pwc, unsigned char const *s, size_t n);
-  /*
-   * int xxx_mbtowc (conv_t conv, ucs4_t *pwc, unsigned char const *s, size_t n)
-   * converts the byte sequence starting at s to a wide character. Up to n bytes
-   * are available at s. n is >= 1.
-   * Result is number of bytes consumed (if a wide character was read),
-   * or -1 if invalid, or -2 if n too small,
-   * or RET_SHIFT_ILSEQ(number of bytes consumed) if invalid input after a shift
-   * sequence was read,
-   * or RET_TOOFEW(number of bytes consumed) if only a shift sequence was read.
-   */
-  int (*xxx_flushwc) (conv_t conv, ucs4_t *pwc);
-  /*
-   * int xxx_flushwc (conv_t conv, ucs4_t *pwc)
-   * returns to the initial state and stores the pending wide character, if any.
-   * Result is 1 (if a wide character was read) or 0 if none was pending.
-   */
-};
+#pragma region CJK character sets
+#include "converters/iso646_jp.h" // IWYU pragma: keep
+#include "converters/jisx0201.h" // IWYU pragma: keep
+#include "converters/jisx0208.h" // IWYU pragma: keep
+#include "converters/jisx0212.h" // IWYU pragma: keep
 
-/* Return code if invalid input after a shift sequence of n bytes was read.
-   (xxx_mbtowc) */
-#define RET_SHIFT_ILSEQ(n)  (-1-2*(n))
-/* Return code if invalid. (xxx_mbtowc) */
-#define RET_ILSEQ           RET_SHIFT_ILSEQ(0)
-/* Return code if only a shift sequence of n bytes was read. (xxx_mbtowc) */
-#define RET_TOOFEW(n)       (-2-2*(n))
-/* Retrieve the n from the encoded RET_... value. */
-#define DECODE_SHIFT_ILSEQ(r)  ((unsigned int)(RET_SHIFT_ILSEQ(0) - (r)) / 2)
-#define DECODE_TOOFEW(r)       ((unsigned int)(RET_TOOFEW(0) - (r)) / 2)
-/* Maximum value of n that may be used as argument to RET_SHIFT_ILSEQ or RET_TOOFEW. */
-#define RET_COUNT_MAX       ((INT_MAX / 2) - 1)
+#include "converters/gb2312.h" // IWYU pragma: keep
+#include "converters/iso646_cn.h" // IWYU pragma: keep
+#include "converters/isoir165.h" // IWYU pragma: keep
+/* #include "converters/gb12345.h" // IWYU pragma: keep */
+#include "converters/big5.h" // IWYU pragma: keep
+#include "converters/cns11643.h" // IWYU pragma: keep
+#include "converters/gbk.h" // IWYU pragma: keep
 
-/*
- * Data type for conversion unicode -> multibyte
- */
-struct wctomb_funcs {
-  int (*xxx_wctomb) (conv_t conv, unsigned char *r, ucs4_t wc, size_t n);
-  /*
-   * int xxx_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
-   * converts the wide character wc to the character set xxx, and stores the
-   * result beginning at r. Up to n bytes may be written at r. n is >= 1.
-   * Result is number of bytes written, or -1 if invalid, or -2 if n too small.
-   */
-  int (*xxx_reset) (conv_t conv, unsigned char *r, size_t n);
-  /*
-   * int xxx_reset (conv_t conv, unsigned char *r, size_t n)
-   * stores a shift sequences returning to the initial state beginning at r.
-   * Up to n bytes may be written at r. n is >= 0.
-   * Result is number of bytes written, or -2 if n too small.
-   */
-};
+#include "converters/johab_hangul.h" // IWYU pragma: keep
+#include "converters/ksc5601.h" // IWYU pragma: keep
+#pragma endregion
 
-/* Return code if invalid. (xxx_wctomb) */
-#define RET_ILUNI      -1
-/* Return code if output buffer is too small. (xxx_wctomb, xxx_reset) */
-#define RET_TOOSMALL   -2
+/* [CES = character encoding scheme] [CJKV.INF chapter 4] */
+#pragma region CJK encodings
+#include "converters/cp932.h" // IWYU pragma: keep
+#include "converters/euc_jp.h" // IWYU pragma: keep
+#include "converters/iso2022_jp.h" // IWYU pragma: keep
+#include "converters/iso2022_jp1.h" // IWYU pragma: keep
+#include "converters/iso2022_jp2.h" // IWYU pragma: keep
+#include "converters/iso2022_jpms.h" // IWYU pragma: keep
+#include "converters/sjis.h" // IWYU pragma: keep
 
-/*
- * Contents of a conversion descriptor.
- */
-struct conv_struct {
-  struct loop_funcs lfuncs;
-  /* Input (conversion multibyte -> unicode) */
-  int iindex;
-  struct mbtowc_funcs ifuncs;
-  unsigned int isurface;
-  state_t istate;
-  /* Output (conversion unicode -> multibyte) */
-  int oindex;
-  struct wctomb_funcs ofuncs;
-  int oflags;
-  unsigned int osurface;
-  state_t ostate;
-  /* Operation flags */
-  int discard_ilseq;
-  struct iconv_fallbacks fallbacks;
-  struct iconv_hooks hooks;
-};
+#include "converters/big5hkscs1999.h" // IWYU pragma: keep
+#include "converters/big5hkscs2001.h" // IWYU pragma: keep
+#include "converters/big5hkscs2004.h" // IWYU pragma: keep
+#include "converters/big5hkscs2008.h" // IWYU pragma: keep
+#include "converters/ces_big5.h" // IWYU pragma: keep
+#include "converters/ces_gbk.h" // IWYU pragma: keep
+#include "converters/cp936.h" // IWYU pragma: keep
+#include "converters/cp950.h" // IWYU pragma: keep
+#include "converters/euc_cn.h" // IWYU pragma: keep
+#include "converters/euc_tw.h" // IWYU pragma: keep
+#include "converters/gb18030_2005.h" // IWYU pragma: keep
+#include "converters/gb18030_2022.h" // IWYU pragma: keep
+#include "converters/hz.h" // IWYU pragma: keep
+#include "converters/iso2022_cn.h" // IWYU pragma: keep
+#include "converters/iso2022_cnext.h" // IWYU pragma: keep
 
-/*
- * Include all the converters.
- */
+#include "converters/cp949.h" // IWYU pragma: keep
+#include "converters/euc_kr.h" // IWYU pragma: keep
+#include "converters/iso2022_kr.h" // IWYU pragma: keep
+#include "converters/johab.h" // IWYU pragma: keep
 
-#include "ascii.h"
+#include "converters/dec_hanyu.h" // IWYU pragma: keep
+#include "converters/dec_kanji.h" // IWYU pragma: keep
+#pragma endregion
 
-/* General multi-byte encodings */
-#include "utf8.h"
-#include "ucs2.h"
-#include "ucs2be.h"
-#include "ucs2le.h"
-#include "ucs4.h"
-#include "ucs4be.h"
-#include "ucs4le.h"
-#include "utf16.h"
-#include "utf16be.h"
-#include "utf16le.h"
-#include "utf32.h"
-#include "utf32be.h"
-#include "utf32le.h"
-#include "utf7.h"
-#include "ucs2internal.h"
-#include "ucs2swapped.h"
-#include "ucs4internal.h"
-#include "ucs4swapped.h"
-#include "c99.h"
-#include "java.h"
+#pragma region Encodings used by system dependent locales
+#include "converters/cp1046.h" // IWYU pragma: keep
+#include "converters/cp1124.h" // IWYU pragma: keep
+#include "converters/cp1129.h" // IWYU pragma: keep
+#include "converters/cp1161.h" // IWYU pragma: keep
+#include "converters/cp1162.h" // IWYU pragma: keep
+#include "converters/cp1163.h" // IWYU pragma: keep
+#include "converters/cp856.h" // IWYU pragma: keep
+#include "converters/cp922.h" // IWYU pragma: keep
+#include "converters/cp943.h" // IWYU pragma: keep
 
-/* 8-bit encodings */
-#include "iso8859_1.h"
-#include "iso8859_2.h"
-#include "iso8859_3.h"
-#include "iso8859_4.h"
-#include "iso8859_5.h"
-#include "iso8859_6.h"
-#include "iso8859_7.h"
-#include "iso8859_8.h"
-#include "iso8859_9.h"
-#include "iso8859_10.h"
-#include "iso8859_11.h"
-#include "iso8859_13.h"
-#include "iso8859_14.h"
-#include "iso8859_15.h"
-#include "iso8859_16.h"
-#include "koi8_r.h"
-#include "koi8_u.h"
-#include "koi8_ru.h"
-#include "cp1250.h"
-#include "cp1251.h"
-#include "cp1252.h"
-#include "cp1253.h"
-#include "cp1254.h"
-#include "cp1255.h"
-#include "cp1256.h"
-#include "cp1257.h"
-#include "cp1258.h"
-#include "cp850.h"
-#include "cp862.h"
-#include "cp866.h"
-#include "cp1131.h"
-#include "mac_roman.h"
-#include "mac_centraleurope.h"
-#include "mac_iceland.h"
-#include "mac_croatian.h"
-#include "mac_romania.h"
-#include "mac_cyrillic.h"
-#include "mac_ukraine.h"
-#include "mac_greek.h"
-#include "mac_turkish.h"
-#include "mac_hebrew.h"
-#include "mac_arabic.h"
-#include "mac_thai.h"
-#include "hp_roman8.h"
-#include "nextstep.h"
-#include "armscii_8.h"
-#include "georgian_academy.h"
-#include "georgian_ps.h"
-#include "koi8_t.h"
-#include "pt154.h"
-#include "rk1048.h"
-#include "mulelao.h"
-#include "cp1133.h"
-#include "tis620.h"
-#include "cp874.h"
-#include "viscii.h"
-#include "tcvn.h"
-
-/* CJK character sets [CCS = coded character set] [CJKV.INF chapter 3] */
-
-typedef struct {
-  unsigned short indx; /* index into big table */
-  unsigned short used; /* bitmask of used entries */
-} Summary16;
-
-#include "iso646_jp.h"
-#include "jisx0201.h"
-#include "jisx0208.h"
-#include "jisx0212.h"
-
-#include "iso646_cn.h"
-#include "gb2312.h"
-#include "isoir165.h"
-/*#include "gb12345.h"*/
-#include "gbk.h"
-#include "cns11643.h"
-#include "big5.h"
-
-#include "ksc5601.h"
-#include "johab_hangul.h"
-
-/* CJK encodings [CES = character encoding scheme] [CJKV.INF chapter 4] */
-
-#include "euc_jp.h"
-#include "sjis.h"
-#include "cp932.h"
-#include "iso2022_jp.h"
-#include "iso2022_jp1.h"
-#include "iso2022_jp2.h"
-#include "iso2022_jpms.h"
-
-#include "euc_cn.h"
-#include "ces_gbk.h"
-#include "cp936.h"
-#include "gb18030_2005.h"
-#include "gb18030_2022.h"
-#include "iso2022_cn.h"
-#include "iso2022_cnext.h"
-#include "hz.h"
-#include "euc_tw.h"
-#include "ces_big5.h"
-#include "cp950.h"
-#include "big5hkscs1999.h"
-#include "big5hkscs2001.h"
-#include "big5hkscs2004.h"
-#include "big5hkscs2008.h"
-
-#include "euc_kr.h"
-#include "cp949.h"
-#include "johab.h"
-#include "iso2022_kr.h"
-
-/* Encodings used by system dependent locales. */
-
-#ifdef USE_AIX
-#include "cp856.h"
-#include "cp922.h"
-#include "cp943.h"
-#include "cp1046.h"
-#include "cp1124.h"
-#include "cp1129.h"
-#include "cp1161.h"
-#include "cp1162.h"
-#include "cp1163.h"
-#endif
-
-#ifdef USE_OSF1
-#include "dec_kanji.h"
-#include "dec_hanyu.h"
-#endif
-
-#ifdef USE_DOS
-#include "cp437.h"
-#include "cp737.h"
-#include "cp775.h"
-#include "cp852.h"
-#include "cp853.h"
-#include "cp855.h"
-#include "cp857.h"
-#include "cp858.h"
-#include "cp860.h"
-#include "cp861.h"
-#include "cp863.h"
-#include "cp864.h"
-#include "cp865.h"
-#include "cp869.h"
-#include "cp1125.h"
-#endif
-
-#ifdef USE_ZOS
+#include "converters/cp1125.h" // IWYU pragma: keep
+#include "converters/cp437.h" // IWYU pragma: keep
+#include "converters/cp737.h" // IWYU pragma: keep
+#include "converters/cp775.h" // IWYU pragma: keep
+#include "converters/cp852.h" // IWYU pragma: keep
+#include "converters/cp853.h" // IWYU pragma: keep
+#include "converters/cp855.h" // IWYU pragma: keep
+#include "converters/cp857.h" // IWYU pragma: keep
+#include "converters/cp858.h" // IWYU pragma: keep
+#include "converters/cp860.h" // IWYU pragma: keep
+#include "converters/cp861.h" // IWYU pragma: keep
+#include "converters/cp863.h" // IWYU pragma: keep
+#include "converters/cp864.h" // IWYU pragma: keep
+#include "converters/cp865.h" // IWYU pragma: keep
+#include "converters/cp869.h" // IWYU pragma: keep
+#pragma endregion
 
 #define DEDUPLICATE_TABLES 1
 
-/* Swaps the values 0x15 and 0x25.
-   Both gcc and clang compile this expression to something that involves as few
-   conditional branching instructions as possible. */
-#define swap_x15_x25_a(x) ((x) == 0x15 ? 0x25 : (x) == 0x25 ? 0x15 : (x))
-#define swap_x15_x25_b(x) ((x) ^ ((x) == 0x15 || (x) == 0x25 ? 0x30 : 0))
-#define swap_x15_x25_c(x) ((x) ^ ((((x) - 0x15) & ~0x10) == 0 ? 0x30 : 0))
-/* Number of conditional branches (with "gcc -O2", as of 2023):
-                   a    b    c
-                 ---------------
-   aarch64         1    0    0
-   alpha           0    0    0
-   arm             1    0    0
-   hppa            1    1    1
-   i686            1    0    0
-   m68k            2    1    1
-   mips            2    1    0
-   mips64          2    1    0
-   powerpc         2    1    1
-   powerpc64       2    1    1
-   powerpc64le     2    1    1
-   riscv64         2    1    1
-   s390x           1    1    1
-   sh4             2    1    1
-   x86_64          1    0    0
-*/
-#define swap_x15_x25 swap_x15_x25_c
+#pragma region AIX locales
+#include "converters/ebcdic037.h" // IWYU pragma: keep
+#include "converters/ebcdic273.h" // IWYU pragma: keep
+#include "converters/ebcdic277.h" // IWYU pragma: keep
+#include "converters/ebcdic278.h" // IWYU pragma: keep
+#include "converters/ebcdic280.h" // IWYU pragma: keep
+#include "converters/ebcdic282.h" // IWYU pragma: keep
+#include "converters/ebcdic284.h" // IWYU pragma: keep
+#include "converters/ebcdic285.h" // IWYU pragma: keep
+#include "converters/ebcdic297.h" // IWYU pragma: keep
+#include "converters/ebcdic423.h" // IWYU pragma: keep
+#include "converters/ebcdic424.h" // IWYU pragma: keep
+#include "converters/ebcdic425.h" // IWYU pragma: keep
+#include "converters/ebcdic500.h" // IWYU pragma: keep
+#include "converters/ebcdic838.h" // IWYU pragma: keep
+#include "converters/ebcdic870.h" // IWYU pragma: keep
+#include "converters/ebcdic871.h" // IWYU pragma: keep
+#include "converters/ebcdic875.h" // IWYU pragma: keep
+#include "converters/ebcdic880.h" // IWYU pragma: keep
+#include "converters/ebcdic905.h" // IWYU pragma: keep
+#include "converters/ebcdic924.h" // IWYU pragma: keep
+#include "converters/ebcdic1025.h" // IWYU pragma: keep
+#include "converters/ebcdic1026.h" // IWYU pragma: keep
+#include "converters/ebcdic1047.h" // IWYU pragma: keep
+#include "converters/ebcdic1097.h" // IWYU pragma: keep
+#include "converters/ebcdic1112.h" // IWYU pragma: keep
+#include "converters/ebcdic1122.h" // IWYU pragma: keep
+#include "converters/ebcdic1123.h" // IWYU pragma: keep
+#include "converters/ebcdic1130.h" // IWYU pragma: keep
+#include "converters/ebcdic1132.h" // IWYU pragma: keep
+#include "converters/ebcdic1137.h" // IWYU pragma: keep
+#include "converters/ebcdic1140.h" // IWYU pragma: keep
+#include "converters/ebcdic1141.h" // IWYU pragma: keep
+#include "converters/ebcdic1142.h" // IWYU pragma: keep
+#include "converters/ebcdic1143.h" // IWYU pragma: keep
+#include "converters/ebcdic1144.h" // IWYU pragma: keep
+#include "converters/ebcdic1145.h" // IWYU pragma: keep
+#include "converters/ebcdic1146.h" // IWYU pragma: keep
+#include "converters/ebcdic1147.h" // IWYU pragma: keep
+#include "converters/ebcdic1148.h" // IWYU pragma: keep
+#include "converters/ebcdic1149.h" // IWYU pragma: keep
+#include "converters/ebcdic1153.h" // IWYU pragma: keep
+#include "converters/ebcdic1154.h" // IWYU pragma: keep
+#include "converters/ebcdic1155.h" // IWYU pragma: keep
+#include "converters/ebcdic1156.h" // IWYU pragma: keep
+#include "converters/ebcdic1157.h" // IWYU pragma: keep
+#include "converters/ebcdic1158.h" // IWYU pragma: keep
+#include "converters/ebcdic1160.h" // IWYU pragma: keep
+#include "converters/ebcdic1164.h" // IWYU pragma: keep
+#include "converters/ebcdic1165.h" // IWYU pragma: keep
+#include "converters/ebcdic1166.h" // IWYU pragma: keep
+#include "converters/ebcdic4971.h" // IWYU pragma: keep
+#include "converters/ebcdic12712.h" // IWYU pragma: keep
+#include "converters/ebcdic16804.h" // IWYU pragma: keep
+#pragma endregion
 
-#include "ebcdic037.h"
-#include "ebcdic273.h"
-#include "ebcdic277.h"
-#include "ebcdic278.h"
-#include "ebcdic280.h"
-#include "ebcdic282.h"
-#include "ebcdic284.h"
-#include "ebcdic285.h"
-#include "ebcdic297.h"
-#include "ebcdic423.h"
-#include "ebcdic424.h"
-#include "ebcdic425.h"
-#include "ebcdic500.h"
-#include "ebcdic838.h"
-#include "ebcdic870.h"
-#include "ebcdic871.h"
-#include "ebcdic875.h"
-#include "ebcdic880.h"
-#include "ebcdic905.h"
-#include "ebcdic924.h"
-#include "ebcdic1025.h"
-#include "ebcdic1026.h"
-#include "ebcdic1047.h"
-#include "ebcdic1097.h"
-#include "ebcdic1112.h"
-#include "ebcdic1122.h"
-#include "ebcdic1123.h"
-#include "ebcdic1130.h"
-#include "ebcdic1132.h"
-#include "ebcdic1137.h"
-#include "ebcdic1140.h"
-#include "ebcdic1141.h"
-#include "ebcdic1142.h"
-#include "ebcdic1143.h"
-#include "ebcdic1144.h"
-#include "ebcdic1145.h"
-#include "ebcdic1146.h"
-#include "ebcdic1147.h"
-#include "ebcdic1148.h"
-#include "ebcdic1149.h"
-#include "ebcdic1153.h"
-#include "ebcdic1154.h"
-#include "ebcdic1155.h"
-#include "ebcdic1156.h"
-#include "ebcdic1157.h"
-#include "ebcdic1158.h"
-#include "ebcdic1160.h"
-#include "ebcdic1164.h"
-#include "ebcdic1165.h"
-#include "ebcdic1166.h"
-#include "ebcdic4971.h"
-#include "ebcdic12712.h"
-#include "ebcdic16804.h"
-#endif
+#pragma region Extra encodings
+#include "converters/atarist.h" // IWYU pragma: keep
+#include "converters/big5_2003.h" // IWYU pragma: keep
+#include "converters/euc_jisx0213.h" // IWYU pragma: keep
+#include "converters/iso2022_jp3.h" // IWYU pragma: keep
+#include "converters/riscos1.h" // IWYU pragma: keep
+#include "converters/shift_jisx0213.h" // IWYU pragma: keep
+#include "converters/tds565.h" // IWYU pragma: keep
+#pragma endregion
 
-#ifdef USE_EXTRA
-#include "euc_jisx0213.h"
-#include "shift_jisx0213.h"
-#include "iso2022_jp3.h"
-#include "big5_2003.h"
-#include "tds565.h"
-#include "atarist.h"
-#include "riscos1.h"
-#endif
-
+#endif /* _CONVERTERS_H_ */

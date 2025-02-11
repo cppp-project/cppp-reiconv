@@ -1,0 +1,13 @@
+name: 🧪 Run tests for ${{ project.name }}
+
+steps:
+  - name: 🛠️ Configure and build
+    run: |
+      cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+      cmake --build build --config Release -v -j ${{ nproc }}
+
+  - name: 🧪 Run tests
+    run: |
+      cd build
+      ctest --output-on-failure -C Release
+      cd ..

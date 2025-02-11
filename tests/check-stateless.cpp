@@ -1,5 +1,10 @@
+/**
+ * @file check-stateless.hpp
+ * @brief Completely check of a stateless encoding.
+ * @author ChenPi11
+ * @copyright Copyright (C) 2024 The C++ Plus Project
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -13,115 +18,121 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with the cppp-reiconv Library; see the file COPYING.
+ * License along with the cppp-reiconv Library; see the file LICENSE.
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
-  Complete check of a stateless encoding.
-*/
-
-#include <iostream>
+#include <cstdlib>
 #include <cstring>
+#include <filesystem>
 #include <regex>
 
-#include "file_utils.hpp"
+#include "output.hpp"
+#include "sort.hpp"
 #include "table-from.hpp"
 #include "table-to.hpp"
-#include "sort.hpp"
 #include "uniq-u.hpp"
+#include "utils.hpp"
 
-std::string replace(const std::string& src, const std::string& from, const std::string& to)
+void check2_pre_process(const std::filesystem::path &input_file_path, const std::filesystem::path &output_file_path)
 {
-    std::string result = src;
-    size_t pos = 0;
-
-    while ((pos = result.find(from, pos)) != std::string::npos)
+    std::ifstream input_file {input_file_path};
+    if (!input_file.good())
     {
-        result.replace(pos, from.length(), to);
-        pos += to.length();
+        error(input_file_path.string(), "Unable to open input file.");
+    }
+    std::ofstream output_file {output_file_path, std::ios::trunc};
+    if (!output_file.good())
+    {
+        error(output_file_path.string(), "Unable to open output file.");
     }
 
-    return result;
-}
+    std::string line;
+    std::regex pattern {"\t.* 0x"};
 
-std::string srcdir, charset;
-
-void check2_pre_process(const std::string& input_file_path, const std::string& output_file_path)
-{
-    std::ifstream input_file(input_file_path);
-    std::ofstream output_file(output_file_path, std::ios::trunc);
-    
-    if (input_file.is_open() && output_file.is_open())
+    while (std::getline(input_file, line))
     {
-        std::string line;
-        std::regex pattern("\t.* 0x");
-        
-        while (std::getline(input_file, line))
+        if (!std::regex_search(line, pattern))
         {
-            if (!std::regex_search(line, pattern))
-            {
-                output_file << line << '\n';
-            }
+            write_stream(output_file, line + "\n");
         }
-        
-        input_file.close();
-        output_file.close();
     }
-    else
-    {
-        error(input_file_path + " " + output_file_path, "Unable to open file.");
-    }
+
+    input_file.close();
+    output_file.close();
 }
 
-// Usage: check-stateful SRCDIR CHARSET
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if(argc < 3)
+    std::ios::sync_with_stdio(false);
+    if (argc != 3 && argc != 4)
     {
-        std::cerr << "Usage: check-stateful SRCDIR CHARSET\n";
-        return 1;
+        print_stderr("Usage: check-stateless DATADIR CHARSET [--debug]\n");
+        return EXIT_FAILURE;
     }
-    srcdir = argv[1];
-    charset = argv[2];
+    bool debug = false;
+    if (argc == 4)
+    {
+        debug = true;
+        print_stderr("Debug mode enabled.\n");
+    }
+    std::filesystem::path srcdir = argv[1];
+    std::string charset = argv[2];
 
     // Charset, modified for use in filenames.
     std::string charsetf = replace(charset, ":", "-");
 
     // Iconv in one direction.
-    test::table_from("tmp-" + charsetf + ".TXT", charset);
+    std::filesystem::path table_from_file = "tmp-" + charsetf + ".TXT";
+    table_from(table_from_file, charset);
 
     // Iconv in the other direction.
-    test::table_to("tmp-" + charsetf + ".INVERSE.UNSORTED.TXT", charset);
-    sort_file("tmp-" + charsetf + ".INVERSE.UNSORTED.TXT", "tmp-" + charsetf + ".INVERSE.TXT");
+    std::filesystem::path table_to_file_unsorted = "tmp-" + charsetf + ".INVERSE.UNSORTED.TXT";
+    std::filesystem::path table_to_file = "tmp-" + charsetf + ".INVERSE.TXT";
+    table_to(table_to_file_unsorted, charset);
+    sort_file(table_to_file_unsorted, table_to_file);
 
-    // Check 1: charmap and iconv forward should be identical.
-    assert_compare_file(srcdir + "/" + charsetf + ".TXT", "tmp-" + charsetf + ".TXT");
+    // Check 1: Charmap and iconv forward should be identical.
+    std::filesystem::path standard_file = srcdir / (charsetf + ".TXT");
+    compare_files(standard_file, table_from_file);
 
     // Check 2: the difference between the charmap and iconv backward.
-    check2_pre_process(srcdir + "/" + charsetf + ".TXT", "tmp-noprecomposed-" + charsetf + ".TXT");
+    std::filesystem::path noprecomposed_tmp_file = "tmp-noprecomposed-" + charsetf + ".TXT";
+    check2_pre_process(standard_file, noprecomposed_tmp_file);
 
-    if(file_exists(srcdir + "/" + charsetf + ".IRREVERSIBLE.TXT"))
+    std::filesystem::path irreversible_file = srcdir / (charsetf + ".IRREVERSIBLE.TXT");
+    std::filesystem::path orig_inverse_unsorted_file = "tmp-orig-" + charsetf + ".INVERSE.UNSORTED.TXT";
+    std::filesystem::path orig_inverse_ununiqued_file = "tmp-orig-" + charsetf + ".INVERSE.UNUNIQUED.TXT";
+    std::filesystem::path orig_inverse_file = "tmp-orig-" + charsetf + ".INVERSE.TXT";
+    if (std::filesystem::exists(irreversible_file))
     {
-        std::vector<std::string> files = { "tmp-noprecomposed-" + charsetf + ".TXT", srcdir + "/" + charsetf + ".IRREVERSIBLE.TXT" };
-        merge_files(files, "tmp-orig-" + charsetf + ".INVERSE.UNSORTED.TXT");
-        sort_file("tmp-orig-" + charsetf + ".INVERSE.UNSORTED.TXT", "tmp-orig-" + charsetf + ".INVERSE.UNUNIQUED.TXT");
-        uniq_u("tmp-orig-" + charsetf + ".INVERSE.UNUNIQUED.TXT", "tmp-orig-" + charsetf + ".INVERSE.TXT");
+        std::vector<std::filesystem::path> files = {noprecomposed_tmp_file, irreversible_file};
+        merge_files(files, orig_inverse_unsorted_file);
+        sort_file(orig_inverse_unsorted_file, orig_inverse_ununiqued_file);
+        uniq_u(orig_inverse_ununiqued_file, orig_inverse_file);
     }
     else
     {
-        copy_file("tmp-noprecomposed-" + charsetf + ".TXT", "tmp-orig-" + charsetf + ".INVERSE.TXT");
+        if (std::filesystem::exists(orig_inverse_file))
+        {
+            std::filesystem::remove(orig_inverse_file);
+        }
+        std::filesystem::copy_file(noprecomposed_tmp_file, orig_inverse_file);
     }
-    assert_compare_file("tmp-orig-" + charsetf + ".INVERSE.TXT", "tmp-" + charsetf + ".INVERSE.TXT");
+    compare_files(orig_inverse_file, table_to_file);
 
-    remove_file("tmp-" + charsetf + ".TXT");
-    remove_file("tmp-" + charsetf + ".INVERSE.UNSORTED.TXT");
-    remove_file("tmp-" + charsetf + ".INVERSE.TXT");
-    remove_file("tmp-orig-" + charsetf + ".INVERSE.UNSORTED.TXT");
-    remove_file("tmp-orig-" + charsetf + ".INVERSE.UNUNIQUED.TXT");
-    remove_file("tmp-orig-" + charsetf + ".INVERSE.TXT");
-    remove_file("tmp-noprecomposed-" + charsetf + ".TXT");
+    if (!debug)
+    {
+        std::filesystem::remove(table_from_file);
+        std::filesystem::remove(table_to_file_unsorted);
+        std::filesystem::remove(table_to_file);
+        std::filesystem::remove(orig_inverse_unsorted_file);
+        std::filesystem::remove(orig_inverse_ununiqued_file);
+        std::filesystem::remove(orig_inverse_file);
+        std::filesystem::remove(noprecomposed_tmp_file);
+    }
 
     success("check-stateless", charset + " OK.");
-    return 0;
+
+    return EXIT_SUCCESS;
 }

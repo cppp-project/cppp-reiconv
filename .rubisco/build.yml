@@ -1,0 +1,19 @@
+name: 🛠️ Build ${{ project.name }}
+
+steps:
+  - name: 📦 Make binary distribution directory
+    mkdir: ${{ project.name }}-${{ project.version }}-bin
+
+  - name: 🛠️ Configure and build
+    run: |
+      cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON -DCMAKE_INSTALL_PREFIX="${{ project.name }}-${{ project.version }}-bin"
+      cmake --build build --config Release -v -j ${{ nproc }}
+
+  - name: 📦 Install to temp install path
+    run: |
+      cmake --install build --config Release --prefix "${{ project.name }}-${{ project.version }}-bin"
+
+  - name: 📦 Packing the binary distribution
+    compress: ${{ project.name }}-${{ project.version }}-bin
+    to: dist/${{ project.name }}-${{ project.version }}
+    format: [zip, tar.xz]

@@ -1,0 +1,99 @@
+name: 📁 Make ${{ project.name }} distribution package
+
+vars:
+  - ignores:
+      [
+        ".git",
+        ".venv",
+        ".github",
+        "build",
+        "install",
+        "dist",
+        "CMakeFiles",
+        "cmake_install.cmake",
+        "CMakeCache.txt",
+        "CTestTestfile.cmake",
+        "DartConfiguration.tcl",
+        "Makefile",
+        "cmake_uninstall.cmake",
+        "reiconv.hpp",
+        "CTestCostData.txt",
+        "Testing",
+        "install_manifest.txt",
+        "CPackConfig.cmake",
+        "CPackSourceConfig.cmake",
+        "_CPack_Packages",
+        "tests/check-ascii-converters",
+        "tests/check-stateful",
+        "tests/check-stateless",
+        "tests/data-generator",
+        "tests/sort",
+        "windows/cppp-reiconv.rc",
+        "pdb",
+        "*.inst",
+        "*.log",
+        "*.dSYM",
+        "*.so",
+        "*.so.*.*.*",
+        "*.a",
+        "*.dylib",
+        "*.stackdump",
+        "*.lib",
+        "*.pdb",
+        "*.dll",
+        "*.exe",
+        "*.sln",
+        "*.vcxproj",
+        "*.vcxproj.filters",
+        "*.vcxproj.user",
+        "*.vcxproj.user.*",
+        "build.ninja",
+        ".ninja_*",
+        "Release",
+        "Debug",
+        "RelWithDebInfo",
+        "MinSizeRel",
+        "x64",
+        "x86",
+        "ARM",
+        "ARM64",
+        "*.suo",
+        "*.user",
+        "*.user.*",
+        "*.dir",
+        "__pycache__",
+        "dist",
+        "cppp-reiconv-*",
+        "*.tar.xz",
+        "*.deb",
+        "lib/generated/genaliases",
+        "*.gperf",
+        "*.orig",
+        "*.rej",
+        "*~",
+        "*.kate-swp",
+        "*.swp",
+        ".vscode",
+        ".cache",
+        "build-aux/",
+        "tests/data/UTF-8.TXT",
+        "tests/data/GB18030-2005.TXT",
+        "tests/data/GB18030-2022.TXT",
+        "tests/tmp-*.TXT",
+        "*.tmp",
+      ]
+
+steps:
+  - name: 📦 Make source distribution directory
+    mkdir: ${{ project.name }}-${{ project.version }}
+  - mkdir: dist
+
+  - name: 📦 Copy files to source distribution directory
+    copy: ${{ cwd }}
+    to: ${{ project.name }}-${{ project.version }}
+    excludes: ${{ ignores }}
+
+  - name: 📦 Packing the source distribution
+    compress: ${{ project.name }}-${{ project.version }}
+    to: dist/${{ project.name }}-${{ project.version }}
+    format: [zip, tar.xz]

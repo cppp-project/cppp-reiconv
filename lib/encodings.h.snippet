@@ -1,0 +1,1684 @@
+/**
+ * @file encodings.h.snippet
+ * @brief Definitions of encodings.
+ * @copyright Copyright (C) 1999-2011 Free Software Foundation, Inc.
+ * @copyright Copyright (C) 2023-2024 The C++ Plus Project.
+ * @note By convention, an encoding named "FOOBAR" or "FOO_BAR" or "FOO-BAR" is defined in a file
+ * named `converters/foobar.h` through the functions `foobar_mbtowc` and `foobar_wctomb` (and
+ * possibly `foobar_reset`). With FOOBAR's index (and possibly codepage)
+ */
+/*
+ * This file is part of the cppp-reiconv library.
+ *
+ * The cppp-reiconv library is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * The cppp-reiconv library is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with the cppp-reiconv library; see the file LICENSE.
+ * If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* DEFENCODING(( name, alias1, ..., ),
+ *             xxx,
+ *             xxx_index,
+ *             { xxx_mbtowc, xxx_flushwc },
+ *             { xxx_wctomb, xxx_reset })
+ * Defines an encoding with the given name and aliases. (There is no difference between a name and
+ * an alias. By convention, the name is chosen as the preferred MIME name or the standard name.)
+ * All names and aliases must be in ASCII. Case is not significant, but for the "cs*" aliases mixed
+ * case is preferred, otherwise UPPERCASE is preferred. For all names and aliases, note where it
+ * comes from.
+ * xxx is the name as used in the C code (lowercase). xxx_index provides a unique index for the
+ * encoding. It will be used in a enum for fast access to the encoding. xxx is for reiconv's
+ * internal use only and xxx_index is for the user's
+ * use. Their values may be same.
+ * We removed all '-' and '_' of encoding's name. And turn their names to upper case.
+ */
+
+/*
+ * DEFCODEPAGE(codepage, xxx)
+ * Defines a codepage for the given encoding.
+ * codepage is the codepage number, which is often used in Windows, z/OS and AIX.
+ * xxx is the encoding internal name.
+ */
+
+/*
+ * DEFINDEX(alias, index)
+ * Defines an index alias for the given encoding.
+ * All encoding has its own index. But some encoding's index is strange. (e.g. GB18030_2022)
+ * So we define an alias for the index. (e.g. GB18030)
+ */
+
+// ASCII
+DEFENCODING(("USASCII",         /* IANA */
+             "ASCII",           /* IANA, JDK 1.1 */
+             "ISO646US",        /* IANA */
+             "ISO646.IRV:1991", /* IANA */
+             "ISOIR6",          /* IANA */
+             "ANSIX3.41968",    /* IANA */
+             "ANSIX3.41986",    /* IANA */
+             "IBM367",          /* IANA */
+             "US",              /* IANA */
+             "CSASCII",         /* IANA */
+             "367",             /* IANA */
+             "CP367",           /* IANA */
+             "646",             /* Solaris */
+             ),
+            ascii, ASCII, {ascii_mbtowc, NULL}, {ascii_wctomb, NULL})
+DEFCODEPAGE(367, ascii)
+
+// General multi-byte encodings
+// UTF-8, the MOST common encoding.
+DEFENCODING(("UTF8",    /* IANA, RFC 2279 */
+             "U8",      /* cppp-reiconv */
+             "CP65001", /* IANA */
+             "65001",   /* IANA */
+             ),
+            utf8, UTF8, {utf8_mbtowc, NULL}, {utf8_wctomb, NULL})
+DEFCODEPAGE(65001, utf8)
+
+DEFENCODING(("UCS2",         /* glibc */
+             "ISO10646UCS2", /* IANA */
+             "CSUNICODE",    /* IANA */
+             ),
+            ucs2, UCS2, {ucs2_mbtowc, NULL}, {ucs2_wctomb, NULL})
+
+DEFENCODING(("UCS2BE",      /* glibc */
+             "UNICODEBIG",  /* glibc */
+             "UNICODE11",   /* IANA */
+             "CSUNICODE11", /* IANA */
+             "UNICODEFFFE", /* .NET */
+             "CP1201",      /* Windows */
+             "1201"         /* Windows */
+             ),
+            ucs2be, UCS2BE, {ucs2be_mbtowc, NULL}, {ucs2be_wctomb, NULL})
+DEFCODEPAGE(1201, ucs2be)
+
+DEFENCODING(("UCS2LE",        /* glibc */
+             "UNICODELITTLE", /* glibc */
+             "CP1200",        /* Windows */
+             "1200",          /* Windows */
+             ),
+            ucs2le, UCS2LE, {ucs2le_mbtowc, NULL}, {ucs2le_wctomb, NULL})
+DEFCODEPAGE(1200, ucs2le)
+
+DEFENCODING(("UCS4",         /* glibc */
+             "ISO10646UCS4", /* IANA */
+             "CSUCS4",       /* IANA */
+             ),
+            ucs4, UCS4, {ucs4_mbtowc, NULL}, {ucs4_wctomb, NULL})
+
+DEFENCODING(("UCS4BE",  /* glibc */
+             "12001",   /* Windows */
+             "CP12001", /* Windows */
+             ),
+            ucs4be, UCS4BE, {ucs4be_mbtowc, NULL}, {ucs4be_wctomb, NULL})
+DEFCODEPAGE(12001, ucs4be)
+
+DEFENCODING(("UCS4LE",  /* glibc */
+             "CP12000", /* Windows */
+             "12000",   /* Windows */
+             ),
+            ucs4le, UCS4LE, {ucs4le_mbtowc, NULL}, {ucs4le_wctomb, NULL})
+DEFCODEPAGE(12000, ucs4le)
+
+DEFENCODING(("UTF16", /* IANA, RFC 2781 */
+             "U16",   /* cppp-reiconv */
+             ),
+            utf16, UTF16, {utf16_mbtowc, NULL}, {utf16_wctomb, NULL})
+
+DEFENCODING(("UTF16BE", /* IANA, RFC 2781 */
+             "U16BE",   /* cppp-reiconv */
+             ),
+            utf16be, UTF16BE, {utf16be_mbtowc, NULL}, {utf16be_wctomb, NULL})
+
+DEFENCODING(("UTF16LE", /* IANA, RFC 2781 */
+             "U16LE",   /* cppp-reiconv */
+             ),
+            utf16le, UTF16LE, {utf16le_mbtowc, NULL}, {utf16le_wctomb, NULL})
+
+DEFENCODING(("UTF32", /* IANA, Unicode 3.1 */
+             "U32",   /* cppp-reiconv */
+             ),
+            utf32, UTF32, {utf32_mbtowc, NULL}, {utf32_wctomb, NULL})
+
+DEFENCODING(("UTF32BE", /* IANA, Unicode 3.1 */
+             "U32BE",   /* cppp-reiconv */
+             ),
+            utf32be, UTF32BE, {utf32be_mbtowc, NULL}, {utf32be_wctomb, NULL})
+
+DEFENCODING(("UTF32LE", /* IANA, Unicode 3.1 */
+             "U32LE",   /* cppp-reiconv */
+             ),
+            utf32le, UTF32LE, {utf32le_mbtowc, NULL}, {utf32le_wctomb, NULL})
+DEFENCODING(("UTF7",            /* IANA, RFC 2152 */
+             "UNICODE11UTF7",   /* IANA, RFC 1642 */
+             "CSUNICODE11UTF7", /* IANA */
+             "U7",              /* cppp-reiconv */
+             "CP65000",         /* Windows */
+             "65000",           /* Windows */
+             ),
+            utf7, UTF7, {utf7_mbtowc, NULL}, {utf7_wctomb, utf7_reset})
+DEFCODEPAGE(65000, utf7)
+
+// UCS-2/4-INTERNAL/SWAPPED are not standard encodings, but are used by
+// cppp-reiconv(and libiconv)'s testsuite.
+
+DEFENCODING(("UCS2INTERNAL", /* libiconv */
+             ),
+            ucs2internal, UCS2_INTERNAL, {ucs2internal_mbtowc, NULL}, {ucs2internal_wctomb, NULL})
+
+DEFENCODING(("UCS2SWAPPED", /* libiconv */
+             ),
+            ucs2swapped, UCS2_SWAPPED, {ucs2swapped_mbtowc, NULL}, {ucs2swapped_wctomb, NULL})
+
+DEFENCODING(("UCS4INTERNAL", /* libiconv */
+             ),
+            ucs4internal, UCS4_INTERNAL, {ucs4internal_mbtowc, NULL}, {ucs4internal_wctomb, NULL})
+
+DEFENCODING(("UCS4SWAPPED", /* libiconv */
+             ),
+            ucs4swapped, UCS4_SWAPPED, {ucs4swapped_mbtowc, NULL}, {ucs4swapped_wctomb, NULL})
+
+DEFENCODING(("C99", ), c99, C99, {c99_mbtowc, NULL}, {c99_wctomb, NULL})
+
+DEFENCODING(("JAVA", ), java, JAVA, {java_mbtowc, NULL}, {java_wctomb, NULL})
+
+// CJK encodings
+DEFENCODING(("EUCJP",                                   /* IANA, glibc, HP-UX, IRIX, OSF/1, Solaris */
+             "EXTENDEDUNIXCODEPACKEDFORMATFORJAPANESE", /* IANA */
+             "CSEUCPKDFMTJAPANESE",                     /* IANA */
+             "IBMEUCJP",                                /* AIX */
+             "SDECKANJI",                               /* OSF/1 */
+             "CP51932",                                 /* Windows */
+             "51932",                                   /* Windows */
+             ),
+            euc_jp, EUC_JP, {euc_jp_mbtowc, NULL}, {euc_jp_wctomb, NULL})
+DEFCODEPAGE(51932, euc_jp)
+
+DEFENCODING(("SHIFTJIS",   /* IANA, glibc */
+             "SJIS",       /* JDK 1.1, HP-UX, OSF/1 */
+             "MSKANJI",    /* IANA */
+             "CSSHIFTJIS", /* IANA */
+             "PCK",        /* Solaris */
+             ),
+            sjis, SHIFT_JIS, {sjis_mbtowc, NULL}, {sjis_wctomb, NULL})
+
+DEFENCODING(("IBM932", /* AIX */
+             "CP932",  /* Windows */
+             "932",    /* Windows */
+             ),
+            cp932, IBM932, {cp932_mbtowc, NULL}, {cp932_wctomb, NULL})
+DEFCODEPAGE(932, cp932)
+
+DEFENCODING(("ISO2022JP",   /* IANA, RFC 1468, JDK 1.1 */
+             "CSISO2022JP", /* IANA */
+             "CP50220",     /* Windows */
+             "50220",       /* Windows */
+             "CP50222",     /* Windows */
+             "50222",       /* Windows */
+             ),
+            iso2022_jp, ISO2022_JP, {iso2022_jp_mbtowc, NULL}, {iso2022_jp_wctomb, iso2022_jp_reset})
+DEFCODEPAGE(50220, iso2022_jp)
+DEFCODEPAGE(50222, iso2022_jp)
+
+DEFENCODING(("ISO2022JP1", /* RFC 2237 */
+             ),
+            iso2022_jp1, ISO2022_JP1, {iso2022_jp1_mbtowc, NULL}, {iso2022_jp1_wctomb, iso2022_jp1_reset})
+
+DEFENCODING(("ISO2022JP2",   /* IANA, RFC 1554 */
+             "CSISO2022JP2", /* IANA */
+             ),
+            iso2022_jp2, ISO2022_JP2, {iso2022_jp2_mbtowc, NULL}, {iso2022_jp2_wctomb, iso2022_jp2_reset})
+
+DEFENCODING(("ISO2022JPMS", /* (Unknown) */
+             "CP50221",     /* Windows */
+             "50221",       /* Windows */
+             ),
+            iso2022_jpms, ISO2022_JPMS, {iso2022_jpms_mbtowc, NULL}, {iso2022_jpms_wctomb, iso2022_jpms_reset})
+DEFCODEPAGE(50221, iso2022_jpms)
+
+DEFENCODING(("EUCCN",    /* glibc, IRIX */
+             "GB2312",   /* IANA */
+             "CNGB",     /* RFC 1922 */
+             "CSGB2312", /* IANA */
+             "CHINESE",  /* IANA */
+             "IBMEUCCN", /* AIX */
+             "HP15CN",   /* HP-UX */
+             "DECHANZI", /* OSF/1 */
+             ),
+            euc_cn, GB2312, {euc_cn_mbtowc, NULL}, {euc_cn_wctomb, NULL})
+DEFCODEPAGE(51936, euc_cn)
+
+DEFENCODING(("GBK", /* IANA, JDK 1.1 */
+             ),
+            ces_gbk, GBK, {ces_gbk_mbtowc, NULL}, {ces_gbk_wctomb, NULL})
+
+DEFENCODING(("MS936",      /* IANA */
+             "WINDOWS936", /* IANA */
+             "CP936",      /* Windows */
+             "936",        /* Windows */
+             ),
+            cp936,
+            CP936, // Chinese developer use CP936 more often than MS936
+            {cp936_mbtowc, NULL}, {cp936_wctomb, NULL})
+DEFCODEPAGE(936, cp936)
+
+DEFENCODING(("GB18030:2005", /* libiconv */
+             ),
+            gb18030_2005, GB18030_2005, {gb18030_2005_mbtowc, NULL}, {gb18030_2005_wctomb, NULL})
+
+DEFENCODING(("GB18030",      /* IANA, glibc */
+             "CSGB18030",    /* IANA */
+             "GB18030:2022", /* libiconv */
+             "CP54936",      /* Windows */
+             "54936",        /* Windows */
+             ),
+            gb18030_2022, GB18030_2022, {gb18030_2022_mbtowc, NULL}, {gb18030_2022_wctomb, NULL})
+DEFINDEX(GB18030, GB18030_2022)
+DEFCODEPAGE(54936, gb18030_2022)
+
+DEFENCODING(("ISO2022CN",   /* IANA, RFC 1922, JDK 1.1 */
+             "CSISO2022CN", /* IANA */
+             "CP50227",     /* Windows */
+             "50227",       /* Windows */
+             "XCP50227",    /* .NET */
+             ),
+            iso2022_cn, ISO2022_CN, {iso2022_cn_mbtowc, NULL}, {iso2022_cn_wctomb, iso2022_cn_reset})
+DEFCODEPAGE(50227, iso2022_cn)
+
+DEFENCODING(("ISO2022CNEXT", /* IANA, RFC 1922 */
+             ),
+            iso2022_cn_ext, ISO2022_CN_EXT, {iso2022_cn_ext_mbtowc, NULL},
+            {iso2022_cn_ext_wctomb, iso2022_cn_ext_reset})
+
+DEFENCODING(("HZ",       /* RFC 1843 */
+             "HZGB2312", /* IANA, RFC 1842 */
+             "CP52936",  /* Windows */
+             "52936",    /* Windows */
+             ),
+            hz, HZ, {hz_mbtowc, NULL}, {hz_wctomb, hz_reset})
+DEFCODEPAGE(52936, hz)
+
+DEFENCODING(("EUCTW",               /* glibc, HPUX, IRIX, OSF/1 */
+             "CSEUCTW", "IBMEUCTW", /* AIX */
+             "CNS11643",            /* Solaris */
+             "CP51950",             /* Windows */
+             "51950",               /* Windows */
+             ),
+            euc_tw, EUC_TW, {euc_tw_mbtowc, NULL}, {euc_tw_wctomb, NULL})
+DEFCODEPAGE(51950, euc_tw)
+
+DEFENCODING(("BIG5",    /* IANA, JDK 1.1, glibc */
+             "BIGFIVE", /* glibc */
+             "CNBIG5",  /* RFC 1922 */
+             "CSBIG5",  /* IANA */
+             ),
+            ces_big5, BIG5, {ces_big5_mbtowc, NULL}, {ces_big5_wctomb, NULL})
+
+DEFENCODING(("WINDOWS950", /* JDK 1.1 */
+             "CP950",      /* Windows */
+             "950",        /* Windows */
+             ),
+            cp950, WINDOWS950, {cp950_mbtowc, NULL}, {cp950_wctomb, NULL})
+DEFCODEPAGE(950, cp950)
+
+DEFENCODING(("BIG5HKSCS:1999", /* libiconv */
+             ),
+            big5hkscs1999, BIG5HKSCS_1999, {big5hkscs1999_mbtowc, big5hkscs1999_flushwc},
+            {big5hkscs1999_wctomb, big5hkscs1999_reset})
+
+DEFENCODING(("BIG5HKSCS:2001", /* libiconv */), big5hkscs2001, BIG5HKSCS_2001,
+            {big5hkscs2001_mbtowc, big5hkscs2001_flushwc}, {big5hkscs2001_wctomb, big5hkscs2001_reset})
+
+DEFENCODING(("BIG5HKSCS:2004", /* libiconv */), big5hkscs2004, BIG5HKSCS_2004,
+            {big5hkscs2004_mbtowc, big5hkscs2004_flushwc}, {big5hkscs2004_wctomb, big5hkscs2004_reset})
+
+DEFENCODING(("BIG5HKSCS",      /* IANA, glibc */
+             "BIG5HKSCS:2008", /* libiconv */
+             ),
+            big5hkscs2008, BIG5HKSCS_2008, {big5hkscs2008_mbtowc, big5hkscs2008_flushwc},
+            {big5hkscs2008_wctomb, big5hkscs2008_reset})
+DEFINDEX(BIG5HKSCS, BIG5HKSCS_2008)
+
+DEFENCODING(("EUCKR",     /* IANA, RFC 1557, glibc, HP-UX, IRIX, OSF/1 */
+             "CSEUCKR",   /* IANA */
+             "IBMEUCKR",  /* AIX */
+             "DECKOREAN", /* OSF/1 */
+             "5601",      /* Solaris */
+             "CP51949",   /* Windows */
+             "51949",     /* Windows */
+             ),
+            euc_kr, EUC_KR, {euc_kr_mbtowc, NULL}, {euc_kr_wctomb, NULL})
+DEFCODEPAGE(51949, euc_kr)
+
+DEFENCODING(("UHC",         /* glibc */
+             "CP949",       /* Windows */
+             "949",         /* Windows */
+             "KSC56011987", /* Windows */
+             ),
+            cp949, UHC, {cp949_mbtowc, NULL}, {cp949_wctomb, NULL})
+DEFCODEPAGE(949, cp949)
+
+DEFENCODING(("JOHAB",        /* glibc */
+             "KOKR.JOHAP92", /* Solaris */
+             "CP1361",       /* Windows */
+             "1361",         /* Windows */
+             ),
+            johab, JOHAB, {johab_mbtowc, NULL}, {johab_wctomb, NULL})
+DEFCODEPAGE(1361, johab)
+
+DEFENCODING(("ISO2022KR",   /* IANA, RFC 1557, JDK 1.1 */
+             "CSISO2022KR", /* IANA */
+             "CP50225",     /* Windows */
+             "50225",       /* Windows */
+             ),
+            iso2022_kr, ISO2022_KR, {iso2022_kr_mbtowc, NULL}, {iso2022_kr_wctomb, iso2022_kr_reset})
+DEFCODEPAGE(50225, iso2022_kr)
+
+DEFENCODING(("DECKANJI", /* OSF/1 */
+             ),
+            dec_kanji, DEC_KANJI, {dec_kanji_mbtowc, NULL}, {dec_kanji_wctomb, NULL})
+
+DEFENCODING(("DECHANYU", /* OSF/1 */
+             ),
+            dec_hanyu, DEC_HANYU, {dec_hanyu_mbtowc, NULL}, {dec_hanyu_wctomb, NULL})
+
+// Standard 8-bit encodings
+DEFENCODING(("ISO88591",      /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1, Solaris */
+             "ISO88591:1987", /* IANA */
+             "ISOIR100",      /* IANA */
+             "IBM819",        /* IANA */
+             "LATIN1",        /* IANA */
+             "L1",            /* IANA */
+             "CSISOLATIN1",   /* IANA */
+             "CP819",         /* IANA */
+             "819",           /* Windows */
+             "CP28591",       /* Windows */
+             "28591",         /* Windows */
+             ),
+            iso8859_1, ISO8859_1, {iso8859_1_mbtowc, NULL}, {iso8859_1_wctomb, NULL})
+DEFCODEPAGE(819, iso8859_1)
+DEFCODEPAGE(28591, iso8859_1)
+
+DEFENCODING(("ISO88592",      /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1, Solaris */
+             "ISO88592:1987", /* IANA */
+             "ISOIR101",      /* IANA */
+             "LATIN2",        /* IANA */
+             "L2",            /* IANA */
+             "CSISOLATIN2",   /* IANA */
+             "CP28592",       /* Windows */
+             "28592",         /* Windows */
+             ),
+            iso8859_2, ISO8859_2, {iso8859_2_mbtowc, NULL}, {iso8859_2_wctomb, NULL})
+DEFCODEPAGE(28592, iso8859_2)
+
+DEFENCODING(("ISO88593",      /* IANA, X11R6.4, glibc, FreeBSD, Solaris */
+             "ISO88593:1988", /* IANA */
+             "ISOIR109",      /* IANA */
+             "LATIN3",        /* IANA */
+             "L3",            /* IANA */
+             "CSISOLATIN3",   /* IANA */
+             "CP28593",       /* Windows */
+             "28593",         /* Windows */
+             ),
+            iso8859_3, ISO8859_3, {iso8859_3_mbtowc, NULL}, {iso8859_3_wctomb, NULL})
+DEFCODEPAGE(28593, iso8859_3)
+
+DEFENCODING(("ISO88594",      /* IANA, X11R6.4, glibc, FreeBSD, OSF/1, Solaris */
+             "ISO88594:1988", /* IANA */
+             "ISOIR110",      /* IANA */
+             "LATIN4",        /* IANA */
+             "L4",            /* IANA */
+             "CSISOLATIN4",   /* IANA */
+             "CP28594",       /* Windows */
+             "28594",         /* Windows */
+             ),
+            iso8859_4, ISO8859_4, {iso8859_4_mbtowc, NULL}, {iso8859_4_wctomb, NULL})
+DEFCODEPAGE(28594, iso8859_4)
+
+DEFENCODING(("ISO88595",           /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1, Solaris */
+             "ISO88595:1988",      /* IANA */
+             "ISOIR144",           /* IANA */
+             "CYRILLIC",           /* IANA */
+             "CSISOLATINCYRILLIC", /* IANA */
+             "CP28595",            /* Windows */
+             "28595",              /* Windows */
+             ),
+            iso8859_5, ISO8859_5, {iso8859_5_mbtowc, NULL}, {iso8859_5_wctomb, NULL})
+DEFCODEPAGE(28595, iso8859_5)
+
+DEFENCODING(("ISO88596",         /* IANA, X11R6.4, glibc, FreeBSD, AIX, Solaris */
+             "ISO88596:1987",    /* IANA */
+             "ISOIR127",         /* IANA */
+             "ECMA114",          /* IANA */
+             "ASMO708",          /* IANA */
+             "ARABIC",           /* IANA */
+             "CSISOLATINARABIC", /* IANA */
+             "CP28596",          /* Windows */
+             "28596",            /* Windows */
+             ),
+            iso8859_6, ISO8859_6, {iso8859_6_mbtowc, NULL}, {iso8859_6_wctomb, NULL})
+DEFCODEPAGE(28596, iso8859_6)
+
+DEFENCODING(("ISO88597",        /* IANA, RFC 1947, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1, Solaris */
+             "ISO88597:1987",   /* IANA */
+             "ISO88597:2003",   /* cppp-reiconv */
+             "ISOIR126",        /* IANA */
+             "ECMA118",         /* IANA */
+             "ELOT928",         /* IANA */
+             "GREEK8",          /* IANA */
+             "GREEK",           /* IANA */
+             "CSISOLATINGREEK", /* IANA */
+             "CP28597",         /* Windows */
+             "28597",           /* Windows */
+             ),
+            iso8859_7, ISO8859_7, {iso8859_7_mbtowc, NULL}, {iso8859_7_wctomb, NULL})
+DEFCODEPAGE(28597, iso8859_7)
+
+DEFENCODING(("ISO88598",         /* IANA, X11R6.4, glibc, FreeBSD, AIX, OSF/1, Solaris */
+             "ISO88598:1988",    /* IANA */
+             "ISOIR138",         /* IANA */
+             "HEBREW",           /* IANA */
+             "CSISOLATINHEBREW", /* IANA */
+             "ISO88598I",        /* .NET */
+             "CP28598",          /* Windows */
+             "28598",            /* Windows */
+             "CP38598",          /* Windows */
+             "38598",            /* Windows */
+             ),
+            iso8859_8, ISO8859_8, {iso8859_8_mbtowc, NULL}, {iso8859_8_wctomb, NULL})
+DEFCODEPAGE(28598, iso8859_8)
+DEFCODEPAGE(38598, iso8859_8)
+
+DEFENCODING(("ISO88599",      /* IANA, X11R6.4, glibc, FreeBSD, AIX, IRIX, OSF/1, Solaris */
+             "ISO88599:1989", /* IANA */
+             "ISOIR148",      /* IANA */
+             "LATIN5",        /* IANA */
+             "L5",            /* IANA */
+             "CSISOLATIN5",   /* IANA */
+             "CP28599",       /* Windows */
+             "28599",         /* Windows */
+             ),
+            iso8859_9, ISO8859_9, {iso8859_9_mbtowc, NULL}, {iso8859_9_wctomb, NULL})
+DEFCODEPAGE(28599, iso8859_9)
+
+DEFENCODING(("ISO885910",      /* IANA, X11R6.4, glibc, FreeBSD */
+             "ISO885910:1992", /* IANA */
+             "ISOIR157",       /* IANA */
+             "LATIN6",         /* IANA */
+             "L6",             /* IANA */
+             "CSISOLATIN6",    /* IANA */
+             ),
+            iso8859_10, ISO8859_10, {iso8859_10_mbtowc, NULL}, {iso8859_10_wctomb, NULL})
+
+DEFENCODING(("ISO885911", /* glibc, X11R6.7, glibc */
+             ),
+            iso8859_11, ISO8859_11, {iso8859_11_mbtowc, NULL}, {iso8859_11_wctomb, NULL})
+
+DEFENCODING(("ISO885913", /* IANA, glibc, FreeBSD */
+             "ISOIR179",  /* glibc */
+             "LATIN7",    /* glibc */
+             "L7",        /* glibc */
+             "IBM921"     /* AIX */
+             "CP28603",   /* Windows */
+             "28603",     /* Windows */
+             ),
+            iso8859_13, ISO8859_13, {iso8859_13_mbtowc, NULL}, {iso8859_13_wctomb, NULL})
+DEFCODEPAGE(28603, iso8859_13)
+
+DEFENCODING(("ISO885914",      /* IANA, glibc, FreeBSD */
+             "ISO885914:1998", /* IANA, glibc */
+             "ISOIR199",       /* IANA */
+             "LATIN8",         /* IANA, glibc */
+             "L8",             /* IANA, glibc */
+             "ISOCELTIC",      /* IANA */
+             ),
+            iso8859_14, ISO8859_14, {iso8859_14_mbtowc, NULL}, {iso8859_14_wctomb, NULL})
+
+DEFENCODING(("ISO885915",      /* IANA, glibc, FreeBSD, AIX, OSF/1, Solaris */
+             "ISO885915:1998", /* glibc */
+             "ISOIR203",       /* libiconv */
+             "LATIN9",         /* IANA */
+             "L9",             /* cppp-reiconv */
+             "CSISO885915"     /* IANA */
+             "CP28605",        /* Windows */
+             "28605",          /* Windows */
+             ),
+            iso8859_15, ISO8859_15, {iso8859_15_mbtowc, NULL}, {iso8859_15_wctomb, NULL})
+DEFCODEPAGE(28605, iso8859_15)
+
+DEFENCODING(("ISO885916",      /* IANA, glibc, FreeBSD */
+             "ISO885916:2001", /* IANA */
+             "ISOIR226",       /* IANA */
+             "LATIN10",        /* IANA */
+             "L10",            /* IANA */
+             "CSISOLATIN10",   /* IANA */
+             ),
+            iso8859_16, ISO8859_16, {iso8859_16_mbtowc, NULL}, {iso8859_16_wctomb, NULL})
+
+DEFENCODING(("KOI8R",   /* IANA, RFC 1489, X11R6.4, JDK 1.1 */
+             "CSKOI8R", /* IANA */
+             "CP20866", /* Windows */
+             "20866",   /* Windows */
+             ),
+            koi8_r, KOI8_R, {koi8_r_mbtowc, NULL}, {koi8_r_wctomb, NULL})
+DEFCODEPAGE(20866, koi8_r)
+
+DEFENCODING(("KOI8U",   /* IANA, RFC 2319 */
+             "CSKOI8U", /* IANA */
+             ),
+            koi8_u, KOI8_U, {koi8_u_mbtowc, NULL}, {koi8_u_wctomb, NULL})
+
+DEFENCODING(("KOI8RU",   /* AIX */
+             "CSKOI8RU", /* cppp-reiconv */
+             "IBM1168",  /* AIX */
+             "CP21866",  /* Windows */
+             "21866",    /* Windows */
+             ),
+            koi8_ru, KOI8_RU, {koi8_ru_mbtowc, NULL}, {koi8_ru_wctomb, NULL})
+DEFCODEPAGE(21866, koi8_ru)
+
+// Windows 8-bit encodings
+DEFENCODING(("CP1250",        /* JDK 1.1 */
+             "CSWINDOWS1250", /* IANA */
+             "WINDOWS1250",   /* IANA */
+             "IBM1250",       /* AIX */
+             "MSEE",          /* Solaris */
+             "1250",          /* Windows */
+             ),
+            cp1250, MSEE, {cp1250_mbtowc, NULL}, {cp1250_wctomb, NULL})
+DEFINDEX(CP1250, MSEE)
+DEFCODEPAGE(1250, cp1250)
+
+DEFENCODING(("WINDOWS1251",   /* IANA */
+             "CSWINDOWS1251", /* IANA */
+             "MSCYRL",        /* (Unknown) */
+             "ANSI1251",      /* Solaris */
+             "CP1251",        /* Windows */
+             "1251",          /* Windows */
+             ),
+            cp1251, MSCYRL, {cp1251_mbtowc, NULL}, {cp1251_wctomb, NULL})
+DEFINDEX(CP1251, MSCYRL)
+DEFCODEPAGE(1251, cp1251)
+
+DEFENCODING(("WINDOWS1252",   /* IANA */
+             "CSWINDOWS1252", /* IANA */
+             "IBM1252",       /* AIX */
+             "MSANSI",        /* (Unknown) */
+             "CP1252",        /* Windows */
+             "1252",          /* Windows */
+             ),
+            cp1252, MSANSI, {cp1252_mbtowc, NULL}, {cp1252_wctomb, NULL})
+DEFINDEX(CP1252, MSANSI)
+DEFCODEPAGE(1252, cp1252)
+
+DEFENCODING(("WINDOWS1253",   /* IANA */
+             "CSWINDOWS1253", /* IANA */
+             "MSGREEK",       /* (Unknown) */
+             "CP1253",        /* Windows */
+             "1253",          /* Windows */
+             ),
+            cp1253, MSGREEK, {cp1253_mbtowc, NULL}, {cp1253_wctomb, NULL})
+DEFINDEX(CP1253, MSGREEK)
+DEFCODEPAGE(1253, cp1253)
+
+DEFENCODING(("WINDOWS1254",   /* IANA */
+             "CSWINDOWS1254", /* IANA */
+             "IBM1254",       /* AIX */
+             "MSTURK",        /* (Unknown) */
+             "CP1254",        /* Windows */
+             "1254",          /* Windows */
+             ),
+            cp1254, MSTURK, {cp1254_mbtowc, NULL}, {cp1254_wctomb, NULL})
+DEFINDEX(CP1254, MSTURK)
+DEFCODEPAGE(1254, cp1254)
+
+DEFENCODING(("WINDOWS1255",   /* IANA */
+             "CSWINDOWS1255", /* IANA */
+             "MSHEBR",        /* (Unknown) */
+             "IBM1255",       /* AIX */
+             "CP1255",        /* Windows */
+             "1255",          /* Windows */
+             ),
+            cp1255, MSHEBR, {cp1255_mbtowc, cp1255_flushwc}, {cp1255_wctomb, NULL})
+DEFINDEX(CP1255, MSHEBR)
+DEFCODEPAGE(1255, cp1255)
+
+DEFENCODING(("WINDOWS1256",   /* IANA */
+             "CSWINDOWS1256", /* IANA */
+             "IBM1256",       /* AIX */
+             "MSARAB",        /* (Unknown) */
+             "CP1256",        /* Windows */
+             "1256",          /* Windows */
+             ),
+            cp1256, MSARAB, {cp1256_mbtowc, NULL}, {cp1256_wctomb, NULL})
+DEFINDEX(CP1256, MSARAB)
+DEFCODEPAGE(1256, cp1256)
+
+DEFENCODING(("WINDOWS1257",   /* IANA */
+             "CSWINDOWS1257", /* IANA */
+             "WINBALTRIM",    /* (Unknown) */
+             "IBM1257",       /* AIX */
+             "CP1257",        /* Windows */
+             "1257",          /* Windows */
+             ),
+            cp1257, WINBALTRIM, {cp1257_mbtowc, NULL}, {cp1257_wctomb, NULL})
+DEFINDEX(CP1257, WINBALTRIM)
+DEFCODEPAGE(1257, cp1257)
+
+DEFENCODING(("WINDOWS1258",   /* IANA */
+             "CSWINDOWS1258", /* IANA */
+             "IBM1258",       /* AIX */
+             "CP1258",        /* Windows */
+             "1258",          /* Windows */
+             ),
+            cp1258, WINDOWS1258, {cp1258_mbtowc, cp1258_flushwc}, {cp1258_wctomb, NULL})
+DEFINDEX(CP1258, WINDOWS1258)
+DEFCODEPAGE(1258, cp1258)
+
+// DOS 8-bit encodings
+DEFENCODING(("IBM850",              /* IANA */
+             "850",                 /* IANA */
+             "CSPC850MULTILINGUAL", /* IANA */
+             "CP850",               /* Windows */
+             ),
+            cp850, IBM850, {cp850_mbtowc, NULL}, {cp850_wctomb, NULL})
+DEFCODEPAGE(850, cp850)
+
+DEFENCODING(("IBM862",             /* IANA */
+             "862",                /* IANA */
+             "CSPC862LATINHEBREW", /* IANA */
+             "DOS862",             /* .NET */
+             "CP862",              /* Windows */
+             ),
+            cp862, IBM862, {cp862_mbtowc, NULL}, {cp862_wctomb, NULL})
+DEFCODEPAGE(862, cp862)
+
+DEFENCODING(("IBM866",   /* IANA */
+             "866",      /* IANA */
+             "CSIBM866", /* IANA */
+             "CP866",    /* Windows */
+             ),
+            cp866, IBM866, {cp866_mbtowc, NULL}, {cp866_wctomb, NULL})
+DEFCODEPAGE(866, cp866)
+
+DEFENCODING(("IBM1131", /* AIX */
+             "CP1131",  /* cppp-reiconv */
+             "1131",    /* cppp-reiconv */
+             ),
+            cp1131, IBM1131, {cp1131_mbtowc, NULL}, {cp1131_wctomb, NULL})
+DEFCODEPAGE(1131, cp1131)
+
+// Macintosh 8-bit encodings
+// This is the best table for MACINTOSH. The ones in glibc and FreeBSD-iconv are bad quality. :)
+DEFENCODING(("MACROMAN",    /* JDK 1.1 */
+             "MACINTOSH",   /* IANA */
+             "MAC",         /* IANA */
+             "CSMACINTOSH", /* IANA */
+             "CP10000",     /* Windows */
+             "10000",       /* Windows */
+             ),
+            mac_roman, MACINTOSH, {mac_roman_mbtowc, NULL}, {mac_roman_wctomb, NULL})
+DEFCODEPAGE(10000, mac_roman)
+DEFINDEX(MAC_ROMAN, MACINTOSH)
+
+DEFENCODING(("MACCENTRALEUROPE", /* JDK 1.1 */
+             "XMACCE",           /* Windows */
+             "CP10029",          /* Windows */
+             "10029",            /* Windows */
+             ),
+            mac_centraleurope, MAC_CENTRALEUROPE, {mac_centraleurope_mbtowc, NULL}, {mac_centraleurope_wctomb, NULL})
+DEFCODEPAGE(10029, mac_centraleurope)
+
+DEFENCODING(("MACICELAND",    /* JDK 1.1 */
+             "XMACICELANDIC", /* Windows */
+             "CP10079",       /* Windows */
+             "10079",         /* Windows */
+             ),
+            mac_iceland, MAC_ICELAND, {mac_iceland_mbtowc, NULL}, {mac_iceland_wctomb, NULL})
+DEFCODEPAGE(10079, mac_iceland)
+
+DEFENCODING(("MACCROATIAN",  /* JDK 1.1 */
+             "XMACCROATIAN", /* Windows */
+             "CP10082",      /* Windows */
+             "10082",        /* Windows */
+             ),
+            mac_croatian, MAC_CROATIAN, {mac_croatian_mbtowc, NULL}, {mac_croatian_wctomb, NULL})
+DEFCODEPAGE(10082, mac_croatian)
+
+DEFENCODING(("MACROMANIA",   /* JDK 1.1 */
+             "XMACROMANIAN", /* Windows */
+             "CP10010",      /* Windows */
+             "10010",        /* Windows */
+             ),
+            mac_romania, MAC_ROMANIA, {mac_romania_mbtowc, NULL}, {mac_romania_wctomb, NULL})
+DEFCODEPAGE(10010, mac_romania)
+
+DEFENCODING(("MACCYRILLIC",  /* JDK 1.1 */
+             "XMACCYRILLIC", /* Windows */
+             "CP10007",      /* Windows */
+             "10007",        /* Windows */
+             ),
+            mac_cyrillic, MAC_CYRILLIC, {mac_cyrillic_mbtowc, NULL}, {mac_cyrillic_wctomb, NULL})
+DEFCODEPAGE(10007, mac_cyrillic)
+
+DEFENCODING(("MACUKRAINE",    /* JDK 1.1 */
+             "XMACUKRAINIAN", /* Windows */
+             "CP10017",       /* Windows */
+             "10017",         /* Windows */
+             ),
+            mac_ukraine, MAC_UKRAINE, {mac_ukraine_mbtowc, NULL}, {mac_ukraine_wctomb, NULL})
+DEFCODEPAGE(10017, mac_ukraine)
+
+DEFENCODING(("MACGREEK",  /* JDK 1.1 */
+             "XMACGREEK", /* Windows */
+             "CP10006",   /* Windows */
+             "10006",     /* Windows */
+             ),
+            mac_greek, MAC_GREEK, {mac_greek_mbtowc, NULL}, {mac_greek_wctomb, NULL})
+DEFCODEPAGE(10006, mac_greek)
+
+DEFENCODING(("MACTURKISH",  /* JDK 1.1 */
+             "XMACTURKISH", /* Windows */
+             "CP10081",     /* Windows */
+             "10081",       /* Windows */
+             ),
+            mac_turkish, MAC_TURKISH, {mac_turkish_mbtowc, NULL}, {mac_turkish_wctomb, NULL})
+DEFCODEPAGE(10081, mac_turkish)
+
+DEFENCODING(("MACHEBREW",  /* JDK 1.1 */
+             "XMACHEBREW", /* Windows */
+             "CP10005",    /* Windows */
+             "10005",      /* Windows */
+             ),
+            mac_hebrew, MAC_HEBREW, {mac_hebrew_mbtowc, NULL}, {mac_hebrew_wctomb, NULL})
+DEFCODEPAGE(10005, mac_hebrew)
+
+DEFENCODING(("MACARABIC",  /* JDK 1.1 */
+             "XMACARABIC", /* Windows */
+             "CP10004",    /* Windows */
+             "10004",      /* Windows */
+             ),
+            mac_arabic, MAC_ARABIC, {mac_arabic_mbtowc, NULL}, {mac_arabic_wctomb, NULL})
+DEFCODEPAGE(10004, mac_arabic)
+
+DEFENCODING(("MACTHAI",  /* JDK 1.1 */
+             "XMACTHAI", /* Windows */
+             "CP10021",  /* Windows */
+             "10021",    /* Windows */
+             ),
+            mac_thai, MAC_THAI, {mac_thai_mbtowc, NULL}, {mac_thai_wctomb, NULL})
+DEFCODEPAGE(10021, mac_thai)
+
+// Other platform specific 8-bit encodings
+DEFENCODING(("HPROMAN8",   /* IANA, X11R6.4 */
+             "ROMAN8",     /* IANA */
+             "R8",         /* IANA */
+             "CSHPROMAN8", /* IANA */
+             "CP1051",     /* Windows */
+             ),
+            hp_roman8, HPROMAN8, {hp_roman8_mbtowc, NULL}, {hp_roman8_wctomb, NULL})
+
+DEFENCODING(("NEXTSTEP", /* (Unknown) */
+             ),
+            nextstep, NEXTSTEP, {nextstep_mbtowc, NULL}, {nextstep_wctomb, NULL})
+
+// Regional 8-bit encodings used for a single language
+DEFENCODING(("ARMSCII8", /* Armenia Standard */
+             ),
+            armscii_8, ARMSCII8, {armscii_8_mbtowc, NULL}, {armscii_8_wctomb, NULL})
+
+DEFENCODING(("GEORGIANACADEMY", /* Georgia Academy */
+             ),
+            georgian_academy, GEORGIANACADEMY, {georgian_academy_mbtowc, NULL}, {georgian_academy_wctomb, NULL})
+
+DEFENCODING(("GEORGIANPS", /* Georgia PS */
+             ),
+            georgian_ps, GEORGIANPS, {georgian_ps_mbtowc, NULL}, {georgian_ps_wctomb, NULL})
+
+DEFENCODING(("KOI8T", /* (Unknown) */
+             ),
+            koi8_t, KOI8T, {koi8_t_mbtowc, NULL}, {koi8_t_wctomb, NULL})
+
+DEFENCODING(("PT154",          /* IANA, glibc */
+             "PTCP154",        /* IANA */
+             "CYRILLICASIAN",  /* IANA */
+             "CSPTCP154",      /* IANA */
+             "IBM1169",        /* AIX */
+             "CYRIILLICASIAN", /* AIX */
+             "CP154",          /* cppp-reiconv */
+             "154",            /* cppp-reiconv */
+             ),
+            pt154, PT154, {pt154_mbtowc, NULL}, {pt154_wctomb, NULL})
+DEFCODEPAGE(154, pt154)
+
+DEFENCODING(("RK1048",       /* IANA, glibc */
+             "STRK10482002", /* IANA */
+             "KZ1048",       /* IANA */
+             "CSKZ1048",     /* IANA */
+             ),
+            rk1048, RK1048, {rk1048_mbtowc, NULL}, {rk1048_wctomb, NULL})
+
+DEFENCODING(("MULELAO1", /* (Unknown) */
+             ),
+            mulelao, MULELAO1, {mulelao_mbtowc, NULL}, {mulelao_wctomb, NULL})
+
+DEFENCODING(("IBMCP1133", /* (Unknown) */
+             "CP1133",    /* cppp-reiconv */
+             "1133",      /* cppp-reiconv */
+             ),
+            cp1133, IBMCP1133, {cp1133_mbtowc, NULL}, {cp1133_wctomb, NULL})
+DEFCODEPAGE(1133, cp1133)
+
+DEFENCODING(("TIS620",                   /* IANA, glibc, HP-UX */
+             "TIS6200",                  /* glibc */
+             "TIS620.25291",             /* glibc */
+             "TIS620.25330",             /* glibc */
+             "TIS620.25331", "ISOIR166", /* glibc */
+             "TACTIS",                   /* OSF/1 */
+             "TIS620.2533",              /* Solaris */
+             ),
+            tis620, TIS620, {tis620_mbtowc, NULL}, {tis620_wctomb, NULL})
+
+DEFENCODING(("WINDOWS874",   /* IANA */
+             "CSWINDOWS874", /* IANA */
+             "MS874",        /* AIX */
+             "CP874",        /* Windows */
+             "874",          /* Windows */
+             ),
+            cp874, WINDOWS874, {cp874_mbtowc, NULL}, {cp874_wctomb, NULL})
+DEFCODEPAGE(874, cp874)
+
+DEFENCODING(("VISCII",     /* IANA, RFC 1456 */
+             "VISCII1.11", /* IANA */
+             "CSVISCII",   /* IANA */
+             ),
+            viscii, VISCII, {viscii_mbtowc, NULL}, {viscii_wctomb, NULL})
+
+DEFENCODING(("TCVN",           /* (Unknown) */
+             "TCVN5712",       /* (Unknown) */
+             "TCVN57121",      /* (Unknown) */
+             "TCVN57121:1993", /* (Unknown) */
+             ),
+            tcvn, TCVN, {tcvn_mbtowc, tcvn_flushwc}, {tcvn_wctomb, NULL})
+
+// CJK character sets (not documented)
+DEFENCODING(("JISC62201969RO",    /* IANA */
+             "ISO646JP",          /* IANA */
+             "ISOIR14",           /* IANA */
+             "JP",                /* IANA */
+             "CSISO14JISC6220RO", /* IANA */
+             ),
+            iso646_jp, JP, {iso646_jp_mbtowc, NULL}, {iso646_jp_wctomb, NULL})
+
+DEFENCODING(("JISX0201",              /* IANA */
+             "JISX02011976", "X0201", /* IANA */
+             "CSHALFWIDTHKATAKANA",   /* IANA */
+             ),
+            jisx0201, JISX0201, {jisx0201_mbtowc, NULL}, {jisx0201_wctomb, NULL})
+
+DEFENCODING(("JISX0208", "JISX02081983",         /* IANA */
+             "JISX02081990", "JIS0208", "X0208", /* IANA */
+             "ISOIR87",                          /* IANA */
+             "JISC62261983",                     /* IANA */
+             "CSISO87JISX0208",                  /* IANA */
+             ),
+            jisx0208, JISX0208, {jisx0208_mbtowc, NULL}, {jisx0208_wctomb, NULL})
+
+DEFENCODING(("JISX0212", "JISX0212.19900", "JISX02121990", /* IANA */
+             "X0212",                                      /* IANA */
+             "ISOIR159",                                   /* IANA */
+             "CSISO159JISX02121990",                       /* IANA */
+             ),
+            jisx0212, JISX0212, {jisx0212_mbtowc, NULL}, {jisx0212_wctomb, NULL})
+
+DEFENCODING(("GB198880",      /* IANA */
+             "ISO646CN",      /* IANA */
+             "ISOIR57",       /* IANA */
+             "CN",            /* IANA */
+             "CSISO57GB1988", /* IANA */
+             ),
+            iso646_cn, GB1988_80, {iso646_cn_mbtowc, NULL}, {iso646_cn_wctomb, NULL})
+
+DEFENCODING(("GB231280",        /* IANA */
+             "ISOIR58",         /* IANA */
+             "CSISO58GB231280", /* IANA */
+             ),
+            gb2312, GB2312_80, {gb2312_mbtowc, NULL}, {gb2312_wctomb, NULL})
+
+DEFENCODING(("ISOIR165", "CNGBISOIR165", /* RFC 1922 */
+             ),
+            isoir165, CNGBISOIR165, {isoir165_mbtowc, NULL}, {isoir165_wctomb, NULL})
+
+DEFENCODING(("KSC5601",       /* IANA */
+             "KSC56011987",   /* IANA */
+             "KSC56011989",   /* IANA */
+             "ISOIR149",      /* IANA */
+             "CSKSC56011987", /* IANA */
+             "KOREAN",        /* IANA */
+             ),
+            ksc5601, KOREAN, {ksc5601_mbtowc, NULL}, {ksc5601_wctomb, NULL})
+
+// AIX locales
+DEFENCODING(("IBM856", /* AIX */
+             "CP856",  /* AIX */
+             "856",    /* AIX */
+             ),
+            cp856, IBM856, {cp856_mbtowc, NULL}, {cp856_wctomb, NULL})
+DEFCODEPAGE(856, cp856)
+
+DEFENCODING(("IBM922", /* AIX */
+             "CP922",  /* AIX */
+             "922",    /* AIX */
+             ),
+            cp922, IBM922, {cp922_mbtowc, NULL}, {cp922_wctomb, NULL})
+DEFCODEPAGE(922, cp922)
+
+DEFENCODING(("IBM943", /* AIX */
+             "CP943",  /* AIX */
+             "943",    /* AIX */
+             ),
+            cp943, IBM943, {cp943_mbtowc, NULL}, {cp943_wctomb, NULL})
+DEFCODEPAGE(943, cp943)
+
+DEFENCODING(("IBM1046", /* AIX */
+             "CP1046",  /* AIX */
+             "1046",    /* AIX */
+             ),
+            cp1046, IBM1046, {cp1046_mbtowc, NULL}, {cp1046_wctomb, NULL})
+DEFCODEPAGE(1046, cp1046)
+
+DEFENCODING(("IBM1124", /* AIX */
+             "CP1124",  /* AIX */
+             "1124",    /* AIX */
+             ),
+            cp1124, IBM1124, {cp1124_mbtowc, NULL}, {cp1124_wctomb, NULL})
+DEFCODEPAGE(1124, cp1124)
+
+DEFENCODING(("IBM1129", /* AIX */
+             "CP1129",  /* AIX */
+             "1129",    /* AIX */
+             ),
+            cp1129, IBM1129, {cp1129_mbtowc, NULL}, {cp1129_wctomb, NULL})
+DEFCODEPAGE(1129, cp1129)
+
+DEFENCODING(("IBM1161",   /* glibc */
+             "CSIBM1161", /* glibc */
+             "CP1161",    /* AIX */
+             "1161",      /* AIX */
+             ),
+            cp1161, IBM1161, {cp1161_mbtowc, NULL}, {cp1161_wctomb, NULL})
+DEFCODEPAGE(1161, cp1161)
+
+DEFENCODING(("IBM1162",   /* glibc */
+             "CSIBM1162", /* glibc */
+             "CP1162",    /* AIX */
+             "1162",      /* AIX */
+             ),
+            cp1162, IBM1162, {cp1162_mbtowc, NULL}, {cp1162_wctomb, NULL})
+DEFCODEPAGE(1162, cp1162)
+
+DEFENCODING(("IBM1163",   /* glibc */
+             "CSIBM1163", /* glibc */
+             "CP1163",    /* AIX */
+             "1163",      /* AIX */
+             ),
+            cp1163, IBM1163, {cp1163_mbtowc, NULL}, {cp1163_wctomb, NULL})
+DEFCODEPAGE(1163, cp1163)
+
+// MS-DOS locales
+DEFENCODING(("IBM437",           /* IANA */
+             "437",              /* IANA */
+             "CSPC8CODEPAGE437", /* IANA */
+             "CP437",            /* IANA */
+             ),
+            cp437, CP437, {cp437_mbtowc, NULL}, {cp437_wctomb, NULL})
+DEFCODEPAGE(437, cp437)
+
+DEFENCODING(("IBM737", /* Windows */
+             "CP737",  /* Windows */
+             "737",    /* Windows */
+             ),
+            cp737, CP737, {cp737_mbtowc, NULL}, {cp737_wctomb, NULL})
+DEFCODEPAGE(737, cp737)
+
+DEFENCODING(("IBM775",        /* IANA */
+             "CSPC775BALTIC", /* IANA */
+             "CP775",         /* Windows */
+             "775",           /* Windows */
+             ),
+            cp775, CP775, {cp775_mbtowc, NULL}, {cp775_wctomb, NULL})
+DEFCODEPAGE(775, cp775)
+
+DEFENCODING(("IBM852",   /* IANA */
+             "852",      /* IANA */
+             "CSPCP852", /* IANA */
+             "CP852",    /* Windows */
+             ),
+            cp852, CP852, {cp852_mbtowc, NULL}, {cp852_wctomb, NULL})
+DEFCODEPAGE(852, cp852)
+
+DEFENCODING(("IBM853",   /* (Unknown) */
+             "853",      /* (Unknown) */
+             "CCSID853", /* dbpedia.org */
+             "CSIBM853", /* (Unknown) */
+             "CP853"     /* cppp-reiconv */
+             ),
+            cp853, CP853, {cp853_mbtowc, NULL}, {cp853_wctomb, NULL})
+DEFCODEPAGE(853, cp853)
+
+DEFENCODING(("IBM855",   /* IANA */
+             "855",      /* IANA */
+             "CSIBM855", /* IANA */
+             "CP855"     /* Windows */
+             ),
+            cp855, CP855, {cp855_mbtowc, NULL}, {cp855_wctomb, NULL})
+DEFCODEPAGE(855, cp855)
+
+DEFENCODING(("IBM857",   /* IANA */
+             "857",      /* IANA */
+             "CSIBM857", /* IANA */
+             "CP857",    /* Windows */
+             ),
+            cp857, CP857, {cp857_mbtowc, NULL}, {cp857_wctomb, NULL})
+DEFCODEPAGE(857, cp857)
+
+DEFENCODING(("IBM858",     /* Solaris */
+             "858",        /* Solaris */
+             "IBM00858",   /* Windows */
+             "CP858",      /* Windows */
+             "CCSID00858", /* Solaris */
+             "CP00858",    /* Solaris */
+             "CSIBM858"    /* Solaris */
+             ),
+            cp858, CP858, {cp858_mbtowc, NULL}, {cp858_wctomb, NULL})
+DEFCODEPAGE(858, cp858)
+
+DEFENCODING(("IBM860",   /* IANA */
+             "860",      /* IANA */
+             "CSIBM860", /* IANA */
+             "CP860",    /* AIX */
+             ),
+            cp860, CP860, {cp860_mbtowc, NULL}, {cp860_wctomb, NULL})
+DEFCODEPAGE(860, cp860)
+
+DEFENCODING(("IBM861",   /* IANA */
+             "861",      /* IANA */
+             "CP861",    /* IANA */
+             "CPIS",     /* IANA */
+             "CSIBM861", /* IANA */
+             ),
+            cp861, CP861, {cp861_mbtowc, NULL}, {cp861_wctomb, NULL})
+DEFCODEPAGE(861, cp861)
+
+DEFENCODING(("IBM863",   /* IANA */
+             "863",      /* IANA */
+             "CSIBM863", /* IANA */
+             "CP863",    /* AIX */
+             ),
+            cp863, CP863, {cp863_mbtowc, NULL}, {cp863_wctomb, NULL})
+DEFCODEPAGE(863, cp863)
+
+DEFENCODING(("IBM864",   /* IANA */
+             "CSIBM864", /* IANA */
+             "CP864",    /* AIX */
+             "864",      /* IANA */
+             ),
+            cp864, CP864, {cp864_mbtowc, NULL}, {cp864_wctomb, NULL})
+DEFCODEPAGE(864, cp864)
+
+DEFENCODING(("IBM865",   /* IANA */
+             "865",      /* IANA */
+             "CSIBM865", /* IANA */
+             "CP865",    /* AIX */
+             ),
+            cp865, CP865, {cp865_mbtowc, NULL}, {cp865_wctomb, NULL})
+DEFCODEPAGE(865, cp865)
+
+DEFENCODING(("IBM869",   /* IANA */
+             "869",      /* IANA */
+             "CPGR",     /* IANA */
+             "CSIBM869", /* IANA */
+             "CP869",    /* AIX */
+             "CP-GR",    /* AIX */
+             ),
+            cp869, CP869, {cp869_mbtowc, NULL}, {cp869_wctomb, NULL})
+DEFCODEPAGE(869, cp869)
+
+DEFENCODING(("IBM1125",    /* AIX */
+             "1125",       /* AIX */
+             "SYSTEM1125", /* AIX */
+             "CSIBM1125",  /* AIX */
+             "RUSCII",     /* AIX */
+             "CP866U",     /* AIX */
+             "CP1125",     /* AIX */
+             ),
+            cp1125, CP1125, {cp1125_mbtowc, NULL}, {cp1125_wctomb, NULL})
+DEFCODEPAGE(1125, cp1125)
+
+// z/OS locales
+DEFENCODING(("IBM037",     /* IANA */
+             "EBCDICCPUS", /* IANA */
+             "EBCDICCPCA", /* IANA */
+             "EBCDICCPWT", /* IANA */
+             "EBCDICCPNL", /* IANA */
+             "CSIBM037",   /* IANA */
+             "CP037",      /* IANA */
+             "CP0037",     /* IANA */
+             ),
+            ebcdic037, EBCDIC_037, {ebcdic037_mbtowc, NULL}, {ebcdic037_wctomb, NULL})
+DEFCODEPAGE(37, ebcdic037)
+
+DEFENCODING(("IBM273",   /* IANA */
+             "CSIBM273", /* IANA */
+             "CP273",    /* AIX */
+             "273",      /* AIX */
+             ),
+            ebcdic273, EBCDIC_273, {ebcdic273_mbtowc, NULL}, {ebcdic273_wctomb, NULL})
+DEFCODEPAGE(273, ebcdic273)
+DEFCODEPAGE(20273, ebcdic273)
+
+DEFENCODING(("IBM277",     /* IANA */
+             "EBCDICCPDK", /* IANA */
+             "EBCDICCPNO", /* IANA */
+             "CSIBM277",   /* IANA */
+             "CP277",      /* AIX */
+             "277",        /* AIX */
+             ),
+            ebcdic277, EBCDIC_277, {ebcdic277_mbtowc, NULL}, {ebcdic277_wctomb, NULL})
+DEFCODEPAGE(277, ebcdic277)
+DEFCODEPAGE(20277, ebcdic277)
+
+DEFENCODING(("IBM278",     /* IANA */
+             "EBCDICCPFI", /* IANA */
+             "EBCDICCPSE", /* IANA */
+             "CSIBM278",   /* IANA */
+             "CP278",      /* AIX */
+             "278",        /* AIX */
+             ),
+            ebcdic278, EBCDIC_278, {ebcdic278_mbtowc, NULL}, {ebcdic278_wctomb, NULL})
+DEFCODEPAGE(278, ebcdic278)
+DEFCODEPAGE(20278, ebcdic278)
+
+DEFENCODING(("IBM280",     /* IANA */
+             "EBCDICCPIT", /* IANA */
+             "CSIBM280",   /* IANA */
+             "CP280",      /* AIX */
+             "280",        /* AIX */
+             ),
+            ebcdic280, EBCDIC_280, {ebcdic280_mbtowc, NULL}, {ebcdic280_wctomb, NULL})
+DEFCODEPAGE(280, ebcdic280)
+DEFCODEPAGE(20280, ebcdic280)
+
+DEFENCODING(("IBM282", /* (Unknown) */
+             "282",    /* cppp-reiconv */
+             "CP282",  /* cppp-reiconv */
+             ),
+            ebcdic282, EBCDIC_282, {ebcdic282_mbtowc, NULL}, {ebcdic282_wctomb, NULL})
+DEFCODEPAGE(282, ebcdic282)
+
+DEFENCODING(("IBM284",     /* IANA */
+             "EBCDICCPES", /* IANA */
+             "CSIBM284",   /* IANA */
+             "CP284",      /* AIX */
+             "284",        /* AIX */
+             ),
+            ebcdic284, EBCDIC_284, {ebcdic284_mbtowc, NULL}, {ebcdic284_wctomb, NULL})
+DEFCODEPAGE(284, ebcdic284)
+DEFCODEPAGE(20284, ebcdic284)
+
+DEFENCODING(("IBM285",     /* IANA */
+             "CP285",      /* IANA */
+             "EBCDICCPGB", /* IANA */
+             "CSIBM285",   /* IANA */
+             "285",        /* AIX */
+             ),
+            ebcdic285, EBCDIC_285, {ebcdic285_mbtowc, NULL}, {ebcdic285_wctomb, NULL})
+DEFCODEPAGE(285, ebcdic285)
+DEFCODEPAGE(20285, ebcdic285)
+
+DEFENCODING(("IBM297",     /* IANA */
+             "EBCDICCPFR", /* IANA */
+             "CSIBM297",   /* IANA */
+             "CP297",      /* AIX */
+             "297",        /* AIX */
+             ),
+            ebcdic297, EBCDIC_297, {ebcdic297_mbtowc, NULL}, {ebcdic297_wctomb, NULL})
+DEFCODEPAGE(297, ebcdic297)
+DEFCODEPAGE(20297, ebcdic297)
+
+DEFENCODING(("IBM423",     /* IANA */
+             "EBCDICCPGR", /* IANA */
+             "CSIBM423",   /* IANA */
+             "CP423",      /* AIX */
+             "423",        /* AIX */
+             ),
+            ebcdic423, EBCDIC_423, {ebcdic423_mbtowc, NULL}, {ebcdic423_wctomb, NULL})
+DEFCODEPAGE(423, ebcdic423)
+DEFCODEPAGE(20423, ebcdic423)
+
+DEFENCODING(("IBM424",     /* IANA */
+             "EBCDICCPHE", /* IANA */
+             "CSIBM424",   /* IANA */
+             "CP424",      /* AIX */
+             "424",        /* AIX */
+             ),
+            ebcdic424, EBCDIC_424, {ebcdic424_mbtowc, NULL}, {ebcdic424_wctomb, NULL})
+DEFCODEPAGE(424, ebcdic424)
+DEFCODEPAGE(20424, ebcdic424)
+
+DEFENCODING(("IBM425", /* (Unknown) */
+             "CP425",  /* cppp-reiconv */
+             "425",    /* cppp-reiconv */
+             ),
+            ebcdic425, EBCDIC_425, {ebcdic425_mbtowc, NULL}, {ebcdic425_wctomb, NULL})
+DEFCODEPAGE(425, ebcdic425)
+
+DEFENCODING(("IBM500",     /* IANA */
+             "EBCDICCPBE", /* IANA */
+             "EBCDICCPCH", /* IANA */
+             "CSIBM500",   /* IANA */
+             "CP500",      /* AIX */
+             "500",        /* AIX */
+             ),
+            ebcdic500, EBCDIC_500, {ebcdic500_mbtowc, NULL}, {ebcdic500_wctomb, NULL})
+
+DEFCODEPAGE(500, ebcdic500)
+
+DEFENCODING(("IBM838",    /* AIX */
+             "IBMTHAI",   /* IANA */
+             "CSIBMTHAI", /* IANA */
+             "CP838",     /* AIX */
+             "838",       /* AIX */
+             ),
+            ebcdic838, EBCDIC_838, {ebcdic838_mbtowc, NULL}, {ebcdic838_wctomb, NULL})
+DEFCODEPAGE(838, ebcdic838)
+
+DEFENCODING(("IBM870",        /* IANA */
+             "CP870",         /* IANA */
+             "EBCDICCPROECE", /* IANA */
+             "EBCDICCPYU",    /* IANA */
+             "CSIBM870",      /* IANA */
+             "870",           /* AIX */
+             ),
+            ebcdic870, EBCDIC_870, {ebcdic870_mbtowc, NULL}, {ebcdic870_wctomb, NULL})
+DEFCODEPAGE(870, ebcdic870)
+
+DEFENCODING(("IBM871",     /* IANA */
+             "EBCDICCPIS", /* IANA */
+             "CSIBM871",   /* IANA */
+             "CP871",      /* AIX */
+             "871",        /* AIX */
+             ),
+            ebcdic871, EBCDIC_871, {ebcdic871_mbtowc, NULL}, {ebcdic871_wctomb, NULL})
+DEFCODEPAGE(871, ebcdic871)
+DEFCODEPAGE(20871, ebcdic871)
+
+DEFENCODING(("IBM875",      /* glibc */
+             "EBCDICGREEK", /* glibc */
+             "CP875",       /* AIX */
+             "875",         /* AIX */
+             ),
+            ebcdic875, EBCDIC_875, {ebcdic875_mbtowc, NULL}, {ebcdic875_wctomb, NULL})
+DEFCODEPAGE(875, ebcdic875)
+
+DEFENCODING(("IBM880",         /* IANA */
+             "EBCDICCYRILLIC", /* IANA */
+             "CSIBM880",       /* IANA */
+             "CP880",          /* cppp-reiconv */
+             "880",            /*cppp-reiconv*/
+             ),
+            ebcdic880, EBCDIC_880, {ebcdic880_mbtowc, NULL}, {ebcdic880_wctomb, NULL})
+DEFCODEPAGE(880, ebcdic880)
+DEFCODEPAGE(20880, ebcdic880)
+
+DEFENCODING(("IBM905",     /* IANA */
+             "EBCDICCPTR", /* IANA */
+             "CSIBM905",   /* IANA */
+             ),
+            ebcdic905, EBCDIC_905, {ebcdic905_mbtowc, NULL}, {ebcdic905_wctomb, NULL})
+DEFCODEPAGE(905, ebcdic905)
+DEFCODEPAGE(20905, ebcdic905)
+
+DEFENCODING(("IBM924",           /* SUSE Linux Enterprise Server */
+             "IBM00924",         /* IANA */
+             "CCSID00924",       /* IANA */
+             "CP00924",          /* IANA */
+             "EBCDICLATIN9EURO", /* IANA */
+             "CSIBM00924",       /* IANA */
+             "CP924",            /* SUSE Linux Enterprise Server */
+             "924",              /* SUSE Linux Enterprise Server */
+             ),
+            ebcdic924, EBCDIC_924, {ebcdic924_mbtowc, NULL}, {ebcdic924_wctomb, NULL})
+DEFCODEPAGE(924, ebcdic924)
+DEFCODEPAGE(20924, ebcdic924)
+
+DEFENCODING(("IBM1025", /* glibc */
+             "CP1025",  /* AIX */
+             "1025",    /* AIX */
+             ),
+            ebcdic1025, EBCDIC_1025, {ebcdic1025_mbtowc, NULL}, {ebcdic1025_wctomb, NULL})
+DEFCODEPAGE(1025, ebcdic1025)
+
+DEFENCODING(("IBM1026",   /* IANA */
+             "CSIBM1026", /* IANA */
+             "CP1026",    /* AIX */
+             "1026",      /* AIX */
+             ),
+            ebcdic1026, EBCDIC_1026, {ebcdic1026_mbtowc, NULL}, {ebcdic1026_wctomb, NULL})
+DEFCODEPAGE(1026, ebcdic1026)
+
+DEFENCODING(("IBM1047",   /* IANA */
+             "CSIBM1047", /* IANA */
+             "CP1047",    /* AIX */
+             "1047",      /* AIX */
+             ),
+            ebcdic1047, EBCDIC_1047, {ebcdic1047_mbtowc, NULL}, {ebcdic1047_wctomb, NULL})
+DEFCODEPAGE(1047, ebcdic1047)
+
+DEFENCODING(("IBM1097", /* glibc */
+             "CP1097",  /* AIX */
+             ),
+            ebcdic1097, EBCDIC_1097, {ebcdic1097_mbtowc, NULL}, {ebcdic1097_wctomb, NULL})
+DEFCODEPAGE(1097, ebcdic1097)
+
+DEFENCODING(("IBM1112", /* glibc */
+             "CP1112",  /* AIX */
+             "1112",    /* AIX */
+             ),
+            ebcdic1112, EBCDIC_1112, {ebcdic1112_mbtowc, NULL}, {ebcdic1112_wctomb, NULL})
+DEFCODEPAGE(1112, ebcdic1112)
+
+DEFENCODING(("IBM1122", /* glibc */
+             "CP1122",  /* AIX */
+             "1122",    /* AIX */
+             ),
+            ebcdic1122, EBCDIC_1122, {ebcdic1122_mbtowc, NULL}, {ebcdic1122_wctomb, NULL})
+DEFCODEPAGE(1122, ebcdic1122)
+
+DEFENCODING(("IBM1123", /* glibc */
+             "CP1123",  /* AIX */
+             "1123",    /* AIX */
+             ),
+            ebcdic1123, EBCDIC_1123, {ebcdic1123_mbtowc, NULL}, {ebcdic1123_wctomb, NULL})
+DEFCODEPAGE(1123, ebcdic1123)
+
+DEFENCODING(("IBM1130", /* glibc */
+             "CP1130",  /* cppp-reiconv */
+             "1130",    /* cppp-reiconv */
+             ),
+            ebcdic1130, EBCDIC_1130, {ebcdic1130_mbtowc, NULL}, {ebcdic1130_wctomb, NULL})
+DEFCODEPAGE(1130, ebcdic1130)
+
+DEFENCODING(("IBM1132", /* glibc */
+             "CP1132",  /* cppp-reiconv */
+             "1132",    /* cppp-reiconv */
+             ),
+            ebcdic1132, EBCDIC_1132, {ebcdic1132_mbtowc, NULL}, {ebcdic1132_wctomb, NULL})
+DEFCODEPAGE(1132, ebcdic1132)
+
+DEFENCODING(("IBM1137", /* glibc */
+             "CP1137",  /* cppp-reiconv */
+             "1137",    /* cppp-reiconv */
+             ),
+            ebcdic1137, EBCDIC_1137, {ebcdic1137_mbtowc, NULL}, {ebcdic1137_wctomb, NULL})
+DEFCODEPAGE(1137, ebcdic1137)
+
+DEFENCODING(("IBM1140",         /* IANA */
+             "IBM01140",        /* IANA */
+             "CCSID01140",      /* IANA */
+             "CP01140",         /* IANA */
+             "EBCDICUS37+EURO", /* IANA */
+             "CSIBM01140",      /* IANA */
+             "CP1140",          /* AIX */
+             "1140",            /* AIX */
+             ),
+            ebcdic1140, EBCDIC_1140, {ebcdic1140_mbtowc, NULL}, {ebcdic1140_wctomb, NULL})
+DEFCODEPAGE(1140, ebcdic1140)
+
+DEFENCODING(("IBM1141",          /* IANA */
+             "IBM01141",         /* IANA */
+             "CCSID01141",       /* IANA */
+             "CP01141",          /* IANA */
+             "EBCDICDE273+EURO", /* IANA */
+             "CSIBM01141",       /* IANA */
+             "CP1141",           /* AIX */
+             "1141",             /* AIX */
+             ),
+            ebcdic1141, EBCDIC_1141, {ebcdic1141_mbtowc, NULL}, {ebcdic1141_wctomb, NULL})
+DEFCODEPAGE(1141, ebcdic1141)
+
+DEFENCODING(("IBM1142",          /* AIX */
+             "IBM01142",         /* IANA */
+             "CCSID01142",       /* IANA */
+             "CP01142",          /* IANA */
+             "EBCDICDK277+EURO", /* IANA */
+             "EBCDICNO277+EURO", /* IANA */
+             "CSIBM01142",       /* IANA */
+             "CP1142",           /* AIX */
+             "1142",             /* AIX */
+             ),
+            ebcdic1142, EBCDIC_1142, {ebcdic1142_mbtowc, NULL}, {ebcdic1142_wctomb, NULL})
+DEFCODEPAGE(1142, ebcdic1142)
+
+DEFENCODING(("IBM1143",          /* AIX */
+             "IBM01143",         /* IANA */
+             "CCSID01143",       /* IANA */
+             "CP01143",          /* IANA */
+             "EBCDICFI278+EURO", /* IANA */
+             "EBCDICSE278+EURO", /* IANA */
+             "CSIBM01143",       /* IANA */
+             "CP1143",           /* AIX */
+             "1143",             /* AIX */
+             ),
+            ebcdic1143, EBCDIC_1143, {ebcdic1143_mbtowc, NULL}, {ebcdic1143_wctomb, NULL})
+DEFCODEPAGE(1143, ebcdic1143)
+
+DEFENCODING(("IBM1144",           /* AIX */
+             "IBM01144",          /* IANA */
+             "CCSID01144",        /* IANA */
+             "CP01144",           /* IANA */
+             "EBCDICIT280+EURO",  /* IANA */
+             "CSPC8CODEPAGE1144", /* IANA */
+             "CP1144",            /* AIX */
+             "1144",              /* AIX */
+             ),
+            ebcdic1144, EBCDIC_1144, {ebcdic1144_mbtowc, NULL}, {ebcdic1144_wctomb, NULL})
+DEFCODEPAGE(1144, ebcdic1144)
+
+DEFENCODING(("IBM1145",          /* AIX */
+             "IBM01145",         /* IANA */
+             "CCSID01145",       /* IANA */
+             "CP01145",          /* IANA */
+             "EBCDICES284+EURO", /* IANA */
+             "CSIBM01145",       /* IANA */
+             "CP1145",           /* AIX */
+             "1145",             /* AIX */
+             ),
+            ebcdic1145, EBCDIC_1145, {ebcdic1145_mbtowc, NULL}, {ebcdic1145_wctomb, NULL})
+DEFCODEPAGE(1145, ebcdic1145)
+
+DEFENCODING(("IBM1146",           /* AIX */
+             "IBM01146",          /* IANA */
+             "CCSID01146",        /* IANA */
+             "CP01146",           /* IANA */
+             "EBCDICGB285+EURO",  /* IANA */
+             "CSPC8CODEPAGE1146", /* IANA */
+             "CP1146",            /* AIX */
+             "1146",              /* AIX */
+             ),
+            ebcdic1146, EBCDIC_1146, {ebcdic1146_mbtowc, NULL}, {ebcdic1146_wctomb, NULL})
+DEFCODEPAGE(1146, ebcdic1146)
+
+DEFENCODING(("IBM1147",          /* AIX */
+             "IBM01147",         /* IANA */
+             "CCSID01147",       /* IANA */
+             "CP01147",          /* IANA */
+             "EBCDICFR297+EURO", /* IANA */
+             "CSIBM01147",       /* IANA */
+             "CP1147",           /* AIX */
+             "1147",             /* AIX */
+             ),
+            ebcdic1147, EBCDIC_1147, {ebcdic1147_mbtowc, NULL}, {ebcdic1147_wctomb, NULL})
+DEFCODEPAGE(1147, ebcdic1147)
+
+DEFENCODING(("IBM1148",                     /* AIX */
+             "IBM01148",                    /* IANA */
+             "CCSID01148",                  /* IANA */
+             "CP01148",                     /* IANA */
+             "EBCDICINTERNATIONAL500+EURO", /* IANA */
+             "CSIBM01148",                  /* IANA */
+             "CP1148",                      /* AIX */
+             "1148",                        /* AIX */
+             ),
+            ebcdic1148, EBCDIC_1148, {ebcdic1148_mbtowc, NULL}, {ebcdic1148_wctomb, NULL})
+DEFCODEPAGE(1148, ebcdic1148)
+
+DEFENCODING(("IBM1149",          /* AIX */
+             "IBM01149",         /* IANA */
+             "CCSID01149",       /* IANA */
+             "CP01149",          /* IANA */
+             "EBCDICIS871+EURO", /* IANA */
+             "CSIBM01149",       /* IANA */
+             "CP1149",           /* AIX */
+             "1149",             /* AIX */
+             ),
+            ebcdic1149, EBCDIC_1149, {ebcdic1149_mbtowc, NULL}, {ebcdic1149_wctomb, NULL})
+DEFCODEPAGE(1149, ebcdic1149)
+
+DEFENCODING(("IBM1153", /* glibc */
+             "CP1153",  /* cppp-reiconv */
+             "1153",    /* cppp-reiconv */
+             ),
+            ebcdic1153, EBCDIC_1153, {ebcdic1153_mbtowc, NULL}, {ebcdic1153_wctomb, NULL})
+DEFCODEPAGE(1153, ebcdic1153)
+
+DEFENCODING(("IBM1154", /* glibc */
+             "CP1154",  /* cppp-reiconv */
+             "1154",    /* cppp-reiconv */
+             ),
+            ebcdic1154, EBCDIC_1154, {ebcdic1154_mbtowc, NULL}, {ebcdic1154_wctomb, NULL})
+DEFCODEPAGE(1154, ebcdic1154)
+
+DEFENCODING(("IBM1155", /* glibc */
+             "CP1155",  /* cppp-reiconv */
+             "1155",    /* cppp-reiconv */
+             ),
+            ebcdic1155, EBCDIC_1155, {ebcdic1155_mbtowc, NULL}, {ebcdic1155_wctomb, NULL})
+DEFCODEPAGE(1155, ebcdic1155)
+
+DEFENCODING(("IBM1156", /* glibc */
+             "CP1156",  /* cppp-reiconv */
+             "1156",    /* cppp-reiconv */
+             ),
+            ebcdic1156, EBCDIC_1156, {ebcdic1156_mbtowc, NULL}, {ebcdic1156_wctomb, NULL})
+DEFCODEPAGE(1156, ebcdic1156)
+
+DEFENCODING(("IBM1157", /* glibc */
+             "CP1157",  /* cppp-reiconv */
+             "1157",    /* cppp-reiconv */
+             ),
+            ebcdic1157, EBCDIC_1157, {ebcdic1157_mbtowc, NULL}, {ebcdic1157_wctomb, NULL})
+DEFCODEPAGE(1157, ebcdic1157)
+
+DEFENCODING(("IBM1158", /* glibc */
+             "CP1158",  /* cppp-reiconv */
+             "1158",    /* cppp-reiconv */
+             ),
+            ebcdic1158, EBCDIC_1158, {ebcdic1158_mbtowc, NULL}, {ebcdic1158_wctomb, NULL})
+DEFCODEPAGE(1158, ebcdic1158)
+
+DEFENCODING(("IBM1160", /* glibc */
+             "CP1160",  /* cppp-reiconv */
+             "1160",    /* cppp-reiconv */
+             ),
+            ebcdic1160, EBCDIC_1160, {ebcdic1160_mbtowc, NULL}, {ebcdic1160_wctomb, NULL})
+DEFCODEPAGE(1160, ebcdic1160)
+
+DEFENCODING(("IBM1164", /* glibc */
+             "CP1164",  /* cppp-reiconv */
+             "1164",    /* cppp-reiconv */
+             ),
+            ebcdic1164, EBCDIC_1164, {ebcdic1164_mbtowc, NULL}, {ebcdic1164_wctomb, NULL})
+DEFCODEPAGE(1164, ebcdic1164)
+
+DEFENCODING(("IBM1165", /* libiconv */
+             "CP1165",  /* cppp-reiconv */
+             "1165",    /* cppp-reiconv */
+             ),
+            ebcdic1165, EBCDIC_1165, {ebcdic1165_mbtowc, NULL}, {ebcdic1165_wctomb, NULL})
+DEFCODEPAGE(1165, ebcdic1165)
+
+DEFENCODING(("IBM1166", /* glibc */
+             "CP1166",  /* cppp-reiconv */
+             "1166",    /* cppp-reiconv */
+             ),
+            ebcdic1166, EBCDIC_1166, {ebcdic1166_mbtowc, NULL}, {ebcdic1166_wctomb, NULL})
+DEFCODEPAGE(1166, ebcdic1166)
+
+DEFENCODING(("IBM4971", /* glibc */
+             "CP4971",  /* cppp-reiconv */
+             "4971",    /* cppp-reiconv */
+             ),
+            ebcdic4971, EBCDIC_4971, {ebcdic4971_mbtowc, NULL}, {ebcdic4971_wctomb, NULL})
+DEFCODEPAGE(4971, ebcdic4971)
+
+DEFENCODING(("IBM12712", /* glibc */
+             "CP12712",  /* cppp-reiconv */
+             "12712",    /* cppp-reiconv */
+             ),
+            ebcdic12712, EBCDIC_12712, {ebcdic12712_mbtowc, NULL}, {ebcdic12712_wctomb, NULL})
+DEFCODEPAGE(12712, ebcdic12712)
+
+DEFENCODING(("IBM16804", /* glibc */
+             "CP16804",  /* cppp-reiconv */
+             "16804",    /* cppp-reiconv */
+             ),
+            ebcdic16804, EBCDIC_16804, {ebcdic16804_mbtowc, NULL}, {ebcdic16804_wctomb, NULL})
+DEFCODEPAGE(16804, ebcdic16804)
+
+// Extra encodigns
+DEFENCODING(("EUCJISX0213", /* x0213.org */
+             "EUCJIS2004",  /* x0213.org */
+             ),
+            euc_jisx0213, EUC_JISX0213, {euc_jisx0213_mbtowc, euc_jisx0213_flushwc},
+            {euc_jisx0213_wctomb, euc_jisx0213_reset})
+
+DEFENCODING(("SHIFTJISX0213", /* x0213.org */
+             "SHIFTJIS2004",  /* x0213.org */
+             ),
+            shift_jisx0213, SHIFT_JISX0213, {shift_jisx0213_mbtowc, shift_jisx0213_flushwc},
+            {shift_jisx0213_wctomb, shift_jisx0213_reset})
+
+DEFENCODING(("ISO2022JP3",    /* x0213.org */
+             "ISO2022JP2004", /* x0213.org */
+             ),
+            iso2022_jp3, ISO2022_JP3, {iso2022_jp3_mbtowc, iso2022_jp3_flushwc},
+            {iso2022_jp3_wctomb, iso2022_jp3_reset})
+
+DEFENCODING(("BIG52003", /* (Unknown) */
+             ),
+            big5_2003, BIG5_2003, {big5_2003_mbtowc, NULL}, {big5_2003_wctomb, NULL})
+
+DEFENCODING(("TDS565",   /* (Unknown) */
+             "ISOIR230", /* (Unknown) */
+             ),
+            tds565, TDS565, {tds565_mbtowc, NULL}, {tds565_wctomb, NULL})
+
+DEFENCODING(("ATARIST", /* (Unknown) */
+             "ATARI",   /* (Unknown) */
+             ),
+            atarist, ATARIST, {atarist_mbtowc, NULL}, {atarist_wctomb, NULL})
+DEFINDEX(ATARI, ATARIST)
+
+DEFENCODING(("RISCOSLATIN1", /* (Unknown) */
+             ),
+            riscos1, RISCOS_LATIN1, {riscos1_mbtowc, NULL}, {riscos1_wctomb, NULL})

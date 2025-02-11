@@ -1,0 +1,4 @@
+1. Implement the //NON_IDENTICAL_DISCARD suffix from POSIX:2024.
+2. Add translit support.
+3. Use xmake buildsystem.
+4. Fix testing errors on some Windows machine.

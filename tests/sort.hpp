@@ -1,5 +1,10 @@
+/**
+ * @file sort.hpp
+ * @brief Sort file lines.
+ * @author ChenPi11
+ * @copyright Copyright (C) 2024 The C++ Plus Project
+ */
 /*
- * Copyright (C) 2023 The C++ Plus Project.
  * This file is part of the cppp-reiconv Library.
  *
  * The cppp-reiconv Library is free software; you can redistribute it
@@ -13,39 +18,35 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with the cppp-reiconv Library; see the file COPYING.
+ * License along with the cppp-reiconv Library; see the file LICENSE.
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
-  Sort file lines.
-*/
+#pragma once
 
-#ifndef _SORT_HPP
-#define _SORT_HPP
-
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <algorithm>
+#include <fstream>
+#include <filesystem>
 #include <string>
+#include <vector>
 
-#include "throw_error.hpp"
+#include "output.hpp"
+#include "utils.hpp"
 
-void sort_file(const std::string& file_name, const std::string& output_file_name)
+inline void sort_file(const std::filesystem::path &file_name, const std::filesystem::path &output_file_name)
 {
     std::vector<std::string> lines;
 
-    std::ifstream input_file(file_name);
-    if(!input_file.is_open())
+    std::ifstream input_file {file_name};
+    if (!input_file.good())
     {
-        error("sort", "Failed to open file: " + file_name);
+        error("sort", "Failed to open the input file.");
     }
 
-    std::ofstream output_file(output_file_name, std::ios::trunc);
-    if(!output_file.is_open())
+    std::ofstream output_file {output_file_name, std::ios::trunc};
+    if (!output_file.good())
     {
-        error("sort", "Failed to open file: " + output_file_name);
+        error("sort", "Failed to open the output file.");
     }
 
     std::string line;
@@ -57,10 +58,9 @@ void sort_file(const std::string& file_name, const std::string& output_file_name
 
     std::sort(lines.begin(), lines.end());
 
-    for (const std::string& line : lines)
+    for (const std::string &line : lines)
     {
-        output_file << line << std::endl;
+        print_string("");
+        write_stream(output_file, line + "\n");
     }
 }
-
-#endif

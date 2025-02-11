@@ -1,6 +1,32 @@
 # CMake build files
-build/
+build
+install
 CMakeFiles
+cmake_install.cmake
+CMakeCache.txt
+CTestTestfile.cmake
+DartConfiguration.tcl
+Makefile
+cmake_uninstall.cmake
+reiconv.hpp
+CTestCostData.txt
+Testing
+install_manifest.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+_CPack_Packages
+pdb
+tests/check-encoding
+tests/check-stateful
+tests/check-stateless
+tests/data-generator
+tests/sort
+tests/test-bom-state
+tests/test-discard
+windows/cppp-reiconv.rc
+*.inst
+*.log
+*.dSYM
 *.so
 *.so.*.*.*
 *.a
@@ -10,55 +36,39 @@ CMakeFiles
 *.pdb
 *.dll
 *.exe
-cmake_install.cmake
-CMakeCache.txt
-CTestTestfile.cmake
-DartConfiguration.tcl
-Makefile
-uninstall.cmake
-reiconv.hpp
-CTestCostData.txt
-*.inst
-Testing
-*.log
-*.dSYM
+*.sln
+*.out
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.vcxproj.user.*
+build.ninja
+.ninja_*
+Release/
+Debug/
+RelWithDebInfo/
+MinSizeRel/
+x64/
+x86/
+ARM/
+ARM64/
+*.suo
+*.user
+*.user.*
+*.dir
+__pycache__
+
+# Dist files
+dist/
+cppp-reiconv-*
+*.tar.xz
+*.deb
 
 # Makefile.devel temp files
 lib/generated/genaliases
-lib/generated/genaliases_sysaix
-lib/generated/genaliases_syshpux
-lib/generated/genaliases_sysosf1
-lib/generated/genaliases_syssolaris
-lib/generated/genaliases2_aix
-lib/generated/genaliases2_aix_sysaix
-lib/generated/genaliases2_dos
-lib/generated/genaliases2_extra
-lib/generated/genaliases2_osf1
-lib/generated/genaliases2_osf1_sysosf1
-lib/generated/genaliases2_zos
-lib/generated/genflags
-/*/**/*.gperf
-
-
-# Test suite runable
-tests/cmp
-tests/cmp.exe
-tests/gengb18030z
-tests/gengb18030z.exe
-tests/genutf8
-tests/genutf8.exe
-tests/reiconv-test
-tests/reiconv-test.exe
-tests/table-from
-tests/table-from.exe
-tests/table-to
-tests/table-to.exe
-tests/test-shiftseq
-tests/test-shiftseq.exe
-tests/uniq-u
-tests/uniq-u.exe
-tests/tmp-*.TXT
-a.out
+lib/generated/genindexes
+lib/generated/check-encodings
+*.gperf
 
 # Patterns for all subdirectories: all kinds of automatic backup files.
 *.orig
@@ -68,18 +78,18 @@ a.out
 *.swp
 .#*
 \#*#
-.vscode
-.cache
+.vscode/
+.cache/
 
-# Autopull modules
+# Submodules.
 build-aux/
+cppp-platform/
 
 # Temp tests files.
 tests/data/UTF-8.TXT
 tests/data/GB18030-2005.TXT
 tests/data/GB18030-2022.TXT
+tests/tmp-*.TXT
 *.tmp
-
-# Dist directory and temps
-cppp-reiconv-v*
-__pycache__
+*.dump
+benchmark/benchmark

@@ -1,0 +1,78 @@
+/**
+ * @file iconv.h
+ * @author ChenPi11
+ * @brief reiconv iconv API compatibility header.
+ * @version 3.0.0
+ * @copyright Copyright (C) 2024 The C++ Plus Project.
+ */
+/*
+ * This file is part of the cppp-reiconv Library.
+ *
+ * The cppp-reiconv Library is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * The cppp-reiconv Library is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with the cppp-reiconv Library; see the file LICENSE.
+ * If not, see <https://www.gnu.org/licenses/>.
+ */
+
+#ifndef _ICONV_H_
+#define _ICONV_H_
+
+#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include <cppp/reiconv.h>
+
+#undef iconv_t
+#undef iconv_open
+#undef iconv
+#undef iconv_close
+
+/**
+ * @brief Iconv conversion descriptor type.
+ * @note This type is equivalent to `reiconv_t`.
+ * @see reiconv_t
+ */
+#define iconv_t reiconv_t
+
+ /**
+ * @brief Open a conversion descriptor. For iconv compatibility.
+ * @param tocode The target encoding. Supports "//IGNORE".
+ * @param fromcode The source encoding.
+ * @return The conversion descriptor. (iconv_t)(-1) on error with errno set.
+ */
+#define iconv_open reiconv_open
+
+/**
+ * @brief Convert at most `*inbytesleft` bytes from `*inbuf` according to the code conversion
+ * algorithm specified by `cd` and place up to `*outbytesleft` bytes in buffer at `*outbuf`.
+ * @param cd The conversion descriptor.
+ * @param inbuf The input buffer.
+ * @param inbytesleft The number of bytes in the input buffer.
+ * @param outbuf The output buffer.
+ * @param outbytesleft The number of bytes in the output buffer.
+ * @return The number of bytes converted, or (size_t)(-1) on error with errno set.
+ * @note This function is equivalent to `reiconv_iconv(cd, inbuf, inbytesleft, outbuf, outbytesleft)`.
+ * @see reiconv_iconv
+ */
+#define iconv reiconv_iconv
+
+/**
+ * @brief Close the conversion descriptor.
+ * @param cd The conversion descriptor.
+ * @return 0 on success, -1 on error with errno set.
+ * @note This function is equivalent to `reiconv_handle_close(cd)`.
+ * @see reiconv_handle_close
+ */
+#define iconv_close reiconv_handle_close
+
+#endif /* _ICONV_H_ */
