@@ -2,7 +2,7 @@
 
 Although we have C API, we still require C++20 runtime.
 
-header file `cppp/reiconv.h` contains all C API.
+Header file `cppp/reiconv.h` contains all C API.
 
 ## Version Information API
 
@@ -42,12 +42,12 @@ extern _CPPP_API size_t reiconv_name_canonicalize(const char *name, char *outbuf
 
 #### Description
 
-Canonicalize an encoding name. the `canonical` means the internal name of
+Canonicalize an encoding name. The `canonical` means the internal name of
 encoding. Not the canonical name of IANA.
 We will ignore '-' and '_', and uppercase all characters.
 
 Segment fault if `name` or `outbuf` is `nullptr`. We will not check the
-length of `outbuf`
+length of `outbuf`.
 
 **This function is not recommended to use.**
 
@@ -343,7 +343,7 @@ Get the size of converted string.
 
 #### Return
 
-The size of converted string. If the conversion failed, returns `(size_t)(-1)`
+The size of converted string. If the conversion failed, returns `(size_t)(-1)`.
 
 **It's don't support flags now, so `flags` is always `REICONV_NO_FLAGS`. We will**
 **support it in the next version. So this API will change in the next version.**
@@ -378,7 +378,7 @@ If the output buffer is too small, -1 is returned.
 If the output buffer is too big, the rest of the buffer will not change.
 
 This function is useful when you want to convert a string to a fixed size buffer
-like stack buffer. It's faster than `reiconv_convert`
+like stack buffer. It's faster than `reiconv_convert`.
 
 #### Parameters
 
@@ -441,7 +441,7 @@ Bruno Haible put this file into the public domain.
 we will allocate memory for you and set it to the result buffer. If pointed but
 not `NULL`, we will use it as the output buffer but reallocate it. So it must be
 a pointer that can be modified.
-**But don't let it value to `NULL`!**
+**But don't let output_data_ptr's value to `NULL`!**
 - `output_length_ptr`: The length of output buffer. If NULL, error will be occured.
 
 #### Return
@@ -549,8 +549,6 @@ printf("Your locale charset is: %s\n", charset);
 
 Iconv compatibility is disabled by default. You can enable it by defining
 `-DICONV_COMPAT=ON` when you configure cppp-reiconv.
-
-See "Iconv support" section below.
 
 ### `iconv_t`, aka `reiconv_t` in `cppp/reiconv.h`
 

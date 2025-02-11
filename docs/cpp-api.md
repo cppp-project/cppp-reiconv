@@ -199,7 +199,7 @@ memory for the output string.
 
 #### Throws
 
-std::system_error if the conversion failed. Use it because it's has errno set.
+- `std::system_error` If the conversion failed. Use it because it's has errno set.
 
 #### Example
 
@@ -233,7 +233,7 @@ The current locale's character encoding.
 
 #### Example
 
-```c
+```cpp
 std::setlocale(LC_ALL, "");
 std::string_view charset = reiconv::locale_charset();
 std::cout <<"Your locale charset is: " << charset << std::endl;

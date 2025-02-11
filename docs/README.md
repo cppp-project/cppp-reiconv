@@ -1,5 +1,7 @@
 # cppp-reiconv documentation
 
+[[Simplified Chinese]](zh_CN/README.md)
+
 ## Introduction
 
 These docs is for `cppp-reiconv 3.0.0`.
@@ -18,7 +20,7 @@ encodings and locale charset detection.
 
 ### Runtime
 
-- C runtime
+- C runtime.
 - C++ runtime with C++20 support.
 
 ### Build with data generation
