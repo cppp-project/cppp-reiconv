@@ -1,3 +1,21 @@
+New in 3.0.0:
+* Refactor ALL API. Provide C and C++ API.
+* Remove `//ZOS_UNIX` support.
+* Remove unused code.
+* Refactor testing suites.
+* Add API documentation.
+* Use Rubisco for project manager.
+* Enable all encodings by default.
+* Add codepage lookup support.
+* Add CPack configuration for DEB packages.
+* Synchronize with upstream GNU LIBICONV.
+* Fix `assert_compare_file()` function issue #5.
+* Optimize the project structure.
+* Add iconv compatibility support.
+* Add locale character set detection support.
+* Fix a bug in test suite caused by line feeds.
+* Remove NLS support.
+
 New in 2.1.0:
 * Add NLS support for the include file, only support en_US and zh_CN.
 * Add CTest support for Windows.
